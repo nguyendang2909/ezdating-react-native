@@ -11,6 +11,7 @@ import {
 } from 'app/styles';
 import { Box, Heading, Text, View } from 'native-base';
 import React, { FC } from 'react';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 import { AppStackScreenProps } from '../navigators';
 import { spacing } from '../theme';
@@ -24,6 +25,9 @@ export const SignInWithPhoneNumberScreen: FC<FCProps> = _props => {
     <>
       <Box safeAreaTop />
       <Box safeAreaBottom style={heightFull}>
+        <View>
+          <AntDesign name="back"></AntDesign>
+        </View>
         <View
           style={[paddingHorizontal(spacing.lg), paddingVertical(spacing.lg)]}
         >
