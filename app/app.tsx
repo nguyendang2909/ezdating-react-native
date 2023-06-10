@@ -14,6 +14,7 @@ import './utils/ignoreWarnings';
 
 import { useFonts } from 'expo-font';
 import * as Linking from 'expo-linking';
+import { NativeBaseProvider } from 'native-base';
 import React from 'react';
 import {
   initialWindowMetrics,
@@ -115,11 +116,13 @@ function App(props: AppProps) {
       <PersistGate loading={null} persistor={persistor}>
         <SafeAreaProvider initialMetrics={initialWindowMetrics}>
           <ErrorBoundary catchErrors={Config.catchErrors}>
-            <AppNavigator
-              linking={linking}
-              initialState={initialNavigationState}
-              onStateChange={onNavigationStateChange}
-            />
+            <NativeBaseProvider>
+              <AppNavigator
+                linking={linking}
+                initialState={initialNavigationState}
+                onStateChange={onNavigationStateChange}
+              />
+            </NativeBaseProvider>
           </ErrorBoundary>
         </SafeAreaProvider>
       </PersistGate>
