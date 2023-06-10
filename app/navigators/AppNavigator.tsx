@@ -13,6 +13,7 @@ import {
   createNativeStackNavigator,
   NativeStackScreenProps,
 } from '@react-navigation/native-stack';
+import { useAppSelector } from 'app/hooks';
 import * as Screens from 'app/screens';
 import { colors } from 'app/theme';
 import React from 'react';
@@ -72,6 +73,10 @@ export interface NavigationProps
 
 export const AppNavigator = (props: NavigationProps) => {
   const colorScheme = useColorScheme();
+
+  const state = useAppSelector(state => state.theme);
+
+  console.log(111, state);
 
   useBackButtonHandler(routeName => exitRoutes.includes(routeName));
 
