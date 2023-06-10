@@ -54,14 +54,26 @@ export type AppStackScreenProps<T extends keyof AppStackParamList> =
 const Stack = createNativeStackNavigator<AppStackParamList>();
 
 const AppStack = () => {
+  const isAuthenticated = useAppSelector(state => state.app.isLogged);
+
   return (
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
         navigationBarColor: colors.background,
       }}
+      initialRouteName={isAuthenticated ? 'Welcome' : 'Welcome'}
     >
-      <Stack.Screen name="Welcome" component={Screens.WelcomeScreen} />
+      {isAuthenticated ? (
+        <>
+          <Stack.Screen name="Welcome" component={Screens.WelcomeScreen} />
+        </>
+      ) : (
+        <>
+          <Stack.Screen name="Welcome" component={Screens.WelcomeScreen} />
+        </>
+      )}
+
       {/** 🔥 Your screens go here */}
       {/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
     </Stack.Navigator>
