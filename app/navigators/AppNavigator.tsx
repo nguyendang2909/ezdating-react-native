@@ -4,6 +4,7 @@
  * Generally speaking, it will contain an auth flow (registration, login, forgot password)
  * and a "main" flow which the user will use once logged in.
  */
+import { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import {
   DarkTheme,
   DefaultTheme,
@@ -15,6 +16,9 @@ import {
 } from '@react-navigation/native-stack';
 import { useAppSelector } from 'app/hooks';
 import * as Screens from 'app/screens';
+import { SignInScreen } from 'app/screens/SignInScreen';
+import { SignInWithOtpPhoneNumberScreen } from 'app/screens/SignInWithOtpPhoneNumberScreen';
+import { SignInWithPhoneNumberScreen } from 'app/screens/SignInWithPhoneNumberScreen';
 import { colors } from 'app/theme';
 import React from 'react';
 import { useColorScheme } from 'react-native';
@@ -37,8 +41,14 @@ import { navigationRef, useBackButtonHandler } from './navigationUtilities';
  */
 export type AppStackParamList = {
   Welcome: undefined;
-  // 🔥 Your screens go here
-  // IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
+  SignIn: undefined;
+  SignInWithPhoneNumber: undefined;
+  SignInWithOtpPhoneNumber: {
+    otpConfirm: FirebaseAuthTypes.ConfirmationResult;
+    user: {
+      phoneNumber: string;
+    };
+  };
 };
 
 /**
@@ -62,7 +72,7 @@ const AppStack = () => {
         headerShown: false,
         navigationBarColor: colors.background,
       }}
-      initialRouteName={isAuthenticated ? 'Welcome' : 'Welcome'}
+      initialRouteName={isAuthenticated ? 'Welcome' : 'SignIn'}
     >
       {isAuthenticated ? (
         <>
@@ -70,7 +80,15 @@ const AppStack = () => {
         </>
       ) : (
         <>
-          <Stack.Screen name="Welcome" component={Screens.WelcomeScreen} />
+          <Stack.Screen name="SignIn" component={SignInScreen} />
+          <Stack.Screen
+            name="SignInWithPhoneNumber"
+            component={SignInWithPhoneNumberScreen}
+          />
+          <Stack.Screen
+            name="SignInWithOtpPhoneNumber"
+            component={SignInWithOtpPhoneNumberScreen}
+          />
         </>
       )}
 
