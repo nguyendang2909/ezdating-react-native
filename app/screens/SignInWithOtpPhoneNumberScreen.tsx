@@ -34,6 +34,9 @@ export const SignInWithOtpPhoneNumberScreen: FC<FCProps> = props => {
   const [isError, setError] = useState<boolean>(false);
   const [otpCode, setOTPCode] = useState('');
   const { otpConfirm, user } = props.route.params;
+  if (!otpConfirm) {
+    goBack();
+  }
   const handleSignUp = async () => {
     setError(false);
     setIsSubmitting(true);
@@ -49,6 +52,7 @@ export const SignInWithOtpPhoneNumberScreen: FC<FCProps> = props => {
         token: idToken,
       }).unwrap();
     } catch (err) {
+      console.log(111, err);
       setError(true);
     } finally {
       setIsSubmitting(false);

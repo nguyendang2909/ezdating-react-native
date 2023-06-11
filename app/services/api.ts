@@ -5,12 +5,13 @@ import {
   fetchBaseQuery,
   FetchBaseQueryError,
 } from '@reduxjs/toolkit/query/react';
+import Config from 'app/config';
 import { API_URL } from 'app/config/config.api';
 import { ApiRequest } from 'app/types/api-request.type';
 import { ApiResponse } from 'app/types/api-response.type';
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: process.env.API_URL,
+  baseUrl: Config.API_URL,
 });
 
 const baseQueryWithInterceptor: BaseQueryFn<

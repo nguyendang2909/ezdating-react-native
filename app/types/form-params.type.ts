@@ -9,6 +9,7 @@ export declare namespace FormParams {
   };
 
   type SignInWithPhoneNumber = {
+    dialCode: string;
     phoneNumber: string;
   };
 }

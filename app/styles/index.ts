@@ -86,6 +86,10 @@ export const textAlignCenter: TextStyle = {
   textAlign: 'center',
 };
 
+export const width = (value: string | number): ViewStyle => ({
+  width: value,
+});
+
 export const widthFull: ViewStyle = {
   width: '100%',
 };

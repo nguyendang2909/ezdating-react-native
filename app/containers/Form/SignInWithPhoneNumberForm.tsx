@@ -1,24 +1,39 @@
 import auth from '@react-native-firebase/auth';
 import { useNavigation } from '@react-navigation/native';
 import { translate, TxKeyPath } from 'app/i18n';
-import { phoneRegExp } from 'app/lib/validators';
-import { marginBottom, marginTop } from 'app/styles';
+import {
+  flexDirectionRow,
+  flexGrow,
+  marginBottom,
+  marginTop,
+  width,
+  widthFull,
+} from 'app/styles';
 import { spacing } from 'app/theme';
 import { FormParams } from 'app/types/form-params.type';
 import { useFormik } from 'formik';
 import {
   Button,
   FormControl,
+  HStack,
+  Icon,
   Input,
   View,
   WarningOutlineIcon,
 } from 'native-base';
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useState } from 'react';
+import { TouchableOpacity } from 'react-native';
+import CountryPicker, {
+  Country,
+  CountryCode,
+} from 'react-native-country-picker-modal';
+import FeatherIcons from 'react-native-vector-icons/Feather';
 import * as Yup from 'yup';
 
 export const SignInWithPhoneNumberForm: FC = () => {
   const { navigate } = useNavigation();
-
+  const [isOpenSearchCountry, setOpenSearchCountry] = useState<boolean>(false);
+  const [countryCode, setCountryCode] = useState<CountryCode>('VN');
   const [errorCode, setErrorCode] = useState<TxKeyPath | undefined>();
 
   function onAuthStateChanged(user: unknown) {
@@ -30,27 +45,26 @@ export const SignInWithPhoneNumberForm: FC = () => {
     }
   }
 
-  useEffect(() => {
-    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-
-    return subscriber; // unsubscribe on unmount
-  }, []);
-
   const formik = useFormik<FormParams.SignInWithPhoneNumber>({
     initialValues: {
+      dialCode: '+84',
       phoneNumber: '',
     },
     validationSchema: Yup.object().shape({
-      phoneNumber: Yup.string().matches(
-        phoneRegExp,
-        translate('Phone number is not valid!'),
-      ),
+      dialCode: Yup.string().required(),
+      phoneNumber: Yup.string().required(),
+      // .matches(
+      //   phoneRegExp,
+      //   translate('Phone number is not valid!'),
+      // ),
     }),
     onSubmit: async values => {
       setErrorCode(undefined);
       try {
-        const { phoneNumber } = values;
-        const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
+        const { phoneNumber, dialCode } = values;
+        const confirmation = await auth().signInWithPhoneNumber(
+          `${dialCode}${phoneNumber}`,
+        );
         navigate('SignInWithOtpPhoneNumber', {
           otpConfirm: confirmation,
           user: { phoneNumber },
@@ -65,34 +79,94 @@ export const SignInWithPhoneNumberForm: FC = () => {
     formik.handleSubmit();
   };
 
-  return (
-    <View>
-      <View style={marginBottom(spacing.lg)}>
-        <FormControl
-          isRequired
-          isInvalid={!!errorCode || !!formik.errors.phoneNumber}
-        >
-          <FormControl.Label>{translate('Phone number')}</FormControl.Label>
-          <Input
-            size="xl"
-            testID="phoneNumber"
-            variant="underlined"
-            onChangeText={formik.handleChange('phoneNumber')}
-            placeholder={translate('Enter your phone number')}
-            onBlur={formik.handleBlur('phoneNumber')}
-            autoFocus
-          ></Input>
-          <FormControl.ErrorMessage leftIcon={<WarningOutlineIcon size="xs" />}>
-            {(!!errorCode && translate(errorCode)) || formik.errors.phoneNumber}
-          </FormControl.ErrorMessage>
-        </FormControl>
-      </View>
+  const handleCloseSearchCountry = () => {
+    setOpenSearchCountry(false);
+  };
 
-      <View style={marginTop(spacing.lg)}>
-        <Button onPress={handlePressSubmit} isLoading={formik.isSubmitting}>
-          Next
-        </Button>
+  const handleOpenSearchCountry = () => {
+    setOpenSearchCountry(true);
+  };
+
+  const handleSelectCountry = (country: Country) => {
+    formik.setFieldValue('dialCode', `+${country.callingCode[0]}`);
+    setCountryCode(country.cca2);
+  };
+
+  return (
+    <>
+      <View>
+        <View style={marginBottom(spacing.lg)}>
+          <View style={widthFull}>
+            <FormControl
+              style={widthFull}
+              isRequired
+              isInvalid={!!errorCode || !!formik.errors.phoneNumber}
+            >
+              <FormControl.Label>{translate('Phone number')}</FormControl.Label>
+              <HStack space={4} style={[flexDirectionRow, widthFull]}>
+                <View style={width(120)}>
+                  <TouchableOpacity onPress={handleOpenSearchCountry}>
+                    <Input
+                      height={12}
+                      size="xl"
+                      testID="dialCode"
+                      variant="underlined"
+                      isReadOnly
+                      value={formik.values.dialCode}
+                      onPressIn={handleOpenSearchCountry}
+                      InputLeftElement={
+                        <CountryPicker
+                          onClose={handleCloseSearchCountry}
+                          visible={isOpenSearchCountry}
+                          countryCode={countryCode}
+                          withFilter
+                          withCallingCode
+                          withFlag={true}
+                          onSelect={handleSelectCountry}
+                        />
+                      }
+                      InputRightElement={
+                        <Icon
+                          as={<FeatherIcons name="chevron-down" />}
+                          size={5}
+                          ml="2"
+                          color="muted.400"
+                        />
+                      }
+                    ></Input>
+                  </TouchableOpacity>
+                </View>
+
+                <View style={flexGrow}>
+                  <Input
+                    height={12}
+                    size="xl"
+                    testID="phoneNumber"
+                    variant="underlined"
+                    onChangeText={formik.handleChange('phoneNumber')}
+                    placeholder={translate('Enter your phone number')}
+                    onBlur={formik.handleBlur('phoneNumber')}
+                    autoFocus
+                  ></Input>
+                </View>
+              </HStack>
+
+              <FormControl.ErrorMessage
+                leftIcon={<WarningOutlineIcon size="xs" />}
+              >
+                {(!!errorCode && translate(errorCode)) ||
+                  formik.errors.phoneNumber}
+              </FormControl.ErrorMessage>
+            </FormControl>
+          </View>
+        </View>
+
+        <View style={marginTop(spacing.lg)}>
+          <Button onPress={handlePressSubmit} isLoading={formik.isSubmitting}>
+            Next
+          </Button>
+        </View>
       </View>
-    </View>
+    </>
   );
 };

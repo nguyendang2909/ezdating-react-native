@@ -9,9 +9,9 @@ import {
   paddingVertical,
   textAlignCenter,
 } from 'app/styles';
-import { Box, Heading, Text, View } from 'native-base';
+import { Box, Heading, IconButton, Text, View } from 'native-base';
 import React, { FC } from 'react';
-import AntDesign from 'react-native-vector-icons/AntDesign';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import { AppStackScreenProps } from '../navigators';
 import { spacing } from '../theme';
@@ -25,12 +25,17 @@ export const SignInWithPhoneNumberScreen: FC<FCProps> = _props => {
     <>
       <Box safeAreaTop />
       <Box safeAreaBottom style={heightFull}>
-        <View>
-          <AntDesign name="back"></AntDesign>
-        </View>
         <View
           style={[paddingHorizontal(spacing.lg), paddingVertical(spacing.lg)]}
         >
+          <View>
+            <IconButton
+              borderRadius="full"
+              size={36}
+              onPress={goBack}
+              icon={<MaterialIcons name="chevron-left" size={36} />}
+            ></IconButton>
+          </View>
           <Heading size="2xl">
             {translate('What is your w?', { w: translate('phone number') })}
           </Heading>
