@@ -14,7 +14,7 @@ import {
 } from 'redux-persist';
 
 import { api } from '../services/api';
-import { appReducer } from './app/app.store';
+import { appReducer } from './app.store';
 import theme from './theme';
 import { currentUserReducer } from './users/current-user.store';
 
@@ -41,13 +41,14 @@ export const reduxStorage: Storage = {
   },
 };
 
-const persistConfig = {
-  key: 'root',
-  storage: reduxStorage,
-  whitelist: ['theme', 'auth'],
-};
-
-const persistedReducer = persistReducer(persistConfig, reducers);
+const persistedReducer = persistReducer(
+  {
+    key: 'root',
+    storage: reduxStorage,
+    whitelist: ['theme', 'auth', 'app'],
+  },
+  reducers,
+);
 
 const store = configureStore({
   reducer: persistedReducer,

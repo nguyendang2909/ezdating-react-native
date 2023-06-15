@@ -16,7 +16,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { AppStackScreenProps } from '../navigators';
 import { spacing } from '../theme';
 
-interface FCProps extends AppStackScreenProps<'SignInWithPhoneNumber'> {}
+type FCProps = AppStackScreenProps<'SignInWithPhoneNumber'>;
 
 export const SignInWithPhoneNumberScreen: FC<FCProps> = _props => {
   const { goBack } = useNavigation();

@@ -8,7 +8,7 @@ export const API_URL = {
   loginByGoogle: '/auth/login/google',
   nearbyUsers: '/users/nearby',
   messages: 'messages',
-  myProfile: '/users/my-profile',
+  myProfile: '/users/profile',
   myGallery: '/gallery/my',
   isExistUser: '/users/exist',
   signInWithPhoneNumber: '/auth/sign-in/phone-number',

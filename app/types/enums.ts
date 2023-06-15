@@ -1,12 +1,13 @@
 export enum EGender {
   male = 'male',
   female = 'female',
+  lgbt = 'lgbt',
 }
 
 export enum ELookingForGender {
   male = 'male',
   female = 'female',
-  all = 'all',
+  lgbt = 'lgbt',
 }
 
 export enum EEducationLevel {

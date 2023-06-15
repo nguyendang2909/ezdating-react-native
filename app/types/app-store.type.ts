@@ -1,23 +1,24 @@
 import { store } from 'app/store';
 
-import { ApiResponse } from './api-response.type';
+import { Entity } from './entity.type';
 
 export declare namespace AppStore {
   type RootState = ReturnType<typeof store.getState>;
 
   type AppState = Partial<{
     accessToken?: string;
-    isLogged?: boolean;
+    isLogged: boolean;
+    profile: Entity.User;
   }>;
 
   type CurrentUser = Partial<{
-    profile?: ApiResponse.User;
+    profile?: Entity.User;
   }>;
 
-  type Conversations = { data: ApiResponse.Conversation[] };
+  type Conversations = { data: Entity.Conversation[] };
 
   type Messages = Partial<{
-    [T: string]: ApiResponse.Message[];
+    [T: string]: Entity.Message[];
   }>;
 
   type PhotoActionType = 'delete' | 'create' | undefined;

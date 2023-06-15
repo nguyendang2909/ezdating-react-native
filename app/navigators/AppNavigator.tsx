@@ -9,21 +9,24 @@ import {
   DarkTheme,
   DefaultTheme,
   NavigationContainer,
+  NavigatorScreenParams,
 } from '@react-navigation/native';
 import {
   createNativeStackNavigator,
   NativeStackScreenProps,
 } from '@react-navigation/native-stack';
 import { useAppSelector } from 'app/hooks';
-import * as Screens from 'app/screens';
+import { InputBasicInfoScreen } from 'app/screens/InputBasicInfoScreen';
 import { SignInScreen } from 'app/screens/SignInScreen';
 import { SignInWithOtpPhoneNumberScreen } from 'app/screens/SignInWithOtpPhoneNumberScreen';
 import { SignInWithPhoneNumberScreen } from 'app/screens/SignInWithPhoneNumberScreen';
+import { api } from 'app/services/api';
 import { colors } from 'app/theme';
 import React from 'react';
 import { useColorScheme } from 'react-native';
 
 import Config from '../config';
+import { HomeNavigator, HomeTabParamList } from './HomeNavigator';
 import { navigationRef, useBackButtonHandler } from './navigationUtilities';
 
 /**
@@ -40,15 +43,17 @@ import { navigationRef, useBackButtonHandler } from './navigationUtilities';
  *   https://reactnavigation.org/docs/typescript/#organizing-types
  */
 export type AppStackParamList = {
-  Welcome: undefined;
+  InputBasicInfo: undefined;
+  Home: NavigatorScreenParams<HomeTabParamList>;
   SignIn: undefined;
-  SignInWithPhoneNumber: undefined;
   SignInWithOtpPhoneNumber: {
     otpConfirm: FirebaseAuthTypes.ConfirmationResult;
     user: {
       phoneNumber: string;
     };
   };
+  SignInWithPhoneNumber: undefined;
+  Welcome: undefined;
 };
 
 /**
@@ -66,18 +71,35 @@ const Stack = createNativeStackNavigator<AppStackParamList>();
 const AppStack = () => {
   const isAuthenticated = useAppSelector(state => state.app.isLogged);
 
+  api.useGetMyProfileQuery(undefined, {});
+
+  const haveBasicInfo = useAppSelector(
+    state => state.app.profile.haveBasicInfo,
+  );
+
   return (
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
         navigationBarColor: colors.background,
       }}
-      initialRouteName={isAuthenticated ? 'Welcome' : 'SignIn'}
+      initialRouteName={
+        isAuthenticated ? (haveBasicInfo ? 'Home' : 'InputBasicInfo') : 'SignIn'
+      }
     >
       {isAuthenticated ? (
-        <>
-          <Stack.Screen name="Welcome" component={Screens.WelcomeScreen} />
-        </>
+        haveBasicInfo ? (
+          <>
+            <Stack.Screen name="Home" component={HomeNavigator} />
+          </>
+        ) : (
+          <>
+            <Stack.Screen
+              name="InputBasicInfo"
+              component={InputBasicInfoScreen}
+            />
+          </>
+        )
       ) : (
         <>
           <Stack.Screen name="SignIn" component={SignInScreen} />
@@ -98,15 +120,12 @@ const AppStack = () => {
   );
 };
 
-export interface NavigationProps
-  extends Partial<React.ComponentProps<typeof NavigationContainer>> {}
+export type NavigationProps = Partial<
+  React.ComponentProps<typeof NavigationContainer>
+>;
 
 export const AppNavigator = (props: NavigationProps) => {
   const colorScheme = useColorScheme();
-
-  const state = useAppSelector(state => state.theme);
-
-  console.log(111, state);
 
   useBackButtonHandler(routeName => exitRoutes.includes(routeName));
 

@@ -24,32 +24,80 @@ const en = {
       button: "Let's try this again",
     },
   },
+  // b
+  Birthday: 'Birthday',
+  birthday: 'birthday',
+  // c
+  Continue: 'Continue',
+  continue: 'continue',
+  // d
+  'desire relation': 'desire relation',
   'Do not share verification code to protect your account':
     'Do not share verification code to protect your account',
+  // e
   'Enter your phone number': 'Enter your phone number',
   'Enter your first name': 'Enter your first name',
   'Enter your last name': 'Enter your last name',
   'Error, please try again!': 'Error, please try again!',
+  // f
+  Female: 'Female',
+  female: 'female',
   'First name': 'First name',
+  Friend: 'Friend',
+  Friends: 'Friends',
+  friend: 'friend',
+  friends: 'friends',
+  // g
+  Gender: 'Gender',
+  gender: 'gender',
+  // i
   'Input OTP': 'Input OTP',
+  Introduce: 'Introduce',
+  introduce: 'introduce',
+  // l
   'Last name': 'Last name',
+  LGBT: 'LGBT',
+  Lover: 'Lover',
+  lover: 'lover',
+  // m
+  Male: 'Male',
+  male: 'male',
+  marriage: 'marriage',
+  Marriage: 'Marriage',
   Messages: 'Messages',
+  // n
   Next: 'Next',
+  Nickname: 'Nickname',
+  nickname: 'nickname',
+  'Nickname is required!': 'Nickname is required!',
   Notes: 'Notes',
+  // o
+  'One-night stand': 'One-Night stand',
+  // p
+  Partner: 'Partner',
+  partner: 'partner',
   Password: 'Password',
   'Phone number': 'Phone number',
   'phone number': 'phone number',
   'Phone number is not valid!': 'Phone number is not valid!',
+  'Please choose your w!': 'Please choose your {{w}}!',
+  'Please enter your w': 'Please enter your {{w}}',
+  'Please enter your w!': 'Please enter your {{w}}!',
   'Please input the phone number to sign in':
     'Please input the phone number to sign in',
   'Please input the OTP code to sign in':
     'Please input the OTP code to sign in',
+  'Please select': 'Please select',
   Profile: 'Profile',
   'Retype password': 'Retype password',
   'Sign in with phone number': 'Sign in with phone number',
   'Sign in': 'Sign in',
+  'Your profile': 'Your profile',
   EZDating: 'EZDating',
+  // w
+  'w is required!': '{{w}} is required!',
   'What is your w?': 'What is your {{w}}?',
+  'What are you looking for here?': 'What are you looking for here?',
   'Wrong verification code, try again!': 'Wrong verification code, try again!',
 };
 

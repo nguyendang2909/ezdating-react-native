@@ -14,6 +14,10 @@ export const borderRadius = (value: number): ViewStyle => ({
   borderRadius: value,
 });
 
+export const flex = (value: number): ViewStyle => ({
+  flex: value,
+});
+
 export const flexDirectionRow: ViewStyle = {
   flexDirection: 'row',
 };
@@ -70,8 +74,16 @@ export const minHeight = (value: number): ViewStyle => ({
 
 export const opacity = (value: number) => ({ opacity: value });
 
+export const paddingBottom = (spacing: number): ViewStyle => ({
+  paddingBottom: spacing,
+});
+
 export const paddingHorizontal = (spacing: number): ViewStyle => ({
   paddingHorizontal: spacing,
+});
+
+export const paddingTop = (spacing: number): ViewStyle => ({
+  paddingTop: spacing,
 });
 
 export const paddingVertical = (spacing: number): ViewStyle => ({
