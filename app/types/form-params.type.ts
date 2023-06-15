@@ -1,3 +1,5 @@
+import { EUserLookingFor } from 'app/constants';
+
 import { ApiRequest } from './api-request.type';
 import { EGender } from './enums';
 
@@ -15,10 +17,10 @@ export declare namespace FormParams {
   };
 
   type BasicInfo = {
-    nickname: string;
+    nickname?: string;
     birthday?: string;
     gender?: EGender;
-    lookingFor: string;
+    lookingFor?: EUserLookingFor;
     introduce?: string;
     haveBasicInfor?: boolean;
   };

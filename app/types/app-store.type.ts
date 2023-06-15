@@ -5,11 +5,11 @@ import { Entity } from './entity.type';
 export declare namespace AppStore {
   type RootState = ReturnType<typeof store.getState>;
 
-  type AppState = Partial<{
+  type AppState = {
     accessToken?: string;
     isLogged: boolean;
     profile: Entity.User;
-  }>;
+  };
 
   type CurrentUser = Partial<{
     profile?: Entity.User;

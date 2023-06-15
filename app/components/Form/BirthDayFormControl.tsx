@@ -11,12 +11,14 @@ type FCProps = {
   error?: string;
   onChange: (date: string) => void;
   value?: string;
+  isRequired?: boolean;
 };
 
 export const BirthDayFormControl: FC<FCProps> = ({
   value,
   onChange,
   error,
+  isRequired,
 }) => {
   const [deviceLocale] = RNLocalize.getLocales();
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
@@ -33,7 +35,7 @@ export const BirthDayFormControl: FC<FCProps> = ({
 
   return (
     <>
-      <FormControl isRequired isInvalid={!!error}>
+      <FormControl {...(isRequired ? { isRequired } : {})} isInvalid={!!error}>
         <Stack>
           <FormControl.Label>{translate('Birthday')}</FormControl.Label>
           <Input

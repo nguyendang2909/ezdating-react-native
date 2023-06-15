@@ -51,7 +51,7 @@ export declare namespace ApiRequest {
   };
 
   type UpdateProfile = Partial<{
-    birthdate?: string;
+    birthDay?: string;
     company?: string;
     drinking?: EDrinking;
     educationLevel?: EEducationLevel;

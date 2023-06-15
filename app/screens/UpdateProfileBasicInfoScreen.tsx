@@ -1,30 +1,33 @@
+import { useNavigation } from '@react-navigation/native';
 import { BirthDayFormControl } from 'app/components/Form/BirthDayFormControl';
 import { FormControlInput } from 'app/components/Form/FormControlInput';
 import { LookingForFormControl } from 'app/components/Form/LookingForFormControl';
 import { SelectGenderFormControl } from 'app/components/Form/SelectGenderForm';
 import { LoadingScreen } from 'app/components/Screen/LoadingScreen';
+import { useAppSelector } from 'app/hooks';
 import { translate } from 'app/i18n';
 import { api } from 'app/services/api';
 import { flexGrow } from 'app/styles';
 import { FormParams } from 'app/types/form-params.type';
 import { useFormik } from 'formik';
+import moment from 'moment';
 import { Box, Button, Heading, ScrollView, View } from 'native-base';
 import React, { FC } from 'react';
 import * as Yup from 'yup';
 
-export const InputBasicInfoScreen: FC = () => {
-  const { data: profileData, refetch } = api.useGetMyProfileQuery(undefined, {
-    refetchOnMountOrArgChange: false,
-  });
-  const profile = profileData?.data;
+export const UpdateProfileBasicInfoScreen: FC = () => {
+  const profile = useAppSelector(state => state.app.profile);
+  const { navigate } = useNavigation();
   const [submitUpdateProfile] = api.useUpdateProfileMutation();
   const formik = useFormik<FormParams.BasicInfo>({
     initialValues: {
-      nickname: profile?.nickname || '',
+      nickname: profile?.nickname,
       gender: profile?.gender,
-      birthday: profile?.birthday,
-      lookingFor: '',
-      introduce: undefined,
+      birthday: profile?.birthday
+        ? moment(profile?.birthday).format('YYYY-MM-DD')
+        : undefined,
+      lookingFor: profile?.lookingFor,
+      introduce: profile?.introduce,
     },
     enableReinitialize: true,
     validationSchema: Yup.object().shape({
@@ -45,7 +48,7 @@ export const InputBasicInfoScreen: FC = () => {
     onSubmit: async values => {
       try {
         await submitUpdateProfile(values).unwrap();
-        await refetch().unwrap();
+        navigate('UpdateProfilePhotosScreen');
       } catch (err) {
         console.log(err);
       }
@@ -65,6 +68,7 @@ export const InputBasicInfoScreen: FC = () => {
               <View px="4">
                 <View mb="4">
                   <FormControlInput
+                    isRequired
                     label={translate('Nickname')}
                     value={formik.values.nickname}
                     onChange={formik.handleChange('nickname')}
@@ -77,6 +81,7 @@ export const InputBasicInfoScreen: FC = () => {
 
                 <View mb="4">
                   <SelectGenderFormControl
+                    isRequired
                     value={formik.values.gender}
                     onChange={formik.handleChange('gender')}
                     error={formik.errors.gender}
@@ -85,6 +90,7 @@ export const InputBasicInfoScreen: FC = () => {
 
                 <View mb="4">
                   <BirthDayFormControl
+                    isRequired
                     value={formik.values.birthday}
                     onChange={formik.handleChange('birthday')}
                     error={formik.errors.birthday}
@@ -93,6 +99,7 @@ export const InputBasicInfoScreen: FC = () => {
 
                 <View mb="4">
                   <LookingForFormControl
+                    isRequired
                     value={formik.values.lookingFor}
                     onChange={formik.handleChange('lookingFor')}
                     error={formik.errors.lookingFor}

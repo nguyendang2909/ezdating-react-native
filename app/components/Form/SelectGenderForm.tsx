@@ -15,15 +15,17 @@ type FCProps = {
   onChange: (gender: EGender) => void;
   error?: string;
   value?: EGender;
+  isRequired?: boolean;
 };
 
 export const SelectGenderFormControl: FC<FCProps> = ({
   onChange,
   error,
   value,
+  isRequired,
 }) => {
   return (
-    <FormControl isRequired isInvalid={!!error}>
+    <FormControl {...(isRequired ? { isRequired } : {})} isInvalid={!!error}>
       <Stack>
         <FormControl.Label>{translate('Gender')}</FormControl.Label>
 

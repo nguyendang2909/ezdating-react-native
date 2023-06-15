@@ -16,10 +16,11 @@ import {
   NativeStackScreenProps,
 } from '@react-navigation/native-stack';
 import { useAppSelector } from 'app/hooks';
-import { InputBasicInfoScreen } from 'app/screens/InputBasicInfoScreen';
 import { SignInScreen } from 'app/screens/SignInScreen';
 import { SignInWithOtpPhoneNumberScreen } from 'app/screens/SignInWithOtpPhoneNumberScreen';
 import { SignInWithPhoneNumberScreen } from 'app/screens/SignInWithPhoneNumberScreen';
+import { UpdateProfileBasicInfoScreen } from 'app/screens/UpdateProfileBasicInfoScreen';
+import { UpdateProfilePhotosScreen } from 'app/screens/UpdateProfilePhotosScreen';
 import { api } from 'app/services/api';
 import { colors } from 'app/theme';
 import React from 'react';
@@ -43,7 +44,8 @@ import { navigationRef, useBackButtonHandler } from './navigationUtilities';
  *   https://reactnavigation.org/docs/typescript/#organizing-types
  */
 export type AppStackParamList = {
-  InputBasicInfo: undefined;
+  UpdateProfileBasicInfo: undefined;
+  UpdateProfilePhotosScreen: undefined;
   Home: NavigatorScreenParams<HomeTabParamList>;
   SignIn: undefined;
   SignInWithOtpPhoneNumber: {
@@ -84,7 +86,11 @@ const AppStack = () => {
         navigationBarColor: colors.background,
       }}
       initialRouteName={
-        isAuthenticated ? (haveBasicInfo ? 'Home' : 'InputBasicInfo') : 'SignIn'
+        isAuthenticated
+          ? haveBasicInfo
+            ? 'Home'
+            : 'UpdateProfileBasicInfo'
+          : 'SignIn'
       }
     >
       {isAuthenticated ? (
@@ -95,8 +101,12 @@ const AppStack = () => {
         ) : (
           <>
             <Stack.Screen
-              name="InputBasicInfo"
-              component={InputBasicInfoScreen}
+              name="UpdateProfileBasicInfo"
+              component={UpdateProfileBasicInfoScreen}
+            />
+            <Stack.Screen
+              name="UpdateProfilePhotosScreen"
+              component={UpdateProfilePhotosScreen}
             />
           </>
         )

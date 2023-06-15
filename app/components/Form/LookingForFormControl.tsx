@@ -34,18 +34,20 @@ const lookingForList: { labelTx: TxKeyPath; value: EUserLookingFor }[] = [
 
 interface ISelectLookingFor {
   error?: string;
-  value: string;
+  isRequired?: boolean;
   onChange: (nickname: string) => void;
+  value?: string;
 }
 
 export const LookingForFormControl: React.FC<ISelectLookingFor> = ({
   error,
   value,
   onChange,
+  isRequired,
 }) => {
   return (
     <>
-      <FormControl>
+      <FormControl {...(isRequired ? { isRequired } : {})} isInvalid={!!error}>
         <Stack>
           <FormControl.Label>
             {translate('What are you looking for here?')}

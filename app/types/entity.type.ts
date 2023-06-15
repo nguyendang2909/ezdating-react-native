@@ -1,3 +1,5 @@
+import { EUserLookingFor } from 'app/constants';
+
 import {
   EDrinking,
   EEducationLevel,
@@ -20,17 +22,15 @@ export declare namespace Entity {
     Partial<{
       introduce: string;
       age?: number;
-      avatar?: MediaFile;
       birthday?: string;
       company?: string;
       drinking?: EDrinking;
       educationLevel?: EEducationLevel;
       email: string;
       fullname: string;
-      gallery: MediaFile[];
-      interests: DataInterest[];
-      location: string;
       gender: EGender;
+      location: string;
+      lookingFor?: EUserLookingFor;
       jobTitle: string;
       lookingForGender: ELookingForGender;
       nickname: string;

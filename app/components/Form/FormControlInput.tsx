@@ -9,6 +9,7 @@ type FCProps = {
   maxLength?: number;
   placeholder?: string;
   testID?: string;
+  isRequired?: boolean;
 };
 
 export const FormControlInput: React.FC<FCProps> = ({
@@ -19,9 +20,10 @@ export const FormControlInput: React.FC<FCProps> = ({
   maxLength,
   placeholder,
   testID,
+  isRequired,
 }) => {
   return (
-    <FormControl isRequired isInvalid={!!error}>
+    <FormControl {...(isRequired ? { isRequired } : {})} isInvalid={!!error}>
       <Stack>
         <FormControl.Label>{label}</FormControl.Label>
         <Input
