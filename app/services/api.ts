@@ -23,7 +23,14 @@ const baseQuery = fetchBaseQuery({
 
 export const api = createApi({
   baseQuery: async (args, api, extraOptions) => {
+    if (args.params) {
+      if (args.params.f) {
+        args.params.f = JSON.stringify(args.params.f);
+      }
+    }
     const result = await baseQuery(args, api, extraOptions);
+
+    // console.log(extraOptions);
     //   if (result.error && result.error.status === 401) {
     //     const refreshResult = (await getFreshTokenFunction();
 
@@ -60,9 +67,21 @@ export const api = createApi({
         url: API_URL.myProfile,
         method: 'GET',
         params: {
-          f: [
-            'id,birthday,email,gender,introduce,lookingFor,haveBasicInfo,nickname,phoneNumber,role,status,createdBy,updatedBy',
-          ],
+          f: {
+            id: true,
+            birthday: true,
+            email: true,
+            gender: true,
+            introduce: true,
+            lookingFor: true,
+            haveBasicInfo: true,
+            nickname: true,
+            phoneNumber: true,
+            role: true,
+            status: true,
+            createdBy: true,
+            updatedBy: true,
+          },
         },
       }),
     }),

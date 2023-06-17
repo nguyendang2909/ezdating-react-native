@@ -66,6 +66,7 @@ export const UpdateProfileBasicInfoScreen: FC = () => {
               <View px="4" py="4">
                 <Heading>{translate('Your profile')}</Heading>
               </View>
+
               <View px="4">
                 <View mb="4">
                   <FormControlInput

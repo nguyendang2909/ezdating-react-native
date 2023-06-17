@@ -163,7 +163,7 @@ export const SignInWithPhoneNumberForm: FC = () => {
 
         <View style={marginTop(spacing.lg)}>
           <Button onPress={handlePressSubmit} isLoading={formik.isSubmitting}>
-            Next
+            {translate('Next')}
           </Button>
         </View>
       </View>

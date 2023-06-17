@@ -24,7 +24,7 @@ import { Keyboard, Pressable, View } from 'react-native';
 
 import { AppStackScreenProps } from '../navigators';
 
-interface FCProps extends AppStackScreenProps<'SignInWithOtpPhoneNumber'> {}
+type FCProps = AppStackScreenProps<'SignInWithOtpPhoneNumber'>;
 
 export const SignInWithOtpPhoneNumberScreen: FC<FCProps> = props => {
   const { goBack } = useNavigation();
@@ -46,7 +46,6 @@ export const SignInWithOtpPhoneNumberScreen: FC<FCProps> = props => {
         return;
       }
       const idToken = await credential.user.getIdToken();
-      console.log(111, idToken);
       await submitSignInPhoneNumber({
         ...user,
         token: idToken,

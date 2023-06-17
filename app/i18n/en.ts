@@ -24,12 +24,17 @@ const en = {
       button: "Let's try this again",
     },
   },
+  // a
+  'Add picture profile (Please choose photos that clearly shows your face, up to 6 photos)':
+    'Add picture profile (Please choose photos that clearly shows your face, up to 6 photos)',
   // b
   Birthday: 'Birthday',
   birthday: 'birthday',
   // c
   Continue: 'Continue',
   continue: 'continue',
+  Complete: 'Complete',
+  complete: 'complete',
   // d
   'desire relation': 'desire relation',
   'Do not share verification code to protect your account':
@@ -80,6 +85,10 @@ const en = {
   'Phone number': 'Phone number',
   'phone number': 'phone number',
   'Phone number is not valid!': 'Phone number is not valid!',
+  Photo: 'Photo',
+  photo: 'photo',
+  Photos: 'Photos',
+  photos: 'photos',
   'Please choose your w!': 'Please choose your {{w}}!',
   'Please enter your w': 'Please enter your {{w}}',
   'Please enter your w!': 'Please enter your {{w}}!',

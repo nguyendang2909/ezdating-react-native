@@ -1,17 +1,29 @@
-import { TextStyle, ViewStyle } from 'react-native';
+import { ColorValue, TextStyle, ViewStyle } from 'react-native';
 
 export const alignItemsCenter: ViewStyle = { alignItems: 'center' };
+
+export const aspectRatio = (value: number): ViewStyle => ({
+  aspectRatio: value,
+});
 
 export const backgroundColor = (value: string): ViewStyle => ({
   backgroundColor: value,
 });
 
-export const borderTopColor = (value: string): ViewStyle => ({
-  borderTopColor: value,
+export const borderColor = (value: ColorValue): ViewStyle => ({
+  borderColor: value,
 });
 
 export const borderRadius = (value: number): ViewStyle => ({
   borderRadius: value,
+});
+
+export const borderTopColor = (value: ColorValue): ViewStyle => ({
+  borderTopColor: value,
+});
+
+export const borderWitdh = (value: number): ViewStyle => ({
+  borderWidth: value,
 });
 
 export const flex = (value: number): ViewStyle => ({
@@ -23,6 +35,8 @@ export const flexDirectionRow: ViewStyle = {
 };
 
 export const flexGrow: ViewStyle = { flexGrow: 1 };
+
+export const flexWrapWrap: ViewStyle = { flexWrap: 'wrap' };
 
 export const fontSize = (value: number): TextStyle => ({
   fontSize: value,
@@ -73,6 +87,8 @@ export const minHeight = (value: number): ViewStyle => ({
 });
 
 export const opacity = (value: number) => ({ opacity: value });
+
+export const padding = (value: number): ViewStyle => ({ padding: value });
 
 export const paddingBottom = (spacing: number): ViewStyle => ({
   paddingBottom: spacing,
