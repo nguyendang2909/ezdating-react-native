@@ -1,9 +1,3 @@
-/**
- * The app navigator (formerly "AppNavigator" and "MainNavigator") is used for the primary
- * navigation flows of your app.
- * Generally speaking, it will contain an auth flow (registration, login, forgot password)
- * and a "main" flow which the user will use once logged in.
- */
 import { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import {
   DarkTheme,
@@ -123,9 +117,6 @@ const AppStack = () => {
           />
         </>
       )}
-
-      {/** 🔥 Your screens go here */}
-      {/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
     </Stack.Navigator>
   );
 };

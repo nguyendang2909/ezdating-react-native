@@ -20,7 +20,7 @@ export type HomeTabParamList = {
   Profile: undefined;
 };
 
-interface FCProps extends AppStackScreenProps<'Home'> {}
+type FCProps = AppStackScreenProps<'Home'>;
 
 const Tab = createBottomTabNavigator<HomeTabParamList>();
 

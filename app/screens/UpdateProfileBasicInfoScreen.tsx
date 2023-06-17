@@ -11,7 +11,7 @@ import { flexGrow } from 'app/styles';
 import { FormParams } from 'app/types/form-params.type';
 import { useFormik } from 'formik';
 import moment from 'moment';
-import { Box, Button, Heading, ScrollView, View } from 'native-base';
+import { Box, Button, Heading, View } from 'native-base';
 import React, { FC } from 'react';
 import * as Yup from 'yup';
 
@@ -61,7 +61,8 @@ export const UpdateProfileBasicInfoScreen: FC = () => {
         <LoadingScreen isLoading={formik.isSubmitting} />
         <View flex="1">
           <View flex="1">
-            <ScrollView style={flexGrow}>
+            {/* TODO: ScrollView */}
+            <View style={flexGrow}>
               <View px="4" py="4">
                 <Heading>{translate('Your profile')}</Heading>
               </View>
@@ -119,7 +120,7 @@ export const UpdateProfileBasicInfoScreen: FC = () => {
                   />
                 </View>
               </View>
-            </ScrollView>
+            </View>
 
             <View px="4" py="4">
               <Button

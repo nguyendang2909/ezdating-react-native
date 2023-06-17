@@ -13,7 +13,10 @@ export const appSlice = createSlice({
   initialState,
   reducers: {
     updateProfile: (state, action: PayloadAction<ApiResponse.UserData>) => {
-      state.profile = action.payload.data;
+      const profile = action.payload.data;
+      if (profile) {
+        state.profile = profile;
+      }
     },
     setLogged: state => {
       state.isLogged = true;
@@ -33,7 +36,6 @@ export const appSlice = createSlice({
     builder.addMatcher(
       api.endpoints.signInWithPhoneNumber.matchFulfilled,
       (state, action) => {
-        console.log(222, action.payload);
         const accessToken = action.payload.data?.accessToken;
         if (!accessToken) {
           return;
