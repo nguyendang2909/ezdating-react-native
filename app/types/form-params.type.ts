@@ -1,4 +1,5 @@
 import { EUserLookingFor } from 'app/constants';
+import { Image } from 'react-native-image-crop-picker';
 
 import { ApiRequest } from './api-request.type';
 import { EGender } from './enums';
@@ -23,5 +24,9 @@ export declare namespace FormParams {
     lookingFor?: EUserLookingFor;
     introduce?: string;
     haveBasicInfor?: boolean;
+  };
+
+  type UpdateProfilePhoto = {
+    photos: Image[];
   };
 }

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import Config from 'app/config';
 import { API_URL } from 'app/config/config.api';
@@ -6,6 +7,7 @@ import { ApiRequest } from 'app/types/api-request.type';
 import { ApiResponse } from 'app/types/api-response.type';
 import { AppStore } from 'app/types/app-store.type';
 import queryString from 'query-string';
+import { Platform } from 'react-native';
 
 const baseQuery = fetchBaseQuery({
   paramsSerializer: (params: Record<string, any>) => {
@@ -95,6 +97,28 @@ export const api = createApi({
         method: 'PATCH',
         body,
       }),
+    }),
+
+    // Gallery
+    uploadPhoto: builder.mutation<ApiResponse.Logged, ApiRequest.UploadPhoto>({
+      query: body => {
+        const { file, share } = body;
+        const formData = new FormData();
+        formData.append('file', {
+          uri: Platform.OS === 'ios' ? `file:///${file.path}` : file.path,
+          type: 'image/jpeg',
+          name: 'image.jpg',
+        });
+        if (share) {
+          formData.append('share', share);
+        }
+        return {
+          url: API_URL.photos,
+          method: 'POST',
+          body: formData,
+        };
+      },
+      // invalidatesTags: ['MyProfile'],
     }),
   }),
 });

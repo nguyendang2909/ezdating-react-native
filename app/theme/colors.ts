@@ -11,7 +11,7 @@ const palette = {
   neutral800: '#191015',
   neutral900: '#000000',
 
-  primary: '#050DED',
+  primary: 'red',
   primary100: '#F4E0D9',
   primary200: '#E8C1B4',
   primary300: '#DDA28E',

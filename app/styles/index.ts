@@ -1,6 +1,10 @@
-import { ColorValue, TextStyle, ViewStyle } from 'react-native';
+import { ColorValue, FlexStyle, TextStyle, ViewStyle } from 'react-native';
 
 export const alignItemsCenter: ViewStyle = { alignItems: 'center' };
+
+export const alignSelfStretch: { alignSelf: FlexStyle['alignSelf'] } = {
+  alignSelf: 'stretch',
+};
 
 export const aspectRatio = (value: number): ViewStyle => ({
   aspectRatio: value,
@@ -14,7 +18,7 @@ export const borderColor = (value: ColorValue): ViewStyle => ({
   borderColor: value,
 });
 
-export const borderRadius = (value: number): ViewStyle => ({
+export const borderRadius = (value: number) => ({
   borderRadius: value,
 });
 
@@ -26,7 +30,7 @@ export const borderWitdh = (value: number): ViewStyle => ({
   borderWidth: value,
 });
 
-export const flex = (value: number): ViewStyle => ({
+export const flex = (value: number) => ({
   flex: value,
 });
 
@@ -48,7 +52,9 @@ export const height = (value: number): ViewStyle => ({
 
 export const heightFull: ViewStyle = { height: '100%' };
 
-export const justifyContentCenter: ViewStyle = { justifyContent: 'center' };
+export const justifyContentCenter: {
+  justifyContent: FlexStyle['justifyContent'];
+} = { justifyContent: 'center' };
 
 export const justifyContentSpaceEvenly: ViewStyle = {
   justifyContent: 'space-evenly',

@@ -1,9 +1,12 @@
+import { Image } from 'react-native-image-crop-picker';
+
 import {
   EDrinking,
   EEducationLevel,
   EGender,
   ELookingForGender,
   ESmoking,
+  EUploadFileShare,
   EWorkout,
 } from './enums';
 
@@ -57,9 +60,10 @@ export declare namespace ApiRequest {
     educationLevel?: EEducationLevel;
     gender?: EGender;
     location: string;
-    nickname?: string;
     jobTitle?: string;
+    haveBasicInfo?: boolean;
     introduction?: string;
+    nickname?: string;
     latitude?: number;
     longitude?: number;
     lookingForGender?: ELookingForGender;
@@ -69,9 +73,9 @@ export declare namespace ApiRequest {
     workout?: EWorkout;
   }>;
 
-  type CreatePhoto = {
-    file: File;
-    isPrivate?: boolean;
+  type UploadPhoto = {
+    file: Image;
+    share: EUploadFileShare;
   };
 
   type FindAllConversations = {};

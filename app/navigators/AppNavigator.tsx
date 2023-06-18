@@ -88,22 +88,17 @@ const AppStack = () => {
       }
     >
       {isAuthenticated ? (
-        haveBasicInfo ? (
-          <>
-            <Stack.Screen name="Home" component={HomeNavigator} />
-          </>
-        ) : (
-          <>
-            <Stack.Screen
-              name="UpdateProfileBasicInfo"
-              component={UpdateProfileBasicInfoScreen}
-            />
-            <Stack.Screen
-              name="UpdateProfilePhotosScreen"
-              component={UpdateProfilePhotosScreen}
-            />
-          </>
-        )
+        <>
+          <Stack.Screen name="Home" component={HomeNavigator} />
+          <Stack.Screen
+            name="UpdateProfileBasicInfo"
+            component={UpdateProfileBasicInfoScreen}
+          />
+          <Stack.Screen
+            name="UpdateProfilePhotosScreen"
+            component={UpdateProfilePhotosScreen}
+          />
+        </>
       ) : (
         <>
           <Stack.Screen name="SignIn" component={SignInScreen} />

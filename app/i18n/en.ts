@@ -31,6 +31,8 @@ const en = {
   Birthday: 'Birthday',
   birthday: 'birthday',
   // c
+  Cancel: 'Cancel',
+  cancel: 'cancel',
   Continue: 'Continue',
   continue: 'continue',
   Complete: 'Complete',
@@ -98,6 +100,10 @@ const en = {
     'Please input the OTP code to sign in',
   'Please select': 'Please select',
   Profile: 'Profile',
+  // r
+  Remove: 'Remove',
+  remove: 'remove',
+  'Remove w': 'Remove {{w}}',
   'Retype password': 'Retype password',
   'Sign in with phone number': 'Sign in with phone number',
   'Sign in': 'Sign in',

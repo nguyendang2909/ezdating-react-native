@@ -50,3 +50,13 @@ export enum ERelationshipStatus {
   divorcedWithKids = 'divorcedWithKids',
   singleParent = 'singleParent',
 }
+
+export enum EUploadFileType {
+  photo = 'photo',
+  video = 'video',
+}
+
+export enum EUploadFileShare {
+  public = 'public',
+  Private = 'private',
+}
