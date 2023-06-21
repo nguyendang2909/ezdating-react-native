@@ -8,6 +8,10 @@ export declare namespace ApiResponse {
     type?: string;
   };
 
+  type RemoveData = FetchData<{ success: true }>;
+
+  type UploadedFileListData = FetchData<Entity.UploadedFile[]>;
+
   type UserData = FetchData<Entity.User>;
 
   type Logged = FetchData<{ accessToken: string; user: Entity.User }>;

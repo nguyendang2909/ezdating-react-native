@@ -11,12 +11,11 @@ import {
 import { Icon, Image, View } from 'native-base';
 import React from 'react';
 import { TouchableHighlight } from 'react-native';
-import { Image as ImageType } from 'react-native-image-crop-picker';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 type FCProps = {
   onPress: () => void;
-  value?: ImageType;
+  value?: string;
 };
 
 export const UploadPhotoCard: React.FC<FCProps> = ({ onPress, value }) => {
@@ -40,7 +39,7 @@ export const UploadPhotoCard: React.FC<FCProps> = ({ onPress, value }) => {
               borderRadius(20),
             ]}
             alt="profile-photo"
-            source={{ uri: value.path }}
+            source={{ uri: value }}
             resizeMode="cover"
           />
         </>

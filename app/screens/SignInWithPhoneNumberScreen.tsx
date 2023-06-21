@@ -1,9 +1,10 @@
 import { useNavigation } from '@react-navigation/native';
+import { LoadingScreen } from 'app/components/Screen/LoadingScreen';
 import { SignInWithPhoneNumberForm } from 'app/containers/Form/SignInWithPhoneNumberForm';
 import { translate } from 'app/i18n';
 import {
+  flex,
   flexGrow,
-  heightFull,
   marginTop,
   paddingHorizontal,
   paddingVertical,
@@ -23,8 +24,8 @@ export const SignInWithPhoneNumberScreen: FC<FCProps> = _props => {
 
   return (
     <>
-      <Box safeAreaTop />
-      <Box safeAreaBottom style={heightFull}>
+      <Box safeAreaY style={flex(1)}>
+        <LoadingScreen />
         <View
           style={[paddingHorizontal(spacing.lg), paddingVertical(spacing.lg)]}
         >

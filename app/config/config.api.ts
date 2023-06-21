@@ -12,5 +12,6 @@ export const API_URL = {
   photos: '/upload-files/photos',
   isExistUser: '/users/exist',
   signInWithPhoneNumber: '/auth/sign-in/phone-number',
+  uploadFiles: '/upload-files',
   users: '/users',
 };

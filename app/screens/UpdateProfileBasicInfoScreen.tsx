@@ -116,7 +116,7 @@ export const UpdateProfileBasicInfoScreen: FC = () => {
                     placeholder={translate('Please enter your w', {
                       w: translate('introduce'),
                     })}
-                    error={formik.errors.nickname}
+                    error={formik.errors.introduce}
                     maxLength={500}
                   />
                 </View>

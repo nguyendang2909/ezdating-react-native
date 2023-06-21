@@ -6,6 +6,8 @@ import {
   EGender,
   ELookingForGender,
   ESmoking,
+  EUploadFileShare,
+  EUploadFileType,
   EWorkout,
 } from './enums';
 
@@ -18,6 +20,16 @@ export declare namespace Entity {
     updatedAt?: string;
   };
 
+  type UploadedFile = BaseEntity &
+    Partial<{
+      key: string;
+      location: string;
+      // eslint-disable-next-line no-use-before-define
+      user: User;
+      type: EUploadFileType;
+      share: EUploadFileShare;
+    }>;
+
   type User = BaseEntity &
     Partial<{
       introduce: string;
@@ -27,6 +39,7 @@ export declare namespace Entity {
       drinking?: EDrinking;
       educationLevel?: EEducationLevel;
       email: string;
+      uploadFiles: UploadedFile[];
       fullname: string;
       gender: EGender;
       location: string;
@@ -43,31 +56,31 @@ export declare namespace Entity {
       workout: EWorkout;
     }>;
 
-  type MediaFile = BaseEntity & Partial<{ url: string }>;
+  // type MediaFile = BaseEntity & Partial<{ url: string }>;
 
-  type DataInterest = BaseEntity &
-    Partial<{
-      tag?: string;
-      title?: string;
-    }>;
+  // type DataInterest = BaseEntity &
+  //   Partial<{
+  //     tag?: string;
+  //     title?: string;
+  //   }>;
 
-  type ConversationMembers = BaseEntity & {
-    _userId: string;
-    _conversationId: string;
-    conversation: Conversation;
-    user?: User;
-  };
+  // type ConversationMembers = BaseEntity & {
+  //   _userId: string;
+  //   _conversationId: string;
+  //   conversation: Conversation;
+  //   user?: User;
+  // };
 
-  type Conversation = BaseEntity &
-    Partial<{
-      _id: string;
-      members: User[];
-    }>;
+  // type Conversation = BaseEntity &
+  //   Partial<{
+  //     _id: string;
+  //     members: User[];
+  //   }>;
 
-  type Message = BaseEntity &
-    Partial<{
-      _conversationId: string;
-      text?: string;
-      conversation?: Conversation;
-    }>;
+  // type Message = BaseEntity &
+  //   Partial<{
+  //     _conversationId: string;
+  //     text?: string;
+  //     conversation?: Conversation;
+  //   }>;
 }

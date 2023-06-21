@@ -1,6 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
 import { OtpInput } from 'app/components/Input/OtpInput';
-import { Header } from 'app/components/Screen/Header';
 import { translate } from 'app/i18n';
 import { api } from 'app/services/api';
 import {
@@ -13,14 +12,15 @@ import { spacing } from 'app/theme';
 import {
   Box,
   Button,
-  ChevronLeftIcon,
   FormControl,
+  Heading,
   HStack,
-  StatusBar,
+  IconButton,
   Text,
 } from 'native-base';
 import React, { FC, useState } from 'react';
 import { Keyboard, Pressable, View } from 'react-native';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import { AppStackScreenProps } from '../navigators';
 
@@ -60,24 +60,24 @@ export const SignInWithOtpPhoneNumberScreen: FC<FCProps> = props => {
 
   return (
     <>
-      <StatusBar barStyle="light-content" />
-      <Box style={heightFull} safeAreaBottom>
+      <Box style={heightFull} safeAreaY>
         <Pressable style={flexGrow} onPress={Keyboard.dismiss}>
-          <Header
-            textTx="Input OTP"
-            leftIcon={ChevronLeftIcon}
-            onPressLeftIcon={goBack}
-          ></Header>
+          <View
+            style={[paddingHorizontal(spacing.lg), paddingVertical(spacing.lg)]}
+          >
+            <View>
+              <IconButton
+                borderRadius="full"
+                size={36}
+                onPress={goBack}
+                icon={<MaterialIcons name="chevron-left" size={36} />}
+              ></IconButton>
+            </View>
+            <Heading size="2xl">{translate('Input OTP')}</Heading>
+            <Text>{translate('signInWithOtpPhoneScreen.checkSmsMessage')}</Text>
+          </View>
 
           <Box style={[flexGrow, paddingHorizontal(spacing.lg)]}>
-            <View style={paddingVertical(spacing.lg)}>
-              <Text>
-                {translate(
-                  'Do not share verification code to protect your account',
-                )}
-              </Text>
-            </View>
-
             <HStack space="2" style={paddingVertical(spacing.lg)}>
               <FormControl isInvalid={isError}>
                 <OtpInput

@@ -6,12 +6,14 @@ import {
   flexGrow,
   marginBottom,
   marginTop,
+  posititionAbsolute,
   width,
   widthFull,
 } from 'app/styles';
 import { spacing } from 'app/theme';
 import { FormParams } from 'app/types/form-params.type';
 import { useFormik } from 'formik';
+import { isValidPhoneNumber } from 'libphonenumber-js/max';
 import {
   Button,
   FormControl,
@@ -48,26 +50,28 @@ export const SignInWithPhoneNumberForm: FC = () => {
   const formik = useFormik<FormParams.SignInWithPhoneNumber>({
     initialValues: {
       dialCode: '+84',
+      countryCode: 'VN',
       phoneNumber: '',
     },
     validationSchema: Yup.object().shape({
       dialCode: Yup.string().required(),
       phoneNumber: Yup.string().required(),
-      // .matches(
-      //   phoneRegExp,
-      //   translate('Phone number is not valid!'),
-      // ),
     }),
     onSubmit: async values => {
       setErrorCode(undefined);
       try {
-        const { phoneNumber, dialCode } = values;
+        const { phoneNumber, dialCode, countryCode } = values;
+        const fullPhoneNumber = `${dialCode}${phoneNumber}`.replaceAll(' ', '');
+        if (!isValidPhoneNumber(fullPhoneNumber, countryCode)) {
+          setErrorCode('Please enter a valid phone number!');
+          return;
+        }
         const confirmation = await auth().signInWithPhoneNumber(
-          `${dialCode}${phoneNumber}`,
+          fullPhoneNumber,
         );
         navigate('SignInWithOtpPhoneNumber', {
           otpConfirm: confirmation,
-          user: { phoneNumber },
+          user: { phoneNumber: fullPhoneNumber },
         });
       } catch (err) {
         setErrorCode('Error, please try again!');
@@ -89,6 +93,7 @@ export const SignInWithPhoneNumberForm: FC = () => {
 
   const handleSelectCountry = (country: Country) => {
     formik.setFieldValue('dialCode', `+${country.callingCode[0]}`);
+    formik.setFieldValue('countryCode', country.cca2);
     setCountryCode(country.cca2);
   };
 
@@ -144,19 +149,22 @@ export const SignInWithPhoneNumberForm: FC = () => {
                     testID="phoneNumber"
                     variant="underlined"
                     onChangeText={formik.handleChange('phoneNumber')}
-                    placeholder={translate('Enter your phone number')}
+                    placeholder={translate('Phone number')}
                     onBlur={formik.handleBlur('phoneNumber')}
                     autoFocus
                   ></Input>
                 </View>
               </HStack>
 
-              <FormControl.ErrorMessage
-                leftIcon={<WarningOutlineIcon size="xs" />}
-              >
-                {(!!errorCode && translate(errorCode)) ||
-                  formik.errors.phoneNumber}
-              </FormControl.ErrorMessage>
+              <View>
+                <FormControl.ErrorMessage
+                  style={posititionAbsolute}
+                  leftIcon={<WarningOutlineIcon size="xs" />}
+                >
+                  {(!!errorCode && translate(errorCode)) ||
+                    formik.errors.phoneNumber}
+                </FormControl.ErrorMessage>
+              </View>
             </FormControl>
           </View>
         </View>

@@ -81,6 +81,13 @@ export const api = createApi({
             phoneNumber: true,
             role: true,
             status: true,
+            uploadFiles: {
+              id: true,
+              key: true,
+              location: true,
+              type: true,
+              share: true,
+            },
             createdBy: true,
             updatedBy: true,
           },
@@ -99,7 +106,19 @@ export const api = createApi({
       }),
     }),
 
-    // Gallery
+    // Photos
+    // getUploadFiles: builder.query<ApiResponse.UploadedFileListData, void>({
+    //   query: () => ({
+    //     url: API_URL.myProfile,
+    //     method: 'GET',
+    //     params: {
+    //       f: {
+    //         id: true,
+
+    //       },
+    //     },
+    //   }),
+    // }),
     uploadPhoto: builder.mutation<ApiResponse.Logged, ApiRequest.UploadPhoto>({
       query: body => {
         const { file, share } = body;
@@ -119,6 +138,12 @@ export const api = createApi({
         };
       },
       // invalidatesTags: ['MyProfile'],
+    }),
+    removePhoto: builder.mutation<ApiResponse.RemoveData, string>({
+      query: (id: string) => ({
+        url: `${API_URL.uploadFiles}/${id}`,
+        method: 'DELETE',
+      }),
     }),
   }),
 });

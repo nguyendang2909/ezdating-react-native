@@ -1,4 +1,5 @@
 import { EUserLookingFor } from 'app/constants';
+import { CountryCode } from 'libphonenumber-js';
 import { Image } from 'react-native-image-crop-picker';
 
 import { ApiRequest } from './api-request.type';
@@ -15,6 +16,7 @@ export declare namespace FormParams {
   type SignInWithPhoneNumber = {
     dialCode: string;
     phoneNumber: string;
+    countryCode: CountryCode;
   };
 
   type BasicInfo = {

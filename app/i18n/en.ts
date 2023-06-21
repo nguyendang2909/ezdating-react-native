@@ -92,6 +92,7 @@ const en = {
   Photos: 'Photos',
   photos: 'photos',
   'Please choose your w!': 'Please choose your {{w}}!',
+  'Please enter a valid phone number!': 'Please enter a valid phone number!',
   'Please enter your w': 'Please enter your {{w}}',
   'Please enter your w!': 'Please enter your {{w}}!',
   'Please input the phone number to sign in':
@@ -104,16 +105,26 @@ const en = {
   Remove: 'Remove',
   remove: 'remove',
   'Remove w': 'Remove {{w}}',
+  'Remove w failed!': 'Remove {{w}} failed!',
   'Retype password': 'Retype password',
   'Sign in with phone number': 'Sign in with phone number',
   'Sign in': 'Sign in',
   'Your profile': 'Your profile',
   EZDating: 'EZDating',
+  // u
+  'Update w failed!': 'Update {{w}} failed!',
+  // v
+  'Verify your w': 'Verify your {{w}}',
   // w
   'w is required!': '{{w}} is required!',
   'What is your w?': 'What is your {{w}}?',
   'What are you looking for here?': 'What are you looking for here?',
   'Wrong verification code, try again!': 'Wrong verification code, try again!',
+  // Screens
+  signInWithOtpPhoneScreen: {
+    checkSmsMessage:
+      "Check your SMS messages. We've sent you the PIN to your phone number",
+  },
 };
 
 export default en;

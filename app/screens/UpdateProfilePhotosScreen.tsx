@@ -1,6 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import { UploadPhotoCard } from 'app/components/Form/UploadPhotoCard';
 import { LoadingScreen } from 'app/components/Screen/LoadingScreen';
+import { useAppSelector } from 'app/hooks';
 import { translate } from 'app/i18n';
 import { api } from 'app/services/api';
 import {
@@ -13,7 +14,7 @@ import {
   width,
 } from 'app/styles';
 import { spacing } from 'app/theme';
-import { EUploadFileShare } from 'app/types/enums';
+import { EUploadFileShare, EUploadFileType } from 'app/types/enums';
 import { FormParams } from 'app/types/form-params.type';
 import { useFormik } from 'formik';
 import {
@@ -26,6 +27,7 @@ import {
   HStack,
   IconButton,
   Text,
+  useToast,
   View,
 } from 'native-base';
 import React, { useState } from 'react';
@@ -34,12 +36,22 @@ import ImageCropPicker from 'react-native-image-crop-picker';
 type FCProps = {};
 
 export const UpdateProfilePhotosScreen: React.FC<FCProps> = () => {
+  const toast = useToast();
   const { navigate, goBack } = useNavigation();
-  const [removePhotoIndex, setRemovePhotoIndex] = useState<number | undefined>(
-    undefined,
-  );
+  const [removePhotoIndex, setRemovePhotoIndex] = useState<
+    number | string | undefined
+  >(undefined);
   const [submitUploadPhoto] = api.useUploadPhotoMutation();
   const [updateProfile] = api.useUpdateProfileMutation();
+  const [submitRemovePhoto] = api.useRemovePhotoMutation();
+  const { refetch: refetchUserProfile } = api.useGetMyProfileQuery();
+  const uploadFiles = useAppSelector(state => state.app.profile.uploadFiles);
+  const profilePublicPhotos = uploadFiles?.filter(
+    item =>
+      item.type === EUploadFileType.photo &&
+      item.share === EUploadFileShare.public,
+  );
+  const profilePublicPhotosLength = profilePublicPhotos?.length || 0;
 
   const formik = useFormik<FormParams.UpdateProfilePhoto>({
     initialValues: {
@@ -65,21 +77,44 @@ export const UpdateProfilePhotosScreen: React.FC<FCProps> = () => {
           }
         }
         await updateProfile({ haveBasicInfo: true });
+        await refetchUserProfile();
+        navigate('Home', {
+          screen: 'DatingSwipe',
+        });
       } catch (err) {
-        console.log(err);
+        toast.show({
+          title: translate('Update w failed!', { w: translate('Photo') }),
+          placement: 'top-right',
+        });
       }
     },
   });
 
-  const handleRemovePhotoCardById = () => {
+  const handleRemovePhotoCardById = async () => {
     if (removePhotoIndex !== undefined) {
-      formik.setFieldValue(
-        'photos',
-        formik.values.photos.filter(
-          (value, index) => index !== removePhotoIndex,
-        ),
-      );
-      handleCloseRemovePhotoCard();
+      if (typeof removePhotoIndex === 'number') {
+        formik.setFieldValue(
+          'photos',
+          formik.values.photos.filter(
+            (value, index) => index !== removePhotoIndex,
+          ),
+        );
+        handleCloseRemovePhotoCard();
+      } else if (typeof removePhotoIndex === 'string') {
+        try {
+          formik.setSubmitting(true);
+          handleCloseRemovePhotoCard();
+          await submitRemovePhoto(removePhotoIndex).unwrap();
+          await refetchUserProfile();
+        } catch (err) {
+          toast.show({
+            title: translate('Remove w failed!', { w: translate('Photo') }),
+            placement: 'top-right',
+          });
+        } finally {
+          formik.setSubmitting(false);
+        }
+      }
     }
   };
 
@@ -87,20 +122,24 @@ export const UpdateProfilePhotosScreen: React.FC<FCProps> = () => {
     setRemovePhotoIndex(undefined);
   };
 
-  const handleClickPhotoCard = async (index: number) => {
-    const photos = formik.values.photos;
-    if (photos[index]) {
+  const handleClickPhotoCard = async (index: number | string) => {
+    if (typeof index === 'number') {
+      const photos = formik.values.photos;
+      if (photos[index]) {
+        setRemovePhotoIndex(index);
+        return;
+      }
+      const photo = await ImageCropPicker.openPicker({
+        width: 640,
+        height: 860,
+        cropping: true,
+        mediaType: 'photo',
+        forceJpg: true,
+      });
+      formik.setFieldValue('photos', formik.values.photos.concat(photo));
+    } else if (typeof index === 'string') {
       setRemovePhotoIndex(index);
-      return;
     }
-    const photo = await ImageCropPicker.openPicker({
-      width: 640,
-      height: 860,
-      cropping: true,
-      mediaType: 'photo',
-      forceJpg: true,
-    });
-    formik.setFieldValue('photos', formik.values.photos.concat(photo));
   };
 
   return (
@@ -127,21 +166,45 @@ export const UpdateProfilePhotosScreen: React.FC<FCProps> = () => {
 
             <View p="4">
               <HStack style={[flexDirectionRow, flexWrapWrap]}>
-                {[...Array(6)].map((item, index) => {
+                {profilePublicPhotos?.map(item => {
                   return (
                     <View
-                      key={index}
+                      key={item.id}
                       style={[padding(spacing.xxs), width('33%')]}
                     >
                       <UploadPhotoCard
-                        value={formik.values.photos[index]}
+                        key={item.id}
+                        value={item.location}
                         onPress={() => {
-                          handleClickPhotoCard(index);
+                          if (item.id) {
+                            handleClickPhotoCard(item.id);
+                          }
                         }}
-                      />
+                      ></UploadPhotoCard>
                     </View>
                   );
                 })}
+                {[...Array(6 - profilePublicPhotosLength)].map(
+                  (item, index) => {
+                    return (
+                      <View
+                        key={index}
+                        style={[padding(spacing.xxs), width('33%')]}
+                      >
+                        <UploadPhotoCard
+                          value={
+                            formik.values.photos[index]
+                              ? formik.values.photos[index].path
+                              : ''
+                          }
+                          onPress={() => {
+                            handleClickPhotoCard(index);
+                          }}
+                        />
+                      </View>
+                    );
+                  },
+                )}
               </HStack>
             </View>
           </View>

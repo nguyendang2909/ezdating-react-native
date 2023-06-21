@@ -56,6 +56,7 @@
     "expo-status-bar": "~1.4.4",
     "formik": "^2.4.1",
     "i18n-js": "3.9.2",
+    "libphonenumber-js": "^1.10.36",
     "moment": "^2.29.4",
     "native-base": "^3.4.28",
     "react": "18.2.0",
