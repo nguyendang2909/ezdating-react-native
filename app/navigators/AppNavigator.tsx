@@ -43,9 +43,9 @@ export type AppStackParamList = {
   Home: NavigatorScreenParams<HomeTabParamList>;
   SignIn: undefined;
   SignInWithOtpPhoneNumber: {
-    otpConfirm: FirebaseAuthTypes.ConfirmationResult;
-    user: {
-      phoneNumber: string;
+    otpConfirm?: FirebaseAuthTypes.ConfirmationResult;
+    user?: {
+      phoneNumber?: string;
     };
   };
   SignInWithPhoneNumber: undefined;

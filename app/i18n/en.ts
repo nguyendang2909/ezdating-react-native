@@ -42,6 +42,7 @@ const en = {
   'Do not share verification code to protect your account':
     'Do not share verification code to protect your account',
   // e
+  'Enter your code': 'Enter your code',
   'Enter your phone number': 'Enter your phone number',
   'Enter your first name': 'Enter your first name',
   'Enter your last name': 'Enter your last name',
@@ -58,7 +59,6 @@ const en = {
   Gender: 'Gender',
   gender: 'gender',
   // i
-  'Input OTP': 'Input OTP',
   Introduce: 'Introduce',
   introduce: 'introduce',
   // l
@@ -106,6 +106,7 @@ const en = {
   remove: 'remove',
   'Remove w': 'Remove {{w}}',
   'Remove w failed!': 'Remove {{w}} failed!',
+  Resend: 'Resend',
   'Retype password': 'Retype password',
   'Sign in with phone number': 'Sign in with phone number',
   'Sign in': 'Sign in',
@@ -120,11 +121,6 @@ const en = {
   'What is your w?': 'What is your {{w}}?',
   'What are you looking for here?': 'What are you looking for here?',
   'Wrong verification code, try again!': 'Wrong verification code, try again!',
-  // Screens
-  signInWithOtpPhoneScreen: {
-    checkSmsMessage:
-      "Check your SMS messages. We've sent you the PIN to your phone number",
-  },
 };
 
 export default en;

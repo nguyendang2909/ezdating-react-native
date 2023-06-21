@@ -30,7 +30,6 @@ import CountryPicker, {
   CountryCode,
 } from 'react-native-country-picker-modal';
 import FeatherIcons from 'react-native-vector-icons/Feather';
-import * as Yup from 'yup';
 
 export const SignInWithPhoneNumberForm: FC = () => {
   const { navigate } = useNavigation();
@@ -53,10 +52,6 @@ export const SignInWithPhoneNumberForm: FC = () => {
       countryCode: 'VN',
       phoneNumber: '',
     },
-    validationSchema: Yup.object().shape({
-      dialCode: Yup.string().required(),
-      phoneNumber: Yup.string().required(),
-    }),
     onSubmit: async values => {
       setErrorCode(undefined);
       try {
@@ -102,11 +97,7 @@ export const SignInWithPhoneNumberForm: FC = () => {
       <View>
         <View style={marginBottom(spacing.lg)}>
           <View style={widthFull}>
-            <FormControl
-              style={widthFull}
-              isRequired
-              isInvalid={!!errorCode || !!formik.errors.phoneNumber}
-            >
+            <FormControl style={widthFull} isInvalid={!!errorCode} isRequired>
               <FormControl.Label>{translate('Phone number')}</FormControl.Label>
               <HStack space={4} style={[flexDirectionRow, widthFull]}>
                 <View style={width(120)}>
@@ -161,8 +152,7 @@ export const SignInWithPhoneNumberForm: FC = () => {
                   style={posititionAbsolute}
                   leftIcon={<WarningOutlineIcon size="xs" />}
                 >
-                  {(!!errorCode && translate(errorCode)) ||
-                    formik.errors.phoneNumber}
+                  {!!errorCode && translate(errorCode)}
                 </FormControl.ErrorMessage>
               </View>
             </FormControl>

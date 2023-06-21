@@ -64,6 +64,10 @@ export const lineHeight = (value: number): TextStyle => ({
   lineHeight: value,
 });
 
+export const marginLeft = (spacing: number) => ({
+  marginLeft: spacing,
+});
+
 export const marginHorizontal = (spacing: number): ViewStyle => ({
   marginHorizontal: spacing,
 });
