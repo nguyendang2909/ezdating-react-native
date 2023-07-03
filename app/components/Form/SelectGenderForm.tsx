@@ -1,6 +1,6 @@
+import { UserGender, UserGenders } from 'app/constants';
 import { translate } from 'app/i18n';
 import { flex } from 'app/styles';
-import { EGender } from 'app/types/enums';
 import {
   Button,
   FormControl,
@@ -12,9 +12,9 @@ import {
 import React, { FC } from 'react';
 
 type FCProps = {
-  onChange: (gender: EGender) => void;
+  onChange: (gender: UserGender) => void;
   error?: string;
-  value?: EGender;
+  value?: UserGender;
   isRequired?: boolean;
 };
 
@@ -33,10 +33,10 @@ export const SelectGenderFormControl: FC<FCProps> = ({
           <View style={flex(1)}>
             <Button
               testID="maleButton"
-              variant={value === EGender.male ? 'solid' : 'outline'}
+              variant={value === UserGenders.male ? 'solid' : 'outline'}
               w="full"
               onPress={() => {
-                onChange(EGender.male);
+                onChange(UserGenders.male);
               }}
             >
               {translate('Male')}
@@ -46,10 +46,10 @@ export const SelectGenderFormControl: FC<FCProps> = ({
           <View style={flex(1)}>
             <Button
               testID="femaleButton"
-              variant={value === EGender.female ? 'solid' : 'outline'}
+              variant={value === UserGenders.female ? 'solid' : 'outline'}
               w="full"
               onPress={() => {
-                onChange(EGender.female);
+                onChange(UserGenders.female);
               }}
             >
               {translate('Female')}
@@ -59,10 +59,10 @@ export const SelectGenderFormControl: FC<FCProps> = ({
           <View style={flex(1)}>
             <Button
               testID="lgbtButton"
-              variant={value === EGender.lgbt ? 'solid' : 'outline'}
+              variant={value === UserGenders.lgbt ? 'solid' : 'outline'}
               w="full"
               onPress={() => {
-                onChange(EGender.lgbt);
+                onChange(UserGenders.lgbt);
               }}
             >
               {translate('LGBT')}

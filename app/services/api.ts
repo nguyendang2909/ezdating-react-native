@@ -106,6 +106,17 @@ export const api = createApi({
       }),
     }),
 
+    updateBasicProfile: builder.mutation<
+      ApiResponse.Logged,
+      ApiRequest.UpdateProfileBasicInfo
+    >({
+      query: body => ({
+        url: API_URL.myProfileBasicInfo,
+        method: 'PATCH',
+        body,
+      }),
+    }),
+
     // Photos
     // getUploadFiles: builder.query<ApiResponse.UploadedFileListData, void>({
     //   query: () => ({

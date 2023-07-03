@@ -8,6 +8,7 @@ export const API_URL = {
   nearbyUsers: '/users/nearby',
   messages: 'messages',
   myProfile: '/users/profile',
+  myProfileBasicInfo: '/users/profile/basic-info',
   myGallery: '/gallery/my',
   photos: '/upload-files/photos',
   isExistUser: '/users/exist',

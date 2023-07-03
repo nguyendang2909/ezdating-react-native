@@ -9,7 +9,7 @@ import {
   EUploadFileShare,
   EUploadFileType,
   EWorkout,
-} from './enums';
+} from './constants';
 
 export declare namespace Entity {
   type BaseEntity = {

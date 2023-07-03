@@ -1,6 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import { UploadPhotoCard } from 'app/components/Form/UploadPhotoCard';
 import { LoadingScreen } from 'app/components/Screen/LoadingScreen';
+import { UploadFileShares, UploadFileTypes } from 'app/constants';
 import { useAppSelector } from 'app/hooks';
 import { translate } from 'app/i18n';
 import { api } from 'app/services/api';
@@ -14,7 +15,6 @@ import {
   width,
 } from 'app/styles';
 import { spacing } from 'app/theme';
-import { EUploadFileShare, EUploadFileType } from 'app/types/enums';
 import { FormParams } from 'app/types/form-params.type';
 import { useFormik } from 'formik';
 import {
@@ -48,8 +48,8 @@ export const UpdateProfilePhotosScreen: React.FC<FCProps> = () => {
   const uploadFiles = useAppSelector(state => state.app.profile.uploadFiles);
   const profilePublicPhotos = uploadFiles?.filter(
     item =>
-      item.type === EUploadFileType.photo &&
-      item.share === EUploadFileShare.public,
+      item.type === UploadFileTypes.photo &&
+      item.share === UploadFileShares.public,
   );
   const profilePublicPhotosLength = profilePublicPhotos?.length || 0;
 
@@ -63,14 +63,14 @@ export const UpdateProfilePhotosScreen: React.FC<FCProps> = () => {
           const [firstPhoto, ...photoParts] = values.photos;
           await submitUploadPhoto({
             file: firstPhoto,
-            share: EUploadFileShare.public,
+            share: UploadFileShares.public,
           }).unwrap();
           if (photoParts.length) {
             await Promise.all(
               photoParts.map(item =>
                 submitUploadPhoto({
                   file: item,
-                  share: EUploadFileShare.public,
+                  share: UploadFileShares.public,
                 }).unwrap(),
               ),
             );

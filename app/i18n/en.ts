@@ -25,6 +25,7 @@ const en = {
     },
   },
   // a
+  Account: 'Account',
   'Add picture profile (Please choose photos that clearly shows your face, up to 6 photos)':
     'Add picture profile (Please choose photos that clearly shows your face, up to 6 photos)',
   // b
@@ -51,6 +52,7 @@ const en = {
   Female: 'Female',
   female: 'female',
   'First name': 'First name',
+  'Free coins': 'Free coins',
   Friend: 'Friend',
   Friends: 'Friends',
   friend: 'friend',
@@ -61,9 +63,12 @@ const en = {
   // i
   Introduce: 'Introduce',
   introduce: 'introduce',
+  Invite: 'Invite',
   // l
   'Last name': 'Last name',
   LGBT: 'LGBT',
+  'Liked you': 'Liked you',
+  Logout: 'Logout',
   Lover: 'Lover',
   lover: 'lover',
   // m
@@ -116,6 +121,7 @@ const en = {
   'Update w failed!': 'Update {{w}} failed!',
   // v
   'Verify your w': 'Verify your {{w}}',
+  Visitors: 'Visitors',
   // w
   'w is required!': '{{w}} is required!',
   'What is your w?': 'What is your {{w}}?',

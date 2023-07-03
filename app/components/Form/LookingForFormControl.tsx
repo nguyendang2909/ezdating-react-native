@@ -1,4 +1,4 @@
-import { EUserLookingFor } from 'app/constants';
+import { UserLookingFor, UserLookingFors } from 'app/constants';
 import { translate, TxKeyPath } from 'app/i18n';
 import {
   FormControl,
@@ -9,26 +9,26 @@ import {
 } from 'native-base';
 import React from 'react';
 
-const lookingForList: { labelTx: TxKeyPath; value: EUserLookingFor }[] = [
+const lookingForList: { labelTx: TxKeyPath; value: UserLookingFor }[] = [
   {
     labelTx: 'Lover',
-    value: EUserLookingFor.lover,
+    value: UserLookingFors.lover,
   },
   {
     labelTx: 'Friend',
-    value: EUserLookingFor.friend,
+    value: UserLookingFors.friend,
   },
   {
     labelTx: 'Partner',
-    value: EUserLookingFor.partner,
+    value: UserLookingFors.partner,
   },
   {
     labelTx: 'Marriage',
-    value: EUserLookingFor.marriage,
+    value: UserLookingFors.marriage,
   },
   {
     labelTx: 'One-night stand',
-    value: EUserLookingFor.oneNightStand,
+    value: UserLookingFors.oneNightStand,
   },
 ];
 

@@ -1,14 +1,13 @@
+import { UploadFileShare, UserGender, UserLookingFor } from 'app/constants';
 import { Image } from 'react-native-image-crop-picker';
 
-import {
-  EDrinking,
-  EEducationLevel,
-  EGender,
-  ELookingForGender,
-  ESmoking,
-  EUploadFileShare,
-  EWorkout,
-} from './enums';
+// import {
+//   EDrinking,
+//   ELookingForGender,
+//   ESmoking,
+//   EUploadFileShare,
+//   EWorkout,
+// } from './constants';
 
 export declare namespace ApiRequest {
   type FindAll = {
@@ -56,9 +55,9 @@ export declare namespace ApiRequest {
   type UpdateProfile = Partial<{
     birthDay?: string;
     company?: string;
-    drinking?: EDrinking;
-    educationLevel?: EEducationLevel;
-    gender?: EGender;
+    // drinking?: EDrinking;
+    // educationLevel?: EEducationLevel;
+    gender?: UserGender;
     location: string;
     jobTitle?: string;
     haveBasicInfo?: boolean;
@@ -66,16 +65,25 @@ export declare namespace ApiRequest {
     nickname?: string;
     latitude?: number;
     longitude?: number;
-    lookingForGender?: ELookingForGender;
+    // lookingForGender?: ELookingForGender;
     photos?: string[];
     school?: string;
-    smoking?: ESmoking;
-    workout?: EWorkout;
+    lookingFor: UserLookingFor;
+    // smoking?: ESmoking;
+    // workout?: EWorkout;
+  }>;
+
+  type UpdateProfileBasicInfo = Partial<{
+    nickname: string;
+    gender: UserGender;
+    birthday: string;
+    lookingFor: UserLookingFor;
+    introduce?: string;
   }>;
 
   type UploadPhoto = {
     file: Image;
-    share: EUploadFileShare;
+    share: UploadFileShare;
   };
 
   type FindAllConversations = {};

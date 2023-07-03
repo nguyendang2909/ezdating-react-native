@@ -3,7 +3,7 @@ import { CountryCode } from 'libphonenumber-js';
 import { Image } from 'react-native-image-crop-picker';
 
 import { ApiRequest } from './api-request.type';
-import { EGender } from './enums';
+import { EGender } from './constants';
 
 export declare namespace FormParams {
   type LoginByEmail = ApiRequest.LoginByEmail;
