@@ -1,9 +1,8 @@
-import { EUserLookingFor } from 'app/constants';
+import { UserGender, UserLookingFor } from 'app/constants';
 import { CountryCode } from 'libphonenumber-js';
 import { Image } from 'react-native-image-crop-picker';
 
 import { ApiRequest } from './api-request.type';
-import { EGender } from './constants';
 
 export declare namespace FormParams {
   type LoginByEmail = ApiRequest.LoginByEmail;
@@ -22,8 +21,8 @@ export declare namespace FormParams {
   type BasicInfo = {
     nickname?: string;
     birthday?: string;
-    gender?: EGender;
-    lookingFor?: EUserLookingFor;
+    gender?: UserGender;
+    lookingFor?: UserLookingFor;
     introduce?: string;
     haveBasicInfor?: boolean;
   };

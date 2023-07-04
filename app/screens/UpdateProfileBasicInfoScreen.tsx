@@ -11,7 +11,7 @@ import { flexGrow } from 'app/styles';
 import { FormParams } from 'app/types/form-params.type';
 import { useFormik } from 'formik';
 import moment from 'moment';
-import { Box, Button, Heading, View } from 'native-base';
+import { Box, Button, Heading, ScrollView, View } from 'native-base';
 import React, { FC } from 'react';
 import * as Yup from 'yup';
 
@@ -43,7 +43,7 @@ export const UpdateProfileBasicInfoScreen: FC = () => {
       lookingFor: Yup.string().required(
         translate('Please choose your w!', { w: translate('desire relation') }),
       ),
-      introduce: Yup.string().max(500).optional(),
+      introduce: Yup.string().max(500).notRequired(),
     }),
     onSubmit: async values => {
       try {
@@ -61,8 +61,7 @@ export const UpdateProfileBasicInfoScreen: FC = () => {
         <LoadingScreen isLoading={formik.isSubmitting} />
         <View flex="1">
           <View flex="1">
-            {/* TODO: ScrollView */}
-            <View style={flexGrow}>
+            <ScrollView style={flexGrow}>
               <View px="4" py="4">
                 <Heading>{translate('Your profile')}</Heading>
               </View>
@@ -77,7 +76,11 @@ export const UpdateProfileBasicInfoScreen: FC = () => {
                     placeholder={translate('Please enter your w', {
                       w: translate('nickname'),
                     })}
-                    error={formik.errors.nickname}
+                    error={
+                      formik.touched.nickname
+                        ? formik.errors.nickname
+                        : undefined
+                    }
                   />
                 </View>
 
@@ -86,7 +89,9 @@ export const UpdateProfileBasicInfoScreen: FC = () => {
                     isRequired
                     value={formik.values.gender}
                     onChange={formik.handleChange('gender')}
-                    error={formik.errors.gender}
+                    error={
+                      formik.touched.gender ? formik.errors.gender : undefined
+                    }
                   />
                 </View>
 
@@ -95,7 +100,11 @@ export const UpdateProfileBasicInfoScreen: FC = () => {
                     isRequired
                     value={formik.values.birthday}
                     onChange={formik.handleChange('birthday')}
-                    error={formik.errors.birthday}
+                    error={
+                      formik.touched.birthday
+                        ? formik.errors.birthday
+                        : undefined
+                    }
                   />
                 </View>
 
@@ -104,7 +113,11 @@ export const UpdateProfileBasicInfoScreen: FC = () => {
                     isRequired
                     value={formik.values.lookingFor}
                     onChange={formik.handleChange('lookingFor')}
-                    error={formik.errors.lookingFor}
+                    error={
+                      formik.touched.lookingFor
+                        ? formik.errors.lookingFor
+                        : undefined
+                    }
                   />
                 </View>
 
@@ -116,12 +129,16 @@ export const UpdateProfileBasicInfoScreen: FC = () => {
                     placeholder={translate('Please enter your w', {
                       w: translate('introduce'),
                     })}
-                    error={formik.errors.introduce}
                     maxLength={500}
+                    error={
+                      formik.touched.introduce
+                        ? formik.errors.introduce
+                        : undefined
+                    }
                   />
                 </View>
               </View>
-            </View>
+            </ScrollView>
 
             <View px="4" py="4">
               <Button

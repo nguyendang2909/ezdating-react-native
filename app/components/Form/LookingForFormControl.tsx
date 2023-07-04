@@ -1,50 +1,77 @@
+import { useActionSheet } from '@expo/react-native-action-sheet';
 import { UserLookingFor, UserLookingFors } from 'app/constants';
 import { translate, TxKeyPath } from 'app/i18n';
 import {
+  ChevronDownIcon,
   FormControl,
-  Select,
+  Input,
   Stack,
   View,
   WarningOutlineIcon,
 } from 'native-base';
 import React from 'react';
 
-const lookingForList: { labelTx: TxKeyPath; value: UserLookingFor }[] = [
-  {
-    labelTx: 'Lover',
-    value: UserLookingFors.lover,
-  },
-  {
-    labelTx: 'Friend',
-    value: UserLookingFors.friend,
-  },
-  {
-    labelTx: 'Partner',
-    value: UserLookingFors.partner,
-  },
-  {
-    labelTx: 'Marriage',
-    value: UserLookingFors.marriage,
-  },
-  {
-    labelTx: 'One-night stand',
-    value: UserLookingFors.oneNightStand,
-  },
-];
+const lookingFors: Record<UserLookingFor, TxKeyPath> = {
+  [UserLookingFors.lover]: 'Lover',
+  [UserLookingFors.friend]: 'Friend',
+  [UserLookingFors.partner]: 'Partner',
+  [UserLookingFors.marriage]: 'Marriage',
+  [UserLookingFors.oneNightStand]: 'One-night stand',
+};
 
-interface ISelectLookingFor {
+type FCProps = {
   error?: string;
   isRequired?: boolean;
-  onChange: (nickname: string) => void;
-  value?: string;
-}
+  onChange: (value: string) => void;
+  value?: UserLookingFor;
+};
 
-export const LookingForFormControl: React.FC<ISelectLookingFor> = ({
+export const LookingForFormControl: React.FC<FCProps> = ({
   error,
   value,
   onChange,
   isRequired,
 }) => {
+  const { showActionSheetWithOptions } = useActionSheet();
+
+  const handlePress = () => {
+    const options = [
+      translate('Lover'),
+      translate('Friend'),
+      translate('Partner'),
+      translate('Marriage'),
+      translate('One-night stand'),
+      translate('Cancel'),
+    ];
+    const cancelButtonIndex = 5;
+    showActionSheetWithOptions(
+      {
+        options,
+        cancelButtonIndex,
+      },
+      (selectedIndex: number) => {
+        switch (selectedIndex) {
+          case 0:
+            onChange(UserLookingFors.lover);
+            console.log(111);
+            break;
+          case 1:
+            onChange(UserLookingFors.friend);
+            break;
+          case 2:
+            onChange(UserLookingFors.partner);
+            break;
+          case 3:
+            onChange(UserLookingFors.marriage);
+            break;
+          case 4:
+            onChange(UserLookingFors.oneNightStand);
+            break;
+        }
+      },
+    );
+  };
+
   return (
     <>
       <FormControl {...(isRequired ? { isRequired } : {})} isInvalid={!!error}>
@@ -53,28 +80,23 @@ export const LookingForFormControl: React.FC<ISelectLookingFor> = ({
             {translate('What are you looking for here?')}
           </FormControl.Label>
           <View>
-            <Select
+            <Input
+              isReadOnly
               size="lg"
               variant="underlined"
               placeholder={translate('Please select')}
-              selectedValue={value}
-              onValueChange={onChange}
-            >
-              {lookingForList.map(item => {
-                return (
-                  <Select.Item
-                    key={item.value}
-                    label={translate(item.labelTx)}
-                    value={item.value}
-                  ></Select.Item>
-                );
-              })}
-            </Select>
+              value={value ? translate(lookingFors[value]) : ''}
+              onPressIn={handlePress}
+              InputRightElement={<ChevronDownIcon />}
+            ></Input>
           </View>
-
-          <FormControl.ErrorMessage leftIcon={<WarningOutlineIcon size="xs" />}>
-            {error}
-          </FormControl.ErrorMessage>
+          <View pb={2}>
+            <FormControl.ErrorMessage
+              leftIcon={<WarningOutlineIcon size="xs" />}
+            >
+              {error}
+            </FormControl.ErrorMessage>
+          </View>
         </Stack>
       </FormControl>
     </>

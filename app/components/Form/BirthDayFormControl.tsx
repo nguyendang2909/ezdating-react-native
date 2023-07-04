@@ -2,7 +2,14 @@ import 'moment/min/locales';
 
 import { translate } from 'app/i18n';
 import moment from 'moment';
-import { FormControl, Input, Stack, WarningOutlineIcon } from 'native-base';
+import {
+  ChevronDownIcon,
+  FormControl,
+  Input,
+  Stack,
+  View,
+  WarningOutlineIcon,
+} from 'native-base';
 import React, { FC, useState } from 'react';
 import * as RNLocalize from 'react-native-localize';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
@@ -54,10 +61,15 @@ export const BirthDayFormControl: FC<FCProps> = ({
             placeholder={translate('Please enter your w', {
               w: translate('birthday'),
             })}
+            InputRightElement={<ChevronDownIcon />}
           ></Input>
-          <FormControl.ErrorMessage leftIcon={<WarningOutlineIcon size="xs" />}>
-            {error}
-          </FormControl.ErrorMessage>
+          <View pb={2}>
+            <FormControl.ErrorMessage
+              leftIcon={<WarningOutlineIcon size="xs" />}
+            >
+              {error}
+            </FormControl.ErrorMessage>
+          </View>
         </Stack>
       </FormControl>
       <DateTimePickerModal

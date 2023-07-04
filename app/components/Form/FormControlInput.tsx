@@ -1,4 +1,10 @@
-import { FormControl, Input, Stack, WarningOutlineIcon } from 'native-base';
+import {
+  FormControl,
+  Input,
+  Stack,
+  View,
+  WarningOutlineIcon,
+} from 'native-base';
 import React from 'react';
 
 type FCProps = {
@@ -35,9 +41,14 @@ export const FormControlInput: React.FC<FCProps> = ({
           placeholder={placeholder}
           maxLength={maxLength}
         ></Input>
-        <FormControl.ErrorMessage leftIcon={<WarningOutlineIcon size="xs" />}>
-          {error}
-        </FormControl.ErrorMessage>
+        <View pb={2}>
+          <FormControl.ErrorMessage
+            position="absolute"
+            leftIcon={<WarningOutlineIcon size="xs" />}
+          >
+            {error}
+          </FormControl.ErrorMessage>
+        </View>
       </Stack>
     </FormControl>
   );

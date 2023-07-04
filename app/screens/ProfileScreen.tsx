@@ -1,31 +1,24 @@
 import { LogoutButton } from 'app/containers/Button/LogoutButton';
 import { ProfileAccountCard } from 'app/containers/Profile/ProfileAccountCard';
-import { ProfileAvatar } from 'app/containers/Profile/ProfileAvatar';
 import { ProfileFreeCoinsCard } from 'app/containers/Profile/ProfileFreeCoinsCard';
+import { ProfileHeader } from 'app/containers/Profile/ProfileHeader';
 import { ProfileLikedYouCard } from 'app/containers/Profile/ProfileLikedYouCard';
+import { ProfileTopBar } from 'app/containers/Profile/ProfileTopBar';
 import { ProfileVisitorsCard } from 'app/containers/Profile/ProfileVisitorsCard';
-import { useAppSelector } from 'app/hooks/useAppSelector';
 import { colors } from 'app/theme';
-import { Box, HStack, Text, View, VStack } from 'native-base';
+import { Box, HStack, View, VStack } from 'native-base';
 import React, { FC } from 'react';
 
 export const ProfileScreen: FC = () => {
-  const user = useAppSelector(state => state.app.profile);
-
   return (
     <>
       <Box safeArea backgroundColor={colors.primary}>
-        <HStack></HStack>
-        <VStack alignItems="center">
-          <View>
-            <ProfileAvatar />
-          </View>
-          <View>
-            <Text fontSize="xl" fontWeight="bold">
-              {user.nickname}
-            </Text>
-          </View>
-        </VStack>
+        <View px={4} pt={4}>
+          <ProfileTopBar />
+        </View>
+        <View>
+          <ProfileHeader />
+        </View>
 
         <View padding={4}>
           <VStack space={4}>

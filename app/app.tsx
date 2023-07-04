@@ -12,6 +12,7 @@
 import './i18n';
 import './utils/ignoreWarnings';
 
+import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 import { useFonts } from 'expo-font';
 import * as Linking from 'expo-linking';
 import { NativeBaseProvider } from 'native-base';
@@ -118,11 +119,13 @@ function App(props: AppProps) {
         <SafeAreaProvider initialMetrics={initialWindowMetrics}>
           <ErrorBoundary catchErrors={Config.catchErrors}>
             <NativeBaseProvider theme={defaultTheme}>
-              <AppNavigator
-                linking={linking}
-                initialState={initialNavigationState}
-                onStateChange={onNavigationStateChange}
-              />
+              <ActionSheetProvider>
+                <AppNavigator
+                  linking={linking}
+                  initialState={initialNavigationState}
+                  onStateChange={onNavigationStateChange}
+                />
+              </ActionSheetProvider>
             </NativeBaseProvider>
           </ErrorBoundary>
         </SafeAreaProvider>
