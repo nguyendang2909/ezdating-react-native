@@ -30,7 +30,8 @@ import {
   useToast,
   View,
 } from 'native-base';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { PermissionsAndroid } from 'react-native';
 import ImageCropPicker from 'react-native-image-crop-picker';
 
 type FCProps = {};
@@ -42,7 +43,6 @@ export const UpdateProfilePhotosScreen: React.FC<FCProps> = () => {
     number | string | undefined
   >(undefined);
   const [submitUploadPhoto] = api.useUploadPhotoMutation();
-  const [updateProfile] = api.useUpdateProfileMutation();
   const [submitRemovePhoto] = api.useRemovePhotoMutation();
   const { refetch: refetchUserProfile } = api.useGetMyProfileQuery();
   const uploadFiles = useAppSelector(state => state.app.profile.uploadFiles);
@@ -52,6 +52,38 @@ export const UpdateProfilePhotosScreen: React.FC<FCProps> = () => {
       item.share === UploadFileShares.public,
   );
   const profilePublicPhotosLength = profilePublicPhotos?.length || 0;
+
+  useEffect(() => {
+    PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+    );
+    PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
+    );
+    PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA);
+    // requestCameraPermission();
+    // requestStoragePermission();
+  }, []);
+
+  // const requestCameraPermission = async () => {
+  //   const havePermission = await PermissionsAndroid.check(
+  //     PermissionsAndroid.PERMISSIONS.CAMERA,
+  //   );
+  //   if (!havePermission) {
+  //     PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA);
+  //   }
+  // };
+
+  // const requestStoragePermission = async () => {
+  //   const havePermission = await PermissionsAndroid.check(
+  //     PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
+  //   );
+  //   if (!havePermission) {
+  //     PermissionsAndroid.request(
+  //       PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
+  //     );
+  //   }
+  // };
 
   const formik = useFormik<FormParams.UpdateProfilePhoto>({
     initialValues: {
@@ -76,7 +108,6 @@ export const UpdateProfilePhotosScreen: React.FC<FCProps> = () => {
             );
           }
         }
-        await updateProfile({ haveBasicInfo: true });
         await refetchUserProfile();
         navigate('Home', {
           screen: 'DatingSwipe',

@@ -82,7 +82,7 @@ const AppStack = () => {
       initialRouteName={
         isAuthenticated
           ? haveBasicInfo
-            ? 'Home'
+            ? 'UpdateProfileBasicInfo'
             : 'UpdateProfileBasicInfo'
           : 'SignIn'
       }
