@@ -11,6 +11,7 @@ import {
   WarningOutlineIcon,
 } from 'native-base';
 import React, { FC, useState } from 'react';
+import { Pressable } from 'react-native';
 import * as RNLocalize from 'react-native-localize';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
@@ -45,24 +46,26 @@ export const BirthDayFormControl: FC<FCProps> = ({
       <FormControl {...(isRequired ? { isRequired } : {})} isInvalid={!!error}>
         <Stack>
           <FormControl.Label>{translate('Birthday')}</FormControl.Label>
-          <Input
-            testID="birthday"
-            size="lg"
-            value={
-              value
-                ? moment(value, 'YYYY-MM-DD')
-                    .locale(deviceLocale.languageCode)
-                    .format('L')
-                : ''
-            }
-            onPressIn={showDatePicker}
-            isReadOnly
-            variant="underlined"
-            placeholder={translate('Please enter your w', {
-              w: translate('birthday'),
-            })}
-            InputRightElement={<ChevronDownIcon />}
-          ></Input>
+          <Pressable onPress={showDatePicker}>
+            <Input
+              testID="birthday"
+              size="lg"
+              value={
+                value
+                  ? moment(value, 'YYYY-MM-DD')
+                      .locale(deviceLocale.languageCode)
+                      .format('L')
+                  : ''
+              }
+              onPressIn={showDatePicker}
+              isReadOnly
+              variant="underlined"
+              placeholder={translate('Please enter your w', {
+                w: translate('birthday'),
+              })}
+              InputRightElement={<ChevronDownIcon />}
+            ></Input>
+          </Pressable>
           <View pb={2}>
             <FormControl.ErrorMessage
               leftIcon={<WarningOutlineIcon size="xs" />}

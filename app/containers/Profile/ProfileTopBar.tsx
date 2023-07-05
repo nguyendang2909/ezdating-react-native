@@ -1,7 +1,7 @@
 import { HStack, View } from 'native-base';
 import React from 'react';
 
-import { ProfileSettingIconButton } from '../Button/ProfileSettingIconButton.ios';
+import { ProfileSettingIconButton } from '../IconButton/ProfileSettingIconButton.ios';
 
 export const ProfileTopBar: React.FC = () => {
   return (

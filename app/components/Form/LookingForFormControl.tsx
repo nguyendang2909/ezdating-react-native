@@ -5,6 +5,7 @@ import {
   ChevronDownIcon,
   FormControl,
   Input,
+  Pressable,
   Stack,
   View,
   WarningOutlineIcon,
@@ -46,14 +47,15 @@ export const LookingForFormControl: React.FC<FCProps> = ({
     const cancelButtonIndex = 5;
     showActionSheetWithOptions(
       {
+        showSeparators: true,
         options,
         cancelButtonIndex,
+        useModal: true,
       },
       (selectedIndex: number) => {
         switch (selectedIndex) {
           case 0:
             onChange(UserLookingFors.lover);
-            console.log(111);
             break;
           case 1:
             onChange(UserLookingFors.friend);
@@ -79,17 +81,17 @@ export const LookingForFormControl: React.FC<FCProps> = ({
           <FormControl.Label>
             {translate('What are you looking for here?')}
           </FormControl.Label>
-          <View>
+          <Pressable onPress={handlePress}>
             <Input
               isReadOnly
               size="lg"
               variant="underlined"
               placeholder={translate('Please select')}
               value={value ? translate(lookingFors[value]) : ''}
-              onPressIn={handlePress}
               InputRightElement={<ChevronDownIcon />}
+              onPressIn={handlePress}
             ></Input>
-          </View>
+          </Pressable>
           <View pb={2}>
             <FormControl.ErrorMessage
               leftIcon={<WarningOutlineIcon size="xs" />}

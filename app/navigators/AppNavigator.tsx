@@ -10,6 +10,7 @@ import {
   NativeStackScreenProps,
 } from '@react-navigation/native-stack';
 import { useAppSelector } from 'app/hooks';
+import { ProfileSettingScreen } from 'app/screens/ProfileSettingScreen';
 import { SignInScreen } from 'app/screens/SignInScreen';
 import { SignInWithOtpPhoneNumberScreen } from 'app/screens/SignInWithOtpPhoneNumberScreen';
 import { SignInWithPhoneNumberScreen } from 'app/screens/SignInWithPhoneNumberScreen';
@@ -50,6 +51,7 @@ export type AppStackParamList = {
   };
   SignInWithPhoneNumber: undefined;
   Welcome: undefined;
+  ProfileSetting: undefined;
 };
 
 /**
@@ -82,7 +84,7 @@ const AppStack = () => {
       initialRouteName={
         isAuthenticated
           ? haveBasicInfo
-            ? 'UpdateProfileBasicInfo'
+            ? 'Home'
             : 'UpdateProfileBasicInfo'
           : 'SignIn'
       }
@@ -97,6 +99,13 @@ const AppStack = () => {
           <Stack.Screen
             name="UpdateProfilePhotosScreen"
             component={UpdateProfilePhotosScreen}
+          />
+          <Stack.Screen
+            name="ProfileSetting"
+            component={ProfileSettingScreen}
+            options={{
+              presentation: 'modal',
+            }}
           />
         </>
       ) : (
