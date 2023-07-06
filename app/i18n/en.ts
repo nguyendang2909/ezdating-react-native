@@ -117,6 +117,8 @@ const en = {
   'Sign in': 'Sign in',
   'Your profile': 'Your profile',
   EZDating: 'EZDating',
+  // s
+  Settings: 'Settings',
   // u
   'Update w failed!': 'Update {{w}} failed!',
   // v
