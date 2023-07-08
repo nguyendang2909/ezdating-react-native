@@ -1,22 +1,18 @@
-import { Header } from 'app/components';
-import { ConversationsBox } from 'app/containers/Conversation/ConversationsBox';
-import { api } from 'app/services/api';
-import { Box, ScrollView, StatusBar, View } from 'native-base';
+import { MessagesByConversationBox } from 'app/containers/MessagesByConversation/MessageByConversationBox';
+import { MessageByConversationHeader } from 'app/containers/MessagesByConversation/MessageByConversationHeader';
+import { AppStackScreenProps } from 'app/navigators';
+import { Box, StatusBar } from 'native-base';
 import React, { FC } from 'react';
 
-export const MessagesScreen: FC = () => {
-  const { refetch } = api.useGetConversationsQuery({});
+type FCProps = AppStackScreenProps<'MessagesByConversation'>;
 
+export const MessagesByConversationScreen: FC<FCProps> = props => {
   return (
     <>
       <StatusBar barStyle="default" />
-      <Header titleTx="EZDating" />
-      <Box safeAreaBottom>
-        <ScrollView>
-          <View>
-            <ConversationsBox />
-          </View>
-        </ScrollView>
+      <MessageByConversationHeader />
+      <Box safeAreaBottom flex={1}>
+        <MessagesByConversationBox />
       </Box>
 
       {/* <View bg={colors.primary} style={height(spacing.xxl)}>

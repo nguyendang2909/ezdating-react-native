@@ -15,13 +15,13 @@ import {
 
 import { api } from '../services/api';
 import { appReducer } from './app.store';
+import { conversationReducer } from './conversations.store';
 import theme from './theme';
-import { currentUserReducer } from './users/current-user.store';
 
 const reducers = combineReducers({
   theme,
   [api.reducerPath]: api.reducer,
-  currentUser: currentUserReducer,
+  conversation: conversationReducer,
   app: appReducer,
 });
 

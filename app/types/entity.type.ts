@@ -1,19 +1,15 @@
-import { EUserLookingFor } from 'app/constants';
-
 import {
-  EDrinking,
-  EEducationLevel,
-  EGender,
-  ELookingForGender,
-  ESmoking,
-  EUploadFileShare,
-  EUploadFileType,
-  EWorkout,
-} from './constants';
+  RelationshipUserStatus,
+  UploadFileShare,
+  UploadFileType,
+  UserGender,
+  UserLookingFor,
+  UserRole,
+} from 'app/constants';
 
 export declare namespace Entity {
   type BaseEntity = {
-    id?: string;
+    id: string;
     createdBy?: string;
     updatedBy?: string;
     createdAt?: string;
@@ -26,34 +22,66 @@ export declare namespace Entity {
       location: string;
       // eslint-disable-next-line no-use-before-define
       user: User;
-      type: EUploadFileType;
-      share: EUploadFileShare;
+      type: UploadFileType;
+      share: UploadFileShare;
     }>;
 
   type User = BaseEntity &
     Partial<{
       introduce: string;
       age?: number;
+      avatar: UploadedFile;
       birthday?: string;
       company?: string;
-      drinking?: EDrinking;
-      educationLevel?: EEducationLevel;
+      // drinking?: EDrinking;
+      // educationLevel?: EEducationLevel;
       email: string;
       uploadFiles: UploadedFile[];
       fullname: string;
-      gender: EGender;
+      gender: UserGender;
       location: string;
-      lookingFor?: EUserLookingFor;
+      lookingFor?: UserLookingFor;
       jobTitle: string;
-      lookingForGender: ELookingForGender;
+      // lookingForGender: ELookingForGender;
       nickname: string;
       haveBasicInfo: boolean;
       password: string;
       phoneNumber: string;
-      role: string;
+      role: UserRole;
       school: string;
-      smoking: ESmoking;
-      workout: EWorkout;
+      // smoking: ESmoking;
+      // workout: EWorkout;
+    }>;
+
+  type Relationship = BaseEntity &
+    Partial<{
+      userOne: User;
+      userTwo: User;
+      userOneStatus: RelationshipUserStatus;
+      userTwoStatus: RelationshipUserStatus;
+      statusAt: string;
+      userOneStatusAt: string;
+      userTwoStatusAt: string;
+      canUserOneChat: string;
+      canUserTwoChat: string;
+      lastMessage: string;
+      lastMessageAt: string;
+      lastMessageBy: string;
+      lastMessageRead: boolean;
+      targetUser: User;
+    }>;
+
+  type Message = BaseEntity &
+    Partial<{
+      replyMessage?: Message;
+      relationship: Partial<Relationship>;
+      user: Partial<User>;
+      imageUrl?: string;
+      likeUserIds?: string[];
+      loveUserIds?: string[];
+      text?: string;
+      videoUrl?: string;
+      uuid: string;
     }>;
 
   // type MediaFile = BaseEntity & Partial<{ url: string }>;

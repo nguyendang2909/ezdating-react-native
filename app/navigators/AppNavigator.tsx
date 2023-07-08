@@ -10,6 +10,7 @@ import {
   NativeStackScreenProps,
 } from '@react-navigation/native-stack';
 import { useAppSelector } from 'app/hooks';
+import { MessagesByConversationScreen } from 'app/screens/MessagesByConversationScreen';
 import { ProfileSettingScreen } from 'app/screens/ProfileSettingScreen';
 import { SignInScreen } from 'app/screens/SignInScreen';
 import { SignInWithOtpPhoneNumberScreen } from 'app/screens/SignInWithOtpPhoneNumberScreen';
@@ -52,6 +53,9 @@ export type AppStackParamList = {
   SignInWithPhoneNumber: undefined;
   Welcome: undefined;
   ProfileSetting: undefined;
+  MessagesByConversation: {
+    conversationId: string;
+  };
 };
 
 /**
@@ -106,6 +110,10 @@ const AppStack = () => {
             options={{
               presentation: 'modal',
             }}
+          />
+          <Stack.Screen
+            name="MessagesByConversation"
+            component={MessagesByConversationScreen}
           />
         </>
       ) : (

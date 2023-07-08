@@ -14,18 +14,11 @@ export declare namespace ApiRequest {
     fields?: string[];
   };
 
-  type PaginationByPage = Partial<{
-    page: number;
-    pageSize: number;
-  }>;
+  type Pagination = {
+    cursor?: string;
+  };
 
-  type PaginationByLastId = Partial<{
-    _lastId: string;
-  }>;
-
-  type FindManyByPage<T> = PaginationByPage & T;
-
-  type FindManyByLastId<T> = PaginationByLastId & T;
+  type FindMany<T> = Pagination & T;
 
   type IsExistUser = {
     phoneNumber: string;
@@ -88,11 +81,11 @@ export declare namespace ApiRequest {
 
   type FindAllConversations = {};
 
-  type FindManyConversations = FindManyByLastId<FindAllConversations> & {};
+  type FindManyConversations = FindMany<FindAllConversations> & {};
 
   type FindAllMessages = {};
 
-  type FindManyMessages = FindManyByLastId<FindAllMessages> & {
-    _conversationId: string;
+  type FindManyMessages = FindMany<FindAllMessages> & {
+    conversationId: string;
   };
 }

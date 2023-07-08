@@ -6,8 +6,12 @@ import { appActions } from 'app/store/app.store';
 import { ApiRequest } from 'app/types/api-request.type';
 import { ApiResponse } from 'app/types/api-response.type';
 import { AppStore } from 'app/types/app-store.type';
+import { Entity } from 'app/types/entity.type';
+import { Mutex } from 'async-mutex';
 import queryString from 'query-string';
 import { Platform } from 'react-native';
+
+const mutex = new Mutex();
 
 const baseQuery = fetchBaseQuery({
   paramsSerializer: (params: Record<string, any>) => {
@@ -24,31 +28,44 @@ const baseQuery = fetchBaseQuery({
 });
 
 export const api = createApi({
-  baseQuery: async (args, api, extraOptions) => {
-    if (args.params) {
-      if (args.params.f) {
-        args.params.f = JSON.stringify(args.params.f);
+  baseQuery: async (args, baseQueryApi, extraOptions) => {
+    await mutex.waitForUnlock();
+    let result = await baseQuery(args, baseQueryApi, extraOptions);
+    if (result.error && [401, 403].includes(result.error.status as number)) {
+      if (!mutex.isLocked()) {
+        const release = await mutex.acquire();
+        try {
+          const refreshToken = (baseQueryApi.getState() as AppStore.RootState)
+            .app?.refreshToken;
+          const refreshResult = (await baseQuery(
+            {
+              method: 'POST',
+              url: '/auth/tokens/access-token',
+              body: {
+                refreshToken,
+              },
+            },
+            baseQueryApi,
+            extraOptions,
+          )) as ApiResponse.FetchData<ApiResponse.Tokens>;
+
+          if (refreshResult.data) {
+            baseQueryApi.dispatch(
+              appActions.updateAccessToken(refreshResult.data),
+            );
+            result = await baseQuery(args, baseQueryApi, extraOptions);
+          } else {
+            baseQueryApi.dispatch(appActions.logout());
+          }
+        } finally {
+          release();
+        }
+      } else {
+        await mutex.waitForUnlock();
+        result = await baseQuery(args, baseQueryApi, extraOptions);
       }
     }
-    const result = await baseQuery(args, api, extraOptions);
 
-    // console.log(extraOptions);
-    //   if (result.error && result.error.status === 401) {
-    //     const refreshResult = (await getFreshTokenFunction();
-
-    //     if (refreshResult) {
-    //         api.dispatch(setSession({ accessToken: refreshResult }));
-
-    //         // retry the initial query
-    //         result = await baseQuery(args, api, extraOptions);
-    //     } else {
-    //         api.dispatch(logout());
-    //     }
-    // }
-    // return result;
-    if (result.error && result.error.status === 401) {
-      api.dispatch(appActions.logout());
-    }
     return result;
   },
 
@@ -68,30 +85,6 @@ export const api = createApi({
       query: () => ({
         url: API_URL.myProfile,
         method: 'GET',
-        params: {
-          f: {
-            id: true,
-            birthday: true,
-            email: true,
-            gender: true,
-            introduce: true,
-            lookingFor: true,
-            haveBasicInfo: true,
-            nickname: true,
-            phoneNumber: true,
-            role: true,
-            status: true,
-            uploadFiles: {
-              id: true,
-              key: true,
-              location: true,
-              type: true,
-              share: true,
-            },
-            createdBy: true,
-            updatedBy: true,
-          },
-        },
       }),
     }),
 
@@ -114,6 +107,33 @@ export const api = createApi({
         url: API_URL.myProfileBasicInfo,
         method: 'PATCH',
         body,
+      }),
+    }),
+
+    // Relationships
+    getConversations: builder.query<
+      ApiResponse.FetchPaginationData<Entity.Relationship[]>,
+      { cursor?: string }
+    >({
+      query: params => ({
+        url: API_URL.conversations,
+        method: 'GET',
+        params,
+      }),
+    }),
+
+    // Messages
+    getMessages: builder.query<
+      ApiResponse.FetchPaginationData<
+        Entity.Message[],
+        { conversationId: string }
+      >,
+      ApiRequest.FindManyMessages
+    >({
+      query: ({ conversationId, ...params }) => ({
+        url: `${API_URL.conversations}/${conversationId}/messages`,
+        method: 'GET',
+        params,
       }),
     }),
 
@@ -150,6 +170,7 @@ export const api = createApi({
       },
       // invalidatesTags: ['MyProfile'],
     }),
+
     removePhoto: builder.mutation<ApiResponse.RemoveData, string>({
       query: (id: string) => ({
         url: `${API_URL.uploadFiles}/${id}`,

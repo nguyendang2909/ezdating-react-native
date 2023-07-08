@@ -4,6 +4,8 @@ import { ApiResponse } from 'app/types/api-response.type';
 import { AppStore } from 'app/types/app-store.type';
 
 const initialState: AppStore.AppState = {
+  accessToken: undefined,
+  refreshToken: undefined,
   isLogged: false,
   profile: {},
 };
@@ -18,17 +20,24 @@ export const appSlice = createSlice({
         state.profile = profile;
       }
     },
+    updateAccessToken: (
+      state,
+      action: PayloadAction<ApiResponse.FetchData<ApiResponse.Tokens>>,
+    ) => {
+      const data = action.payload.data;
+      if (data?.accessToken) {
+        state.accessToken = data.accessToken;
+      }
+      if (data?.refreshToken) {
+        state.refreshToken = data.refreshToken;
+      }
+    },
     setLogged: state => {
       state.isLogged = true;
     },
-    updateToken: (state, action: PayloadAction<{ accessToken: string }>) => {
-      state.accessToken = action.payload.accessToken;
-    },
-    removeLogged: state => {
-      state.accessToken = undefined;
-    },
     logout: state => {
       state.accessToken = undefined;
+      state.refreshToken = undefined;
       state.isLogged = false;
     },
   },
@@ -36,12 +45,14 @@ export const appSlice = createSlice({
     builder.addMatcher(
       api.endpoints.signInWithPhoneNumber.matchFulfilled,
       (state, action) => {
-        const accessToken = action.payload.data?.accessToken;
-        if (!accessToken) {
+        const tokens = action.payload.data;
+        const accessToken = tokens?.accessToken;
+        const refreshToken = tokens?.refreshToken;
+        if (!accessToken || !refreshToken) {
           return;
         }
-
         state.accessToken = accessToken;
+        state.refreshToken = refreshToken;
         state.isLogged = true;
       },
     );

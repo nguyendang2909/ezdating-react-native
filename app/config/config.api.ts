@@ -6,7 +6,6 @@ export const API_URL = {
   loginByFacebook: '/auth/login/facebook',
   loginByGoogle: '/auth/login/google',
   nearbyUsers: '/users/nearby',
-  messages: 'messages',
   myProfile: '/users/profile',
   myProfileBasicInfo: '/users/profile/basic-info',
   myGallery: '/gallery/my',
