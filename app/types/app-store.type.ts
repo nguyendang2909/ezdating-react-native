@@ -1,5 +1,4 @@
 import { store } from 'app/store';
-import { IMessage } from 'react-native-gifted-chat';
 
 import { ApiResponse } from './api-response.type';
 import { Entity } from './entity.type';
@@ -11,7 +10,7 @@ export declare namespace AppStore {
     accessToken?: string;
     refreshToken?: string;
     isLogged: boolean;
-    profile: Entity.User;
+    profile: Partial<Entity.User>;
   };
 
   type ConversationState = {
@@ -20,7 +19,7 @@ export declare namespace AppStore {
       string,
       {
         pagination: ApiResponse.Pagination;
-        data: IMessage[];
+        data: Entity.Message[];
       }
     >;
     pagination: ApiResponse.Pagination;

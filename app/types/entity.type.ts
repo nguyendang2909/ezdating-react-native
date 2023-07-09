@@ -76,11 +76,12 @@ export declare namespace Entity {
       replyMessage?: Message;
       relationship: Partial<Relationship>;
       user: Partial<User>;
-      imageUrl?: string;
+      audio: string;
+      image?: string;
       likeUserIds?: string[];
       loveUserIds?: string[];
       text?: string;
-      videoUrl?: string;
+      video?: string;
       uuid: string;
     }>;
 

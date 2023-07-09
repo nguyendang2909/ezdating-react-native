@@ -51,41 +51,12 @@ export const conversationSlice = createSlice({
             if (!messages) {
               state.messages[conversationId] = {
                 pagination,
-                data: messagesData.map(item => {
-                  return {
-                    _id: item.id,
-                    text: item.text || '',
-                    createdAt: item.createdAt
-                      ? new Date(item.createdAt)
-                      : new Date(),
-                    user: {
-                      _id: item.user?.id || '',
-                      name: item.user?.nickname,
-                      avatar: item.user?.avatar?.location,
-                    },
-                  };
-                }),
+                data: messagesData,
               };
             } else {
               state.messages[conversationId] = {
                 pagination,
-                data: [
-                  ...messages.data,
-                  ...messagesData.map(item => {
-                    return {
-                      _id: item.id,
-                      text: item.text || '',
-                      createdAt: item.createdAt
-                        ? new Date(item.createdAt)
-                        : new Date(),
-                      user: {
-                        _id: item.user?.id || '',
-                        name: item.user?.nickname,
-                        avatar: item.user?.avatar?.location,
-                      },
-                    };
-                  }),
-                ],
+                data: [...messages.data, ...messagesData],
               };
             }
           }

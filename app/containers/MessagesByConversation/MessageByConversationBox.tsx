@@ -30,7 +30,18 @@ export const MessagesByConversationBox: React.FC<FCProps> = () => {
   return (
     <>
       <GiftedChat
-        messages={messages}
+        messages={messages.map(item => {
+          return {
+            _id: item.id,
+            text: item.text || '',
+            createdAt: item.createdAt,
+            user: {
+              _id: item.user?.id || '',
+              name: item.user?.nickname,
+              avatar: item.user?.avatar?.location,
+            },
+          };
+        })}
         onSend={message => onSend(message)}
         user={{
           _id: currentUser.id,
