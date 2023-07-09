@@ -7,7 +7,9 @@ const initialState: AppStore.AppState = {
   accessToken: undefined,
   refreshToken: undefined,
   isLogged: false,
-  profile: {},
+  profile: {
+    id: '',
+  },
 };
 
 export const appSlice = createSlice({

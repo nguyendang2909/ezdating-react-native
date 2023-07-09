@@ -19,29 +19,33 @@ export const ConversationBox: React.FC<FCProps> = ({ data }) => {
   };
 
   return (
-    <Pressable onPress={handlePress} bgColor="#ffffff">
-      <Row space={4}>
-        <Column>
-          <Avatar
-            size={16}
-            source={{
-              uri: conversation.targetUser?.avatar?.location,
-            }}
-          ></Avatar>
-        </Column>
-        <Column justifyContent="center">
-          <Row>
-            <Text bold fontSize={16}>
-              {conversation.targetUser?.nickname}
-            </Text>
+    <Pressable backgroundColor="#fff" onPress={handlePress}>
+      {({ isPressed }) => {
+        return (
+          <Row px={4} py={2} space={4} bg={isPressed ? 'coolGray.200' : '#fff'}>
+            <Column>
+              <Avatar
+                size={16}
+                source={{
+                  uri: conversation.targetUser?.avatar,
+                }}
+              ></Avatar>
+            </Column>
+            <Column justifyContent="center">
+              <Row>
+                <Text bold fontSize={16}>
+                  {conversation.targetUser?.nickname}
+                </Text>
+              </Row>
+              <Row>
+                <Text fontSize={14} color="gray.700">
+                  {conversation.lastMessage}
+                </Text>
+              </Row>
+            </Column>
           </Row>
-          <Row>
-            <Text fontSize={14} color="gray.700">
-              {conversation.lastMessage}
-            </Text>
-          </Row>
-        </Column>
-      </Row>
+        );
+      }}
     </Pressable>
   );
 };

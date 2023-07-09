@@ -1,6 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { api } from 'app/services/api';
-import { messagesService } from 'app/services/messages';
 import { AppStore } from 'app/types/app-store.type';
 import { Entity } from 'app/types/entity.type';
 
@@ -18,45 +17,7 @@ const initialState: AppStore.ConversationState = {
 export const conversationSlice = createSlice({
   name: 'conversation',
   initialState,
-  reducers: {
-    receiveMsg: (state, action: PayloadAction<Entity.Message>) => {
-      const msg = action.payload;
-      const message = messagesService.convertToStateFromEntity(msg);
-      const relationshipId = msg.relationship?.id;
-      if (relationshipId) {
-        const oldMessages = state.messages[relationshipId];
-        if (oldMessages) {
-          state.messages[relationshipId].data = [
-            message,
-            ...(state.messages[relationshipId].data || []),
-          ];
-        } else {
-          state.messages[relationshipId] = {
-            data: [message],
-          };
-        }
-      }
-    },
-    sendMsg: (state, action: PayloadAction<AppStore.MessageState>) => {
-      const msg = action.payload;
-      const relationshipId = msg.relationship?.id;
-      if (relationshipId) {
-        const messages = state.messages[relationshipId];
-        if (messages) {
-          state.messages[relationshipId].data = [msg].concat(
-            state.messages[relationshipId].data,
-          );
-        } else {
-          state.messages[relationshipId] = {
-            data: [msg],
-          };
-        }
-      }
-    },
-    updateMsg: (state, action: PayloadAction<Entity.Message>) => {
-      const { relationship } = action.payload;
-    },
-  },
+  reducers: {},
   extraReducers: builder => {
     builder.addMatcher(
       api.endpoints.getConversations.matchFulfilled,
@@ -86,18 +47,16 @@ export const conversationSlice = createSlice({
         } = action.payload;
         if (messagesData && pagination && conversationId) {
           if (messagesData.length) {
-            const messages =
-              messagesService.converToStatesFromEntities(messagesData);
-            const oldMessages = state.messages[conversationId];
-            if (!oldMessages) {
+            const messages = state.messages[conversationId];
+            if (!messages) {
               state.messages[conversationId] = {
                 pagination,
-                data: messages,
+                data: messagesData,
               };
             } else {
               state.messages[conversationId] = {
                 pagination,
-                data: (oldMessages.data || []).concat(messages),
+                data: [...messages.data, ...messagesData],
               };
             }
           }

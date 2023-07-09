@@ -28,9 +28,9 @@ export declare namespace Entity {
 
   type User = BaseEntity &
     Partial<{
+      avatar: string;
       introduce: string;
       age?: number;
-      avatar: UploadedFile;
       birthday?: string;
       company?: string;
       // drinking?: EDrinking;
@@ -75,14 +75,14 @@ export declare namespace Entity {
     Partial<{
       replyMessage?: Message;
       relationship: Partial<Relationship>;
-      user: Partial<User>;
       audio: string;
       image?: string;
       likeUserIds?: string[];
       loveUserIds?: string[];
       text?: string;
-      video?: string;
+      user: Partial<User>;
       uuid: string;
+      video?: string;
     }>;
 
   // type MediaFile = BaseEntity & Partial<{ url: string }>;

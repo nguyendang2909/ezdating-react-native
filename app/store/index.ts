@@ -12,16 +12,23 @@ import {
   REHYDRATE,
   Storage,
 } from 'redux-persist';
+import createSagaMiddleware from 'redux-saga';
 
 import { api } from '../services/api';
 import { appReducer } from './app.store';
 import { conversationReducer } from './conversations.store';
+import { appSaga } from './saga';
 import theme from './theme';
+import { userReducer } from './user.store';
+
+const reduxSagaMonitorOptions = {};
+const sagaMiddleware = createSagaMiddleware(reduxSagaMonitorOptions);
 
 const reducers = combineReducers({
   theme,
   [api.reducerPath]: api.reducer,
   conversation: conversationReducer,
+  user: userReducer,
   app: appReducer,
 });
 
@@ -56,20 +63,30 @@ const store = configureStore({
     const middlewares = getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        // ignoredActionPaths: [
+        //   'meta.createdAt',
+        //   'payload.createdAt',
+        //   'createdAt',
+        //   'meta.baseQueryMeta.request',
+        // ],
+        // ignoredPaths: ['meta.baseQueryMeta.request'],
       },
-    }).concat(api.middleware);
+    }).concat(api.middleware, sagaMiddleware);
 
-    if (__DEV__ && !process.env.JEST_WORKER_ID) {
-      const createDebugger = require('redux-flipper').default;
-      middlewares.push(createDebugger());
-    }
+    // if (__DEV__ && !process.env.JEST_WORKER_ID) {
+    //   const createDebugger = require('redux-flipper').default;
+    //   middlewares.push(createDebugger());
+    // }
 
     return middlewares;
   },
+  devTools: process.env.NODE_ENV !== 'production',
 });
 
 const persistor = persistStore(store);
 
 setupListeners(store.dispatch);
+
+sagaMiddleware.run(appSaga);
 
 export { persistor, store };

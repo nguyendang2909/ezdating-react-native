@@ -1,7 +1,7 @@
 import { Header } from 'app/components';
 import { ConversationsBox } from 'app/containers/Conversation/ConversationsBox';
 import { api } from 'app/services/api';
-import { Box, ScrollView, StatusBar, View } from 'native-base';
+import { Box, StatusBar, View } from 'native-base';
 import React, { FC } from 'react';
 
 export const MessagesScreen: FC = () => {
@@ -11,12 +11,10 @@ export const MessagesScreen: FC = () => {
     <>
       <StatusBar barStyle="default" />
       <Header titleTx="EZDating" />
-      <Box safeAreaBottom>
-        <ScrollView>
-          <View>
-            <ConversationsBox />
-          </View>
-        </ScrollView>
+      <Box safeAreaBottom flex={1}>
+        <View flex={1}>
+          <ConversationsBox />
+        </View>
       </Box>
 
       {/* <View bg={colors.primary} style={height(spacing.xxl)}>

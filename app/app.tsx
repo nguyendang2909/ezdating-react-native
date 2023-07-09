@@ -25,6 +25,7 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/lib/integration/react';
 
 import Config from './config';
+import { ConnectSocket } from './containers/Socket/ConnectSocket';
 import { AppNavigator, useNavigationPersistence } from './navigators';
 import { ErrorBoundary } from './screens/ErrorScreen/ErrorBoundary';
 import { setupReactotron } from './services/reactotron';
@@ -116,6 +117,7 @@ function App(props: AppProps) {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
+        <ConnectSocket />
         <SafeAreaProvider initialMetrics={initialWindowMetrics}>
           <ErrorBoundary catchErrors={Config.catchErrors}>
             <NativeBaseProvider theme={defaultTheme}>

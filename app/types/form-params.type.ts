@@ -1,5 +1,6 @@
 import { UserGender, UserLookingFor } from 'app/constants';
 import { CountryCode } from 'libphonenumber-js';
+import { IMessage } from 'react-native-gifted-chat';
 import { Image } from 'react-native-image-crop-picker';
 
 import { ApiRequest } from './api-request.type';
@@ -30,4 +31,6 @@ export declare namespace FormParams {
   type UpdateProfilePhoto = {
     photos: Image[];
   };
+
+  type SendMessage = IMessage & { relationshipId: string };
 }

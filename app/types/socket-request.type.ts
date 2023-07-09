@@ -1,6 +1,7 @@
 export declare namespace SocketRequest {
   type SendMessage = {
-    conversationId: string;
+    relationshipId: string;
     text?: string;
+    uuid: string;
   };
 }

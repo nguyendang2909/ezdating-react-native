@@ -1,4 +1,5 @@
 import { store } from 'app/store';
+import { IMessage } from 'react-native-gifted-chat';
 
 import { ApiResponse } from './api-response.type';
 import { Entity } from './entity.type';
@@ -10,16 +11,19 @@ export declare namespace AppStore {
     accessToken?: string;
     refreshToken?: string;
     isLogged: boolean;
-    profile: Partial<Entity.User>;
+    profile: Entity.User;
   };
+
+  type MessageState = Omit<IMessage, 'createdAt'> &
+    Omit<Entity.Message, 'id'> & { id?: string };
 
   type ConversationState = {
     data: Record<string, Entity.Relationship>;
     messages: Record<
       string,
       {
-        pagination: ApiResponse.Pagination;
-        data: Entity.Message[];
+        pagination?: ApiResponse.Pagination;
+        data: MessageState[];
       }
     >;
     pagination: ApiResponse.Pagination;
@@ -30,6 +34,10 @@ export declare namespace AppStore {
   type Messages = Partial<{
     [T: string]: Entity.Message[];
   }>;
+
+  type UserState = {
+    data: Record<string, Entity.User>;
+  };
 
   type PhotoActionType = 'delete' | 'create' | undefined;
 

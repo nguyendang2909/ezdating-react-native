@@ -1,4 +1,3 @@
-import { LogoutButton } from 'app/containers/Button/LogoutButton';
 import { ProfileAccountCard } from 'app/containers/Profile/ProfileAccountCard';
 import { ProfileFreeCoinsCard } from 'app/containers/Profile/ProfileFreeCoinsCard';
 import { ProfileHeader } from 'app/containers/Profile/ProfileHeader';
@@ -40,7 +39,6 @@ export const ProfileScreen: FC = () => {
             </HStack>
           </VStack>
         </View>
-        <LogoutButton />
       </Box>
     </>
   );

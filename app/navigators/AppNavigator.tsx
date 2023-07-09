@@ -16,7 +16,7 @@ import { SignInScreen } from 'app/screens/SignInScreen';
 import { SignInWithOtpPhoneNumberScreen } from 'app/screens/SignInWithOtpPhoneNumberScreen';
 import { SignInWithPhoneNumberScreen } from 'app/screens/SignInWithPhoneNumberScreen';
 import { UpdateProfileBasicInfoScreen } from 'app/screens/UpdateProfileBasicInfoScreen';
-import { UpdateProfilePhotosScreen } from 'app/screens/UpdateProfilePhotosScreen';
+import { UpdateProfilePhotosScreen } from 'app/screens/UpdateProfilePhotosScreen.ios';
 import { api } from 'app/services/api';
 import { colors } from 'app/theme';
 import React from 'react';
