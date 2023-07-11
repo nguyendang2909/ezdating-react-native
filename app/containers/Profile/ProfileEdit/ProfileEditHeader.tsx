@@ -2,14 +2,13 @@ import { Header } from 'app/components';
 import { goBack } from 'app/navigators';
 import React from 'react';
 
-export const ProfileSettingHeader: React.FC = () => {
+export const ProfileEditHeader: React.FC = () => {
   return (
     <>
       <Header
-        safeAreaEdges={[]}
         leftIcon="caretLeft"
         onLeftPress={goBack}
-        titleTx="Settings"
+        titleTx="Edit profile"
       />
     </>
   );

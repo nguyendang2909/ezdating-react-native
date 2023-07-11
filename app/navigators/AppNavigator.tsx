@@ -1,7 +1,5 @@
 import { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import {
-  DarkTheme,
-  DefaultTheme,
   NavigationContainer,
   NavigatorScreenParams,
 } from '@react-navigation/native';
@@ -10,15 +8,21 @@ import {
   NativeStackScreenProps,
 } from '@react-navigation/native-stack';
 import { useAppSelector } from 'app/hooks';
+import { LikedYouScreen } from 'app/screens/LikedYouScreen';
 import { MessagesByConversationScreen } from 'app/screens/MessagesByConversationScreen';
+import { ProfileEditScreen } from 'app/screens/ProfileEditScreen';
 import { ProfileSettingScreen } from 'app/screens/ProfileSettingScreen';
 import { SignInScreen } from 'app/screens/SignInScreen';
 import { SignInWithOtpPhoneNumberScreen } from 'app/screens/SignInWithOtpPhoneNumberScreen';
 import { SignInWithPhoneNumberScreen } from 'app/screens/SignInWithPhoneNumberScreen';
 import { UpdateProfileBasicInfoScreen } from 'app/screens/UpdateProfileBasicInfoScreen';
-import { UpdateProfilePhotosScreen } from 'app/screens/UpdateProfilePhotosScreen.ios';
+import { UpdateProfilePhotosScreen } from 'app/screens/UpdateProfilePhotosScreen';
 import { api } from 'app/services/api';
 import { colors } from 'app/theme';
+import {
+  ReactNavDarkTheme,
+  ReactNavDefaultTheme,
+} from 'app/theme/default-theme/react-navigation-theme';
 import React from 'react';
 import { useColorScheme } from 'react-native';
 
@@ -43,6 +47,7 @@ export type AppStackParamList = {
   UpdateProfileBasicInfo: undefined;
   UpdateProfilePhotosScreen: undefined;
   Home: NavigatorScreenParams<HomeTabParamList>;
+  LikedYou: undefined;
   SignIn: undefined;
   SignInWithOtpPhoneNumber: {
     otpConfirm?: FirebaseAuthTypes.ConfirmationResult;
@@ -52,6 +57,7 @@ export type AppStackParamList = {
   };
   SignInWithPhoneNumber: undefined;
   Welcome: undefined;
+  ProfileEdit: undefined;
   ProfileSetting: undefined;
   MessagesByConversation: {
     conversationId: string;
@@ -97,12 +103,26 @@ const AppStack = () => {
         <>
           <Stack.Screen name="Home" component={HomeNavigator} />
           <Stack.Screen
+            name="LikedYou"
+            component={LikedYouScreen}
+            options={{
+              presentation: 'modal',
+            }}
+          />
+          <Stack.Screen
             name="UpdateProfileBasicInfo"
             component={UpdateProfileBasicInfoScreen}
           />
           <Stack.Screen
             name="UpdateProfilePhotosScreen"
             component={UpdateProfilePhotosScreen}
+          />
+          <Stack.Screen
+            name="ProfileEdit"
+            component={ProfileEditScreen}
+            options={{
+              presentation: 'fullScreenModal',
+            }}
           />
           <Stack.Screen
             name="ProfileSetting"
@@ -145,7 +165,7 @@ export const AppNavigator = (props: NavigationProps) => {
   return (
     <NavigationContainer
       ref={navigationRef}
-      theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
+      theme={colorScheme === 'dark' ? ReactNavDarkTheme : ReactNavDefaultTheme}
       {...props}
     >
       <AppStack />

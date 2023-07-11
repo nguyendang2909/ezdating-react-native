@@ -3,7 +3,6 @@ import { BirthDayFormControl } from 'app/components/Form/BirthDayFormControl';
 import { FormControlInput } from 'app/components/Form/FormControlInput';
 import { LookingForFormControl } from 'app/components/Form/LookingForFormControl';
 import { SelectGenderFormControl } from 'app/components/Form/SelectGenderForm';
-import { LoadingScreen } from 'app/components/Screen/LoadingScreen';
 import { useAppSelector } from 'app/hooks';
 import { translate } from 'app/i18n';
 import { api } from 'app/services/api';
@@ -58,7 +57,6 @@ export const UpdateProfileBasicInfoScreen: FC = () => {
   return (
     <>
       <Box flex="1" safeAreaY>
-        <LoadingScreen isLoading={formik.isSubmitting} />
         <View flex="1">
           <View flex="1">
             <ScrollView style={flexGrow}>
@@ -142,6 +140,7 @@ export const UpdateProfileBasicInfoScreen: FC = () => {
 
             <View px="4" py="4">
               <Button
+                isLoading={formik.isSubmitting}
                 onPress={() => {
                   formik.handleSubmit();
                 }}

@@ -43,6 +43,7 @@ const en = {
   'Do not share verification code to protect your account':
     'Do not share verification code to protect your account',
   // e
+  'Edit profile': 'Edit profile',
   'Enter your code': 'Enter your code',
   'Enter your phone number': 'Enter your phone number',
   'Enter your first name': 'Enter your first name',

@@ -2,6 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import { UploadPhotoCard } from 'app/components/Form/UploadPhotoCard';
 import { LoadingScreen } from 'app/components/Screen/LoadingScreen';
 import { UploadFileShares, UploadFileTypes } from 'app/constants';
+import { PhotoRequestPermission } from 'app/containers/Photos/PhotoRequestPermission.ios';
 import { useAppSelector } from 'app/hooks';
 import { translate } from 'app/i18n';
 import { api } from 'app/services/api';
@@ -15,6 +16,7 @@ import {
   width,
 } from 'app/styles';
 import { spacing } from 'app/theme';
+import { ApiRequest } from 'app/types/api-request.type';
 import { FormParams } from 'app/types/form-params.type';
 import { useFormik } from 'formik';
 import {
@@ -30,8 +32,7 @@ import {
   useToast,
   View,
 } from 'native-base';
-import React, { useEffect, useState } from 'react';
-import { PermissionsAndroid } from 'react-native';
+import React, { useState } from 'react';
 import ImageCropPicker from 'react-native-image-crop-picker';
 
 type FCProps = {};
@@ -53,38 +54,6 @@ export const UpdateProfilePhotosScreen: React.FC<FCProps> = () => {
   );
   const profilePublicPhotosLength = profilePublicPhotos?.length || 0;
 
-  useEffect(() => {
-    PermissionsAndroid.request(
-      PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
-    );
-    PermissionsAndroid.request(
-      PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
-    );
-    PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA);
-    // requestCameraPermission();
-    // requestStoragePermission();
-  }, []);
-
-  // const requestCameraPermission = async () => {
-  //   const havePermission = await PermissionsAndroid.check(
-  //     PermissionsAndroid.PERMISSIONS.CAMERA,
-  //   );
-  //   if (!havePermission) {
-  //     PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA);
-  //   }
-  // };
-
-  // const requestStoragePermission = async () => {
-  //   const havePermission = await PermissionsAndroid.check(
-  //     PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
-  //   );
-  //   if (!havePermission) {
-  //     PermissionsAndroid.request(
-  //       PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
-  //     );
-  //   }
-  // };
-
   const formik = useFormik<FormParams.UpdateProfilePhoto>({
     initialValues: {
       photos: [],
@@ -99,12 +68,15 @@ export const UpdateProfilePhotosScreen: React.FC<FCProps> = () => {
           }).unwrap();
           if (photoParts.length) {
             await Promise.all(
-              photoParts.map(item =>
-                submitUploadPhoto({
+              photoParts.map((item, index) => {
+                const payload: ApiRequest.UploadPhoto = {
                   file: item,
                   share: UploadFileShares.public,
-                }).unwrap(),
-              ),
+                  ...(index === 0 ? { isAvatar: true } : {}),
+                };
+
+                return submitUploadPhoto(payload).unwrap();
+              }),
             );
           }
         }
@@ -242,6 +214,7 @@ export const UpdateProfilePhotosScreen: React.FC<FCProps> = () => {
 
           <View px="4" py="4">
             <Button
+              isLoading={formik.isSubmitting}
               onPress={() => {
                 formik.handleSubmit();
               }}
@@ -275,6 +248,8 @@ export const UpdateProfilePhotosScreen: React.FC<FCProps> = () => {
           </Actionsheet.Item>
         </Actionsheet.Content>
       </Actionsheet>
+
+      <PhotoRequestPermission />
     </>
   );
 };

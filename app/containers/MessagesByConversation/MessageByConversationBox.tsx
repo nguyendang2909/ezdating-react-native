@@ -3,7 +3,9 @@ import { useAppSelector } from 'app/hooks';
 import { AppStackParamList } from 'app/navigators';
 import { api } from 'app/services/api';
 import { socketStoreActions } from 'app/store/socket.store';
+import { KeyboardAvoidingView } from 'native-base';
 import React from 'react';
+import { Platform } from 'react-native';
 import { GiftedChat, IMessage } from 'react-native-gifted-chat';
 import { useDispatch } from 'react-redux';
 
@@ -37,6 +39,8 @@ export const MessagesByConversationBox: React.FC<FCProps> = () => {
   return (
     <>
       <GiftedChat
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         messages={messages}
         onSend={message => onSend(message)}
         user={{
@@ -48,6 +52,14 @@ export const MessagesByConversationBox: React.FC<FCProps> = () => {
         }}
         showUserAvatar={true}
       />
+      {Platform.OS === 'android' ? (
+        <KeyboardAvoidingView
+          behavior={'padding'}
+          keyboardVerticalOffset={80}
+        />
+      ) : (
+        <></>
+      )}
     </>
   );
 };

@@ -1,14 +1,6 @@
 import { UploadFileShare, UserGender, UserLookingFor } from 'app/constants';
 import { Image } from 'react-native-image-crop-picker';
 
-// import {
-//   EDrinking,
-//   ELookingForGender,
-//   ESmoking,
-//   EUploadFileShare,
-//   EWorkout,
-// } from './constants';
-
 export declare namespace ApiRequest {
   type FindAll = {
     fields?: string[];
@@ -77,6 +69,7 @@ export declare namespace ApiRequest {
   type UploadPhoto = {
     file: Image;
     share: UploadFileShare;
+    isAvatar?: boolean;
   };
 
   type FindAllConversations = {};

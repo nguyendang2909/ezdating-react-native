@@ -1,4 +1,4 @@
-import { ProfileAccountCard } from 'app/containers/Profile/ProfileAccountCard';
+import { ProfileEditCard } from 'app/containers/Profile/ProfileEditCard';
 import { ProfileFreeCoinsCard } from 'app/containers/Profile/ProfileFreeCoinsCard';
 import { ProfileHeader } from 'app/containers/Profile/ProfileHeader';
 import { ProfileLikedYouCard } from 'app/containers/Profile/ProfileLikedYouCard';
@@ -23,7 +23,7 @@ export const ProfileScreen: FC = () => {
           <VStack space={4}>
             <HStack space={4}>
               <View flex="1">
-                <ProfileAccountCard />
+                <ProfileEditCard />
               </View>
               <View flex="1">
                 <ProfileLikedYouCard />

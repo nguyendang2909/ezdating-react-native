@@ -11,12 +11,12 @@ import {
   zIndex,
 } from 'app/styles';
 import { spacing } from 'app/theme';
-import { Button, View } from 'native-base';
+import { Button, Text, View } from 'native-base';
 import React, { FC } from 'react';
 import { ImageBackground } from 'react-native';
 const backgroundImage = require('../../assets/images/Couples-home.jpeg');
 
-interface FCProps extends AppStackScreenProps<'SignIn'> {}
+type FCProps = AppStackScreenProps<'SignIn'>;
 
 export const SignInScreen: FC<FCProps> = () => {
   return (
@@ -47,7 +47,7 @@ export const SignInScreen: FC<FCProps> = () => {
         </View>
         <View style={marginTop(spacing.lg)}>
           <Button variant="outline" disabled>
-            asda
+            <Text>asdasd</Text>
           </Button>
         </View>
       </View>
