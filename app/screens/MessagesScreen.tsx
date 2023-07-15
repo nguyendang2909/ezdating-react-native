@@ -5,7 +5,9 @@ import { Box, StatusBar, View } from 'native-base';
 import React, { FC } from 'react';
 
 export const MessagesScreen: FC = () => {
-  const { refetch } = api.useGetConversationsQuery({});
+  const { refetch, data } = api.useGetConversationsQuery({});
+
+  console.log(data);
 
   return (
     <>

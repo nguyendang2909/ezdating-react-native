@@ -1,4 +1,4 @@
-import { UploadFileShare, UserGender, UserLookingFor } from 'app/constants';
+import { UserGender, UserLookingFor } from 'app/constants';
 import { Image } from 'react-native-image-crop-picker';
 
 export declare namespace ApiRequest {
@@ -46,7 +46,7 @@ export declare namespace ApiRequest {
     location: string;
     jobTitle?: string;
     haveBasicInfo?: boolean;
-    introduction?: string;
+    introduce?: string;
     nickname?: string;
     latitude?: number;
     longitude?: number;
@@ -68,7 +68,6 @@ export declare namespace ApiRequest {
 
   type UploadPhoto = {
     file: Image;
-    share: UploadFileShare;
     isAvatar?: boolean;
   };
 

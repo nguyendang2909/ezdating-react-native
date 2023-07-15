@@ -1,7 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import { UploadPhotoCard } from 'app/components/Form/UploadPhotoCard';
 import { LoadingScreen } from 'app/components/Screen/LoadingScreen';
-import { UploadFileShares, UploadFileTypes } from 'app/constants';
 import { PhotoRequestPermission } from 'app/containers/Photos/PhotoRequestPermission.ios';
 import { useAppSelector } from 'app/hooks';
 import { translate } from 'app/i18n';
@@ -46,13 +45,8 @@ export const UpdateProfilePhotosScreen: React.FC<FCProps> = () => {
   const [submitUploadPhoto] = api.useUploadPhotoMutation();
   const [submitRemovePhoto] = api.useRemovePhotoMutation();
   const { refetch: refetchUserProfile } = api.useGetMyProfileQuery();
-  const uploadFiles = useAppSelector(state => state.app.profile.uploadFiles);
-  const profilePublicPhotos = uploadFiles?.filter(
-    item =>
-      item.type === UploadFileTypes.photo &&
-      item.share === UploadFileShares.public,
-  );
-  const profilePublicPhotosLength = profilePublicPhotos?.length || 0;
+  const uploadedFiles = useAppSelector(state => state.app.profile.uploadFiles);
+  const profilePublicPhotosLength = uploadedFiles?.length || 0;
 
   const formik = useFormik<FormParams.UpdateProfilePhoto>({
     initialValues: {
@@ -64,14 +58,12 @@ export const UpdateProfilePhotosScreen: React.FC<FCProps> = () => {
           const [firstPhoto, ...photoParts] = values.photos;
           await submitUploadPhoto({
             file: firstPhoto,
-            share: UploadFileShares.public,
           }).unwrap();
           if (photoParts.length) {
             await Promise.all(
               photoParts.map((item, index) => {
                 const payload: ApiRequest.UploadPhoto = {
                   file: item,
-                  share: UploadFileShares.public,
                   ...(index === 0 ? { isAvatar: true } : {}),
                 };
 
@@ -169,7 +161,7 @@ export const UpdateProfilePhotosScreen: React.FC<FCProps> = () => {
 
             <View p="4">
               <HStack style={[flexDirectionRow, flexWrapWrap]}>
-                {profilePublicPhotos?.map(item => {
+                {uploadedFiles?.map(item => {
                   return (
                     <View
                       key={item.id}

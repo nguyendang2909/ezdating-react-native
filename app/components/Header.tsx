@@ -1,10 +1,10 @@
+import { View } from 'native-base';
 import React, { ReactElement } from 'react';
 import {
   StyleProp,
   TextStyle,
   TouchableOpacity,
   TouchableOpacityProps,
-  View,
   ViewStyle,
 } from 'react-native';
 

@@ -12,6 +12,7 @@ import { LikedYouScreen } from 'app/screens/LikedYouScreen';
 import { MessagesByConversationScreen } from 'app/screens/MessagesByConversationScreen';
 import { ProfileEditScreen } from 'app/screens/ProfileEditScreen';
 import { ProfileSettingScreen } from 'app/screens/ProfileSettingScreen';
+import { SelectLookingForScreen } from 'app/screens/SelectLookingForScreen';
 import { SignInScreen } from 'app/screens/SignInScreen';
 import { SignInWithOtpPhoneNumberScreen } from 'app/screens/SignInWithOtpPhoneNumberScreen';
 import { SignInWithPhoneNumberScreen } from 'app/screens/SignInWithPhoneNumberScreen';
@@ -48,6 +49,12 @@ export type AppStackParamList = {
   UpdateProfilePhotosScreen: undefined;
   Home: NavigatorScreenParams<HomeTabParamList>;
   LikedYou: undefined;
+  MessagesByConversation: {
+    conversationId: string;
+  };
+  ProfileEdit: undefined;
+  ProfileSetting: undefined;
+  SelectLookingFor: undefined;
   SignIn: undefined;
   SignInWithOtpPhoneNumber: {
     otpConfirm?: FirebaseAuthTypes.ConfirmationResult;
@@ -57,11 +64,6 @@ export type AppStackParamList = {
   };
   SignInWithPhoneNumber: undefined;
   Welcome: undefined;
-  ProfileEdit: undefined;
-  ProfileSetting: undefined;
-  MessagesByConversation: {
-    conversationId: string;
-  };
 };
 
 /**
@@ -121,7 +123,7 @@ const AppStack = () => {
             name="ProfileEdit"
             component={ProfileEditScreen}
             options={{
-              presentation: 'fullScreenModal',
+              presentation: 'card',
             }}
           />
           <Stack.Screen
@@ -135,6 +137,10 @@ const AppStack = () => {
             name="MessagesByConversation"
             component={MessagesByConversationScreen}
           />
+          <Stack.Screen
+            name="SelectLookingFor"
+            component={SelectLookingForScreen}
+          ></Stack.Screen>
         </>
       ) : (
         <>

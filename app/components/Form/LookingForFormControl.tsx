@@ -1,6 +1,6 @@
 import { useActionSheet } from '@expo/react-native-action-sheet';
 import { UserLookingFor, UserLookingFors } from 'app/constants';
-import { translate, TxKeyPath } from 'app/i18n';
+import { translate } from 'app/i18n';
 import {
   ChevronDownIcon,
   FormControl,
@@ -12,18 +12,10 @@ import {
 } from 'native-base';
 import React from 'react';
 
-const lookingFors: Record<UserLookingFor, TxKeyPath> = {
-  [UserLookingFors.lover]: 'Lover',
-  [UserLookingFors.friend]: 'Friend',
-  [UserLookingFors.partner]: 'Partner',
-  [UserLookingFors.marriage]: 'Marriage',
-  [UserLookingFors.oneNightStand]: 'One-night stand',
-};
-
 type FCProps = {
   error?: string;
   isRequired?: boolean;
-  onChange: (value: string) => void;
+  onChange: (value: number) => void;
   value?: UserLookingFor;
 };
 
@@ -55,19 +47,19 @@ export const LookingForFormControl: React.FC<FCProps> = ({
       (selectedIndex: number) => {
         switch (selectedIndex) {
           case 0:
-            onChange(UserLookingFors.lover);
+            onChange(UserLookingFors.boyGirlFriend);
             break;
           case 1:
-            onChange(UserLookingFors.friend);
+            onChange(UserLookingFors.getMarried);
             break;
           case 2:
-            onChange(UserLookingFors.partner);
+            onChange(UserLookingFors.makeFriends);
             break;
           case 3:
-            onChange(UserLookingFors.marriage);
+            onChange(UserLookingFors.oneNightStand);
             break;
           case 4:
-            onChange(UserLookingFors.oneNightStand);
+            onChange(UserLookingFors.sexPartner);
             break;
         }
       },
@@ -87,7 +79,9 @@ export const LookingForFormControl: React.FC<FCProps> = ({
               size="lg"
               variant="underlined"
               placeholder={translate('Please select')}
-              value={value ? translate(lookingFors[value]) : ''}
+              value={
+                value ? translate(`constants.userLookingFors.${value}`) : ''
+              }
               InputRightElement={<ChevronDownIcon />}
               onPressIn={handlePress}
             ></Input>

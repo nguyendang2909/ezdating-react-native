@@ -152,16 +152,13 @@ export const api = createApi({
     // }),
     uploadPhoto: builder.mutation<ApiResponse.Logged, ApiRequest.UploadPhoto>({
       query: body => {
-        const { file, share, isAvatar } = body;
+        const { file, isAvatar } = body;
         const formData = new FormData();
         formData.append('file', {
           uri: Platform.OS === 'ios' ? `file:///${file.path}` : file.path,
           type: 'image/jpeg',
           name: 'image.jpg',
         });
-        if (share) {
-          formData.append('share', share);
-        }
         if (isAvatar) {
           formData.append('isAvatar', 'true');
         }

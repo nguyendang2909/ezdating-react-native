@@ -38,7 +38,8 @@ export declare namespace Entity {
       email: string;
       uploadFiles: UploadedFile[];
       fullname: string;
-      gender: UserGender;
+      gender?: UserGender;
+      height: number;
       location: string;
       lookingFor?: UserLookingFor;
       jobTitle: string;
@@ -49,6 +50,7 @@ export declare namespace Entity {
       phoneNumber: string;
       role: UserRole;
       school: string;
+      weight: number;
       // smoking: ESmoking;
       // workout: EWorkout;
     }>;

@@ -4,6 +4,27 @@ const en = {
     cancel: 'Cancel',
     back: 'Back',
   },
+  constants: {
+    genders: {
+      1: 'Male',
+      2: 'Female',
+    },
+    relationshipStatuses: {
+      1: 'Single',
+      2: 'Have boy/girl friend',
+      3: 'Married',
+      4: 'Divorced without children',
+      5: 'Divorced with children',
+      6: 'Single mom/dad',
+    },
+    userLookingFors: {
+      1: 'Boy/Girl friend',
+      2: 'Make friends',
+      3: 'Sex partner',
+      4: 'Get married',
+      5: 'One-Night stand',
+    },
+  },
   welcomeScreen: {
     postscript:
       "psst  — This probably isn't what your app looks like. (Unless your designer handed you these screens, and in that case, ship it!)",
@@ -25,6 +46,7 @@ const en = {
     },
   },
   // a
+  'About me': 'About me',
   Account: 'Account',
   'Add picture profile (Please choose photos that clearly shows your face, up to 6 photos)':
     'Add picture profile (Please choose photos that clearly shows your face, up to 6 photos)',
@@ -61,7 +83,10 @@ const en = {
   // g
   Gender: 'Gender',
   gender: 'gender',
+  // h
+  Height: 'Height',
   // i
+  'I am looking for': 'I am looking for',
   Introduce: 'Introduce',
   introduce: 'introduce',
   Invite: 'Invite',
@@ -69,6 +94,7 @@ const en = {
   'Last name': 'Last name',
   LGBT: 'LGBT',
   'Liked you': 'Liked you',
+  'Looking for': 'Looking for',
   Logout: 'Logout',
   Lover: 'Lover',
   lover: 'lover',
@@ -108,13 +134,16 @@ const en = {
   'Please select': 'Please select',
   Profile: 'Profile',
   // r
+  Relationship: 'Relationship',
+  'Relationship goals': 'Relationship goals',
+  'Relationship status': 'Relationship status',
   Remove: 'Remove',
   remove: 'remove',
   'Remove w': 'Remove {{w}}',
   'Remove w failed!': 'Remove {{w}} failed!',
   Resend: 'Resend',
   'Retype password': 'Retype password',
-  'Sign in with phone number': 'Sign in with phone number',
+  'Sign in with w': 'Sign in with {{w}}',
   'Sign in': 'Sign in',
   'Your profile': 'Your profile',
   EZDating: 'EZDating',
@@ -127,6 +156,7 @@ const en = {
   Visitors: 'Visitors',
   // w
   'w is required!': '{{w}} is required!',
+  Weight: 'Weight',
   'What is your w?': 'What is your {{w}}?',
   'What are you looking for here?': 'What are you looking for here?',
   'Wrong verification code, try again!': 'Wrong verification code, try again!',

@@ -1,6 +1,5 @@
 import { UserGender, UserGenders } from 'app/constants';
 import { translate } from 'app/i18n';
-import { flex } from 'app/styles';
 import {
   Button,
   FormControl,
@@ -30,44 +29,21 @@ export const SelectGenderFormControl: FC<FCProps> = ({
         <FormControl.Label>{translate('Gender')}</FormControl.Label>
 
         <HStack space="sm">
-          <View style={flex(1)}>
-            <Button
-              testID="maleButton"
-              variant={value === UserGenders.male ? 'solid' : 'outline'}
-              w="full"
-              onPress={() => {
-                onChange(UserGenders.male);
-              }}
-            >
-              {translate('Male')}
-            </Button>
-          </View>
-
-          <View style={flex(1)}>
-            <Button
-              testID="femaleButton"
-              variant={value === UserGenders.female ? 'solid' : 'outline'}
-              w="full"
-              onPress={() => {
-                onChange(UserGenders.female);
-              }}
-            >
-              {translate('Female')}
-            </Button>
-          </View>
-
-          <View style={flex(1)}>
-            <Button
-              testID="lgbtButton"
-              variant={value === UserGenders.lgbt ? 'solid' : 'outline'}
-              w="full"
-              onPress={() => {
-                onChange(UserGenders.lgbt);
-              }}
-            >
-              {translate('LGBT')}
-            </Button>
-          </View>
+          {Object.values(UserGenders).map(item => {
+            return (
+              <View flex={1} key={item}>
+                <Button
+                  variant={value === item ? 'solid' : 'outline'}
+                  w="full"
+                  onPress={() => {
+                    onChange(item);
+                  }}
+                >
+                  {translate(`constants.genders.${item}`)}
+                </Button>
+              </View>
+            );
+          })}
         </HStack>
 
         <FormControl.ErrorMessage leftIcon={<WarningOutlineIcon size="xs" />}>

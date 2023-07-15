@@ -3,6 +3,7 @@ import { BirthDayFormControl } from 'app/components/Form/BirthDayFormControl';
 import { FormControlInput } from 'app/components/Form/FormControlInput';
 import { LookingForFormControl } from 'app/components/Form/LookingForFormControl';
 import { SelectGenderFormControl } from 'app/components/Form/SelectGenderForm';
+import { UserGender, UserLookingFor } from 'app/constants';
 import { useAppSelector } from 'app/hooks';
 import { translate } from 'app/i18n';
 import { api } from 'app/services/api';
@@ -33,7 +34,7 @@ export const UpdateProfileBasicInfoScreen: FC = () => {
       nickname: Yup.string().required(
         translate('Please enter your w!', { w: translate('nickname') }),
       ),
-      gender: Yup.string().required(
+      gender: Yup.number().required(
         translate('Please choose your w!', { w: translate('gender') }),
       ),
       birthday: Yup.string().required(
@@ -53,6 +54,14 @@ export const UpdateProfileBasicInfoScreen: FC = () => {
       }
     },
   });
+
+  const handleChangeGender = (value: UserGender) => {
+    formik.setFieldValue('gender', value);
+  };
+
+  const handleChangeLookingFor = (value: UserLookingFor) => {
+    formik.setFieldValue('lookingFor', value);
+  };
 
   return (
     <>
@@ -86,7 +95,7 @@ export const UpdateProfileBasicInfoScreen: FC = () => {
                   <SelectGenderFormControl
                     isRequired
                     value={formik.values.gender}
-                    onChange={formik.handleChange('gender')}
+                    onChange={handleChangeGender}
                     error={
                       formik.touched.gender ? formik.errors.gender : undefined
                     }
@@ -110,7 +119,7 @@ export const UpdateProfileBasicInfoScreen: FC = () => {
                   <LookingForFormControl
                     isRequired
                     value={formik.values.lookingFor}
-                    onChange={formik.handleChange('lookingFor')}
+                    onChange={handleChangeLookingFor}
                     error={
                       formik.touched.lookingFor
                         ? formik.errors.lookingFor

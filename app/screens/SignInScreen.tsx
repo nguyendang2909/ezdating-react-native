@@ -1,17 +1,18 @@
+import { SignInWithFacebookButton } from 'app/containers/Button/SignInWithFacebookButton';
+import { SignInWithGoogleButton } from 'app/containers/Button/SignInWithGoogleButton';
 import { SignInWithPhoneNumberButton } from 'app/containers/Button/SignInWithPhoneNumberButton';
 import { AppStackScreenProps } from 'app/navigators';
 import {
   backgroundColor,
   heightFull,
   justifyContentCenter,
-  marginTop,
   paddingHorizontal,
   posititionAbsolute,
   widthFull,
   zIndex,
 } from 'app/styles';
 import { spacing } from 'app/theme';
-import { Button, Text, View } from 'native-base';
+import { View, VStack } from 'native-base';
 import React, { FC } from 'react';
 import { ImageBackground } from 'react-native';
 const backgroundImage = require('../../assets/images/Couples-home.jpeg');
@@ -42,14 +43,17 @@ export const SignInScreen: FC<FCProps> = () => {
           zIndex(3),
         ]}
       >
-        <View>
-          <SignInWithPhoneNumberButton />
-        </View>
-        <View style={marginTop(spacing.lg)}>
-          <Button variant="outline" disabled>
-            <Text>asdasd</Text>
-          </Button>
-        </View>
+        <VStack space={8}>
+          <View>
+            <SignInWithPhoneNumberButton />
+          </View>
+          <View>
+            <SignInWithFacebookButton />
+          </View>
+          <View>
+            <SignInWithGoogleButton />
+          </View>
+        </VStack>
       </View>
     </>
   );
