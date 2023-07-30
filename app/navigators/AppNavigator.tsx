@@ -9,6 +9,7 @@ import {
 } from '@react-navigation/native-stack';
 import { useAppSelector } from 'app/hooks';
 import { LikedYouScreen } from 'app/screens/LikedYouScreen';
+import { MainScreen } from 'app/screens/MainScreen';
 import { MessagesByConversationScreen } from 'app/screens/MessagesByConversationScreen';
 import { ProfileEditScreen } from 'app/screens/ProfileEditScreen';
 import { ProfileSettingScreen } from 'app/screens/ProfileSettingScreen';
@@ -49,6 +50,7 @@ export type AppStackParamList = {
   UpdateProfilePhotosScreen: undefined;
   Home: NavigatorScreenParams<HomeTabParamList>;
   LikedYou: undefined;
+  Main: undefined;
   MessagesByConversation: {
     conversationId: string;
   };
@@ -87,22 +89,21 @@ const AppStack = () => {
     state => state.app.profile.haveBasicInfo,
   );
 
+  const initialRoute: keyof AppStackParamList = isAuthenticated
+    ? 'Main'
+    : 'SignIn';
+
   return (
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
         navigationBarColor: colors.background,
       }}
-      initialRouteName={
-        isAuthenticated
-          ? haveBasicInfo
-            ? 'Home'
-            : 'UpdateProfileBasicInfo'
-          : 'SignIn'
-      }
+      initialRouteName={initialRoute}
     >
       {isAuthenticated ? (
         <>
+          <Stack.Screen name="Main" component={MainScreen} />
           <Stack.Screen name="Home" component={HomeNavigator} />
           <Stack.Screen
             name="LikedYou"

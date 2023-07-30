@@ -18,7 +18,7 @@ import * as Yup from 'yup';
 export const UpdateProfileBasicInfoScreen: FC = () => {
   const profile = useAppSelector(state => state.app.profile);
   const { navigate } = useNavigation();
-  const [submitUpdateProfile] = api.useUpdateProfileMutation();
+  const [submitUpdateBasicProfile] = api.useUpdateBasicProfileMutation();
   const formik = useFormik<FormParams.BasicInfo>({
     initialValues: {
       nickname: profile?.nickname,
@@ -47,7 +47,7 @@ export const UpdateProfileBasicInfoScreen: FC = () => {
     }),
     onSubmit: async values => {
       try {
-        await submitUpdateProfile(values).unwrap();
+        await submitUpdateBasicProfile(values).unwrap();
         navigate('UpdateProfilePhotosScreen');
       } catch (err) {
         console.log(err);

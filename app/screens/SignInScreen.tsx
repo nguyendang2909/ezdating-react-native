@@ -43,7 +43,7 @@ export const SignInScreen: FC<FCProps> = () => {
           zIndex(3),
         ]}
       >
-        <VStack space={8}>
+        <VStack space={4}>
           <View>
             <SignInWithPhoneNumberButton />
           </View>

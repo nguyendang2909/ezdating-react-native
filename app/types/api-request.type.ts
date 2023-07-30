@@ -43,7 +43,6 @@ export declare namespace ApiRequest {
     // drinking?: EDrinking;
     // educationLevel?: EEducationLevel;
     gender?: UserGender;
-    location: string;
     jobTitle?: string;
     haveBasicInfo?: boolean;
     introduce?: string;

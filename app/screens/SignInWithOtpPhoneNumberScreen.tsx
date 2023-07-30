@@ -80,6 +80,7 @@ export const SignInWithOtpPhoneNumberScreen: FC<FCProps> = props => {
         token: idToken,
       }).unwrap();
     } catch (err) {
+      console.log(err);
       setError(true);
       setResendStatus(ResendStatusObj.nonResent);
     } finally {

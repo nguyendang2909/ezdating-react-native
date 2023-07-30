@@ -68,7 +68,7 @@ export const api = createApi({
 
     return result;
   },
-
+  tagTypes: ['Profile'],
   endpoints: builder => ({
     signInWithPhoneNumber: builder.mutation<
       ApiResponse.Logged,
@@ -86,6 +86,7 @@ export const api = createApi({
         url: API_URL.myProfile,
         method: 'GET',
       }),
+      providesTags: ['Profile'],
     }),
 
     updateProfile: builder.mutation<
@@ -97,6 +98,12 @@ export const api = createApi({
         method: 'PATCH',
         body,
       }),
+      invalidatesTags: (result, error) => {
+        if (error) {
+          return [];
+        }
+        return ['Profile'];
+      },
     }),
 
     updateBasicProfile: builder.mutation<
