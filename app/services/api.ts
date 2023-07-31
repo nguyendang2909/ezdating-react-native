@@ -81,6 +81,14 @@ export const api = createApi({
       }),
     }),
 
+    getSwipeUsers: builder.query<ApiResponse.UserData, void>({
+      query: () => ({
+        url: API_URL.myProfile,
+        method: 'GET',
+      }),
+    }),
+
+    // Profile
     getMyProfile: builder.query<ApiResponse.UserData, void>({
       query: () => ({
         url: API_URL.myProfile,

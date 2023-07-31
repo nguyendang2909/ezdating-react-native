@@ -1,15 +1,20 @@
+import { Header } from 'app/components';
+import { DatingSwipe } from 'app/containers/DatingSwipe/DatingSwipe';
+import { UpdateGeolocation } from 'app/containers/Home/UpdateGeolocation';
+import { UpdateGeoLocationPermission } from 'app/containers/Home/UpdateGeolocationPermission';
 import { colors } from 'app/theme';
-import { Box, StatusBar } from 'native-base';
+import { Box } from 'native-base';
 import React, { FC } from 'react';
-
-import { UpdateGeoLocation } from '../containers/Home/UpdateGeoLocation';
 
 export const DatingSwipeScreen: FC = () => {
   return (
     <>
-      <StatusBar barStyle="light-content" />
-      <UpdateGeoLocation />
-      <Box safeAreaTop backgroundColor={colors.primary}></Box>
+      <Header titleTx="appName" />
+      <UpdateGeoLocationPermission />
+      <UpdateGeolocation />
+      <Box flex={1} safeAreaY backgroundColor={colors.primary}>
+        <DatingSwipe />
+      </Box>
     </>
   );
 };

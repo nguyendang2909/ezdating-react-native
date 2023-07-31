@@ -18,8 +18,8 @@ export const InputBasicInforForm: FC = () => {
       nickname: profile?.nickname || '',
       gender: profile?.gender,
       birthday: profile?.birthday,
-      lookingFor: '',
-      introduce: undefined,
+      lookingFor: undefined,
+      introduce: '',
     },
     enableReinitialize: true,
     validationSchema: Yup.object().shape({

@@ -1,4 +1,5 @@
 import { store } from 'app/store';
+import { AuthorizationResult } from 'react-native-geolocation-service';
 import { IMessage } from 'react-native-gifted-chat';
 
 import { ApiResponse } from './api-response.type';
@@ -12,6 +13,9 @@ export declare namespace AppStore {
     refreshToken?: string;
     isLogged: boolean;
     profile: Entity.User;
+    osPermissions: {
+      locationService?: AuthorizationResult;
+    };
   };
 
   type MessageState = Omit<IMessage, 'createdAt'> &

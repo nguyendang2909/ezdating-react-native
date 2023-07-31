@@ -1,4 +1,5 @@
 const en = {
+  appName: 'EZ Dating',
   common: {
     ok: 'OK!',
     cancel: 'Cancel',
@@ -112,6 +113,7 @@ const en = {
   Notes: 'Notes',
   // o
   'One-night stand': 'One-Night stand',
+  'Open Settings': 'Open settings',
   // p
   Partner: 'Partner',
   partner: 'partner',

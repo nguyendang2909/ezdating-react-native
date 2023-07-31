@@ -10,7 +10,7 @@ export const API_URL = {
   myProfileBasicInfo: '/profile/basic-info',
   myGallery: '/gallery/my',
   photos: '/upload-files/photos',
-  isExistUser: '/users/exist',
+  usersSwipe: '/users/swipe',
   signInWithPhoneNumber: '/auth/sign-in/phone-number',
   uploadFiles: '/upload-files',
   users: '/users',
