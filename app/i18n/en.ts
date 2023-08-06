@@ -106,6 +106,7 @@ const en = {
   Marriage: 'Marriage',
   Messages: 'Messages',
   // n
+  Nearby: 'Nearby',
   Next: 'Next',
   Nickname: 'Nickname',
   nickname: 'nickname',

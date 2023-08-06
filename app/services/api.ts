@@ -96,7 +96,6 @@ export const api = createApi({
       }),
       providesTags: ['Profile'],
     }),
-
     updateProfile: builder.mutation<
       ApiResponse.Logged,
       ApiRequest.UpdateProfile
@@ -122,6 +121,18 @@ export const api = createApi({
         url: API_URL.myProfileBasicInfo,
         method: 'PATCH',
         body,
+      }),
+    }),
+
+    // Users
+    getUsersNearby: builder.query<
+      ApiResponse.FetchPaginationData<Entity.User[]>,
+      ApiRequest.SearchUsersNearby
+    >({
+      query: ({ params }) => ({
+        url: API_URL.usersNearby,
+        method: 'POST',
+        // params,
       }),
     }),
 

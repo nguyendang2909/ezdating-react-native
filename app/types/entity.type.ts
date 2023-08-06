@@ -29,6 +29,7 @@ export declare namespace Entity {
   type User = BaseEntity &
     Partial<{
       avatar: string;
+      avatarFile: Entity.UploadedFile;
       introduce: string;
       age?: number;
       birthday?: string;

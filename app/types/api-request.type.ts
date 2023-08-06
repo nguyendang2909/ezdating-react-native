@@ -65,6 +65,10 @@ export declare namespace ApiRequest {
     introduce?: string;
   }>;
 
+  type SearchUsersNearby = {
+    params?: Pagination;
+  };
+
   type UploadPhoto = {
     file: Image;
     isAvatar?: boolean;

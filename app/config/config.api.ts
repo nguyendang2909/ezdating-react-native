@@ -5,7 +5,6 @@ export const API_URL = {
   loginByEmail: '/auth/login/email',
   loginByFacebook: '/auth/login/facebook',
   loginByGoogle: '/auth/login/google',
-  nearbyUsers: '/users/nearby',
   myProfile: '/profile',
   myProfileBasicInfo: '/profile/basic-info',
   myGallery: '/gallery/my',
@@ -14,4 +13,5 @@ export const API_URL = {
   signInWithPhoneNumber: '/auth/sign-in/phone-number',
   uploadFiles: '/upload-files',
   users: '/users',
+  usersNearby: '/users/nearby',
 };

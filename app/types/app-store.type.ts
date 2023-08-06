@@ -41,6 +41,9 @@ export declare namespace AppStore {
 
   type UserState = {
     data: Record<string, Entity.User>;
+    nearby: {
+      data: Entity.User[];
+    };
   };
 
   type PhotoActionType = 'delete' | 'create' | undefined;

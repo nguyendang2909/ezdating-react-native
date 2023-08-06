@@ -1,12 +1,28 @@
-import { colors } from 'app/theme';
-import { Box, StatusBar } from 'native-base';
-import React, { FC } from 'react';
+import { Header } from 'app/components';
+import { DatingNearby } from 'app/containers/DatingNearby/DatingNearby';
+import { api } from 'app/services/api';
+import { StatusBar } from 'native-base';
+import React, { FC, useEffect } from 'react';
 
 export const DatingNearbyScreen: FC = () => {
+  const { refetch } = api.useGetUsersNearbyQuery(
+    {
+      params: {},
+    },
+    {
+      refetchOnMountOrArgChange: false,
+    },
+  );
+
+  useEffect(() => {
+    refetch();
+  }, []);
+
   return (
     <>
       <StatusBar barStyle="light-content" />
-      <Box safeAreaTop backgroundColor={colors.primary}></Box>
+      <Header titleTx="Nearby" />
+      <DatingNearby />
     </>
   );
 };
