@@ -32,5 +32,8 @@ export declare namespace FormParams {
     photos: Image[];
   };
 
-  type SendMessage = IMessage & { relationshipId: string };
+  type SendMessage = Omit<IMessage, 'createdAt'> & {
+    relationshipId: string;
+    createdAt: string;
+  };
 }

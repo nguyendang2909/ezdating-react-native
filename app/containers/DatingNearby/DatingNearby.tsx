@@ -1,10 +1,12 @@
+import { useNavigation } from '@react-navigation/native';
 import { useAppSelector } from 'app/hooks';
 import { aspectRatio } from 'app/styles';
-import { Avatar, Box, FlatList, Text } from 'native-base';
+import { Avatar, Box, FlatList, Pressable, Text } from 'native-base';
 import React from 'react';
 import { RefreshControl } from 'react-native';
 
 export const DatingNearby: React.FC = () => {
+  const navigator = useNavigation();
   const users = useAppSelector(state => state.user.nearby.data);
 
   const [refreshing, setRefreshing] = React.useState(false);
@@ -28,20 +30,27 @@ export const DatingNearby: React.FC = () => {
         numColumns={2}
         data={users}
         renderItem={({ item }) => {
+          const handlePressCard = () => {
+            navigator.navigate('ProfileNearby', {
+              user: item,
+            });
+          };
           return (
             <Box width={'50%'}>
               <Box p={4}>
-                <Box width="100%" style={aspectRatio(1)}>
-                  <Avatar
-                    style={{ width: '100%', height: '100%' }}
-                    source={{ uri: item.avatarFile?.location }}
-                  ></Avatar>
-                </Box>
-                <Box>
-                  <Text textAlign="center">
-                    {item.nickname} {item.age}
-                  </Text>
-                </Box>
+                <Pressable onPress={handlePressCard}>
+                  <Box width="100%" style={aspectRatio(1)}>
+                    <Avatar
+                      style={{ width: '100%', height: '100%' }}
+                      source={{ uri: item.avatarFile?.location }}
+                    ></Avatar>
+                  </Box>
+                  <Box>
+                    <Text textAlign="center">
+                      {item.nickname} {item.age}
+                    </Text>
+                  </Box>
+                </Pressable>
               </Box>
             </Box>
           );

@@ -12,6 +12,7 @@ import { LikedYouScreen } from 'app/screens/LikedYouScreen';
 import { MainScreen } from 'app/screens/MainScreen';
 import { MessagesByConversationScreen } from 'app/screens/MessagesByConversationScreen';
 import { ProfileEditScreen } from 'app/screens/ProfileEditScreen';
+import { ProfileNearbyScreen } from 'app/screens/ProfileNearbyScreen';
 import { ProfileSettingScreen } from 'app/screens/ProfileSettingScreen';
 import { SelectLookingForScreen } from 'app/screens/SelectLookingForScreen';
 import { SignInScreen } from 'app/screens/SignInScreen';
@@ -25,6 +26,7 @@ import {
   ReactNavDarkTheme,
   ReactNavDefaultTheme,
 } from 'app/theme/default-theme/react-navigation-theme';
+import { Entity } from 'app/types/entity.type';
 import React from 'react';
 import { useColorScheme } from 'react-native';
 
@@ -55,6 +57,9 @@ export type AppStackParamList = {
     conversationId: string;
   };
   ProfileEdit: undefined;
+  ProfileNearby: {
+    user: Entity.User;
+  };
   ProfileSetting: undefined;
   SelectLookingFor: undefined;
   SignIn: undefined;
@@ -84,10 +89,6 @@ const AppStack = () => {
   const isAuthenticated = useAppSelector(state => state.app.isLogged);
 
   api.useGetMyProfileQuery(undefined, {});
-
-  const haveBasicInfo = useAppSelector(
-    state => state.app.profile.haveBasicInfo,
-  );
 
   const initialRoute: keyof AppStackParamList = isAuthenticated
     ? 'Main'
@@ -127,6 +128,13 @@ const AppStack = () => {
               presentation: 'card',
             }}
           />
+          <Stack.Screen
+            name="ProfileNearby"
+            component={ProfileNearbyScreen}
+            options={{
+              presentation: 'modal',
+            }}
+          ></Stack.Screen>
           <Stack.Screen
             name="ProfileSetting"
             component={ProfileSettingScreen}

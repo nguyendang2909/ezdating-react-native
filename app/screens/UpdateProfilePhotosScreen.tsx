@@ -77,6 +77,7 @@ export const UpdateProfilePhotosScreen: React.FC<FCProps> = () => {
           screen: 'DatingSwipe',
         });
       } catch (err) {
+        console.log(err);
         toast.show({
           title: translate('Update w failed!', { w: translate('Photo') }),
           placement: 'top-right',

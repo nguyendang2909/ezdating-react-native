@@ -25,6 +25,7 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/lib/integration/react';
 
 import Config from './config';
+import { nativeBaseConfig } from './config/native-base.config';
 import { ConnectSocket } from './containers/Socket/ConnectSocket';
 import { AppNavigator, useNavigationPersistence } from './navigators';
 import { ErrorBoundary } from './screens/ErrorScreen/ErrorBoundary';
@@ -120,7 +121,7 @@ function App(props: AppProps) {
         <ConnectSocket />
         <SafeAreaProvider initialMetrics={initialWindowMetrics}>
           <ErrorBoundary catchErrors={Config.catchErrors}>
-            <NativeBaseProvider theme={defaultTheme}>
+            <NativeBaseProvider theme={defaultTheme} config={nativeBaseConfig}>
               <ActionSheetProvider>
                 <AppNavigator
                   linking={linking}

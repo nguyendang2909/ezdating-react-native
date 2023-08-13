@@ -31,6 +31,7 @@ export const MessagesByConversationBox: React.FC<FCProps> = () => {
     dispatch(
       socketStoreActions.sendMessage({
         ...msgs[0],
+        createdAt: msgs[0].createdAt.toString(),
         relationshipId: conversationId,
       }),
     );
@@ -51,6 +52,7 @@ export const MessagesByConversationBox: React.FC<FCProps> = () => {
             : undefined,
         }}
         showUserAvatar={true}
+        alwaysShowSend={true}
       />
       {Platform.OS === 'android' ? (
         <KeyboardAvoidingView

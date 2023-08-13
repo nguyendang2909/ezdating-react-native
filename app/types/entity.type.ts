@@ -1,118 +1,96 @@
 import {
+  MediaFileType,
   RelationshipUserStatus,
-  UploadFileShare,
-  UploadFileType,
+  UserEducationLevel,
   UserGender,
   UserLookingFor,
+  UserRelationshipStatus,
   UserRole,
+  UserStatus,
 } from 'app/constants';
 
 export declare namespace Entity {
   type BaseEntity = {
-    id: string;
-    createdBy?: string;
-    updatedBy?: string;
+    _id: string;
     createdAt?: string;
     updatedAt?: string;
   };
 
-  type UploadedFile = BaseEntity &
+  type MediaFile = BaseEntity &
     Partial<{
+      _userId: string;
       key: string;
       location: string;
       // eslint-disable-next-line no-use-before-define
-      user: User;
-      type: UploadFileType;
-      share: UploadFileShare;
+      type: MediaFileType;
     }>;
 
   type User = BaseEntity &
     Partial<{
-      avatar: string;
-      avatarFile: Entity.UploadedFile;
-      introduce: string;
       age?: number;
       birthday?: string;
-      company?: string;
+      coins?: number;
+      educationLevel: UserEducationLevel;
+      email: string;
+      // company?: string;
       // drinking?: EDrinking;
       // educationLevel?: EEducationLevel;
-      email: string;
-      uploadFiles: UploadedFile[];
-      fullname: string;
       gender?: UserGender;
       height: number;
-      location: string;
+      introduce: string;
+      geolocation: string;
       lookingFor?: UserLookingFor;
-      jobTitle: string;
-      // lookingForGender: ELookingForGender;
+      filterGender?: UserGender;
+      filterMaxAge?: number;
+      filterMaxDistance?: number;
+      filterMinAge?: number;
+      lastActivatedAt: string;
+      mediaFiles: MediaFile[];
       nickname: string;
-      haveBasicInfo: boolean;
       password: string;
       phoneNumber: string;
+      relationshipStatus: UserRelationshipStatus;
       role: UserRole;
-      school: string;
       weight: number;
+      status?: UserStatus;
+      // jobTitle: string;
+      // lookingForGender: ELookingForGender;
+      // school: string;
       // smoking: ESmoking;
       // workout: EWorkout;
     }>;
 
   type Relationship = BaseEntity &
     Partial<{
-      userOne: User;
-      userTwo: User;
-      userOneStatus: RelationshipUserStatus;
-      userTwoStatus: RelationshipUserStatus;
-      statusAt: string;
-      userOneStatusAt: string;
-      userTwoStatusAt: string;
+      _userOneId: string;
+      _userTwoId: string;
+      _lastMessageUserId: string;
       canUserOneChat: string;
       canUserTwoChat: string;
       lastMessage: string;
       lastMessageAt: string;
-      lastMessageBy: string;
-      lastMessageRead: boolean;
+      userOneRead: boolean;
+      userOneStatus: RelationshipUserStatus;
+      userTwoRead: boolean;
+      userTwoStatus: RelationshipUserStatus;
+      statusAt: string;
+      userOneStatusAt: string;
+      userTwoStatusAt: string;
       targetUser: User;
     }>;
 
   type Message = BaseEntity &
     Partial<{
+      _relationshipId: string;
+      _replyMessageId?: string;
+      _userId: string;
       replyMessage?: Message;
-      relationship: Partial<Relationship>;
       audio: string;
       image?: string;
-      likeUserIds?: string[];
-      loveUserIds?: string[];
+      // likeUserIds?: string[];
+      // loveUserIds?: string[];
       text?: string;
-      user: Partial<User>;
-      uuid: string;
+      uuid?: string;
       video?: string;
     }>;
-
-  // type MediaFile = BaseEntity & Partial<{ url: string }>;
-
-  // type DataInterest = BaseEntity &
-  //   Partial<{
-  //     tag?: string;
-  //     title?: string;
-  //   }>;
-
-  // type ConversationMembers = BaseEntity & {
-  //   _userId: string;
-  //   _conversationId: string;
-  //   conversation: Conversation;
-  //   user?: User;
-  // };
-
-  // type Conversation = BaseEntity &
-  //   Partial<{
-  //     _id: string;
-  //     members: User[];
-  //   }>;
-
-  // type Message = BaseEntity &
-  //   Partial<{
-  //     _conversationId: string;
-  //     text?: string;
-  //     conversation?: Conversation;
-  //   }>;
 }

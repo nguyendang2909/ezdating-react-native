@@ -117,6 +117,7 @@ export function* sendMessage(data: PayloadAction<FormParams.SendMessage>) {
       id: user._id as string,
       avatar: user.avatar as string,
     },
+    sent: false,
   };
 
   yield put(conversationActions.sendMsg(message));

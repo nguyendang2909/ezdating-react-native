@@ -1,22 +1,25 @@
 import { useNavigation } from '@react-navigation/native';
+import { UserStatuses } from 'app/constants';
 import { useAppSelector } from 'app/hooks';
 import React, { useEffect } from 'react';
 
 export const MainScreen: React.FC = () => {
-  const haveBasicInfo = useAppSelector(
-    state => state.app.profile.haveBasicInfo,
-  );
+  const userStatus = useAppSelector(state => state.app.profile.status);
+
+  console.log(userStatus);
 
   const navigation = useNavigation();
 
   useEffect(() => {
-    if (haveBasicInfo) {
-      navigation.navigate('Home', {
-        screen: 'DatingSwipe',
-      });
-    } else {
-      navigation.navigate('UpdateProfileBasicInfo');
+    if (userStatus) {
+      if (userStatus !== UserStatuses.registered) {
+        navigation.navigate('Home', {
+          screen: 'DatingSwipe',
+        });
+      } else {
+        navigation.navigate('UpdateProfileBasicInfo');
+      }
     }
-  }, [haveBasicInfo]);
+  }, [userStatus]);
   return <></>;
 };
