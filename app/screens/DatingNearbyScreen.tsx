@@ -20,7 +20,7 @@ export const DatingNearbyScreen: FC = () => {
 
   return (
     <>
-      <StatusBar barStyle="light-content" />
+      <StatusBar barStyle="default" />
       <Header titleTx="Nearby" />
       <DatingNearby />
     </>

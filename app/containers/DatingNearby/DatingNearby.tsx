@@ -32,7 +32,7 @@ export const DatingNearby: React.FC = () => {
         renderItem={({ item }) => {
           const handlePressCard = () => {
             navigator.navigate('ProfileNearby', {
-              user: item,
+              userId: item._id,
             });
           };
           return (
@@ -41,8 +41,13 @@ export const DatingNearby: React.FC = () => {
                 <Pressable onPress={handlePressCard}>
                   <Box width="100%" style={aspectRatio(1)}>
                     <Avatar
-                      style={{ width: '100%', height: '100%' }}
-                      source={{ uri: item.avatarFile?.location }}
+                      width="100%"
+                      height="100%"
+                      source={{
+                        uri: item.mediaFiles?.length
+                          ? item.mediaFiles[0].location
+                          : '',
+                      }}
                     ></Avatar>
                   </Box>
                   <Box>

@@ -1,8 +1,155 @@
+import { useNavigation } from '@react-navigation/native';
+import { MaterialIcons } from 'app/components/Icon/Lib';
+import { useAppSelector } from 'app/hooks';
 import { AppStackScreenProps } from 'app/navigators';
-import React from 'react';
+import { aspectRatio } from 'app/styles';
+import _ from 'lodash';
+import {
+  Box,
+  CloseIcon,
+  HStack,
+  Icon,
+  IconButton,
+  Image,
+  Text,
+  View,
+} from 'native-base';
+import React, { createRef, useState } from 'react';
+import { Dimensions } from 'react-native';
+import Carousel from 'react-native-reanimated-carousel';
 
 type FCProps = AppStackScreenProps<'ProfileNearby'>;
 
 export const ProfileNearbyScreen: React.FC<FCProps> = props => {
-  return <></>;
+  const { userId } = props.route.params;
+  const user = useAppSelector(state => {
+    return state.user.nearby?.data?.find(item => item._id === userId);
+  });
+  const width = Dimensions.get('window').width;
+  const { goBack } = useNavigation();
+
+  const [activeSlide, setActiveSlide] = useState<number>(0);
+
+  const ref = createRef<any>();
+
+  const photoLength = user?.mediaFiles?.length;
+
+  const dotWidth = photoLength ? (width - 48) / photoLength : 0;
+
+  return (
+    <>
+      <Box style={aspectRatio(640 / 860)}>
+        <Box position="absolute" zIndex={100} right={4} top={4}>
+          <Box safeAreaTop />
+          <Box zIndex={100}>
+            <IconButton icon={<CloseIcon />} onPress={goBack}></IconButton>
+          </Box>
+        </Box>
+        <Box
+          position="absolute"
+          bottom={0}
+          zIndex={100}
+          alignItems="center"
+          justifyContent="center"
+          px={4}
+          m={0}
+        >
+          {/* <Pagination
+            dotsLength={user?.mediaFiles?.length || 0}
+            activeDotIndex={activeSlide}
+            // containerStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.75)' }}
+            dotStyle={{
+              width: dotWidth,
+              height: 5,
+              // borderRadius: 5,
+              backgroundColor: 'rgba(255, 255, 255, 0.92)',
+            }}
+            inactiveDotStyle={{
+              width: dotWidth,
+              height: 5,
+              // borderRadius: 5,
+              // backgroundColor: 'rgba(255, 255, 255, 0.92)',
+            }}
+            inactiveDotOpacity={0.4}
+            inactiveDotScale={1}
+          /> */}
+        </Box>
+        <Carousel
+          loop={false}
+          width={width}
+          height={(width / 640) * 860}
+          data={user?.mediaFiles || []}
+          onSnapToItem={index => console.log('current index:', index)}
+          renderItem={({ item, index }) => (
+            <View justifyContent="center">
+              <Image
+                height="100%"
+                width="100%"
+                source={{
+                  uri: item.location,
+                }}
+                alt="profile"
+              ></Image>
+            </View>
+          )}
+        />
+      </Box>
+      <Box flex={1} mt={4}>
+        <Box px={4}>
+          <HStack space={3}>
+            <Box>
+              <Text fontSize={28} fontWeight="bold">
+                {user?.nickname}
+              </Text>
+            </Box>
+            <Box>
+              <Text fontSize={28}>{user?.age}</Text>
+            </Box>
+          </HStack>
+        </Box>
+
+        <Box mt={2} px={4}>
+          <Box>
+            {/* <HStack alignItems="center" space={2}>
+              <Box>
+                <Icon as={FontAwesome} name="home" size={6} />
+              </Box>
+              <Box>
+                <Text fontSize={20}>{user?.nickname}</Text>
+              </Box>
+            </HStack> */}
+            {_.isNumber(user?.distance) && (
+              <HStack alignItems="center" space={2}>
+                <Box>
+                  <Icon as={MaterialIcons} name="location-on" size={6} />
+                </Box>
+                <Box>
+                  <Text fontSize={20}>
+                    {Math.round((user?.distance || 0) / 1000)} km away
+                  </Text>
+                </Box>
+              </HStack>
+            )}
+          </Box>
+        </Box>
+
+        {!!user?.lookingFor && (
+          <Box mt={2} px={4}>
+            <Box>
+              <HStack>
+                <Box>
+                  <Text>Looking for</Text>
+                </Box>
+                <Box>{user?.lookingFor}</Box>
+              </HStack>
+            </Box>
+          </Box>
+        )}
+
+        <Box></Box>
+      </Box>
+
+      <Box safeAreaBottom />
+    </>
+  );
 };

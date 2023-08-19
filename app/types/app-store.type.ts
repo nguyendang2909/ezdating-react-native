@@ -11,9 +11,9 @@ export declare namespace AppStore {
   type AppState = {
     accessToken?: string;
     refreshToken?: string;
-    isLogged: boolean;
-    profile: Entity.User;
-    osPermissions: {
+    isLogged?: boolean;
+    profile?: Entity.User;
+    osPermissions?: {
       locationService?: AuthorizationResult;
     };
   };
@@ -40,9 +40,9 @@ export declare namespace AppStore {
   }>;
 
   type UserState = {
-    data: Record<string, Entity.User>;
-    nearby: {
-      data: Entity.User[];
+    data?: Record<string, Entity.User>;
+    nearby?: {
+      data?: Entity.User[];
     };
   };
 

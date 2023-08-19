@@ -26,7 +26,6 @@ import {
   ReactNavDarkTheme,
   ReactNavDefaultTheme,
 } from 'app/theme/default-theme/react-navigation-theme';
-import { Entity } from 'app/types/entity.type';
 import React from 'react';
 import { useColorScheme } from 'react-native';
 
@@ -58,7 +57,7 @@ export type AppStackParamList = {
   };
   ProfileEdit: undefined;
   ProfileNearby: {
-    user: Entity.User;
+    userId: string;
   };
   ProfileSetting: undefined;
   SelectLookingFor: undefined;
@@ -132,7 +131,7 @@ const AppStack = () => {
             name="ProfileNearby"
             component={ProfileNearbyScreen}
             options={{
-              presentation: 'modal',
+              presentation: 'containedModal',
             }}
           ></Stack.Screen>
           <Stack.Screen

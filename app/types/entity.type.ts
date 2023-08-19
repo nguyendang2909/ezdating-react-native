@@ -30,6 +30,7 @@ export declare namespace Entity {
       age?: number;
       birthday?: string;
       coins?: number;
+      distance?: number;
       educationLevel: UserEducationLevel;
       email: string;
       // company?: string;

@@ -9,7 +9,7 @@ const initialState: AppStore.AppState = {
   refreshToken: undefined,
   isLogged: false,
   profile: {
-    id: '',
+    _id: '',
   },
   osPermissions: {},
 };
@@ -48,7 +48,13 @@ export const appSlice = createSlice({
       state,
       action: PayloadAction<AuthorizationResult>,
     ) => {
-      state.osPermissions.locationService = action.payload;
+      if (state.osPermissions) {
+        state.osPermissions.locationService = action.payload;
+      } else {
+        state.osPermissions = {
+          locationService: action.payload,
+        };
+      }
     },
   },
   extraReducers: builder => {
