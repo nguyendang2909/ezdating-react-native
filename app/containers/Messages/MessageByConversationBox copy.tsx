@@ -3,13 +3,16 @@ import { useAppSelector } from 'app/hooks';
 import { AppStackParamList } from 'app/navigators';
 import { api } from 'app/services/api';
 import { socketStoreActions } from 'app/store/socket.store';
+import { Entity } from 'app/types/entity.type';
 import { KeyboardAvoidingView } from 'native-base';
 import React from 'react';
 import { Platform } from 'react-native';
 import { GiftedChat, IMessage } from 'react-native-gifted-chat';
 import { useDispatch } from 'react-redux';
 
-type FCProps = {};
+type FCProps = {
+  conversation: Entity.Relationship;
+};
 
 export const MessagesByConversationBox: React.FC<FCProps> = () => {
   const route =

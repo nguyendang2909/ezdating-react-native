@@ -1,6 +1,5 @@
 import { UserGender, UserLookingFor } from 'app/constants';
 import { CountryCode } from 'libphonenumber-js';
-import { IMessage } from 'react-native-gifted-chat';
 import { Image } from 'react-native-image-crop-picker';
 
 import { ApiRequest } from './api-request.type';
@@ -32,8 +31,10 @@ export declare namespace FormParams {
     photos: Image[];
   };
 
-  type SendMessage = Omit<IMessage, 'createdAt'> & {
-    relationshipId: string;
-    createdAt: string;
+  type SendMessage = {
+    // relationshipId: string;
+    text: string;
+    // uuid: string;
+    // replyMessageId?: string;
   };
 }

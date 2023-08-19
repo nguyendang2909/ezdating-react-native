@@ -137,7 +137,17 @@ export const api = createApi({
     }),
 
     // Relationships
-    getConversations: builder.query<
+    getNextConversations: builder.query<
+      ApiResponse.FetchPaginationData<Entity.Relationship[]>,
+      { cursor?: string }
+    >({
+      query: params => ({
+        url: API_URL.conversations,
+        method: 'GET',
+        params,
+      }),
+    }),
+    getPreviousConversations: builder.query<
       ApiResponse.FetchPaginationData<Entity.Relationship[]>,
       { cursor?: string }
     >({
@@ -149,7 +159,7 @@ export const api = createApi({
     }),
 
     // Messages
-    getMessages: builder.query<
+    getNextMessages: builder.query<
       ApiResponse.FetchPaginationData<
         Entity.Message[],
         { conversationId: string }

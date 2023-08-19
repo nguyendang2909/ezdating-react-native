@@ -1,6 +1,5 @@
 import { store } from 'app/store';
 import { AuthorizationResult } from 'react-native-geolocation-service';
-import { IMessage } from 'react-native-gifted-chat';
 
 import { ApiResponse } from './api-response.type';
 import { Entity } from './entity.type';
@@ -18,16 +17,13 @@ export declare namespace AppStore {
     };
   };
 
-  type MessageState = Omit<IMessage, 'createdAt'> &
-    Omit<Entity.Message, 'id'> & { id?: string };
-
   type ConversationState = {
-    data: Record<string, Entity.Relationship>;
+    data: Entity.Relationship[];
     messages: Record<
       string,
       {
         pagination?: ApiResponse.Pagination;
-        data: MessageState[];
+        data: Entity.Message[];
       }
     >;
     pagination: ApiResponse.Pagination;

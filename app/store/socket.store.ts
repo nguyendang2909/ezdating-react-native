@@ -2,9 +2,9 @@ import 'react-native-get-random-values';
 
 import { PayloadAction } from '@reduxjs/toolkit';
 import Config from 'app/config';
-import { AppStore } from 'app/types/app-store.type';
+import { Constants } from 'app/constants';
 import { Entity } from 'app/types/entity.type';
-import { FormParams } from 'app/types/form-params.type';
+import { SocketRequest } from 'app/types/socket-request.type';
 import { eventChannel } from 'redux-saga';
 import { ActionPattern, call, put, select, take } from 'redux-saga/effects';
 import { io, Socket } from 'socket.io-client';
@@ -36,9 +36,13 @@ export function* initializeWebSocket() {
     while (true) {
       try {
         const { type, data } = yield take(socketChannel);
+
         switch (type) {
-          case 'msg':
+          case Constants.socketEvents.toClient.newMessage:
             yield put(conversationActions.receiveMsg(data));
+            break;
+          case Constants.socketEvents.toClient.updateMessage:
+            yield put(conversationActions.updateMsg(data));
             break;
           default:
             break;
@@ -59,9 +63,22 @@ function createSocketChannel() {
     socket.on('error', msg => {
       console.log('====error====', msg);
     });
-    socket.on('msg', (msg: Entity.Message) => {
-      emit({ type: 'msg', data: msg });
-    });
+    socket.on(
+      Constants.socketEvents.toClient.newMessage,
+      (msg: Entity.Message) => {
+        emit({ type: Constants.socketEvents.toClient.newMessage, data: msg });
+      },
+    );
+    socket.on(
+      Constants.socketEvents.toClient.updateMessage,
+      (msg: Entity.Message) => {
+        emit({
+          type: Constants.socketEvents.toClient.updateMessage,
+          data: msg,
+        });
+      },
+    );
+
     const unsubscribe = () => {
       socket.off('msg');
     };
@@ -80,7 +97,7 @@ export const socketStoreActions = {
   initializeWebSocket: () => ({
     type: socketActionTypes.INITIALIZE_WEB_SOCKET,
   }),
-  sendMessage: (payload: FormParams.SendMessage) => ({
+  sendMessage: (payload: SocketRequest.SendMessage) => ({
     type: socketActionTypes.SEND_MESSAGE,
     payload,
   }),
@@ -91,34 +108,22 @@ export const socketActionTypes = {
   SEND_MESSAGE: 'SEND_MESSAGE',
 };
 
-export function* sendMessage(data: PayloadAction<FormParams.SendMessage>) {
-  const msg = data.payload;
+export function* sendMessage(data: PayloadAction<SocketRequest.SendMessage>) {
+  const { payload } = data;
 
   if (socket) {
-    const socketMessage = {
-      relationshipId: msg.relationshipId,
-      text: msg.text,
-      uuid: msg._id,
-    };
-    socket.emit('sendMsg', socketMessage);
+    socket.emit(Constants.socketEvents.toServer.sendMessage, payload);
   }
 
-  const { relationshipId, replyMessageId, user, createdAt, ...msgProps } = msg;
+  const currentUserId: string = yield select(state => state.app.profile._id);
 
-  const message: AppStore.MessageState = {
-    ...msg,
-    createdAt: createdAt.toString(),
-    relationship: {
-      id: relationshipId,
-    },
-    uuid: msgProps._id as string,
-    user: {
-      _id: user._id,
-      id: user._id as string,
-      avatar: user.avatar as string,
-    },
-    sent: false,
-  };
-
-  yield put(conversationActions.sendMsg(message));
+  yield put(
+    conversationActions.sendMsg({
+      _id: payload.uuid,
+      text: payload.text,
+      _relationshipId: payload.relationshipId,
+      uuid: payload.uuid,
+      _userId: currentUserId,
+    }),
+  );
 }

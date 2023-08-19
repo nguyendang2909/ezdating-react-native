@@ -26,6 +26,7 @@ import {
   ReactNavDarkTheme,
   ReactNavDefaultTheme,
 } from 'app/theme/default-theme/react-navigation-theme';
+import { Entity } from 'app/types/entity.type';
 import React from 'react';
 import { useColorScheme } from 'react-native';
 
@@ -53,7 +54,7 @@ export type AppStackParamList = {
   LikedYou: undefined;
   Main: undefined;
   MessagesByConversation: {
-    conversationId: string;
+    conversation: Entity.Relationship;
   };
   ProfileEdit: undefined;
   ProfileNearby: {
