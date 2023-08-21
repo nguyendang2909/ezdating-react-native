@@ -22,10 +22,7 @@ export const conversationSlice = createSlice({
       const { _id, ...data } = action.payload;
 
       if (!_id) {
-        return;
       }
-
-      const newConversations = conversation;
     },
     receiveMsg: (state, action: PayloadAction<Entity.Message>) => {
       const { payload } = action;
@@ -114,7 +111,7 @@ export const conversationSlice = createSlice({
           conversationId,
         } = action.payload;
 
-        if (!messagesData?.length || !pagination || !conversationId) {
+        if (!messagesData || !pagination || !conversationId) {
           return;
         }
 

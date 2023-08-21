@@ -11,7 +11,7 @@ export declare namespace AppStore {
     accessToken?: string;
     refreshToken?: string;
     isLogged?: boolean;
-    profile?: Entity.User;
+    profile: Entity.User;
     osPermissions?: {
       locationService?: AuthorizationResult;
     };

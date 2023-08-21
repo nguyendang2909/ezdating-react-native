@@ -151,6 +151,7 @@ const en = {
   'Your profile': 'Your profile',
   EZDating: 'EZDating',
   // s
+  Save: 'Save',
   Settings: 'Settings',
   // u
   'Update w failed!': 'Update {{w}} failed!',

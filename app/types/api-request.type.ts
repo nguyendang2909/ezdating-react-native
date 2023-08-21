@@ -7,7 +7,8 @@ export declare namespace ApiRequest {
   };
 
   type Pagination = {
-    cursor?: string;
+    after?: string;
+    before?: string;
   };
 
   type FindMany<T> = Pagination & T;

@@ -8,6 +8,7 @@ import {
   NativeStackScreenProps,
 } from '@react-navigation/native-stack';
 import { useAppSelector } from 'app/hooks';
+import { EditNicknameScreen } from 'app/screens/EditNicknameScreen';
 import { LikedYouScreen } from 'app/screens/LikedYouScreen';
 import { MainScreen } from 'app/screens/MainScreen';
 import { MessagesByConversationScreen } from 'app/screens/MessagesByConversationScreen';
@@ -48,6 +49,7 @@ import { navigationRef, useBackButtonHandler } from './navigationUtilities';
  *   https://reactnavigation.org/docs/typescript/#organizing-types
  */
 export type AppStackParamList = {
+  EditNickname: undefined;
   UpdateProfileBasicInfo: undefined;
   UpdateProfilePhotosScreen: undefined;
   Home: NavigatorScreenParams<HomeTabParamList>;
@@ -106,6 +108,8 @@ const AppStack = () => {
         <>
           <Stack.Screen name="Main" component={MainScreen} />
           <Stack.Screen name="Home" component={HomeNavigator} />
+          <Stack.Screen name="EditNickname" component={EditNicknameScreen} />
+
           <Stack.Screen
             name="LikedYou"
             component={LikedYouScreen}

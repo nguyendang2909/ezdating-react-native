@@ -2,20 +2,43 @@ import { RouteProp, useRoute } from '@react-navigation/native';
 import { useAppSelector } from 'app/hooks';
 import { AppStackParamList } from 'app/navigators';
 import { api } from 'app/services/api';
-import { Box, FlatList, HStack, Text } from 'native-base';
-import React from 'react';
+import { Entity } from 'app/types/entity.type';
+import { Box, HStack, Text, View } from 'native-base';
+import React, { createRef, useState } from 'react';
+import { ActivityIndicator, FlatList, RefreshControl } from 'react-native';
 
 export const MessagesScrollView = () => {
   const route =
     useRoute<RouteProp<AppStackParamList, 'MessagesByConversation'>>();
 
+  const flatListRef = createRef<typeof FlatList<Entity.Message>>();
+
   const { conversation } = route.params;
 
   const conversationId = conversation?._id;
 
-  const { refetch } = api.useGetNextMessagesQuery(
-    { conversationId },
-    { skip: !conversationId },
+  const reduxCursorAfter = useAppSelector(
+    state =>
+      state.conversation.messages[conversationId]?.pagination?.cursors?.after,
+  );
+
+  const [cursorAfter, setCursorAfter] = useState<string | null>(null);
+
+  const { refetch, isFetching } = api.useGetNextMessagesQuery(
+    {
+      conversationId,
+      ...(cursorAfter
+        ? {
+            after: cursorAfter,
+          }
+        : {}),
+    },
+    {
+      skip: !conversationId,
+      // refetchOnMountOrArgChange: false,
+      // refetchOnFocus: false,
+      // refetchOnReconnect: false,
+    },
   );
 
   if (!conversationId) {
@@ -29,11 +52,45 @@ export const MessagesScrollView = () => {
       state => state.conversation.messages[conversationId]?.data,
     ) || [];
 
+  const onRefresh = () => {
+    console.log(reduxCursorAfter);
+    if (reduxCursorAfter) {
+      setCursorAfter(reduxCursorAfter);
+    }
+  };
+
+  const renderFooter = () => {
+    if (!isFetching) return null;
+
+    return (
+      <View
+        flexDirection="row"
+        justifyContent="center"
+        alignItems="center"
+        pt={2.5}
+      >
+        <ActivityIndicator size="small" color="#888888" />
+      </View>
+    );
+  };
+
   return (
     <FlatList
-      flex={1}
+      // ref={flatListRef}
+      // onLayout={() => {
+      //   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //   // @ts-ignore
+      //   flatListRef.current?.scrollToEnd({ animated: true });
+      // }}
+      refreshControl={
+        <RefreshControl
+          refreshing={isFetching}
+          onRefresh={onRefresh}
+        ></RefreshControl>
+      }
       inverted
       data={messages}
+      keyExtractor={item => item._id}
       renderItem={({ item, index }) => {
         const isMe = !item._userId || item._userId === currentUserId;
 
