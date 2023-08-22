@@ -15,9 +15,9 @@ export const SendMessageBox: React.FC = () => {
 
   const { conversation } = route.params;
 
-  const conversationId = conversation?._id;
+  const matchId = conversation?._id;
 
-  if (!conversationId) {
+  if (!matchId) {
     return <></>;
   }
 
@@ -36,7 +36,7 @@ export const SendMessageBox: React.FC = () => {
         socketStoreActions.sendMessage({
           ...values,
           uuid: uuidV4(),
-          relationshipId: conversationId,
+          matchId,
         }),
       );
     },

@@ -18,7 +18,7 @@ export declare namespace AppStore {
   };
 
   type ConversationState = {
-    data: Entity.Relationship[];
+    data: Entity.Match[];
     messages: Record<
       string,
       {
@@ -29,7 +29,7 @@ export declare namespace AppStore {
     pagination: ApiResponse.Pagination;
   };
 
-  type Conversations = { data: Entity.Relationship[] };
+  type Conversations = { data: Entity.Match[] };
 
   type Messages = Partial<{
     [T: string]: Entity.Message[];

@@ -136,9 +136,9 @@ export const api = createApi({
       }),
     }),
 
-    // Relationships
+    // Matches
     getNextConversations: builder.query<
-      ApiResponse.FetchPaginationData<Entity.Relationship[]>,
+      ApiResponse.FetchPaginationData<Entity.Match[]>,
       { cursor?: string }
     >({
       query: params => ({
@@ -148,7 +148,7 @@ export const api = createApi({
       }),
     }),
     getPreviousConversations: builder.query<
-      ApiResponse.FetchPaginationData<Entity.Relationship[]>,
+      ApiResponse.FetchPaginationData<Entity.Match[]>,
       { cursor?: string }
     >({
       query: params => ({
@@ -160,32 +160,17 @@ export const api = createApi({
 
     // Messages
     getNextMessages: builder.query<
-      ApiResponse.FetchPaginationData<
-        Entity.Message[],
-        { conversationId: string }
-      >,
+      ApiResponse.FetchPaginationData<Entity.Message[], { _matchId: string }>,
       ApiRequest.FindManyMessages
     >({
-      query: ({ conversationId, ...params }) => ({
-        url: `${API_URL.conversations}/${conversationId}/messages`,
+      query: params => ({
+        url: `${API_URL.messages}`,
         method: 'GET',
         params,
       }),
     }),
 
     // Photos
-    // getUploadFiles: builder.query<ApiResponse.UploadedFileListData, void>({
-    //   query: () => ({
-    //     url: API_URL.myProfile,
-    //     method: 'GET',
-    //     params: {
-    //       f: {
-    //         id: true,
-
-    //       },
-    //     },
-    //   }),
-    // }),
     uploadPhoto: builder.mutation<ApiResponse.Logged, ApiRequest.UploadPhoto>({
       query: body => {
         const { file, isAvatar } = body;

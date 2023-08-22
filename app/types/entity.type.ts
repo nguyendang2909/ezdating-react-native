@@ -1,6 +1,5 @@
 import {
   MediaFileType,
-  RelationshipUserStatus,
   UserEducationLevel,
   UserGender,
   UserLookingFor,
@@ -61,28 +60,22 @@ export declare namespace Entity {
       // workout: EWorkout;
     }>;
 
-  type Relationship = BaseEntity &
+  type Match = BaseEntity &
     Partial<{
       _userOneId: string;
       _userTwoId: string;
       _lastMessageUserId: string;
-      canUserOneChat: string;
-      canUserTwoChat: string;
       lastMessage: string;
       lastMessageAt: string;
       userOneRead: boolean;
-      userOneStatus: RelationshipUserStatus;
       userTwoRead: boolean;
-      userTwoStatus: RelationshipUserStatus;
-      statusAt: string;
-      userOneStatusAt: string;
-      userTwoStatusAt: string;
+      matchedAt: string;
       targetUser: User;
     }>;
 
   type Message = BaseEntity &
     Partial<{
-      _relationshipId: string;
+      _matchId: string;
       _replyMessageId?: string;
       _userId: string;
       replyMessage?: Message;

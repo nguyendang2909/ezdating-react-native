@@ -1,6 +1,6 @@
 export declare namespace SocketRequest {
   type SendMessage = {
-    relationshipId: string;
+    matchId: string;
     text: string;
     uuid: string;
     replyMessageId?: string;

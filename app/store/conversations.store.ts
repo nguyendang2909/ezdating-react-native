@@ -18,25 +18,37 @@ export const conversationSlice = createSlice({
   name: 'conversation',
   initialState,
   reducers: {
-    updateConversation: (state, action: PayloadAction<Entity.Relationship>) => {
-      const { _id, ...data } = action.payload;
+    updateConversationByMessage: (
+      state,
+      action: PayloadAction<Entity.Message>,
+    ) => {
+      const message = action.payload;
 
-      if (!_id) {
-      }
+      state.data = state.data.map(item => {
+        if (message._matchId === item._id) {
+          return {
+            ...item,
+            lastMessage: message.text,
+            _lastMessageUserId: message._userId,
+            lastMessageAt: message._userId,
+          };
+        }
+        return item;
+      });
     },
     receiveMsg: (state, action: PayloadAction<Entity.Message>) => {
       const { payload } = action;
-      const relationshipId = payload._relationshipId;
+      const matchId = payload._matchId;
 
-      if (relationshipId) {
-        const oldMessages = state.messages[relationshipId];
+      if (matchId) {
+        const oldMessages = state.messages[matchId];
 
         if (oldMessages) {
-          state.messages[relationshipId].data = [payload].concat(
-            state.messages[relationshipId].data || [],
+          state.messages[matchId].data = [payload].concat(
+            state.messages[matchId].data || [],
           );
         } else {
-          state.messages[relationshipId] = {
+          state.messages[matchId] = {
             data: [payload],
           };
         }
@@ -44,20 +56,20 @@ export const conversationSlice = createSlice({
     },
     sendMsg: (state, action: PayloadAction<Entity.Message>) => {
       const { payload } = action;
-      const relationshipId = payload._relationshipId;
+      const matchId = payload._matchId;
 
-      if (!relationshipId) {
+      if (!matchId) {
         return;
       }
 
-      const messages = state.messages[relationshipId];
+      const messages = state.messages[matchId];
 
       if (messages) {
-        state.messages[relationshipId].data = [payload].concat(
-          state.messages[relationshipId].data || [],
+        state.messages[matchId].data = [payload].concat(
+          state.messages[matchId].data || [],
         );
       } else {
-        state.messages[relationshipId] = {
+        state.messages[matchId] = {
           data: [payload],
         };
       }
@@ -65,22 +77,22 @@ export const conversationSlice = createSlice({
     updateMsg: (state, action: PayloadAction<Entity.Message>) => {
       const { payload } = action;
 
-      const { uuid, _relationshipId } = payload;
+      const { uuid, _matchId } = payload;
 
-      if (!_relationshipId || !uuid) {
+      if (!_matchId || !uuid) {
         return;
       }
 
-      if (state.messages[_relationshipId]) {
-        const messagesLength = state.messages[_relationshipId].data.length;
+      if (state.messages[_matchId]) {
+        const messagesLength = state.messages[_matchId].data.length;
 
         for (let i = 0; i < messagesLength; i += 1) {
-          if (uuid === state.messages[_relationshipId].data[i].uuid) {
-            state.messages[_relationshipId].data[i] = payload;
+          if (uuid === state.messages[_matchId].data[i].uuid) {
+            state.messages[_matchId].data[i] = payload;
           }
         }
       } else {
-        state.messages[_relationshipId] = {
+        state.messages[_matchId] = {
           data: [payload],
         };
       }
@@ -105,25 +117,21 @@ export const conversationSlice = createSlice({
     builder.addMatcher(
       api.endpoints.getNextMessages.matchFulfilled,
       (state, action) => {
-        const {
-          data: messagesData,
-          pagination,
-          conversationId,
-        } = action.payload;
+        const { data: messagesData, pagination, _matchId } = action.payload;
 
-        if (!messagesData || !pagination || !conversationId) {
+        if (!messagesData || !pagination || !_matchId) {
           return;
         }
 
-        const oldConversation = state.messages[conversationId];
+        const oldConversation = state.messages[_matchId];
 
         if (!oldConversation) {
-          state.messages[conversationId] = {
+          state.messages[_matchId] = {
             pagination,
             data: messagesData,
           };
         } else {
-          state.messages[conversationId] = {
+          state.messages[_matchId] = {
             pagination,
             data: (oldConversation.data || []).concat(messagesData),
           };

@@ -43,6 +43,7 @@ export function* initializeWebSocket() {
             break;
           case Constants.socketEvents.toClient.updateMessage:
             yield put(conversationActions.updateMsg(data));
+            yield put(conversationActions.updateConversationByMessage(data));
             break;
           default:
             break;
@@ -121,7 +122,7 @@ export function* sendMessage(data: PayloadAction<SocketRequest.SendMessage>) {
     conversationActions.sendMsg({
       _id: payload.uuid,
       text: payload.text,
-      _relationshipId: payload.relationshipId,
+      _matchId: payload.matchId,
       uuid: payload.uuid,
       _userId: currentUserId,
     }),

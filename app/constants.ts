@@ -140,16 +140,6 @@ export const UserJobs = {
 
 export type UserJob = (typeof UserJobs)[keyof typeof UserJobs];
 
-export const RelationshipUserStatuses = {
-  like: 1,
-  unlike: 2,
-  cancel: 3,
-  viewed: 4,
-} as const;
-
-export type RelationshipUserStatus =
-  (typeof RelationshipUserStatuses)[keyof typeof RelationshipUserStatuses];
-
 export const MediaFileTypes = {
   photo: 1,
   video: 2,
@@ -157,14 +147,6 @@ export const MediaFileTypes = {
 
 export type MediaFileType =
   (typeof MediaFileTypes)[keyof typeof MediaFileTypes];
-
-// export const UploadFileShares = {
-//   public: 'public',
-//   private: 'private',
-// };
-
-// export type UploadFileShare =
-//   (typeof UploadFileShares)[keyof typeof UploadFileShares];
 
 export const WeeklyCoins = [10, 20, 40, 70, 110, 160, 220];
 

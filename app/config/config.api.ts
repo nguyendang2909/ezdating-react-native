@@ -3,6 +3,9 @@ export const API_URL = {
   // loginByEmail: '/auth/login/email',
   // loginByFacebook: '/auth/login/facebook',
   // loginByGoogle: '/auth/login/google',
+  likes: '/likes',
+  matches: '/matches',
+  messages: '/messages',
   myProfile: '/profile',
   myProfileBasicInfo: '/profile/basic-info',
   photos: '/media-files/photos',
@@ -11,4 +14,5 @@ export const API_URL = {
   mediaFiles: '/media-files',
   users: '/users',
   usersNearby: '/users/nearby',
+  views: '/views',
 };

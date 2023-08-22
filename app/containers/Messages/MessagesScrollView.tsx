@@ -15,18 +15,17 @@ export const MessagesScrollView = () => {
 
   const { conversation } = route.params;
 
-  const conversationId = conversation?._id;
+  const matchId = conversation?._id;
 
   const reduxCursorAfter = useAppSelector(
-    state =>
-      state.conversation.messages[conversationId]?.pagination?.cursors?.after,
+    state => state.conversation.messages[matchId]?.pagination?.cursors?.after,
   );
 
   const [cursorAfter, setCursorAfter] = useState<string | null>(null);
 
   const { refetch, isFetching } = api.useGetNextMessagesQuery(
     {
-      conversationId,
+      matchId,
       ...(cursorAfter
         ? {
             after: cursorAfter,
@@ -34,23 +33,21 @@ export const MessagesScrollView = () => {
         : {}),
     },
     {
-      skip: !conversationId,
+      skip: !matchId,
       // refetchOnMountOrArgChange: false,
       // refetchOnFocus: false,
       // refetchOnReconnect: false,
     },
   );
 
-  if (!conversationId) {
+  if (!matchId) {
     return <></>;
   }
 
   const currentUserId = useAppSelector(state => state.app.profile?._id);
 
   const messages =
-    useAppSelector(
-      state => state.conversation.messages[conversationId]?.data,
-    ) || [];
+    useAppSelector(state => state.conversation.messages[matchId]?.data) || [];
 
   const onRefresh = () => {
     console.log(reduxCursorAfter);

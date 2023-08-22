@@ -82,6 +82,6 @@ export declare namespace ApiRequest {
   type FindAllMessages = {};
 
   type FindManyMessages = FindMany<FindAllMessages> & {
-    conversationId: string;
+    matchId: string;
   };
 }

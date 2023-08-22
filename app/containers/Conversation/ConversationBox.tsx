@@ -5,7 +5,7 @@ import React from 'react';
 import { ListRenderItemInfo } from 'react-native';
 
 type FCProps = {
-  data: ListRenderItemInfo<Entity.Relationship>;
+  data: ListRenderItemInfo<Entity.Match>;
 };
 
 export const ConversationBox: React.FC<FCProps> = ({ data }) => {
