@@ -4,13 +4,15 @@ import { useAppSelector } from 'app/hooks';
 import React from 'react';
 
 export const ProfileEditRelationshipStatus: React.FC = () => {
-  const value = useAppSelector(state => state.app.profile.lookingFor);
+  const value = useAppSelector(state => state.app.profile.relationshipGoal);
   return (
     <>
       <MenuItem
         titleTx="Relationship status"
         leftIcon={<MaterialIcons name="person" />}
-        {...(value ? { valueTx: `constants.userLookingFors.${value}` } : {})}
+        {...(value
+          ? { valueTx: `constants.userRelationshipGoals.${value}` }
+          : {})}
       />
     </>
   );

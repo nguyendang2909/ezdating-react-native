@@ -15,7 +15,7 @@ import { MessagesByConversationScreen } from 'app/screens/MessagesByConversation
 import { ProfileEditScreen } from 'app/screens/ProfileEditScreen';
 import { ProfileNearbyScreen } from 'app/screens/ProfileNearbyScreen';
 import { ProfileSettingScreen } from 'app/screens/ProfileSettingScreen';
-import { SelectLookingForScreen } from 'app/screens/SelectLookingForScreen';
+import { SelectRelationshipScreen } from 'app/screens/SelectLookingForScreen';
 import { SignInScreen } from 'app/screens/SignInScreen';
 import { SignInWithOtpPhoneNumberScreen } from 'app/screens/SignInWithOtpPhoneNumberScreen';
 import { SignInWithPhoneNumberScreen } from 'app/screens/SignInWithPhoneNumberScreen';
@@ -63,7 +63,7 @@ export type AppStackParamList = {
     userId: string;
   };
   ProfileSetting: undefined;
-  SelectLookingFor: undefined;
+  SelectRelationshipGoal: undefined;
   SignIn: undefined;
   SignInWithOtpPhoneNumber: {
     otpConfirm?: FirebaseAuthTypes.ConfirmationResult;
@@ -151,8 +151,8 @@ const AppStack = () => {
             component={MessagesByConversationScreen}
           />
           <Stack.Screen
-            name="SelectLookingFor"
-            component={SelectLookingForScreen}
+            name="SelectRelationshipGoal"
+            component={SelectRelationshipScreen}
           ></Stack.Screen>
         </>
       ) : (

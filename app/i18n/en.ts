@@ -18,7 +18,7 @@ const en = {
       5: 'Divorced with children',
       6: 'Single mom/dad',
     },
-    userLookingFors: {
+    userRelationshipGoals: {
       1: 'Boy/Girl friend',
       2: 'Make friends',
       3: 'Sex partner',

@@ -1,4 +1,4 @@
-import { UserGender, UserLookingFor } from 'app/constants';
+import { UserGender, UserRelationshipGoal } from 'app/constants';
 import { CountryCode } from 'libphonenumber-js';
 import { Image } from 'react-native-image-crop-picker';
 
@@ -22,7 +22,7 @@ export declare namespace FormParams {
     nickname?: string;
     birthday?: string;
     gender?: UserGender;
-    lookingFor?: UserLookingFor;
+    relationshipGoal?: UserRelationshipGoal;
     introduce?: string;
     haveBasicInfor?: boolean;
   };

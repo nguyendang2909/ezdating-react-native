@@ -28,8 +28,6 @@ export const MenuItem: React.FC<FCProps> = ({
 }) => {
   return (
     <Pressable
-      px={4}
-      py={4}
       {...(onPress
         ? {
             onPress: () => {
@@ -38,33 +36,37 @@ export const MenuItem: React.FC<FCProps> = ({
           }
         : {})}
     >
-      <View>
-        <HStack alignItems="center">
-          {!!leftIcon && (
-            <View mr={2}>
-              <Icon as={leftIcon} />
-            </View>
-          )}
+      {({ isPressed }) => {
+        return (
+          <View px={4} py={4} bg={isPressed ? 'coolGray.200' : undefined}>
+            <HStack alignItems="center">
+              {!!leftIcon && (
+                <View mr={2}>
+                  <Icon as={leftIcon} />
+                </View>
+              )}
 
-          {(!!title || !!titleTx) && (
-            <View>
-              <Text>{titleTx ? translate(titleTx) : title}</Text>
-            </View>
-          )}
+              {(!!title || !!titleTx) && (
+                <View>
+                  <Text>{titleTx ? translate(titleTx) : title}</Text>
+                </View>
+              )}
 
-          <View flex={1}></View>
+              <View flex={1}></View>
 
-          {(!!value || !!valueTx) && (
-            <View mr={2}>
-              <Text>{valueTx ? translate(valueTx) : value}</Text>
-            </View>
-          )}
+              {(!!value || !!valueTx) && (
+                <View mr={2}>
+                  <Text>{valueTx ? translate(valueTx) : value}</Text>
+                </View>
+              )}
 
-          <View>
-            <ChevronRightIcon />
+              <View>
+                <ChevronRightIcon />
+              </View>
+            </HStack>
           </View>
-        </HStack>
-      </View>
+        );
+      }}
     </Pressable>
   );
 };

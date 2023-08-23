@@ -1,17 +1,3 @@
-// export enum EUserLookingFor {
-//   lover = 'lover',
-//   friend = 'friend',
-//   partner = 'partner',
-//   marriage = 'marriage',
-//   oneNightStand = 'oneNightStand',
-// }
-
-// export enum ELookingForGender {
-//   male = 'male',
-//   female = 'female',
-//   lgbt = 'lgbt',
-// }
-
 // export enum EEducationLevel {
 //   highSchool = 'highSchool',
 //   bachelor = 'bachelor',
@@ -35,13 +21,6 @@
 // export enum EDrinking {
 //   nondrinker = 'nondrinker',
 //   drinker = 'drinker',
-// }
-
-// export enum ELookingForRelationship {
-//   friend = 'friend',
-//   oneNightStand = 'oneNightStand',
-//   longTermRelationship = 'longTermRelationship',
-//   partner = 'partner',
 // }
 
 // export enum ERelationshipStatus {
@@ -88,7 +67,7 @@ export const UserStatuses = {
 
 export type UserStatus = (typeof UserStatuses)[keyof typeof UserStatuses];
 
-export const UserLookingFors = {
+export const UserRelationshipGoals = {
   boyGirlFriend: 1,
   makeFriends: 2,
   sexPartner: 3,
@@ -96,8 +75,8 @@ export const UserLookingFors = {
   oneNightStand: 5,
 } as const;
 
-export type UserLookingFor =
-  (typeof UserLookingFors)[keyof typeof UserLookingFors];
+export type UserRelationshipGoal =
+  (typeof UserRelationshipGoals)[keyof typeof UserRelationshipGoals];
 
 export const UserRelationshipStatuses = {
   single: 1,

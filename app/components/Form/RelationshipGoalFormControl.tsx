@@ -1,5 +1,5 @@
 import { useActionSheet } from '@expo/react-native-action-sheet';
-import { UserLookingFor, UserLookingFors } from 'app/constants';
+import { UserRelationshipGoal, UserRelationshipGoals } from 'app/constants';
 import { translate } from 'app/i18n';
 import {
   ChevronDownIcon,
@@ -16,10 +16,10 @@ type FCProps = {
   error?: string;
   isRequired?: boolean;
   onChange: (value: number) => void;
-  value?: UserLookingFor;
+  value?: UserRelationshipGoal;
 };
 
-export const LookingForFormControl: React.FC<FCProps> = ({
+export const RelationshipGoalFormControl: React.FC<FCProps> = ({
   error,
   value,
   onChange,
@@ -47,19 +47,19 @@ export const LookingForFormControl: React.FC<FCProps> = ({
       (selectedIndex: number) => {
         switch (selectedIndex) {
           case 0:
-            onChange(UserLookingFors.boyGirlFriend);
+            onChange(UserRelationshipGoals.boyGirlFriend);
             break;
           case 1:
-            onChange(UserLookingFors.getMarried);
+            onChange(UserRelationshipGoals.getMarried);
             break;
           case 2:
-            onChange(UserLookingFors.makeFriends);
+            onChange(UserRelationshipGoals.makeFriends);
             break;
           case 3:
-            onChange(UserLookingFors.oneNightStand);
+            onChange(UserRelationshipGoals.oneNightStand);
             break;
           case 4:
-            onChange(UserLookingFors.sexPartner);
+            onChange(UserRelationshipGoals.sexPartner);
             break;
         }
       },
@@ -80,7 +80,9 @@ export const LookingForFormControl: React.FC<FCProps> = ({
               variant="underlined"
               placeholder={translate('Please select')}
               value={
-                value ? translate(`constants.userLookingFors.${value}`) : ''
+                value
+                  ? translate(`constants.userRelationshipGoals.${value}`)
+                  : ''
               }
               InputRightElement={<ChevronDownIcon />}
               onPressIn={handlePress}

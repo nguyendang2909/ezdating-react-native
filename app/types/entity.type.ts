@@ -2,7 +2,7 @@ import {
   MediaFileType,
   UserEducationLevel,
   UserGender,
-  UserLookingFor,
+  UserRelationshipGoal,
   UserRelationshipStatus,
   UserRole,
   UserStatus,
@@ -39,7 +39,7 @@ export declare namespace Entity {
       height: number;
       introduce: string;
       geolocation: string;
-      lookingFor?: UserLookingFor;
+      relationshipGoal?: UserRelationshipGoal;
       filterGender?: UserGender;
       filterMaxAge?: number;
       filterMaxDistance?: number;
@@ -54,7 +54,6 @@ export declare namespace Entity {
       weight: number;
       status?: UserStatus;
       // jobTitle: string;
-      // lookingForGender: ELookingForGender;
       // school: string;
       // smoking: ESmoking;
       // workout: EWorkout;

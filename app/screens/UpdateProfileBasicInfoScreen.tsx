@@ -1,9 +1,9 @@
 import { useNavigation } from '@react-navigation/native';
 import { BirthDayFormControl } from 'app/components/Form/BirthDayFormControl';
 import { FormControlInput } from 'app/components/Form/FormControlInput';
-import { LookingForFormControl } from 'app/components/Form/LookingForFormControl';
+import { RelationshipGoalFormControl } from 'app/components/Form/RelationshipGoalFormControl';
 import { SelectGenderFormControl } from 'app/components/Form/SelectGenderForm';
-import { UserGender, UserLookingFor } from 'app/constants';
+import { UserGender, UserRelationshipGoal } from 'app/constants';
 import { useAppSelector } from 'app/hooks';
 import { translate } from 'app/i18n';
 import { api } from 'app/services/api';
@@ -26,7 +26,7 @@ export const UpdateProfileBasicInfoScreen: FC = () => {
       birthday: profile?.birthday
         ? moment(profile?.birthday).format('YYYY-MM-DD')
         : undefined,
-      lookingFor: profile?.lookingFor,
+      relationshipGoal: profile?.relationshipGoal,
       introduce: profile?.introduce,
     },
     enableReinitialize: true,
@@ -40,7 +40,7 @@ export const UpdateProfileBasicInfoScreen: FC = () => {
       birthday: Yup.string().required(
         translate('Please enter your w!', { w: translate('birthday') }),
       ),
-      lookingFor: Yup.string().required(
+      relationshipGoal: Yup.string().required(
         translate('Please choose your w!', { w: translate('desire relation') }),
       ),
       introduce: Yup.string().max(500).notRequired(),
@@ -59,8 +59,8 @@ export const UpdateProfileBasicInfoScreen: FC = () => {
     formik.setFieldValue('gender', value);
   };
 
-  const handleChangeLookingFor = (value: UserLookingFor) => {
-    formik.setFieldValue('lookingFor', value);
+  const handleChangeRelationshipGoal = (value: UserRelationshipGoal) => {
+    formik.setFieldValue('relationshipGoal', value);
   };
 
   return (
@@ -116,13 +116,13 @@ export const UpdateProfileBasicInfoScreen: FC = () => {
                 </View>
 
                 <View mb="4">
-                  <LookingForFormControl
+                  <RelationshipGoalFormControl
                     isRequired
-                    value={formik.values.lookingFor}
-                    onChange={handleChangeLookingFor}
+                    value={formik.values.relationshipGoal}
+                    onChange={handleChangeRelationshipGoal}
                     error={
-                      formik.touched.lookingFor
-                        ? formik.errors.lookingFor
+                      formik.touched.relationshipGoal
+                        ? formik.errors.relationshipGoal
                         : undefined
                     }
                   />

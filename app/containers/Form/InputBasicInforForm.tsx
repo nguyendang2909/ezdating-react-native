@@ -18,7 +18,7 @@ export const InputBasicInforForm: FC = () => {
       nickname: profile?.nickname || '',
       gender: profile?.gender,
       birthday: profile?.birthday,
-      lookingFor: undefined,
+      relationshipGoal: undefined,
       introduce: '',
     },
     enableReinitialize: true,
@@ -32,7 +32,7 @@ export const InputBasicInforForm: FC = () => {
       birthday: Yup.string().required(
         translate('Please enter your w!', { w: translate('birthday') }),
       ),
-      // lookingFor: Yup.string().required(
+      // relationshipGoal: Yup.string().required(
       //   translate('Please choose your w!', { w: translate('desire relation') }),
       // ),
       introduce: Yup.string().max(500).optional(),

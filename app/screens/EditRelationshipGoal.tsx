@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import { Header } from 'app/components';
-import { FormControlInput } from 'app/components/Form/FormControlInput';
+import { UserGender } from 'app/constants';
 import { useAppSelector } from 'app/hooks';
 import { translate } from 'app/i18n';
 import { api } from 'app/services/api';
@@ -9,23 +9,23 @@ import { Button, useToast, View } from 'native-base';
 import React from 'react';
 import * as Yup from 'yup';
 
-export const EditNicknameScreen = () => {
+export const EditRelationshipGoal = () => {
   const { goBack } = useNavigation();
 
   const toast = useToast();
 
-  const currentNickname = useAppSelector(state => state.app.profile.nickname);
+  const currentGender = useAppSelector(state => state.app.profile.gender);
 
   const [submitUpdateProfile] = api.useUpdateProfileMutation();
 
-  const formik = useFormik<{ nickname: string }>({
+  const formik = useFormik<{ gender?: UserGender }>({
     enableReinitialize: true,
     initialValues: {
-      nickname: currentNickname || '',
+      gender: currentGender,
     },
     validationSchema: Yup.object().shape({
-      nickname: Yup.string().required(
-        translate('Please enter your w!', { w: translate('nickname') }),
+      gender: Yup.string().required(
+        translate('Please enter your w!', { w: translate('gender') }),
       ),
     }),
 
@@ -33,7 +33,10 @@ export const EditNicknameScreen = () => {
       try {
         await submitUpdateProfile(values);
       } catch (err) {
-        toast.show({ title: 'Update nickname failed', placement: 'top' });
+        toast.show({
+          title: translate('Update w failed!', { w: translate('gender') }),
+          placement: 'top',
+        });
       }
 
       goBack();
@@ -58,15 +61,15 @@ export const EditNicknameScreen = () => {
       />
 
       <View mt={4} mb={4} px={4}>
-        <FormControlInput
-          label={translate('Nickname')}
-          value={formik.values.nickname}
+        {/* <FormControlInput
+          label={translate('Gender')}
+          value={formik.values.gender}
           onChange={formik.handleChange('nickname')}
           placeholder={translate('Please enter your w', {
             w: translate('nickname'),
           })}
-          error={formik.errors.nickname}
-        />
+          error={formik.errors.gender}
+        /> */}
       </View>
     </>
   );

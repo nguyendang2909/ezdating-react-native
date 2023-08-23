@@ -4,12 +4,13 @@ import { colors, spacing } from 'app/theme';
 import { Divider, Row, Text, View } from 'native-base';
 import React from 'react';
 
+import { ProfileEditBirthday } from './ProfileEditBirthday';
 import { ProfileEditGender } from './ProfileEditGender';
 import { ProfileEditHeight } from './ProfileEditHeight';
 import { ProfileEditIntroduce } from './ProfileEditIntroduction';
-import { ProfileEditLookingFor } from './ProfileEditLookingFor';
 import { ProfileEditNickname } from './ProfileEditNickname';
 import { ProfileEditPhotos } from './ProfileEditPhotos';
+import { ProfileEditRelationshipGoal } from './ProfileEditRelationshipGoal';
 import { ProfileEditRelationshipStatus } from './ProfileEditRelationshipStatus';
 import { ProfileEditWeight } from './ProfileEditWeight';
 
@@ -28,6 +29,10 @@ export const ProfileEditContent: React.FC = () => {
         </View>
         <View backgroundColor={colors.background}>
           <ProfileEditNickname />
+        </View>
+        <Divider />
+        <View backgroundColor={colors.background}>
+          <ProfileEditBirthday />
         </View>
         <Divider />
         <View backgroundColor={colors.background}>
@@ -61,7 +66,7 @@ export const ProfileEditContent: React.FC = () => {
           </Text>
         </View>
         <View backgroundColor={colors.background}>
-          <ProfileEditLookingFor />
+          <ProfileEditRelationshipGoal />
         </View>
         <Divider />
         <View backgroundColor={colors.background}>

@@ -3,15 +3,17 @@ import { MenuItem } from 'app/components/Menu/MenuItem';
 import { useAppSelector } from 'app/hooks';
 import React from 'react';
 
-export const ProfileEditLookingFor: React.FC = () => {
-  const lookingFor = useAppSelector(state => state.app.profile.lookingFor);
+export const ProfileEditRelationshipGoal: React.FC = () => {
+  const relationshipGoal = useAppSelector(
+    state => state.app.profile.relationshipGoal,
+  );
   return (
     <>
       <MenuItem
         titleTx="Looking for"
         leftIcon={<MaterialIcons name="add-to-photos" />}
-        {...(lookingFor
-          ? { valueTx: `constants.userLookingFors.${lookingFor}` }
+        {...(relationshipGoal
+          ? { valueTx: `constants.userRelationshipGoals.${relationshipGoal}` }
           : {})}
       />
     </>

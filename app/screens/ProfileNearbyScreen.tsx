@@ -133,14 +133,14 @@ export const ProfileNearbyScreen: React.FC<FCProps> = props => {
           </Box>
         </Box>
 
-        {!!user?.lookingFor && (
+        {!!user?.relationshipGoal && (
           <Box mt={2} px={4}>
             <Box>
               <HStack>
                 <Box>
                   <Text>Looking for</Text>
                 </Box>
-                <Box>{user?.lookingFor}</Box>
+                <Box>{user?.relationshipGoal}</Box>
               </HStack>
             </Box>
           </Box>
