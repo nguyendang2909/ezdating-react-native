@@ -31,6 +31,25 @@ export declare namespace FormParams {
     photos: Image[];
   };
 
+  type UpdateProfile = {
+    birthday?: string;
+    company?: string;
+    // drinking?: EDrinking;
+    // educationLevel?: EEducationLevel;
+    gender?: UserGender;
+    jobTitle?: string;
+    haveBasicInfo?: boolean;
+    introduce?: string;
+    nickname?: string;
+    latitude?: number;
+    longitude?: number;
+    photos?: string[];
+    school?: string;
+    relationshipGoal: UserRelationshipGoal;
+    // smoking?: ESmoking;
+    // workout?: EWorkout;
+  };
+
   type SendMessage = {
     // relationshipId: string;
     text: string;

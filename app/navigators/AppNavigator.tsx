@@ -8,6 +8,11 @@ import {
   NativeStackScreenProps,
 } from '@react-navigation/native-stack';
 import { useAppSelector } from 'app/hooks';
+import { EditInfoBirthdayScreen } from 'app/screens/EditInfoBirthdayScreen';
+import { EditInforGenderScreen } from 'app/screens/EditInfoGenderScreen';
+import { EditInfoHeightScreen } from 'app/screens/EditInfoHeightScreen';
+import { EditInfoRelationshipGoalScreen } from 'app/screens/EditInfoRelationshipGoalScreen';
+import { EditInfoWeightScreen } from 'app/screens/EditInfoWeightScreen';
 import { EditNicknameScreen } from 'app/screens/EditNicknameScreen';
 import { LikedYouScreen } from 'app/screens/LikedYouScreen';
 import { MainScreen } from 'app/screens/MainScreen';
@@ -49,7 +54,12 @@ import { navigationRef, useBackButtonHandler } from './navigationUtilities';
  *   https://reactnavigation.org/docs/typescript/#organizing-types
  */
 export type AppStackParamList = {
+  EditInfoBirthday: undefined;
+  EditInfoGender: undefined;
+  EditInfoHeight: undefined;
   EditNickname: undefined;
+  EditInfoRelationshipGoal: undefined;
+  EditInfoWeight: undefined;
   UpdateProfileBasicInfo: undefined;
   UpdateProfilePhotosScreen: undefined;
   Home: NavigatorScreenParams<HomeTabParamList>;
@@ -108,8 +118,27 @@ const AppStack = () => {
         <>
           <Stack.Screen name="Main" component={MainScreen} />
           <Stack.Screen name="Home" component={HomeNavigator} />
+          <Stack.Screen
+            name="EditInfoBirthday"
+            component={EditInfoBirthdayScreen}
+          />
+          <Stack.Screen
+            name="EditInfoGender"
+            component={EditInforGenderScreen}
+          />
+          <Stack.Screen
+            name="EditInfoHeight"
+            component={EditInfoHeightScreen}
+          />
           <Stack.Screen name="EditNickname" component={EditNicknameScreen} />
-
+          <Stack.Screen
+            name="EditInfoRelationshipGoal"
+            component={EditInfoRelationshipGoalScreen}
+          />
+          <Stack.Screen
+            name="EditInfoWeight"
+            component={EditInfoWeightScreen}
+          />
           <Stack.Screen
             name="LikedYou"
             component={LikedYouScreen}

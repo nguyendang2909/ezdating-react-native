@@ -39,13 +39,14 @@ export declare namespace ApiRequest {
   };
 
   type UpdateProfile = Partial<{
-    birthDay?: string;
+    birthday?: string;
     company?: string;
     // drinking?: EDrinking;
     // educationLevel?: EEducationLevel;
     gender?: UserGender;
     jobTitle?: string;
     haveBasicInfo?: boolean;
+    height?: number;
     introduce?: string;
     nickname?: string;
     latitude?: number;
@@ -53,6 +54,7 @@ export declare namespace ApiRequest {
     photos?: string[];
     school?: string;
     relationshipGoal: UserRelationshipGoal;
+    weight?: number;
     // smoking?: ESmoking;
     // workout?: EWorkout;
   }>;

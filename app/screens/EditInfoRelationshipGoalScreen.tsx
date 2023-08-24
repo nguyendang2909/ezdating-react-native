@@ -1,40 +1,44 @@
 import { useNavigation } from '@react-navigation/native';
-import { Header } from 'app/components';
-import { UserGender } from 'app/constants';
+import { HeaderSave } from 'app/components/Header/HeaderSave';
+import { UserRelationshipGoal } from 'app/constants';
 import { useAppSelector } from 'app/hooks';
 import { translate } from 'app/i18n';
 import { api } from 'app/services/api';
 import { useFormik } from 'formik';
-import { Button, useToast, View } from 'native-base';
+import { useToast, View } from 'native-base';
 import React from 'react';
 import * as Yup from 'yup';
 
-export const EditGenderScreen = () => {
+export const EditInfoRelationshipGoalScreen = () => {
   const { goBack } = useNavigation();
 
   const toast = useToast();
 
-  const currentGender = useAppSelector(state => state.app.profile.gender);
+  const value = useAppSelector(state => state.app.profile.relationshipGoal);
 
   const [submitUpdateProfile] = api.useUpdateProfileMutation();
 
-  const formik = useFormik<{ gender?: UserGender }>({
+  const formik = useFormik<{ relationshipGoal?: UserRelationshipGoal }>({
     enableReinitialize: true,
     initialValues: {
-      gender: currentGender,
+      relationshipGoal: value,
     },
     validationSchema: Yup.object().shape({
-      gender: Yup.string().required(
-        translate('Please enter your w!', { w: translate('gender') }),
+      gender: Yup.number().required(
+        translate('Please enter your w!', {
+          w: translate('Relationship goals'),
+        }),
       ),
     }),
 
     onSubmit: async values => {
       try {
-        await submitUpdateProfile(values);
+        await submitUpdateProfile(values).unwrap();
       } catch (err) {
         toast.show({
-          title: translate('Update w failed!', { w: translate('gender') }),
+          title: translate('Update w failed!', {
+            w: translate('Relationship goals'),
+          }),
           placement: 'top',
         });
       }
@@ -45,19 +49,10 @@ export const EditGenderScreen = () => {
 
   return (
     <>
-      <Header
-        titleTx="Nickname"
-        leftIcon="caretLeft"
-        onLeftPress={goBack}
-        RightActionComponent={
-          <Button
-            variant="unstyled"
-            onPress={() => formik.handleSubmit()}
-            isLoading={formik.isSubmitting}
-          >
-            {translate('Save')}
-          </Button>
-        }
+      <HeaderSave
+        titleTx="Relationship goals"
+        onSave={() => formik.handleSubmit()}
+        isLoading={formik.isSubmitting}
       />
 
       <View mt={4} mb={4} px={4}>

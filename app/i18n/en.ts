@@ -86,6 +86,7 @@ const en = {
   gender: 'gender',
   // h
   Height: 'Height',
+  height: 'height',
   // i
   'I am looking for': 'I am looking for',
   Introduce: 'Introduce',
@@ -161,6 +162,7 @@ const en = {
   // w
   'w is required!': '{{w}} is required!',
   Weight: 'Weight',
+  weight: 'weight',
   'What is your w?': 'What is your {{w}}?',
   'What are you looking for here?': 'What are you looking for here?',
   'Wrong verification code, try again!': 'Wrong verification code, try again!',

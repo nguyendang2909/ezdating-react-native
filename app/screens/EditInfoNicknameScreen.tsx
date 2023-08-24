@@ -1,15 +1,15 @@
 import { useNavigation } from '@react-navigation/native';
-import { Header } from 'app/components';
 import { FormControlInput } from 'app/components/Form/FormControlInput';
+import { HeaderSave } from 'app/components/Header/HeaderSave';
 import { useAppSelector } from 'app/hooks';
 import { translate } from 'app/i18n';
 import { api } from 'app/services/api';
 import { useFormik } from 'formik';
-import { Button, useToast, View } from 'native-base';
+import { useToast, View } from 'native-base';
 import React from 'react';
 import * as Yup from 'yup';
 
-export const EditNicknameScreen = () => {
+export const EditInfoNicknameScreen = () => {
   const { goBack } = useNavigation();
 
   const toast = useToast();
@@ -31,7 +31,7 @@ export const EditNicknameScreen = () => {
 
     onSubmit: async values => {
       try {
-        await submitUpdateProfile(values);
+        await submitUpdateProfile(values).unwrap();
       } catch (err) {
         toast.show({ title: 'Update nickname failed', placement: 'top' });
       }
@@ -42,19 +42,10 @@ export const EditNicknameScreen = () => {
 
   return (
     <>
-      <Header
+      <HeaderSave
         titleTx="Nickname"
-        leftIcon="caretLeft"
-        onLeftPress={goBack}
-        RightActionComponent={
-          <Button
-            variant="unstyled"
-            onPress={() => formik.handleSubmit()}
-            isLoading={formik.isSubmitting}
-          >
-            {translate('Save')}
-          </Button>
-        }
+        onSave={() => formik.handleSubmit()}
+        isLoading={formik.isSubmitting}
       />
 
       <View mt={4} mb={4} px={4}>
