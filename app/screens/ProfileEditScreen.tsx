@@ -1,5 +1,5 @@
-import { ProfileEditContent } from 'app/containers/ProfileEdit/ProfileEditContent';
-import { ProfileEditHeader } from 'app/containers/ProfileEdit/ProfileEditHeader';
+import { ProfileEditPageHeader } from 'app/containers/ProfileEdit/ProfileEditHeader';
+import { ProfileEditPageContent } from 'app/containers/ProfileEdit/ProfileEditPageContent';
 import { backgroundColor } from 'app/styles';
 import { colors } from 'app/theme';
 import { Box, ScrollView } from 'native-base';
@@ -8,7 +8,7 @@ import React from 'react';
 export const ProfileEditScreen: React.FC = () => {
   return (
     <>
-      <ProfileEditHeader />
+      <ProfileEditPageHeader />
       <Box flex={1} safeAreaBottom>
         <ScrollView
           flex={1}
@@ -16,7 +16,7 @@ export const ProfileEditScreen: React.FC = () => {
           pb={4}
           style={backgroundColor(colors.backgroundSecondary)}
         >
-          <ProfileEditContent />
+          <ProfileEditPageContent />
         </ScrollView>
       </Box>
     </>

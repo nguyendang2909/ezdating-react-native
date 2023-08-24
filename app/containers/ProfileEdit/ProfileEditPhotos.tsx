@@ -12,9 +12,9 @@ import React from 'react';
 
 export const ProfileEditPhotos: React.FC = () => {
   const toast = useToast();
-  const uploadedFiles =
-    useAppSelector(state => state.app.profile.uploadFiles) || [];
-  const uploadFilesLength = uploadedFiles.length;
+  const mediaFiles =
+    useAppSelector(state => state.app.profile.mediaFiles) || [];
+  const mediaFilesLength = mediaFiles.length;
 
   const handleClickPhotoCard = async (index: number | string) => {};
 
@@ -53,25 +53,24 @@ export const ProfileEditPhotos: React.FC = () => {
     },
   });
 
-  const files = uploadedFiles.concat([
+  const files = mediaFiles.concat([
     ...formik.values.photos,
-    ...Array(6 - uploadFilesLength - formik.values.photos.length),
+    ...Array(6 - mediaFilesLength - formik.values.photos.length),
   ]);
 
   return (
     <>
       <HStack style={[flexDirectionRow, flexWrapWrap]}>
         {files?.map((item, index) => {
-          const id = item?.id;
           return (
             <View
-              key={id || index}
+              key={item._id || index}
               style={[padding(spacing.xxs), width('33%')]}
             >
               <UploadPhotoCard
                 value={item?.location}
                 onPress={() => {
-                  if (id) {
+                  if (item._id) {
                     handleClickPhotoCard(id);
                   }
                 }}

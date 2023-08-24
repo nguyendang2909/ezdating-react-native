@@ -8,14 +8,14 @@ export declare namespace ApiResponse {
     };
   };
 
-  type FetchData<T = any, R extends Record<string, any> = {}> = {
+  type FetchData<T, R extends Record<string, any> = object> = {
     [P in keyof R]?: R[P];
   } & {
     data?: T;
     type?: string;
   };
 
-  type FetchPaginationData<T = any, R extends Record<string, any> = {}> = {
+  type FetchPaginationData<T, R extends Record<string, any> = object> = {
     [P in keyof R]?: R[P];
   } & FetchData<T, { pagination: Pagination }>;
 
@@ -26,7 +26,7 @@ export declare namespace ApiResponse {
 
   type RemoveData = FetchData<{ success: true }>;
 
-  type UploadedFileListData = FetchData<Entity.UploadedFile[]>;
+  type UploadedFileListData = FetchData<Entity.MediaFile[]>;
 
   type UserData = FetchData<Entity.User>;
 

@@ -36,9 +36,10 @@ export declare namespace Entity {
       // drinking?: EDrinking;
       // educationLevel?: EEducationLevel;
       gender?: UserGender;
+      geolocation: string;
       height: number;
       introduce: string;
-      geolocation: string;
+      languages: string[];
       relationshipGoal?: UserRelationshipGoal;
       filterGender?: UserGender;
       filterMaxAge?: number;

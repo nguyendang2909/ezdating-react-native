@@ -1,17 +1,16 @@
-import { useNavigation } from '@react-navigation/native';
 import { FontAwesome } from 'app/components/Icon/Lib';
 import { translate } from 'app/i18n';
 import { Button, Icon } from 'native-base';
 import React, { FC } from 'react';
 
 export const SignInWithFacebookButton: FC = () => {
-  const { navigate } = useNavigation();
+  // const { navigate } = useNavigation();
 
-  const handlePress = () => {};
+  // const handlePress = () => {};
 
   return (
     <Button
-      onPress={handlePress}
+      // onPress={handlePress}
       startIcon={<Icon as={<FontAwesome name="facebook" />} />}
       colorScheme="blue"
     >

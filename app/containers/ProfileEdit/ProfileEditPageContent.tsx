@@ -4,17 +4,18 @@ import { colors, spacing } from 'app/theme';
 import { Divider, Row, Text, View } from 'native-base';
 import React from 'react';
 
-import { ProfileEditBirthday } from './ProfileEditBirthday';
-import { ProfileEditGender } from './ProfileEditGender';
-import { ProfileEditHeight } from './ProfileEditHeight';
-import { ProfileEditIntroduce } from './ProfileEditIntroduction';
-import { ProfileEditNickname } from './ProfileEditNickname';
+import { ProfileEditBirthdayMenuItem } from './ProfileEditBirthdayMenuItem';
+import { ProfileEditGenderMenuItem } from './ProfileEditGenderMenuItem';
+import { ProfileEditHeightMenuItem } from './ProfileEditHeightMenuItem';
+import { ProfileEditIntroduceMenuItem } from './ProfileEditIntroductionMenuItem';
+import { ProfileEditLanguagesMenuItem } from './ProfileEditLanguagesMenuItem';
+import { ProfileEditNicknameMenuItem } from './ProfileEditNicknameMenuItem';
 import { ProfileEditPhotos } from './ProfileEditPhotos';
-import { ProfileEditRelationshipGoal } from './ProfileEditRelationshipGoal';
+import { ProfileEditRelationshipGoalMenuItem } from './ProfileEditRelationshipGoal';
 import { ProfileEditRelationshipStatus } from './ProfileEditRelationshipStatus';
-import { ProfileEditWeight } from './ProfileEditWeight';
+import { ProfileEditWeightMenuItem } from './ProfileEditWeight';
 
-export const ProfileEditContent: React.FC = () => {
+export const ProfileEditPageContent: React.FC = () => {
   return (
     <>
       <Row style={paddingHorizontal(spacing.md)}>
@@ -28,23 +29,23 @@ export const ProfileEditContent: React.FC = () => {
           </Text>
         </View>
         <View backgroundColor={colors.background}>
-          <ProfileEditNickname />
+          <ProfileEditNicknameMenuItem />
         </View>
         <Divider />
         <View backgroundColor={colors.background}>
-          <ProfileEditBirthday />
+          <ProfileEditBirthdayMenuItem />
         </View>
         <Divider />
         <View backgroundColor={colors.background}>
-          <ProfileEditGender />
+          <ProfileEditGenderMenuItem />
         </View>
         <Divider />
         <View backgroundColor={colors.background}>
-          <ProfileEditHeight />
+          <ProfileEditHeightMenuItem />
         </View>
         <Divider />
         <View backgroundColor={colors.background}>
-          <ProfileEditWeight />
+          <ProfileEditWeightMenuItem />
         </View>
       </View>
 
@@ -55,7 +56,7 @@ export const ProfileEditContent: React.FC = () => {
           </Text>
         </View>
         <View backgroundColor={colors.background}>
-          <ProfileEditIntroduce />
+          <ProfileEditIntroduceMenuItem />
         </View>
       </View>
 
@@ -66,11 +67,22 @@ export const ProfileEditContent: React.FC = () => {
           </Text>
         </View>
         <View backgroundColor={colors.background}>
-          <ProfileEditRelationshipGoal />
+          <ProfileEditRelationshipGoalMenuItem />
         </View>
         <Divider />
         <View backgroundColor={colors.background}>
           <ProfileEditRelationshipStatus />
+        </View>
+      </View>
+
+      <View mt={4}>
+        <View mx={4} mb={2}>
+          <Text bold={true} textTransform="uppercase">
+            {translate('Languages')}
+          </Text>
+        </View>
+        <View backgroundColor={colors.background}>
+          <ProfileEditLanguagesMenuItem />
         </View>
       </View>
       <View mt={8}></View>

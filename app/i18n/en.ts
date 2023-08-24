@@ -47,6 +47,7 @@ const en = {
     },
   },
   // a
+  'Add languages': 'Add languages',
   'About me': 'About me',
   Account: 'Account',
   'Add picture profile (Please choose photos that clearly shows your face, up to 6 photos)':
@@ -93,6 +94,10 @@ const en = {
   introduce: 'introduce',
   Invite: 'Invite',
   // l
+  Language: 'Language',
+  language: 'language',
+  Languages: 'Languages',
+  languages: 'languages',
   'Last name': 'Last name',
   LGBT: 'LGBT',
   'Liked you': 'Liked you',

@@ -4,13 +4,13 @@ import { MenuItem } from 'app/components/Menu/MenuItem';
 import { useAppSelector } from 'app/hooks';
 import React from 'react';
 
-export const ProfileEditNickname: React.FC = () => {
+export const ProfileEditNicknameMenuItem: React.FC = () => {
   const value = useAppSelector(state => state.app.profile.nickname);
 
   const navigation = useNavigation();
 
   const onPress = () => {
-    navigation.navigate('EditNickname');
+    navigation.navigate('EditInfoNickname');
   };
 
   return (

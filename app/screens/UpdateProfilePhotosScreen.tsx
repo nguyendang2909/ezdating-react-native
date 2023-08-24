@@ -4,6 +4,7 @@ import { LoadingScreen } from 'app/components/Screen/LoadingScreen';
 import { PhotoRequestPermission } from 'app/containers/Photos/PhotoRequestPermission.ios';
 import { useAppSelector } from 'app/hooks';
 import { translate } from 'app/i18n';
+import { AppStackScreenProps } from 'app/navigators';
 import { api } from 'app/services/api';
 import {
   alignItemsCenter,
@@ -34,7 +35,7 @@ import {
 import React, { useState } from 'react';
 import ImageCropPicker from 'react-native-image-crop-picker';
 
-type FCProps = {};
+type FCProps = AppStackScreenProps<'UpdateProfilePhotosScreen'>;
 
 export const UpdateProfilePhotosScreen: React.FC<FCProps> = () => {
   const toast = useToast();

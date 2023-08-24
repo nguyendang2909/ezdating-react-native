@@ -48,7 +48,7 @@ export const MenuItem: React.FC<FCProps> = ({
 
               {(!!title || !!titleTx) && (
                 <View>
-                  <Text>{titleTx ? translate(titleTx) : title}</Text>
+                  <Text>{title || (!!titleTx && translate(titleTx))}</Text>
                 </View>
               )}
 

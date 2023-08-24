@@ -3,7 +3,7 @@ import { MenuItem } from 'app/components/Menu/MenuItem';
 import { useAppSelector } from 'app/hooks';
 import React from 'react';
 
-export const ProfileEditRelationshipGoal: React.FC = () => {
+export const ProfileEditRelationshipGoalMenuItem: React.FC = () => {
   const relationshipGoal = useAppSelector(
     state => state.app.profile.relationshipGoal,
   );

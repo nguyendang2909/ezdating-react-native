@@ -15,7 +15,6 @@ import { spacing } from 'app/theme';
 import { View, VStack } from 'native-base';
 import React, { FC } from 'react';
 import { ImageBackground } from 'react-native';
-const backgroundImage = require('../../assets/images/Couples-home.jpeg');
 
 type FCProps = AppStackScreenProps<'SignIn'>;
 
@@ -23,7 +22,7 @@ export const SignInScreen: FC<FCProps> = () => {
   return (
     <>
       <ImageBackground
-        source={backgroundImage}
+        source={require('../../assets/images/Couples-home.jpeg')}
         style={[widthFull, heightFull, posititionAbsolute, zIndex(1)]}
       ></ImageBackground>
       <View

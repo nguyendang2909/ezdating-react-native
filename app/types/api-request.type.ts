@@ -48,6 +48,7 @@ export declare namespace ApiRequest {
     haveBasicInfo?: boolean;
     height?: number;
     introduce?: string;
+    languages?: string[];
     nickname?: string;
     latitude?: number;
     longitude?: number;

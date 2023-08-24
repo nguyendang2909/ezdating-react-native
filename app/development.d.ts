@@ -2,6 +2,7 @@ import { AppStackParamList } from './navigators';
 
 declare global {
   namespace ReactNavigation {
-    type RootParamList = AppStackParamList;
+    // eslint-disable-next-line @typescript-eslint/no-empty-interface
+    interface RootParamList extends AppStackParamList {}
   }
 }

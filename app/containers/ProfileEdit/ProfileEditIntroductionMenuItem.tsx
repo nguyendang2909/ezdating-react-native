@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 
 const maxLength = 500;
 
-export const ProfileEditIntroduce: React.FC = () => {
+export const ProfileEditIntroduceMenuItem: React.FC = () => {
   const toast = useToast();
   const [submitUpdateProfile] = api.useUpdateProfileMutation();
 

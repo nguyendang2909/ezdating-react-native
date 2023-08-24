@@ -1,18 +1,17 @@
 import { MaterialCommunityIcons } from 'app/components/Icon/Lib';
 import { MenuItem } from 'app/components/Menu/MenuItem';
 import { useAppSelector } from 'app/hooks';
-import moment from 'moment';
 import React from 'react';
 
-export const ProfileEditBirthday: React.FC = () => {
-  const value = useAppSelector(state => state.app.profile.birthday);
+export const ProfileEditGenderMenuItem: React.FC = () => {
+  const value = useAppSelector(state => state.app.profile.gender);
 
   return (
     <>
       <MenuItem
-        titleTx="Birthday"
+        titleTx="Gender"
         leftIcon={<MaterialCommunityIcons name="gender-male-female" />}
-        {...(value ? { value: moment(value).format('YYYY-MM-DD') } : {})}
+        {...(value ? { valueTx: `constants.genders.${value}` } : {})}
       />
     </>
   );

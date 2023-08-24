@@ -80,7 +80,7 @@ export const ProfileNearbyScreen: React.FC<FCProps> = props => {
           height={(width / 640) * 860}
           data={user?.mediaFiles || []}
           onSnapToItem={index => console.log('current index:', index)}
-          renderItem={({ item, index }) => (
+          renderItem={({ item }) => (
             <View justifyContent="center">
               <Image
                 height="100%"

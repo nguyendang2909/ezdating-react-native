@@ -3,7 +3,7 @@ import { MenuItem } from 'app/components/Menu/MenuItem';
 import { useAppSelector } from 'app/hooks';
 import React from 'react';
 
-export const ProfileEditWeight: React.FC = () => {
+export const ProfileEditWeightMenuItem: React.FC = () => {
   const value = useAppSelector(state => state.app.profile.weight);
 
   return (

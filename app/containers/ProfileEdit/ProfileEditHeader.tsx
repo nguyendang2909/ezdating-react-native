@@ -3,7 +3,7 @@ import { goBack } from 'app/navigators';
 import { colors } from 'app/theme';
 import React from 'react';
 
-export const ProfileEditHeader: React.FC = () => {
+export const ProfileEditPageHeader: React.FC = () => {
   return (
     <>
       <Header
