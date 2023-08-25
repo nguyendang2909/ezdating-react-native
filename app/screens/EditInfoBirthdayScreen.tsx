@@ -12,14 +12,14 @@ import * as Yup from 'yup';
 export const EditInfoBirthdayScreen = () => {
   const { goBack } = useNavigation();
 
-  const currentNickname = useAppSelector(state => state.app.profile.birthday);
+  const value = useAppSelector(state => state.app.profile.birthday);
 
   const [submitUpdateProfile] = api.useUpdateProfileMutation();
 
-  const formik = useFormik<{ nickname: string }>({
+  const formik = useFormik<{ birthday: string }>({
     enableReinitialize: true,
     initialValues: {
-      nickname: currentNickname || '',
+      birthday: value || '',
     },
     validationSchema: Yup.object().shape({
       birthday: Yup.string().required(
@@ -48,13 +48,13 @@ export const EditInfoBirthdayScreen = () => {
 
       <View mb="4" px={4}>
         <FormControlInput
-          label={translate('Nickname')}
-          value={formik.values.nickname}
-          onChange={formik.handleChange('nickname')}
+          label={translate('Birthday')}
+          value={formik.values.birthday}
+          onChange={formik.handleChange('birthday')}
           placeholder={translate('Please enter your w', {
             w: translate('nickname'),
           })}
-          error={formik.errors.nickname}
+          error={formik.errors.birthday}
         />
       </View>
     </>

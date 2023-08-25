@@ -93,6 +93,9 @@ const en = {
   Introduce: 'Introduce',
   introduce: 'introduce',
   Invite: 'Invite',
+  // j
+  'Job title': 'Job title',
+  'job title': 'job title',
   // l
   Language: 'Language',
   language: 'language',

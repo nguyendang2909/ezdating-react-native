@@ -11,6 +11,7 @@ import { useAppSelector } from 'app/hooks';
 import { EditInfoBirthdayScreen } from 'app/screens/EditInfoBirthdayScreen';
 import { EditInforGenderScreen } from 'app/screens/EditInfoGenderScreen';
 import { EditInfoHeightScreen } from 'app/screens/EditInfoHeightScreen';
+import { EditInfoJobTitleScreen } from 'app/screens/EditInfoJobTitleScreen';
 import { EditInfoNicknameScreen } from 'app/screens/EditInfoNicknameScreen';
 import { EditInfoRelationshipGoalScreen } from 'app/screens/EditInfoRelationshipGoalScreen';
 import { EditInfoWeightScreen } from 'app/screens/EditInfoWeightScreen';
@@ -57,6 +58,7 @@ export type AppStackParamList = {
   EditInfoBirthday: undefined;
   EditInfoGender: undefined;
   EditInfoHeight: undefined;
+  EditInfoJobTitle: undefined;
   EditInfoNickname: undefined;
   EditInfoRelationshipGoal: undefined;
   EditInfoWeight: undefined;
@@ -129,6 +131,10 @@ const AppStack = () => {
           <Stack.Screen
             name="EditInfoHeight"
             component={EditInfoHeightScreen}
+          />
+          <Stack.Screen
+            name="EditInfoJobTitle"
+            component={EditInfoJobTitleScreen}
           />
           <Stack.Screen
             name="EditInfoNickname"

@@ -29,6 +29,7 @@ export declare namespace Entity {
       age?: number;
       birthday?: string;
       coins?: number;
+      company?: string;
       distance?: number;
       educationLevel: UserEducationLevel;
       email: string;
@@ -39,6 +40,7 @@ export declare namespace Entity {
       geolocation: string;
       height: number;
       introduce: string;
+      jobTitle: string;
       languages: string[];
       relationshipGoal?: UserRelationshipGoal;
       filterGender?: UserGender;

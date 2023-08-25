@@ -13,14 +13,14 @@ export const EditInfoWeightScreen = () => {
 
   const toast = useToast();
 
-  const value = useAppSelector(state => state.app.profile.weight);
+  const value = useAppSelector(state => state.app.profile.company);
 
   const [submitUpdateProfile] = api.useUpdateProfileMutation();
 
-  const formik = useFormik<{ weight: number }>({
+  const formik = useFormik<{ company: string }>({
     enableReinitialize: true,
     initialValues: {
-      weight: value || 50,
+      company: value || '',
     },
     validationSchema: Yup.object().shape({
       weight: Yup.number().required(

@@ -10,10 +10,10 @@ import { useDispatch } from 'react-redux';
 export const ConnectSocket: React.FC = () => {
   const dispatch = useDispatch();
   const accessToken = useAppSelector(state => state.app.accessToken);
-  const isLogged = useAppSelector(state => state.app.isLogged);
+  const userId = useAppSelector(state => state.app.profile._id);
 
   React.useEffect(() => {
-    if (accessToken) {
+    if (accessToken && userId) {
       const socket = getSocket();
       if (!socket || !socket.connected) {
         dispatch(socketStoreActions.initializeWebSocket());
@@ -23,7 +23,7 @@ export const ConnectSocket: React.FC = () => {
     return () => {
       disconnectWebSocket();
     };
-  }, [dispatch, accessToken, isLogged]);
+  }, [dispatch, accessToken, userId]);
 
   return <></>;
 };

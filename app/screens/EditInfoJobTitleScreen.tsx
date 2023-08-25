@@ -1,4 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
+import { FormControlInput } from 'app/components/Form/FormControlInput';
 import { HeaderSave } from 'app/components/Header/HeaderSave';
 import { useAppSelector } from 'app/hooks';
 import { translate } from 'app/i18n';
@@ -8,32 +9,31 @@ import { useToast, View } from 'native-base';
 import React from 'react';
 import * as Yup from 'yup';
 
-export const EditInfoWeightScreen = () => {
+export const EditInfoJobTitleScreen = () => {
   const { goBack } = useNavigation();
 
   const toast = useToast();
 
-  const value = useAppSelector(state => state.app.profile.weight);
+  const value = useAppSelector(state => state.app.profile.jobTitle);
 
   const [submitUpdateProfile] = api.useUpdateProfileMutation();
 
-  const formik = useFormik<{ weight: number }>({
+  const formik = useFormik<{ jobTitle: string }>({
     enableReinitialize: true,
     initialValues: {
-      weight: value || 50,
+      jobTitle: value || '',
     },
     validationSchema: Yup.object().shape({
-      weight: Yup.number().required(
-        translate('Please enter your w!', { w: translate('weight') }),
+      value: Yup.string().required(
+        translate('Please enter your w!', { w: translate('job title') }),
       ),
     }),
-
     onSubmit: async values => {
       try {
         await submitUpdateProfile(values);
       } catch (err) {
         toast.show({
-          title: translate('Update w failed!', { w: translate('weight') }),
+          title: translate('Update w failed!', { w: translate('job title') }),
           placement: 'top',
         });
       }
@@ -45,21 +45,21 @@ export const EditInfoWeightScreen = () => {
   return (
     <>
       <HeaderSave
-        titleTx="Relationship goals"
+        titleTx="Job title"
         onSave={() => formik.handleSubmit()}
         isLoading={formik.isSubmitting}
       />
 
       <View mt={4} mb={4} px={4}>
-        {/* <FormControlInput
-          label={translate('Gender')}
-          value={formik.values.gender}
-          onChange={formik.handleChange('nickname')}
+        <FormControlInput
+          label={translate('Job title')}
+          value={formik.values.jobTitle}
+          onChange={formik.handleChange('jobTitle')}
           placeholder={translate('Please enter your w', {
-            w: translate('nickname'),
+            w: translate('job title'),
           })}
-          error={formik.errors.gender}
-        /> */}
+          error={formik.errors.jobTitle}
+        />
       </View>
     </>
   );
