@@ -8,7 +8,7 @@ import { useToast, View } from 'native-base';
 import React from 'react';
 import * as Yup from 'yup';
 
-export const EditInfoWeightScreen = () => {
+export const EditInfoCompanyScreen = () => {
   const { goBack } = useNavigation();
 
   const toast = useToast();
@@ -45,7 +45,7 @@ export const EditInfoWeightScreen = () => {
   return (
     <>
       <HeaderSave
-        titleTx="Relationship goals"
+        titleTx="Relationship goal"
         onSave={() => formik.handleSubmit()}
         isLoading={formik.isSubmitting}
       />

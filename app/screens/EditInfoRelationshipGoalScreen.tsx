@@ -26,7 +26,7 @@ export const EditInfoRelationshipGoalScreen = () => {
     validationSchema: Yup.object().shape({
       gender: Yup.number().required(
         translate('Please enter your w!', {
-          w: translate('Relationship goals'),
+          w: translate('Relationship goal'),
         }),
       ),
     }),
@@ -37,7 +37,7 @@ export const EditInfoRelationshipGoalScreen = () => {
       } catch (err) {
         toast.show({
           title: translate('Update w failed!', {
-            w: translate('Relationship goals'),
+            w: translate('Relationship goal'),
           }),
           placement: 'top',
         });
@@ -50,7 +50,7 @@ export const EditInfoRelationshipGoalScreen = () => {
   return (
     <>
       <HeaderSave
-        titleTx="Relationship goals"
+        titleTx="Relationship goal"
         onSave={() => formik.handleSubmit()}
         isLoading={formik.isSubmitting}
       />

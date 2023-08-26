@@ -100,7 +100,7 @@ export type AppStackScreenProps<T extends keyof AppStackParamList> =
 const Stack = createNativeStackNavigator<AppStackParamList>();
 
 const AppStack = () => {
-  const isAuthenticated = useAppSelector(state => state.app.isLogged);
+  const isAuthenticated = useAppSelector(state => state.app.accessToken);
 
   api.useGetMyProfileQuery(undefined, {});
 

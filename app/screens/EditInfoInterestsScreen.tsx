@@ -45,7 +45,7 @@ export const EditInfoWeightScreen = () => {
   return (
     <>
       <HeaderSave
-        titleTx="Relationship goals"
+        titleTx="Relationship goal"
         onSave={() => formik.handleSubmit()}
         isLoading={formik.isSubmitting}
       />

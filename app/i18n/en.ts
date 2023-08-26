@@ -6,11 +6,11 @@ const en = {
     back: 'Back',
   },
   constants: {
-    genders: {
+    userGenders: {
       1: 'Male',
       2: 'Female',
     },
-    relationshipStatuses: {
+    userRelationshipStatuses: {
       1: 'Single',
       2: 'Have boy/girl friend',
       3: 'Married',
@@ -58,14 +58,18 @@ const en = {
   // c
   Cancel: 'Cancel',
   cancel: 'cancel',
-  Continue: 'Continue',
-  continue: 'continue',
+  cm: 'cm',
   Complete: 'Complete',
   complete: 'complete',
+  Continue: 'Continue',
+  continue: 'continue',
+  'Control your profile': 'Control your profile',
   // d
   'desire relation': 'desire relation',
   'Do not share verification code to protect your account':
     'Do not share verification code to protect your account',
+  "Don't show my age": "Don't show my age",
+  "Don't show my distance": "Don't show my distance",
   // e
   'Edit profile': 'Edit profile',
   'Enter your code': 'Enter your code',
@@ -74,6 +78,8 @@ const en = {
   'Enter your last name': 'Enter your last name',
   'Error, please try again!': 'Error, please try again!',
   // f
+  Fail: 'Fail',
+  fail: 'fail',
   Female: 'Female',
   female: 'female',
   'First name': 'First name',
@@ -96,6 +102,8 @@ const en = {
   // j
   'Job title': 'Job title',
   'job title': 'job title',
+  // k
+  kg: 'kg',
   // l
   Language: 'Language',
   language: 'language',
@@ -114,6 +122,7 @@ const en = {
   marriage: 'marriage',
   Marriage: 'Marriage',
   Messages: 'Messages',
+  'My w is': 'My {{w}} is',
   // n
   Nearby: 'Nearby',
   Next: 'Next',
@@ -145,9 +154,10 @@ const en = {
     'Please input the OTP code to sign in',
   'Please select': 'Please select',
   Profile: 'Profile',
+  profile: 'profile',
   // r
   Relationship: 'Relationship',
-  'Relationship goals': 'Relationship goals',
+  'Relationship goal': 'Relationship goal',
   'Relationship status': 'Relationship status',
   Remove: 'Remove',
   remove: 'remove',
@@ -162,8 +172,11 @@ const en = {
   // s
   Save: 'Save',
   Settings: 'Settings',
+  Success: 'Success',
+  success: 'success',
   // u
   'Update w failed!': 'Update {{w}} failed!',
+  'Update w successfully': 'Update {{w}} successfully',
   // v
   'Verify your w': 'Verify your {{w}}',
   Visitors: 'Visitors',

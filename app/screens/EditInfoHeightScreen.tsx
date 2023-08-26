@@ -1,17 +1,16 @@
+import { Picker } from '@react-native-picker/picker';
 import { useNavigation } from '@react-navigation/native';
 import { HeaderSave } from 'app/components/Header/HeaderSave';
 import { useAppSelector } from 'app/hooks';
 import { translate } from 'app/i18n';
 import { api } from 'app/services/api';
 import { useFormik } from 'formik';
-import { useToast, View } from 'native-base';
+import { Text, Toast, View } from 'native-base';
 import React from 'react';
 import * as Yup from 'yup';
 
 export const EditInfoHeightScreen = () => {
   const { goBack } = useNavigation();
-
-  const toast = useToast();
 
   const currentHeight = useAppSelector(state => state.app.profile.height);
 
@@ -31,14 +30,25 @@ export const EditInfoHeightScreen = () => {
     onSubmit: async values => {
       try {
         await submitUpdateProfile(values).unwrap();
-      } catch (err) {
-        toast.show({
-          title: translate('Update w failed!', { w: translate('gender') }),
+
+        Toast.show({
           placement: 'top',
+          description: translate('Update w successfully', {
+            w: translate('profile'),
+          }),
+          title: translate('Success'),
+        });
+
+        goBack();
+      } catch (err) {
+        Toast.show({
+          placement: 'top',
+          description: translate('Update w failed!', {
+            w: translate('profile'),
+          }),
+          title: translate('Fail'),
         });
       }
-
-      goBack();
     },
   });
 
@@ -51,15 +61,25 @@ export const EditInfoHeightScreen = () => {
       />
 
       <View mt={4} mb={4} px={4}>
-        {/* <FormControlInput
-          label={translate('Gender')}
-          value={formik.values.gender}
-          onChange={formik.handleChange('nickname')}
-          placeholder={translate('Please enter your w', {
-            w: translate('nickname'),
+        <Text color="gray.500">{`${translate('My w is', {
+          w: translate('height'),
+        })} (${translate('cm')}):`}</Text>
+      </View>
+
+      <View mt={4} mb={4} px={4}>
+        <Picker
+          selectedValue={formik.values.height}
+          onValueChange={(itemValue, itemIndex) =>
+            formik.setFieldValue('height', itemValue)
+          }
+        >
+          {Array.from({ length: 100 }, (value, index) => {
+            const heightValue = index + 100;
+            return (
+              <Picker.Item label={heightValue.toString()} value={heightValue} />
+            );
           })}
-          error={formik.errors.gender}
-        /> */}
+        </Picker>
       </View>
     </>
   );

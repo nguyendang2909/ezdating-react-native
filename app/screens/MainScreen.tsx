@@ -6,8 +6,6 @@ import React, { useEffect } from 'react';
 export const MainScreen: React.FC = () => {
   const userStatus = useAppSelector(state => state.app.profile.status);
 
-  console.log(userStatus);
-
   const navigation = useNavigation();
 
   useEffect(() => {

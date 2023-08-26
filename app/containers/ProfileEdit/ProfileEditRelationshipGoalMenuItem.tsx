@@ -1,6 +1,6 @@
-import { MaterialCommunityIcons } from 'app/components/Icon/Lib';
+import { MaterialIcons } from 'app/components/Icon/Lib';
 import { MenuItem } from 'app/components/Menu/MenuItem';
-import { UserGender, UserGenders } from 'app/constants';
+import { UserRelationshipGoal, UserRelationshipGoals } from 'app/constants';
 import { useAppSelector } from 'app/hooks';
 import { translate } from 'app/i18n';
 import { ApiRequest } from 'app/types/api-request.type';
@@ -11,23 +11,29 @@ type FCProps = {
   onPress: (payload: ApiRequest.UpdateProfile) => void;
 };
 
-export const ProfileEditGenderMenuItem: React.FC<FCProps> = ({ onPress }) => {
-  const currentValue = useAppSelector(state => state.app.profile.gender);
+export const ProfileEditRelationshipGoalMenuItem: React.FC<FCProps> = ({
+  onPress,
+}) => {
+  const currentRelationshipGoal = useAppSelector(
+    state => state.app.profile.relationshipGoal,
+  );
 
   const { isOpen, onOpen, onClose } = useDisclose();
 
-  const handleChange = (gender: UserGender) => {
+  const handleChange = (relationshipGoal: UserRelationshipGoal) => {
     onClose();
-    onPress({ gender });
+    onPress({ relationshipGoal });
   };
 
   return (
     <>
       <MenuItem
-        titleTx="Gender"
-        leftIcon={<MaterialCommunityIcons name="gender-male-female" />}
-        {...(currentValue
-          ? { valueTx: `constants.userGenders.${currentValue}` }
+        titleTx="Looking for"
+        leftIcon={<MaterialIcons name="add-to-photos" />}
+        {...(currentRelationshipGoal
+          ? {
+              valueTx: `constants.userRelationshipGoals.${currentRelationshipGoal}`,
+            }
           : {})}
         onPress={onOpen}
       />
@@ -36,10 +42,10 @@ export const ProfileEditGenderMenuItem: React.FC<FCProps> = ({ onPress }) => {
         <Actionsheet.Content>
           <Box mb={4}>
             <Heading size="sm" textAlign="center">
-              {translate('Gender')}
+              {translate('Relationship goal')}
             </Heading>
           </Box>
-          {Object.values(UserGenders).map(value => {
+          {Object.values(UserRelationshipGoals).map(value => {
             return (
               <Actionsheet.Item
                 key={value}
@@ -47,8 +53,12 @@ export const ProfileEditGenderMenuItem: React.FC<FCProps> = ({ onPress }) => {
                   handleChange(value);
                 }}
               >
-                <Text fontWeight={currentValue === value ? 'bold' : undefined}>
-                  {translate(`constants.userGenders.${value}`)}
+                <Text
+                  fontWeight={
+                    currentRelationshipGoal === value ? 'bold' : undefined
+                  }
+                >
+                  {translate(`constants.userRelationshipGoals.${value}`)}
                 </Text>
               </Actionsheet.Item>
             );

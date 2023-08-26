@@ -1,4 +1,8 @@
-import { UserGender, UserRelationshipGoal } from 'app/constants';
+import {
+  UserGender,
+  UserRelationshipGoal,
+  UserRelationshipStatus,
+} from 'app/constants';
 import { Image } from 'react-native-image-crop-picker';
 
 export declare namespace ApiRequest {
@@ -47,6 +51,8 @@ export declare namespace ApiRequest {
     jobTitle?: string;
     haveBasicInfo?: boolean;
     height?: number;
+    hideAge?: boolean;
+    hideDistance?: boolean;
     introduce?: string;
     languages?: string[];
     nickname?: string;
@@ -55,6 +61,7 @@ export declare namespace ApiRequest {
     photos?: string[];
     school?: string;
     relationshipGoal: UserRelationshipGoal;
+    relationshipStatus: UserRelationshipStatus;
     weight?: number;
     // smoking?: ESmoking;
     // workout?: EWorkout;

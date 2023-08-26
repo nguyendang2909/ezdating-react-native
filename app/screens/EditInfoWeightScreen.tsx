@@ -1,17 +1,16 @@
+import { Picker } from '@react-native-picker/picker';
 import { useNavigation } from '@react-navigation/native';
 import { HeaderSave } from 'app/components/Header/HeaderSave';
 import { useAppSelector } from 'app/hooks';
 import { translate } from 'app/i18n';
 import { api } from 'app/services/api';
 import { useFormik } from 'formik';
-import { useToast, View } from 'native-base';
+import { Text, Toast, View } from 'native-base';
 import React from 'react';
 import * as Yup from 'yup';
 
 export const EditInfoWeightScreen = () => {
   const { goBack } = useNavigation();
-
-  const toast = useToast();
 
   const value = useAppSelector(state => state.app.profile.weight);
 
@@ -31,35 +30,57 @@ export const EditInfoWeightScreen = () => {
     onSubmit: async values => {
       try {
         await submitUpdateProfile(values);
-      } catch (err) {
-        toast.show({
-          title: translate('Update w failed!', { w: translate('weight') }),
+
+        Toast.show({
           placement: 'top',
+          description: translate('Update w successfully', {
+            w: translate('profile'),
+          }),
+          title: translate('Success'),
+        });
+
+        goBack();
+      } catch (err) {
+        Toast.show({
+          placement: 'top',
+          description: translate('Update w failed!', {
+            w: translate('profile'),
+          }),
+          title: translate('Fail'),
         });
       }
-
-      goBack();
     },
   });
 
   return (
     <>
       <HeaderSave
-        titleTx="Relationship goals"
+        titleTx="Weight"
         onSave={() => formik.handleSubmit()}
         isLoading={formik.isSubmitting}
       />
 
       <View mt={4} mb={4} px={4}>
-        {/* <FormControlInput
-          label={translate('Gender')}
-          value={formik.values.gender}
-          onChange={formik.handleChange('nickname')}
-          placeholder={translate('Please enter your w', {
-            w: translate('nickname'),
+        <Text color="gray.500">{`${translate('My w is', {
+          w: translate('weight'),
+        })} (${translate('kg')}):`}</Text>
+      </View>
+
+      <View mt={4} mb={4} px={4}>
+        <Picker
+          selectedValue={formik.values.weight}
+          onValueChange={(itemValue, itemIndex) =>
+            formik.setFieldValue('weight', itemValue)
+          }
+        >
+          {Array.from({ length: 100 }, (value, index) => {
+            const heightValue = index + 30;
+
+            return (
+              <Picker.Item label={heightValue.toString()} value={heightValue} />
+            );
           })}
-          error={formik.errors.gender}
-        /> */}
+        </Picker>
       </View>
     </>
   );

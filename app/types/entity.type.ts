@@ -39,6 +39,8 @@ export declare namespace Entity {
       gender?: UserGender;
       geolocation: string;
       height: number;
+      hideAge: boolean;
+      hideDistance: boolean;
       introduce: string;
       jobTitle: string;
       languages: string[];

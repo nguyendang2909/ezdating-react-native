@@ -1,7 +1,9 @@
 import { translate } from 'app/i18n';
+import { api } from 'app/services/api';
 import { paddingHorizontal } from 'app/styles';
 import { colors, spacing } from 'app/theme';
-import { Divider, Row, Text, View } from 'native-base';
+import { ApiRequest } from 'app/types/api-request.type';
+import { Divider, Row, Text, Toast, View } from 'native-base';
 import React from 'react';
 
 import { ProfileEditBirthdayMenuItem } from './ProfileEditBirthdayMenuItem';
@@ -11,11 +13,34 @@ import { ProfileEditIntroduceMenuItem } from './ProfileEditIntroductionMenuItem'
 import { ProfileEditLanguagesMenuItem } from './ProfileEditLanguagesMenuItem';
 import { ProfileEditNicknameMenuItem } from './ProfileEditNicknameMenuItem';
 import { ProfileEditPhotos } from './ProfileEditPhotos';
-import { ProfileEditRelationshipGoalMenuItem } from './ProfileEditRelationshipGoal';
-import { ProfileEditRelationshipStatus } from './ProfileEditRelationshipStatus';
+import { ProfileEditRelationshipGoalMenuItem } from './ProfileEditRelationshipGoalMenuItem';
+import { ProfileEditRelationshipStatusMenuItem } from './ProfileEditRelationshipStatusMenuItem';
+import { ProfileShowAgeMenuItem } from './ProfileEditShowAgeMenuItem';
+import { ProfileShowMyDistanceMenuItem } from './ProfileEditShowDistanceMenuItem';
 import { ProfileEditWeightMenuItem } from './ProfileEditWeight';
 
 export const ProfileEditPageContent: React.FC = () => {
+  const [submitUpdateProfile] = api.useUpdateProfileMutation();
+
+  const handleEditProfile = async (payload: ApiRequest.UpdateProfile) => {
+    try {
+      await submitUpdateProfile(payload).unwrap();
+
+      Toast.show({
+        placement: 'top',
+        description: translate('Update w successfully', {
+          w: translate('profile'),
+        }),
+        title: translate('Success'),
+      });
+    } catch (err) {
+      Toast.show({
+        placement: 'top',
+        description: translate('Update w failed!', { w: translate('profile') }),
+        title: translate('Fail'),
+      });
+    }
+  };
   return (
     <>
       <Row style={paddingHorizontal(spacing.md)}>
@@ -33,11 +58,11 @@ export const ProfileEditPageContent: React.FC = () => {
         </View>
         <Divider />
         <View backgroundColor={colors.background}>
-          <ProfileEditBirthdayMenuItem />
+          <ProfileEditBirthdayMenuItem onPress={handleEditProfile} />
         </View>
         <Divider />
         <View backgroundColor={colors.background}>
-          <ProfileEditGenderMenuItem />
+          <ProfileEditGenderMenuItem onPress={handleEditProfile} />
         </View>
         <Divider />
         <View backgroundColor={colors.background}>
@@ -56,7 +81,7 @@ export const ProfileEditPageContent: React.FC = () => {
           </Text>
         </View>
         <View backgroundColor={colors.background}>
-          <ProfileEditIntroduceMenuItem />
+          <ProfileEditIntroduceMenuItem onPress={handleEditProfile} />
         </View>
       </View>
 
@@ -67,11 +92,11 @@ export const ProfileEditPageContent: React.FC = () => {
           </Text>
         </View>
         <View backgroundColor={colors.background}>
-          <ProfileEditRelationshipGoalMenuItem />
+          <ProfileEditRelationshipGoalMenuItem onPress={handleEditProfile} />
         </View>
         <Divider />
         <View backgroundColor={colors.background}>
-          <ProfileEditRelationshipStatus />
+          <ProfileEditRelationshipStatusMenuItem onPress={handleEditProfile} />
         </View>
       </View>
 
@@ -85,7 +110,33 @@ export const ProfileEditPageContent: React.FC = () => {
           <ProfileEditLanguagesMenuItem />
         </View>
       </View>
-      <View mt={8}></View>
+
+      <View mt={4}>
+        <View mx={4} mb={2}>
+          <Text bold={true} textTransform="uppercase">
+            {translate('Job title')}
+          </Text>
+        </View>
+        <View backgroundColor={colors.background}>
+          <ProfileEditIntroduceMenuItem onPress={handleEditProfile} />
+        </View>
+      </View>
+
+      <View mt={4}>
+        <View mx={4} mb={2}>
+          <Text bold={true} textTransform="uppercase">
+            {translate('Control your profile')}
+          </Text>
+        </View>
+        <View backgroundColor={colors.background}>
+          <ProfileShowAgeMenuItem onPress={handleEditProfile} />
+        </View>
+        <View backgroundColor={colors.background}>
+          <ProfileShowMyDistanceMenuItem onPress={handleEditProfile} />
+        </View>
+      </View>
+
+      <View mt={100}></View>
     </>
   );
 };
