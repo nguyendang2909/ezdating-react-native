@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { ComponentType } from 'react';
 import {
   Pressable,
@@ -11,6 +12,7 @@ import {
 import { colors, spacing, typography } from '../theme';
 import { Text, TextProps } from './Text';
 
+// eslint-disable-next-line no-use-before-define
 type Presets = keyof typeof $viewPresets;
 
 export interface ButtonAccessoryProps {

@@ -8,6 +8,7 @@ export declare namespace ApiResponse {
     };
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   type FetchData<T, R extends Record<string, any> = object> = {
     [P in keyof R]?: R[P];
   } & {
@@ -15,6 +16,7 @@ export declare namespace ApiResponse {
     type?: string;
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   type FetchPaginationData<T, R extends Record<string, any> = object> = {
     [P in keyof R]?: R[P];
   } & FetchData<T, { pagination: Pagination }>;

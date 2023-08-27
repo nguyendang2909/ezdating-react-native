@@ -84,13 +84,11 @@ export declare namespace ApiRequest {
     isAvatar?: boolean;
   };
 
-  type FindAllConversations = {};
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  type FindManyConversations = FindMany<{}>;
 
-  type FindManyConversations = FindMany<FindAllConversations> & {};
-
-  type FindAllMessages = {};
-
-  type FindManyMessages = FindMany<FindAllMessages> & {
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  type FindManyMessages = FindMany<{}> & {
     matchId: string;
   };
 }

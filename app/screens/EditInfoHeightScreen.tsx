@@ -58,9 +58,7 @@ export const EditInfoHeightScreen = () => {
       <View mt={4} mb={4} px={4}>
         <Picker
           selectedValue={formik.values.height}
-          onValueChange={(itemValue, itemIndex) =>
-            formik.setFieldValue('height', itemValue)
-          }
+          onValueChange={itemValue => formik.setFieldValue('height', itemValue)}
         >
           {Array.from({ length: 100 }, (value, index) => {
             const heightValue = index + 100;

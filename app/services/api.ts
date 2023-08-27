@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import Config from 'app/config';
 import { API_URL } from 'app/config/config.api';
@@ -14,7 +13,7 @@ import { Platform } from 'react-native';
 const mutex = new Mutex();
 
 const baseQuery = fetchBaseQuery({
-  paramsSerializer: (params: Record<string, any>) => {
+  paramsSerializer: (params: Record<string, unknown>) => {
     return queryString.stringify(params);
   },
   baseUrl: Config.API_URL,

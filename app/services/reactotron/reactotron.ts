@@ -54,6 +54,8 @@ if (__DEV__) {
   console.tron = Reactotron; // attach reactotron to `console.tron`
 } else {
   // attach a mock so if things sneak by our __DEV__ guards, we won't crash.
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   console.tron = fakeReactotron;
 }
 
@@ -69,7 +71,7 @@ export function setReactotronRootStore() {
   // initialData: RootStoreSnapshot,
   if (__DEV__) {
     const { logInitialState, logSnapshots } = config;
-    const name = 'ROOT STORE';
+    // const name = 'ROOT STORE';
 
     // logging features
     if (logInitialState) {
@@ -109,6 +111,7 @@ export function setupReactotron(customConfig: ReactotronConfig = {}) {
 
     // configure reactotron
     Reactotron.configure({
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
       name: config.name || require('../../../package.json').name,
       host: config.host,
     });
@@ -116,7 +119,9 @@ export function setupReactotron(customConfig: ReactotronConfig = {}) {
     // hookup middleware
     if (Platform.OS !== 'web') {
       if (config.useAsyncStorage) {
-        Reactotron.setAsyncStorageHandler(AsyncStorage);
+        if (Reactotron.setAsyncStorageHandler) {
+          Reactotron.setAsyncStorageHandler(AsyncStorage);
+        }
       }
       Reactotron.useReactNative({
         asyncStorage: config.useAsyncStorage ? undefined : false,
@@ -149,7 +154,9 @@ export function setupReactotron(customConfig: ReactotronConfig = {}) {
       description: 'Resets the MST store',
       command: 'resetStore',
       handler: () => {
-        Reactotron.log('resetting store');
+        if (Reactotron.log) {
+          Reactotron.log('resetting store');
+        }
         clear();
       },
     });
@@ -159,7 +166,9 @@ export function setupReactotron(customConfig: ReactotronConfig = {}) {
       description: 'Resets the navigation state',
       command: 'resetNavigation',
       handler: () => {
-        Reactotron.log('resetting navigation state');
+        if (Reactotron.log) {
+          Reactotron.log('resetting navigation state');
+        }
         resetRoot({ index: 0, routes: [] });
       },
     });
@@ -190,14 +199,18 @@ export function setupReactotron(customConfig: ReactotronConfig = {}) {
       description: 'Goes back',
       command: 'goBack',
       handler: () => {
-        Reactotron.log('Going back');
+        if (Reactotron.log) {
+          Reactotron.log('Going back');
+        }
         goBack();
       },
     });
 
     // clear if we should
     if (config.clearOnLoad) {
-      Reactotron.clear();
+      if (Reactotron.clear) {
+        Reactotron.clear();
+      }
     }
 
     _reactotronIsSetUp = true;

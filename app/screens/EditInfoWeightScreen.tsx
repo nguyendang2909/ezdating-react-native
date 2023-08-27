@@ -58,9 +58,7 @@ export const EditInfoWeightScreen = () => {
       <View mt={4} mb={4} px={4}>
         <Picker
           selectedValue={formik.values.weight}
-          onValueChange={(itemValue, itemIndex) =>
-            formik.setFieldValue('weight', itemValue)
-          }
+          onValueChange={itemValue => formik.setFieldValue('weight', itemValue)}
         >
           {Array.from({ length: 100 }, (value, index) => {
             const heightValue = index + 30;

@@ -25,6 +25,7 @@ I18nManager.forceRTL(isRTL);
 type RecursiveKeyOfHandleValue<
   TValue,
   Text extends string,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
 > = TValue extends any[]
   ? Text
   : TValue extends object
