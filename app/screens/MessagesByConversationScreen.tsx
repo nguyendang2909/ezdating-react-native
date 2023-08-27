@@ -3,8 +3,9 @@ import { MessageByConversationHeader } from 'app/containers/Messages/MessagesHea
 import { MessagesScrollView } from 'app/containers/Messages/MessagesScrollView';
 import { SendMessageBox } from 'app/containers/Messages/SendMessageBox';
 import { AppStackScreenProps } from 'app/navigators';
-import { Box, StatusBar } from 'native-base';
+import { Box, KeyboardAvoidingView, StatusBar } from 'native-base';
 import React, { FC } from 'react';
+import { Platform } from 'react-native';
 
 type FCProps = AppStackScreenProps<'MessagesByConversation'>;
 
@@ -23,10 +24,15 @@ export const MessagesByConversationScreen: FC<FCProps> = props => {
     <>
       <StatusBar barStyle="default" />
       <MessageByConversationHeader />
-      <Box safeAreaBottom flex={1}>
-        <MessagesScrollView />
-        <SendMessageBox />
-      </Box>
+      <KeyboardAvoidingView
+        flex={1}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      >
+        <Box safeAreaBottom flex={1}>
+          <MessagesScrollView />
+          <SendMessageBox />
+        </Box>
+      </KeyboardAvoidingView>
     </>
   );
 };

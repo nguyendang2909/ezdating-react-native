@@ -1,25 +1,26 @@
 import { Header } from 'app/components';
+import { GradientIcon } from 'app/components/Icon/GradientIcon';
+import { FontAwesome } from 'app/components/Icon/Lib';
 import { DatingSwipe } from 'app/containers/DatingSwipe/DatingSwipe';
 import { UpdateGeolocation } from 'app/containers/Home/UpdateGeolocation';
-import { UpdateGeoLocationPermission } from 'app/containers/Home/UpdateGeolocationPermission';
 import { colors } from 'app/theme';
-import { Box, Button, Pressable, Text } from 'native-base';
+import { Box, Text } from 'native-base';
 import React, { FC } from 'react';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import LinearGradient from 'react-native-linear-gradient';
 
 export const DatingSwipeScreen: FC = () => {
   return (
     <>
       <Header titleTx="appName" />
-      <UpdateGeoLocationPermission />
       <UpdateGeolocation />
       <Box flex={1} safeAreaY backgroundColor={colors.primary}>
-        <Pressable>
+        <TouchableOpacity>
           <Box
             bg={{
               linearGradient: {
-                colors: ['lightBlue.300', 'violet.800'],
-                start: [1, 0],
+                colors: ['#fd267a', '#ff6036'],
+                start: [0, 1],
                 end: [1, 1],
               },
             }}
@@ -29,7 +30,7 @@ export const DatingSwipeScreen: FC = () => {
           >
             <Text>This is a Box with Linear Gradient</Text>
           </Box>
-        </Pressable>
+        </TouchableOpacity>
 
         <LinearGradient
           colors={['#FF00FF', '#FFF000', '#FF0000']}
@@ -37,7 +38,8 @@ export const DatingSwipeScreen: FC = () => {
           start={{ y: 0.0, x: 0.0 }}
           end={{ y: 0.0, x: 1.0 }}
         >
-          <Button
+          <Box height={100}></Box>
+          {/* <Button
             style={{
               borderRadius: 20,
               width: 100 / 3,
@@ -45,8 +47,10 @@ export const DatingSwipeScreen: FC = () => {
               color: '#fff',
             }}
             title={`Welcome`}
-          />
+          /> */}
         </LinearGradient>
+
+        <GradientIcon icon={FontAwesome} name="heart" />
         <DatingSwipe />
       </Box>
     </>

@@ -175,8 +175,10 @@ const en = {
   Success: 'Success',
   success: 'success',
   // u
+  'Unable to connect': 'Unable to connect',
   'Update w failed!': 'Update {{w}} failed!',
   'Update w successfully': 'Update {{w}} successfully',
+  'Upload w': 'Upload {{w}}',
   // v
   'Verify your w': 'Verify your {{w}}',
   Visitors: 'Visitors',

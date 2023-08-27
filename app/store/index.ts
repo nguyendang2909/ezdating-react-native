@@ -18,14 +18,14 @@ import { api } from '../services/api';
 import { appReducer } from './app.store';
 import { conversationReducer } from './conversations.store';
 import { appSaga } from './saga';
-import theme from './theme';
+// import theme from './theme';
 import { userReducer } from './user.store';
 
 const reduxSagaMonitorOptions = {};
 const sagaMiddleware = createSagaMiddleware(reduxSagaMonitorOptions);
 
 const reducers = combineReducers({
-  theme,
+  // theme,
   [api.reducerPath]: api.reducer,
   conversation: conversationReducer,
   user: userReducer,

@@ -8,7 +8,7 @@ import { useAppSelector } from 'app/hooks';
 import { translate } from 'app/i18n';
 import { ApiRequest } from 'app/types/api-request.type';
 import { Actionsheet, Box, Heading, Text, useDisclose } from 'native-base';
-import React from 'react';
+import React, { useState } from 'react';
 
 type FCProps = {
   onPress: (payload: ApiRequest.UpdateProfile) => void;
@@ -21,12 +21,20 @@ export const ProfileEditRelationshipStatusMenuItem: React.FC<FCProps> = ({
     state => state.app.profile.relationshipStatus,
   );
 
+  const [isInit, setInit] = useState<boolean>(false);
+
   const { isOpen, onOpen, onClose } = useDisclose();
 
   const handleChange = (relationshipStatus: UserRelationshipStatus) => {
     onClose();
     onPress({ relationshipStatus });
   };
+
+  const handleOpen = () => {
+    setInit(true);
+    onOpen();
+  };
+
   return (
     <>
       <MenuItem
@@ -35,32 +43,36 @@ export const ProfileEditRelationshipStatusMenuItem: React.FC<FCProps> = ({
         {...(currentValue
           ? { valueTx: `constants.userRelationshipStatuses.${currentValue}` }
           : {})}
-        onPress={onOpen}
+        onPress={handleOpen}
       />
 
-      <Actionsheet isOpen={isOpen} onClose={onClose}>
-        <Actionsheet.Content>
-          <Box mb={4}>
-            <Heading size="sm" textAlign="center">
-              {translate('Relationship goal')}
-            </Heading>
-          </Box>
-          {Object.values(UserRelationshipStatuses).map(value => {
-            return (
-              <Actionsheet.Item
-                key={value}
-                onPress={() => {
-                  handleChange(value);
-                }}
-              >
-                <Text fontWeight={currentValue === value ? 'bold' : undefined}>
-                  {translate(`constants.userRelationshipStatuses.${value}`)}
-                </Text>
-              </Actionsheet.Item>
-            );
-          })}
-        </Actionsheet.Content>
-      </Actionsheet>
+      {isInit && (
+        <Actionsheet isOpen={isOpen} onClose={onClose}>
+          <Actionsheet.Content>
+            <Box mb={4}>
+              <Heading size="sm" textAlign="center">
+                {translate('Relationship goal')}
+              </Heading>
+            </Box>
+            {Object.values(UserRelationshipStatuses).map(value => {
+              return (
+                <Actionsheet.Item
+                  key={value}
+                  onPress={() => {
+                    handleChange(value);
+                  }}
+                >
+                  <Text
+                    fontWeight={currentValue === value ? 'bold' : undefined}
+                  >
+                    {translate(`constants.userRelationshipStatuses.${value}`)}
+                  </Text>
+                </Actionsheet.Item>
+              );
+            })}
+          </Actionsheet.Content>
+        </Actionsheet>
+      )}
     </>
   );
 };

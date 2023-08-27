@@ -8,12 +8,8 @@ import {
   NativeStackScreenProps,
 } from '@react-navigation/native-stack';
 import { useAppSelector } from 'app/hooks';
-import { EditInfoBirthdayScreen } from 'app/screens/EditInfoBirthdayScreen';
-import { EditInforGenderScreen } from 'app/screens/EditInfoGenderScreen';
 import { EditInfoHeightScreen } from 'app/screens/EditInfoHeightScreen';
-import { EditInfoJobTitleScreen } from 'app/screens/EditInfoJobTitleScreen';
 import { EditInfoNicknameScreen } from 'app/screens/EditInfoNicknameScreen';
-import { EditInfoRelationshipGoalScreen } from 'app/screens/EditInfoRelationshipGoalScreen';
 import { EditInfoWeightScreen } from 'app/screens/EditInfoWeightScreen';
 import { LikedYouScreen } from 'app/screens/LikedYouScreen';
 import { MainScreen } from 'app/screens/MainScreen';
@@ -55,12 +51,8 @@ import { navigationRef, useBackButtonHandler } from './navigationUtilities';
  *   https://reactnavigation.org/docs/typescript/#organizing-types
  */
 export type AppStackParamList = {
-  EditInfoBirthday: undefined;
-  EditInfoGender: undefined;
   EditInfoHeight: undefined;
-  EditInfoJobTitle: undefined;
   EditInfoNickname: undefined;
-  EditInfoRelationshipGoal: undefined;
   EditInfoWeight: undefined;
   UpdateProfileBasicInfo: undefined;
   UpdateProfilePhotosScreen: undefined;
@@ -120,33 +112,28 @@ const AppStack = () => {
         <>
           <Stack.Screen name="Main" component={MainScreen} />
           <Stack.Screen name="Home" component={HomeNavigator} />
-          <Stack.Screen
-            name="EditInfoBirthday"
-            component={EditInfoBirthdayScreen}
-          />
-          <Stack.Screen
-            name="EditInfoGender"
-            component={EditInforGenderScreen}
-          />
+
           <Stack.Screen
             name="EditInfoHeight"
             component={EditInfoHeightScreen}
+            options={{
+              presentation: 'modal',
+            }}
           />
-          <Stack.Screen
-            name="EditInfoJobTitle"
-            component={EditInfoJobTitleScreen}
-          />
+
           <Stack.Screen
             name="EditInfoNickname"
             component={EditInfoNicknameScreen}
-          />
-          <Stack.Screen
-            name="EditInfoRelationshipGoal"
-            component={EditInfoRelationshipGoalScreen}
+            options={{
+              presentation: 'modal',
+            }}
           />
           <Stack.Screen
             name="EditInfoWeight"
             component={EditInfoWeightScreen}
+            options={{
+              presentation: 'modal',
+            }}
           />
           <Stack.Screen
             name="LikedYou"

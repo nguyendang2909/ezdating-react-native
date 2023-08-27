@@ -1,9 +1,10 @@
 import { translate } from 'app/i18n';
 import { api } from 'app/services/api';
+import { profileNotificationsService } from 'app/services/notifications/profile-notifications.service';
 import { paddingHorizontal } from 'app/styles';
 import { colors, spacing } from 'app/theme';
 import { ApiRequest } from 'app/types/api-request.type';
-import { Divider, Row, Text, Toast, View } from 'native-base';
+import { Divider, Row, Text, View } from 'native-base';
 import React from 'react';
 
 import { ProfileEditBirthdayMenuItem } from './ProfileEditBirthdayMenuItem';
@@ -12,7 +13,7 @@ import { ProfileEditHeightMenuItem } from './ProfileEditHeightMenuItem';
 import { ProfileEditIntroduceMenuItem } from './ProfileEditIntroductionMenuItem';
 import { ProfileEditLanguagesMenuItem } from './ProfileEditLanguagesMenuItem';
 import { ProfileEditNicknameMenuItem } from './ProfileEditNicknameMenuItem';
-import { ProfileEditPhotos } from './ProfileEditPhotos';
+import { ProfileEditPhotos } from './ProfileEditPhotos/ProfileEditMedifaFiles';
 import { ProfileEditRelationshipGoalMenuItem } from './ProfileEditRelationshipGoalMenuItem';
 import { ProfileEditRelationshipStatusMenuItem } from './ProfileEditRelationshipStatusMenuItem';
 import { ProfileShowAgeMenuItem } from './ProfileEditShowAgeMenuItem';
@@ -26,19 +27,9 @@ export const ProfileEditPageContent: React.FC = () => {
     try {
       await submitUpdateProfile(payload).unwrap();
 
-      Toast.show({
-        placement: 'top',
-        description: translate('Update w successfully', {
-          w: translate('profile'),
-        }),
-        title: translate('Success'),
-      });
+      profileNotificationsService.success();
     } catch (err) {
-      Toast.show({
-        placement: 'top',
-        description: translate('Update w failed!', { w: translate('profile') }),
-        title: translate('Fail'),
-      });
+      profileNotificationsService.fail();
     }
   };
   return (

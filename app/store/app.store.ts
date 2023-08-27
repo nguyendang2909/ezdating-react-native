@@ -7,10 +7,7 @@ import { AuthorizationResult } from 'react-native-geolocation-service';
 const initialState: AppStore.AppState = {
   accessToken: undefined,
   refreshToken: undefined,
-  isLogged: false,
-  profile: {
-    _id: '',
-  },
+  profile: {},
   osPermissions: {},
 };
 
@@ -20,6 +17,7 @@ export const appSlice = createSlice({
   reducers: {
     updateProfile: (state, action: PayloadAction<ApiResponse.UserData>) => {
       const profile = action.payload.data;
+
       if (profile) {
         state.profile = profile;
       }
@@ -36,13 +34,11 @@ export const appSlice = createSlice({
         state.refreshToken = data.refreshToken;
       }
     },
-    setLogged: state => {
-      state.isLogged = true;
-    },
     logout: state => {
       state.accessToken = undefined;
       state.refreshToken = undefined;
       state.isLogged = false;
+      state.profile = {};
     },
     setOsLocationPermission: (
       state,

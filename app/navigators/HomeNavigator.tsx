@@ -57,7 +57,7 @@ export const HomeNavigator: FC<FCProps> = () => {
           tabBarIcon: ({ focused }) => (
             <FontAwesome
               name="globe"
-              color={focused ? 'red' : colors.palette.neutral500}
+              color={focused ? '#ff6036' : colors.palette.neutral400}
               size={30}
             />
           ),
@@ -71,7 +71,7 @@ export const HomeNavigator: FC<FCProps> = () => {
           tabBarIcon: ({ focused }) => (
             <MaterialIcons
               name="location-on"
-              color={focused ? 'red' : colors.palette.neutral500}
+              color={focused ? '#ff6036' : colors.palette.neutral400}
               size={30}
             />
           ),
@@ -85,7 +85,7 @@ export const HomeNavigator: FC<FCProps> = () => {
           tabBarIcon: ({ focused }) => (
             <MaterialCommunityIcons
               name="chat"
-              color={focused ? 'red' : colors.palette.neutral500}
+              color={focused ? '#ff6036' : colors.palette.neutral400}
               size={30}
             />
           ),
@@ -99,7 +99,7 @@ export const HomeNavigator: FC<FCProps> = () => {
           tabBarIcon: ({ focused }) => (
             <MaterialCommunityIcons
               name="account"
-              color={focused ? 'red' : colors.palette.neutral500}
+              color={focused ? '#ff6036' : colors.palette.neutral400}
               size={30}
             />
           ),

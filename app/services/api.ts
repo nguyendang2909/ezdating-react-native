@@ -173,30 +173,39 @@ export const api = createApi({
     // Photos
     uploadPhoto: builder.mutation<ApiResponse.Logged, ApiRequest.UploadPhoto>({
       query: body => {
-        const { file, isAvatar } = body;
+        const { file } = body;
         const formData = new FormData();
         formData.append('file', {
           uri: Platform.OS === 'ios' ? `file:///${file.path}` : file.path,
           type: 'image/jpeg',
           name: 'image.jpg',
         });
-        if (isAvatar) {
-          formData.append('isAvatar', 'true');
-        }
+
         return {
           url: API_URL.photos,
           method: 'POST',
           body: formData,
         };
       },
-      // invalidatesTags: ['MyProfile'],
+      invalidatesTags: (result, error) => {
+        if (error) {
+          return [];
+        }
+        return ['Profile'];
+      },
     }),
 
     removePhoto: builder.mutation<ApiResponse.RemoveData, string>({
       query: (id: string) => ({
-        url: `${API_URL.uploadFiles}/${id}`,
+        url: `${API_URL.photos}/${id}`,
         method: 'DELETE',
       }),
+      invalidatesTags: (result, error) => {
+        if (error) {
+          return [];
+        }
+        return ['Profile'];
+      },
     }),
   }),
 });

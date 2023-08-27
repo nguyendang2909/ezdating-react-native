@@ -18,6 +18,16 @@ export const conversationSlice = createSlice({
   name: 'conversation',
   initialState,
   reducers: {
+    logout: state => {
+      state.data = [];
+      state.pagination = {
+        cursors: {
+          after: null,
+          before: null,
+        },
+      };
+      state.messages = {};
+    },
     updateConversationByMessage: (
       state,
       action: PayloadAction<Entity.Message>,

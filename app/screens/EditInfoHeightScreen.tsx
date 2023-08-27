@@ -1,11 +1,12 @@
 import { Picker } from '@react-native-picker/picker';
 import { useNavigation } from '@react-navigation/native';
-import { HeaderSave } from 'app/components/Header/HeaderSave';
+import { HeaderSaveModal } from 'app/components/Header/HeaderSaveModal';
 import { useAppSelector } from 'app/hooks';
 import { translate } from 'app/i18n';
 import { api } from 'app/services/api';
+import { profileNotificationsService } from 'app/services/notifications/profile-notifications.service';
 import { useFormik } from 'formik';
-import { Text, Toast, View } from 'native-base';
+import { Box, Text, View } from 'native-base';
 import React from 'react';
 import * as Yup from 'yup';
 
@@ -31,30 +32,18 @@ export const EditInfoHeightScreen = () => {
       try {
         await submitUpdateProfile(values).unwrap();
 
-        Toast.show({
-          placement: 'top',
-          description: translate('Update w successfully', {
-            w: translate('profile'),
-          }),
-          title: translate('Success'),
-        });
+        profileNotificationsService.success();
 
         goBack();
       } catch (err) {
-        Toast.show({
-          placement: 'top',
-          description: translate('Update w failed!', {
-            w: translate('profile'),
-          }),
-          title: translate('Fail'),
-        });
+        profileNotificationsService.fail();
       }
     },
   });
 
   return (
-    <>
-      <HeaderSave
+    <Box flex="1" safeAreaY>
+      <HeaderSaveModal
         titleTx="Height"
         onSave={() => formik.handleSubmit()}
         isLoading={formik.isSubmitting}
@@ -81,6 +70,6 @@ export const EditInfoHeightScreen = () => {
           })}
         </Picker>
       </View>
-    </>
+    </Box>
   );
 };

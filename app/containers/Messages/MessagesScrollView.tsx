@@ -87,7 +87,7 @@ export const MessagesScrollView = () => {
       }
       inverted
       data={messages}
-      keyExtractor={item => item._id}
+      keyExtractor={(item, index) => item._id || index.toString()}
       renderItem={({ item, index }) => {
         const isMe = !item._userId || item._userId === currentUserId;
 

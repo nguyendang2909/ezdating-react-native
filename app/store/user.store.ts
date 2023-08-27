@@ -12,7 +12,14 @@ const initialState: AppStore.UserState = {
 export const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
+  reducers: {
+    logout: state => {
+      state.data = {};
+      state.nearby = {
+        data: [],
+      };
+    },
+  },
   extraReducers: builder => {
     // builder.addMatcher(
     //   api.endpoints.getConversations.matchFulfilled,
@@ -45,7 +52,11 @@ export const userSlice = createSlice({
         if (!usersData?.length) {
           return;
         }
-        state.nearby.data = usersData;
+        if (state.nearby) {
+          state.nearby.data = usersData;
+        } else {
+          state.nearby = { data: usersData };
+        }
       },
     );
   },

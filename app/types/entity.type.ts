@@ -10,7 +10,7 @@ import {
 
 export declare namespace Entity {
   type BaseEntity = {
-    _id: string;
+    _id?: string;
     createdAt?: string;
     updatedAt?: string;
   };

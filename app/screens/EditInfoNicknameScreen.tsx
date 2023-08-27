@@ -1,11 +1,11 @@
 import { useNavigation } from '@react-navigation/native';
 import { FormControlInput } from 'app/components/Form/FormControlInput';
-import { HeaderSave } from 'app/components/Header/HeaderSave';
+import { HeaderSaveModal } from 'app/components/Header/HeaderSaveModal';
 import { useAppSelector } from 'app/hooks';
 import { translate } from 'app/i18n';
 import { api } from 'app/services/api';
 import { useFormik } from 'formik';
-import { useToast, View } from 'native-base';
+import { Box, useToast, View } from 'native-base';
 import React from 'react';
 import * as Yup from 'yup';
 
@@ -41,8 +41,8 @@ export const EditInfoNicknameScreen = () => {
   });
 
   return (
-    <>
-      <HeaderSave
+    <Box flex="1" safeAreaY>
+      <HeaderSaveModal
         titleTx="Nickname"
         onSave={() => formik.handleSubmit()}
         isLoading={formik.isSubmitting}
@@ -59,6 +59,6 @@ export const EditInfoNicknameScreen = () => {
           error={formik.errors.nickname}
         />
       </View>
-    </>
+    </Box>
   );
 };
