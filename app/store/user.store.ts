@@ -2,6 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 import { api } from 'app/services/api';
 import { AppStore } from 'app/types/app-store.type';
 
+import { appActions } from './app.store';
+
 const initialState: AppStore.UserState = {
   data: {},
   nearby: {
@@ -12,15 +14,14 @@ const initialState: AppStore.UserState = {
 export const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {
-    logout: state => {
+  reducers: {},
+  extraReducers: builder => {
+    builder.addCase(appActions.logout, state => {
       state.data = {};
       state.nearby = {
         data: [],
       };
-    },
-  },
-  extraReducers: builder => {
+    });
     // builder.addMatcher(
     //   api.endpoints.getConversations.matchFulfilled,
     //   (state, action) => {

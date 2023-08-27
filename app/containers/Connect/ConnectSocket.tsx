@@ -10,7 +10,7 @@ import { useDispatch } from 'react-redux';
 export const ConnectSocket: React.FC = () => {
   const dispatch = useDispatch();
   const accessToken = useAppSelector(state => state.app.accessToken);
-  const userId = useAppSelector(state => state.app.profile._id);
+  const userId = useAppSelector(state => state.app.profile?._id);
 
   React.useEffect(() => {
     if (accessToken && userId) {

@@ -26,7 +26,8 @@ import { PersistGate } from 'redux-persist/lib/integration/react';
 
 import Config from './config';
 import { nativeBaseConfig } from './config/native-base.config';
-import { ConnectSocket } from './containers/Socket/ConnectSocket';
+import { ConnectProfile } from './containers/Connect/ConnectProfile';
+import { ConnectSocket } from './containers/Connect/ConnectSocket';
 import { AppNavigator, useNavigationPersistence } from './navigators';
 import { ErrorBoundary } from './screens/ErrorScreen/ErrorBoundary';
 import { setupReactotron } from './services/reactotron';
@@ -119,6 +120,7 @@ function App(props: AppProps) {
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <ConnectSocket />
+        <ConnectProfile />
         <SafeAreaProvider initialMetrics={initialWindowMetrics}>
           <ErrorBoundary catchErrors={Config.catchErrors}>
             <NativeBaseProvider theme={defaultTheme} config={nativeBaseConfig}>

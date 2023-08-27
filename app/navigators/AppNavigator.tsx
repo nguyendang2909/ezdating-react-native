@@ -23,7 +23,6 @@ import { SignInWithOtpPhoneNumberScreen } from 'app/screens/SignInWithOtpPhoneNu
 import { SignInWithPhoneNumberScreen } from 'app/screens/SignInWithPhoneNumberScreen';
 import { UpdateProfileBasicInfoScreen } from 'app/screens/UpdateProfileBasicInfoScreen';
 import { UpdateProfilePhotosScreen } from 'app/screens/UpdateProfilePhotosScreen';
-import { api } from 'app/services/api';
 import { colors } from 'app/theme';
 import {
   ReactNavDarkTheme,
@@ -93,8 +92,6 @@ const Stack = createNativeStackNavigator<AppStackParamList>();
 
 const AppStack = () => {
   const isAuthenticated = useAppSelector(state => state.app.accessToken);
-
-  api.useGetMyProfileQuery(undefined, {});
 
   const initialRoute: keyof AppStackParamList = isAuthenticated
     ? 'Main'

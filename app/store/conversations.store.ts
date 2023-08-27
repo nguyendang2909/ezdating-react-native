@@ -3,6 +3,8 @@ import { api } from 'app/services/api';
 import { AppStore } from 'app/types/app-store.type';
 import { Entity } from 'app/types/entity.type';
 
+import { appActions } from './app.store';
+
 const initialState: AppStore.ConversationState = {
   data: [],
   pagination: {
@@ -18,16 +20,6 @@ export const conversationSlice = createSlice({
   name: 'conversation',
   initialState,
   reducers: {
-    logout: state => {
-      state.data = [];
-      state.pagination = {
-        cursors: {
-          after: null,
-          before: null,
-        },
-      };
-      state.messages = {};
-    },
     updateConversationByMessage: (
       state,
       action: PayloadAction<Entity.Message>,
@@ -109,6 +101,15 @@ export const conversationSlice = createSlice({
     },
   },
   extraReducers: builder => {
+    builder.addCase(appActions.logout, state => {
+      state.pagination = {
+        cursors: {
+          after: null,
+          before: null,
+        },
+      };
+      state.messages = {};
+    });
     builder.addMatcher(
       api.endpoints.getNextConversations.matchFulfilled,
       (state, action) => {

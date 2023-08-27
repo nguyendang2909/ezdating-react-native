@@ -4,7 +4,10 @@ import { useAppSelector } from 'app/hooks';
 import React, { useEffect } from 'react';
 
 export const MainScreen: React.FC = () => {
-  const userStatus = useAppSelector(state => state.app.profile.status);
+  const userStatus = useAppSelector(state => state.app.profile?.status);
+  const profile = useAppSelector(state => state.app.profile);
+
+  console.log(111, profile);
 
   const navigation = useNavigation();
 
