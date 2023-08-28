@@ -36,6 +36,9 @@ export declare namespace AppStore {
   }>;
 
   type UserState = {
+    swipe?: {
+      data?: Entity.User[];
+    };
     data?: Record<string, Entity.User>;
     nearby?: {
       data?: Entity.User[];

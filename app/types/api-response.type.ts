@@ -3,8 +3,8 @@ import { Entity } from './entity.type';
 export declare namespace ApiResponse {
   type Pagination = {
     cursors?: {
-      after?: string | null;
-      before?: string | null;
+      next?: string | null;
+      prev?: string | null;
     };
   };
 

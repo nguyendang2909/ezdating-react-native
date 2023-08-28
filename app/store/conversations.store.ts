@@ -9,8 +9,8 @@ const initialState: AppStore.ConversationState = {
   data: [],
   pagination: {
     cursors: {
-      after: null,
-      before: null,
+      next: null,
+      prev: null,
     },
   },
   messages: {},
@@ -104,8 +104,8 @@ export const conversationSlice = createSlice({
     builder.addCase(appActions.logout, state => {
       state.pagination = {
         cursors: {
-          after: null,
-          before: null,
+          next: null,
+          prev: null,
         },
       };
       state.messages = {};

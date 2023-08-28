@@ -1,10 +1,14 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { api } from 'app/services/api';
 import { AppStore } from 'app/types/app-store.type';
+import { Entity } from 'app/types/entity.type';
 
 import { appActions } from './app.store';
 
 const initialState: AppStore.UserState = {
+  swipe: {
+    data: [],
+  },
   data: {},
   nearby: {
     data: [],
@@ -14,7 +18,21 @@ const initialState: AppStore.UserState = {
 export const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
+  reducers: {
+    addSwipeUsers: (state, action: PayloadAction<Entity.User[]>) => {
+      if (!state.swipe) {
+        state.swipe = {
+          data: action.payload,
+        };
+
+        return;
+      }
+
+      if (!state.swipe.data || !state.swipe.data.length) {
+        state.swipe.data = action.payload;
+      }
+    },
+  },
   extraReducers: builder => {
     builder.addCase(appActions.logout, state => {
       state.data = {};

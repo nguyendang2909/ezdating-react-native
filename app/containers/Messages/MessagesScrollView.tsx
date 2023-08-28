@@ -28,7 +28,7 @@ export const MessagesScrollView = () => {
       matchId,
       ...(cursorAfter
         ? {
-            after: cursorAfter,
+            next: cursorAfter,
           }
         : {}),
     },

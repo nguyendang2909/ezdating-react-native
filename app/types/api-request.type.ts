@@ -11,8 +11,8 @@ export declare namespace ApiRequest {
   };
 
   type Pagination = {
-    after?: string;
-    before?: string;
+    next?: string;
+    prev?: string;
   };
 
   type FindMany<T> = Pagination & T;
@@ -91,4 +91,6 @@ export declare namespace ApiRequest {
   type FindManyMessages = FindMany<{}> & {
     matchId: string;
   };
+
+  type FindManySwipeUsers = FindMany<object>;
 }
