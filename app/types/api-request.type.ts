@@ -84,13 +84,9 @@ export declare namespace ApiRequest {
     isAvatar?: boolean;
   };
 
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  type FindManyConversations = FindMany<{}>;
+  type FindManyConversations = Pagination;
 
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  type FindManyMessages = FindMany<{}> & {
-    matchId: string;
-  };
+  type FindManyMessages = FindMany<{ matchId: string }>;
 
   type FindManySwipeUsers = FindMany<object>;
 

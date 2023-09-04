@@ -4,12 +4,12 @@ import { appActions } from 'app/store/app.store';
 import { ApiResponse } from 'app/types/api-response.type';
 import axios from 'axios';
 
-export const requestApi = axios.create({
+export const api = axios.create({
   baseURL: Config.API_URL,
   timeout: 15000,
 });
 
-requestApi.interceptors.request.use(config => {
+api.interceptors.request.use(config => {
   const accessToken = store.getState().app.accessToken;
 
   if (accessToken) {
@@ -19,7 +19,7 @@ requestApi.interceptors.request.use(config => {
   return config;
 });
 
-requestApi.interceptors.response.use(
+api.interceptors.response.use(
   response => {
     return response;
   },
@@ -40,7 +40,7 @@ requestApi.interceptors.response.use(
         if (tokenResponse.data.data) {
           store.dispatch(appActions.updateAccessToken(tokenResponse.data.data));
 
-          return requestApi(originalRequest);
+          return api(originalRequest);
         }
       } catch (err) {}
 

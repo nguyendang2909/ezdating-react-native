@@ -37,4 +37,9 @@ export declare namespace ApiResponse {
     refreshToken?: string;
     user?: Entity.User;
   }>;
+
+  type MessagesData = FetchPaginationData<
+    Entity.Message[],
+    { _matchId: string }
+  >;
 }

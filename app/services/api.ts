@@ -148,7 +148,7 @@ export const api = createApi({
     >({
       query: ({ params }) => ({
         url: API_URL.usersNearby,
-        method: 'POST',
+        method: 'GET',
         params,
       }),
     }),
