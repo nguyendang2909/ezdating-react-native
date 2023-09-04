@@ -5,7 +5,7 @@ import { useAppSelector } from 'app/hooks';
 import React from 'react';
 
 export const ProfileEditNicknameMenuItem: React.FC = () => {
-  const value = useAppSelector(state => state.app.profile.nickname);
+  const value = useAppSelector(state => state.app.profile?.nickname);
 
   const navigation = useNavigation();
 

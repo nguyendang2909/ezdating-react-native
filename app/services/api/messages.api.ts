@@ -6,9 +6,11 @@ import { api } from './api';
 
 class MessagesApi {
   async getMany(params: ApiRequest.FindManyMessages) {
-    return await api.get<ApiResponse.MessagesData>(API_URL.messages, {
+    const { data } = await api.get<ApiResponse.MessagesData>(API_URL.messages, {
       params,
     });
+
+    return data;
   }
 }
 

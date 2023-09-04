@@ -7,10 +7,11 @@ import { api } from './api';
 
 class ConversationsApi {
   async getMany(params: ApiRequest.FindManyConversations) {
-    return await api.get<ApiResponse.FetchPaginationData<Entity.Match[]>>(
-      API_URL.conversations,
-      { params },
-    );
+    const { data } = await api.get<
+      ApiResponse.FetchPaginationData<Entity.Match[]>
+    >(API_URL.conversations, { params });
+
+    return data;
   }
 }
 

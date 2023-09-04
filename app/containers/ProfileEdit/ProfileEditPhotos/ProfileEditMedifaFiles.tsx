@@ -2,6 +2,9 @@ import { useActionSheet } from '@expo/react-native-action-sheet';
 import { useAppSelector } from 'app/hooks';
 import { translate } from 'app/i18n';
 import { api } from 'app/services/api';
+import { mediaFilesApi } from 'app/services/api/media-files.api';
+import { usersApi } from 'app/services/api/users.api';
+import { appActions } from 'app/store/app.store';
 import { flexDirectionRow, flexWrapWrap, padding, width } from 'app/styles';
 import { spacing } from 'app/theme';
 import _ from 'lodash';
@@ -10,15 +13,18 @@ import React, { useState } from 'react';
 import { Platform } from 'react-native';
 import ImageCropPicker from 'react-native-image-crop-picker';
 import { check, PERMISSIONS, request, RESULTS } from 'react-native-permissions';
+import { useDispatch } from 'react-redux';
 
 import { ProfileEditMediaFileCard } from './MediaFileCard';
 
 export const ProfileEditPhotos: React.FC = () => {
-  const [submitRemovePhoto] = api.useRemovePhotoMutation();
+  const dispatch = useDispatch();
+
+  // const [submitRemovePhoto] = api.useRemovePhotoMutation();
 
   const [submitUploadPhoto] = api.useUploadPhotoMutation();
   const mediaFiles =
-    useAppSelector(state => state.app.profile.mediaFiles) || [];
+    useAppSelector(state => state.app.profile?.mediaFiles) || [];
 
   const [loadings, setLoadings] = useState<boolean[]>([
     false,
@@ -41,7 +47,13 @@ export const ProfileEditPhotos: React.FC = () => {
 
       setLoadings(newLoadings);
 
-      await submitRemovePhoto(_id).unwrap();
+      await mediaFilesApi.removePhoto(_id);
+
+      const profile = await usersApi.getMyProfile();
+
+      if (profile.data) {
+        dispatch(appActions.updateProfile(profile.data));
+      }
     } catch (err) {
     } finally {
       const newLoadings = _.cloneDeep(loadings);

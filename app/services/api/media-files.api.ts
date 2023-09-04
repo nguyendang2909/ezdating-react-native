@@ -14,13 +14,19 @@ class MediaFilesAPi {
       name: 'image.jpg',
     });
 
-    return await api.post<ApiResponse.MessagesData>(API_URL.photos, {
+    const { data } = await api.post<ApiResponse.MessagesData>(API_URL.photos, {
       body: formData,
     });
+
+    return data;
   }
 
   async removePhoto(id: string) {
-    return await api.delete<ApiResponse.RemoveData>(`${API_URL.photos}/${id}`);
+    const { data } = await api.delete<ApiResponse.RemoveData>(
+      `${API_URL.photos}/${id}`,
+    );
+
+    return data;
   }
 }
 

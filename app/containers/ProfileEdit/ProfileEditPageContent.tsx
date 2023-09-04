@@ -1,11 +1,13 @@
 import { translate } from 'app/i18n';
-import { api } from 'app/services/api';
+import { usersApi } from 'app/services/api/users.api';
 import { profileNotificationsService } from 'app/services/notifications/profile-notifications.service';
+import { appActions } from 'app/store/app.store';
 import { paddingHorizontal } from 'app/styles';
 import { colors, spacing } from 'app/theme';
 import { ApiRequest } from 'app/types/api-request.type';
 import { Divider, Row, Text, View } from 'native-base';
 import React from 'react';
+import { useDispatch } from 'react-redux';
 
 import { ProfileEditBirthdayMenuItem } from './ProfileEditBirthdayMenuItem';
 import { ProfileEditGenderMenuItem } from './ProfileEditGenderMenuItem';
@@ -21,17 +23,24 @@ import { ProfileShowMyDistanceMenuItem } from './ProfileEditShowDistanceMenuItem
 import { ProfileEditWeightMenuItem } from './ProfileEditWeight';
 
 export const ProfileEditPageContent: React.FC = () => {
-  const [submitUpdateProfile] = api.useUpdateProfileMutation();
+  const dispatch = useDispatch();
 
   const handleEditProfile = async (payload: ApiRequest.UpdateProfile) => {
     try {
-      await submitUpdateProfile(payload).unwrap();
+      await usersApi.updateProfile(payload);
 
       profileNotificationsService.success();
+
+      const profile = await usersApi.getMyProfile();
+
+      if (profile.data) {
+        dispatch(appActions.updateProfile(profile.data));
+      }
     } catch (err) {
       profileNotificationsService.fail();
     }
   };
+
   return (
     <>
       <Row style={paddingHorizontal(spacing.md)}>

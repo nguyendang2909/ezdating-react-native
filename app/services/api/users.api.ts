@@ -7,27 +7,34 @@ import { api } from './api';
 
 class UsersApi {
   async getSwipeUsers() {
-    return await api.get<ApiResponse.FetchData<Entity.User[]>>(
+    const { data } = await api.get<ApiResponse.FetchData<Entity.User[]>>(
       API_URL.usersSwipe,
     );
+
+    return data;
   }
 
   async getUsersNearby(params: ApiRequest.SearchUsersNearby) {
-    return await api.get(API_URL.usersNearby, {
+    const { data } = await api.get(API_URL.usersNearby, {
       params,
     });
+    return data;
   }
 
   async getMyProfile() {
-    return await api.get<ApiResponse.UserData>(API_URL.myProfile);
+    const { data } = await api.get<ApiResponse.UserData>(API_URL.myProfile);
+
+    return data;
   }
 
   async updateBasicProfile(body: ApiRequest.UpdateProfileBasicInfo) {
-    return await api.patch(API_URL.myProfileBasicInfo, body);
+    const { data } = await api.patch(API_URL.myProfileBasicInfo, body);
+    return data;
   }
 
   async updateProfile(body: ApiRequest.UpdateProfile) {
-    return await api.patch(API_URL.myProfile, body);
+    const { data } = await api.patch(API_URL.myProfile, body);
+    return data;
   }
 }
 

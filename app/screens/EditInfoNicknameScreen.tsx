@@ -3,20 +3,22 @@ import { FormControlInput } from 'app/components/Form/FormControlInput';
 import { HeaderSaveModal } from 'app/components/Header/HeaderSaveModal';
 import { useAppSelector } from 'app/hooks';
 import { translate } from 'app/i18n';
-import { api } from 'app/services/api';
+import { usersApi } from 'app/services/api/users.api';
+import { appActions } from 'app/store/app.store';
 import { useFormik } from 'formik';
 import { Box, useToast, View } from 'native-base';
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 
 export const EditInfoNicknameScreen = () => {
+  const dispatch = useDispatch();
+
   const { goBack } = useNavigation();
 
   const toast = useToast();
 
-  const currentNickname = useAppSelector(state => state.app.profile.nickname);
-
-  const [submitUpdateProfile] = api.useUpdateProfileMutation();
+  const currentNickname = useAppSelector(state => state.app.profile?.nickname);
 
   const formik = useFormik<{ nickname: string }>({
     enableReinitialize: true,
@@ -31,7 +33,13 @@ export const EditInfoNicknameScreen = () => {
 
     onSubmit: async values => {
       try {
-        await submitUpdateProfile(values).unwrap();
+        await usersApi.updateProfile(values);
+
+        const profile = await usersApi.getMyProfile();
+
+        if (profile.data) {
+          dispatch(appActions.updateProfile(profile.data));
+        }
       } catch (err) {
         toast.show({ title: 'Update nickname failed', placement: 'top' });
       }

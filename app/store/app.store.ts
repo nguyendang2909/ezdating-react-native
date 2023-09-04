@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { api } from 'app/services/api';
 import { ApiResponse } from 'app/types/api-response.type';
 import { AppStore } from 'app/types/app-store.type';
+import { Entity } from 'app/types/entity.type';
 import { AuthorizationResult } from 'react-native-geolocation-service';
 
 const initialState: AppStore.AppState = {
@@ -15,12 +16,10 @@ export const appSlice = createSlice({
   name: 'app',
   initialState,
   reducers: {
-    updateProfile: (state, action: PayloadAction<ApiResponse.UserData>) => {
-      const profile = action.payload.data;
+    updateProfile: (state, action: PayloadAction<Entity.User>) => {
+      const { payload } = action;
 
-      if (profile) {
-        state.profile = profile;
-      }
+      state.profile = payload;
     },
     updateAccessToken: (
       state,

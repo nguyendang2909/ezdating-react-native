@@ -5,7 +5,11 @@ import { api } from './api';
 
 class AuthApi {
   async signInWithPhoneNumber() {
-    return await api.post<ApiResponse.Logged>(API_URL.signInWithPhoneNumber);
+    const { data } = await api.post<ApiResponse.Logged>(
+      API_URL.signInWithPhoneNumber,
+    );
+
+    return data;
   }
 }
 

@@ -7,10 +7,12 @@ import { api } from './api';
 
 class MatchesApi {
   async getMany(params: ApiRequest.FindManyMatches) {
-    return await api.get<ApiResponse.FetchData<Entity.Match[]>>(
+    const { data } = await api.get<ApiResponse.FetchData<Entity.Match[]>>(
       API_URL.usersSwipe,
       { params },
     );
+
+    return data;
   }
 }
 
