@@ -93,4 +93,6 @@ export declare namespace ApiRequest {
   };
 
   type FindManySwipeUsers = FindMany<object>;
+
+  type FindManyMatches = Pagination;
 }

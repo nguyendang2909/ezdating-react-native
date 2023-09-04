@@ -6,9 +6,8 @@ import axios from 'axios';
 
 export const requestApi = axios.create({
   baseURL: Config.API_URL,
+  timeout: 15000,
 });
-
-requestApi.defaults.timeout = 15000;
 
 requestApi.interceptors.request.use(config => {
   const accessToken = store.getState().app.accessToken;

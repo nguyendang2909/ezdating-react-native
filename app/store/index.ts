@@ -17,6 +17,7 @@ import createSagaMiddleware from 'redux-saga';
 import { api } from '../services/api';
 import { appReducer } from './app.store';
 import { conversationReducer } from './conversations.store';
+import { matchReducer } from './matches.store';
 import { appSaga } from './saga';
 // import theme from './theme';
 import { userReducer } from './user.store';
@@ -28,6 +29,7 @@ const reducers = combineReducers({
   // theme,
   [api.reducerPath]: api.reducer,
   conversation: conversationReducer,
+  match: matchReducer,
   user: userReducer,
   app: appReducer,
 });

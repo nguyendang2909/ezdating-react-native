@@ -95,6 +95,16 @@ export const api = createApi({
       }),
     }),
 
+    getMatches: builder.query<
+      ApiResponse.FetchData<Entity.Match[]>,
+      ApiRequest.FindManyMatches
+    >({
+      query: () => ({
+        url: API_URL.matches,
+        method: 'GET',
+      }),
+    }),
+
     // Profile
     getMyProfile: builder.query<ApiResponse.UserData, void>({
       query: () => ({

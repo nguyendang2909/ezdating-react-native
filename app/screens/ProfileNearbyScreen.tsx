@@ -42,7 +42,12 @@ export const ProfileNearbyScreen: React.FC<FCProps> = props => {
         <Box position="absolute" zIndex={100} right={4} top={4}>
           <Box safeAreaTop />
           <Box zIndex={100}>
-            <IconButton icon={<CloseIcon />} onPress={goBack}></IconButton>
+            <IconButton
+              backgroundColor="#fff"
+              variant="ghost"
+              icon={<CloseIcon />}
+              onPress={goBack}
+            ></IconButton>
           </Box>
         </Box>
         <Box

@@ -1,7 +1,8 @@
 import { Header } from 'app/components';
 import { ConversationsBox } from 'app/containers/Conversation/ConversationsBox';
+import { MatchCards } from 'app/containers/Messages/MatchCards';
 import { api } from 'app/services/api';
-import { Box, StatusBar, View } from 'native-base';
+import { Box, StatusBar, Text, View } from 'native-base';
 import React, { FC } from 'react';
 
 export const MessagesScreen: FC = () => {
@@ -12,6 +13,17 @@ export const MessagesScreen: FC = () => {
       <StatusBar barStyle="default" />
       <Header titleTx="EZDating" />
       <Box safeAreaBottom flex={1}>
+        <Box>
+          <Box px={4}>
+            <Text bold>New matches</Text>
+          </Box>
+          <Box px={4}>
+            <MatchCards />
+          </Box>
+        </Box>
+        <Box px={4} mt={2}>
+          <Text bold>Messages</Text>
+        </Box>
         <View flex={1}>
           <ConversationsBox />
         </View>

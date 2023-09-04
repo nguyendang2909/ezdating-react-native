@@ -18,18 +18,21 @@ export declare namespace AppStore {
   };
 
   type ConversationState = {
-    data: Entity.Match[];
-    messages: Record<
+    data?: Entity.Match[];
+    messages?: Record<
       string,
       {
         pagination?: ApiResponse.Pagination;
-        data: Entity.Message[];
+        data?: Entity.Message[];
       }
     >;
-    pagination: ApiResponse.Pagination;
+    pagination?: ApiResponse.Pagination;
   };
 
-  type Conversations = { data: Entity.Match[] };
+  type MatchState = {
+    data?: Entity.Match[];
+    pagination?: ApiResponse.Pagination;
+  };
 
   type Messages = Partial<{
     [T: string]: Entity.Message[];

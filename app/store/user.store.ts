@@ -13,6 +13,9 @@ const initialState: AppStore.UserState = {
   nearby: {
     data: [],
   },
+  matched: {
+    data: [],
+  },
 };
 
 export const userSlice = createSlice({

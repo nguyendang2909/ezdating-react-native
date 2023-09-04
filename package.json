@@ -45,6 +45,7 @@
     "@react-navigation/native-stack": "^6.0.2",
     "@reduxjs/toolkit": "^1.9.5",
     "@shopify/flash-list": "^1.4.3",
+    "add": "^2.0.6",
     "apisauce": "2.1.5",
     "async-mutex": "^0.4.0",
     "axios": "^1.5.0",
@@ -93,9 +94,11 @@
     "reactotron-react-native": "5.0.3",
     "redux-persist": "^6.0.0",
     "redux-saga": "^1.2.3",
+    "rn-tinder-card": "^1.6.0",
     "socket.io-client": "^4.7.1",
     "styled-components": "^6.0.0-rc.3",
     "uuid": "^9.0.0",
+    "yarn": "^1.22.19",
     "yup": "^1.2.0"
   },
   "devDependencies": {

@@ -17,8 +17,12 @@ export const MessagesScrollView = () => {
 
   const matchId = conversation?._id;
 
+  if (!matchId) {
+    return <></>;
+  }
+
   const reduxCursorAfter = useAppSelector(
-    state => state.conversation.messages[matchId]?.pagination?.cursors?.after,
+    state => state.conversation.messages[matchId]?.pagination?.cursors?.next,
   );
 
   const [cursorAfter, setCursorAfter] = useState<string | null>(null);

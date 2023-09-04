@@ -1,13 +1,9 @@
 import { Header } from 'app/components';
-import { GradientIcon } from 'app/components/Icon/GradientIcon';
-import { FontAwesome } from 'app/components/Icon/Lib';
 import { DatingSwipe } from 'app/containers/DatingSwipe/DatingSwipe';
 import { UpdateGeolocation } from 'app/containers/Home/UpdateGeolocation';
 import { colors } from 'app/theme';
-import { Box, Text } from 'native-base';
+import { Box } from 'native-base';
 import React, { FC } from 'react';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import LinearGradient from 'react-native-linear-gradient';
 
 export const DatingSwipeScreen: FC = () => {
   return (
@@ -15,7 +11,7 @@ export const DatingSwipeScreen: FC = () => {
       <Header titleTx="appName" />
       <UpdateGeolocation />
       <Box flex={1} safeAreaY backgroundColor={colors.primary}>
-        <TouchableOpacity>
+        {/* <TouchableOpacity>
           <Box
             bg={{
               linearGradient: {
@@ -39,18 +35,9 @@ export const DatingSwipeScreen: FC = () => {
           end={{ y: 0.0, x: 1.0 }}
         >
           <Box height={100}></Box>
-          {/* <Button
-            style={{
-              borderRadius: 20,
-              width: 100 / 3,
-              textAlign: 'center',
-              color: '#fff',
-            }}
-            title={`Welcome`}
-          /> */}
-        </LinearGradient>
+        </LinearGradient> */}
 
-        <GradientIcon icon={FontAwesome} name="heart" />
+        {/* <GradientIcon icon={FontAwesome} name="heart" /> */}
         <DatingSwipe />
       </Box>
     </>
