@@ -3,6 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 import { OtpInput } from 'app/components/Input/OtpInput';
 import { translate } from 'app/i18n';
 import { api } from 'app/services/api';
+import { authApi } from 'app/services/api/auth.api';
 import {
   flexGrow,
   heightFull,
@@ -76,9 +77,7 @@ export const SignInWithOtpPhoneNumberScreen: FC<FCProps> = props => {
         return;
       }
       const idToken = await credential.user.getIdToken();
-      await submitSignInPhoneNumber({
-        token: idToken,
-      }).unwrap();
+      await authApi.signInWithPhoneNumber({ token: idToken });
     } catch (err) {
       console.log(err);
       setError(true);

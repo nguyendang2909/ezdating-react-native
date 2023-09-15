@@ -3,7 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 import { HeaderSaveModal } from 'app/components/Header/HeaderSaveModal';
 import { useAppSelector } from 'app/hooks';
 import { translate } from 'app/i18n';
-import { api } from 'app/services/api';
+import { usersApi } from 'app/services/api/users.api';
 import { profileNotificationsService } from 'app/services/notifications/profile-notifications.service';
 import { useFormik } from 'formik';
 import { Box, Text, View } from 'native-base';
@@ -13,9 +13,7 @@ import * as Yup from 'yup';
 export const EditInfoHeightScreen = () => {
   const { goBack } = useNavigation();
 
-  const currentHeight = useAppSelector(state => state.app.profile.height);
-
-  const [submitUpdateProfile] = api.useUpdateProfileMutation();
+  const currentHeight = useAppSelector(state => state.app.profile?.height);
 
   const formik = useFormik<{ height: number }>({
     enableReinitialize: true,
@@ -30,7 +28,7 @@ export const EditInfoHeightScreen = () => {
 
     onSubmit: async values => {
       try {
-        await submitUpdateProfile(values).unwrap();
+        await usersApi.updateProfile(values);
 
         profileNotificationsService.success();
 

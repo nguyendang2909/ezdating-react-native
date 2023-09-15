@@ -3,6 +3,7 @@ import { FormControlInput } from 'app/components/Form/FormControlInput';
 import { SelectGenderFormControl } from 'app/components/Form/SelectGenderForm';
 import { translate } from 'app/i18n';
 import { api } from 'app/services/api';
+import { usersApi } from 'app/services/api/users.api';
 import { FormParams } from 'app/types/form-params.type';
 import { useFormik } from 'formik';
 import { Button, Spinner, View } from 'native-base';
@@ -12,7 +13,6 @@ import * as Yup from 'yup';
 export const InputBasicInforForm: FC = () => {
   const { data: profileData } = api.useGetMyProfileQuery();
   const profile = profileData?.data;
-  const [submitUpdateProfile] = api.useUpdateProfileMutation();
   const formik = useFormik<FormParams.BasicInfo>({
     initialValues: {
       nickname: profile?.nickname || '',
@@ -39,7 +39,7 @@ export const InputBasicInforForm: FC = () => {
     }),
     onSubmit: async values => {
       try {
-        const result = await submitUpdateProfile(values).unwrap();
+        const result = await usersApi.updateProfile(values);
         console.log(result);
       } catch (err) {
         console.log(err);

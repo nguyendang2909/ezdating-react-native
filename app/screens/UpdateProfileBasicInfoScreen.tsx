@@ -7,6 +7,7 @@ import { UserGender, UserRelationshipGoal } from 'app/constants';
 import { useAppSelector } from 'app/hooks';
 import { translate } from 'app/i18n';
 import { api } from 'app/services/api';
+import { usersApi } from 'app/services/api/users.api';
 import { flexGrow } from 'app/styles';
 import { FormParams } from 'app/types/form-params.type';
 import { useFormik } from 'formik';
@@ -47,7 +48,7 @@ export const UpdateProfileBasicInfoScreen: FC = () => {
     }),
     onSubmit: async values => {
       try {
-        await submitUpdateBasicProfile(values).unwrap();
+        await usersApi.updateBasicProfile(values);
         navigate('UpdateProfilePhotosScreen');
       } catch (err) {
         console.log(err);

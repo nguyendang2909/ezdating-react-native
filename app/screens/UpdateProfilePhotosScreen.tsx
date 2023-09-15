@@ -6,6 +6,7 @@ import { useAppSelector } from 'app/hooks';
 import { translate } from 'app/i18n';
 import { AppStackScreenProps } from 'app/navigators';
 import { api } from 'app/services/api';
+import { mediaFilesApi } from 'app/services/api/media-files.api';
 import {
   alignItemsCenter,
   flexDirectionRow,
@@ -43,8 +44,6 @@ export const UpdateProfilePhotosScreen: React.FC<FCProps> = () => {
   const [removePhotoIndex, setRemovePhotoIndex] = useState<
     number | string | undefined
   >(undefined);
-  const [submitUploadPhoto] = api.useUploadPhotoMutation();
-  const [submitRemovePhoto] = api.useRemovePhotoMutation();
   const { refetch: refetchUserProfile } = api.useGetMyProfileQuery();
   const uploadedFiles = useAppSelector(state => state.app.profile.uploadFiles);
   const profilePublicPhotosLength = uploadedFiles?.length || 0;
@@ -56,22 +55,16 @@ export const UpdateProfilePhotosScreen: React.FC<FCProps> = () => {
     onSubmit: async values => {
       try {
         if (values.photos.length) {
-          const [firstPhoto, ...photoParts] = values.photos;
-          await submitUploadPhoto({
-            file: firstPhoto,
-          }).unwrap();
-          if (photoParts.length) {
-            await Promise.all(
-              photoParts.map((item, index) => {
-                const payload: ApiRequest.UploadPhoto = {
-                  file: item,
-                  ...(index === 0 ? { isAvatar: true } : {}),
-                };
+          await Promise.all(
+            values.photos.map((item, index) => {
+              const payload: ApiRequest.UploadPhoto = {
+                file: item,
+                ...(index === 0 ? { isAvatar: true } : {}),
+              };
 
-                return submitUploadPhoto(payload).unwrap();
-              }),
-            );
-          }
+              return mediaFilesApi.uploadPhoto(payload);
+            }),
+          );
         }
         await refetchUserProfile();
         navigate('Home', {
@@ -101,7 +94,7 @@ export const UpdateProfilePhotosScreen: React.FC<FCProps> = () => {
         try {
           formik.setSubmitting(true);
           handleCloseRemovePhotoCard();
-          await submitRemovePhoto(removePhotoIndex).unwrap();
+          await mediaFilesApi.removePhoto(removePhotoIndex);
           await refetchUserProfile();
         } catch (err) {
           toast.show({

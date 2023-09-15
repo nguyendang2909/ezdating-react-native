@@ -1,7 +1,6 @@
 import { useActionSheet } from '@expo/react-native-action-sheet';
 import { useAppSelector } from 'app/hooks';
 import { translate } from 'app/i18n';
-import { api } from 'app/services/api';
 import { mediaFilesApi } from 'app/services/api/media-files.api';
 import { usersApi } from 'app/services/api/users.api';
 import { appActions } from 'app/store/app.store';
@@ -22,7 +21,6 @@ export const ProfileEditPhotos: React.FC = () => {
 
   // const [submitRemovePhoto] = api.useRemovePhotoMutation();
 
-  const [submitUploadPhoto] = api.useUploadPhotoMutation();
   const mediaFiles =
     useAppSelector(state => state.app.profile?.mediaFiles) || [];
 
@@ -99,7 +97,7 @@ export const ProfileEditPhotos: React.FC = () => {
 
       setLoadings(newLoadings);
 
-      await submitUploadPhoto({ file: photo });
+      await mediaFilesApi.uploadPhoto({ file: photo });
     } catch (err) {
     } finally {
       const newLoadings = _.cloneDeep(loadings);

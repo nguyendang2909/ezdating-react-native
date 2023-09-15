@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import { HeaderSave } from 'app/components/Header/HeaderSave';
 import { useAppSelector } from 'app/hooks';
 import { translate } from 'app/i18n';
-import { api } from 'app/services/api';
+import { usersApi } from 'app/services/api/users.api';
 import { useFormik } from 'formik';
 import { useToast, View } from 'native-base';
 import React from 'react';
@@ -13,9 +13,7 @@ export const EditInfoLanguagesScreen = () => {
 
   const toast = useToast();
 
-  const languages = useAppSelector(state => state.app.profile.languages);
-
-  const [submitUpdateProfile] = api.useUpdateProfileMutation();
+  const languages = useAppSelector(state => state.app.profile?.languages);
 
   const formik = useFormik<{ languages?: string[] }>({
     enableReinitialize: true,
@@ -30,7 +28,7 @@ export const EditInfoLanguagesScreen = () => {
 
     onSubmit: async values => {
       try {
-        await submitUpdateProfile(values).unwrap();
+        await usersApi.updateProfile(values);
       } catch (err) {
         toast.show({
           title: translate('Update w failed!', { w: translate('languages') }),

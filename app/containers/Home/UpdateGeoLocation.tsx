@@ -1,19 +1,15 @@
-import { api } from 'app/services/api';
+import { usersApi } from 'app/services/api/users.api';
 import React, { useEffect } from 'react';
 import Geolocation from 'react-native-geolocation-service';
 
 export const UpdateGeolocation: React.FC = () => {
-  const [submitUpdateProfile] = api.useUpdateProfileMutation();
-
   useEffect(() => {
     Geolocation.getCurrentPosition(
       async position => {
-        console.log(11111, position.coords.longitude, position.coords.latitude);
-
-        await submitUpdateProfile({
-          longitude: -122,
-          latitude: 38,
-        }).unwrap();
+        await usersApi.updateProfile({
+          longitude: position.coords.longitude,
+          latitude: position.coords.latitude,
+        });
       },
       error => {
         // See error code charts below.

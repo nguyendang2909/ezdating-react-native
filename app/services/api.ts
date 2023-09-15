@@ -8,7 +8,6 @@ import { AppStore } from 'app/types/app-store.type';
 import { Entity } from 'app/types/entity.type';
 import { Mutex } from 'async-mutex';
 import queryString from 'query-string';
-import { Platform } from 'react-native';
 
 const mutex = new Mutex();
 
@@ -188,41 +187,41 @@ export const api = createApi({
     }),
 
     // Photos
-    uploadPhoto: builder.mutation<ApiResponse.Logged, ApiRequest.UploadPhoto>({
-      query: body => {
-        const { file } = body;
-        const formData = new FormData();
-        formData.append('file', {
-          uri: Platform.OS === 'ios' ? `file:///${file.path}` : file.path,
-          type: 'image/jpeg',
-          name: 'image.jpg',
-        });
+    // uploadPhoto: builder.mutation<ApiResponse.Logged, ApiRequest.UploadPhoto>({
+    //   query: body => {
+    //     const { file } = body;
+    //     const formData = new FormData();
+    //     formData.append('file', {
+    //       uri: Platform.OS === 'ios' ? `file:///${file.path}` : file.path,
+    //       type: 'image/jpeg',
+    //       name: 'image.jpg',
+    //     });
 
-        return {
-          url: API_URL.photos,
-          method: 'POST',
-          body: formData,
-        };
-      },
-      invalidatesTags: (result, error) => {
-        if (error) {
-          return [];
-        }
-        return ['Profile'];
-      },
-    }),
+    //     return {
+    //       url: API_URL.photos,
+    //       method: 'POST',
+    //       body: formData,
+    //     };
+    //   },
+    //   invalidatesTags: (result, error) => {
+    //     if (error) {
+    //       return [];
+    //     }
+    //     return ['Profile'];
+    //   },
+    // }),
 
-    removePhoto: builder.mutation<ApiResponse.RemoveData, string>({
-      query: (id: string) => ({
-        url: `${API_URL.photos}/${id}`,
-        method: 'DELETE',
-      }),
-      invalidatesTags: (result, error) => {
-        if (error) {
-          return [];
-        }
-        return ['Profile'];
-      },
-    }),
+    // removePhoto: builder.mutation<ApiResponse.RemoveData, string>({
+    //   query: (id: string) => ({
+    //     url: `${API_URL.photos}/${id}`,
+    //     method: 'DELETE',
+    //   }),
+    //   invalidatesTags: (result, error) => {
+    //     if (error) {
+    //       return [];
+    //     }
+    //     return ['Profile'];
+    //   },
+    // }),
   }),
 });
