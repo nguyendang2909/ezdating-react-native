@@ -9,7 +9,7 @@ type FCProps = {
 
 export const ProfileEditJobTitleMenuItem: React.FC<FCProps> = ({ onPress }) => {
   const currentValue =
-    useAppSelector(state => state.app.profile.introduce) || '';
+    useAppSelector(state => state.app.profile?.introduce) || '';
 
   const [value, setValue] = useState<string>(currentValue);
 

@@ -8,7 +8,7 @@ type FCProps = {
 };
 
 export const ProfileShowAgeMenuItem: React.FC<FCProps> = ({ onPress }) => {
-  const currentValue = useAppSelector(state => state.app.profile.hideAge);
+  const currentValue = useAppSelector(state => state.app.profile?.hideAge);
 
   const [isEnable, setEnable] = useState<boolean | undefined>(currentValue);
 

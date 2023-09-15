@@ -11,19 +11,22 @@ export const ProfileEditIntroduceMenuItem: React.FC<FCProps> = ({
   onPress,
 }) => {
   const introduceState =
-    useAppSelector(state => state.app.profile.introduce) || '';
+    useAppSelector(state => state.app.profile?.introduce) || '';
   const [introduce, setIntroduce] = useState<string>(introduceState);
 
   useEffect(() => {
-    if (introduceState !== introduce) {
-      const timeout = setTimeout(() => {
-        onPress({ introduce: introduceState });
-      }, 2000);
-      return () => clearTimeout(timeout);
-    }
+    const timeout =
+      introduceState !== introduce
+        ? setTimeout(() => {
+            onPress({ introduce: introduceState });
+          }, 2000)
+        : null;
 
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    return () => {};
+    return () => {
+      if (timeout) {
+        clearTimeout(timeout);
+      }
+    };
   }, [introduce]);
 
   return (

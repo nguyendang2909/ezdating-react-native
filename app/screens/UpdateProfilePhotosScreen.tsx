@@ -45,8 +45,8 @@ export const UpdateProfilePhotosScreen: React.FC<FCProps> = () => {
     number | string | undefined
   >(undefined);
   const { refetch: refetchUserProfile } = api.useGetMyProfileQuery();
-  const uploadedFiles = useAppSelector(state => state.app.profile.uploadFiles);
-  const profilePublicPhotosLength = uploadedFiles?.length || 0;
+  const mediaFiles = useAppSelector(state => state.app.profile?.mediaFiles);
+  const profilePublicPhotosLength = mediaFiles?.length || 0;
 
   const formik = useFormik<FormParams.UpdateProfilePhoto>({
     initialValues: {
@@ -156,18 +156,18 @@ export const UpdateProfilePhotosScreen: React.FC<FCProps> = () => {
 
             <View p="4">
               <HStack style={[flexDirectionRow, flexWrapWrap]}>
-                {uploadedFiles?.map(item => {
+                {mediaFiles?.map(item => {
                   return (
                     <View
-                      key={item.id}
+                      key={item._id}
                       style={[padding(spacing.xxs), width('33%')]}
                     >
                       <UploadPhotoCard
-                        key={item.id}
+                        key={item._id}
                         value={item.location}
                         onPress={() => {
-                          if (item.id) {
-                            handleClickPhotoCard(item.id);
+                          if (item._id) {
+                            handleClickPhotoCard(item._id);
                           }
                         }}
                       ></UploadPhotoCard>

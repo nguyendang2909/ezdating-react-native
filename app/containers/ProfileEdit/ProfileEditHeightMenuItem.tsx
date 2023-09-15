@@ -7,7 +7,7 @@ import React from 'react';
 export const ProfileEditHeightMenuItem: React.FC = () => {
   const navigation = useNavigation();
 
-  const value = useAppSelector(state => state.app.profile.height);
+  const value = useAppSelector(state => state.app.profile?.height);
 
   const handleChange = () => {
     navigation.navigate('EditInfoHeight');

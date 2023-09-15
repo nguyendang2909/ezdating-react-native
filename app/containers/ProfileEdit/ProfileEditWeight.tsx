@@ -7,7 +7,7 @@ import React from 'react';
 export const ProfileEditWeightMenuItem: React.FC = () => {
   const navigation = useNavigation();
 
-  const value = useAppSelector(state => state.app.profile.weight);
+  const value = useAppSelector(state => state.app.profile?.weight);
 
   const handleChange = () => {
     navigation.navigate('EditInfoWeight');

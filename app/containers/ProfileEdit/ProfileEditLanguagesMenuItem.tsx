@@ -20,7 +20,7 @@ const getLanguages = (languages: string[]): string => {
 };
 
 export const ProfileEditLanguagesMenuItem: React.FC = () => {
-  const languages = useAppSelector(state => state.app.profile.languages);
+  const languages = useAppSelector(state => state.app.profile?.languages);
   return (
     <>
       <MenuItem

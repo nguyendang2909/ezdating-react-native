@@ -6,7 +6,6 @@ import { SelectGenderFormControl } from 'app/components/Form/SelectGenderForm';
 import { UserGender, UserRelationshipGoal } from 'app/constants';
 import { useAppSelector } from 'app/hooks';
 import { translate } from 'app/i18n';
-import { api } from 'app/services/api';
 import { usersApi } from 'app/services/api/users.api';
 import { flexGrow } from 'app/styles';
 import { FormParams } from 'app/types/form-params.type';
@@ -19,7 +18,7 @@ import * as Yup from 'yup';
 export const UpdateProfileBasicInfoScreen: FC = () => {
   const profile = useAppSelector(state => state.app.profile);
   const { navigate } = useNavigation();
-  const [submitUpdateBasicProfile] = api.useUpdateBasicProfileMutation();
+
   const formik = useFormik<FormParams.BasicInfo>({
     initialValues: {
       nickname: profile?.nickname,

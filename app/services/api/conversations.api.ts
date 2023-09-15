@@ -7,7 +7,7 @@ import { Entity } from 'app/types/entity.type';
 import { api } from './api';
 
 class ConversationsApi extends CommonApi {
-  async getMany(params: ApiRequest.FindManyConversations) {
+  async getMany(params?: ApiRequest.FindManyConversations) {
     const { data } = await api.get<
       ApiResponse.FetchPaginationData<Entity.Match[]>
     >(API_URL.conversations, { params });

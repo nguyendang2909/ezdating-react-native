@@ -13,7 +13,7 @@ type FCProps = {
 };
 
 export const ProfileEditBirthdayMenuItem: React.FC<FCProps> = ({ onPress }) => {
-  const value = useAppSelector(state => state.app.profile.birthday);
+  const value = useAppSelector(state => state.app.profile?.birthday);
 
   const [isInit, setInit] = useState<boolean>(false);
 

@@ -12,7 +12,7 @@ type FCProps = {
 };
 
 export const ProfileEditGenderMenuItem: React.FC<FCProps> = ({ onPress }) => {
-  const currentValue = useAppSelector(state => state.app.profile.gender);
+  const currentValue = useAppSelector(state => state.app.profile?.gender);
 
   const [isInit, setInit] = useState<boolean>(false);
 

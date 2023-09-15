@@ -15,7 +15,7 @@ export const ProfileEditRelationshipGoalMenuItem: React.FC<FCProps> = ({
   onPress,
 }) => {
   const currentRelationshipGoal = useAppSelector(
-    state => state.app.profile.relationshipGoal,
+    state => state.app.profile?.relationshipGoal,
   );
 
   const [isInit, setInit] = useState<boolean>(false);

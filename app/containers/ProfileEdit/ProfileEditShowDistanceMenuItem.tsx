@@ -10,7 +10,7 @@ type FCProps = {
 export const ProfileShowMyDistanceMenuItem: React.FC<FCProps> = ({
   onPress,
 }) => {
-  const currentValue = useAppSelector(state => state.app.profile.hideDistance);
+  const currentValue = useAppSelector(state => state.app.profile?.hideDistance);
 
   const [isEnable, setEnable] = useState<boolean | undefined>(currentValue);
 

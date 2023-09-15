@@ -2,7 +2,6 @@ import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import { useNavigation } from '@react-navigation/native';
 import { OtpInput } from 'app/components/Input/OtpInput';
 import { translate } from 'app/i18n';
-import { api } from 'app/services/api';
 import { authApi } from 'app/services/api/auth.api';
 import {
   flexGrow,
@@ -48,7 +47,6 @@ export const SignInWithOtpPhoneNumberScreen: FC<FCProps> = props => {
   const { goBack } = useNavigation();
   const { otpConfirm, user } = props.route.params;
 
-  const [submitSignInPhoneNumber] = api.useSignInWithPhoneNumberMutation();
   const [isSubmiting, setIsSubmitting] = useState<boolean>(false);
   const [isError, setError] = useState<boolean>(false);
   const [otpCode, setOTPCode] = useState('');
@@ -122,7 +120,7 @@ export const SignInWithOtpPhoneNumberScreen: FC<FCProps> = props => {
             </View>
             <View style={marginTop(spacing.md)}>
               <HStack>
-                <Text fontWeight={600}>{user.phoneNumber}</Text>
+                <Text fontWeight={600}>{user?.phoneNumber}</Text>
                 <Link
                   onPress={handleResendingOtpCode}
                   style={marginLeft(spacing.sm)}
