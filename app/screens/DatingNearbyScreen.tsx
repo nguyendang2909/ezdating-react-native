@@ -1,22 +1,25 @@
 import { Header } from 'app/components';
-import { DatingNearby } from 'app/containers/DatingNearby/DatingNearby';
-import { api } from 'app/services/api';
+import { DatingNearby } from 'app/containers/DatingNearby/DatingNearby.1';
+import { usersApi } from 'app/services/api/users.api';
+import { userActions } from 'app/store/user.store';
 import { StatusBar } from 'native-base';
-import React, { FC, useEffect } from 'react';
+import React, { FC, useCallback, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
 export const DatingNearbyScreen: FC = () => {
-  const { refetch } = api.useGetUsersNearbyQuery(
-    {
-      params: {},
-    },
-    {
-      refetchOnMountOrArgChange: false,
-    },
-  );
+  const dispatch = useDispatch();
+
+  const getUserNearby = useCallback(async () => {
+    const nearbyUsersData = await usersApi.getNearbyUsers({});
+
+    if (nearbyUsersData.data?.length) {
+      dispatch(userActions.addNearby(nearbyUsersData.data));
+    }
+  }, [dispatch]);
 
   useEffect(() => {
-    refetch();
-  }, []);
+    getUserNearby();
+  }, [getUserNearby]);
 
   return (
     <>

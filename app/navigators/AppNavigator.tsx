@@ -164,9 +164,6 @@ const AppStack = () => {
           <Stack.Screen
             name="ProfileSetting"
             component={ProfileSettingScreen}
-            options={{
-              presentation: 'modal',
-            }}
           />
           <Stack.Screen
             name="MessagesByConversation"

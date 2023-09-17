@@ -1,13 +1,10 @@
 import { Header } from 'app/components';
 import { ConversationsBox } from 'app/containers/Conversation/ConversationsBox';
 import { MatchCards } from 'app/containers/Messages/MatchCards';
-import { api } from 'app/services/api';
 import { Box, StatusBar, Text, View } from 'native-base';
 import React, { FC } from 'react';
 
-export const MessagesScreen: FC = () => {
-  const { refetch, data } = api.useGetNextConversationsQuery({});
-
+export const MatchesScreen: FC = () => {
   return (
     <>
       <StatusBar barStyle="default" />

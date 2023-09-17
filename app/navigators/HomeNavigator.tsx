@@ -3,7 +3,7 @@ import { translate } from 'app/i18n';
 import { AppStackScreenProps } from 'app/navigators';
 import { DatingNearbyScreen } from 'app/screens/DatingNearbyScreen';
 import { DatingSwipeScreen } from 'app/screens/DatingSwipeScreen';
-import { MessagesScreen } from 'app/screens/MessagesScreen';
+import { MatchesScreen } from 'app/screens/MachesScreen';
 import { ProfileScreen } from 'app/screens/ProfileScreen';
 import { backgroundColor, borderTopColor } from 'app/styles';
 import { colors, spacing } from 'app/theme';
@@ -16,7 +16,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 export type HomeTabParamList = {
   DatingSwipe: undefined;
   DatingNearby: undefined;
-  Messages: undefined;
+  Matches: undefined;
   Profile: undefined;
 };
 
@@ -53,6 +53,7 @@ export const HomeNavigator: FC<FCProps> = () => {
         name="DatingSwipe"
         component={DatingSwipeScreen}
         options={{
+          tabBarShowLabel: false,
           //   tabBarLabel: translate('Swipe'),
           tabBarIcon: ({ focused }) => (
             <FontAwesome
@@ -67,6 +68,7 @@ export const HomeNavigator: FC<FCProps> = () => {
         name="DatingNearby"
         component={DatingNearbyScreen}
         options={{
+          tabBarShowLabel: false,
           //   tabBarLabel: translate('Nearby'),
           tabBarIcon: ({ focused }) => (
             <MaterialIcons
@@ -78,9 +80,10 @@ export const HomeNavigator: FC<FCProps> = () => {
         }}
       />
       <Tab.Screen
-        name="Messages"
-        component={MessagesScreen}
+        name="Matches"
+        component={MatchesScreen}
         options={{
+          tabBarShowLabel: false,
           tabBarLabel: translate('Messages'),
           tabBarIcon: ({ focused }) => (
             <MaterialCommunityIcons
@@ -95,6 +98,7 @@ export const HomeNavigator: FC<FCProps> = () => {
         name="Profile"
         component={ProfileScreen}
         options={{
+          tabBarShowLabel: false,
           tabBarLabel: translate('Profile'),
           tabBarIcon: ({ focused }) => (
             <MaterialCommunityIcons

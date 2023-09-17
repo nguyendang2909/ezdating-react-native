@@ -13,14 +13,16 @@ module.exports = {
     "plugin:react/recommended",
     "plugin:react-native/all",
     "standard",
-    "prettier"],
+    "prettier",
+  ],
   plugins: [
     'prettier',
     'simple-import-sort',
-     "@typescript-eslint",
-     "react",
-     "react-native",
-     "unused-imports"
+    "@typescript-eslint",
+    "react",
+    "react-native",
+    "unused-imports",
+    "react-hooks"
     ],
   rules: {
     'prettier/prettier': ['error', prettierOptions],
@@ -33,6 +35,8 @@ module.exports = {
         argsIgnorePattern: '^_',
       },
     ],
+    "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
+    "react-hooks/exhaustive-deps": "warn" // Checks effect dependencies
   },
   "parserOptions": {
     "ecmaFeatures": {

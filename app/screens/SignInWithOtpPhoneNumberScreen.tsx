@@ -3,6 +3,8 @@ import { useNavigation } from '@react-navigation/native';
 import { OtpInput } from 'app/components/Input/OtpInput';
 import { translate } from 'app/i18n';
 import { authApi } from 'app/services/api/auth.api';
+import { usersApi } from 'app/services/api/users.api';
+import { appActions } from 'app/store/app.store';
 import {
   flexGrow,
   heightFull,
@@ -28,6 +30,7 @@ import {
 import React, { FC, useState } from 'react';
 import { Keyboard, Pressable, View } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { useDispatch } from 'react-redux';
 
 import { AppStackScreenProps } from '../navigators';
 
@@ -46,6 +49,7 @@ const maximumCodeLength = 6;
 export const SignInWithOtpPhoneNumberScreen: FC<FCProps> = props => {
   const { goBack } = useNavigation();
   const { otpConfirm, user } = props.route.params;
+  const dispatch = useDispatch();
 
   const [isSubmiting, setIsSubmitting] = useState<boolean>(false);
   const [isError, setError] = useState<boolean>(false);
@@ -65,19 +69,32 @@ export const SignInWithOtpPhoneNumberScreen: FC<FCProps> = props => {
   const handleSignUp = async () => {
     setError(false);
     setIsSubmitting(true);
+
     if (!otpConfirmation) {
       goBack();
       return;
     }
+
     try {
       const credential = await otpConfirmation.confirm(otpCode);
       if (!credential) {
         return;
       }
       const idToken = await credential.user.getIdToken();
-      await authApi.signInWithPhoneNumber({ token: idToken });
+      const signInWithPhoneNumber = await authApi.signInWithPhoneNumber({
+        token: idToken,
+      });
+
+      if (signInWithPhoneNumber.data) {
+        dispatch(appActions.updateAccessToken(signInWithPhoneNumber.data));
+      }
+
+      const myProfile = await usersApi.getMyProfile();
+
+      if (myProfile.data) {
+        dispatch(appActions.updateProfile(myProfile.data));
+      }
     } catch (err) {
-      console.log(err);
       setError(true);
       setResendStatus(ResendStatusObj.nonResent);
     } finally {
@@ -89,13 +106,16 @@ export const SignInWithOtpPhoneNumberScreen: FC<FCProps> = props => {
     if (resendStatus === ResendStatusObj.resending) {
       return;
     }
-    if (!user?.phoneNumber) {
+    if (!user || !user?.phoneNumber) {
       goBack();
       return;
     }
+
     setResendStatus(ResendStatusObj.resending);
+
     try {
       const confirmation = await auth().signInWithPhoneNumber(user.phoneNumber);
+
       setOtpConfirmation(confirmation);
     } catch (err) {}
   };

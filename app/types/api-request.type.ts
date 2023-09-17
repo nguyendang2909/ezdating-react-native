@@ -11,8 +11,8 @@ export declare namespace ApiRequest {
   };
 
   type Pagination = {
-    next?: string;
-    prev?: string;
+    _next?: string;
+    _prev?: string;
   };
 
   type FindMany<T> = Pagination & T;
@@ -75,9 +75,9 @@ export declare namespace ApiRequest {
     introduce?: string;
   }>;
 
-  type SearchUsersNearby = {
-    params?: Pagination;
-  };
+  type SearchUsersNearby = FindMany<{
+    excludedUserId?: string[] | string;
+  }>;
 
   type UploadPhoto = {
     file: Image;

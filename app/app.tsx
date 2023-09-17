@@ -13,6 +13,7 @@ import './i18n';
 import './utils/ignoreWarnings';
 
 import { ActionSheetProvider } from '@expo/react-native-action-sheet';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useFonts } from 'expo-font';
 import * as Linking from 'expo-linking';
 import { NativeBaseProvider } from 'native-base';
@@ -78,6 +79,8 @@ interface AppProps {
   hideSplashScreen: () => Promise<void>;
 }
 
+const queryClient = new QueryClient();
+
 /**
  * This is the root component of our app.
  */
@@ -119,21 +122,26 @@ function App(props: AppProps) {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <ConnectSocket />
-        <ConnectProfile />
-        <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-          <ErrorBoundary catchErrors={Config.catchErrors}>
-            <NativeBaseProvider theme={defaultTheme} config={nativeBaseConfig}>
-              <ActionSheetProvider>
-                <AppNavigator
-                  linking={linking}
-                  initialState={initialNavigationState}
-                  onStateChange={onNavigationStateChange}
-                />
-              </ActionSheetProvider>
-            </NativeBaseProvider>
-          </ErrorBoundary>
-        </SafeAreaProvider>
+        <QueryClientProvider client={queryClient}>
+          <ConnectSocket />
+          <ConnectProfile />
+          <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+            <ErrorBoundary catchErrors={Config.catchErrors}>
+              <NativeBaseProvider
+                theme={defaultTheme}
+                config={nativeBaseConfig}
+              >
+                <ActionSheetProvider>
+                  <AppNavigator
+                    linking={linking}
+                    initialState={initialNavigationState}
+                    onStateChange={onNavigationStateChange}
+                  />
+                </ActionSheetProvider>
+              </NativeBaseProvider>
+            </ErrorBoundary>
+          </SafeAreaProvider>
+        </QueryClientProvider>
       </PersistGate>
     </Provider>
   );

@@ -42,6 +42,10 @@
 //   Private = 'private',
 // }
 
+export const QUERY_KEYS = {
+  PROFILE: 'profile',
+};
+
 export const UserRoles = {
   admin: 1,
   manager: 2,

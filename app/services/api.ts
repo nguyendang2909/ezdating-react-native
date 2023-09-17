@@ -73,16 +73,16 @@ export const api = createApi({
   },
   tagTypes: ['Profile'],
   endpoints: builder => ({
-    signInWithPhoneNumber: builder.mutation<
-      ApiResponse.Logged,
-      ApiRequest.SignInWithPhoneNumber
-    >({
-      query: body => ({
-        url: API_URL.signInWithPhoneNumber,
-        method: 'POST',
-        body,
-      }),
-    }),
+    // signInWithPhoneNumber: builder.mutation<
+    //   ApiResponse.Logged,
+    //   ApiRequest.SignInWithPhoneNumber
+    // >({
+    //   query: body => ({
+    //     url: API_URL.signInWithPhoneNumber,
+    //     method: 'POST',
+    //     body,
+    //   }),
+    // }),
 
     getSwipeUsers: builder.query<
       ApiResponse.FetchData<Entity.User[]>,

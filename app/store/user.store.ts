@@ -35,7 +35,23 @@ export const userSlice = createSlice({
         state.swipe.data = action.payload;
       }
     },
+    addNearby: (state, action: PayloadAction<Entity.User[]>) => {
+      const { payload } = action;
+
+      if (!state.nearby) {
+        state.nearby = {
+          data: payload,
+        };
+      }
+
+      if (!state.nearby.data) {
+        state.nearby.data = payload;
+      }
+
+      state.nearby.data = payload;
+    },
   },
+
   extraReducers: builder => {
     builder.addCase(appActions.logout, state => {
       state.data = {};

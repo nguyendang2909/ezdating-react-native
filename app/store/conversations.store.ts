@@ -19,6 +19,9 @@ export const conversationSlice = createSlice({
   name: 'conversation',
   initialState,
   reducers: {
+    addConversations: (state, action: PayloadAction<Entity.Match[]>) => {
+      state.data = action.payload;
+    },
     updateConversationByMessage: (
       state,
       action: PayloadAction<Entity.Message>,

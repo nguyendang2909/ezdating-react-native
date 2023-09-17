@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { api } from 'app/services/api';
 import { ApiResponse } from 'app/types/api-response.type';
 import { AppStore } from 'app/types/app-store.type';
 import { Entity } from 'app/types/entity.type';
@@ -21,16 +20,15 @@ export const appSlice = createSlice({
 
       state.profile = payload;
     },
-    updateAccessToken: (
-      state,
-      action: PayloadAction<ApiResponse.FetchData<ApiResponse.Tokens>>,
-    ) => {
-      const data = action.payload.data;
-      if (data?.accessToken) {
-        state.accessToken = data.accessToken;
+    updateAccessToken: (state, action: PayloadAction<ApiResponse.Tokens>) => {
+      const { payload } = action;
+
+      if (payload.accessToken) {
+        state.accessToken = payload.accessToken;
       }
-      if (data?.refreshToken) {
-        state.refreshToken = data.refreshToken;
+
+      if (payload.refreshToken) {
+        state.refreshToken = payload.refreshToken;
       }
     },
     logout: state => {
@@ -53,29 +51,29 @@ export const appSlice = createSlice({
     },
   },
   extraReducers: builder => {
-    builder.addMatcher(
-      api.endpoints.signInWithPhoneNumber.matchFulfilled,
-      (state, action) => {
-        const tokens = action.payload.data;
-        const accessToken = tokens?.accessToken;
-        const refreshToken = tokens?.refreshToken;
-        if (!accessToken || !refreshToken) {
-          return;
-        }
-        state.accessToken = accessToken;
-        state.refreshToken = refreshToken;
-        state.isLogged = true;
-      },
-    );
-    builder.addMatcher(
-      api.endpoints.getMyProfile.matchFulfilled,
-      (state, action) => {
-        const user = action.payload.data;
-        if (user) {
-          state.profile = user;
-        }
-      },
-    );
+    // builder.addMatcher(
+    //   api.endpoints.signInWithPhoneNumber.matchFulfilled,
+    //   (state, action) => {
+    //     const tokens = action.payload.data;
+    //     const accessToken = tokens?.accessToken;
+    //     const refreshToken = tokens?.refreshToken;
+    //     if (!accessToken || !refreshToken) {
+    //       return;
+    //     }
+    //     state.accessToken = accessToken;
+    //     state.refreshToken = refreshToken;
+    //     state.isLogged = true;
+    //   },
+    // );
+    // builder.addMatcher(
+    //   api.endpoints.getMyProfile.matchFulfilled,
+    //   (state, action) => {
+    //     const user = action.payload.data;
+    //     if (user) {
+    //       state.profile = user;
+    //     }
+    //   },
+    // );
   },
 });
 
