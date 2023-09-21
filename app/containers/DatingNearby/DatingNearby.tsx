@@ -1,22 +1,33 @@
 import { useNavigation } from '@react-navigation/native';
 import { useAppSelector } from 'app/hooks';
+import { usersApi } from 'app/services/api/users.api';
+import { userActions } from 'app/store/user.store';
 import { aspectRatio } from 'app/styles';
 import { Avatar, Box, FlatList, Pressable, Text } from 'native-base';
 import React from 'react';
 import { RefreshControl } from 'react-native';
+import { useDispatch } from 'react-redux';
 
 export const DatingNearby: React.FC = () => {
+  const dispatch = useDispatch();
   const navigator = useNavigation();
   const users = useAppSelector(state => state.user.nearby?.data) || [];
 
   const [refreshing, setRefreshing] = React.useState(false);
 
-  const onRefresh = React.useCallback(() => {
+  const onRefresh = React.useCallback(async () => {
     setRefreshing(true);
-    setTimeout(() => {
-      setRefreshing(false);
-    }, 2000);
-  }, []);
+
+    try {
+      const nearbyUsersData = await usersApi.getNearbyUsers();
+
+      if (nearbyUsersData.data) {
+        dispatch(userActions.addNearby(nearbyUsersData.data));
+      }
+    } catch (err) {}
+
+    setRefreshing(false);
+  }, [dispatch]);
 
   return (
     <>

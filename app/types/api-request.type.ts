@@ -91,4 +91,12 @@ export declare namespace ApiRequest {
   type FindManySwipeUsers = FindMany<object>;
 
   type FindManyMatches = Pagination;
+
+  type SendLike = {
+    targetUserId: string;
+  };
+
+  type SendView = {
+    targetUserId: string;
+  };
 }

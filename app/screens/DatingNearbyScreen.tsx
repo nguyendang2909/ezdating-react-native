@@ -1,5 +1,5 @@
 import { Header } from 'app/components';
-import { DatingNearby } from 'app/containers/DatingNearby/DatingNearby.1';
+import { DatingNearby } from 'app/containers/DatingNearby/DatingNearby';
 import { usersApi } from 'app/services/api/users.api';
 import { userActions } from 'app/store/user.store';
 import { StatusBar } from 'native-base';

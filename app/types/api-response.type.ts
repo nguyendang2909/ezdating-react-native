@@ -16,6 +16,8 @@ export declare namespace ApiResponse {
     type?: string;
   };
 
+  type SuccessResponse = FetchData<{ success: boolean }>;
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   type FetchPaginationData<T, R extends Record<string, any> = object> = {
     [P in keyof R]?: R[P];

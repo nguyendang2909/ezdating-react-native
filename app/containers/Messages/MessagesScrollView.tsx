@@ -17,10 +17,6 @@ export const MessagesScrollView = () => {
 
   const matchId = conversation?._id;
 
-  if (!matchId) {
-    return <></>;
-  }
-
   const reduxCursorAfter = useAppSelector(
     state => state.conversation.messages[matchId]?.pagination?.cursors?.next,
   );
@@ -83,6 +79,12 @@ export const MessagesScrollView = () => {
       //   // @ts-ignore
       //   flatListRef.current?.scrollToEnd({ animated: true });
       // }}
+      ListFooterComponent={
+        <RefreshControl
+          refreshing={isFetching}
+          onRefresh={onRefresh}
+        ></RefreshControl>
+      }
       refreshControl={
         <RefreshControl
           refreshing={isFetching}

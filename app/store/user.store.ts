@@ -13,9 +13,6 @@ const initialState: AppStore.UserState = {
   nearby: {
     data: [],
   },
-  matched: {
-    data: [],
-  },
 };
 
 export const userSlice = createSlice({
@@ -38,17 +35,64 @@ export const userSlice = createSlice({
     addNearby: (state, action: PayloadAction<Entity.User[]>) => {
       const { payload } = action;
 
+      const payloadLength = payload.length;
+
+      if (!payloadLength) {
+        return;
+      }
+
       if (!state.nearby) {
         state.nearby = {
           data: payload,
         };
       }
 
-      if (!state.nearby.data) {
+      if (!state.nearby.data?.length) {
         state.nearby.data = payload;
       }
 
-      state.nearby.data = payload;
+      const result: Entity.User[] = [];
+
+      let m = 0;
+      let n = 0;
+      let canSetState = false;
+
+      const stateDataLength = state.nearby.data.length;
+
+      while (m < stateDataLength && n < payloadLength) {
+        const mData = state.nearby.data[m];
+        const nData = payload[n];
+
+        const mDistance = mData.distance || 0;
+        const nDistance = nData.distance || 0;
+
+        if (mDistance === nDistance) {
+          if (mData._id === nData._id) {
+            result.push(mData);
+          } else {
+            result.push(mData, nData);
+            if (!canSetState) {
+              canSetState = true;
+            }
+          }
+
+          m += 1;
+          n += 1;
+        } else if (mDistance < nDistance) {
+          result.push(mData);
+          m += 1;
+        } else {
+          result.push(nData);
+          if (!canSetState) {
+            canSetState = true;
+          }
+          n += 1;
+        }
+      }
+
+      if (canSetState) {
+        state.nearby.data = result;
+      }
     },
   },
 
