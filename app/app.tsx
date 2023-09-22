@@ -13,6 +13,7 @@ import './i18n';
 import './utils/ignoreWarnings';
 
 import { ActionSheetProvider } from '@expo/react-native-action-sheet';
+import { GluestackUIProvider } from '@gluestack-ui/themed';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useFonts } from 'expo-font';
 import * as Linking from 'expo-linking';
@@ -35,6 +36,7 @@ import { setupReactotron } from './services/reactotron';
 import { persistor, store } from './store';
 import { customFontsToLoad } from './theme';
 import { defaultTheme } from './theme/default-theme';
+import { glueStackConfig } from './theme/glue-stack.config';
 import * as storage from './utils/storage';
 
 // Set up Reactotron, which is a free desktop app for inspecting and debugging
@@ -127,18 +129,20 @@ function App(props: AppProps) {
           <ConnectProfile />
           <SafeAreaProvider initialMetrics={initialWindowMetrics}>
             <ErrorBoundary catchErrors={Config.catchErrors}>
-              <NativeBaseProvider
-                theme={defaultTheme}
-                config={nativeBaseConfig}
-              >
-                <ActionSheetProvider>
-                  <AppNavigator
-                    linking={linking}
-                    initialState={initialNavigationState}
-                    onStateChange={onNavigationStateChange}
-                  />
-                </ActionSheetProvider>
-              </NativeBaseProvider>
+              <GluestackUIProvider config={glueStackConfig}>
+                <NativeBaseProvider
+                  theme={defaultTheme}
+                  config={nativeBaseConfig}
+                >
+                  <ActionSheetProvider>
+                    <AppNavigator
+                      linking={linking}
+                      initialState={initialNavigationState}
+                      onStateChange={onNavigationStateChange}
+                    />
+                  </ActionSheetProvider>
+                </NativeBaseProvider>
+              </GluestackUIProvider>
             </ErrorBoundary>
           </SafeAreaProvider>
         </QueryClientProvider>

@@ -5,6 +5,7 @@ export const API_URL = {
   // loginByGoogle: '/auth/login/google',
   likedMe: '/likes/me',
   likes: '/likes',
+  logout: '/auth/logout',
   matches: '/matches',
   messages: '/messages',
   myProfile: '/profile',

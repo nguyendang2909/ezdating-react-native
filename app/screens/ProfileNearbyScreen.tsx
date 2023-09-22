@@ -1,6 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
 import { Feather, MaterialIcons } from 'app/components/Icon/Lib';
-import { LoadingScreen } from 'app/components/Screen/LoadingScreen';
 import { useAppSelector } from 'app/hooks';
 import { AppStackScreenProps } from 'app/navigators';
 import { likesApi } from 'app/services/api/likes.api';
@@ -13,7 +12,6 @@ import {
   Icon,
   IconButton,
   Image,
-  Spinner,
   Text,
   View,
 } from 'native-base';
@@ -58,7 +56,7 @@ export const ProfileNearbyScreen: React.FC<FCProps> = props => {
           <Box>
             <IconButton
               variant="subtle"
-              icon={<Spinner />}
+              icon={<CloseIcon />}
               onPress={goBack}
             ></IconButton>
           </Box>

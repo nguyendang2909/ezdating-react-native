@@ -1,6 +1,7 @@
 import { Header } from 'app/components';
 import { DatingSwipe } from 'app/containers/DatingSwipe/DatingSwipe';
-import { UpdateGeolocation } from 'app/containers/Home/UpdateGeolocation';
+import { UpdateGeolocation } from 'app/containers/Home/UpdateGeoLocation';
+// import { UpdateGeolocation } from 'app/containers/Home/UpdateGeolocation';
 import { colors } from 'app/theme';
 import { Box } from 'native-base';
 import React, { FC } from 'react';

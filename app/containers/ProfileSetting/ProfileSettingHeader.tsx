@@ -5,12 +5,7 @@ import React from 'react';
 export const ProfileSettingHeader: React.FC = () => {
   return (
     <>
-      <Header
-        safeAreaEdges={[]}
-        leftIcon="caretLeft"
-        onLeftPress={goBack}
-        titleTx="Settings"
-      />
+      <Header leftIcon="caretLeft" onLeftPress={goBack} titleTx="Settings" />
     </>
   );
 };

@@ -6,10 +6,20 @@ import { ApiResponse } from 'app/types/api-response.type';
 import { api } from './api';
 
 class AuthApi extends CommonApi {
-  async signInWithPhoneNumber(payload: ApiRequest.SignInWithPhoneNumber) {
+  public async signInWithPhoneNumber(
+    payload: ApiRequest.SignInWithPhoneNumber,
+  ) {
     const { data } = await api.post<ApiResponse.Logged>(
       API_URL.signInWithPhoneNumber,
       payload,
+    );
+
+    return data;
+  }
+
+  public async logout() {
+    const { data } = await api.post<ApiResponse.SuccessResponse>(
+      API_URL.logout,
     );
 
     return data;
