@@ -11,7 +11,7 @@ import { useAppSelector } from 'app/hooks';
 import { EditInfoHeightScreen } from 'app/screens/EditInfoHeightScreen';
 import { EditInfoNicknameScreen } from 'app/screens/EditInfoNicknameScreen';
 import { EditInfoWeightScreen } from 'app/screens/EditInfoWeightScreen';
-import { LikedYouScreen } from 'app/screens/LikedYouScreen';
+import { LikedMeScreen } from 'app/screens/LikedMeScreen';
 import { MainScreen } from 'app/screens/MainScreen';
 import { MessagesByConversationScreen } from 'app/screens/MessagesByConversationScreen';
 import { ProfileEditScreen } from 'app/screens/ProfileEditScreen';
@@ -56,7 +56,7 @@ export type AppStackParamList = {
   UpdateProfileBasicInfo: undefined;
   UpdateProfilePhotosScreen: undefined;
   Home: NavigatorScreenParams<HomeTabParamList>;
-  LikedYou: undefined;
+  LikedMe: undefined;
   Main: undefined;
   MessagesByConversation: {
     conversation: Entity.Match;
@@ -132,13 +132,7 @@ const AppStack = () => {
               presentation: 'modal',
             }}
           />
-          <Stack.Screen
-            name="LikedYou"
-            component={LikedYouScreen}
-            options={{
-              presentation: 'modal',
-            }}
-          />
+          <Stack.Screen name="LikedMe" component={LikedMeScreen} />
           <Stack.Screen
             name="UpdateProfileBasicInfo"
             component={UpdateProfileBasicInfoScreen}

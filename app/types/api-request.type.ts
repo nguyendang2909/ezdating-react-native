@@ -99,4 +99,6 @@ export declare namespace ApiRequest {
   type SendView = {
     targetUserId: string;
   };
+
+  type FindManyLikedMe = Pagination;
 }

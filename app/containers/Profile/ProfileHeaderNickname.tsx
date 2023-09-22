@@ -3,7 +3,7 @@ import { Text } from 'native-base';
 import React from 'react';
 
 export const ProfileHeaderNickname: React.FC = () => {
-  const nickname = useAppSelector(state => state.app.profile.nickname);
+  const nickname = useAppSelector(state => state.app.profile?.nickname);
 
   return (
     <>

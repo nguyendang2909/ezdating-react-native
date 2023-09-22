@@ -186,6 +186,7 @@ const en = {
   'w is required!': '{{w}} is required!',
   Weight: 'Weight',
   weight: 'weight',
+  'Who liked you?': 'Who liked you?',
   'What is your w?': 'What is your {{w}}?',
   'What are you looking for here?': 'What are you looking for here?',
   'Wrong verification code, try again!': 'Wrong verification code, try again!',

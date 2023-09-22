@@ -1,7 +1,9 @@
 import { useNavigation } from '@react-navigation/native';
-import { MaterialIcons } from 'app/components/Icon/Lib';
+import { Feather, MaterialIcons } from 'app/components/Icon/Lib';
+import { LoadingScreen } from 'app/components/Screen/LoadingScreen';
 import { useAppSelector } from 'app/hooks';
 import { AppStackScreenProps } from 'app/navigators';
+import { likesApi } from 'app/services/api/likes.api';
 import { aspectRatio } from 'app/styles';
 import _ from 'lodash';
 import {
@@ -11,6 +13,7 @@ import {
   Icon,
   IconButton,
   Image,
+  Spinner,
   Text,
   View,
 } from 'native-base';
@@ -26,7 +29,19 @@ export const ProfileNearbyScreen: React.FC<FCProps> = props => {
     return state.user.nearby?.data?.find(item => item._id === userId);
   });
   const width = Dimensions.get('window').width;
-  const { goBack } = useNavigation();
+  const { goBack, navigate } = useNavigation();
+
+  const handleSendLike = async () => {
+    await likesApi.send({
+      targetUserId: userId,
+    });
+  };
+
+  const sendMessage = async () => {
+    navigate('MessagesByConversation', {
+      conversation: {},
+    });
+  };
 
   const [activeSlide, setActiveSlide] = useState<number>(0);
 
@@ -38,13 +53,37 @@ export const ProfileNearbyScreen: React.FC<FCProps> = props => {
 
   return (
     <>
+      <Box position="absolute" bottom={10} left={0} right={0} zIndex={999}>
+        <HStack justifyContent="center" space={4}>
+          <Box>
+            <IconButton
+              variant="subtle"
+              icon={<Spinner />}
+              onPress={goBack}
+            ></IconButton>
+          </Box>
+          <Box>
+            <IconButton
+              variant="subtle"
+              icon={<CloseIcon />}
+              onPress={goBack}
+            ></IconButton>
+          </Box>
+          <Box>
+            <IconButton
+              variant="subtle"
+              icon={<Icon as={<Feather name="heart" />} />}
+              onPress={handleSendLike}
+            ></IconButton>
+          </Box>
+        </HStack>
+      </Box>
       <Box style={aspectRatio(640 / 860)}>
         <Box position="absolute" zIndex={100} right={4} top={4}>
           <Box safeAreaTop />
           <Box zIndex={100}>
             <IconButton
-              backgroundColor="#fff"
-              variant="ghost"
+              variant="subtle"
               icon={<CloseIcon />}
               onPress={goBack}
             ></IconButton>

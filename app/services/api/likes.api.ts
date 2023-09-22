@@ -14,6 +14,14 @@ class LikeApi extends CommonApi {
 
     return data;
   }
+
+  async getManyLikedMe(params?: ApiRequest.FindManyLikedMe) {
+    const { data } = await api.get<ApiResponse.UserData[]>(API_URL.likedMe, {
+      params,
+    });
+
+    return data;
+  }
 }
 
 export const likesApi = new LikeApi();

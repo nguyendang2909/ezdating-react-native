@@ -3,6 +3,7 @@ export const API_URL = {
   // loginByEmail: '/auth/login/email',
   // loginByFacebook: '/auth/login/facebook',
   // loginByGoogle: '/auth/login/google',
+  likedMe: '/likes/me',
   likes: '/likes',
   matches: '/matches',
   messages: '/messages',
