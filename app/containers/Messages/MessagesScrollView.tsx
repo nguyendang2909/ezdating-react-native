@@ -50,7 +50,6 @@ export const MessagesScrollView = () => {
     useAppSelector(state => state.conversation.messages[matchId]?.data) || [];
 
   const onRefresh = () => {
-    console.log(reduxCursorAfter);
     if (reduxCursorAfter) {
       setCursorAfter(reduxCursorAfter);
     }

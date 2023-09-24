@@ -20,8 +20,6 @@ export const MatchCards: React.FC = () => {
     },
   );
 
-  console.log(111, getMatchesQuery.data?.data);
-
   const matches = useAppSelector(state => state.match.data);
 
   const fetchFirstMatchedUsers = async () => {

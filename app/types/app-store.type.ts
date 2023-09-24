@@ -43,9 +43,22 @@ export declare namespace AppStore {
       data?: Entity.User[];
     };
     data?: Record<string, Entity.User>;
-    nearby?: {
-      data?: Entity.User[];
-    };
+  };
+
+  type NearbyState = {
+    data?: Entity.User[];
+  };
+
+  type SwipeUserState = {
+    data?: Entity.User[];
+  };
+
+  type LikesState = {
+    data?: Entity.Like[];
+  };
+
+  type LikedMeState = {
+    data?: Entity.Like[];
   };
 
   type PhotoActionType = 'delete' | 'create' | undefined;

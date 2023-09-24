@@ -52,6 +52,7 @@
     "apisauce": "2.1.5",
     "async-mutex": "^0.4.0",
     "axios": "^1.5.0",
+    "buffer": "^6.0.3",
     "date-fns": "^2.29.2",
     "expo": "^48.0.15",
     "expo-application": "~5.1.1",

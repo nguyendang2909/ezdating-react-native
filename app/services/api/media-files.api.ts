@@ -16,9 +16,15 @@ class MediaFilesAPi extends CommonApi {
       name: 'image.jpg',
     });
 
-    const { data } = await api.post<ApiResponse.MessagesData>(API_URL.photos, {
-      body: formData,
-    });
+    const { data } = await api.post<ApiResponse.MessagesData>(
+      API_URL.photos,
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      },
+    );
 
     return data;
   }

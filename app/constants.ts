@@ -43,7 +43,12 @@
 // }
 
 export const QUERY_KEYS = {
+  NEARBY_USERS: {
+    KEY: 'nearbyUsers',
+    STALE_TIME: 10 * (6 * 1000) * 6,
+  },
   PROFILE: 'profile',
+  LIKED_ME: 'likedMe',
 };
 
 export const UserRoles = {

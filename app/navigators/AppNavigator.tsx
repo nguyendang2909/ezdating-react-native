@@ -63,7 +63,7 @@ export type AppStackParamList = {
   };
   ProfileEdit: undefined;
   ProfileNearby: {
-    userId: string;
+    user: Entity.User;
   };
   ProfileSetting: undefined;
   SelectRelationshipGoal: undefined;

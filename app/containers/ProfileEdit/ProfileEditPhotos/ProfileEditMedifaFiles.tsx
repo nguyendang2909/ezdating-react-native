@@ -81,6 +81,21 @@ export const ProfileEditPhotos: React.FC = () => {
             return;
           }
         }
+      } else if (Platform.OS === 'android') {
+        const permission = await check(PERMISSIONS.ANDROID.CAMERA);
+
+        if (permission !== RESULTS.GRANTED) {
+          const requestPermission = await request(PERMISSIONS.ANDROID.CAMERA);
+
+          if (
+            requestPermission !== RESULTS.LIMITED &&
+            requestPermission !== RESULTS.GRANTED
+          ) {
+            console.log('Permissions to access camera has been blocked');
+
+            return;
+          }
+        }
       }
 
       const photo = await ImageCropPicker.openPicker({
@@ -98,6 +113,12 @@ export const ProfileEditPhotos: React.FC = () => {
       setLoadings(newLoadings);
 
       await mediaFilesApi.uploadPhoto({ file: photo });
+
+      const profile = await usersApi.getMyProfile();
+
+      if (profile.data) {
+        dispatch(appActions.updateProfile(profile.data));
+      }
     } catch (err) {
     } finally {
       const newLoadings = _.cloneDeep(loadings);

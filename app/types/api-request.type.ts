@@ -81,7 +81,6 @@ export declare namespace ApiRequest {
 
   type UploadPhoto = {
     file: Image;
-    isAvatar?: boolean;
   };
 
   type FindManyConversations = Pagination;

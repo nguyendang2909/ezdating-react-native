@@ -1,6 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
 import { Feather, MaterialIcons } from 'app/components/Icon/Lib';
-import { useAppSelector } from 'app/hooks';
 import { AppStackScreenProps } from 'app/navigators';
 import { likesApi } from 'app/services/api/likes.api';
 import { aspectRatio } from 'app/styles';
@@ -22,16 +21,14 @@ import Carousel from 'react-native-reanimated-carousel';
 type FCProps = AppStackScreenProps<'ProfileNearby'>;
 
 export const ProfileNearbyScreen: React.FC<FCProps> = props => {
-  const { userId } = props.route.params;
-  const user = useAppSelector(state => {
-    return state.user.nearby?.data?.find(item => item._id === userId);
-  });
+  const user = props.route.params.user;
+
   const width = Dimensions.get('window').width;
   const { goBack, navigate } = useNavigation();
 
   const handleSendLike = async () => {
     await likesApi.send({
-      targetUserId: userId,
+      targetUserId: user._id,
     });
   };
 

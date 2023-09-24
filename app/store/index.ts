@@ -17,8 +17,12 @@ import createSagaMiddleware from 'redux-saga';
 import { api } from '../services/api';
 import { appReducer } from './app.store';
 import { conversationReducer } from './conversations.store';
+import { likedMeReducer } from './liked-me.store';
+import { likeReducer } from './likes.store';
 import { matchReducer } from './matches.store';
+import { nearbyUserReducer } from './nearby-user.store';
 import { appSaga } from './saga';
+import { swipeUserReducer } from './swipe-user.store';
 // import theme from './theme';
 import { userReducer } from './user.store';
 
@@ -32,6 +36,10 @@ const reducers = combineReducers({
   match: matchReducer,
   user: userReducer,
   app: appReducer,
+  like: likeReducer,
+  likedMe: likedMeReducer,
+  nearbyUser: nearbyUserReducer,
+  swipeUser: swipeUserReducer,
 });
 
 const storage = new MMKV();

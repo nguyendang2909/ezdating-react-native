@@ -5,8 +5,9 @@ import { PhotoRequestPermission } from 'app/containers/Photos/PhotoRequestPermis
 import { useAppSelector } from 'app/hooks';
 import { translate } from 'app/i18n';
 import { AppStackScreenProps } from 'app/navigators';
-import { api } from 'app/services/api';
 import { mediaFilesApi } from 'app/services/api/media-files.api';
+import { usersApi } from 'app/services/api/users.api';
+import { appActions } from 'app/store/app.store';
 import {
   alignItemsCenter,
   flexDirectionRow,
@@ -35,6 +36,7 @@ import {
 } from 'native-base';
 import React, { useState } from 'react';
 import ImageCropPicker from 'react-native-image-crop-picker';
+import { useDispatch } from 'react-redux';
 
 type FCProps = AppStackScreenProps<'UpdateProfilePhotosScreen'>;
 
@@ -44,7 +46,7 @@ export const UpdateProfilePhotosScreen: React.FC<FCProps> = () => {
   const [removePhotoIndex, setRemovePhotoIndex] = useState<
     number | string | undefined
   >(undefined);
-  const { refetch: refetchUserProfile } = api.useGetMyProfileQuery();
+  const dispatch = useDispatch();
   const mediaFiles = useAppSelector(state => state.app.profile?.mediaFiles);
   const profilePublicPhotosLength = mediaFiles?.length || 0;
 
@@ -66,10 +68,14 @@ export const UpdateProfilePhotosScreen: React.FC<FCProps> = () => {
             }),
           );
         }
-        await refetchUserProfile();
-        navigate('Home', {
-          screen: 'DatingSwipe',
-        });
+        const userData = await usersApi.getMyProfile();
+
+        if (userData.data) {
+          dispatch(appActions.updateProfile(userData.data));
+          navigate('Home', {
+            screen: 'DatingSwipe',
+          });
+        }
       } catch (err) {
         console.log(err);
         toast.show({
@@ -95,7 +101,6 @@ export const UpdateProfilePhotosScreen: React.FC<FCProps> = () => {
           formik.setSubmitting(true);
           handleCloseRemovePhotoCard();
           await mediaFilesApi.removePhoto(removePhotoIndex);
-          await refetchUserProfile();
         } catch (err) {
           toast.show({
             title: translate('Remove w failed!', { w: translate('Photo') }),

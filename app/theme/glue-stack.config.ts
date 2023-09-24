@@ -1,4 +1,5 @@
 import { config as defaultConfig, createConfig } from '@gluestack-ui/themed';
+import LinearGradient from 'react-native-linear-gradient';
 
 export const glueStackConfig = createConfig({
   ...defaultConfig.theme,
@@ -6,6 +7,13 @@ export const glueStackConfig = createConfig({
     ...defaultConfig.theme.aliases,
   },
   components: {
+    LinearGradient: {
+      theme: {
+        props: {
+          as: LinearGradient,
+        },
+      },
+    },
     Button: {
       theme: {
         borderRadius: 100,

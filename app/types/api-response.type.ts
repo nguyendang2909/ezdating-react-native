@@ -16,6 +16,15 @@ export declare namespace ApiResponse {
     type?: string;
   };
 
+  type PaginatedResponse<T> = {
+    data?: T[];
+    pagination?: {
+      _next?: null | string;
+      _prev?: null | string;
+    };
+    type?: string;
+  };
+
   type SuccessResponse = FetchData<{ success: boolean }>;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

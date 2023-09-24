@@ -15,17 +15,6 @@ class UsersApi extends CommonApi {
     return data;
   }
 
-  async getNearbyUsers(params?: ApiRequest.SearchUsersNearby) {
-    const { data } = await api.get<ApiResponse.FetchData<Entity.User[]>>(
-      API_URL.usersNearby,
-      {
-        params,
-      },
-    );
-
-    return data;
-  }
-
   async getMyProfile() {
     const { data } = await api.get<ApiResponse.UserData>(API_URL.myProfile);
 

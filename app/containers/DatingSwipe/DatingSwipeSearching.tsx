@@ -1,6 +1,6 @@
 import { useAppSelector } from 'app/hooks';
-import { api } from 'app/services/api';
-import { userActions } from 'app/store/user.store';
+import { swipeUsersApi } from 'app/services/api/swipe-users.api';
+import { swipeUserActions } from 'app/store/swipe-user.store';
 import { Image, View } from 'native-base';
 import React, { useEffect } from 'react';
 import { Dimensions, StyleSheet } from 'react-native';
@@ -10,27 +10,19 @@ import { TinderCard } from 'rn-tinder-card';
 export const DatingSwipeSearching: React.FC = () => {
   const dispatch = useDispatch();
 
-  const swipeUsersQuery = api.useGetSwipeUsersQuery(
-    {},
-    {
-      refetchOnMountOrArgChange: false,
-      refetchOnFocus: false,
-    },
-  );
-
-  const swipeUsers = useAppSelector(state => state.user.swipe?.data);
+  const swipeUsers = useAppSelector(state => state.swipeUser.data);
 
   const fetchFirstTime = async () => {
-    if (!swipeUsers?.length) {
-      if (swipeUsersQuery.data?.data?.length) {
-        dispatch(userActions.addSwipeUsers(swipeUsersQuery.data.data));
-      }
+    const swipeUsersData = await swipeUsersApi.getMany();
 
-      const refetchUsers = await swipeUsersQuery.refetch();
+    // if (swipeUsersData.pagination?._next === null) {
+    //   setReachedEnd(true);
+    // }
 
-      if (refetchUsers.data?.data) {
-        dispatch(userActions.addSwipeUsers(refetchUsers.data.data));
-      }
+    if (swipeUsersData.data?.length) {
+      dispatch(swipeUserActions.addMany(swipeUsersData.data));
+    } else {
+      // setReachedEnd(true);
     }
   };
 

@@ -10,7 +10,7 @@ import {
 
 export declare namespace Entity {
   type BaseEntity = {
-    _id?: string;
+    _id: string;
     createdAt?: string;
     updatedAt?: string;
   };
@@ -73,7 +73,6 @@ export declare namespace Entity {
       lastMessageAt: string;
       userOneRead: boolean;
       userTwoRead: boolean;
-      matchedAt: string;
       targetUser: User;
     }>;
 
@@ -90,5 +89,13 @@ export declare namespace Entity {
       text?: string;
       uuid?: string;
       video?: string;
+    }>;
+
+  type Like = BaseEntity &
+    Partial<{
+      _userId?: string;
+      _targetUserId?: string;
+      isMatched?: boolean;
+      user?: User;
     }>;
 }

@@ -40,10 +40,7 @@ export const InputBasicInforForm: FC = () => {
     onSubmit: async values => {
       try {
         const result = await usersApi.updateProfile(values);
-        console.log(result);
-      } catch (err) {
-        console.log(err);
-      }
+      } catch (err) {}
     },
   });
 
