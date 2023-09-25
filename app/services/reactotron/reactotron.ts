@@ -123,6 +123,7 @@ export function setupReactotron(customConfig: ReactotronConfig = {}) {
           Reactotron.setAsyncStorageHandler(AsyncStorage);
         }
       }
+      // eslint-disable-next-line react-hooks/rules-of-hooks
       Reactotron.useReactNative({
         asyncStorage: config.useAsyncStorage ? undefined : false,
       });

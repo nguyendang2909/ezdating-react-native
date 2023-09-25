@@ -7,7 +7,7 @@ import { Box, KeyboardAvoidingView, StatusBar } from 'native-base';
 import React, { FC } from 'react';
 import { Platform } from 'react-native';
 
-type FCProps = AppStackScreenProps<'MessagesByConversation'>;
+type FCProps = AppStackScreenProps<'Messages'>;
 
 export const MessagesScreen: FC<FCProps> = props => {
   const { conversation } = props.route.params;

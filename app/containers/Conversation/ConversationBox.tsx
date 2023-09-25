@@ -11,7 +11,7 @@ export const ConversationBox: React.FC<FCProps> = ({ data }) => {
   const navigation = useNavigation();
 
   const handlePress = () => {
-    navigation.navigate('MessagesByConversation', {
+    navigation.navigate('Messages', {
       conversation: data,
     });
   };

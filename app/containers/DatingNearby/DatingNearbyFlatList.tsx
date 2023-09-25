@@ -138,6 +138,7 @@ export const DatingNearbyFlatList: React.FC = () => {
             <></>
           )
         }
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         renderItem={({ item }: { item: Entity.User }) => {
           const handlePressCard = () => {
@@ -156,6 +157,7 @@ export const DatingNearbyFlatList: React.FC = () => {
                   width="$full"
                   position="absolute"
                   borderRadius={8}
+                  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                   // @ts-ignore
                   colors={['#00000000', '#00000000', '#00000000', '#000000']}
                   justifyContent="flex-end"

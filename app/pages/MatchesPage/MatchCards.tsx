@@ -76,7 +76,7 @@ export const MatchCards: React.FC = () => {
   const imageCardHeight = (cardWidth / 640) * 860;
 
   const handlePressCard = (conversation: Entity.Match) => {
-    navigation.navigate('MessagesByConversation', {
+    navigation.navigate('Messages', {
       conversation,
     });
   };

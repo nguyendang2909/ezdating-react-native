@@ -21,7 +21,7 @@ export const UpdateGeoLocationPermission: React.FC = () => {
         });
         break;
     }
-  }, []);
+  }, [dispatch]);
 
   return <></>;
 };

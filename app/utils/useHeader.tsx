@@ -19,5 +19,6 @@ export function useHeader(
       headerShown: true,
       header: () => <Header {...headerProps} />,
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [...deps, navigation]);
 }

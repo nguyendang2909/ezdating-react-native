@@ -50,7 +50,7 @@ export const appSlice = createSlice({
       }
     },
   },
-  extraReducers: builder => {
+  extraReducers: _builder => {
     // builder.addMatcher(
     //   api.endpoints.signInWithPhoneNumber.matchFulfilled,
     //   (state, action) => {

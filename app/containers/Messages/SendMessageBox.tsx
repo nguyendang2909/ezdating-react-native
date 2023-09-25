@@ -10,8 +10,7 @@ import { v4 as uuidV4 } from 'uuid';
 
 export const SendMessageBox: React.FC = () => {
   const dispatch = useDispatch();
-  const route =
-    useRoute<RouteProp<AppStackParamList, 'MessagesByConversation'>>();
+  const route = useRoute<RouteProp<AppStackParamList, 'Messages'>>();
 
   const { conversation } = route.params;
 

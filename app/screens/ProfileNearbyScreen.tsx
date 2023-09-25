@@ -34,7 +34,7 @@ export const ProfileNearbyScreen: React.FC<FCProps> = props => {
   };
 
   const sendMessage = async () => {
-    navigate('MessagesByConversation', {
+    navigate('Messages', {
       conversation: {},
     });
   };
@@ -91,7 +91,7 @@ export const ProfileNearbyScreen: React.FC<FCProps> = props => {
         <Box
           position="absolute"
           bottom={0}
-        zIndex={100}
+          zIndex={100}
           alignItems="center"
           justifyContent="center"
           px={4}

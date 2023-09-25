@@ -18,6 +18,6 @@ export const MainScreen: React.FC = () => {
         navigation.navigate('UpdateProfileBasicInfo');
       }
     }
-  }, [userStatus]);
+  }, [navigation, userStatus]);
   return <></>;
 };
