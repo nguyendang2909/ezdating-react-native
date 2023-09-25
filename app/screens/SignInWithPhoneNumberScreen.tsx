@@ -1,21 +1,14 @@
+import { Box, Heading, Text, View } from '@gluestack-ui/themed';
 import { useNavigation } from '@react-navigation/native';
-import { LoadingScreen } from 'app/components/Screen/LoadingScreen';
 import { SignInWithPhoneNumberForm } from 'app/containers/Form/SignInWithPhoneNumberForm';
 import { translate } from 'app/i18n';
-import {
-  flex,
-  flexGrow,
-  marginTop,
-  paddingHorizontal,
-  paddingVertical,
-  textAlignCenter,
-} from 'app/styles';
-import { Box, Heading, IconButton, Text, View } from 'native-base';
+import { textAlignCenter } from 'app/styles';
+import { IconButton } from 'native-base';
 import React, { FC } from 'react';
+import { SafeAreaView } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import { AppStackScreenProps } from '../navigators';
-import { spacing } from '../theme';
 
 type FCProps = AppStackScreenProps<'SignInWithPhoneNumber'>;
 
@@ -24,11 +17,10 @@ export const SignInWithPhoneNumberScreen: FC<FCProps> = _props => {
 
   return (
     <>
-      <Box safeAreaY style={flex(1)}>
-        <LoadingScreen />
-        <View
-          style={[paddingHorizontal(spacing.lg), paddingVertical(spacing.lg)]}
-        >
+      <SafeAreaView></SafeAreaView>
+
+      <Box flex={1}>
+        <View px={24} py={24}>
           <View>
             <IconButton
               borderRadius="full"
@@ -43,15 +35,18 @@ export const SignInWithPhoneNumberScreen: FC<FCProps> = _props => {
           <Text>{translate('Please input the phone number to sign in')}</Text>
         </View>
 
-        <View style={[marginTop(spacing.lg), flexGrow]}>
-          <View style={paddingHorizontal(spacing.lg)}>
+        <View mt={24} flexGrow={1}>
+          <View px={24}>
             <SignInWithPhoneNumberForm />
           </View>
         </View>
+
         <View>
           <Text style={textAlignCenter}>{translate('EZDating')}</Text>
         </View>
       </Box>
+
+      <SafeAreaView></SafeAreaView>
     </>
   );
 };

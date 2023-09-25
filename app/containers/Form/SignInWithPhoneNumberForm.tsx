@@ -1,5 +1,7 @@
+import { View } from '@gluestack-ui/themed';
 import auth from '@react-native-firebase/auth';
 import { useNavigation } from '@react-navigation/native';
+import { LoadingButton } from 'app/components/Button/LoadingButton';
 import { translate, TxKeyPath } from 'app/i18n';
 import {
   flexDirectionRow,
@@ -15,12 +17,10 @@ import { FormParams } from 'app/types/form-params.type';
 import { useFormik } from 'formik';
 import { isValidPhoneNumber } from 'libphonenumber-js/max';
 import {
-  Button,
   FormControl,
   HStack,
   Icon,
   Input,
-  View,
   WarningOutlineIcon,
 } from 'native-base';
 import React, { FC, useState } from 'react';
@@ -160,9 +160,12 @@ export const SignInWithPhoneNumberForm: FC = () => {
         </View>
 
         <View style={marginTop(spacing.lg)}>
-          <Button onPress={handlePressSubmit} isLoading={formik.isSubmitting}>
+          <LoadingButton
+            onPress={handlePressSubmit}
+            isLoading={formik.isSubmitting}
+          >
             {translate('Next')}
-          </Button>
+          </LoadingButton>
         </View>
       </View>
     </>
