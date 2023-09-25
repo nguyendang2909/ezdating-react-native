@@ -20,6 +20,7 @@ import { conversationReducer } from './conversations.store';
 import { likedMeReducer } from './liked-me.store';
 import { likeReducer } from './likes.store';
 import { matchReducer } from './matches.store';
+import { messageReducer } from './messages.store';
 import { nearbyUserReducer } from './nearby-user.store';
 import { appSaga } from './saga';
 import { swipeUserReducer } from './swipe-user.store';
@@ -40,6 +41,7 @@ const reducers = combineReducers({
   likedMe: likedMeReducer,
   nearbyUser: nearbyUserReducer,
   swipeUser: swipeUserReducer,
+  messages: messageReducer,
 });
 
 const storage = new MMKV();

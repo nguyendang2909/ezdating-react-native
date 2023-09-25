@@ -2,19 +2,17 @@ import { useNavigation } from '@react-navigation/native';
 import { Entity } from 'app/types/entity.type';
 import { Avatar, Box, HStack, Pressable, Text } from 'native-base';
 import React from 'react';
-import { ListRenderItemInfo } from 'react-native';
 
 type FCProps = {
-  data: ListRenderItemInfo<Entity.Match>;
+  data: Entity.Match;
 };
 
 export const ConversationBox: React.FC<FCProps> = ({ data }) => {
   const navigation = useNavigation();
-  const conversation = data.item;
 
   const handlePress = () => {
     navigation.navigate('MessagesByConversation', {
-      conversation: data.item,
+      conversation: data,
     });
   };
 
@@ -22,14 +20,14 @@ export const ConversationBox: React.FC<FCProps> = ({ data }) => {
     <Pressable backgroundColor="#fff" onPress={handlePress}>
       {({ isPressed }) => {
         return (
-          <Box px={4} py={2}>
-            <HStack space={4} bg={isPressed ? 'coolGray.200' : '#fff'}>
+          <Box px={4} py={2} bg={isPressed ? 'coolGray.200' : '#fff'}>
+            <HStack space={4}>
               <Box>
                 <Avatar
                   size={16}
                   source={{
-                    uri: conversation.targetUser?.mediaFiles?.length
-                      ? conversation.targetUser?.mediaFiles[0].location
+                    uri: data.targetUser?.mediaFiles?.length
+                      ? data.targetUser?.mediaFiles[0].location
                       : undefined,
                   }}
                 ></Avatar>
@@ -37,12 +35,12 @@ export const ConversationBox: React.FC<FCProps> = ({ data }) => {
               <Box justifyContent="center">
                 <Box>
                   <Text bold fontSize={16}>
-                    {conversation.targetUser?.nickname}
+                    {data.targetUser?.nickname}
                   </Text>
                 </Box>
                 <Box>
                   <Text fontSize={14} color="gray.700">
-                    {conversation.lastMessage}
+                    {data.lastMessage}
                   </Text>
                 </Box>
               </Box>

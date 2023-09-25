@@ -18,18 +18,28 @@ export const matchSlice = createSlice({
   name: 'match',
   initialState,
   reducers: {
-    addMatches: (state, action: PayloadAction<Entity.Match[]>) => {
-      const matches = action.payload;
+    addManyFirst: (state, action: PayloadAction<Entity.Match[]>) => {
+      const { payload } = action;
 
-      if (!matches.length) {
+      if (!payload.length) {
         return;
       }
 
-      if (!state.data?.length) {
-        state.data = matches;
+      state.data = payload;
+    },
+
+    addManyNext(state, action: PayloadAction<Entity.Match[]>) {
+      const { payload } = action;
+
+      if (!payload.length) {
+        return;
       }
 
-      state.data = state.data.concat(matches);
+      if (!state.data) {
+        state.data = payload;
+      }
+
+      state.data = state.data.concat(payload);
     },
   },
   extraReducers: builder => {

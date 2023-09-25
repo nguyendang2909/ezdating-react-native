@@ -1,10 +1,11 @@
 import { useNavigation } from '@react-navigation/native';
 import { useAppSelector } from 'app/hooks';
-import { api } from 'app/services/api';
+import { matchesApi } from 'app/services/api/matches.api';
+import { nearbyUsersApi } from 'app/services/api/nearby-users.api';
 import { matchActions } from 'app/store/matches.store';
 import { Entity } from 'app/types/entity.type';
 import { Box, HStack, Image, Pressable, ScrollView, Text } from 'native-base';
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Dimensions } from 'react-native';
 import { useDispatch } from 'react-redux';
 
@@ -13,30 +14,60 @@ export const MatchCards: React.FC = () => {
 
   const navigation = useNavigation();
 
-  const getMatchesQuery = api.useGetMatchesQuery(
-    {},
-    {
-      refetchOnMountOrArgChange: false,
-    },
-  );
+  const [isRefreshingTop, setRefreshingTop] = useState<boolean>(false);
+  const [isRefreshingBottom, setRefreshingBottom] = useState<boolean>(false);
+  const [isReachedEnd, setReachedEnd] = useState<boolean>(false);
+  const isRefreshing = isRefreshingTop || isRefreshingBottom;
 
   const matches = useAppSelector(state => state.match.data);
 
-  const fetchFirstMatchedUsers = async () => {
-    if (!matches?.length) {
-      if (!getMatchesQuery.data?.data) {
-        const refetchMatches = await getMatchesQuery.refetch();
+  const fetchFirstTime = useCallback(async () => {
+    setRefreshingTop(true);
 
-        if (refetchMatches.data?.data?.length) {
-          dispatch(matchActions.addMatches(refetchMatches.data?.data));
-        }
+    try {
+      const fetchData = await matchesApi.getMany();
+
+      if (fetchData.pagination?._next === null) {
+        setReachedEnd(true);
+      } else {
+        setReachedEnd(false);
       }
-    }
-  };
+
+      if (fetchData.data) {
+        dispatch(matchActions.addManyFirst(fetchData.data));
+      }
+    } catch (err) {}
+
+    setRefreshingTop(false);
+  }, [dispatch]);
 
   useEffect(() => {
-    fetchFirstMatchedUsers();
-  }, []);
+    fetchFirstTime();
+  }, [fetchFirstTime]);
+
+  const handleRefreshTop = async () => {
+    if (isRefreshing) {
+      return;
+    }
+
+    setRefreshingTop(true);
+
+    try {
+      const fetchData = await nearbyUsersApi.getMany();
+
+      if (fetchData.pagination?._next === null) {
+        setReachedEnd(true);
+      } else {
+        setReachedEnd(false);
+      }
+
+      if (fetchData.data) {
+        dispatch(matchActions.addManyFirst(fetchData.data));
+      }
+    } catch (err) {}
+
+    setRefreshingTop(false);
+  };
 
   const width = Dimensions.get('window').width;
 
@@ -57,6 +88,8 @@ export const MatchCards: React.FC = () => {
           const imageUrl = item.targetUser?.mediaFiles?.length
             ? item.targetUser.mediaFiles[0].location
             : '';
+
+          console.log(item);
 
           return (
             <Pressable

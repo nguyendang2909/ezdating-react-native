@@ -1,9 +1,9 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { translate } from 'app/i18n';
 import { AppStackScreenProps } from 'app/navigators';
+import { ConversationsScreen } from 'app/screens/ConversationsScreen';
 import { DatingNearbyScreen } from 'app/screens/DatingNearbyScreen';
 import { DatingSwipeScreen } from 'app/screens/DatingSwipeScreen';
-import { MatchesScreen } from 'app/screens/MachesScreen';
 import { ProfileScreen } from 'app/screens/ProfileScreen';
 import { backgroundColor, borderTopColor } from 'app/styles';
 import { colors, spacing } from 'app/theme';
@@ -16,7 +16,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 export type HomeTabParamList = {
   DatingSwipe: undefined;
   DatingNearby: undefined;
-  Matches: undefined;
+  Conversations: undefined;
   Profile: undefined;
 };
 
@@ -80,8 +80,8 @@ export const HomeNavigator: FC<FCProps> = () => {
         }}
       />
       <Tab.Screen
-        name="Matches"
-        component={MatchesScreen}
+        name="Conversations"
+        component={ConversationsScreen}
         options={{
           tabBarShowLabel: false,
           tabBarLabel: translate('Messages'),

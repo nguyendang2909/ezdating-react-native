@@ -7,13 +7,30 @@ import { Entity } from 'app/types/entity.type';
 import { api } from './api';
 
 class MatchesApi extends CommonApi {
-  async getMany(params: ApiRequest.FindManyMatches) {
-    const { data } = await api.get<ApiResponse.FetchData<Entity.Match[]>>(
-      API_URL.usersSwipe,
-      { params },
+  async getMany({
+    params = {},
+    data,
+  }: {
+    params?: ApiRequest.FindManyMatches;
+    data?: Entity.Match[];
+  } = {}) {
+    const _next = this.getCursor(data);
+
+    const response = await api.get<ApiResponse.PaginatedResponse<Entity.Match>>(
+      API_URL.matches,
+      {
+        params: {
+          ...params,
+          ...(_next ? { _next } : {}),
+        },
+      },
     );
 
-    return data;
+    return response.data;
+  }
+
+  public getCursor(data?: Entity.User[]): string | undefined {
+    return this.getCursorByField(['_id'], data);
   }
 }
 

@@ -49,8 +49,7 @@ export declare namespace ApiResponse {
     user?: Entity.User;
   }>;
 
-  type MessagesData = FetchPaginationData<
-    Entity.Message[],
-    { _matchId: string }
-  >;
+  type MessagesData = PaginatedResponse<Entity.Message> & {
+    _matchId?: string;
+  };
 }

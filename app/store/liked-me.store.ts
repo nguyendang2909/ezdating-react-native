@@ -20,7 +20,7 @@ export const likedMeSlice = createSlice({
       state.data = payload;
     },
 
-    addManyNext(state, action: PayloadAction<Entity.User[]>) {
+    addManyNext(state, action: PayloadAction<Entity.Like[]>) {
       const { payload } = action;
 
       if (!payload.length) {

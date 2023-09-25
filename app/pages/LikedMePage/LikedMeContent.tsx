@@ -4,25 +4,22 @@ import {
   Image,
   LinearGradient,
   Pressable,
-  ScrollView,
   Spinner,
   Text,
 } from '@gluestack-ui/themed';
 import { useAppSelector } from 'app/hooks';
 import { likedMeApi } from 'app/services/api/likedMe.api';
-import { likesApi } from 'app/services/api/likes.api';
 import { likedMeActions } from 'app/store/liked-me.store';
-import { likeActions } from 'app/store/likes.store';
 import { Entity } from 'app/types/entity.type';
-import _ from 'lodash';
+import { flatListUtil } from 'app/utils/flat-list.util';
 import React, { useCallback, useEffect, useState } from 'react';
-import { ActivityIndicator, RefreshControl } from 'react-native';
+import { RefreshControl } from 'react-native';
 import { useDispatch } from 'react-redux';
 
 export const LikedMeContent: React.FC = () => {
   const dispatch = useDispatch();
 
-  const likes = useAppSelector(state => state.like.data);
+  const likes = useAppSelector(state => state.likedMe.data);
 
   const [isReachedEnd, setReachedEnd] = useState<boolean>(false);
 
@@ -30,20 +27,26 @@ export const LikedMeContent: React.FC = () => {
 
   const [isRefreshingBottom, setRefreshingBottom] = useState<boolean>(false);
 
-  const fetchLikedMeFirst = useCallback(async () => {
-    try {
-      const likedMeData = await likedMeApi.getMany();
+  const isRefreshing = isRefreshingTop || isRefreshingBottom;
 
-      if (likedMeData.pagination?._next === null) {
+  const fetchLikedMeFirst = useCallback(async () => {
+    setRefreshingTop(true);
+
+    try {
+      const fetchData = await likedMeApi.getMany();
+
+      if (fetchData.pagination?._next === null) {
         setReachedEnd(true);
       } else {
         setReachedEnd(false);
       }
 
-      if (likedMeData.data?.length) {
-        dispatch(likedMeActions.addManyFirst(likedMeData.data));
+      if (fetchData.data?.length) {
+        dispatch(likedMeActions.addManyFirst(fetchData.data));
       }
     } catch (err) {}
+
+    setRefreshingTop(false);
   }, [dispatch]);
 
   useEffect(() => {
@@ -51,29 +54,35 @@ export const LikedMeContent: React.FC = () => {
   }, [fetchLikedMeFirst]);
 
   const handleRefreshTop = async () => {
-    if (isRefreshingTop) {
+    if (isRefreshing) {
       return;
     }
 
     setRefreshingTop(true);
 
     try {
-      const nearbyUsersData = await likedMeApi.getMany();
+      const fetchData = await likedMeApi.getMany();
 
-      console.log(111, nearbyUsersData);
-
-      if (nearbyUsersData.data) {
-        dispatch(likeActions.addLikes(nearbyUsersData.data));
-      } else {
+      if (fetchData.pagination?._next === null) {
         setReachedEnd(true);
+      } else {
+        setReachedEnd(false);
+      }
+
+      if (fetchData.data?.length) {
+        dispatch(likedMeActions.addManyFirst(fetchData.data));
       }
     } catch (err) {}
 
     setRefreshingTop(false);
   };
 
-  const handleRefreshBottom = async () => {
-    if (isRefreshingBottom) {
+  const handleScroll = async (e: NativeSyntheticEvent<NativeScrollEvent>) => {
+    if (!flatListUtil.isCloseToBottom(e)) {
+      return;
+    }
+
+    if (isRefreshing) {
       return;
     }
 
@@ -84,14 +93,10 @@ export const LikedMeContent: React.FC = () => {
     setRefreshingBottom(true);
 
     try {
-      const _next = _.last(likes)?._id;
+      const fetchData = await likedMeApi.getMany({ data: likes });
 
-      const likesData = await likesApi.getManyLikedMe({
-        ...(_next ? { _next } : {}),
-      });
-
-      if (likesData.data?.length) {
-        dispatch(likeActions.addLikes(likesData.data));
+      if (fetchData.data?.length) {
+        dispatch(likedMeActions.addManyNext(fetchData.data));
       } else {
         setReachedEnd(true);
       }
@@ -102,8 +107,6 @@ export const LikedMeContent: React.FC = () => {
 
   return (
     <>
-      <ActivityIndicator />
-      <Spinner />
       <FlatList
         showsVerticalScrollIndicator={false}
         refreshControl={
@@ -112,13 +115,18 @@ export const LikedMeContent: React.FC = () => {
             onRefresh={handleRefreshTop}
           ></RefreshControl>
         }
-        onEndReached={handleRefreshBottom}
         numColumns={2}
         data={likes}
-        ListFooterComponent={isRefreshingBottom ? <Spinner /> : <></>}
-        onScroll={event => {
-          console.log(event);
-        }}
+        onScroll={handleScroll}
+        ListFooterComponent={
+          isRefreshingBottom ? (
+            <Box mt={16}>
+              <Spinner />
+            </Box>
+          ) : (
+            <></>
+          )
+        }
         // @ts-ignore
         renderItem={({ item }: { item: Entity.Like }) => {
           const handlePressCard = () => {};
@@ -161,7 +169,7 @@ export const LikedMeContent: React.FC = () => {
           );
         }}
       ></FlatList>
-      <ScrollView showsHorizontalScrollIndicator={false}>
+      {/* <ScrollView showsHorizontalScrollIndicator={false}>
         <Box px={12} py={12}>
           <Box
             sx={{
@@ -209,7 +217,7 @@ export const LikedMeContent: React.FC = () => {
             })}
           </Box>
         </Box>
-      </ScrollView>
+      </ScrollView> */}
     </>
   );
 };

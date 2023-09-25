@@ -14,7 +14,7 @@ export const MessagesByConversationScreen: FC<FCProps> = props => {
 
   const { goBack } = useNavigation();
 
-  if (!conversation) {
+  if (!conversation || !conversation._id) {
     goBack();
 
     return <></>;

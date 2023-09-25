@@ -11,7 +11,7 @@ export declare namespace AppStore {
     accessToken?: string;
     refreshToken?: string;
     isLogged?: boolean;
-    profile?: Entity.User;
+    profile?: Partial<Entity.User>;
     osPermissions?: {
       locationService?: AuthorizationResult;
     };
@@ -19,14 +19,10 @@ export declare namespace AppStore {
 
   type ConversationState = {
     data?: Entity.Match[];
-    messages?: Record<
-      string,
-      {
-        pagination?: ApiResponse.Pagination;
-        data?: Entity.Message[];
-      }
-    >;
-    pagination?: ApiResponse.Pagination;
+  };
+
+  type MessageState = {
+    data?: Record<string, Entity.Message[] | undefined>;
   };
 
   type MatchState = {

@@ -12,6 +12,7 @@ import { nearbyUsersApi } from 'app/services/api/nearby-users.api';
 import { nearbyUserActions } from 'app/store/nearby-user.store';
 import { Entity } from 'app/types/entity.type';
 import { flatListUtil } from 'app/utils/flat-list.util';
+import _ from 'lodash';
 import { Spinner } from 'native-base';
 import React, { useCallback, useEffect, useState } from 'react';
 import {
@@ -26,10 +27,10 @@ export const DatingNearbyFlatList: React.FC = () => {
   const navigator = useNavigation();
 
   const users = useAppSelector(state => state.nearbyUser.data) || [];
+
   const [isRefreshingTop, setRefreshingTop] = useState<boolean>(false);
   const [isRefreshingBottom, setRefreshingBottom] = useState<boolean>(false);
   const [isReachedEnd, setReachedEnd] = useState<boolean>(false);
-
   const isRefreshing = isRefreshingTop || isRefreshingBottom;
 
   const fetchFirstTime = useCallback(async () => {
@@ -81,6 +82,7 @@ export const DatingNearbyFlatList: React.FC = () => {
   };
 
   const handleScroll = async (e: NativeSyntheticEvent<NativeScrollEvent>) => {
+    console.log(11);
     if (!flatListUtil.isCloseToBottom(e)) {
       return;
     }
@@ -160,7 +162,8 @@ export const DatingNearbyFlatList: React.FC = () => {
                 >
                   <Box px={4} py={4}>
                     <Text fontWeight="bold" color="$white" numberOfLines={1}>
-                      {item.nickname} {item.age}
+                      {item.nickname}{' '}
+                      {item.distance && `${_.round(item.distance, 1)} km`}
                     </Text>
                   </Box>
                 </LinearGradient>
