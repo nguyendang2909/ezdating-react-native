@@ -1,5 +1,5 @@
+import { ChevronLeftIcon, Pressable } from '@gluestack-ui/themed';
 import { useNavigation } from '@react-navigation/native';
-import { ChevronLeftIcon, Pressable } from 'native-base';
 import React from 'react';
 
 export const BackIconButton: React.FC = () => {

@@ -13,7 +13,7 @@ import { EditInfoNicknameScreen } from 'app/screens/EditInfoNicknameScreen';
 import { EditInfoWeightScreen } from 'app/screens/EditInfoWeightScreen';
 import { LikedMeScreen } from 'app/screens/LikedMeScreen';
 import { MainScreen } from 'app/screens/MainScreen';
-import { MessagesByConversationScreen } from 'app/screens/MessagesByConversationScreen';
+import { MessagesScreen } from 'app/screens/MessagesByConversationScreen';
 import { ProfileEditScreen } from 'app/screens/ProfileEditScreen';
 import { ProfileNearbyScreen } from 'app/screens/ProfileNearbyScreen';
 import { ProfileSettingScreen } from 'app/screens/ProfileSettingScreen';
@@ -54,11 +54,11 @@ export type AppStackParamList = {
   EditInfoNickname: undefined;
   EditInfoWeight: undefined;
   UpdateProfileBasicInfo: undefined;
-  UpdateProfilePhotosScreen: undefined;
+  UpdateProfilePhotos: undefined;
   Home: NavigatorScreenParams<HomeTabParamList>;
   LikedMe: undefined;
   Main: undefined;
-  MessagesByConversation: {
+  Messages: {
     conversation: Entity.Match;
   };
   ProfileEdit: undefined;
@@ -77,6 +77,27 @@ export type AppStackParamList = {
   SignInWithPhoneNumber: undefined;
   Welcome: undefined;
 };
+
+export const SCREENS: Record<keyof AppStackParamList, keyof AppStackParamList> =
+  {
+    EditInfoHeight: 'EditInfoHeight',
+    EditInfoNickname: 'EditInfoNickname',
+    EditInfoWeight: 'EditInfoWeight',
+    UpdateProfileBasicInfo: 'UpdateProfileBasicInfo',
+    UpdateProfilePhotos: 'UpdateProfilePhotos',
+    Home: 'Home',
+    LikedMe: 'LikedMe',
+    Main: 'Main',
+    Messages: 'Messages',
+    ProfileEdit: 'ProfileEdit',
+    ProfileNearby: 'ProfileNearby',
+    ProfileSetting: 'ProfileSetting',
+    SelectRelationshipGoal: 'SelectRelationshipGoal',
+    SignIn: 'SignIn',
+    SignInWithOtpPhoneNumber: 'SignInWithOtpPhoneNumber',
+    SignInWithPhoneNumber: 'SignInWithPhoneNumber',
+    Welcome: 'Welcome',
+  };
 
 /**
  * This is a list of all the route names that will exit the app if the back button
@@ -107,11 +128,11 @@ const AppStack = () => {
     >
       {isAuthenticated ? (
         <>
-          <Stack.Screen name="Main" component={MainScreen} />
-          <Stack.Screen name="Home" component={HomeNavigator} />
+          <Stack.Screen name={SCREENS.Main} component={MainScreen} />
+          <Stack.Screen name={SCREENS.Home} component={HomeNavigator} />
 
           <Stack.Screen
-            name="EditInfoHeight"
+            name={SCREENS.EditInfoHeight}
             component={EditInfoHeightScreen}
             options={{
               presentation: 'modal',
@@ -119,64 +140,61 @@ const AppStack = () => {
           />
 
           <Stack.Screen
-            name="EditInfoNickname"
+            name={SCREENS.EditInfoNickname}
             component={EditInfoNicknameScreen}
             options={{
               presentation: 'modal',
             }}
           />
           <Stack.Screen
-            name="EditInfoWeight"
+            name={SCREENS.EditInfoWeight}
             component={EditInfoWeightScreen}
             options={{
               presentation: 'modal',
             }}
           />
-          <Stack.Screen name="LikedMe" component={LikedMeScreen} />
+          <Stack.Screen name={SCREENS.LikedMe} component={LikedMeScreen} />
           <Stack.Screen
-            name="UpdateProfileBasicInfo"
+            name={SCREENS.UpdateProfileBasicInfo}
             component={UpdateProfileBasicInfoScreen}
           />
           <Stack.Screen
-            name="UpdateProfilePhotosScreen"
+            name={SCREENS.UpdateProfilePhotos}
             component={UpdateProfilePhotosScreen}
           />
           <Stack.Screen
-            name="ProfileEdit"
+            name={SCREENS.ProfileEdit}
             component={ProfileEditScreen}
             options={{
               presentation: 'card',
             }}
           />
           <Stack.Screen
-            name="ProfileNearby"
+            name={SCREENS.ProfileNearby}
             component={ProfileNearbyScreen}
             options={{
               presentation: 'containedModal',
             }}
           ></Stack.Screen>
           <Stack.Screen
-            name="ProfileSetting"
+            name={SCREENS.ProfileSetting}
             component={ProfileSettingScreen}
           />
+          <Stack.Screen name={SCREENS.Messages} component={MessagesScreen} />
           <Stack.Screen
-            name="MessagesByConversation"
-            component={MessagesByConversationScreen}
-          />
-          <Stack.Screen
-            name="SelectRelationshipGoal"
+            name={SCREENS.SelectRelationshipGoal}
             component={SelectRelationshipScreen}
           ></Stack.Screen>
         </>
       ) : (
         <>
-          <Stack.Screen name="SignIn" component={SignInScreen} />
+          <Stack.Screen name={SCREENS.SignIn} component={SignInScreen} />
           <Stack.Screen
-            name="SignInWithPhoneNumber"
+            name={SCREENS.SignInWithPhoneNumber}
             component={SignInWithPhoneNumberScreen}
           />
           <Stack.Screen
-            name="SignInWithOtpPhoneNumber"
+            name={SCREENS.SignInWithOtpPhoneNumber}
             component={SignInWithOtpPhoneNumberScreen}
           />
         </>

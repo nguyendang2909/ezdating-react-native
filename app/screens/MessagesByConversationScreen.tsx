@@ -9,7 +9,7 @@ import { Platform } from 'react-native';
 
 type FCProps = AppStackScreenProps<'MessagesByConversation'>;
 
-export const MessagesByConversationScreen: FC<FCProps> = props => {
+export const MessagesScreen: FC<FCProps> = props => {
   const { conversation } = props.route.params;
 
   const { goBack } = useNavigation();

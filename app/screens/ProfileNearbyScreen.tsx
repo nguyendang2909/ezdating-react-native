@@ -1,3 +1,4 @@
+import { Button, ButtonIcon } from '@gluestack-ui/themed';
 import { useNavigation } from '@react-navigation/native';
 import { Feather, MaterialIcons } from 'app/components/Icon/Lib';
 import { AppStackScreenProps } from 'app/navigators';
@@ -77,6 +78,9 @@ export const ProfileNearbyScreen: React.FC<FCProps> = props => {
         <Box position="absolute" zIndex={100} right={4} top={4}>
           <Box safeAreaTop />
           <Box zIndex={100}>
+            <Button>
+              <ButtonIcon as={CloseIcon} />
+            </Button>
             <IconButton
               variant="subtle"
               icon={<CloseIcon />}
@@ -87,7 +91,7 @@ export const ProfileNearbyScreen: React.FC<FCProps> = props => {
         <Box
           position="absolute"
           bottom={0}
-          zIndex={100}
+        zIndex={100}
           alignItems="center"
           justifyContent="center"
           px={4}
