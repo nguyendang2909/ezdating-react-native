@@ -165,6 +165,7 @@ const en = {
   'Remove w failed!': 'Remove {{w}} failed!',
   Resend: 'Resend',
   'Retype password': 'Retype password',
+  'Sign in with phone number': 'Sign in with phone number',
   'Sign in with w': 'Sign in with {{w}}',
   'Sign in': 'Sign in',
   'Your profile': 'Your profile',

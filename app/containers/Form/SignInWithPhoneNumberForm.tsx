@@ -8,7 +8,6 @@ import {
   flexGrow,
   marginBottom,
   marginTop,
-  posititionAbsolute,
   width,
   widthFull,
 } from 'app/styles';
@@ -149,7 +148,7 @@ export const SignInWithPhoneNumberForm: FC = () => {
 
               <View>
                 <FormControl.ErrorMessage
-                  style={posititionAbsolute}
+                  position="absolute"
                   leftIcon={<WarningOutlineIcon size="xs" />}
                 >
                   {!!errorCode && translate(errorCode)}

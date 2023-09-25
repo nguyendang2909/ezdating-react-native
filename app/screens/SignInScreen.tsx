@@ -1,3 +1,4 @@
+import { View, VStack } from '@gluestack-ui/themed';
 import { SignInWithFacebookButton } from 'app/containers/Button/SignInWithFacebookButton';
 import { SignInWithGoogleButton } from 'app/containers/Button/SignInWithGoogleButton';
 import { SignInWithPhoneNumberButton } from 'app/containers/Button/SignInWithPhoneNumberButton';
@@ -5,14 +6,10 @@ import { AppStackScreenProps } from 'app/navigators';
 import {
   backgroundColor,
   heightFull,
-  justifyContentCenter,
-  paddingHorizontal,
   posititionAbsolute,
   widthFull,
   zIndex,
 } from 'app/styles';
-import { spacing } from 'app/theme';
-import { View, VStack } from 'native-base';
 import React, { FC } from 'react';
 import { ImageBackground } from 'react-native';
 
@@ -34,15 +31,9 @@ export const SignInScreen: FC<FCProps> = () => {
           zIndex(2),
         ]}
       ></View>
-      <View
-        style={[
-          heightFull,
-          justifyContentCenter,
-          paddingHorizontal(spacing.lg),
-          zIndex(3),
-        ]}
-      >
-        <VStack space={4}>
+
+      <View flex={1} justifyContent="center" px={24} zIndex={10}>
+        <VStack rowGap={16}>
           <View>
             <SignInWithPhoneNumberButton />
           </View>
