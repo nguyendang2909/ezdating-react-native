@@ -13,7 +13,7 @@ import { EditInfoNicknameScreen } from 'app/screens/EditInfoNicknameScreen';
 import { EditInfoWeightScreen } from 'app/screens/EditInfoWeightScreen';
 import { LikedMeScreen } from 'app/screens/LikedMeScreen';
 import { MainScreen } from 'app/screens/MainScreen';
-import { MessagesScreen } from 'app/screens/MessagesByConversationScreen';
+import { MessagesScreen } from 'app/screens/MessagesScreen';
 import { ProfileEditScreen } from 'app/screens/ProfileEditScreen';
 import { ProfileNearbyScreen } from 'app/screens/ProfileNearbyScreen';
 import { ProfileSettingScreen } from 'app/screens/ProfileSettingScreen';

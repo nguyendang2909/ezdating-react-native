@@ -1,4 +1,4 @@
-import { View } from 'native-base';
+import { Text, View } from '@gluestack-ui/themed';
 import React, { ReactElement } from 'react';
 import {
   StyleProp,
@@ -15,7 +15,7 @@ import {
   useSafeAreaInsetsStyle,
 } from '../../utils/useSafeAreaInsetsStyle';
 import { Icon, IconTypes } from '../Icon';
-import { Text, TextProps } from '../Text';
+import { TextProps } from '../Text';
 
 export interface HeaderProps {
   /**
@@ -180,14 +180,16 @@ export function Header(props: HeaderProps) {
 
   return (
     <View
-      style={[
-        $container,
-        $containerInsets,
-        { backgroundColor },
-        $containerStyleOverride,
-      ]}
+      w="$full"
+      style={[$containerInsets, { backgroundColor }, $containerStyleOverride]}
     >
-      <View style={[$wrapper, $styleOverride]}>
+      <View
+        height={56}
+        flexDirection="row"
+        alignItems="center"
+        justifyContent="space-between"
+        style={$styleOverride}
+      >
         <HeaderAction
           tx={leftTx}
           text={leftText}
@@ -209,11 +211,12 @@ export function Header(props: HeaderProps) {
             pointerEvents="none"
           >
             <Text
-              weight="medium"
+              fontWeight="$medium"
               size="md"
-              text={titleContent}
               style={[$title, $titleStyleOverride]}
-            />
+            >
+              {titleContent}
+            </Text>
           </View>
         )}
 
@@ -256,7 +259,9 @@ function HeaderAction(props: HeaderActionProps) {
         disabled={!onPress}
         activeOpacity={0.8}
       >
-        <Text weight="medium" size="md" text={content} style={$actionText} />
+        <Text fontWeight="$medium" size="md" style={$actionText}>
+          {content}
+        </Text>
       </TouchableOpacity>
     );
   }
@@ -276,13 +281,6 @@ function HeaderAction(props: HeaderActionProps) {
 
   return <View style={[$actionFillerContainer, { backgroundColor }]} />;
 }
-
-const $wrapper: ViewStyle = {
-  height: 56,
-  flexDirection: 'row',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-};
 
 const $container: ViewStyle = {
   width: '100%',
