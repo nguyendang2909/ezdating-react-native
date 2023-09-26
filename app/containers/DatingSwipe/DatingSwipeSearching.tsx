@@ -2,7 +2,7 @@ import { useAppSelector } from 'app/hooks';
 import { swipeUsersApi } from 'app/services/api/swipe-users.api';
 import { swipeUserActions } from 'app/store/swipe-user.store';
 import { Image, View } from 'native-base';
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { Dimensions, StyleSheet } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { TinderCard } from 'rn-tinder-card';
@@ -12,7 +12,7 @@ export const DatingSwipeSearching: React.FC = () => {
 
   const swipeUsers = useAppSelector(state => state.swipeUser.data);
 
-  const fetchFirstTime = async () => {
+  const fetchFirstTime = useCallback(async () => {
     const swipeUsersData = await swipeUsersApi.getMany();
 
     // if (swipeUsersData.pagination?._next === null) {
@@ -24,11 +24,11 @@ export const DatingSwipeSearching: React.FC = () => {
     } else {
       // setReachedEnd(true);
     }
-  };
+  }, [dispatch]);
 
   useEffect(() => {
     fetchFirstTime();
-  }, []);
+  }, [fetchFirstTime]);
 
   const width = Dimensions.get('window').width;
 

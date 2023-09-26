@@ -15,10 +15,6 @@ export const nearbyUserSlice = createSlice({
     addManyFirst: (state, action: PayloadAction<Entity.User[]>) => {
       const { payload } = action;
 
-      if (!payload.length) {
-        return;
-      }
-
       state.data = payload;
     },
 
@@ -34,6 +30,18 @@ export const nearbyUserSlice = createSlice({
       }
 
       state.data = state.data.concat(payload);
+    },
+
+    setRefreshingTop(state, action: PayloadAction<boolean>) {
+      state.isRefreshingTop = action.payload;
+    },
+
+    setRefreshingBottom(state, action: PayloadAction<boolean>) {
+      state.isRefreshingBottom = action.payload;
+    },
+
+    setReachedEnd(state, action: PayloadAction<boolean>) {
+      state.isReachedEnd = action.payload;
     },
 
     // addMany: (state, action: PayloadAction<Entity.User[]>) => {

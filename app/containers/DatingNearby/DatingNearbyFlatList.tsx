@@ -14,7 +14,7 @@ import { Entity } from 'app/types/entity.type';
 import { flatListUtil } from 'app/utils/flat-list.util';
 import _ from 'lodash';
 import { Spinner } from 'native-base';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import {
   NativeScrollEvent,
   NativeSyntheticEvent,
@@ -28,29 +28,32 @@ export const DatingNearbyFlatList: React.FC = () => {
 
   const users = useAppSelector(state => state.nearbyUser.data) || [];
 
-  const [isRefreshingTop, setRefreshingTop] = useState<boolean>(false);
-  const [isRefreshingBottom, setRefreshingBottom] = useState<boolean>(false);
-  const [isReachedEnd, setReachedEnd] = useState<boolean>(false);
+  const isRefreshingTop = useAppSelector(
+    s => s.nearbyUser.isRefreshingTop || false,
+  );
+  const isRefreshingBottom = useAppSelector(
+    s => s.nearbyUser.isRefreshingBottom || false,
+  );
+  const isReachedEnd = useAppSelector(s => s.nearbyUser.isReachedEnd);
+
   const isRefreshing = isRefreshingTop || isRefreshingBottom;
 
   const fetchFirstTime = useCallback(async () => {
-    setRefreshingTop(true);
+    dispatch(nearbyUserActions.setRefreshingTop(true));
 
     try {
       const nearbyUsersData = await nearbyUsersApi.getMany();
 
       if (nearbyUsersData.pagination?._next === null) {
-        setReachedEnd(true);
+        dispatch(nearbyUserActions.setReachedEnd(true));
       } else {
-        setReachedEnd(false);
+        dispatch(nearbyUserActions.setReachedEnd(false));
       }
 
-      if (nearbyUsersData.data) {
-        dispatch(nearbyUserActions.addManyFirst(nearbyUsersData.data));
-      }
+      dispatch(nearbyUserActions.addManyFirst(nearbyUsersData.data || []));
     } catch (err) {}
 
-    setRefreshingTop(false);
+    dispatch(nearbyUserActions.setRefreshingTop(false));
   }, [dispatch]);
 
   useEffect(() => {
@@ -58,19 +61,19 @@ export const DatingNearbyFlatList: React.FC = () => {
   }, [fetchFirstTime]);
 
   const handleRefreshTop = async () => {
-    if (isRefreshing) {
+    if (isRefreshingTop) {
       return;
     }
 
-    setRefreshingTop(true);
+    dispatch(nearbyUserActions.setRefreshingTop(true));
 
     try {
       const nearbyUsersData = await nearbyUsersApi.getMany();
 
       if (nearbyUsersData.pagination?._next === null) {
-        setReachedEnd(true);
+        dispatch(nearbyUserActions.setReachedEnd(true));
       } else {
-        setReachedEnd(false);
+        dispatch(nearbyUserActions.setReachedEnd(false));
       }
 
       if (nearbyUsersData.data) {
@@ -78,11 +81,10 @@ export const DatingNearbyFlatList: React.FC = () => {
       }
     } catch (err) {}
 
-    setRefreshingTop(false);
+    dispatch(nearbyUserActions.setRefreshingTop(false));
   };
 
   const handleScroll = async (e: NativeSyntheticEvent<NativeScrollEvent>) => {
-    console.log(11);
     if (!flatListUtil.isCloseToBottom(e)) {
       return;
     }
@@ -95,7 +97,7 @@ export const DatingNearbyFlatList: React.FC = () => {
       return;
     }
 
-    setRefreshingBottom(true);
+    dispatch(nearbyUserActions.setRefreshingBottom(true));
 
     try {
       const nearbyUsersData = await nearbyUsersApi.getMany({
@@ -103,17 +105,17 @@ export const DatingNearbyFlatList: React.FC = () => {
       });
 
       if (nearbyUsersData.pagination?._next === null) {
-        setReachedEnd(true);
+        dispatch(nearbyUserActions.setReachedEnd(true));
       }
 
       if (nearbyUsersData.data?.length) {
         dispatch(nearbyUserActions.addManyNext(nearbyUsersData.data));
       } else {
-        setReachedEnd(true);
+        dispatch(nearbyUserActions.setReachedEnd(false));
       }
     } catch (err) {}
 
-    setRefreshingBottom(false);
+    dispatch(nearbyUserActions.setRefreshingBottom(false));
   };
 
   return (

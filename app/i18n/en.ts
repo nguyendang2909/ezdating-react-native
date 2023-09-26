@@ -48,6 +48,7 @@ const en = {
   },
   // a
   'Add languages': 'Add languages',
+  'Age preference': 'Age preference',
   'About me': 'About me',
   Account: 'Account',
   'Add picture profile (Please choose photos that clearly shows your face, up to 6 photos)':

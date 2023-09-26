@@ -43,6 +43,9 @@ export declare namespace AppStore {
 
   type NearbyState = {
     data?: Entity.User[];
+    isRefreshingTop?: boolean;
+    isRefreshingBottom?: boolean;
+    isReachedEnd?: boolean;
   };
 
   type SwipeUserState = {

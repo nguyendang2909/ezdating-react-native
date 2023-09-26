@@ -5,9 +5,11 @@ import { HeaderSaveDone } from 'app/components/Header/HeaderSaveDone';
 import { useAppSelector } from 'app/hooks';
 import { translate } from 'app/i18n';
 import { EditFilterGenderMenuItem } from 'app/pages/EditMatchFilter/EditFilterGenderMenuItem';
+import { nearbyUsersApi } from 'app/services/api/nearby-users.api';
 import { usersApi } from 'app/services/api/users.api';
 import { notificationsService } from 'app/services/notifications/notifications.service';
 import { appActions } from 'app/store/app.store';
+import { nearbyUserActions } from 'app/store/nearby-user.store';
 import { colors } from 'app/theme';
 import { FormParams } from 'app/types/form-params.type';
 import { useFormik } from 'formik';
@@ -33,6 +35,11 @@ export const EditMatchFilterScreen: React.FC<FCProps> = () => {
   const filterMaxAge =
     useAppSelector(state => state.app.profile?.filterMaxAge) || 99;
   const filterGender = useAppSelector(state => state.app.profile?.filterGender);
+
+  const isNearbyUsersRefreshingTop = useAppSelector(
+    s => s.nearbyUser.isRefreshingTop || false,
+  );
+
   const formik = useFormik<FormParams.UpdateMatchFilter>({
     initialValues: {
       filterMinAge,
@@ -43,11 +50,12 @@ export const EditMatchFilterScreen: React.FC<FCProps> = () => {
     enableReinitialize: true,
     onSubmit: async values => {
       try {
-        console.log(values);
         await usersApi.updateProfile(values);
 
         notificationsService.success('profile');
+
         const profile = await usersApi.getMyProfile();
+
         if (profile.data) {
           dispatch(appActions.updateProfile(profile.data));
         }
@@ -55,7 +63,20 @@ export const EditMatchFilterScreen: React.FC<FCProps> = () => {
         notificationsService.fail('profile');
       }
 
-      navigation.goBack();
+      navigation.navigate('Home', {
+        screen: 'DatingNearby',
+      });
+
+      if (!isNearbyUsersRefreshingTop) {
+        dispatch(nearbyUserActions.setRefreshingTop(true));
+        try {
+          const nearbyUsersData = await nearbyUsersApi.getMany();
+
+          dispatch(nearbyUserActions.addManyFirst(nearbyUsersData.data || []));
+        } catch (err) {}
+
+        dispatch(nearbyUserActions.setRefreshingTop(false));
+      }
     },
   });
 
@@ -127,7 +148,7 @@ export const EditMatchFilterScreen: React.FC<FCProps> = () => {
             <View py={16}>
               <View mx={16}>
                 <HStack justifyContent="space-between">
-                  <Text>{translate('Distance preference')}</Text>
+                  <Text>{translate('Age preference')}</Text>
                   <Text>
                     {formik.values.filterMinAge} - {formik.values.filterMaxAge}
                   </Text>
