@@ -11,6 +11,7 @@ import { useAppSelector } from 'app/hooks';
 import { EditInfoHeightScreen } from 'app/screens/EditInfoHeightScreen';
 import { EditInfoNicknameScreen } from 'app/screens/EditInfoNicknameScreen';
 import { EditInfoWeightScreen } from 'app/screens/EditInfoWeightScreen';
+import { EditMatchFilterScreen } from 'app/screens/EditMatchFilterScreen';
 import { LikedMeScreen } from 'app/screens/LikedMeScreen';
 import { MainScreen } from 'app/screens/MainScreen';
 import { MessagesScreen } from 'app/screens/MessagesScreen';
@@ -53,6 +54,7 @@ export type AppStackParamList = {
   EditInfoHeight: undefined;
   EditInfoNickname: undefined;
   EditInfoWeight: undefined;
+  EditMatchFilter: undefined;
   UpdateProfileBasicInfo: undefined;
   UpdateProfilePhotos: undefined;
   Home: NavigatorScreenParams<HomeTabParamList>;
@@ -83,6 +85,7 @@ export const SCREENS: Record<keyof AppStackParamList, keyof AppStackParamList> =
     EditInfoHeight: 'EditInfoHeight',
     EditInfoNickname: 'EditInfoNickname',
     EditInfoWeight: 'EditInfoWeight',
+    EditMatchFilter: 'EditMatchFilter',
     UpdateProfileBasicInfo: 'UpdateProfileBasicInfo',
     UpdateProfilePhotos: 'UpdateProfilePhotos',
     Home: 'Home',
@@ -97,7 +100,7 @@ export const SCREENS: Record<keyof AppStackParamList, keyof AppStackParamList> =
     SignInWithOtpPhoneNumber: 'SignInWithOtpPhoneNumber',
     SignInWithPhoneNumber: 'SignInWithPhoneNumber',
     Welcome: 'Welcome',
-  };
+  } as const;
 
 /**
  * This is a list of all the route names that will exit the app if the back button
@@ -184,6 +187,10 @@ const AppStack = () => {
           <Stack.Screen
             name={SCREENS.SelectRelationshipGoal}
             component={SelectRelationshipScreen}
+          ></Stack.Screen>
+          <Stack.Screen
+            name={SCREENS.EditMatchFilter}
+            component={EditMatchFilterScreen}
           ></Stack.Screen>
         </>
       ) : (

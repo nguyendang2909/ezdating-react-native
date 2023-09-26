@@ -66,10 +66,12 @@ const en = {
   'Control your profile': 'Control your profile',
   // d
   'desire relation': 'desire relation',
+  'Distance preference': 'Distance preference',
   'Do not share verification code to protect your account':
     'Do not share verification code to protect your account',
   "Don't show my age": "Don't show my age",
   "Don't show my distance": "Don't show my distance",
+  Done: 'Done',
   // e
   'Edit profile': 'Edit profile',
   'Enter your code': 'Enter your code',
@@ -82,6 +84,7 @@ const en = {
   fail: 'fail',
   Female: 'Female',
   female: 'female',
+  'Filter settings': 'Filter settings',
   'First name': 'First name',
   'Free coins': 'Free coins',
   Friend: 'Friend',
@@ -173,6 +176,7 @@ const en = {
   // s
   Save: 'Save',
   Settings: 'Settings',
+  'Show me': 'Show me',
   Success: 'Success',
   success: 'success',
   // u

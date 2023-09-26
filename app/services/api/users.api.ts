@@ -16,7 +16,7 @@ class UsersApi extends CommonApi {
   }
 
   async getMyProfile() {
-    const { data } = await api.get<ApiResponse.UserData>(API_URL.myProfile);
+    const { data } = await api.get<ApiResponse.UserData>(API_URL.me);
 
     return data;
   }
@@ -27,7 +27,7 @@ class UsersApi extends CommonApi {
   }
 
   async updateProfile(body: ApiRequest.UpdateProfile) {
-    const { data } = await api.patch(API_URL.myProfile, body);
+    const { data } = await api.patch(API_URL.me, body);
     return data;
   }
 }

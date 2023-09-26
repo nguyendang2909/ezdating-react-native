@@ -107,7 +107,7 @@ export const api = createApi({
     // Profile
     getMyProfile: builder.query<ApiResponse.UserData, void>({
       query: () => ({
-        url: API_URL.myProfile,
+        url: API_URL.me,
         method: 'GET',
       }),
       providesTags: ['Profile'],
@@ -117,7 +117,7 @@ export const api = createApi({
       ApiRequest.UpdateProfile
     >({
       query: body => ({
-        url: API_URL.myProfile,
+        url: API_URL.me,
         method: 'PATCH',
         body,
       }),

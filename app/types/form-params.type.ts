@@ -50,6 +50,13 @@ export declare namespace FormParams {
     // workout?: EWorkout;
   };
 
+  type UpdateMatchFilter = {
+    filterMinAge: number;
+    filterMaxAge: number;
+    filterGender?: UserGender;
+    filterMaxDistance: number;
+  };
+
   type SendMessage = {
     // relationshipId: string;
     text: string;

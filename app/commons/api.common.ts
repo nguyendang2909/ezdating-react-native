@@ -3,15 +3,17 @@ import { Buffer } from 'buffer';
 import _ from 'lodash';
 
 export class CommonApi {
-  public encodeFromString(value: string): string {
+  protected encodeFromString(value: string): string {
     return Buffer.from(value, 'utf-8').toString('base64');
   }
 
-  public encodeFromObj(value: Record<string, unknown>): string {
+  protected encodeFromObj(value: Record<string, unknown>): string {
     return this.encodeFromString(JSON.stringify(value));
   }
 
-  public getCursor<T extends Entity.BaseEntity[]>(data: T): string | undefined {
+  protected getCursor<T extends Entity.BaseEntity[]>(
+    data: T,
+  ): string | undefined {
     if (!data?.length) {
       return undefined;
     }
@@ -19,7 +21,7 @@ export class CommonApi {
     throw new Error('Not implemented!');
   }
 
-  public getCursorByField<T>(
+  protected getCursorByField<T>(
     field: keyof T | (keyof T)[],
     data?: T[],
   ): string | undefined {

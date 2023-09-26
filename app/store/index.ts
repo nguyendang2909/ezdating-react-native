@@ -69,7 +69,7 @@ const persistedReducer = persistReducer(
   reducers,
 );
 
-const store = configureStore({
+export const store = configureStore({
   reducer: persistedReducer,
   middleware: getDefaultMiddleware => {
     const middlewares = getDefaultMiddleware({
@@ -95,10 +95,12 @@ const store = configureStore({
   devTools: process.env.NODE_ENV !== 'production',
 });
 
-const persistor = persistStore(store);
+export const persistor = persistStore(store);
 
 setupListeners(store.dispatch);
 
 sagaMiddleware.run(appSaga);
 
-export { persistor, store };
+export const dispatch = store.dispatch;
+
+export const getState = store.getState();
