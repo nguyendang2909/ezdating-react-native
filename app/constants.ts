@@ -5,6 +5,8 @@
 //   phD = 'phD',
 // }
 
+import { TxKey } from './types';
+
 // export enum ESmoking {
 //   nonSmoker = 'nonSmoker',
 //   smoker = 'smoker',
@@ -161,3 +163,12 @@ export const SOCKET_TO_CLIENT_EVENTS = {
   NEW_MESSAGE: 'msg',
   UPDATE_MESSAGE: 'updateMsg',
 } as const;
+
+// Const
+export const UserRelationshipMessages: Record<UserRelationshipGoal, TxKey> = {
+  [UserRelationshipGoals.boyGirlFriend]: 'Boy/Girl friend',
+  [UserRelationshipGoals.getMarried]: 'Get married',
+  [UserRelationshipGoals.makeFriends]: 'Make friends',
+  [UserRelationshipGoals.oneNightStand]: 'One-Night stand',
+  [UserRelationshipGoals.sexPartner]: 'Sex partner',
+};

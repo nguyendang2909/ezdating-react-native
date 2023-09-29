@@ -195,4 +195,60 @@ export const messages = defineMessages({
     defaultMessage: 'What is your phone number?',
     id: 'da0aff91b2',
   },
+  'Boy/Girl friend': {
+    defaultMessage: 'Boy/Girl friend',
+    id: '0040146e37',
+  },
+  'Make friends': {
+    defaultMessage: 'Make friends',
+    id: 'e6f05d3bf5',
+  },
+  'Sex partner': {
+    defaultMessage: 'Sex partner',
+    id: '0118654071',
+  },
+  'Get married': {
+    defaultMessage: 'Get married',
+    id: '04d06670fa',
+  },
+  'Please enter your nickname': {
+    defaultMessage: 'Please enter your nickname',
+    id: 'c411d73128',
+  },
+  'Please enter your gender': {
+    defaultMessage: 'Please enter your gender',
+    id: '4da73cba7c',
+  },
+  'Please enter your introduce': {
+    defaultMessage: 'Please enter your introduce',
+    id: 'e2faec1ddc',
+  },
+  'Please enter your height': {
+    defaultMessage: 'Please enter your height',
+    id: '6bc417cb7e',
+  },
+  'Update failed, please try again.': {
+    defaultMessage: 'Updated failed, please try again.',
+    id: '92761d53bb',
+  },
+  'Remove failed, please try again.': {
+    defaultMessage: 'Updated failed, please try again.',
+    id: '92761d53bb',
+  },
+  'Please enter your weight.': {
+    defaultMessage: 'Please enter your weight.',
+    id: '368854bb3c',
+  },
+  'My weight is': {
+    defaultMessage: 'My weight is',
+    id: 'a3995ef93b',
+  },
+  'Remove photo': {
+    defaultMessage: 'Remove photo',
+    id: 'a97215f569',
+  },
+  'Please choose your desire relation.': {
+    defaultMessage: 'Please choose your desire relation.',
+    id: 'e0eab0b21d',
+  },
 });

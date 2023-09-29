@@ -1,6 +1,10 @@
 import { useActionSheet } from '@expo/react-native-action-sheet';
-import { UserRelationshipGoal, UserRelationshipGoals } from 'app/constants';
-import { translate } from 'app/i18n';
+import {
+  UserRelationshipGoal,
+  UserRelationshipGoals,
+  UserRelationshipMessages,
+} from 'app/constants';
+import { useTranslate } from 'app/hooks/useFormatMessage';
 import {
   ChevronDownIcon,
   FormControl,
@@ -25,16 +29,18 @@ export const RelationshipGoalFormControl: React.FC<FCProps> = ({
   onChange,
   isRequired,
 }) => {
+  const t = useTranslate();
+
   const { showActionSheetWithOptions } = useActionSheet();
 
   const handlePress = () => {
     const options = [
-      translate('Lover'),
-      translate('Friend'),
-      translate('Partner'),
-      translate('Marriage'),
-      translate('One-night stand'),
-      translate('Cancel'),
+      t('Lover'),
+      t('Friend'),
+      t('Partner'),
+      t('Marriage'),
+      t('One-Night stand'),
+      t('Cancel'),
     ];
     const cancelButtonIndex = 5;
     showActionSheetWithOptions(
@@ -71,19 +77,15 @@ export const RelationshipGoalFormControl: React.FC<FCProps> = ({
       <FormControl {...(isRequired ? { isRequired } : {})} isInvalid={!!error}>
         <Stack>
           <FormControl.Label>
-            {translate('What are you looking for here?')}
+            {t('What are you looking for here?')}
           </FormControl.Label>
           <Pressable onPress={handlePress}>
             <Input
               isReadOnly
               size="lg"
               variant="underlined"
-              placeholder={translate('Please select')}
-              value={
-                value
-                  ? translate(`constants.userRelationshipGoals.${value}`)
-                  : ''
-              }
+              placeholder={t('Please select')}
+              value={value ? t(UserRelationshipMessages[value]) : ''}
               InputRightElement={<ChevronDownIcon />}
               onPressIn={handlePress}
             ></Input>

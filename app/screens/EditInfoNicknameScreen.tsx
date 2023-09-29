@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import { FormControlInput } from 'app/components/Form/FormControlInput';
 import { HeaderSaveModal } from 'app/components/Header/HeaderSaveModal';
 import { useAppSelector } from 'app/hooks';
-import { translate } from 'app/i18n';
+import { useTranslate } from 'app/hooks/useFormatMessage';
 import { usersApi } from 'app/services/api/users.api';
 import { appActions } from 'app/store/app.store';
 import { useFormik } from 'formik';
@@ -12,6 +12,8 @@ import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 
 export const EditInfoNicknameScreen = () => {
+  const t = useTranslate();
+
   const dispatch = useDispatch();
 
   const { goBack } = useNavigation();
@@ -26,9 +28,7 @@ export const EditInfoNicknameScreen = () => {
       nickname: currentNickname || '',
     },
     validationSchema: Yup.object().shape({
-      nickname: Yup.string().required(
-        translate('Please enter your w!', { w: translate('nickname') }),
-      ),
+      nickname: Yup.string().required(t('Please enter your nickname')),
     }),
 
     onSubmit: async values => {
@@ -58,12 +58,10 @@ export const EditInfoNicknameScreen = () => {
 
       <View mt={4} mb={4} px={4}>
         <FormControlInput
-          label={translate('Nickname')}
+          label={t('Nickname')}
           value={formik.values.nickname}
           onChange={formik.handleChange('nickname')}
-          placeholder={translate('Please enter your w', {
-            w: translate('nickname'),
-          })}
+          placeholder={t('Please enter your nickname')}
           error={formik.errors.nickname}
         />
       </View>

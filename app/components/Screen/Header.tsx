@@ -1,12 +1,13 @@
-import { translate, TxKeyPath } from 'app/i18n';
+import { useTranslate } from 'app/hooks/useFormatMessage';
 import { alignItemsCenter } from 'app/styles';
 import { colors, spacing } from 'app/theme';
+import { TxKey } from 'app/types';
 import { Box, HStack, IconButton, Text, View } from 'native-base';
 import React, { FC } from 'react';
 
 type FCProps = {
   bg?: string;
-  textTx?: TxKeyPath;
+  textTx?: TxKey;
   leftIcon?: FC<{ color: string }>;
   onPressLeftIcon?: () => void;
 };
@@ -17,6 +18,8 @@ export const Header: FC<FCProps> = ({
   leftIcon: LeftIcon,
   onPressLeftIcon,
 }) => {
+  const t = useTranslate();
+
   return (
     <View>
       <Box safeAreaTop backgroundColor={colors.primary} />
@@ -30,7 +33,7 @@ export const Header: FC<FCProps> = ({
                 onPress={onPressLeftIcon}
               />
             )}
-            {!!textTx && <Text color="light">{translate(textTx)}</Text>}
+            {!!textTx && <Text color="light">{t(textTx)}</Text>}
           </HStack>
         </HStack>
       </Box>

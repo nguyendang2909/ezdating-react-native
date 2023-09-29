@@ -2,7 +2,7 @@ import { Picker } from '@react-native-picker/picker';
 import { useNavigation } from '@react-navigation/native';
 import { HeaderSaveModal } from 'app/components/Header/HeaderSaveModal';
 import { useAppSelector } from 'app/hooks';
-import { translate } from 'app/i18n';
+import { useTranslate } from 'app/hooks/useFormatMessage';
 import { api } from 'app/services/api';
 import { profileNotificationsService } from 'app/services/notifications/profile-notifications.service';
 import { useFormik } from 'formik';
@@ -11,9 +11,10 @@ import React from 'react';
 import * as Yup from 'yup';
 
 export const EditInfoWeightScreen = () => {
+  const t = useTranslate();
   const { goBack } = useNavigation();
 
-  const value = useAppSelector(state => state.app.profile.weight);
+  const value = useAppSelector(state => state.app.profile?.weight);
 
   const [submitUpdateProfile] = api.useUpdateProfileMutation();
 
@@ -23,9 +24,7 @@ export const EditInfoWeightScreen = () => {
       weight: value || 50,
     },
     validationSchema: Yup.object().shape({
-      weight: Yup.number().required(
-        translate('Please enter your w!', { w: translate('weight') }),
-      ),
+      weight: Yup.number().required(t('Please enter your weight.')),
     }),
 
     onSubmit: async values => {
@@ -50,9 +49,7 @@ export const EditInfoWeightScreen = () => {
       />
 
       <View mt={4} mb={4} px={4}>
-        <Text color="gray.500">{`${translate('My w is', {
-          w: translate('weight'),
-        })} (${translate('kg')}):`}</Text>
+        <Text color="gray.500">{`${t('My weight is')} (${t('kg')}):`}</Text>
       </View>
 
       <View mt={4} mb={4} px={4}>

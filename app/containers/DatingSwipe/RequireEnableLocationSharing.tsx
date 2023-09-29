@@ -1,4 +1,4 @@
-import { translate } from 'app/i18n';
+import { useTranslate } from 'app/hooks/useFormatMessage';
 import { locationPermissionsService } from 'app/services/location-permissions.service';
 import { Button, Heading, Text, View } from 'native-base';
 import React from 'react';
@@ -12,6 +12,8 @@ type FCProps = {
 export const RequireEnalbeLocationSharing: React.FC<FCProps> = ({
   onChange,
 }) => {
+  const t = useTranslate();
+
   const handlePress = async () => {
     const permission = await locationPermissionsService.request();
     if (permission !== 'granted') {
@@ -25,7 +27,7 @@ export const RequireEnalbeLocationSharing: React.FC<FCProps> = ({
   return (
     <View flex={1} justifyContent="center">
       <View alignItems="center" px={4}>
-        <Heading size="sm">{translate('Unable to connect')}</Heading>
+        <Heading size="sm">{t('Unable to connect')}</Heading>
       </View>
 
       <View mt={5} alignItems="center" px={4}>
@@ -44,7 +46,7 @@ export const RequireEnalbeLocationSharing: React.FC<FCProps> = ({
 
       <View mt={7} alignItems="center" px={4}>
         <Button w="full" onPress={handlePress}>
-          {translate('Open Settings')}
+          {t('Open settings')}
         </Button>
       </View>
     </View>

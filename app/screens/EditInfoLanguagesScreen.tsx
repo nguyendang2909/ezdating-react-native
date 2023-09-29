@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import { HeaderSave } from 'app/components/Header/HeaderSave';
 import { useAppSelector } from 'app/hooks';
-import { translate } from 'app/i18n';
+import { useTranslate } from 'app/hooks/useFormatMessage';
 import { usersApi } from 'app/services/api/users.api';
 import { useFormik } from 'formik';
 import { useToast, View } from 'native-base';
@@ -9,6 +9,8 @@ import React from 'react';
 import * as Yup from 'yup';
 
 export const EditInfoLanguagesScreen = () => {
+  const t = useTranslate();
+
   const { goBack } = useNavigation();
 
   const toast = useToast();
@@ -21,9 +23,7 @@ export const EditInfoLanguagesScreen = () => {
       languages,
     },
     validationSchema: Yup.object().shape({
-      height: Yup.array().required(
-        translate('Please enter your w!', { w: translate('height') }),
-      ),
+      height: Yup.array().required(t('Please enter your height')),
     }),
 
     onSubmit: async values => {
@@ -31,7 +31,7 @@ export const EditInfoLanguagesScreen = () => {
         await usersApi.updateProfile(values);
       } catch (err) {
         toast.show({
-          title: translate('Update w failed!', { w: translate('languages') }),
+          title: t('Update failed, please try again.'),
           placement: 'top',
         });
       }

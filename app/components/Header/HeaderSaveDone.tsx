@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import { translate } from 'app/i18n';
+import { useTranslate } from 'app/hooks/useFormatMessage';
 import { Button } from 'native-base';
 import React from 'react';
 
@@ -15,6 +15,7 @@ export const HeaderSaveDone: React.FC<FCProps> = ({
   isLoading,
   ...props
 }) => {
+  const t = useTranslate();
   const navigation = useNavigation();
 
   return (
@@ -23,7 +24,7 @@ export const HeaderSaveDone: React.FC<FCProps> = ({
       onLeftPress={navigation.goBack}
       RightActionComponent={
         <Button variant="unstyled" onPress={onSave} isLoading={isLoading}>
-          {translate('Done')}
+          {t('Done')}
         </Button>
       }
       {...props}

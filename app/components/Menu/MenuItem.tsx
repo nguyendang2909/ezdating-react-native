@@ -1,4 +1,5 @@
-import { translate, TxKeyPath } from 'app/i18n';
+import { useTranslate } from 'app/hooks/useFormatMessage';
+import { TxKey } from 'app/types';
 import {
   ChevronRightIcon,
   HStack,
@@ -11,10 +12,10 @@ import React from 'react';
 
 type FCProps = {
   title?: string;
-  titleTx?: TxKeyPath;
+  titleTx?: TxKey;
   leftIcon?: React.ReactElement;
   value?: string;
-  valueTx?: TxKeyPath;
+  valueTx?: TxKey;
   onPress?: () => void;
 };
 
@@ -26,6 +27,8 @@ export const MenuItem: React.FC<FCProps> = ({
   valueTx,
   onPress,
 }) => {
+  const t = useTranslate();
+
   return (
     <Pressable
       {...(onPress
@@ -48,7 +51,7 @@ export const MenuItem: React.FC<FCProps> = ({
 
               {(!!title || !!titleTx) && (
                 <View>
-                  <Text>{title || (!!titleTx && translate(titleTx))}</Text>
+                  <Text>{title || (!!titleTx && t(titleTx))}</Text>
                 </View>
               )}
 
@@ -56,7 +59,7 @@ export const MenuItem: React.FC<FCProps> = ({
 
               {(!!value || !!valueTx) && (
                 <View mr={2}>
-                  <Text>{valueTx ? translate(valueTx) : value}</Text>
+                  <Text>{valueTx ? t(valueTx) : value}</Text>
                 </View>
               )}
 

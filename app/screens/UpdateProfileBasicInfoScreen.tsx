@@ -5,7 +5,7 @@ import { RelationshipGoalFormControl } from 'app/components/Form/RelationshipGoa
 import { SelectGenderFormControl } from 'app/components/Form/SelectGenderForm';
 import { UserGender, UserRelationshipGoal } from 'app/constants';
 import { useAppSelector } from 'app/hooks';
-import { translate } from 'app/i18n';
+import { useTranslate } from 'app/hooks/useFormatMessage';
 import { usersApi } from 'app/services/api/users.api';
 import { flexGrow } from 'app/styles';
 import { FormParams } from 'app/types/form-params.type';
@@ -16,6 +16,8 @@ import React, { FC } from 'react';
 import * as Yup from 'yup';
 
 export const UpdateProfileBasicInfoScreen: FC = () => {
+  const t = useTranslate();
+
   const profile = useAppSelector(state => state.app.profile);
   const { navigate } = useNavigation();
 
@@ -31,24 +33,18 @@ export const UpdateProfileBasicInfoScreen: FC = () => {
     },
     enableReinitialize: true,
     validationSchema: Yup.object().shape({
-      nickname: Yup.string().required(
-        translate('Please enter your w!', { w: translate('nickname') }),
-      ),
-      gender: Yup.number().required(
-        translate('Please choose your w!', { w: translate('gender') }),
-      ),
-      birthday: Yup.string().required(
-        translate('Please enter your w!', { w: translate('birthday') }),
-      ),
+      nickname: Yup.string().required(t('Please enter your nickname')),
+      gender: Yup.number().required(t('Please enter your gender')),
+      birthday: Yup.string().required(t('Please enter your birthday')),
       relationshipGoal: Yup.string().required(
-        translate('Please choose your w!', { w: translate('desire relation') }),
+        t('Please choose your desire relation.'),
       ),
       introduce: Yup.string().max(500).notRequired(),
     }),
     onSubmit: async values => {
       try {
         await usersApi.updateBasicProfile(values);
-        navigate('UpdateProfilePhotosScreen');
+        navigate('UpdateProfilePhotos');
       } catch (err) {
         console.log(err);
       }
@@ -70,19 +66,17 @@ export const UpdateProfileBasicInfoScreen: FC = () => {
           <View flex="1">
             <ScrollView style={flexGrow}>
               <View px="4" py="4">
-                <Heading>{translate('Your profile')}</Heading>
+                <Heading>{t('Your profile')}</Heading>
               </View>
 
               <View px="4">
                 <View mb="4">
                   <FormControlInput
                     isRequired
-                    label={translate('Nickname')}
+                    label={t('Nickname')}
                     value={formik.values.nickname}
                     onChange={formik.handleChange('nickname')}
-                    placeholder={translate('Please enter your w', {
-                      w: translate('nickname'),
-                    })}
+                    placeholder={t('Please enter your nickname')}
                     error={
                       formik.touched.nickname
                         ? formik.errors.nickname
@@ -130,12 +124,10 @@ export const UpdateProfileBasicInfoScreen: FC = () => {
 
                 <View mb="4">
                   <FormControlInput
-                    label={translate('Introduce')}
+                    label={t('Introduce')}
                     value={formik.values.introduce}
                     onChange={formik.handleChange('introduce')}
-                    placeholder={translate('Please enter your w', {
-                      w: translate('introduce'),
-                    })}
+                    placeholder={t('Please enter your introduce')}
                     maxLength={500}
                     error={
                       formik.touched.introduce
@@ -154,7 +146,7 @@ export const UpdateProfileBasicInfoScreen: FC = () => {
                   formik.handleSubmit();
                 }}
               >
-                {translate('Continue')}
+                {t('Continue')}
               </Button>
             </View>
           </View>

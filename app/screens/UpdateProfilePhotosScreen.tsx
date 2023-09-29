@@ -3,7 +3,7 @@ import { UploadPhotoCard } from 'app/components/Form/UploadPhotoCard';
 import { LoadingScreen } from 'app/components/Screen/LoadingScreen';
 import { PhotoRequestPermission } from 'app/containers/Photos/PhotoRequestPermission.ios';
 import { useAppSelector } from 'app/hooks';
-import { translate } from 'app/i18n';
+import { useTranslate } from 'app/hooks/useFormatMessage';
 import { AppStackScreenProps } from 'app/navigators';
 import { mediaFilesApi } from 'app/services/api/media-files.api';
 import { usersApi } from 'app/services/api/users.api';
@@ -38,9 +38,11 @@ import React, { useState } from 'react';
 import ImageCropPicker from 'react-native-image-crop-picker';
 import { useDispatch } from 'react-redux';
 
-type FCProps = AppStackScreenProps<'UpdateProfilePhotosScreen'>;
+type FCProps = AppStackScreenProps<'UpdateProfilePhotos'>;
 
 export const UpdateProfilePhotosScreen: React.FC<FCProps> = () => {
+  const t = useTranslate();
+
   const toast = useToast();
   const { navigate, goBack } = useNavigation();
   const [removePhotoIndex, setRemovePhotoIndex] = useState<
@@ -79,7 +81,7 @@ export const UpdateProfilePhotosScreen: React.FC<FCProps> = () => {
       } catch (err) {
         console.log(err);
         toast.show({
-          title: translate('Update w failed!', { w: translate('Photo') }),
+          title: t('Update failed, please try again.'),
           placement: 'top-right',
         });
       }
@@ -103,7 +105,7 @@ export const UpdateProfilePhotosScreen: React.FC<FCProps> = () => {
           await mediaFilesApi.removePhoto(removePhotoIndex);
         } catch (err) {
           toast.show({
-            title: translate('Remove w failed!', { w: translate('Photo') }),
+            title: t('Remove failed, please try again.'),
             placement: 'top-right',
           });
         } finally {
@@ -149,10 +151,10 @@ export const UpdateProfilePhotosScreen: React.FC<FCProps> = () => {
                   <ChevronLeftIcon />
                 </IconButton>
               </View>
-              <Heading>{translate('Photos')}</Heading>
+              <Heading>{t('Photos')}</Heading>
               <View mt="4">
                 <Text>
-                  {translate(
+                  {t(
                     'Add picture profile (Please choose photos that clearly shows your face, up to 6 photos)',
                   )}
                 </Text>
@@ -211,7 +213,7 @@ export const UpdateProfilePhotosScreen: React.FC<FCProps> = () => {
                 formik.handleSubmit();
               }}
             >
-              {translate('Complete')}
+              {t('Complete')}
             </Button>
           </View>
         </View>
@@ -223,20 +225,18 @@ export const UpdateProfilePhotosScreen: React.FC<FCProps> = () => {
       >
         <Actionsheet.Content>
           <View mb="8">
-            <Text color="gray.500">
-              {translate('Remove w', { w: translate('photo') })}
-            </Text>
+            <Text color="gray.500">{t('Remove photo')}</Text>
           </View>
           <Divider borderColor="gray.300" />
           <Actionsheet.Item
             onPress={handleRemovePhotoCardById}
             style={[justifyContentCenter, alignItemsCenter]}
           >
-            <Text color="red.500">{translate('Remove')}</Text>
+            <Text color="red.500">{t('Remove')}</Text>
           </Actionsheet.Item>
           <Divider borderColor="gray.300" />
           <Actionsheet.Item style={[justifyContentCenter, alignItemsCenter]}>
-            <Text>{translate('Cancel')}</Text>
+            <Text>{t('Cancel')}</Text>
           </Actionsheet.Item>
         </Actionsheet.Content>
       </Actionsheet>
