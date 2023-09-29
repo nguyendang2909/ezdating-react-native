@@ -168,7 +168,7 @@ export const EditMatchFilterScreen: React.FC<FCProps> = () => {
                   ]}
                   sliderLength={width - 48}
                   onValuesChange={handleChangeAges}
-                  min={0}
+                  min={18}
                   max={100}
                   step={1}
                   allowOverlap={false}
