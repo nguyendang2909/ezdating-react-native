@@ -1,4 +1,4 @@
-import { Button } from '@gluestack-ui/themed';
+import { Button } from '@rneui/base';
 import { LoadingButton } from 'app/components/Button/LoadingButton';
 import { useLogoutMutation } from 'app/hooks/useLogoutMutation';
 import { translate } from 'app/i18n';
@@ -32,6 +32,10 @@ export const LogoutButton: React.FC<FC> = () => {
       >
         {translate('Logout')}
       </LoadingButton>
+
+      <Button loading={logoutMutation.isLoading} onPress={handleLogout}>
+        {translate('Logout')}
+      </Button>
     </>
   );
 };
