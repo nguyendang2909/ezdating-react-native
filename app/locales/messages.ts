@@ -1,6 +1,7 @@
 import { defineMessages } from 'react-intl';
 
 export const messages = defineMessages({
+  AppName: { defaultMessage: 'EZDating', id: '108c09a533' },
   'About me': { defaultMessage: 'About me', id: 'd48efc4ceb' },
   Account: { defaultMessage: 'Account', id: '4f0c8c6ae3' },
   'Add languages': { defaultMessage: 'Add languages', id: '1e2d09cb8d' },
@@ -181,5 +182,17 @@ export const messages = defineMessages({
   'Please enter your birthday': {
     defaultMessage: 'Please enter your birthday',
     id: '1b8ae22ec2',
+  },
+  'Sign in with Facebook': {
+    defaultMessage: 'Sign in with Facebook',
+    id: 'eefb2ed70f',
+  },
+  'Sign in with Google': {
+    defaultMessage: 'Sign in with Google',
+    id: '3a9e441eb7',
+  },
+  'What is your phone number?': {
+    defaultMessage: 'What is your phone number?',
+    id: 'da0aff91b2',
   },
 });

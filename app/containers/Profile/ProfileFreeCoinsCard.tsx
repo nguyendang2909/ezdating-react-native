@@ -1,9 +1,11 @@
-import { translate } from 'app/i18n';
+import { useTranslate } from 'app/hooks/useFormatMessage';
 import { Center, Icon, Text, View, VStack } from 'native-base';
 import React from 'react';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 export const ProfileFreeCoinsCard: React.FC = () => {
+  const t = useTranslate();
+
   return (
     <>
       <View
@@ -23,7 +25,7 @@ export const ProfileFreeCoinsCard: React.FC = () => {
             </View>
           </Center>
           <Center>
-            <Text>{translate('Free coins')}</Text>
+            <Text>{t('Free coins')}</Text>
           </Center>
         </VStack>
       </View>

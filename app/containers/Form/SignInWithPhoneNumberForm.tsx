@@ -2,7 +2,8 @@ import { View } from '@gluestack-ui/themed';
 import auth from '@react-native-firebase/auth';
 import { useNavigation } from '@react-navigation/native';
 import { LoadingButton } from 'app/components/Button/LoadingButton';
-import { translate, TxKeyPath } from 'app/i18n';
+import { useTranslate } from 'app/hooks/useFormatMessage';
+import { messages } from 'app/locales/messages';
 import {
   flexDirectionRow,
   flexGrow,
@@ -12,6 +13,7 @@ import {
   widthFull,
 } from 'app/styles';
 import { spacing } from 'app/theme';
+import { TxKey } from 'app/types';
 import { FormParams } from 'app/types/form-params.type';
 import { useFormik } from 'formik';
 import { isValidPhoneNumber } from 'libphonenumber-js/max';
@@ -31,10 +33,11 @@ import CountryPicker, {
 import FeatherIcons from 'react-native-vector-icons/Feather';
 
 export const SignInWithPhoneNumberForm: FC = () => {
+  const t = useTranslate();
   const { navigate } = useNavigation();
   const [isOpenSearchCountry, setOpenSearchCountry] = useState<boolean>(false);
   const [countryCode, setCountryCode] = useState<CountryCode>('VN');
-  const [errorCode, setErrorCode] = useState<TxKeyPath | undefined>();
+  const [errorCode, setErrorCode] = useState<TxKey | undefined>();
 
   // function onAuthStateChanged(user: unknown) {
   //   if (user) {
@@ -97,7 +100,7 @@ export const SignInWithPhoneNumberForm: FC = () => {
         <View style={marginBottom(spacing.lg)}>
           <View style={widthFull}>
             <FormControl style={widthFull} isInvalid={!!errorCode} isRequired>
-              <FormControl.Label>{translate('Phone number')}</FormControl.Label>
+              <FormControl.Label>{t('Phone number')}</FormControl.Label>
               <HStack space={4} style={[flexDirectionRow, widthFull]}>
                 <View style={width(120)}>
                   <TouchableOpacity onPress={handleOpenSearchCountry}>
@@ -139,7 +142,7 @@ export const SignInWithPhoneNumberForm: FC = () => {
                     testID="phoneNumber"
                     variant="underlined"
                     onChangeText={formik.handleChange('phoneNumber')}
-                    placeholder={translate('Phone number')}
+                    placeholder={t('Phone number')}
                     onBlur={formik.handleBlur('phoneNumber')}
                     autoFocus
                   ></Input>
@@ -151,7 +154,7 @@ export const SignInWithPhoneNumberForm: FC = () => {
                   position="absolute"
                   leftIcon={<WarningOutlineIcon size="xs" />}
                 >
-                  {!!errorCode && translate(errorCode)}
+                  {!!errorCode && messages[errorCode] && t(errorCode)}
                 </FormControl.ErrorMessage>
               </View>
             </FormControl>
@@ -163,7 +166,7 @@ export const SignInWithPhoneNumberForm: FC = () => {
             onPress={handlePressSubmit}
             isLoading={formik.isSubmitting}
           >
-            {translate('Next')}
+            {t('Next')}
           </LoadingButton>
         </View>
       </View>

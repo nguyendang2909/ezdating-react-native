@@ -1,9 +1,10 @@
 import { FontAwesome } from 'app/components/Icon/Lib';
-import { translate } from 'app/i18n';
+import { useTranslate } from 'app/hooks/useFormatMessage';
 import { Button, Icon } from 'native-base';
 import React, { FC } from 'react';
 
 export const SignInWithFacebookButton: FC = () => {
+  const t = useTranslate();
   // const { navigate } = useNavigation();
 
   // const handlePress = () => {};
@@ -14,7 +15,7 @@ export const SignInWithFacebookButton: FC = () => {
       startIcon={<Icon as={<FontAwesome name="facebook" />} />}
       colorScheme="blue"
     >
-      {translate('Sign in with w', { w: 'Facebook' })}
+      {t('Sign in with Facebook')}
     </Button>
   );
 };

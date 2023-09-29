@@ -1,6 +1,6 @@
 import 'moment/min/locales';
 
-import { messages } from 'app/locales/define-messages';
+import { messages } from 'app/locales/messages';
 import moment from 'moment';
 import {
   ChevronDownIcon,

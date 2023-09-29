@@ -1,7 +1,7 @@
 import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import { useNavigation } from '@react-navigation/native';
 import { OtpInput } from 'app/components/Input/OtpInput';
-import { translate } from 'app/i18n';
+import { useTranslate } from 'app/hooks/useFormatMessage';
 import { authApi } from 'app/services/api/auth.api';
 import { usersApi } from 'app/services/api/users.api';
 import { appActions } from 'app/store/app.store';
@@ -47,6 +47,7 @@ type ResendStatus = ValueOf<typeof ResendStatusObj>;
 const maximumCodeLength = 6;
 
 export const SignInWithOtpPhoneNumberScreen: FC<FCProps> = props => {
+  const t = useTranslate();
   const { goBack } = useNavigation();
   const { otpConfirm, user } = props.route.params;
   const dispatch = useDispatch();
@@ -136,7 +137,7 @@ export const SignInWithOtpPhoneNumberScreen: FC<FCProps> = props => {
               ></IconButton>
             </View>
             <View>
-              <Heading size="2xl">{translate('Enter your code')}</Heading>
+              <Heading size="2xl">{t('Enter your code')}</Heading>
             </View>
             <View style={marginTop(spacing.md)}>
               <HStack>
@@ -145,7 +146,7 @@ export const SignInWithOtpPhoneNumberScreen: FC<FCProps> = props => {
                   onPress={handleResendingOtpCode}
                   style={marginLeft(spacing.sm)}
                 >
-                  {translate('Resend')}
+                  {t('Resend')}
                 </Link>
               </HStack>
             </View>
@@ -171,8 +172,7 @@ export const SignInWithOtpPhoneNumberScreen: FC<FCProps> = props => {
                     style={posititionAbsolute}
                     leftIcon={<WarningOutlineIcon size="xs" />}
                   >
-                    {isError &&
-                      translate('Wrong verification code, try again!')}
+                    {isError && t('Wrong verification code, try again!')}
                   </FormControl.ErrorMessage>
                 </View>
               </FormControl>
@@ -185,12 +185,12 @@ export const SignInWithOtpPhoneNumberScreen: FC<FCProps> = props => {
                 testID="register-button"
                 onPress={handleSignUp}
               >
-                {translate('Sign in')}
+                {t('Sign in')}
               </Button>
             </View>
           </Box>
           <View>
-            <Text textAlign="center">{translate('EZDating')}</Text>
+            <Text textAlign="center">{t('AppName')}</Text>
           </View>
         </Pressable>
       </Box>

@@ -1,4 +1,4 @@
-import { messages } from 'app/locales/define-messages';
+import { messages } from 'app/locales/messages';
 
 export type Message = typeof messages;
 
