@@ -35,7 +35,7 @@ export const appSlice = createSlice({
       state.accessToken = undefined;
       state.refreshToken = undefined;
       state.isLogged = false;
-      state.profile = {};
+      state.profile = undefined;
     },
     setOsLocationPermission: (
       state,

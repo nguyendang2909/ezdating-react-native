@@ -1,13 +1,17 @@
-import { Box, ScrollView, Text, View } from '@gluestack-ui/themed';
+import { Box, ScrollView } from '@gluestack-ui/themed';
 import { conversationsApi } from 'app/services/api/conversations.api';
 import { conversationActions } from 'app/store/conversations.store';
 import { flatListUtil } from 'app/utils/flat-list.util';
 import React, { useCallback, useEffect, useState } from 'react';
-import { NativeScrollEvent, NativeSyntheticEvent } from 'react-native';
+import {
+  NativeScrollEvent,
+  NativeSyntheticEvent,
+  ViewStyle,
+} from 'react-native';
 import { useDispatch } from 'react-redux';
 
-import { ConversationsBox } from './ConversationsFlatList';
-import { MatchCards } from './MatchCards';
+import { ConversationContent } from './ConversationContent';
+import { MatchContent } from './MatchContent';
 
 export const ConversationsScrollView: React.FC = () => {
   const dispatch = useDispatch();
@@ -72,6 +76,7 @@ export const ConversationsScrollView: React.FC = () => {
   return (
     <ScrollView
       flex={1}
+      contentContainerStyle={scrollViewContentContainerStyle}
       showsVerticalScrollIndicator={false}
       onScroll={handleScroll}
       //   ListFooterComponent={
@@ -85,19 +90,14 @@ export const ConversationsScrollView: React.FC = () => {
       //   }
     >
       <Box>
-        <Box px={16}>
-          <Text bold>New matches</Text>
-        </Box>
-        <Box px={16}>
-          <MatchCards />
-        </Box>
+        <MatchContent />
       </Box>
-      <Box px={16} mt={8}>
-        <Text bold>Messages</Text>
-      </Box>
-      <View flex={1}>
-        <ConversationsBox />
-      </View>
+
+      <ConversationContent />
     </ScrollView>
   );
+};
+
+const scrollViewContentContainerStyle: ViewStyle = {
+  flexGrow: 1,
 };

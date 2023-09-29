@@ -1,9 +1,8 @@
 import { useNavigation } from '@react-navigation/native';
+import { MessagesChat } from 'app/containers/Messages/MessagesChat';
 import { MessageByConversationHeader } from 'app/containers/Messages/MessagesHeader';
-import { MessagesScrollView } from 'app/containers/Messages/MessagesScrollView';
-import { SendMessageBox } from 'app/containers/Messages/SendMessageBox';
 import { AppStackScreenProps } from 'app/navigators';
-import { Box, KeyboardAvoidingView, StatusBar } from 'native-base';
+import { KeyboardAvoidingView, StatusBar } from 'native-base';
 import React, { FC } from 'react';
 import { Platform } from 'react-native';
 
@@ -28,10 +27,11 @@ export const MessagesScreen: FC<FCProps> = props => {
         flex={1}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       >
-        <Box safeAreaBottom flex={1}>
+        <MessagesChat conversation={conversation} />
+        {/* <Box safeAreaBottom flex={1}>
           <MessagesScrollView />
           <SendMessageBox />
-        </Box>
+        </Box> */}
       </KeyboardAvoidingView>
     </>
   );

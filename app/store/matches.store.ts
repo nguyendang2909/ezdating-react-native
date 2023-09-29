@@ -4,15 +4,7 @@ import { Entity } from 'app/types/entity.type';
 
 import { appActions } from './app.store';
 
-const initialState: AppStore.MatchState = {
-  data: [],
-  pagination: {
-    cursors: {
-      next: null,
-      prev: null,
-    },
-  },
-};
+const initialState: AppStore.MatchState = {};
 
 export const matchSlice = createSlice({
   name: 'match',
@@ -41,16 +33,15 @@ export const matchSlice = createSlice({
 
       state.data = state.data.concat(payload);
     },
+
+    setReachedEnd(state, action: PayloadAction<boolean>) {
+      state.isReachedEnd = action.payload;
+    },
   },
   extraReducers: builder => {
     builder.addCase(appActions.logout, state => {
-      state.data = [];
-      state.pagination = {
-        cursors: {
-          next: null,
-          prev: null,
-        },
-      };
+      state.data = undefined;
+      state.isReachedEnd = undefined;
     });
   },
 });

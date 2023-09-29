@@ -101,6 +101,9 @@ export const nearbyUserSlice = createSlice({
   extraReducers: builder => {
     builder.addCase(appActions.logout, state => {
       state.data = undefined;
+      state.isReachedEnd = undefined;
+      state.isRefreshingBottom = undefined;
+      state.isRefreshingTop = undefined;
     });
   },
 });

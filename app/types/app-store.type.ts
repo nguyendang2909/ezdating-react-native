@@ -1,7 +1,7 @@
 import { store } from 'app/store';
 import { AuthorizationResult } from 'react-native-geolocation-service';
+import { IMessage } from 'react-native-gifted-chat';
 
-import { ApiResponse } from './api-response.type';
 import { Entity } from './entity.type';
 
 export declare namespace AppStore {
@@ -21,13 +21,15 @@ export declare namespace AppStore {
     data?: Entity.Match[];
   };
 
+  type ChatMessage = IMessage & { uuid?: string };
+
   type MessageState = {
-    data?: Record<string, Entity.Message[] | undefined>;
+    data?: Record<string, ChatMessage[] | undefined>;
   };
 
   type MatchState = {
     data?: Entity.Match[];
-    pagination?: ApiResponse.Pagination;
+    isReachedEnd?: boolean;
   };
 
   type Messages = Partial<{

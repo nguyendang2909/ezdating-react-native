@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { messagesService } from 'app/services/messages.service';
 import { ApiResponse } from 'app/types/api-response.type';
 import { AppStore } from 'app/types/app-store.type';
 import { Entity } from 'app/types/entity.type';
@@ -16,29 +17,33 @@ export const messageSlice = createSlice({
     addManyFirst: (state, action: PayloadAction<ApiResponse.MessagesData>) => {
       const { payload } = action;
 
-      if (!payload.data?.length || !payload._matchId) {
+      if (!payload._matchId || !payload.data) {
         return;
       }
 
+      const messages = messagesService.formatMany(payload.data);
+
       if (!state.data) {
         state.data = {
-          [payload._matchId]: payload.data,
+          [payload._matchId]: messages,
         };
       }
 
-      state.data[payload._matchId] = payload.data;
+      state.data[payload._matchId] = messages;
     },
 
     addManyNext(state, action: PayloadAction<ApiResponse.MessagesData>) {
       const { payload } = action;
 
-      if (!payload.data?.length || !payload._matchId) {
+      if (!payload._matchId || !payload.data) {
         return;
       }
 
+      const messages = messagesService.formatMany(payload.data);
+
       if (!state.data) {
         state.data = {
-          [payload._matchId]: payload.data,
+          [payload._matchId]: messages,
         };
 
         return;
@@ -47,12 +52,12 @@ export const messageSlice = createSlice({
       const oldMessages = state.data[payload._matchId];
 
       if (!oldMessages?.length) {
-        state.data[payload._matchId] = payload.data;
+        state.data[payload._matchId] = messages;
 
         return;
       }
 
-      state.data[payload._matchId] = oldMessages.concat(payload.data);
+      state.data[payload._matchId] = oldMessages.concat(messages);
     },
 
     receiveMsg: (state, action: PayloadAction<Entity.Message>) => {
@@ -63,9 +68,11 @@ export const messageSlice = createSlice({
         return;
       }
 
+      const message = messagesService.formatOne(payload);
+
       if (!state.data) {
         state.data = {
-          [matchId]: [payload],
+          [matchId]: [message],
         };
 
         return;
@@ -74,12 +81,12 @@ export const messageSlice = createSlice({
       const oldMessages = state.data[matchId];
 
       if (!oldMessages?.length) {
-        state.data[matchId] = [payload];
+        state.data[matchId] = [message];
 
         return;
       }
 
-      state.data[matchId] = [payload].concat(oldMessages);
+      state.data[matchId] = [message].concat(oldMessages);
     },
 
     sendMsg: (state, action: PayloadAction<Entity.Message>) => {
@@ -90,9 +97,11 @@ export const messageSlice = createSlice({
         return;
       }
 
+      const message = messagesService.formatOne(payload);
+
       if (!state.data) {
         state.data = {
-          [matchId]: [payload],
+          [matchId]: [message],
         };
 
         return;
@@ -101,12 +110,12 @@ export const messageSlice = createSlice({
       const oldMessages = state.data[matchId];
 
       if (!oldMessages?.length) {
-        state.data[matchId] = [payload];
+        state.data[matchId] = [message];
 
         return;
       }
 
-      state.data[matchId] = [payload].concat(oldMessages);
+      state.data[matchId] = [message].concat(oldMessages);
     },
 
     updateMsg: (state, action: PayloadAction<Entity.Message>) => {
@@ -118,23 +127,25 @@ export const messageSlice = createSlice({
         return;
       }
 
+      const message = messagesService.formatOne(payload);
+
       if (!state.data) {
         state.data = {
-          [matchId]: [payload],
+          [matchId]: [message],
         };
       }
 
       const oldMessages = state.data[matchId];
 
       if (!oldMessages?.length) {
-        state.data[matchId] = [payload];
+        state.data[matchId] = [message];
 
         return;
       }
 
       for (let i = 0; i < oldMessages.length; i += 1) {
         if (uuid === oldMessages[i].uuid) {
-          (state.data[matchId] as Entity.Message[])[i] = payload;
+          (state.data[matchId] as AppStore.ChatMessage[])[i] = message;
 
           return;
         }

@@ -1,5 +1,5 @@
 import { Header } from 'app/components';
-import { ConversationsScrollView } from 'app/pages/MatchesPage/ConversationsScrollView';
+import { ConversationsScrollView } from 'app/pages/ConversattionsPage/ConversationsScrollView';
 import { StatusBar } from 'native-base';
 import React, { FC } from 'react';
 

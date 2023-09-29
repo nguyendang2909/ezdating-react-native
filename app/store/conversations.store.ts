@@ -64,7 +64,7 @@ export const conversationSlice = createSlice({
   },
   extraReducers: builder => {
     builder.addCase(appActions.logout, state => {
-      state.data = [];
+      state.data = undefined;
     });
     // builder.addMatcher(
     //   api.endpoints.getNextConversations.matchFulfilled,

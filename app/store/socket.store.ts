@@ -113,6 +113,7 @@ export const socketActionTypes = {
 };
 
 export function* sendMessage(data: PayloadAction<SocketRequest.SendMessage>) {
+  console.log(111);
   const { payload } = data;
 
   socket.emit(SOCKET_TO_SERVER_EVENTS.SEND_MESSAGE, payload);
