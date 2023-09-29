@@ -1,4 +1,4 @@
-import { AppStackParamList } from './navigators';
+import { AppStackParamList } from './app/navigators';
 
 declare global {
   namespace ReactNavigation {
@@ -6,3 +6,5 @@ declare global {
     interface RootParamList extends AppStackParamList {}
   }
 }
+
+export {};

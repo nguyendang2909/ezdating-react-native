@@ -19,6 +19,7 @@ import { useFonts } from 'expo-font';
 import * as Linking from 'expo-linking';
 import { NativeBaseProvider } from 'native-base';
 import React from 'react';
+import { IntlProvider } from 'react-intl';
 import {
   initialWindowMetrics,
   SafeAreaProvider,
@@ -135,11 +136,18 @@ function App(props: AppProps) {
                   config={nativeBaseConfig}
                 >
                   <ActionSheetProvider>
-                    <AppNavigator
-                      linking={linking}
-                      initialState={initialNavigationState}
-                      onStateChange={onNavigationStateChange}
-                    />
+                    <IntlProvider
+                      locale="en-US"
+                      messages={{
+                        '0bcd7fb867': 'a',
+                      }}
+                    >
+                      <AppNavigator
+                        linking={linking}
+                        initialState={initialNavigationState}
+                        onStateChange={onNavigationStateChange}
+                      />
+                    </IntlProvider>
                   </ActionSheetProvider>
                 </NativeBaseProvider>
               </GluestackUIProvider>

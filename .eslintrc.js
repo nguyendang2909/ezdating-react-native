@@ -22,7 +22,8 @@ module.exports = {
     "react",
     "react-native",
     "unused-imports",
-    "react-hooks"
+    "react-hooks",
+    "formatjs"
     ],
   rules: {
     'prettier/prettier': ['error', prettierOptions],
@@ -36,7 +37,14 @@ module.exports = {
       },
     ],
     "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
-    "react-hooks/exhaustive-deps": "warn" // Checks effect dependencies
+    "react-hooks/exhaustive-deps": "warn", // Checks effect dependencies
+    "formatjs/enforce-id": [
+      "error",
+      {
+        "idInterpolationPattern": "[sha512:contenthash:hex:10]"
+      }
+    ],
+    "formatjs/enforce-default-message": ["error", "literal"]
   },
   "parserOptions": {
     "ecmaFeatures": {
