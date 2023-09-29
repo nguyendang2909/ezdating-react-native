@@ -1,8 +1,9 @@
-import { translate, TxKeyPath } from 'app/i18n';
+import { translate } from 'app/i18n';
+import { TxKey } from 'app/types';
 import { Toast } from 'native-base';
 
 class NotificationsService {
-  success(value: TxKeyPath) {
+  success(value: TxKey) {
     Toast.show({
       placement: 'top',
       description: translate('Update w successfully', {
@@ -12,7 +13,7 @@ class NotificationsService {
     });
   }
 
-  fail(value: TxKeyPath) {
+  fail(value: TxKey) {
     Toast.show({
       placement: 'top',
       description: translate('Update w failed!', {

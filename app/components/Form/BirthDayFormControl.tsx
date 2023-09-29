@@ -1,6 +1,6 @@
 import 'moment/min/locales';
 
-import { translate } from 'app/i18n';
+import { messages } from 'app/locales/define-messages';
 import moment from 'moment';
 import {
   ChevronDownIcon,
@@ -11,6 +11,7 @@ import {
   WarningOutlineIcon,
 } from 'native-base';
 import React, { FC, useState } from 'react';
+import { useIntl } from 'react-intl';
 import { Pressable } from 'react-native';
 import * as RNLocalize from 'react-native-localize';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
@@ -28,6 +29,8 @@ export const BirthDayFormControl: FC<FCProps> = ({
   error,
   isRequired,
 }) => {
+  const t = useIntl();
+
   const [deviceLocale] = RNLocalize.getLocales();
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const showDatePicker = () => {
@@ -45,7 +48,9 @@ export const BirthDayFormControl: FC<FCProps> = ({
     <>
       <FormControl {...(isRequired ? { isRequired } : {})} isInvalid={!!error}>
         <Stack>
-          <FormControl.Label>{translate('Birthday')}</FormControl.Label>
+          <FormControl.Label>
+            {t.formatMessage(messages.Birthday)}
+          </FormControl.Label>
           <Pressable onPress={showDatePicker}>
             <Input
               testID="birthday"
@@ -60,9 +65,9 @@ export const BirthDayFormControl: FC<FCProps> = ({
               onPressIn={showDatePicker}
               isReadOnly
               variant="underlined"
-              placeholder={translate('Please enter your w', {
-                w: translate('birthday'),
-              })}
+              placeholder={t.formatMessage(
+                messages['Please enter your birthday'],
+              )}
               InputRightElement={<ChevronDownIcon />}
             ></Input>
           </Pressable>

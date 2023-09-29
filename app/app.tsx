@@ -31,6 +31,8 @@ import Config from './config';
 import { nativeBaseConfig } from './config/native-base.config';
 import { ConnectProfile } from './containers/Connect/ConnectProfile';
 import { ConnectSocket } from './containers/Connect/ConnectSocket';
+import { translators } from './locales';
+import { language } from './locales/locale';
 import { AppNavigator, useNavigationPersistence } from './navigators';
 import { ErrorBoundary } from './screens/ErrorScreen/ErrorBoundary';
 import { setupReactotron } from './services/reactotron';
@@ -137,10 +139,9 @@ function App(props: AppProps) {
                 >
                   <ActionSheetProvider>
                     <IntlProvider
-                      locale="en-US"
-                      messages={{
-                        '0bcd7fb867': 'a',
-                      }}
+                      defaultLocale="en"
+                      locale={language}
+                      messages={translators[language] || translators.en}
                     >
                       <AppNavigator
                         linking={linking}
