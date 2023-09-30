@@ -10,7 +10,6 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import { isRTL } from '../../i18n';
 import { colors, spacing } from '../../theme';
 import {
   ExtendedEdge,
