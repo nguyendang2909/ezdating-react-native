@@ -21,7 +21,7 @@ export declare namespace AppStore {
     data?: Entity.Match[];
   };
 
-  type ChatMessage = IMessage & { uuid?: string };
+  type ChatMessage = IMessage & { uuid?: string } & Entity.BaseEntity;
 
   type MessageState = {
     data?: Record<string, ChatMessage[] | undefined>;

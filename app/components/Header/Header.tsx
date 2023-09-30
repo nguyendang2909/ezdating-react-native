@@ -278,7 +278,7 @@ function HeaderAction(props: HeaderActionProps) {
         color={iconColor}
         onPress={onPress}
         containerStyle={[$actionIconContainer, { backgroundColor }]}
-        style={isRTL ? { transform: [{ rotate: '180deg' }] } : {}}
+        // style={isRTL ? { transform: [{ rotate: '180deg' }] } : {}}
       />
     );
   }

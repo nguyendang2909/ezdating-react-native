@@ -7,7 +7,6 @@ import { useTranslate } from 'app/hooks/useFormatMessage';
 import { EditFilterGenderMenuItem } from 'app/pages/EditMatchFilter/EditFilterGenderMenuItem';
 import { nearbyUsersApi } from 'app/services/api/nearby-users.api';
 import { usersApi } from 'app/services/api/users.api';
-import { notificationsService } from 'app/services/notifications/notifications.service';
 import { appActions } from 'app/store/app.store';
 import { nearbyUserActions } from 'app/store/nearby-user.store';
 import { colors } from 'app/theme';
@@ -15,7 +14,8 @@ import { FormParams } from 'app/types/form-params.type';
 import { useFormik } from 'formik';
 import { HStack } from 'native-base';
 import React from 'react';
-import { Dimensions, SafeAreaView } from 'react-native';
+import { Dimensions } from 'react-native';
+import Toast from 'react-native-toast-message';
 import { useDispatch } from 'react-redux';
 
 import { AppStackScreenProps } from '../navigators';
@@ -53,15 +53,16 @@ export const EditMatchFilterScreen: React.FC<FCProps> = () => {
       try {
         await usersApi.updateProfile(values);
 
-        notificationsService.success('profile');
-
         const profile = await usersApi.getMyProfile();
 
         if (profile.data) {
           dispatch(appActions.updateProfile(profile.data));
         }
       } catch (err) {
-        notificationsService.fail('profile');
+        Toast.show({
+          type: 'error',
+          text1: t('Update failed, please try again.'),
+        });
       }
 
       navigation.navigate('Home', {
@@ -127,8 +128,6 @@ export const EditMatchFilterScreen: React.FC<FCProps> = () => {
                   allowOverlap={false}
                   snapped
                   minMarkerOverlapDistance={40}
-                  // customMarker={CustomMarker}
-                  // customLabel={CustomLabel}
                 />
               </View>
             </View>
@@ -185,7 +184,7 @@ export const EditMatchFilterScreen: React.FC<FCProps> = () => {
           <View mt={100}></View>
         </ScrollView>
       </Box>
-      <SafeAreaView />
+      {/* <SafeAreaView /> */}
     </>
   );
 };

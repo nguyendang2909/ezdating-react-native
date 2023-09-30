@@ -46,21 +46,24 @@ export const MessagesChat: React.FC<FCProps> = ({ conversation }) => {
     fetchFirstTime();
   }, [fetchFirstTime]);
 
-  const onSend = useCallback((messages: IChatMessage[] = []) => {
-    for (const message of messages) {
-      dispatch(
-        socketStoreActions.sendMessage({
-          ...message,
-          uuid: uuidV4(),
-          matchId,
-        }),
-      );
-    }
+  const onSend = useCallback(
+    (messages: IChatMessage[] = []) => {
+      for (const message of messages) {
+        dispatch(
+          socketStoreActions.sendMessage({
+            text: message.text,
+            uuid: uuidV4(),
+            matchId,
+          }),
+        );
+      }
 
-    // setMessages(previousMessages =>
-    //   GiftedChat.append(previousMessages, messages),
-    // );
-  }, []);
+      // setMessages(previousMessages =>
+      //   GiftedChat.append(previousMessages, messages),
+      // );
+    },
+    [dispatch, matchId],
+  );
 
   const onEndReached = async () => {
     try {

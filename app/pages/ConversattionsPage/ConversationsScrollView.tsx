@@ -79,6 +79,8 @@ export const ConversationsScrollView: React.FC = () => {
       contentContainerStyle={scrollViewContentContainerStyle}
       showsVerticalScrollIndicator={false}
       onScroll={handleScroll}
+      scrollEventThrottle={16}
+
       //   ListFooterComponent={
       //     isRefreshingBottom ? (
       //       <Box mt={16}>

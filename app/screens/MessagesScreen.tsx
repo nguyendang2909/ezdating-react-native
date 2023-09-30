@@ -4,7 +4,7 @@ import { MessageByConversationHeader } from 'app/containers/Messages/MessagesHea
 import { AppStackScreenProps } from 'app/navigators';
 import { KeyboardAvoidingView, StatusBar } from 'native-base';
 import React, { FC } from 'react';
-import { Platform } from 'react-native';
+import { Platform, SafeAreaView } from 'react-native';
 
 type FCProps = AppStackScreenProps<'Messages'>;
 
@@ -33,6 +33,7 @@ export const MessagesScreen: FC<FCProps> = props => {
           <SendMessageBox />
         </Box> */}
       </KeyboardAvoidingView>
+      <SafeAreaView />
     </>
   );
 };

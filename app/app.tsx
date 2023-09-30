@@ -12,6 +12,7 @@ import {
   initialWindowMetrics,
   SafeAreaProvider,
 } from 'react-native-safe-area-context';
+import Toast from 'react-native-toast-message';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/lib/integration/react';
 
@@ -136,6 +137,7 @@ function App(props: AppProps) {
                         initialState={initialNavigationState}
                         onStateChange={onNavigationStateChange}
                       />
+                      <Toast />
                     </IntlProvider>
                   </ActionSheetProvider>
                 </NativeBaseProvider>

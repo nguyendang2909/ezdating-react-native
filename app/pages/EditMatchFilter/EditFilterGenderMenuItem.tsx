@@ -42,7 +42,7 @@ export const EditFilterGenderMenuItem: React.FC<FCProps> = ({
       <MenuItem
         titleTx="Gender"
         leftIcon={<MaterialCommunityIcons name="gender-male-female" />}
-        {...(value ? { valueTx: `constants.userGenders.${value}` } : {})}
+        {...(value ? { valueTx: UserGenderMessages[value] } : {})}
         onPress={handleOpen}
       />
 

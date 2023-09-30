@@ -3,6 +3,5 @@ export declare namespace SocketRequest {
     matchId: string;
     text: string;
     uuid: string;
-    replyMessageId?: string;
   };
 }
