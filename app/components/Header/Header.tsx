@@ -17,7 +17,6 @@ import {
   useSafeAreaInsetsStyle,
 } from '../../utils/useSafeAreaInsetsStyle';
 import { Icon, IconTypes } from '../Icon';
-// import { TextProps } from '../Text';
 
 export interface HeaderProps {
   /**
