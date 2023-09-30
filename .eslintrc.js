@@ -30,6 +30,7 @@ module.exports = {
     'simple-import-sort/imports': 'error', // Import configuration for `eslint-plugin-simple-import-sort`
     'simple-import-sort/exports': 'error', // Export configuration for `eslint-plugin-simple-import-sort`
     'unused-imports/no-unused-imports': 'error',
+    "react/prop-types": "off",
     'unused-imports/no-unused-vars': [
       'warn',
       {

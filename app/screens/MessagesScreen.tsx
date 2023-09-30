@@ -2,18 +2,18 @@ import { useNavigation } from '@react-navigation/native';
 import { MessagesChat } from 'app/containers/Messages/MessagesChat';
 import { MessageByConversationHeader } from 'app/containers/Messages/MessagesHeader';
 import { AppStackScreenProps } from 'app/navigators';
-import { KeyboardAvoidingView, StatusBar } from 'native-base';
+import { StatusBar } from 'native-base';
 import React, { FC } from 'react';
-import { Platform, SafeAreaView } from 'react-native';
+import { SafeAreaView } from 'react-native';
 
 type FCProps = AppStackScreenProps<'Messages'>;
 
 export const MessagesScreen: FC<FCProps> = props => {
-  const { conversation } = props.route.params;
+  const { conversation, user } = props.route.params;
 
   const { goBack } = useNavigation();
 
-  if (!conversation || !conversation._id) {
+  if (!conversation || !conversation._id || !user || !user._id) {
     goBack();
 
     return <></>;
@@ -23,16 +23,26 @@ export const MessagesScreen: FC<FCProps> = props => {
     <>
       <StatusBar barStyle="default" />
       <MessageByConversationHeader />
-      <KeyboardAvoidingView
+      {/* <KeyboardAvoidingView
         flex={1}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      >
-        <MessagesChat conversation={conversation} />
-        {/* <Box safeAreaBottom flex={1}>
+      > */}
+      <MessagesChat
+        conversation={conversation}
+        currentUser={user}
+        targetUser={{
+          _id: conversation.targetUser?._id || '',
+          avatar: conversation.targetUser?.mediaFiles?.length
+            ? conversation.targetUser.mediaFiles[0].location
+            : undefined,
+          name: conversation.targetUser?.nickname,
+        }}
+      />
+      {/* <Box safeAreaBottom flex={1}>
           <MessagesScrollView />
           <SendMessageBox />
         </Box> */}
-      </KeyboardAvoidingView>
+      {/* </KeyboardAvoidingView> */}
       <SafeAreaView />
     </>
   );

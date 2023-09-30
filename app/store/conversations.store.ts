@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AppStore } from 'app/types/app-store.type';
 import { Entity } from 'app/types/entity.type';
+import { SocketRequest } from 'app/types/socket-request.type';
 
 import { appActions } from './app.store';
 
@@ -34,7 +35,7 @@ export const conversationSlice = createSlice({
       state.data = state.data.concat(payload);
     },
 
-    updateConversationByMessage: (
+    updateConversationWhenUpdateSentMessage: (
       state,
       action: PayloadAction<Entity.Message>,
     ) => {
@@ -55,10 +56,56 @@ export const conversationSlice = createSlice({
             lastMessage: message.text,
             _lastMessageUserId: message._userId,
             lastMessageAt: message._userId,
+            read: true,
           };
 
           return;
         }
+      }
+    },
+
+    updateConversationWhenReceivingMessage: (
+      state,
+      action: PayloadAction<Entity.Message>,
+    ) => {
+      if (!state.data?.length) {
+        return;
+      }
+
+      const message = action.payload;
+
+      const stateDataLength = state.data.length;
+
+      for (let i = 0; i < stateDataLength; i += 1) {
+        const stateData = state.data[i];
+
+        if (stateData._id === message._matchId) {
+          state.data[i] = {
+            ...stateData,
+            lastMessage: message.text,
+            _lastMessageUserId: message._userId,
+            lastMessageAt: message._userId,
+            read: false,
+          };
+
+          return;
+        }
+      }
+    },
+
+    readMessage: (state, action: PayloadAction<SocketRequest.ReadMessage>) => {
+      const { payload } = action;
+
+      const matchId = payload.matchId;
+
+      if (!state.data?.length) {
+        return;
+      }
+
+      const matchIndex = state.data.findIndex(item => item._id === matchId);
+
+      if (matchIndex >= 0) {
+        state.data[matchIndex].read = true;
       }
     },
   },

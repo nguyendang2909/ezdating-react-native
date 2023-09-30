@@ -44,11 +44,15 @@ export function* initializeWebSocket() {
         switch (type) {
           case SOCKET_TO_CLIENT_EVENTS.NEW_MESSAGE:
             yield put(messageActions.receiveMsg(data));
-            yield put(conversationActions.updateConversationByMessage(data));
+            yield put(
+              conversationActions.updateConversationWhenReceivingMessage(data),
+            );
             break;
-          case SOCKET_TO_CLIENT_EVENTS.UPDATE_MESSAGE:
+          case SOCKET_TO_CLIENT_EVENTS.UPDATE_SENT_MESSAGE:
             yield put(messageActions.updateMsg(data));
-            yield put(conversationActions.updateConversationByMessage(data));
+            yield put(
+              conversationActions.updateConversationWhenUpdateSentMessage(data),
+            );
             break;
           default:
             break;
@@ -76,12 +80,15 @@ function createSocketChannel() {
       emit({ type: SOCKET_TO_CLIENT_EVENTS.NEW_MESSAGE, data: msg });
     });
 
-    socket.on(SOCKET_TO_CLIENT_EVENTS.UPDATE_MESSAGE, (msg: Entity.Message) => {
-      emit({
-        type: SOCKET_TO_CLIENT_EVENTS.UPDATE_MESSAGE,
-        data: msg,
-      });
-    });
+    socket.on(
+      SOCKET_TO_CLIENT_EVENTS.UPDATE_SENT_MESSAGE,
+      (msg: Entity.Message) => {
+        emit({
+          type: SOCKET_TO_CLIENT_EVENTS.UPDATE_SENT_MESSAGE,
+          data: msg,
+        });
+      },
+    );
 
     const unsubscribe = () => {
       socket.off('msg');
@@ -105,11 +112,16 @@ export const socketStoreActions = {
     type: socketActionTypes.SEND_MESSAGE,
     payload,
   }),
+  readMessage: (payload: SocketRequest.ReadMessage) => ({
+    type: socketActionTypes.READ_MESSAGE,
+    payload,
+  }),
 };
 
 export const socketActionTypes = {
   INITIALIZE_WEB_SOCKET: 'INITIALIZE_WEB_SOCKET',
   SEND_MESSAGE: 'SEND_MESSAGE',
+  READ_MESSAGE: 'READ_MESSAGE',
 };
 
 export function* sendMessage(data: PayloadAction<SocketRequest.SendMessage>) {
@@ -128,4 +140,12 @@ export function* sendMessage(data: PayloadAction<SocketRequest.SendMessage>) {
       _userId: currentUserId,
     }),
   );
+}
+
+export function* readMessage(data: PayloadAction<SocketRequest.ReadMessage>) {
+  const { payload } = data;
+
+  socket.emit(SOCKET_TO_SERVER_EVENTS.READ_MESSAGE, payload);
+
+  yield put(conversationActions.readMessage(payload));
 }

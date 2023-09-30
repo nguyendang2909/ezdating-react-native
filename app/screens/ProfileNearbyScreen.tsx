@@ -33,11 +33,11 @@ export const ProfileNearbyScreen: React.FC<FCProps> = props => {
     });
   };
 
-  const sendMessage = async () => {
-    navigate('Messages', {
-      conversation: {},
-    });
-  };
+  // const sendMessage = async () => {
+  //   navigate('Messages', {
+  //     conversation: {},
+  //   });
+  // };
 
   const [activeSlide, setActiveSlide] = useState<number>(0);
 

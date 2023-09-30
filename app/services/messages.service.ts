@@ -11,6 +11,7 @@ class MessagesService extends CommonService {
 
   formatOne(entity: Entity.Message): IMessage {
     const { createdAt, text, ...data } = entity;
+
     return {
       ...data,
       user: { _id: entity._userId || '' },

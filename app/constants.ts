@@ -155,13 +155,14 @@ export const SOCKET_TO_SERVER_EVENTS = {
   SEND_MESSAGE: 'sendMsg',
   MATCHED: 'matched',
   EDIT_MESSAGE: 'editMsg',
+  READ_MESSAGE: 'readMsg',
 } as const;
 
 export const SOCKET_TO_CLIENT_EVENTS = {
   CANCEL_MATCHED: 'cancelMatched',
   ERROR: 'error',
   NEW_MESSAGE: 'msg',
-  UPDATE_MESSAGE: 'updateMsg',
+  UPDATE_SENT_MESSAGE: 'updateSentMsg',
 } as const;
 
 // Const

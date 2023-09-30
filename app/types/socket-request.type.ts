@@ -4,4 +4,9 @@ export declare namespace SocketRequest {
     text: string;
     uuid: string;
   };
+
+  type ReadMessage = {
+    matchId: string;
+    lastMessageId: string;
+  };
 }
