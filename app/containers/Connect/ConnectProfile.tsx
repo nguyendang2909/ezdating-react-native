@@ -11,7 +11,7 @@ export const ConnectProfile: React.FC = () => {
     if (accessToken) {
       refetch();
     }
-  }, [accessToken]);
+  }, [accessToken, refetch]);
 
   return <></>;
 };

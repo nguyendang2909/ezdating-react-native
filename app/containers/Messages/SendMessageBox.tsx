@@ -16,10 +16,6 @@ export const SendMessageBox: React.FC = () => {
 
   const matchId = conversation?._id;
 
-  if (!matchId) {
-    return <></>;
-  }
-
   const formik = useFormik<FormParams.SendMessage>({
     initialValues: {
       text: '',
@@ -40,6 +36,10 @@ export const SendMessageBox: React.FC = () => {
       );
     },
   });
+
+  if (!matchId) {
+    return <></>;
+  }
 
   return (
     <>

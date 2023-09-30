@@ -1,7 +1,8 @@
+import { Image } from '@gluestack-ui/themed';
 import { useAppSelector } from 'app/hooks';
 import { swipeUsersApi } from 'app/services/api/swipe-users.api';
 import { swipeUserActions } from 'app/store/swipe-user.store';
-import { Image, View } from 'native-base';
+import { View } from 'native-base';
 import React, { useCallback, useEffect } from 'react';
 import { Dimensions, StyleSheet } from 'react-native';
 import { useDispatch } from 'react-redux';
@@ -65,10 +66,8 @@ export const DatingSwipeSearching: React.FC = () => {
               // }}
             >
               <Image
-                style={{
-                  width: '100%',
-                  height: '100%',
-                }}
+                w="$full"
+                h="$full"
                 alt={item._id}
                 source={{ uri: imageUrl }}
               />

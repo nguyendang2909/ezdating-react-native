@@ -13,7 +13,11 @@ import { likedMeActions } from 'app/store/liked-me.store';
 import { Entity } from 'app/types/entity.type';
 import { flatListUtil } from 'app/utils/flat-list.util';
 import React, { useCallback, useEffect, useState } from 'react';
-import { RefreshControl } from 'react-native';
+import {
+  NativeScrollEvent,
+  NativeSyntheticEvent,
+  RefreshControl,
+} from 'react-native';
 import { useDispatch } from 'react-redux';
 
 export const LikedMeContent: React.FC = () => {
@@ -127,6 +131,7 @@ export const LikedMeContent: React.FC = () => {
             <></>
           )
         }
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         renderItem={({ item }: { item: Entity.Like }) => {
           const handlePressCard = () => {};

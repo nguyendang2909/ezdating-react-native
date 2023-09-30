@@ -9,7 +9,7 @@ import React, { FC } from 'react';
 export const DatingSwipeScreen: FC = () => {
   return (
     <>
-      <Header titleTx="appName" />
+      <Header titleTx="AppName" />
       <UpdateGeolocation />
       <Box flex={1} safeAreaY backgroundColor={colors.primary}>
         {/* <TouchableOpacity>

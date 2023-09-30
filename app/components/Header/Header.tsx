@@ -10,7 +10,7 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import { isRTL, translate } from '../../i18n';
+import { isRTL } from '../../i18n';
 import { colors, spacing } from '../../theme';
 import {
   ExtendedEdge,
@@ -180,7 +180,7 @@ export function Header(props: HeaderProps) {
 
   const $containerInsets = useSafeAreaInsetsStyle(safeAreaEdges);
 
-  const titleContent = titleTx ? translate(titleTx) : title;
+  const titleContent = titleTx ? t(titleTx) : title;
 
   return (
     <View

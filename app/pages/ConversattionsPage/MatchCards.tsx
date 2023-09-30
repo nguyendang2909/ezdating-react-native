@@ -19,6 +19,7 @@ export const MatchCards: React.FC<FCProps> = ({ data: matches }) => {
 
   const [isRefreshingBottom, setRefreshingBottom] = useState<boolean>(false);
   const [isReachedEnd, setReachedEnd] = useState<boolean>(false);
+  const isRefreshing = isRefreshingBottom;
 
   const handleRefreshTop = async () => {
     if (isRefreshing) {
