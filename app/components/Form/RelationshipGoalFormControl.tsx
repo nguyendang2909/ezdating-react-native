@@ -1,8 +1,8 @@
 import { useActionSheet } from '@expo/react-native-action-sheet';
 import {
   UserRelationshipGoal,
+  UserRelationshipGoalMessages,
   UserRelationshipGoals,
-  UserRelationshipMessages,
 } from 'app/constants';
 import { useTranslate } from 'app/hooks/useFormatMessage';
 import {
@@ -85,7 +85,7 @@ export const RelationshipGoalFormControl: React.FC<FCProps> = ({
               size="lg"
               variant="underlined"
               placeholder={t('Please select')}
-              value={value ? t(UserRelationshipMessages[value]) : ''}
+              value={value ? t(UserRelationshipGoalMessages[value]) : ''}
               InputRightElement={<ChevronDownIcon />}
               onPressIn={handlePress}
             ></Input>

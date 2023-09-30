@@ -1,10 +1,11 @@
-import { translate, TxKeyPath } from 'app/i18n';
+import { useTranslate } from 'app/hooks/useFormatMessage';
+import { TxKey } from 'app/types';
 import { HStack, Icon, Switch, Text, View } from 'native-base';
 import React from 'react';
 
 type FCProps = {
   title?: string;
-  titleTx?: TxKeyPath;
+  titleTx?: TxKey;
   leftIcon?: React.ReactElement;
   value?: boolean;
   onToggle?: (value: boolean) => void;
@@ -17,6 +18,8 @@ export const MenuItemSwitch: React.FC<FCProps> = ({
   value,
   onToggle,
 }) => {
+  const t = useTranslate();
+
   return (
     <View px={4} py={2}>
       <HStack alignItems="center">
@@ -28,7 +31,7 @@ export const MenuItemSwitch: React.FC<FCProps> = ({
 
         {(!!title || !!titleTx) && (
           <View>
-            <Text>{title || (!!titleTx && translate(titleTx))}</Text>
+            <Text>{title || (!!titleTx && t(titleTx))}</Text>
           </View>
         )}
 

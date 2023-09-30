@@ -29,7 +29,7 @@ export const InputBasicInforForm: FC = () => {
       gender: Yup.string().required(t('Please enter your gender')),
       birthday: Yup.string().required(t('Please enter your birthday')),
       // relationshipGoal: Yup.string().required(
-      //   translate('Please choose your w!', { w: translate('desire relation') }),
+      //   t('Please choose your w!', { w: t('desire relation') }),
       // ),
       introduce: Yup.string().max(500).optional(),
     }),

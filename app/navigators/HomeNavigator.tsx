@@ -1,5 +1,5 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { translate } from 'app/i18n';
+import { useTranslate } from 'app/hooks/useFormatMessage';
 import { AppStackScreenProps } from 'app/navigators';
 import { ConversationsScreen } from 'app/screens/ConversationsScreen';
 import { DatingNearbyScreen } from 'app/screens/DatingNearbyScreen';
@@ -25,6 +25,8 @@ type FCProps = AppStackScreenProps<'Home'>;
 const Tab = createBottomTabNavigator<HomeTabParamList>();
 
 export const HomeNavigator: FC<FCProps> = () => {
+  const t = useTranslate();
+
   const { bottom } = useSafeAreaInsets();
 
   return (
@@ -54,7 +56,7 @@ export const HomeNavigator: FC<FCProps> = () => {
         component={DatingSwipeScreen}
         options={{
           tabBarShowLabel: false,
-          //   tabBarLabel: translate('Swipe'),
+          //   tabBarLabel: t('Swipe'),
           tabBarIcon: ({ focused }) => (
             <FontAwesome
               name="globe"
@@ -69,7 +71,7 @@ export const HomeNavigator: FC<FCProps> = () => {
         component={DatingNearbyScreen}
         options={{
           tabBarShowLabel: false,
-          //   tabBarLabel: translate('Nearby'),
+          //   tabBarLabel: t('Nearby'),
           tabBarIcon: ({ focused }) => (
             <MaterialIcons
               name="location-on"
@@ -84,7 +86,7 @@ export const HomeNavigator: FC<FCProps> = () => {
         component={ConversationsScreen}
         options={{
           tabBarShowLabel: false,
-          tabBarLabel: translate('Messages'),
+          tabBarLabel: t('Messages'),
           tabBarIcon: ({ focused }) => (
             <MaterialCommunityIcons
               name="chat"
@@ -99,7 +101,7 @@ export const HomeNavigator: FC<FCProps> = () => {
         component={ProfileScreen}
         options={{
           tabBarShowLabel: false,
-          tabBarLabel: translate('Profile'),
+          tabBarLabel: t('Profile'),
           tabBarIcon: ({ focused }) => (
             <MaterialCommunityIcons
               name="account"

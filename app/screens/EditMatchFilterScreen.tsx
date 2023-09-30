@@ -3,7 +3,7 @@ import MultiSlider from '@ptomasroos/react-native-multi-slider';
 import { useNavigation } from '@react-navigation/native';
 import { HeaderSaveDone } from 'app/components/Header/HeaderSaveDone';
 import { useAppSelector } from 'app/hooks';
-import { translate } from 'app/i18n';
+import { useTranslate } from 'app/hooks/useFormatMessage';
 import { EditFilterGenderMenuItem } from 'app/pages/EditMatchFilter/EditFilterGenderMenuItem';
 import { nearbyUsersApi } from 'app/services/api/nearby-users.api';
 import { usersApi } from 'app/services/api/users.api';
@@ -23,6 +23,7 @@ import { AppStackScreenProps } from '../navigators';
 type FCProps = AppStackScreenProps<'SignInWithOtpPhoneNumber'>;
 
 export const EditMatchFilterScreen: React.FC<FCProps> = () => {
+  const t = useTranslate();
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
@@ -110,7 +111,7 @@ export const EditMatchFilterScreen: React.FC<FCProps> = () => {
             <View py={16}>
               <View mx={16}>
                 <HStack justifyContent="space-between">
-                  <Text>{translate('Distance preference')}</Text>
+                  <Text>{t('Distance preference')}</Text>
                   <Text>{formik.values.filterMaxDistance} km</Text>
                 </HStack>
               </View>
@@ -148,7 +149,7 @@ export const EditMatchFilterScreen: React.FC<FCProps> = () => {
             <View py={16}>
               <View mx={16}>
                 <HStack justifyContent="space-between">
-                  <Text>{translate('Age preference')}</Text>
+                  <Text>{t('Age preference')}</Text>
                   <Text>
                     {formik.values.filterMinAge} - {formik.values.filterMaxAge}
                   </Text>
@@ -179,89 +180,7 @@ export const EditMatchFilterScreen: React.FC<FCProps> = () => {
                 />
               </View>
             </View>
-
-            {/* <View backgroundColor={colors.background}>
-              <ProfileEditBirthdayMenuItem onPress={handleEditProfile} />
-            </View>
-            <Divider />
-            <View backgroundColor={colors.background}>
-              <ProfileEditGenderMenuItem onPress={handleEditProfile} />
-            </View>
-            <Divider />
-            <View backgroundColor={colors.background}>
-              <ProfileEditHeightMenuItem />
-            </View>
-            <Divider />
-            <View backgroundColor={colors.background}>
-              <ProfileEditWeightMenuItem />
-            </View> */}
           </View>
-
-          {/* <View mt={4}>
-            <View mx={4} mb={2}>
-              <Text bold={true} textTransform="uppercase">
-                {translate('About me')}
-              </Text>
-            </View>
-            <View backgroundColor={colors.background}>
-              <ProfileEditIntroduceMenuItem onPress={handleEditProfile} />
-            </View>
-          </View> */}
-
-          {/* <View mt={4}>
-            <View mx={4} mb={2}>
-              <Text bold={true} textTransform="uppercase">
-                {translate('Relationship')}
-              </Text>
-            </View>
-            <View backgroundColor={colors.background}>
-              <ProfileEditRelationshipGoalMenuItem
-                onPress={handleEditProfile}
-              />
-            </View>
-            <Divider />
-            <View backgroundColor={colors.background}>
-              <ProfileEditRelationshipStatusMenuItem
-                onPress={handleEditProfile}
-              />
-            </View>
-          </View> */}
-
-          {/* <View mt={4}>
-            <View mx={4} mb={2}>
-              <Text bold={true} textTransform="uppercase">
-                {translate('Languages')}
-              </Text>
-            </View>
-            <View backgroundColor={colors.background}>
-              <ProfileEditLanguagesMenuItem />
-            </View>
-          </View> */}
-
-          {/* <View mt={4}>
-            <View mx={4} mb={2}>
-              <Text bold={true} textTransform="uppercase">
-                {translate('Job title')}
-              </Text>
-            </View>
-            <View backgroundColor={colors.background}>
-              <ProfileEditIntroduceMenuItem onPress={handleEditProfile} />
-            </View>
-          </View> */}
-
-          {/* <View mt={4}>
-            <View mx={4} mb={2}>
-              <Text bold={true} textTransform="uppercase">
-                {translate('Control your profile')}
-              </Text>
-            </View>
-            <View backgroundColor={colors.background}>
-              <ProfileShowAgeMenuItem onPress={handleEditProfile} />
-            </View>
-            <View backgroundColor={colors.background}>
-              <ProfileShowMyDistanceMenuItem onPress={handleEditProfile} />
-            </View>
-          </View> */}
 
           <View mt={100}></View>
         </ScrollView>

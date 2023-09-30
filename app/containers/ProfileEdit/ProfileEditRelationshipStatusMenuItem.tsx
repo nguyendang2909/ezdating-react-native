@@ -3,9 +3,10 @@ import { MenuItem } from 'app/components/Menu/MenuItem';
 import {
   UserRelationshipStatus,
   UserRelationshipStatuses,
+  UserRelationshipStatusMessages,
 } from 'app/constants';
 import { useAppSelector } from 'app/hooks';
-import { translate } from 'app/i18n';
+import { useTranslate } from 'app/hooks/useFormatMessage';
 import { ApiRequest } from 'app/types/api-request.type';
 import { Actionsheet, Box, Heading, Text, useDisclose } from 'native-base';
 import React, { useState } from 'react';
@@ -17,6 +18,8 @@ type FCProps = {
 export const ProfileEditRelationshipStatusMenuItem: React.FC<FCProps> = ({
   onPress,
 }) => {
+  const t = useTranslate();
+
   const currentValue = useAppSelector(
     state => state.app.profile?.relationshipStatus,
   );
@@ -41,7 +44,7 @@ export const ProfileEditRelationshipStatusMenuItem: React.FC<FCProps> = ({
         titleTx="Relationship status"
         leftIcon={<MaterialIcons name="person" />}
         {...(currentValue
-          ? { valueTx: `constants.userRelationshipStatuses.${currentValue}` }
+          ? { valueTx: UserRelationshipStatusMessages[currentValue] }
           : {})}
         onPress={handleOpen}
       />
@@ -51,7 +54,7 @@ export const ProfileEditRelationshipStatusMenuItem: React.FC<FCProps> = ({
           <Actionsheet.Content>
             <Box mb={4}>
               <Heading size="sm" textAlign="center">
-                {translate('Relationship goal')}
+                {t('Relationship goal')}
               </Heading>
             </Box>
             {Object.values(UserRelationshipStatuses).map(value => {
@@ -65,7 +68,7 @@ export const ProfileEditRelationshipStatusMenuItem: React.FC<FCProps> = ({
                   <Text
                     fontWeight={currentValue === value ? 'bold' : undefined}
                   >
-                    {translate(`constants.userRelationshipStatuses.${value}`)}
+                    {t(UserRelationshipStatusMessages[value])}
                   </Text>
                 </Actionsheet.Item>
               );

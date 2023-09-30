@@ -50,11 +50,11 @@ export const EditInfoLanguagesScreen = () => {
 
       <View mt={4} mb={4} px={4}>
         {/* <FormControlInput
-          label={translate('Gender')}
+          label={t('Gender')}
           value={formik.values.gender}
           onChange={formik.handleChange('nickname')}
-          placeholder={translate('Please enter your w', {
-            w: translate('nickname'),
+          placeholder={t('Please enter your w', {
+            w: t('nickname'),
           })}
           error={formik.errors.gender}
         /> */}

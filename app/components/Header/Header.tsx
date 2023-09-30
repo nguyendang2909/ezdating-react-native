@@ -1,4 +1,6 @@
 import { Text, View } from '@gluestack-ui/themed';
+import { useTranslate } from 'app/hooks/useFormatMessage';
+import { TxKey } from 'app/types';
 import React, { ReactElement } from 'react';
 import {
   StyleProp,
@@ -15,7 +17,7 @@ import {
   useSafeAreaInsetsStyle,
 } from '../../utils/useSafeAreaInsetsStyle';
 import { Icon, IconTypes } from '../Icon';
-import { TextProps } from '../Text';
+// import { TextProps } from '../Text';
 
 export interface HeaderProps {
   /**
@@ -47,16 +49,16 @@ export interface HeaderProps {
   /**
    * Title text to display if not using `tx` or nested components.
    */
-  title?: TextProps['text'];
+  title?: string;
   /**
    * Title text which is looked up via i18n.
    */
-  titleTx?: TextProps['tx'];
-  /**
-   * Optional options to pass to i18n. Useful for interpolation
-   * as well as explicitly setting locale or translation fallbacks.
-   */
-  titleTxOptions?: TextProps['txOptions'];
+  titleTx?: TxKey;
+  // /**
+  //  * Optional options to pass to i18n. Useful for interpolation
+  //  * as well as explicitly setting locale or translation fallbacks.
+  //  */
+  // titleTxOptions?: TextProps['txOptions'];
   /**
    * Icon that should appear on the left.
    * Can be used with `onLeftPress`.
@@ -70,22 +72,22 @@ export interface HeaderProps {
    * Left action text to display if not using `leftTx`.
    * Can be used with `onLeftPress`. Overrides `leftIcon`.
    */
-  leftText?: TextProps['text'];
+  leftText?: string;
   /**
    * Left action text text which is looked up via i18n.
    * Can be used with `onLeftPress`. Overrides `leftIcon`.
    */
-  leftTx?: TextProps['tx'];
+  leftTx?: TxKey;
   /**
    * Left action custom ReactElement if the built in action props don't suffice.
    * Overrides `leftIcon`, `leftTx` and `leftText`.
    */
   LeftActionComponent?: ReactElement;
-  /**
-   * Optional options to pass to i18n. Useful for interpolation
-   * as well as explicitly setting locale or translation fallbacks.
-   */
-  leftTxOptions?: TextProps['txOptions'];
+  // /**
+  //  * Optional options to pass to i18n. Useful for interpolation
+  //  * as well as explicitly setting locale or translation fallbacks.
+  //  */
+  // leftTxOptions?: TextProps['txOptions'];
   /**
    * What happens when you press the left icon or text action.
    */
@@ -103,22 +105,22 @@ export interface HeaderProps {
    * Right action text to display if not using `rightTx`.
    * Can be used with `onRightPress`. Overrides `rightIcon`.
    */
-  rightText?: TextProps['text'];
+  rightText?: string;
   /**
    * Right action text text which is looked up via i18n.
    * Can be used with `onRightPress`. Overrides `rightIcon`.
    */
-  rightTx?: TextProps['tx'];
+  rightTx?: TxKey;
   /**
    * Right action custom ReactElement if the built in action props don't suffice.
    * Overrides `rightIcon`, `rightTx` and `rightText`.
    */
   RightActionComponent?: ReactElement;
-  /**
-   * Optional options to pass to i18n. Useful for interpolation
-   * as well as explicitly setting locale or translation fallbacks.
-   */
-  rightTxOptions?: TextProps['txOptions'];
+  // /**
+  //  * Optional options to pass to i18n. Useful for interpolation
+  //  * as well as explicitly setting locale or translation fallbacks.
+  //  */
+  // rightTxOptions?: TextProps['txOptions'];
   /**
    * What happens when you press the right icon or text action.
    */
@@ -133,9 +135,9 @@ interface HeaderActionProps {
   backgroundColor?: string;
   icon?: IconTypes;
   iconColor?: string;
-  text?: TextProps['text'];
-  tx?: TextProps['tx'];
-  txOptions?: TextProps['txOptions'];
+  text?: string;
+  tx?: TxKey;
+  // txOptions?: TextProps['txOptions'];
   onPress?: TouchableOpacityProps['onPress'];
   ActionComponent?: ReactElement;
 }
@@ -154,7 +156,7 @@ export function Header(props: HeaderProps) {
     leftIconColor,
     leftText,
     leftTx,
-    leftTxOptions,
+    // leftTxOptions,
     onLeftPress,
     onRightPress,
     RightActionComponent,
@@ -162,21 +164,23 @@ export function Header(props: HeaderProps) {
     rightIconColor,
     rightText,
     rightTx,
-    rightTxOptions,
+    // rightTxOptions,
     safeAreaEdges = ['top'],
     title,
     titleMode = 'center',
     titleTx,
-    titleTxOptions,
+    // titleTxOptions,
     titleContainerStyle: $titleContainerStyleOverride,
     style: $styleOverride,
     titleStyle: $titleStyleOverride,
     containerStyle: $containerStyleOverride,
   } = props;
 
+  const t = useTranslate();
+
   const $containerInsets = useSafeAreaInsetsStyle(safeAreaEdges);
 
-  const titleContent = titleTx ? translate(titleTx, titleTxOptions) : title;
+  const titleContent = titleTx ? translate(titleTx) : title;
 
   return (
     <View
@@ -196,7 +200,7 @@ export function Header(props: HeaderProps) {
           icon={leftIcon}
           iconColor={leftIconColor}
           onPress={onLeftPress}
-          txOptions={leftTxOptions}
+          // txOptions={leftTxOptions}
           backgroundColor={backgroundColor}
           ActionComponent={LeftActionComponent}
         />
@@ -226,7 +230,7 @@ export function Header(props: HeaderProps) {
           icon={rightIcon}
           iconColor={rightIconColor}
           onPress={onRightPress}
-          txOptions={rightTxOptions}
+          // txOptions={rightTxOptions}
           backgroundColor={backgroundColor}
           ActionComponent={RightActionComponent}
         />
@@ -241,13 +245,15 @@ function HeaderAction(props: HeaderActionProps) {
     icon,
     text,
     tx,
-    txOptions,
+    // txOptions,
     onPress,
     ActionComponent,
     iconColor,
   } = props;
 
-  const content = tx ? translate(tx, txOptions) : text;
+  const t = useTranslate();
+
+  const content = tx ? t(tx) : text;
 
   if (ActionComponent) return ActionComponent;
 

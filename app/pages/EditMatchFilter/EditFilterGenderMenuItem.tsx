@@ -8,8 +8,8 @@ import {
 } from '@gluestack-ui/themed';
 import { MaterialCommunityIcons } from 'app/components/Icon/Lib';
 import { MenuItem } from 'app/components/Menu/MenuItem';
-import { UserGender, UserGenders } from 'app/constants';
-import { translate } from 'app/i18n';
+import { UserGender, UserGenderMessages, UserGenders } from 'app/constants';
+import { useTranslate } from 'app/hooks/useFormatMessage';
 import React, { useState } from 'react';
 
 type FCProps = {
@@ -21,8 +21,9 @@ export const EditFilterGenderMenuItem: React.FC<FCProps> = ({
   value,
   onChange,
 }) => {
-  const [isInit, setInit] = useState<boolean>(false);
+  const t = useTranslate();
 
+  const [isInit, setInit] = useState<boolean>(false);
   const [showActionsheet, setShowActionsheet] = React.useState(false);
   const handleClose = () => setShowActionsheet(!showActionsheet);
 
@@ -50,7 +51,7 @@ export const EditFilterGenderMenuItem: React.FC<FCProps> = ({
           <ActionsheetContent>
             <Box mb={16}>
               <Heading size="sm" textAlign="center">
-                {translate('Show me')}
+                {t('Show me')}
               </Heading>
             </Box>
             {Object.values(UserGenders).map(e => {
@@ -63,7 +64,7 @@ export const EditFilterGenderMenuItem: React.FC<FCProps> = ({
                   }}
                 >
                   <Text fontWeight={e === value ? 'bold' : undefined}>
-                    {translate(`constants.userGenders.${e}`)}
+                    {t(UserGenderMessages[e])}
                   </Text>
                 </ActionsheetItem>
               );

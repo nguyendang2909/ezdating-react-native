@@ -165,10 +165,29 @@ export const SOCKET_TO_CLIENT_EVENTS = {
 } as const;
 
 // Const
-export const UserRelationshipMessages: Record<UserRelationshipGoal, TxKey> = {
-  [UserRelationshipGoals.boyGirlFriend]: 'Boy/Girl friend',
-  [UserRelationshipGoals.getMarried]: 'Get married',
-  [UserRelationshipGoals.makeFriends]: 'Make friends',
-  [UserRelationshipGoals.oneNightStand]: 'One-Night stand',
-  [UserRelationshipGoals.sexPartner]: 'Sex partner',
+export const UserRelationshipGoalMessages: Record<UserRelationshipGoal, TxKey> =
+  {
+    [UserRelationshipGoals.boyGirlFriend]: 'Boy/Girl friend',
+    [UserRelationshipGoals.getMarried]: 'Get married',
+    [UserRelationshipGoals.makeFriends]: 'Make friends',
+    [UserRelationshipGoals.oneNightStand]: 'One-Night stand',
+    [UserRelationshipGoals.sexPartner]: 'Sex partner',
+  };
+
+export const UserGenderMessages: Record<UserGender, TxKey> = {
+  [UserGenders.male]: 'Male',
+  [UserGenders.female]: 'Female',
+};
+
+export const UserRelationshipStatusMessages: Record<
+  UserRelationshipStatus,
+  TxKey
+> = {
+  [UserRelationshipStatuses.divorcedWithChildren]: 'Divorced with children',
+  [UserRelationshipStatuses.divorcedWithoutChildren]:
+    'Divorced without children',
+  [UserRelationshipStatuses.haveBoyGirlFriend]: 'Have boy/girl friend',
+  [UserRelationshipStatuses.married]: 'Married',
+  [UserRelationshipStatuses.single]: 'Single',
+  [UserRelationshipStatuses.singleMomDad]: 'Single mom/dad',
 };

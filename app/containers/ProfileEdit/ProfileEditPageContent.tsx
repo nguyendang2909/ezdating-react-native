@@ -1,4 +1,4 @@
-import { translate } from 'app/i18n';
+import { useTranslate } from 'app/hooks/useFormatMessage';
 import { usersApi } from 'app/services/api/users.api';
 import { profileNotificationsService } from 'app/services/notifications/profile-notifications.service';
 import { appActions } from 'app/store/app.store';
@@ -23,6 +23,7 @@ import { ProfileShowMyDistanceMenuItem } from './ProfileEditShowDistanceMenuItem
 import { ProfileEditWeightMenuItem } from './ProfileEditWeight';
 
 export const ProfileEditPageContent: React.FC = () => {
+  const t = useTranslate();
   const dispatch = useDispatch();
 
   const handleEditProfile = async (payload: ApiRequest.UpdateProfile) => {
@@ -50,7 +51,7 @@ export const ProfileEditPageContent: React.FC = () => {
       <View mt={4}>
         <View mx={4} mb={2}>
           <Text bold={true} textTransform="uppercase">
-            {translate('Profile')}
+            {t('Profile')}
           </Text>
         </View>
         <View backgroundColor={colors.background}>
@@ -77,7 +78,7 @@ export const ProfileEditPageContent: React.FC = () => {
       <View mt={4}>
         <View mx={4} mb={2}>
           <Text bold={true} textTransform="uppercase">
-            {translate('About me')}
+            {t('About me')}
           </Text>
         </View>
         <View backgroundColor={colors.background}>
@@ -88,7 +89,7 @@ export const ProfileEditPageContent: React.FC = () => {
       <View mt={4}>
         <View mx={4} mb={2}>
           <Text bold={true} textTransform="uppercase">
-            {translate('Relationship')}
+            {t('Relationship')}
           </Text>
         </View>
         <View backgroundColor={colors.background}>
@@ -103,7 +104,7 @@ export const ProfileEditPageContent: React.FC = () => {
       <View mt={4}>
         <View mx={4} mb={2}>
           <Text bold={true} textTransform="uppercase">
-            {translate('Languages')}
+            {t('Languages')}
           </Text>
         </View>
         <View backgroundColor={colors.background}>
@@ -114,7 +115,7 @@ export const ProfileEditPageContent: React.FC = () => {
       <View mt={4}>
         <View mx={4} mb={2}>
           <Text bold={true} textTransform="uppercase">
-            {translate('Job title')}
+            {t('Job title')}
           </Text>
         </View>
         <View backgroundColor={colors.background}>
@@ -125,7 +126,7 @@ export const ProfileEditPageContent: React.FC = () => {
       <View mt={4}>
         <View mx={4} mb={2}>
           <Text bold={true} textTransform="uppercase">
-            {translate('Control your profile')}
+            {t('Control your profile')}
           </Text>
         </View>
         <View backgroundColor={colors.background}>

@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import { HeaderSave } from 'app/components/Header/HeaderSave';
 import { useAppSelector } from 'app/hooks';
-import { translate } from 'app/i18n';
+import { useTranslate } from 'app/hooks/useFormatMessage';
 import { api } from 'app/services/api';
 import { useFormik } from 'formik';
 import { useToast, View } from 'native-base';
@@ -9,11 +9,12 @@ import React from 'react';
 import * as Yup from 'yup';
 
 export const EditInfoWeightScreen = () => {
+  const t = useTranslate();
   const { goBack } = useNavigation();
 
   const toast = useToast();
 
-  const value = useAppSelector(state => state.app.profile.weight);
+  const value = useAppSelector(state => state.app.profile?.weight);
 
   const [submitUpdateProfile] = api.useUpdateProfileMutation();
 
@@ -23,9 +24,7 @@ export const EditInfoWeightScreen = () => {
       weight: value || 50,
     },
     validationSchema: Yup.object().shape({
-      weight: Yup.number().required(
-        translate('Please enter your w!', { w: translate('weight') }),
-      ),
+      weight: Yup.number().required(t('Please enter your weight.')),
     }),
 
     onSubmit: async values => {
@@ -33,7 +32,7 @@ export const EditInfoWeightScreen = () => {
         await submitUpdateProfile(values);
       } catch (err) {
         toast.show({
-          title: translate('Update w failed!', { w: translate('weight') }),
+          title: t('Update failed, please try again.'),
           placement: 'top',
         });
       }
@@ -52,11 +51,11 @@ export const EditInfoWeightScreen = () => {
 
       <View mt={4} mb={4} px={4}>
         {/* <FormControlInput
-          label={translate('Gender')}
+          label={t('Gender')}
           value={formik.values.gender}
           onChange={formik.handleChange('nickname')}
-          placeholder={translate('Please enter your w', {
-            w: translate('nickname'),
+          placeholder={t('Please enter your w', {
+            w: t('nickname'),
           })}
           error={formik.errors.gender}
         /> */}

@@ -251,4 +251,40 @@ export const messages = defineMessages({
     defaultMessage: 'Please choose your desire relation.',
     id: 'e0eab0b21d',
   },
+  'Divorced with children': {
+    defaultMessage: 'Divorced with children',
+    id: '45424cc579',
+  },
+  Single: {
+    defaultMessage: 'Single',
+    id: '0dcc20df6b',
+  },
+  'Have boy/girl friend': {
+    defaultMessage: 'Have boy/girl friend',
+    id: '4fd7bae353',
+  },
+  Married: {
+    defaultMessage: 'Married',
+    id: '53705721d6',
+  },
+  'Divorced without children': {
+    defaultMessage: 'Divorced without children',
+    id: '58b1d65df9',
+  },
+  'Single mom/dad': {
+    defaultMessage: 'Single mom/dad',
+    id: '312ee946c0',
+  },
+  'Remove the photo': {
+    defaultMessage: 'Remove the photo',
+    id: '140d14a12e',
+  },
+  'Upload the photo': {
+    defaultMessage: 'Upload the photo',
+    id: '115a5f8beb',
+  },
+  'My height is': {
+    defaultMessage: 'My height is',
+    id: 'e02a86d6f6',
+  },
 });

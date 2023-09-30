@@ -1,10 +1,11 @@
 import { useNavigation } from '@react-navigation/native';
-import { translate } from 'app/i18n';
+import { useTranslate } from 'app/hooks/useFormatMessage';
 import { Center, Icon, Pressable, Text, View, VStack } from 'native-base';
 import React from 'react';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 export const ProfileLikedYouCard: React.FC = () => {
+  const t = useTranslate();
   const { navigate } = useNavigation();
 
   const onPress = () => {
@@ -34,7 +35,7 @@ export const ProfileLikedYouCard: React.FC = () => {
                   </View>
                 </Center>
                 <Center>
-                  <Text>{translate('Liked you')}</Text>
+                  <Text>{t('Liked you')}</Text>
                 </Center>
               </VStack>
             </View>
