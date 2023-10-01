@@ -6,13 +6,18 @@ import {
   KeyboardAvoidingView,
 } from '@gluestack-ui/themed';
 import { useAppSelector } from 'app/hooks';
-import { messagesApi } from 'app/services/api/messages.api';
-import { messageActions } from 'app/store/messages.store';
+import { useGetMessages } from 'app/hooks/useGetMessages';
 import { socketStoreActions } from 'app/store/socket.store';
 import { Entity } from 'app/types/entity.type';
+import { flatListUtil } from 'app/utils/flat-list.util';
 import _ from 'lodash';
+import { Spinner } from 'native-base';
 import React, { useCallback, useEffect } from 'react';
-import { Platform } from 'react-native';
+import {
+  NativeScrollEvent,
+  NativeSyntheticEvent,
+  Platform,
+} from 'react-native';
 import { GiftedChat, IChatMessage, User } from 'react-native-gifted-chat';
 import { useDispatch } from 'react-redux';
 import { v4 as uuidV4 } from 'uuid';
@@ -36,6 +41,8 @@ export const MessagesChat: React.FC<FCProps> = ({
       state.messages.data ? state.messages.data[matchId] : [],
     ) || [];
 
+  const { fetchNext, isFetchingNext } = useGetMessages({ matchId });
+
   const lastMessageId = _.first(messages)?._id as string;
 
   useEffect(() => {
@@ -48,31 +55,6 @@ export const MessagesChat: React.FC<FCProps> = ({
       );
     }
   }, [conversation.read, dispatch, lastMessageId, matchId]);
-
-  const currenUserId = useAppSelector(s => s.app.profile?._id) || '';
-
-  const fetchFirstTime = useCallback(async () => {
-    try {
-      console.log(22233);
-      const fetchData = await messagesApi.getMany({
-        params: { matchId },
-      });
-
-      //   if (fetchData.pagination?._next === null) {
-      //     setReachedEnd(true);
-      //   } else {
-      //     setReachedEnd(false);
-      //   }
-
-      if (fetchData.data) {
-        dispatch(messageActions.addManyNext(fetchData));
-      }
-    } catch (err) {}
-  }, [dispatch, matchId]);
-
-  // useEffect(() => {
-  //   fetchFirstTime();
-  // }, []);
 
   const onSend = useCallback(
     (messages: IChatMessage[] = []) => {
@@ -93,61 +75,14 @@ export const MessagesChat: React.FC<FCProps> = ({
     [dispatch, matchId],
   );
 
-  const onEndReached = async () => {
-    try {
-      const fetchData = await messagesApi.getMany({
-        params: {
-          matchId,
-        },
-        data: messages,
-      });
-
-      //   if (fetchData.pagination?._next === null) {
-      //     setReachedEnd(true);
-      //   } else {
-      //     setReachedEnd(false);
-      //   }
-
-      if (fetchData.data) {
-        dispatch(messageActions.addManyFirst(fetchData));
-      }
-    } catch (err) {}
-  };
-
   return (
     <>
-      {/* <GiftedChat
-        renderSystemMessage={() => {
-          return <Box />;
-        }}
-        //   renderMessage={() => {
-        //     return <Box />;
-        //   }}
-        messages={messages}
-        //   messages={messages.map(m => {
-        //     return {
-        //       ...m,
-        //       user: {
-        //         _id: 1222,
-        //       },
-        //     };
-        //   })}
-        onSend={messages => onSend(messages)}
-        user={{
-          _id: user._id,
-          name: 'asd',
-          avatar:
-            'https://upload.wikimedia.org/wikipedia/commons/e/e9/Felis_silvestris_silvestris_small_gradual_decrease_of_quality.png',
-        }}
-        showUserAvatar={true}
-        alwaysShowSend={true}
-        // isLoadingEarlier={true}
-        // listViewProps={{
-        //   onEndReached,
-        //   onEndReachedThreshold: 1000,
-        // }}
-      /> */}
       <GiftedChat
+        isLoadingEarlier={true}
+        loadEarlier={isFetchingNext}
+        renderLoadEarlier={() => {
+          return <Spinner />;
+        }}
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         messages={messages}
@@ -158,6 +93,15 @@ export const MessagesChat: React.FC<FCProps> = ({
         showUserAvatar={true}
         alwaysShowSend={true}
         renderAvatarOnTop
+        listViewProps={{
+          initialNumToRender: 20,
+          scrollEventThrottle: 400,
+          onScroll: (e: NativeSyntheticEvent<NativeScrollEvent>) => {
+            if (flatListUtil.isCloseToTop(e)) {
+              fetchNext();
+            }
+          },
+        }}
         renderAvatar={props => {
           const { currentMessage } = props;
 

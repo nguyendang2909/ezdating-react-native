@@ -44,6 +44,18 @@ import { TxKey } from './types';
 //   Private = 'private',
 // }
 
+export const QUERY_OPTIONS = {
+  MESSAGES: {
+    KEY: {
+      PRIMARY: 'messages',
+      SECONDARY: {
+        NEWEST: 'newest',
+        NEXT: 'next',
+      },
+    },
+  },
+};
+
 export const QUERY_KEYS = {
   NEARBY_USERS: {
     KEY: 'nearbyUsers',

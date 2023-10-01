@@ -14,7 +14,7 @@ export const messageSlice = createSlice({
   name: 'message',
   initialState,
   reducers: {
-    addManyFirst: (state, action: PayloadAction<ApiResponse.MessagesData>) => {
+    addManyNewest: (state, action: PayloadAction<ApiResponse.MessagesData>) => {
       const { payload } = action;
 
       if (!payload._matchId || !payload.data) {

@@ -1,4 +1,3 @@
-import { Entity } from 'app/types/entity.type';
 import { Buffer } from 'buffer';
 import _ from 'lodash';
 
@@ -11,9 +10,7 @@ export class CommonApi {
     return this.encodeFromString(JSON.stringify(value));
   }
 
-  protected getCursor<T extends Entity.BaseEntity[]>(
-    data: T,
-  ): string | undefined {
+  protected getCursor<T extends []>(data: T): string | undefined {
     if (!data?.length) {
       return undefined;
     }

@@ -7,20 +7,9 @@ import { AppStore } from 'app/types/app-store.type';
 import { api } from './api';
 
 class MessagesApi extends CommonApi {
-  async getMany({
-    params,
-    data,
-  }: {
-    params: ApiRequest.FindManyMessages;
-    data?: AppStore.ChatMessage[];
-  }) {
-    const _next = this.getCursor(data);
-
+  async getMany({ params }: { params?: ApiRequest.FindManyMessages }) {
     const response = await api.get<ApiResponse.MessagesData>(API_URL.messages, {
-      params: {
-        ...params,
-        ...(_next ? { _next } : {}),
-      },
+      params,
     });
 
     return response.data;
