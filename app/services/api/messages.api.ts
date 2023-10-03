@@ -7,7 +7,7 @@ import { AppStore } from 'app/types/app-store.type';
 import { api } from './api';
 
 class MessagesApi extends CommonApi {
-  async getMany({ params }: { params?: ApiRequest.FindManyMessages }) {
+  async getMany(params: ApiRequest.FindManyMessages) {
     const response = await api.get<ApiResponse.MessagesData>(API_URL.messages, {
       params,
     });

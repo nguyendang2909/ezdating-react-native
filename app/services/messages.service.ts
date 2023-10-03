@@ -9,7 +9,7 @@ class MessagesService extends CommonService {
     return messages;
   }
 
-  formatOne(entity: Entity.Message): IMessage {
+  formatOne(entity: Entity.Message, options?: Partial<IMessage>): IMessage {
     const { createdAt, text, ...data } = entity;
 
     return {
@@ -19,6 +19,7 @@ class MessagesService extends CommonService {
       createdAt: createdAt
         ? new Date(createdAt).getTime()
         : new Date().getTime(),
+      ...options,
     };
   }
 }

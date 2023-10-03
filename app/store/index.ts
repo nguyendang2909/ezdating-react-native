@@ -1,6 +1,6 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
-import { MMKV } from 'react-native-mmkv';
 import {
   FLUSH,
   PAUSE,
@@ -10,7 +10,6 @@ import {
   PURGE,
   REGISTER,
   REHYDRATE,
-  Storage,
 } from 'redux-persist';
 import createSagaMiddleware from 'redux-saga';
 
@@ -44,27 +43,23 @@ const reducers = combineReducers({
   messages: messageReducer,
 });
 
-const storage = new MMKV();
-export const reduxStorage: Storage = {
-  setItem: (key, value) => {
-    storage.set(key, value);
-    return Promise.resolve(true);
-  },
-  getItem: key => {
-    const value = storage.getString(key);
-    return Promise.resolve(value);
-  },
-  removeItem: key => {
-    storage.delete(key);
-    return Promise.resolve();
-  },
-};
-
 const persistedReducer = persistReducer(
   {
     key: 'root',
-    storage: reduxStorage,
-    whitelist: ['theme', 'auth', 'app'],
+    storage: AsyncStorage,
+    whitelist: [
+      'theme',
+      'auth',
+      'app',
+      'conversation',
+      'match',
+      'user',
+      'like',
+      'likedMe',
+      'nearbyUser',
+      'swipeUser',
+      'messages',
+    ],
   },
   reducers,
 );

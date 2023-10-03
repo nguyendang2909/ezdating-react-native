@@ -11,20 +11,29 @@ export declare namespace AppStore {
     accessToken?: string;
     refreshToken?: string;
     isLogged?: boolean;
-    profile?: Partial<Entity.User>;
+    profile: Partial<Entity.User>;
     osPermissions?: {
       locationService?: AuthorizationResult;
+    };
+    socket: {
+      connectedAt?: string;
     };
   };
 
   type ConversationState = {
-    data?: Entity.Match[];
+    data: Entity.Match[];
   };
 
   type ChatMessage = IMessage & { uuid?: string };
 
   type MessageState = {
-    data?: Record<string, ChatMessage[] | undefined>;
+    data: Record<string, ChatMessage[] | undefined>;
+    info: Record<
+      string,
+      {
+        lastRefreshAt?: string;
+      }
+    >;
   };
 
   type MatchState = {

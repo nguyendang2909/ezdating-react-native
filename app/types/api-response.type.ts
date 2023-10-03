@@ -2,10 +2,8 @@ import { Entity } from './entity.type';
 
 export declare namespace ApiResponse {
   type Pagination = {
-    cursors?: {
-      next?: string | null;
-      prev?: string | null;
-    };
+    next?: string | null;
+    prev?: string | null;
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -18,10 +16,7 @@ export declare namespace ApiResponse {
 
   type PaginatedResponse<T> = {
     data?: T[];
-    pagination?: {
-      _next?: null | string;
-      _prev?: null | string;
-    };
+    pagination?: Pagination;
     type?: string;
   };
 

@@ -3,153 +3,108 @@ import { messagesService } from 'app/services/messages.service';
 import { ApiResponse } from 'app/types/api-response.type';
 import { AppStore } from 'app/types/app-store.type';
 import { Entity } from 'app/types/entity.type';
+import _ from 'lodash';
+import moment from 'moment';
 
 import { appActions } from './app.store';
 
 const initialState: AppStore.MessageState = {
   data: {},
+  info: {},
 };
 
 export const messageSlice = createSlice({
   name: 'message',
   initialState,
   reducers: {
-    addMany: (state, action: PayloadAction<ApiResponse.MessagesData>) => {
-      const { payload } = action;
-
-      if (!payload._matchId || !payload.data) {
+    addMany: (
+      state,
+      {
+        payload: { _matchId: matchId, data: payloadData },
+      }: PayloadAction<ApiResponse.MessagesData>,
+    ) => {
+      if (!matchId || !payloadData) {
         return;
       }
 
-      const messages = messagesService.formatMany(payload.data);
+      const stateInfo = state.info[matchId];
 
-      if (!state.data) {
-        state.data = {
-          [payload._matchId]: messages,
+      if (!stateInfo) {
+        state.info[matchId] = {
+          lastRefreshAt: moment().toDate().toISOString(),
         };
+      } else {
+        stateInfo.lastRefreshAt = moment().toDate().toISOString();
+      }
+
+      console.log(stateInfo.lastRefreshAt);
+
+      const messages = messagesService.formatMany(payloadData);
+      const stateData = state.data[matchId];
+      if (!stateData?.length) {
+        state.data[matchId] = messages;
         return;
       }
-
-      if (!state.data[payload._matchId]?.length) {
-        state.data[payload._matchId] = messages;
-      }
-
-      // console.log(
-      //   _.chain([...messages])
-      //     .uniqBy('_id')
-      //     .orderBy('desc') as unknown as AppStore.ChatMessage[],
-      // );
-
-      // state.data[payload._matchId] = _.chain([
-      //   ...messages,
-      //   // ...state.data[payload._matchId],
-      // ])
-      //   // .uniqBy('_id')
-      //   .orderBy('desc') as unknown as AppStore.ChatMessage[];
+      state.data[matchId] = _.chain([...messages, ...stateData])
+        .uniqBy('_id')
+        .orderBy('desc')
+        .value();
     },
 
-    addManyNext(state, action: PayloadAction<ApiResponse.MessagesData>) {
-      const { payload } = action;
-
-      if (!payload._matchId || !payload.data) {
+    addManyNext(
+      state,
+      {
+        payload: { _matchId: matchId, data: payloadData },
+      }: PayloadAction<ApiResponse.MessagesData>,
+    ) {
+      if (!matchId || !payloadData) {
         return;
       }
-
-      const messages = messagesService.formatMany(payload.data);
-
-      if (!state.data) {
-        state.data = {
-          [payload._matchId]: messages,
-        };
-
-        return;
-      }
-
-      const oldMessages = state.data[payload._matchId];
-
+      const messages = messagesService.formatMany(payloadData);
+      const oldMessages = state.data[matchId];
       if (!oldMessages?.length) {
-        state.data[payload._matchId] = messages;
-
+        state.data[matchId] = messages;
         return;
       }
-
-      state.data[payload._matchId] = oldMessages.concat(messages);
+      state.data[matchId] = oldMessages.concat(messages);
     },
 
     receiveMsg: (state, action: PayloadAction<Entity.Message>) => {
       const { payload } = action;
       const matchId = payload._matchId;
-
       if (!matchId) {
         return;
       }
-
       const message = messagesService.formatOne(payload);
-
-      if (!state.data) {
-        state.data = {
-          [matchId]: [message],
-        };
-
-        return;
-      }
-
       const oldMessages = state.data[matchId];
-
       if (!oldMessages?.length) {
         state.data[matchId] = [message];
-
         return;
       }
-
       state.data[matchId] = [message].concat(oldMessages);
     },
 
-    sendMsg: (state, action: PayloadAction<Entity.Message>) => {
-      const { payload } = action;
+    sendMsg: (state, { payload }: PayloadAction<Entity.Message>) => {
       const matchId = payload._matchId;
-
       if (!matchId) {
         return;
       }
-
-      const message = messagesService.formatOne(payload);
-
-      if (!state.data) {
-        state.data = {
-          [matchId]: [message],
-        };
-
-        return;
-      }
-
+      const message = messagesService.formatOne(payload, { sent: false });
       const oldMessages = state.data[matchId];
-
       if (!oldMessages?.length) {
         state.data[matchId] = [message];
-
         return;
       }
-
       state.data[matchId] = [message].concat(oldMessages);
     },
 
     updateMsg: (state, action: PayloadAction<Entity.Message>) => {
       const { payload } = action;
-
       const { uuid, _matchId: matchId } = payload;
-
       if (!matchId || !uuid) {
         return;
       }
-
-      const message = messagesService.formatOne(payload);
-
-      if (!state.data) {
-        state.data = {
-          [matchId]: [message],
-        };
-      }
+      const message = messagesService.formatOne(payload, { sent: true });
 
       const oldMessages = state.data[matchId];
 
@@ -161,7 +116,7 @@ export const messageSlice = createSlice({
 
       for (let i = 0; i < oldMessages.length; i += 1) {
         if (uuid === oldMessages[i].uuid) {
-          (state.data[matchId] as AppStore.ChatMessage[])[i] = message;
+          oldMessages[i] = message;
 
           return;
         }
@@ -170,7 +125,8 @@ export const messageSlice = createSlice({
   },
   extraReducers: builder => {
     builder.addCase(appActions.logout, state => {
-      state.data = undefined;
+      state.data = {};
+      state.info = {};
     });
     // builder.addMatcher(
     //   api.endpoints.getNextConversations.matchFulfilled,

@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ApiResponse } from 'app/types/api-response.type';
 import { AppStore } from 'app/types/app-store.type';
 import { Entity } from 'app/types/entity.type';
+import moment from 'moment';
 import { AuthorizationResult } from 'react-native-geolocation-service';
 
 const initialState: AppStore.AppState = {
@@ -9,6 +10,7 @@ const initialState: AppStore.AppState = {
   refreshToken: undefined,
   profile: {},
   osPermissions: {},
+  socket: {},
 };
 
 export const appSlice = createSlice({
@@ -34,8 +36,8 @@ export const appSlice = createSlice({
     logout: state => {
       state.accessToken = undefined;
       state.refreshToken = undefined;
-      state.isLogged = false;
-      state.profile = undefined;
+      state.profile = {};
+      state.socket = {};
     },
     setOsLocationPermission: (
       state,
@@ -48,6 +50,9 @@ export const appSlice = createSlice({
           locationService: action.payload,
         };
       }
+    },
+    setSocketConnected: state => {
+      state.socket.connectedAt = moment().toDate().toISOString();
     },
   },
   extraReducers: _builder => {

@@ -1,3 +1,4 @@
+import { ApiResponse } from 'app/types/api-response.type';
 import { Buffer } from 'buffer';
 import _ from 'lodash';
 
@@ -47,4 +48,16 @@ export class CommonApi {
 
     return lastField ? this.encodeFromString(lastField) : undefined;
   }
+
+  handlePagination = (
+    pagination: ApiResponse.Pagination | undefined,
+    fn: (v: boolean) => void,
+  ) => {
+    if (pagination?.next) {
+      fn(false);
+      return;
+    }
+
+    fn(true);
+  };
 }

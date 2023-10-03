@@ -1,9 +1,5 @@
-import { useQuery } from '@tanstack/react-query';
-import { QUERY_OPTIONS } from 'app/constants';
 import { conversationsApi } from 'app/services/api/conversations.api';
 import { conversationActions } from 'app/store/conversations.store';
-import { ApiResponse } from 'app/types/api-response.type';
-import { Entity } from 'app/types/entity.type';
 import { useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -12,94 +8,76 @@ import { useAppSelector } from './useAppSelector';
 export const useGetConversations = () => {
   const dispatch = useDispatch();
 
-  const conversations = useAppSelector(state => state.conversation.data) || [];
+  const conversations = useAppSelector(state => state.conversation.data);
+  const conversationsLength = conversations.length;
 
-  const [nextCursor, setNextCursor] = useState<string>();
   const [isReachedEnd, setReachedEnd] = useState<boolean>(true);
+  const [isLoadingNewest, setLoadingNewest] = useState<boolean>(false);
+  const [isLoadingNext, setLoadingNext] = useState<boolean>(false);
+  const [isFetchedFirstTime, setFetchFirstTime] = useState<boolean>(false);
 
-  const fetchNewestQuery = useQuery({
-    queryKey: [
-      QUERY_OPTIONS.CONVERSATIONS.KEY.PRIMARY,
-      QUERY_OPTIONS.CONVERSATIONS.KEY.SECONDARY.NEWEST,
-    ],
-    queryFn: () => conversationsApi.getMany(),
-  });
+  const fetchFirst = useCallback(async () => {
+    setFetchFirstTime(true);
 
-  const fetchNextQuery = useQuery({
-    queryKey: [
-      QUERY_OPTIONS.MESSAGES.KEY.PRIMARY,
-      QUERY_OPTIONS.MESSAGES.KEY.SECONDARY.NEXT,
-    ],
-    queryFn: () =>
-      conversationsApi.getMany({
-        _next: nextCursor,
-      }),
-    enabled: !!nextCursor,
-  });
+    setLoadingNewest(true);
 
-  const {
-    isFetching: isFetchingNewest,
-    refetch: refetchNewest,
-    data: newestData,
-    isLoading: isLoadingNewest,
-  } = fetchNewestQuery;
+    try {
+      const { data, pagination } = await conversationsApi.getMany();
 
-  const {
-    isFetching: isFetchingNext,
-    data: nextData,
-    isLoading: isLoadingNext,
-  } = fetchNextQuery;
-
-  const addData = useCallback(
-    (data?: ApiResponse.PaginatedResponse<Entity.Match>) => {
-      if (data?.data) {
-        dispatch(conversationActions.addMany(data.data));
-
-        if (!data.pagination?._next) {
-          setReachedEnd(true);
-        } else {
-          setReachedEnd(false);
-        }
+      if (data) {
+        dispatch(conversationActions.addMany(data));
       }
-    },
-    [dispatch],
-  );
+
+      conversationsApi.handlePagination(pagination, setReachedEnd);
+    } catch (err) {
+    } finally {
+      setLoadingNewest(false);
+    }
+  }, [dispatch]);
 
   useEffect(() => {
-    console.log(333);
-    addData(newestData);
-  }, [addData, newestData]);
-
-  useEffect(() => {
-    addData(nextData);
-  }, [addData, nextData]);
+    if (!isFetchedFirstTime && !conversationsLength && !isLoadingNewest) {
+      fetchFirst();
+    }
+  }, [conversationsLength, fetchFirst, isFetchedFirstTime, isLoadingNewest]);
 
   const fetchNewest = async () => {
-    if (isFetchingNewest) {
+    if (isLoadingNewest) {
       return;
     }
 
-    await refetchNewest();
+    await fetchFirst();
   };
 
   const fetchNext = async () => {
     if (isReachedEnd) {
       return;
     }
-    if (isFetchingNext) {
+    if (isLoadingNext) {
       return;
     }
-
-    setNextCursor(conversationsApi.getCursor(conversations));
+    try {
+      const nextCursor = conversationsApi.getCursor(conversations);
+      const { data, pagination } = await conversationsApi.getMany({
+        _next: nextCursor,
+      });
+      if (data) {
+        dispatch(conversationActions.addMany(data));
+      }
+      conversationsApi.handlePagination(pagination, setReachedEnd);
+    } catch (err) {
+    } finally {
+      setLoadingNext(false);
+    }
   };
 
   return {
+    length: conversationsLength,
     data: conversations,
     fetchNewest,
     fetchNext,
-    isFetchingNewest,
-    isFetchingNext,
     isLoadingNewest,
     isLoadingNext,
+    isFetchedFirstTime,
   };
 };

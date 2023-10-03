@@ -12,6 +12,7 @@ import { eventChannel } from 'redux-saga';
 import { ActionPattern, call, put, select, take } from 'redux-saga/effects';
 import { io, Socket } from 'socket.io-client';
 
+import { appActions } from './app.store';
 import { conversationActions } from './conversations.store';
 import { messageActions } from './messages.store';
 
@@ -42,6 +43,9 @@ export function* initializeWebSocket() {
         const { type, data } = yield take(socketChannel);
 
         switch (type) {
+          case 'connect':
+            yield put(appActions.setSocketConnected());
+            break;
           case SOCKET_TO_CLIENT_EVENTS.NEW_MESSAGE:
             yield put(messageActions.receiveMsg(data));
             yield put(
@@ -66,6 +70,7 @@ function createSocketChannel() {
   return eventChannel(emit => {
     socket.on('connect', () => {
       console.log('socket connected', socket.connected);
+      emit({ type: 'connect' });
     });
 
     socket.on('disconnect', () => {
@@ -127,7 +132,7 @@ export const socketActionTypes = {
 export function* sendMessage(data: PayloadAction<SocketRequest.SendMessage>) {
   const { payload } = data;
 
-  // socket.emit(SOCKET_TO_SERVER_EVENTS.SEND_MESSAGE, payload);
+  socket.emit(SOCKET_TO_SERVER_EVENTS.SEND_MESSAGE, payload);
 
   const currentUserId: string = yield select(state => state.app.profile._id);
 

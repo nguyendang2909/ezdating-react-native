@@ -1,7 +1,6 @@
-import { useQuery } from '@tanstack/react-query';
-import { QUERY_OPTIONS } from 'app/constants';
 import { messagesApi } from 'app/services/api/messages.api';
 import { messageActions } from 'app/store/messages.store';
+import moment from 'moment';
 import { useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -10,111 +9,101 @@ import { useAppSelector } from './useAppSelector';
 export const useGetMessages = ({ matchId }: { matchId: string }) => {
   const dispatch = useDispatch();
 
-  const messages = useAppSelector(state =>
-    state.messages.data ? state.messages.data[matchId] : [],
-  );
+  const messages = useAppSelector(state => state.messages.data[matchId]);
+  const messagesLength = messages?.length || 0;
 
-  const [nextCursor, setNextCursor] = useState<string>();
   const [isReachedEnd, setReachedEnd] = useState<boolean>(true);
+  const [isLoadingNewest, setLoadingNewest] = useState<boolean>(false);
+  const [isLoadingNext, setLoadingNext] = useState<boolean>(false);
+  const [isFetchedFirstTime, setFetchedFirstTime] = useState<boolean>(false);
+  const lastRefreshAt = useAppSelector(
+    s => s.messages.info[matchId]?.lastRefreshAt,
+  );
+  const lastConnectedSocket = useAppSelector(s => s.app.socket.connectedAt);
 
-  const fetchNewestQuery = useQuery({
-    queryKey: [
-      QUERY_OPTIONS.MESSAGES.KEY.PRIMARY,
-      matchId,
-      QUERY_OPTIONS.MESSAGES.KEY.SECONDARY.NEWEST,
-    ],
-    queryFn: () =>
-      messagesApi.getMany({
-        params: {
-          matchId: matchId || '',
-        },
-      }),
-    staleTime: Infinity,
-    enabled: !!matchId,
-  });
+  const fetchFirst = useCallback(async () => {
+    setFetchedFirstTime(true);
 
-  const fetchNextQuery = useQuery({
-    queryKey: [
-      QUERY_OPTIONS.MESSAGES.KEY.PRIMARY,
-      matchId,
-      QUERY_OPTIONS.MESSAGES.KEY.SECONDARY.NEXT,
-    ],
-    queryFn: () =>
-      messagesApi.getMany({
-        params: {
-          matchId: matchId || '',
-          _next: nextCursor,
-        },
-      }),
-    staleTime: Infinity,
-    enabled: !!matchId && !!nextCursor,
-  });
+    setLoadingNewest(true);
 
-  const {
-    isFetching: isFetchingNewest,
-    refetch: refetchNewest,
-    data: newestData,
-    isLoading: isLoadingNewest,
-  } = fetchNewestQuery;
+    try {
+      const data = await messagesApi.getMany({
+        matchId,
+      });
+      // console.log(data);
 
-  const {
-    isFetching: isFetchingNext,
-    refetch: refetchNext,
-    data: nextData,
-    isLoading: isLoadingNext,
-  } = fetchNextQuery;
+      dispatch(messageActions.addMany(data));
+
+      messagesApi.handlePagination(data.pagination, setReachedEnd);
+    } catch (err) {
+    } finally {
+      setLoadingNewest(false);
+    }
+  }, [dispatch, matchId]);
 
   useEffect(() => {
     console.log(111);
-    if (newestData) {
-      dispatch(messageActions.addMany(newestData));
-
-      if (!newestData.pagination?._next) {
-        setReachedEnd(true);
-      } else {
-        setReachedEnd(false);
-      }
+    if (
+      !isFetchedFirstTime &&
+      !isLoadingNewest &&
+      (!messagesLength ||
+        !lastRefreshAt ||
+        moment(lastConnectedSocket).isAfter(moment(lastRefreshAt)))
+    ) {
+      fetchFirst();
     }
-  }, [dispatch, newestData]);
+  }, [
+    fetchFirst,
+    isFetchedFirstTime,
+    isLoadingNewest,
+    lastConnectedSocket,
+    lastRefreshAt,
+    messagesLength,
+  ]);
 
-  useEffect(() => {
-    if (nextData) {
-      dispatch(messageActions.addManyNext(nextData));
-
-      if (!nextData.pagination?._next) {
-        setReachedEnd(true);
-      } else {
-        setReachedEnd(false);
-      }
-    }
-  }, [dispatch, nextData]);
-
-  const fetchNewest = useCallback(async () => {
-    if (isFetchingNewest) {
+  const fetchNewest = async () => {
+    if (isLoadingNewest) {
       return;
     }
 
-    await refetchNewest();
-  }, [isFetchingNewest, refetchNewest]);
+    await fetchFirst();
+  };
 
-  const fetchNext = useCallback(async () => {
+  const fetchNext = async () => {
     if (isReachedEnd) {
       return;
     }
-    if (isFetchingNext) {
+
+    if (isLoadingNext) {
       return;
     }
 
-    setNextCursor(messagesApi.getCursor(messages));
-  }, [isFetchingNext, isReachedEnd, messages]);
+    try {
+      const nextCursor = messagesApi.getCursor(messages);
+
+      const data = await messagesApi.getMany({
+        matchId,
+        _next: nextCursor,
+      });
+
+      if (data) {
+        dispatch(messageActions.addMany(data));
+
+        messagesApi.handlePagination(data.pagination, setReachedEnd);
+      }
+    } catch (err) {
+    } finally {
+      setLoadingNext(false);
+    }
+  };
 
   return {
     data: messages,
     fetchNewest,
     fetchNext,
-    isFetchingNewest,
-    isFetchingNext,
     isLoadingNewest,
     isLoadingNext,
+    isFetchedFirstTime,
+    length: messagesLength,
   };
 };

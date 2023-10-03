@@ -1,4 +1,4 @@
-import { Box, ScrollView } from '@gluestack-ui/themed';
+import { Box, ScrollView, Text, View } from '@gluestack-ui/themed';
 import { useGetConversations } from 'app/hooks/useGetConversations';
 import { flatListUtil } from 'app/utils/flat-list.util';
 import React from 'react';
@@ -8,11 +8,12 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import { ConversationContent } from './ConversationContent';
+import { ConversationsBox } from './ConversationsFlatList';
 import { MatchContent } from './MatchContent';
+import { NoConversationBox } from './NoConversationBox';
 
 export const ConversationsScrollView: React.FC = () => {
-  const { fetchNext } = useGetConversations();
+  const { fetchNext, length: conversationsLength } = useGetConversations();
 
   const handleScroll = async (e: NativeSyntheticEvent<NativeScrollEvent>) => {
     if (!flatListUtil.isCloseToBottom(e)) {
@@ -42,7 +43,18 @@ export const ConversationsScrollView: React.FC = () => {
         <MatchContent />
       </Box>
 
-      <ConversationContent />
+      {conversationsLength ? (
+        <>
+          <Box px={16} mt={8}>
+            <Text bold>Messages</Text>
+          </Box>
+          <View flex={1}>
+            <ConversationsBox></ConversationsBox>
+          </View>
+        </>
+      ) : (
+        <NoConversationBox></NoConversationBox>
+      )}
     </ScrollView>
   );
 };

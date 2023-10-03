@@ -6,16 +6,18 @@ import _ from 'lodash';
 
 import { appActions } from './app.store';
 
-const initialState: AppStore.ConversationState = {};
+const initialState: AppStore.ConversationState = {
+  data: [],
+};
 
 export const conversationSlice = createSlice({
   name: 'conversation',
   initialState,
   reducers: {
     addMany: (state, { payload }: PayloadAction<Entity.Match[]>) => {
-      if (!state.data?.length) {
+      const stateData = state.data;
+      if (!stateData.length) {
         state.data = payload;
-
         return;
       }
 
@@ -25,7 +27,8 @@ export const conversationSlice = createSlice({
 
       state.data = _.chain([...payload, ...state.data])
         .uniqBy('_id')
-        .orderBy('desc') as unknown as Entity.Match[];
+        .orderBy('desc')
+        .value();
     },
 
     // addManyNext(state, action: PayloadAction<Entity.Match[]>) {
@@ -43,13 +46,12 @@ export const conversationSlice = createSlice({
     // },
 
     updateOne(state, { payload }: PayloadAction<Entity.Match>) {
-      if (!state.data?.length) {
-        return;
-      }
-
-      state.data = _.chain([payload, ...state.data])
-        .uniqBy('_id')
-        .orderBy('desc') as unknown as Entity.Match[];
+      // if (!state.data?.length) {
+      //   return;
+      // }
+      // state.data = _.chain([payload, ...state.data])
+      //   .uniqBy('_id')
+      //   .orderBy('desc') as unknown as Entity.Match[];
     },
 
     updateConversationWhenUpdateSentMessage: (
@@ -128,47 +130,8 @@ export const conversationSlice = createSlice({
   },
   extraReducers: builder => {
     builder.addCase(appActions.logout, state => {
-      state.data = undefined;
+      state.data = [];
     });
-    // builder.addMatcher(
-    //   api.endpoints.getNextConversations.matchFulfilled,
-    //   (state, action) => {
-    //     const { data: conversationsData, pagination: paginationData } =
-    //       action.payload;
-
-    //     if (!conversationsData || !paginationData) {
-    //       return;
-    //     }
-
-    //     state.data = state.data.concat(conversationsData);
-
-    //     state.pagination = paginationData;
-    //   },
-    // );
-    // builder.addMatcher(
-    //   api.endpoints.getNextMessages.matchFulfilled,
-    //   (state, action) => {
-    //     const { data: messagesData, pagination, _matchId } = action.payload;
-
-    //     if (!messagesData || !pagination || !_matchId) {
-    //       return;
-    //     }
-
-    //     const oldConversation = state.messages[_matchId];
-
-    //     if (!oldConversation) {
-    //       state.messages[_matchId] = {
-    //         pagination,
-    //         data: messagesData,
-    //       };
-    //     } else {
-    //       state.messages[_matchId] = {
-    //         pagination,
-    //         data: (oldConversation.data || []).concat(messagesData),
-    //       };
-    //     }
-    //   },
-    // );
   },
 });
 

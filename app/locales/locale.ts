@@ -1,7 +1,9 @@
+import { TxKey } from 'app/types';
 import * as Localization from 'expo-localization';
 import { createIntl, createIntlCache } from 'react-intl';
 
 import { translators } from '.';
+import { messages } from './messages';
 
 const locale = Localization.locale;
 
@@ -19,4 +21,8 @@ const intl = createIntl(
   cache,
 );
 
-export const translate = intl.formatMessage;
+const { formatMessage } = intl;
+
+export const translate = (e: TxKey) => {
+  return formatMessage(messages[e]);
+};

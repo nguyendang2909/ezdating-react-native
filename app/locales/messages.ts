@@ -287,4 +287,12 @@ export const messages = defineMessages({
     defaultMessage: 'My height is',
     id: 'e02a86d6f6',
   },
+  'Internal server error': {
+    defaultMessage: 'Internal server error',
+    id: '5c1a1a8718',
+  },
+  Sending: {
+    defaultMessage: 'Sending',
+    id: '0b60888020',
+  },
 });
