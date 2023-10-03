@@ -59,6 +59,7 @@ export const useGetMessages = ({ matchId }: { matchId: string }) => {
 
   const {
     isFetching: isFetchingNext,
+    refetch: refetchNext,
     data: nextData,
     isLoading: isLoadingNext,
   } = fetchNextQuery;
@@ -66,7 +67,7 @@ export const useGetMessages = ({ matchId }: { matchId: string }) => {
   useEffect(() => {
     console.log(111);
     if (newestData) {
-      dispatch(messageActions.addManyNewest(newestData));
+      dispatch(messageActions.addMany(newestData));
 
       if (!newestData.pagination?._next) {
         setReachedEnd(true);

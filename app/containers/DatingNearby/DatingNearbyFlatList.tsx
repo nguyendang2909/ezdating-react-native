@@ -166,8 +166,10 @@ export const DatingNearbyFlatList: React.FC = () => {
                 >
                   <Box px={4} py={4}>
                     <Text fontWeight="bold" color="$white" numberOfLines={1}>
-                      {item.nickname}{' '}
-                      {item.distance && `${_.round(item.distance, 1)} km`}
+                      {item.nickname}
+                      {', '}
+                      {!_.isUndefined(item.distance) &&
+                        `${_.round(item.distance, 1)} km`}
                     </Text>
                   </Box>
                 </LinearGradient>

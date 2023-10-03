@@ -68,6 +68,7 @@ export declare namespace Entity {
     Partial<{
       _userOneId: string;
       _userTwoId: string;
+      _lastMessageId: string;
       _lastMessageUserId: string;
       lastMessage: string;
       lastMessageAt: string;

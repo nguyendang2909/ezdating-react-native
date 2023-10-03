@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AppStore } from 'app/types/app-store.type';
 import { Entity } from 'app/types/entity.type';
 import { SocketRequest } from 'app/types/socket-request.type';
+import _ from 'lodash';
 
 import { appActions } from './app.store';
 
@@ -11,28 +12,44 @@ export const conversationSlice = createSlice({
   name: 'conversation',
   initialState,
   reducers: {
-    addManyFirst: (state, action: PayloadAction<Entity.Match[]>) => {
-      const { payload } = action;
+    addMany: (state, { payload }: PayloadAction<Entity.Match[]>) => {
+      if (!state.data?.length) {
+        state.data = payload;
+
+        return;
+      }
 
       if (!payload.length) {
         return;
       }
 
-      state.data = payload;
+      state.data = _.chain([...payload, ...state.data])
+        .uniqBy('_id')
+        .orderBy('desc') as unknown as Entity.Match[];
     },
 
-    addManyNext(state, action: PayloadAction<Entity.Match[]>) {
-      const { payload } = action;
+    // addManyNext(state, action: PayloadAction<Entity.Match[]>) {
+    //   const { payload } = action;
 
-      if (!payload.length) {
+    //   if (!payload.length) {
+    //     return;
+    //   }
+
+    //   if (!state.data) {
+    //     state.data = payload;
+    //   }
+
+    //   state.data = state.data.concat(payload);
+    // },
+
+    updateOne(state, { payload }: PayloadAction<Entity.Match>) {
+      if (!state.data?.length) {
         return;
       }
 
-      if (!state.data) {
-        state.data = payload;
-      }
-
-      state.data = state.data.concat(payload);
+      state.data = _.chain([payload, ...state.data])
+        .uniqBy('_id')
+        .orderBy('desc') as unknown as Entity.Match[];
     },
 
     updateConversationWhenUpdateSentMessage: (

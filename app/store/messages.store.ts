@@ -14,7 +14,7 @@ export const messageSlice = createSlice({
   name: 'message',
   initialState,
   reducers: {
-    addManyNewest: (state, action: PayloadAction<ApiResponse.MessagesData>) => {
+    addMany: (state, action: PayloadAction<ApiResponse.MessagesData>) => {
       const { payload } = action;
 
       if (!payload._matchId || !payload.data) {
@@ -27,9 +27,25 @@ export const messageSlice = createSlice({
         state.data = {
           [payload._matchId]: messages,
         };
+        return;
       }
 
-      state.data[payload._matchId] = messages;
+      if (!state.data[payload._matchId]?.length) {
+        state.data[payload._matchId] = messages;
+      }
+
+      // console.log(
+      //   _.chain([...messages])
+      //     .uniqBy('_id')
+      //     .orderBy('desc') as unknown as AppStore.ChatMessage[],
+      // );
+
+      // state.data[payload._matchId] = _.chain([
+      //   ...messages,
+      //   // ...state.data[payload._matchId],
+      // ])
+      //   // .uniqBy('_id')
+      //   .orderBy('desc') as unknown as AppStore.ChatMessage[];
     },
 
     addManyNext(state, action: PayloadAction<ApiResponse.MessagesData>) {

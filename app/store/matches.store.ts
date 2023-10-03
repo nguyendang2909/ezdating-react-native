@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AppStore } from 'app/types/app-store.type';
 import { Entity } from 'app/types/entity.type';
+import _ from 'lodash';
 
 import { appActions } from './app.store';
 
@@ -32,6 +33,36 @@ export const matchSlice = createSlice({
       }
 
       state.data = state.data.concat(payload);
+    },
+
+    addOne(state, { payload }: PayloadAction<Entity.Match>) {
+      if (!state.data?.length) {
+        state.data = [payload];
+        return;
+      }
+
+      const stateDataLength = state.data.length;
+
+      for (let i = 0; i < stateDataLength; i += 1) {
+        const item = state.data[i];
+        if (item._id === payload._id) {
+          state.data[i] = {
+            ...item,
+            ...payload,
+          };
+        }
+      }
+
+      state.data = _.chain([...state.data]).unionBy;
+
+      setList(
+        prev =>
+          orderBy(
+            unionBy([...prev, ...dataList], 'id'),
+            ['createdAt'],
+            ['desc'],
+          ) as Array<ConversationItem>,
+      );
     },
 
     setReachedEnd(state, action: PayloadAction<boolean>) {

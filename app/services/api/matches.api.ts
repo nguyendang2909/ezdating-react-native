@@ -7,6 +7,14 @@ import { Entity } from 'app/types/entity.type';
 import { api } from './api';
 
 class MatchesApi extends CommonApi {
+  public async getOne(id: string) {
+    const { data } = await api.get<ApiResponse.FetchData<Entity.Match>>(
+      `${API_URL.matches}/${id}`,
+    );
+
+    return data;
+  }
+
   async getMany({
     params = {},
     data,

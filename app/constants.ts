@@ -54,7 +54,21 @@ export const QUERY_OPTIONS = {
       },
     },
   },
-};
+  MATCH: {
+    KEY: {
+      PRIMARY: 'match',
+    },
+  },
+  CONVERSATIONS: {
+    KEY: {
+      PRIMARY: 'conversations',
+      SECONDARY: {
+        NEWEST: 'newest',
+        NEXT: 'next',
+      },
+    },
+  },
+} as const;
 
 export const QUERY_KEYS = {
   NEARBY_USERS: {

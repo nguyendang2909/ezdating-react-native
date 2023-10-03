@@ -127,7 +127,7 @@ export const socketActionTypes = {
 export function* sendMessage(data: PayloadAction<SocketRequest.SendMessage>) {
   const { payload } = data;
 
-  socket.emit(SOCKET_TO_SERVER_EVENTS.SEND_MESSAGE, payload);
+  // socket.emit(SOCKET_TO_SERVER_EVENTS.SEND_MESSAGE, payload);
 
   const currentUserId: string = yield select(state => state.app.profile._id);
 

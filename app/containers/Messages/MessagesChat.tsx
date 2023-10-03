@@ -41,7 +41,7 @@ export const MessagesChat: React.FC<FCProps> = ({
       state.messages.data ? state.messages.data[matchId] : [],
     ) || [];
 
-  const { fetchNext, isFetchingNext } = useGetMessages({ matchId });
+  const { fetchNext, isLoadingNext } = useGetMessages({ matchId });
 
   const lastMessageId = _.first(messages)?._id as string;
 
@@ -79,7 +79,7 @@ export const MessagesChat: React.FC<FCProps> = ({
     <>
       <GiftedChat
         isLoadingEarlier={true}
-        loadEarlier={isFetchingNext}
+        loadEarlier={isLoadingNext}
         renderLoadEarlier={() => {
           return <Spinner />;
         }}
