@@ -26,6 +26,8 @@ export const RenderMessage: React.FC = ({
       <Box
         p={8}
         bgColor={isCurrentMe ? '$blue500' : '$blueGray100'}
+        ml={isCurrentMe ? 64 : undefined}
+        mr={!isCurrentMe ? 64 : undefined}
         sx={{
           borderTopLeftRadius:
             isCurrentMe || isPrevMe ? bigBorder : smallBorder,

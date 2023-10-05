@@ -24,28 +24,21 @@ export class CommonApi {
     data?: T[],
   ): string | undefined {
     const dataLength = data?.length;
-
     if (!dataLength) {
       return undefined;
     }
-
     const lastData = data[dataLength - 1];
-
     if (_.isArray(field)) {
       if (!field.length) {
         return undefined;
       }
-
       const obj: Partial<T> = {};
       for (const item of field) {
         obj[item] = lastData[item];
       }
-
       return this.encodeFromObj(obj);
     }
-
     const lastField = lastData[field]?.toString();
-
     return lastField ? this.encodeFromString(lastField) : undefined;
   }
 
@@ -53,7 +46,7 @@ export class CommonApi {
     pagination: ApiResponse.Pagination | undefined,
     fn: (v: boolean) => void,
   ) => {
-    if (pagination?.next) {
+    if (pagination?._next) {
       fn(false);
       return;
     }

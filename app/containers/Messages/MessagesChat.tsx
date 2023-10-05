@@ -1,13 +1,7 @@
-import {
-  Avatar,
-  AvatarFallbackText,
-  AvatarImage,
-  Box,
-  KeyboardAvoidingView,
-  Spinner,
-} from '@gluestack-ui/themed';
+import { KeyboardAvoidingView, Spinner } from '@gluestack-ui/themed';
 import { useGetMessages } from 'app/hooks/useGetMessages';
 import { socketStoreActions } from 'app/store/socket.store';
+import { ChatUser } from 'app/types';
 import { Entity } from 'app/types/entity.type';
 import { flatListUtil } from 'app/utils/flat-list.util';
 import React, { useCallback } from 'react';
@@ -21,18 +15,18 @@ import {
   GiftedChat,
   IChatMessage,
   IMessage,
-  User,
 } from 'react-native-gifted-chat';
 import { useDispatch } from 'react-redux';
 import { v4 as uuidV4 } from 'uuid';
 
 import { ChatSpinner } from './ChatSpinner';
+import { RenderAvatar } from './RenderAvatar';
 import { RenderMessage } from './RenderMessage';
 
 type FCProps = {
   conversation: Entity.Match;
-  currentUser: User;
-  targetUser: User;
+  currentUser: ChatUser;
+  targetUser: ChatUser;
 };
 export const MessagesChat: React.FC<FCProps> = ({
   conversation,
@@ -42,7 +36,6 @@ export const MessagesChat: React.FC<FCProps> = ({
   const dispatch = useDispatch();
 
   const matchId = conversation._id;
-
   const {
     data: messages = [],
     fetchNext,
@@ -60,43 +53,21 @@ export const MessagesChat: React.FC<FCProps> = ({
           }),
         );
       }
-
-      // setMessages(previousMessages =>
-      //   GiftedChat.append(previousMessages, messages),
-      // );
     },
     [dispatch, matchId],
   );
 
   const renderAvatar = useCallback(
     (props: AvatarProps<IMessage>) => {
-      const { currentMessage } = props;
-      const userId = currentMessage?.user._id;
-      const isCurrentUser = userId === currentUser._id;
-      const avatar = isCurrentUser ? currentUser.avatar : targetUser.avatar;
-      const name = isCurrentUser ? currentUser.name : targetUser.name;
       return (
-        <>
-          <Box>
-            <Avatar width={36} height={36}>
-              <AvatarFallbackText>{name}</AvatarFallbackText>
-              <AvatarImage
-                source={{
-                  uri: avatar as string,
-                }}
-              ></AvatarImage>
-            </Avatar>
-          </Box>
-        </>
+        <RenderAvatar
+          avatarProps={props}
+          currentUser={currentUser}
+          targetUser={targetUser}
+        />
       );
     },
-    [
-      currentUser._id,
-      currentUser.avatar,
-      currentUser.name,
-      targetUser.avatar,
-      targetUser.name,
-    ],
+    [currentUser, targetUser],
   );
 
   const handleScroll = useCallback(
@@ -129,7 +100,6 @@ export const MessagesChat: React.FC<FCProps> = ({
         }}
         renderAvatar={renderAvatar}
         maxInputLength={5000}
-        renderActions={RenderMessage}
         renderBubble={RenderMessage}
         scrollToBottom={true}
         scrollToBottomComponent={() => {

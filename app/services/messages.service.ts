@@ -1,5 +1,6 @@
 import { CommonService } from 'app/commons/service.common';
 import { Entity } from 'app/types/entity.type';
+import _ from 'lodash';
 import { IMessage } from 'react-native-gifted-chat';
 
 class MessagesService extends CommonService {
@@ -21,6 +22,13 @@ class MessagesService extends CommonService {
         : new Date().getTime(),
       ...options,
     };
+  }
+
+  sortAndUniq(newMessages: IMessage[], oldMessages: IMessage[]) {
+    return _.chain([...newMessages, ...oldMessages])
+      .uniqBy('_id')
+      .orderBy('_id', 'desc')
+      .value();
   }
 }
 

@@ -1,7 +1,9 @@
 import { useNavigation } from '@react-navigation/native';
 import { MessagesChat } from 'app/containers/Messages/MessagesChat';
 import { MessageByConversationHeader } from 'app/containers/Messages/MessagesHeader';
+import { useAppSelector } from 'app/hooks';
 import { AppStackScreenProps } from 'app/navigators';
+import { ChatUser } from 'app/types';
 import { StatusBar } from 'native-base';
 import React, { FC } from 'react';
 import { SafeAreaView } from 'react-native';
@@ -9,11 +11,22 @@ import { SafeAreaView } from 'react-native';
 type FCProps = AppStackScreenProps<'Messages'>;
 
 export const MessagesScreen: FC<FCProps> = props => {
-  const { conversation, user } = props.route.params;
+  const { conversation } = props.route.params;
+
+  const currentUser: ChatUser = useAppSelector(state => {
+    const profile = state.app.profile;
+    return {
+      _id: profile?._id || '',
+      name: profile?.nickname,
+      avatar: profile?.mediaFiles?.length
+        ? profile.mediaFiles[0].location
+        : undefined,
+    };
+  });
 
   const { goBack } = useNavigation();
 
-  if (!conversation || !conversation._id || !user || !user._id) {
+  if (!conversation || !conversation._id) {
     goBack();
 
     return <></>;
@@ -23,13 +36,9 @@ export const MessagesScreen: FC<FCProps> = props => {
     <>
       <StatusBar barStyle="default" />
       <MessageByConversationHeader />
-      {/* <KeyboardAvoidingView
-        flex={1}
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      > */}
       <MessagesChat
         conversation={conversation}
-        currentUser={user}
+        currentUser={currentUser}
         targetUser={{
           _id: conversation.targetUser?._id || '',
           avatar: conversation.targetUser?.mediaFiles?.length
@@ -38,11 +47,6 @@ export const MessagesScreen: FC<FCProps> = props => {
           name: conversation.targetUser?.nickname,
         }}
       />
-      {/* <Box safeAreaBottom flex={1}>
-          <MessagesScrollView />
-          <SendMessageBox />
-        </Box> */}
-      {/* </KeyboardAvoidingView> */}
       <SafeAreaView />
     </>
   );

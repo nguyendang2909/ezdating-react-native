@@ -3,7 +3,6 @@ import { messagesService } from 'app/services/messages.service';
 import { ApiResponse } from 'app/types/api-response.type';
 import { AppStore } from 'app/types/app-store.type';
 import { Entity } from 'app/types/entity.type';
-import _ from 'lodash';
 import moment from 'moment';
 
 import { appActions } from './app.store';
@@ -26,9 +25,7 @@ export const messageSlice = createSlice({
       if (!matchId || !payloadData) {
         return;
       }
-
       const stateInfo = state.info[matchId];
-
       if (!stateInfo) {
         state.info[matchId] = {
           lastRefreshedAt: moment().toDate().toISOString(),
@@ -36,37 +33,13 @@ export const messageSlice = createSlice({
       } else {
         stateInfo.lastRefreshedAt = moment().toDate().toISOString();
       }
-
-      console.log(stateInfo.lastRefreshedAt);
-
       const messages = messagesService.formatMany(payloadData);
       const stateData = state.data[matchId];
       if (!stateData?.length) {
         state.data[matchId] = messages;
         return;
       }
-      state.data[matchId] = _.chain([...messages, ...stateData])
-        .uniqBy('_id')
-        .orderBy('desc')
-        .value();
-    },
-
-    addManyNext(
-      state,
-      {
-        payload: { _matchId: matchId, data: payloadData },
-      }: PayloadAction<ApiResponse.MessagesData>,
-    ) {
-      if (!matchId || !payloadData) {
-        return;
-      }
-      const messages = messagesService.formatMany(payloadData);
-      const oldMessages = state.data[matchId];
-      if (!oldMessages?.length) {
-        state.data[matchId] = messages;
-        return;
-      }
-      state.data[matchId] = oldMessages.concat(messages);
+      state.data[matchId] = messagesService.sortAndUniq(messages, stateData);
     },
 
     receiveMsg: (state, action: PayloadAction<Entity.Message>) => {

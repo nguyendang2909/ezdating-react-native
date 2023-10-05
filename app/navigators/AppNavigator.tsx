@@ -32,7 +32,6 @@ import {
 import { Entity } from 'app/types/entity.type';
 import React from 'react';
 import { useColorScheme } from 'react-native';
-import { User } from 'react-native-gifted-chat';
 
 import Config from '../config';
 import { HomeNavigator, HomeTabParamList } from './HomeNavigator';
@@ -63,7 +62,6 @@ export type AppStackParamList = {
   Main: undefined;
   Messages: {
     conversation: Entity.Match;
-    user: User;
   };
   ProfileEdit: undefined;
   ProfileNearby: {

@@ -2,14 +2,12 @@ import { useNavigation } from '@react-navigation/native';
 import { Entity } from 'app/types/entity.type';
 import { Avatar, Box, HStack, Pressable, Text } from 'native-base';
 import React, { useCallback } from 'react';
-import { User } from 'react-native-gifted-chat';
 
 type FCProps = {
   data: Entity.Match;
-  user: User;
 };
 
-export const ConversationBox: React.FC<FCProps> = ({ data, user }) => {
+export const ConversationBox: React.FC<FCProps> = ({ data }) => {
   const navigation = useNavigation();
 
   const isRead = data.read;
@@ -17,9 +15,8 @@ export const ConversationBox: React.FC<FCProps> = ({ data, user }) => {
   const handlePress = useCallback(() => {
     navigation.navigate('Messages', {
       conversation: data,
-      user,
     });
-  }, [data, navigation, user]);
+  }, [data, navigation]);
 
   return (
     <Pressable backgroundColor="#fff" onPress={handlePress}>
@@ -39,12 +36,25 @@ export const ConversationBox: React.FC<FCProps> = ({ data, user }) => {
               </Box>
               <Box justifyContent="center">
                 <Box>
-                  <Text color="black" bold={!isRead} fontSize={16}>
+                  <Text
+                    color="black"
+                    bold={!isRead}
+                    fontSize={16}
+                    numberOfLines={1}
+                    marginRight={24}
+                  >
                     {data.targetUser?.nickname}
                   </Text>
                 </Box>
                 <Box>
-                  <Text bold={!isRead} fontSize={14} color="gray.700">
+                  <Text
+                    flex={1}
+                    bold={!isRead}
+                    fontSize={14}
+                    color="gray.700"
+                    numberOfLines={1}
+                    marginRight={24}
+                  >
                     {data.lastMessage}
                   </Text>
                 </Box>

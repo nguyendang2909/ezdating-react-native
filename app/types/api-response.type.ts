@@ -2,8 +2,8 @@ import { Entity } from './entity.type';
 
 export declare namespace ApiResponse {
   type Pagination = {
-    next?: string | null;
-    prev?: string | null;
+    _next?: string | null;
+    _prev?: string | null;
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
