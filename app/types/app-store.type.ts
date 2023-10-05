@@ -27,6 +27,10 @@ export declare namespace AppStore {
     };
   };
 
+  type Match = Entity.Match & {
+    lastRefreshedAt?: string;
+  };
+
   type ChatMessage = IMessage & { uuid?: string };
 
   type MessageState = {

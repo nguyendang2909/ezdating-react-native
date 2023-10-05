@@ -13,7 +13,7 @@ import { ActionPattern, call, put, select, take } from 'redux-saga/effects';
 import { io, Socket } from 'socket.io-client';
 
 import { appActions } from './app.store';
-import { conversationActions } from './conversations.store';
+import { conversationActions } from './match.store';
 import { messageActions } from './messages.store';
 
 let socket: Socket;

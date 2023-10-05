@@ -1,15 +1,15 @@
-import { conversationsApi } from 'app/services/api/conversations.api';
+import { matchesApi } from 'app/services/api/matches.api';
 import { matchActions, matchSelects } from 'app/store/match.store';
 import { useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { useAppSelector } from './useAppSelector';
 
-export const useGetConversations = () => {
+export const useGetMatches = () => {
   const dispatch = useDispatch();
 
-  const conversations = useAppSelector(matchSelects.conversations);
-  const conversationsLength = conversations.length;
+  const matches = useAppSelector(matchSelects.matches);
+  const matchesLength = matches.length;
   const [isReachedEnd, setReachedEnd] = useState<boolean>(true);
   const [isLoadingNewest, setLoadingNewest] = useState<boolean>(false);
   const [isLoadingNext, setLoadingNext] = useState<boolean>(false);
@@ -21,13 +21,13 @@ export const useGetConversations = () => {
     setLoadingNewest(true);
 
     try {
-      const { data, pagination } = await conversationsApi.getMany();
+      const { data, pagination } = await matchesApi.getMany();
 
       if (data) {
         dispatch(matchActions.addMany(data));
       }
 
-      conversationsApi.handlePagination(pagination, setReachedEnd);
+      matchesApi.handlePagination(pagination, setReachedEnd);
     } catch (err) {
     } finally {
       setLoadingNewest(false);
@@ -35,10 +35,10 @@ export const useGetConversations = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (!isFetchedFirstTime && !conversationsLength && !isLoadingNewest) {
+    if (!isFetchedFirstTime && !matchesLength && !isLoadingNewest) {
       fetchFirst();
     }
-  }, [conversationsLength, fetchFirst, isFetchedFirstTime, isLoadingNewest]);
+  }, [matchesLength, fetchFirst, isFetchedFirstTime, isLoadingNewest]);
 
   const fetchNewest = async () => {
     if (isLoadingNewest) {
@@ -56,14 +56,14 @@ export const useGetConversations = () => {
       return;
     }
     try {
-      const nextCursor = conversationsApi.getCursor(conversations);
-      const { data, pagination } = await conversationsApi.getMany({
+      const nextCursor = matchesApi.getCursor(matches);
+      const { data, pagination } = await matchesApi.getMany({
         _next: nextCursor,
       });
       if (data) {
         dispatch(matchActions.addMany(data));
       }
-      conversationsApi.handlePagination(pagination, setReachedEnd);
+      matchesApi.handlePagination(pagination, setReachedEnd);
     } catch (err) {
     } finally {
       setLoadingNext(false);
@@ -71,8 +71,8 @@ export const useGetConversations = () => {
   };
 
   return {
-    length: conversationsLength,
-    data: conversations,
+    length: matchesLength,
+    data: matches,
     fetchNewest,
     fetchNext,
     isLoadingNewest,

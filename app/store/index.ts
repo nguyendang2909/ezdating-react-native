@@ -15,10 +15,9 @@ import createSagaMiddleware from 'redux-saga';
 
 import { api } from '../services/api';
 import { appReducer } from './app.store';
-import { conversationReducer } from './conversations.store';
 import { likedMeReducer } from './liked-me.store';
 import { likeReducer } from './likes.store';
-import { matchReducer } from './matches.store';
+import { matchReducer } from './match.store';
 import { messageReducer } from './messages.store';
 import { nearbyUserReducer } from './nearby-user.store';
 import { appSaga } from './saga';
@@ -32,7 +31,6 @@ const sagaMiddleware = createSagaMiddleware(reduxSagaMonitorOptions);
 const reducers = combineReducers({
   // theme,
   [api.reducerPath]: api.reducer,
-  conversation: conversationReducer,
   match: matchReducer,
   user: userReducer,
   app: appReducer,

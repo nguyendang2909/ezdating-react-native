@@ -1,50 +1,16 @@
 import { Box, ScrollView, Text } from '@gluestack-ui/themed';
 import { useNavigation } from '@react-navigation/native';
-import { nearbyUsersApi } from 'app/services/api/nearby-users.api';
-import { matchActions } from 'app/store/matches.store';
+import { useGetMatches } from 'app/hooks/useGetMatches';
 import { Entity } from 'app/types/entity.type';
 import { HStack, Image, Pressable } from 'native-base';
-import React, { useState } from 'react';
+import React from 'react';
 import { Dimensions } from 'react-native';
-import { useDispatch } from 'react-redux';
 
-type FCProps = {
-  data: Entity.Match[];
-};
-
-export const MatchCards: React.FC<FCProps> = ({ data: matches }) => {
-  const dispatch = useDispatch();
-
+export const MatchCards: React.FC = () => {
   const navigation = useNavigation();
+  const { data: matches } = useGetMatches();
 
-  const [isRefreshingBottom, setRefreshingBottom] = useState<boolean>(false);
-  const [isReachedEnd, setReachedEnd] = useState<boolean>(false);
-  const isRefreshing = isRefreshingBottom;
-
-  const handleRefreshTop = async () => {
-    if (isRefreshing) {
-      return;
-    }
-
-    try {
-      const fetchData = await nearbyUsersApi.getMany();
-
-      if (fetchData.pagination?._next === null) {
-        setReachedEnd(true);
-      } else {
-        setReachedEnd(false);
-      }
-
-      if (fetchData.data) {
-        dispatch(matchActions.addManyFirst(fetchData.data));
-      }
-    } catch (err) {}
-  };
-
-  const width = Dimensions.get('window').width;
-
-  const cardWidth = width / 4;
-
+  const cardWidth = Dimensions.get('window').width / 4;
   const imageCardHeight = (cardWidth / 640) * 860;
 
   const handlePressCard = (conversation: Entity.Match) => {

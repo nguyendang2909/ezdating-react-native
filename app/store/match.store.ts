@@ -11,8 +11,8 @@ const initialState: AppStore.ConversationState = {
   info: {},
 };
 
-export const conversationSlice = createSlice({
-  name: 'conversation',
+export const matchSlice = createSlice({
+  name: 'match',
   initialState,
   reducers: {
     addMany: (state, { payload }: PayloadAction<Entity.Match[]>) => {
@@ -28,15 +28,7 @@ export const conversationSlice = createSlice({
 
       state.data = conversationsService.sortAndUniq(payload, stateData);
     },
-    updateOne(state, { payload }: PayloadAction<Entity.Match>) {
-      // if (!state.data?.length) {
-      //   return;
-      // }
-      // state.data = _.chain([payload, ...state.data])
-      //   .uniqBy('_id')
-      //   .orderBy('desc') as unknown as Entity.Match[];
-    },
-
+    updateOne(state, { payload }: PayloadAction<Entity.Match>) {},
     updateConversationWhenUpdateSentMessage: (
       state,
       action: PayloadAction<Entity.Message>,
@@ -104,6 +96,15 @@ export const conversationSlice = createSlice({
   },
 });
 
-export const conversationActions = conversationSlice.actions;
+export const matchActions = matchSlice.actions;
 
-export const conversationReducer = conversationSlice.reducer;
+export const matchSelects = {
+  conversations: (state: AppStore.RootState) => {
+    return state.match.data.filter(e => !!e._lastMessageId);
+  },
+  matches: (state: AppStore.RootState) => {
+    return state.match.data.filter(e => !e._lastMessageId);
+  },
+};
+
+export const matchReducer = matchSlice.reducer;
