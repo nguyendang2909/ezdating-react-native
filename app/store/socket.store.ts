@@ -13,7 +13,7 @@ import { ActionPattern, call, put, select, take } from 'redux-saga/effects';
 import { io, Socket } from 'socket.io-client';
 
 import { appActions } from './app.store';
-import { conversationActions } from './match.store';
+import { matchActions } from './match.store';
 import { messageActions } from './messages.store';
 
 let socket: Socket;
@@ -48,15 +48,11 @@ export function* initializeWebSocket() {
             break;
           case SOCKET_TO_CLIENT_EVENTS.NEW_MESSAGE:
             yield put(messageActions.receiveMsg(data));
-            yield put(
-              conversationActions.updateConversationWhenReceivingMessage(data),
-            );
+            yield put(matchActions.updateWhenReceivingMessage(data));
             break;
           case SOCKET_TO_CLIENT_EVENTS.UPDATE_SENT_MESSAGE:
             yield put(messageActions.updateMsg(data));
-            yield put(
-              conversationActions.updateConversationWhenUpdateSentMessage(data),
-            );
+            yield put(matchActions.updateWhenUpdateSentMessage(data));
             break;
           default:
             break;
@@ -152,5 +148,5 @@ export function* readMessage(data: PayloadAction<SocketRequest.ReadMessage>) {
 
   socket.emit(SOCKET_TO_SERVER_EVENTS.READ_MESSAGE, payload);
 
-  yield put(conversationActions.readMessage(payload));
+  yield put(matchActions.readMessage(payload));
 }

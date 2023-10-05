@@ -95,6 +95,20 @@ export const messageSlice = createSlice({
         }
       }
     },
+
+    updateRefreshTime: (
+      state,
+      { payload: { matchId } }: PayloadAction<{ matchId: string }>,
+    ) => {
+      const lastRefreshedAt = moment().toISOString();
+      if (!state.info[matchId]) {
+        state.info[matchId] = {
+          lastRefreshedAt,
+        };
+        return;
+      }
+      state.info[matchId].lastRefreshedAt = lastRefreshedAt;
+    },
   },
   extraReducers: builder => {
     builder.addCase(appActions.logout, state => {

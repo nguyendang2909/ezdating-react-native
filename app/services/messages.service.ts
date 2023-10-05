@@ -24,8 +24,8 @@ class MessagesService extends CommonService {
     };
   }
 
-  sortAndUniq(newMessages: IMessage[], oldMessages: IMessage[]) {
-    return _.chain([...newMessages, ...oldMessages])
+  sortAndUniq(news: IMessage[], olds: IMessage[]) {
+    return _.chain([...news, ...olds])
       .uniqBy('_id')
       .orderBy('_id', 'desc')
       .value();

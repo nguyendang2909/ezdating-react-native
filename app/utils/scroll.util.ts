@@ -1,6 +1,6 @@
 import { NativeScrollEvent, NativeSyntheticEvent } from 'react-native';
 
-class FlatListUtil {
+class ScrollUtil {
   isCloseToBottom = (
     {
       nativeEvent: { layoutMeasurement, contentOffset, contentSize },
@@ -25,4 +25,4 @@ class FlatListUtil {
   }
 }
 
-export const flatListUtil = new FlatListUtil();
+export const scrollUtil = new ScrollUtil();

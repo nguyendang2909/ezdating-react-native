@@ -1,7 +1,7 @@
 import { Box, ScrollView, Text, View } from '@gluestack-ui/themed';
 import { ConversationBox } from 'app/containers/Conversation/ConversationBox';
 import { useGetConversations } from 'app/hooks/useGetConversations';
-import { flatListUtil } from 'app/utils/flat-list.util';
+import { scrollUtil } from 'app/utils/scroll.util';
 import React from 'react';
 import {
   NativeScrollEvent,
@@ -20,7 +20,7 @@ export const ConversationsScrollView: React.FC = () => {
   } = useGetConversations();
 
   const handleScroll = async (e: NativeSyntheticEvent<NativeScrollEvent>) => {
-    if (!flatListUtil.isCloseToBottom(e)) {
+    if (!scrollUtil.isCloseToBottom(e)) {
       fetchNext();
     }
   };

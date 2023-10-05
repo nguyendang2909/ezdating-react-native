@@ -33,6 +33,7 @@ export const useGetMessages = ({ matchId }: { matchId: string }) => {
     } catch (err) {
     } finally {
       setLoadingNewest(false);
+      dispatch(messageActions.updateRefreshTime({ matchId }));
     }
   }, [dispatch, matchId]);
 

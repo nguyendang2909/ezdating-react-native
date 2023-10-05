@@ -7,22 +7,11 @@ import { Entity } from 'app/types/entity.type';
 import { api } from './api';
 
 class NearbyUsersApi extends CommonApi {
-  async getMany({
-    params = {},
-    data,
-  }: {
-    params?: ApiRequest.SearchUsersNearby;
-    data?: Entity.User[];
-  } = {}) {
-    const _next = this.getCursor(data);
-
+  async getMany(params?: ApiRequest.SearchUsersNearby) {
     const response = await api.get<ApiResponse.PaginatedResponse<Entity.User>>(
       API_URL.usersNearby,
       {
-        params: {
-          ...params,
-          ...(_next ? { _next } : {}),
-        },
+        params,
       },
     );
 

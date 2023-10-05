@@ -29,7 +29,7 @@ export const matchSlice = createSlice({
       state.data = conversationsService.sortAndUniq(payload, stateData);
     },
     updateOne(state, { payload }: PayloadAction<Entity.Match>) {},
-    updateConversationWhenUpdateSentMessage: (
+    updateWhenUpdateSentMessage: (
       state,
       action: PayloadAction<Entity.Message>,
     ) => {
@@ -53,7 +53,7 @@ export const matchSlice = createSlice({
       }
     },
 
-    updateConversationWhenReceivingMessage: (
+    updateWhenReceivingMessage: (
       state,
       action: PayloadAction<Entity.Message>,
     ) => {
@@ -80,7 +80,7 @@ export const matchSlice = createSlice({
     readMessage: (state, action: PayloadAction<SocketRequest.ReadMessage>) => {
       const { payload } = action;
       const matchId = payload.matchId;
-      if (!state.data?.length) {
+      if (!state.data.length) {
         return;
       }
       const matchIndex = state.data.findIndex(item => item._id === matchId);

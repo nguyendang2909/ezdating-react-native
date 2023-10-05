@@ -79,9 +79,7 @@ export declare namespace ApiRequest {
     introduce?: string;
   }>;
 
-  type SearchUsersNearby = FindMany<{
-    excludedUserId?: string[] | string;
-  }>;
+  type SearchUsersNearby = Pagination;
 
   type UploadPhoto = {
     file: Image;

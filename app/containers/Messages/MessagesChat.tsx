@@ -3,7 +3,7 @@ import { useGetMessages } from 'app/hooks/useGetMessages';
 import { socketStoreActions } from 'app/store/socket.store';
 import { ChatUser } from 'app/types';
 import { Entity } from 'app/types/entity.type';
-import { flatListUtil } from 'app/utils/flat-list.util';
+import { scrollUtil } from 'app/utils/scroll.util';
 import React, { useCallback } from 'react';
 import {
   NativeScrollEvent,
@@ -72,7 +72,7 @@ export const MessagesChat: React.FC<FCProps> = ({
 
   const handleScroll = useCallback(
     (e: NativeSyntheticEvent<NativeScrollEvent>) => {
-      if (flatListUtil.isCloseToTop(e)) {
+      if (scrollUtil.isCloseToTop(e)) {
         fetchNext();
       }
     },

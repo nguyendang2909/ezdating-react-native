@@ -7,115 +7,34 @@ import {
   Text,
 } from '@gluestack-ui/themed';
 import { useNavigation } from '@react-navigation/native';
-import { useAppSelector } from 'app/hooks';
-import { nearbyUsersApi } from 'app/services/api/nearby-users.api';
-import { nearbyUserActions } from 'app/store/nearby-user.store';
+import { useGetNearbyUsers } from 'app/hooks/useGetNearbyUsers';
 import { Entity } from 'app/types/entity.type';
-import { flatListUtil } from 'app/utils/flat-list.util';
+import { scrollUtil } from 'app/utils/scroll.util';
 import _ from 'lodash';
 import { Spinner } from 'native-base';
-import React, { useCallback, useEffect } from 'react';
+import React from 'react';
 import {
   NativeScrollEvent,
   NativeSyntheticEvent,
   RefreshControl,
 } from 'react-native';
-import { useDispatch } from 'react-redux';
 
 export const DatingNearbyFlatList: React.FC = () => {
-  const dispatch = useDispatch();
   const navigator = useNavigation();
 
-  const users = useAppSelector(state => state.nearbyUser.data) || [];
-
-  const isRefreshingTop = useAppSelector(
-    s => s.nearbyUser.isRefreshingTop || false,
-  );
-  const isRefreshingBottom = useAppSelector(
-    s => s.nearbyUser.isRefreshingBottom || false,
-  );
-  const isReachedEnd = useAppSelector(s => s.nearbyUser.isReachedEnd);
-
-  const isRefreshing = isRefreshingTop || isRefreshingBottom;
-
-  const fetchFirstTime = useCallback(async () => {
-    dispatch(nearbyUserActions.setRefreshingTop(true));
-
-    try {
-      const nearbyUsersData = await nearbyUsersApi.getMany();
-
-      if (nearbyUsersData.pagination?._next === null) {
-        dispatch(nearbyUserActions.setReachedEnd(true));
-      } else {
-        dispatch(nearbyUserActions.setReachedEnd(false));
-      }
-
-      dispatch(nearbyUserActions.addManyFirst(nearbyUsersData.data || []));
-    } catch (err) {}
-
-    dispatch(nearbyUserActions.setRefreshingTop(false));
-  }, [dispatch]);
-
-  useEffect(() => {
-    fetchFirstTime();
-  }, [fetchFirstTime]);
-
-  const handleRefreshTop = async () => {
-    if (isRefreshingTop) {
-      return;
-    }
-
-    dispatch(nearbyUserActions.setRefreshingTop(true));
-
-    try {
-      const nearbyUsersData = await nearbyUsersApi.getMany();
-
-      if (nearbyUsersData.pagination?._next === null) {
-        dispatch(nearbyUserActions.setReachedEnd(true));
-      } else {
-        dispatch(nearbyUserActions.setReachedEnd(false));
-      }
-
-      if (nearbyUsersData.data) {
-        dispatch(nearbyUserActions.addManyFirst(nearbyUsersData.data));
-      }
-    } catch (err) {}
-
-    dispatch(nearbyUserActions.setRefreshingTop(false));
-  };
+  const {
+    data: nearbyUsers,
+    fetchNext,
+    isLoadingNewest,
+    isLoadingNext,
+    fetchNewest,
+  } = useGetNearbyUsers();
 
   const handleScroll = async (e: NativeSyntheticEvent<NativeScrollEvent>) => {
-    if (!flatListUtil.isCloseToBottom(e)) {
+    if (!scrollUtil.isCloseToBottom(e)) {
       return;
     }
-
-    if (isReachedEnd) {
-      return;
-    }
-
-    if (isRefreshing) {
-      return;
-    }
-
-    dispatch(nearbyUserActions.setRefreshingBottom(true));
-
-    try {
-      const nearbyUsersData = await nearbyUsersApi.getMany({
-        data: users,
-      });
-
-      if (nearbyUsersData.pagination?._next === null) {
-        dispatch(nearbyUserActions.setReachedEnd(true));
-      }
-
-      if (nearbyUsersData.data?.length) {
-        dispatch(nearbyUserActions.addManyNext(nearbyUsersData.data));
-      } else {
-        dispatch(nearbyUserActions.setReachedEnd(false));
-      }
-    } catch (err) {}
-
-    dispatch(nearbyUserActions.setRefreshingBottom(false));
+    fetchNext();
   };
 
   return (
@@ -124,15 +43,15 @@ export const DatingNearbyFlatList: React.FC = () => {
         showsVerticalScrollIndicator={false}
         refreshControl={
           <RefreshControl
-            refreshing={isRefreshingTop}
-            onRefresh={handleRefreshTop}
+            refreshing={isLoadingNewest}
+            onRefresh={fetchNewest}
           ></RefreshControl>
         }
         onScroll={handleScroll}
         numColumns={2}
-        data={users}
+        data={nearbyUsers}
         ListFooterComponent={
-          isRefreshingBottom ? (
+          isLoadingNext ? (
             <Box mt={16}>
               <Spinner />
             </Box>

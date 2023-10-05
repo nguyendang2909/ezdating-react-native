@@ -11,7 +11,7 @@ import { useAppSelector } from 'app/hooks';
 import { likedMeApi } from 'app/services/api/likedMe.api';
 import { likedMeActions } from 'app/store/liked-me.store';
 import { Entity } from 'app/types/entity.type';
-import { flatListUtil } from 'app/utils/flat-list.util';
+import { scrollUtil } from 'app/utils/scroll.util';
 import React, { useCallback, useEffect, useState } from 'react';
 import {
   NativeScrollEvent,
@@ -82,7 +82,7 @@ export const LikedMeContent: React.FC = () => {
   };
 
   const handleScroll = async (e: NativeSyntheticEvent<NativeScrollEvent>) => {
-    if (!flatListUtil.isCloseToBottom(e)) {
+    if (!scrollUtil.isCloseToBottom(e)) {
       return;
     }
 
@@ -145,6 +145,7 @@ export const LikedMeContent: React.FC = () => {
                   width="$full"
                   position="absolute"
                   borderRadius={8}
+                  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                   // @ts-ignore
                   colors={['#00000000', '#00000000', '#00000000', '#000000']}
                   justifyContent="flex-end"
