@@ -28,16 +28,6 @@ export const ConversationsScrollView: React.FC = () => {
       showsVerticalScrollIndicator={false}
       onScroll={handleScroll}
       scrollEventThrottle={16}
-
-      //   ListFooterComponent={
-      //     isRefreshingBottom ? (
-      //       <Box mt={16}>
-      //         <Spinner />
-      //       </Box>
-      //     ) : (
-      //       <></>
-      //     )
-      //   }
     >
       <Box>
         <MatchContent />

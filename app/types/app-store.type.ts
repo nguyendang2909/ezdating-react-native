@@ -22,6 +22,9 @@ export declare namespace AppStore {
 
   type ConversationState = {
     data: Entity.Match[];
+    info: {
+      lastRefreshedAt?: string;
+    };
   };
 
   type ChatMessage = IMessage & { uuid?: string };
@@ -31,7 +34,7 @@ export declare namespace AppStore {
     info: Record<
       string,
       {
-        lastRefreshAt?: string;
+        lastRefreshedAt?: string;
       }
     >;
   };

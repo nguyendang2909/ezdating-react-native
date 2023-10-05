@@ -10,8 +10,7 @@ import { useGetMessages } from 'app/hooks/useGetMessages';
 import { socketStoreActions } from 'app/store/socket.store';
 import { Entity } from 'app/types/entity.type';
 import { flatListUtil } from 'app/utils/flat-list.util';
-import _ from 'lodash';
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback } from 'react';
 import {
   NativeScrollEvent,
   NativeSyntheticEvent,
@@ -44,29 +43,11 @@ export const MessagesChat: React.FC<FCProps> = ({
 
   const matchId = conversation._id;
 
-  // const messages =
-  //   useAppSelector(state =>
-  //     state.messages.data ? state.messages.data[matchId] : [],
-  //   ) || [];
-
   const {
     data: messages = [],
     fetchNext,
     isLoadingNext,
   } = useGetMessages({ matchId });
-
-  const lastMessageId = _.first(messages)?._id as string;
-
-  useEffect(() => {
-    if (conversation.read === false && matchId && lastMessageId) {
-      dispatch(
-        socketStoreActions.readMessage({
-          matchId,
-          lastMessageId,
-        }),
-      );
-    }
-  }, [conversation.read, dispatch, lastMessageId, matchId]);
 
   const handleSend = useCallback(
     (messages: IChatMessage[] = []) => {
@@ -154,15 +135,12 @@ export const MessagesChat: React.FC<FCProps> = ({
         scrollToBottomComponent={() => {
           return <Spinner />;
         }}
-        // renderMessage={RenderMessage}
       />
-      {Platform.OS === 'android' ? (
+      {Platform.OS === 'android' && (
         <KeyboardAvoidingView
           behavior={'padding'}
           keyboardVerticalOffset={80}
         />
-      ) : (
-        <></>
       )}
     </>
   );

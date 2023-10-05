@@ -31,13 +31,13 @@ export const messageSlice = createSlice({
 
       if (!stateInfo) {
         state.info[matchId] = {
-          lastRefreshAt: moment().toDate().toISOString(),
+          lastRefreshedAt: moment().toDate().toISOString(),
         };
       } else {
-        stateInfo.lastRefreshAt = moment().toDate().toISOString();
+        stateInfo.lastRefreshedAt = moment().toDate().toISOString();
       }
 
-      console.log(stateInfo.lastRefreshAt);
+      console.log(stateInfo.lastRefreshedAt);
 
       const messages = messagesService.formatMany(payloadData);
       const stateData = state.data[matchId];

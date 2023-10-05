@@ -1,5 +1,6 @@
 import { messagesApi } from 'app/services/api/messages.api';
 import { messageActions } from 'app/store/messages.store';
+import { socketStoreActions } from 'app/store/socket.store';
 import moment from 'moment';
 import { useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -8,32 +9,25 @@ import { useAppSelector } from './useAppSelector';
 
 export const useGetMessages = ({ matchId }: { matchId: string }) => {
   const dispatch = useDispatch();
-
   const messages = useAppSelector(state => state.messages.data[matchId]);
   const messagesLength = messages?.length || 0;
-
   const [isReachedEnd, setReachedEnd] = useState<boolean>(true);
   const [isLoadingNewest, setLoadingNewest] = useState<boolean>(false);
   const [isLoadingNext, setLoadingNext] = useState<boolean>(false);
   const [isFetchedFirstTime, setFetchedFirstTime] = useState<boolean>(false);
-  const lastRefreshAt = useAppSelector(
-    s => s.messages.info[matchId]?.lastRefreshAt,
+  const lastRefreshedAt = useAppSelector(
+    s => s.messages.info[matchId]?.lastRefreshedAt,
   );
   const lastConnectedSocket = useAppSelector(s => s.app.socket.connectedAt);
 
   const fetchFirst = useCallback(async () => {
     setFetchedFirstTime(true);
-
     setLoadingNewest(true);
-
     try {
       const data = await messagesApi.getMany({
         matchId,
       });
-      // console.log(data);
-
       dispatch(messageActions.addMany(data));
-
       messagesApi.handlePagination(data.pagination, setReachedEnd);
     } catch (err) {
     } finally {
@@ -42,13 +36,12 @@ export const useGetMessages = ({ matchId }: { matchId: string }) => {
   }, [dispatch, matchId]);
 
   useEffect(() => {
-    console.log(111);
     if (
       !isFetchedFirstTime &&
       !isLoadingNewest &&
       (!messagesLength ||
-        !lastRefreshAt ||
-        moment(lastConnectedSocket).isAfter(moment(lastRefreshAt)))
+        !lastRefreshedAt ||
+        moment(lastConnectedSocket).isAfter(moment(lastRefreshedAt)))
     ) {
       fetchFirst();
     }
@@ -57,38 +50,42 @@ export const useGetMessages = ({ matchId }: { matchId: string }) => {
     isFetchedFirstTime,
     isLoadingNewest,
     lastConnectedSocket,
-    lastRefreshAt,
+    lastRefreshedAt,
     messagesLength,
   ]);
+
+  const lastMessageId = _.first(messages)?._id as string;
+
+  useEffect(() => {
+    if (matchId && lastMessageId) {
+      dispatch(
+        socketStoreActions.readMessage({
+          matchId,
+          lastMessageId,
+        }),
+      );
+    }
+  }, [dispatch, lastMessageId, matchId]);
 
   const fetchNewest = async () => {
     if (isLoadingNewest) {
       return;
     }
-
     await fetchFirst();
   };
 
   const fetchNext = async () => {
-    if (isReachedEnd) {
+    if (isReachedEnd || isLoadingNext) {
       return;
     }
-
-    if (isLoadingNext) {
-      return;
-    }
-
     try {
       const nextCursor = messagesApi.getCursor(messages);
-
       const data = await messagesApi.getMany({
         matchId,
         _next: nextCursor,
       });
-
       if (data) {
         dispatch(messageActions.addMany(data));
-
         messagesApi.handlePagination(data.pagination, setReachedEnd);
       }
     } catch (err) {

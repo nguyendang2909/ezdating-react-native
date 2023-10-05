@@ -10,7 +10,6 @@ export const useGetConversations = () => {
 
   const conversations = useAppSelector(state => state.conversation.data);
   const conversationsLength = conversations.length;
-
   const [isReachedEnd, setReachedEnd] = useState<boolean>(true);
   const [isLoadingNewest, setLoadingNewest] = useState<boolean>(false);
   const [isLoadingNext, setLoadingNext] = useState<boolean>(false);
