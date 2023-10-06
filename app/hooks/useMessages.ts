@@ -20,16 +20,16 @@ export const getMessageFromResponse = (
 export const useMessages = () => {
   const intl = useIntl();
 
-  const translate = (value: TxKey): string => {
+  const formatMessage = (value: TxKey): string => {
     return intl.formatMessage(messages[value]);
   };
 
-  const translateErrorResponse = (error: unknown) => {
+  const formatErrorMessage = (error: unknown) => {
     return intl.formatMessage(getMessageFromResponse(error));
   };
 
   return {
-    translate,
-    translateErrorResponse,
+    formatMessage,
+    formatErrorMessage,
   };
 };

@@ -43,10 +43,10 @@ export class CommonApi {
   }
 
   handlePagination = (
-    pagination: ApiResponse.Pagination | undefined,
+    pagination: ApiResponse.Pagination,
     fn: (v: boolean) => void,
   ) => {
-    if (pagination?._next) {
+    if (pagination._next) {
       fn(false);
       return;
     }

@@ -1,5 +1,5 @@
 import { Text, View } from '@gluestack-ui/themed';
-import { useTranslate } from 'app/hooks/useFormatMessage';
+import { useMessages } from 'app/hooks/useMessages';
 import { TxKey } from 'app/types';
 import React, { ReactElement } from 'react';
 import {
@@ -174,11 +174,11 @@ export function Header(props: HeaderProps) {
     containerStyle: $containerStyleOverride,
   } = props;
 
-  const t = useTranslate();
+  const { formatMessage } = useMessages();
 
   const $containerInsets = useSafeAreaInsetsStyle(safeAreaEdges);
 
-  const titleContent = titleTx ? t(titleTx) : title;
+  const titleContent = titleTx ? formatMessage(titleTx) : title;
 
   return (
     <View
@@ -249,9 +249,9 @@ function HeaderAction(props: HeaderActionProps) {
     iconColor,
   } = props;
 
-  const t = useTranslate();
+  const { formatMessage } = useMessages();
 
-  const content = tx ? t(tx) : text;
+  const content = tx ? formatMessage(tx) : text;
 
   if (ActionComponent) return ActionComponent;
 

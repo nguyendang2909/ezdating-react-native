@@ -1,5 +1,5 @@
 import { UserGender, UserGenderMessages, UserGenders } from 'app/constants';
-import { useTranslate } from 'app/hooks/useFormatMessage';
+import { useMessages } from 'app/hooks/useMessages';
 import {
   Button,
   FormControl,
@@ -23,12 +23,12 @@ export const SelectGenderFormControl: FC<FCProps> = ({
   value,
   isRequired,
 }) => {
-  const t = useTranslate();
+  const { formatMessage } = useMessages();
 
   return (
     <FormControl {...(isRequired ? { isRequired } : {})} isInvalid={!!error}>
       <Stack>
-        <FormControl.Label>{t('Gender')}</FormControl.Label>
+        <FormControl.Label>{formatMessage('Gender')}</FormControl.Label>
 
         <HStack space="sm">
           {Object.values(UserGenders).map(item => {
@@ -41,7 +41,7 @@ export const SelectGenderFormControl: FC<FCProps> = ({
                     onChange(item);
                   }}
                 >
-                  {t(UserGenderMessages[item])}
+                  {formatMessage(UserGenderMessages[item])}
                 </Button>
               </View>
             );

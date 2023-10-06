@@ -4,7 +4,7 @@ import {
   UserRelationshipGoalMessages,
   UserRelationshipGoals,
 } from 'app/constants';
-import { useTranslate } from 'app/hooks/useFormatMessage';
+import { useMessages } from 'app/hooks/useMessages';
 import {
   ChevronDownIcon,
   FormControl,
@@ -29,18 +29,18 @@ export const RelationshipGoalFormControl: React.FC<FCProps> = ({
   onChange,
   isRequired,
 }) => {
-  const t = useTranslate();
+  const { formatMessage } = useMessages();
 
   const { showActionSheetWithOptions } = useActionSheet();
 
   const handlePress = () => {
     const options = [
-      t('Lover'),
-      t('Friend'),
-      t('Partner'),
-      t('Marriage'),
-      t('One-Night stand'),
-      t('Cancel'),
+      formatMessage('Lover'),
+      formatMessage('Friend'),
+      formatMessage('Partner'),
+      formatMessage('Marriage'),
+      formatMessage('One-Night stand'),
+      formatMessage('Cancel'),
     ];
     const cancelButtonIndex = 5;
     showActionSheetWithOptions(
@@ -77,15 +77,17 @@ export const RelationshipGoalFormControl: React.FC<FCProps> = ({
       <FormControl {...(isRequired ? { isRequired } : {})} isInvalid={!!error}>
         <Stack>
           <FormControl.Label>
-            {t('What are you looking for here?')}
+            {formatMessage('What are you looking for here?')}
           </FormControl.Label>
           <Pressable onPress={handlePress}>
             <Input
               isReadOnly
               size="lg"
               variant="underlined"
-              placeholder={t('Please select')}
-              value={value ? t(UserRelationshipGoalMessages[value]) : ''}
+              placeholder={formatMessage('Please select')}
+              value={
+                value ? formatMessage(UserRelationshipGoalMessages[value]) : ''
+              }
               InputRightElement={<ChevronDownIcon />}
               onPressIn={handlePress}
             ></Input>

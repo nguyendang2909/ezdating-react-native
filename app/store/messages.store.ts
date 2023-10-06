@@ -22,9 +22,6 @@ export const messageSlice = createSlice({
         payload: { _matchId: matchId, data: payloadData },
       }: PayloadAction<ApiResponse.MessagesData>,
     ) => {
-      if (!matchId || !payloadData) {
-        return;
-      }
       const stateInfo = state.info[matchId];
       if (!stateInfo) {
         state.info[matchId] = {
