@@ -2,7 +2,7 @@ import { Entity } from './entity.type';
 
 export declare namespace ApiResponse {
   type Pagination = {
-    _next?: string | null;
+    _next: string | null;
     _prev?: string | null;
   };
 
@@ -10,14 +10,14 @@ export declare namespace ApiResponse {
   type FetchData<T, R extends Record<string, any> = object> = {
     [P in keyof R]?: R[P];
   } & {
-    data?: T;
-    type?: string;
+    data: T;
+    type: string;
   };
 
   type PaginatedResponse<T> = {
-    data?: T[];
-    pagination?: Pagination;
-    type?: string;
+    data: T[];
+    pagination: Pagination;
+    type: string;
   };
 
   type SuccessResponse = FetchData<{ success: boolean }>;
@@ -28,8 +28,8 @@ export declare namespace ApiResponse {
   } & FetchData<T, { pagination: Pagination }>;
 
   type Tokens = {
-    accessToken?: string;
-    refreshToken?: string;
+    accessToken: string;
+    refreshToken: string;
   };
 
   type RemoveData = FetchData<{ success: true }>;
@@ -39,8 +39,8 @@ export declare namespace ApiResponse {
   type UserData = FetchData<Entity.User>;
 
   type Logged = FetchData<{
-    accessToken?: string;
-    refreshToken?: string;
+    accessToken: string;
+    refreshToken: string;
     user?: Entity.User;
   }>;
 
