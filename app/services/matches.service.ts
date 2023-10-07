@@ -1,17 +1,44 @@
 import { CommonService } from 'app/commons/service.common';
-import { AppStore } from 'app/types';
+import { APP_CONFIG } from 'app/config/config.app';
+import { AppStore, Entity } from 'app/types';
 import _ from 'lodash';
-import { IMessage } from 'react-native-gifted-chat';
+import moment from 'moment';
 
-class MessagesService extends CommonService {
-  sortAndUniq(news: IMessage[], olds: IMessage[]) {
-    return _.chain([...news, ...olds])
-      .uniqBy('_id')
-      .orderBy('_id', 'desc')
-      .value();
+class MatchesService extends CommonService {
+  constructor() {
+    super();
+    this.staleTime = APP_CONFIG.STALE_TIME.DEFAULT;
   }
 
-  isOld(match: AppStore.Match) {}
+  formatMany(
+    payload: Entity.Match[],
+    options?: Partial<AppStore.Match>,
+  ): AppStore.Match[] {
+    const lastRefreshedAt = moment().toISOString();
+    return payload.map(e => ({
+      ...e,
+      lastRefreshedAt,
+      ...options,
+    }));
+  }
+
+  formatOne(
+    payload: Entity.Match,
+    options?: Partial<AppStore.Match>,
+  ): AppStore.Match {
+    return {
+      ...payload,
+      lastRefreshedAt: moment().toISOString(),
+      ...options,
+    };
+  }
+
+  sortAndUniq(news: AppStore.Match[], olds: AppStore.Match[]) {
+    return _.chain([...news, ...olds])
+      .uniqBy('_id')
+      .orderBy(['_lastMessageUserId', '_id'], ['desc', 'desc'])
+      .value();
+  }
 }
 
-export const messagesService = new MessagesService();
+export const matchesService = new MatchesService();

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { conversationsService } from 'app/services/conversations.service';
+import { matchesService } from 'app/services/matches.service';
 import { AppStore } from 'app/types/app-store.type';
 import { Entity } from 'app/types/entity.type';
 import { SocketRequest } from 'app/types/socket-request.type';
@@ -17,6 +17,7 @@ export const matchSlice = createSlice({
   reducers: {
     addMany: (state, { payload }: PayloadAction<Entity.Match[]>) => {
       const stateData = state.data;
+      const matches = matchesService.formatMany(payload);
       if (!stateData.length) {
         state.data = payload;
         return;
@@ -26,7 +27,7 @@ export const matchSlice = createSlice({
         return;
       }
 
-      state.data = conversationsService.sortAndUniq(payload, stateData);
+      state.data = matchesService.sortAndUniq(matches, stateData);
     },
     updateOne(state, { payload }: PayloadAction<Entity.Match>) {},
     updateWhenUpdateSentMessage: (

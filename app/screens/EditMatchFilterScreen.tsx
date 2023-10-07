@@ -20,13 +20,12 @@ import { useDispatch } from 'react-redux';
 
 import { AppStackScreenProps } from '../navigators';
 
-type FCProps = AppStackScreenProps<'SignInWithOtpPhoneNumber'>;
-
-export const EditMatchFilterScreen: React.FC<FCProps> = () => {
+export const EditMatchFilterScreen: React.FC<
+  AppStackScreenProps<'EditMatchFilter'>
+> = () => {
   const t = useTranslate();
   const navigation = useNavigation();
   const dispatch = useDispatch();
-
   const { width } = Dimensions.get('window');
 
   const filterMaxDistance =
@@ -36,10 +35,6 @@ export const EditMatchFilterScreen: React.FC<FCProps> = () => {
   const filterMaxAge =
     useAppSelector(state => state.app.profile?.filterMaxAge) || 99;
   const filterGender = useAppSelector(state => state.app.profile?.filterGender);
-
-  const isNearbyUsersRefreshingTop = useAppSelector(
-    s => s.nearbyUser.isRefreshingTop || false,
-  );
 
   const formik = useFormik<FormParams.UpdateMatchFilter>({
     initialValues: {
@@ -52,9 +47,7 @@ export const EditMatchFilterScreen: React.FC<FCProps> = () => {
     onSubmit: async values => {
       try {
         await usersApi.updateProfile(values);
-
         const profile = await usersApi.getMyProfile();
-
         if (profile.data) {
           dispatch(appActions.updateProfile(profile.data));
         }
@@ -64,21 +57,17 @@ export const EditMatchFilterScreen: React.FC<FCProps> = () => {
           text1: t('Update failed, please try again.'),
         });
       }
+      dispatch(nearbyUserActions.updateRefreshTime());
 
       navigation.navigate('Home', {
         screen: 'DatingNearby',
       });
 
-      if (!isNearbyUsersRefreshingTop) {
-        dispatch(nearbyUserActions.setRefreshingTop(true));
-        try {
-          const nearbyUsersData = await nearbyUsersApi.getMany();
+      try {
+        const nearbyUsersData = await nearbyUsersApi.getMany();
 
-          dispatch(nearbyUserActions.addManyFirst(nearbyUsersData.data || []));
-        } catch (err) {}
-
-        dispatch(nearbyUserActions.setRefreshingTop(false));
-      }
+        dispatch(nearbyUserActions.addManyFirst(nearbyUsersData.data || []));
+      } catch (err) {}
     },
   });
 

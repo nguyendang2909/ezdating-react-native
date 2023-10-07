@@ -37,8 +37,8 @@ class MatchesApi extends CommonApi {
     return response.data;
   }
 
-  public getCursor(data?: Entity.Match[]): string | undefined {
-    return this.getCursorByField(['_id'], data);
+  public getCursor(data: Entity.Match[]): string | undefined {
+    return this.getCursorByField(['createdAt'], data);
   }
 }
 

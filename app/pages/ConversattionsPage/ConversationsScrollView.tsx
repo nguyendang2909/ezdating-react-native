@@ -6,6 +6,7 @@ import React from 'react';
 import {
   NativeScrollEvent,
   NativeSyntheticEvent,
+  RefreshControl,
   ViewStyle,
 } from 'react-native';
 
@@ -17,6 +18,8 @@ export const ConversationsScrollView: React.FC = () => {
     fetchNext,
     length: conversationsLength,
     data: conversations,
+    isLoadingNewest,
+    fetchNewest,
   } = useGetConversations();
 
   const handleScroll = async (e: NativeSyntheticEvent<NativeScrollEvent>) => {
@@ -32,6 +35,12 @@ export const ConversationsScrollView: React.FC = () => {
       showsVerticalScrollIndicator={false}
       onScroll={handleScroll}
       scrollEventThrottle={16}
+      refreshControl={
+        <RefreshControl
+          refreshing={isLoadingNewest}
+          onRefresh={fetchNewest}
+        ></RefreshControl>
+      }
     >
       <Box>
         <MatchCards />

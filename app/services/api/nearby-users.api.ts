@@ -18,8 +18,20 @@ class NearbyUsersApi extends CommonApi {
     return response.data;
   }
 
-  public getCursor(data?: Entity.User[]): string | undefined {
-    return this.getCursorByField(['_id', 'distance'], data);
+  public getCursor(users: Entity.User[]): string | undefined {
+    if (!users.length) {
+      return undefined;
+    }
+    const minDistance = users[users.length - 1].distance;
+    const excludedUserIds = users
+      .filter(e => e.distance === minDistance)
+      .map(e => e._id);
+    const cursor = {
+      minDistance,
+      excludedUserIds,
+    };
+
+    return this.encodeFromObj(cursor);
   }
 }
 

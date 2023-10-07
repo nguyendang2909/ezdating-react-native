@@ -29,8 +29,8 @@ class LikeMeApi extends CommonApi {
     return response.data;
   }
 
-  public getCursor(data?: Entity.User[]): string | undefined {
-    return this.getCursorByField('_id', data);
+  public getCursor(data: Entity.User[]): string | undefined {
+    return this.getCursorByField('createdAt', data);
   }
 }
 

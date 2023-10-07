@@ -15,8 +15,8 @@ class MessagesApi extends CommonApi {
     return response.data;
   }
 
-  public getCursor(data?: AppStore.ChatMessage[]): string | undefined {
-    return this.getCursorByField('_id', data);
+  public getCursor(data: AppStore.ChatMessage[]): string | undefined {
+    return this.getCursorByField('createdAt', data);
   }
 }
 

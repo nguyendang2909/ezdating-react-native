@@ -21,9 +21,9 @@ export class CommonApi {
 
   protected getCursorByField<T>(
     field: keyof T | (keyof T)[],
-    data?: T[],
+    data: T[],
   ): string | undefined {
-    const dataLength = data?.length;
+    const dataLength = data.length;
     if (!dataLength) {
       return undefined;
     }

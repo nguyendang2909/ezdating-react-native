@@ -1,22 +1,14 @@
-import { Button, ButtonIcon } from '@gluestack-ui/themed';
+import { Button, ChevronLeftIcon, Text } from '@gluestack-ui/themed';
 import { useNavigation } from '@react-navigation/native';
-import { Feather, MaterialIcons } from 'app/components/Icon/Lib';
+import { LoadingButtonIcon } from 'app/components/Button/LoadingButtonIcon';
+import { FontAwesome, Ionicons } from 'app/components/Icon/Lib';
 import { AppStackScreenProps } from 'app/navigators';
 import { likesApi } from 'app/services/api/likes.api';
 import { aspectRatio } from 'app/styles';
 import _ from 'lodash';
-import {
-  Box,
-  CloseIcon,
-  HStack,
-  Icon,
-  IconButton,
-  Image,
-  Text,
-  View,
-} from 'native-base';
-import React, { createRef, useState } from 'react';
-import { Dimensions } from 'react-native';
+import { Box, HStack, Image, View } from 'native-base';
+import React, { useState } from 'react';
+import { Dimensions, SafeAreaView } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
 
 type FCProps = AppStackScreenProps<'ProfileNearby'>;
@@ -25,67 +17,76 @@ export const ProfileNearbyScreen: React.FC<FCProps> = props => {
   const user = props.route.params.user;
 
   const width = Dimensions.get('window').width;
-  const { goBack, navigate } = useNavigation();
+  const { goBack } = useNavigation();
+
+  const [isLoadingSendLike, setLoadingSendLike] = useState<boolean>(false);
+  const [isShowSendLike, setShowSendLike] = useState<boolean>(true);
+  const [isLoadingSendMessage, setLoadingSendMessage] =
+    useState<boolean>(false);
 
   const handleSendLike = async () => {
-    await likesApi.send({
-      targetUserId: user._id,
-    });
+    try {
+      setLoadingSendLike(true);
+      await likesApi.send({
+        targetUserId: user._id,
+      });
+      setShowSendLike(false);
+    } catch (err) {
+    } finally {
+      setLoadingSendLike(false);
+    }
   };
 
-  // const sendMessage = async () => {
-  //   navigate('Messages', {
-  //     conversation: {},
-  //   });
-  // };
-
-  const [activeSlide, setActiveSlide] = useState<number>(0);
-
-  const ref = createRef<any>();
-
-  const photoLength = user?.mediaFiles?.length;
-
-  const dotWidth = photoLength ? (width - 48) / photoLength : 0;
+  const handleChat = async () => {
+    try {
+      setLoadingSendLike(true);
+      await likesApi.send({
+        targetUserId: user._id,
+      });
+      setShowSendLike(false);
+    } catch (err) {
+    } finally {
+      setLoadingSendLike(false);
+    }
+  };
 
   return (
     <>
       <Box position="absolute" bottom={10} left={0} right={0} zIndex={999}>
         <HStack justifyContent="center" space={4}>
           <Box>
-            <IconButton
-              variant="subtle"
-              icon={<CloseIcon />}
-              onPress={goBack}
-            ></IconButton>
+            <LoadingButtonIcon
+              height={40}
+              width={40}
+              onPress={handleChat}
+              isLoading={isLoadingSendMessage}
+            >
+              <Ionicons
+                color="white"
+                size={20}
+                name="chatbubble-ellipses-outline"
+              />
+            </LoadingButtonIcon>
           </Box>
-          <Box>
-            <IconButton
-              variant="subtle"
-              icon={<CloseIcon />}
-              onPress={goBack}
-            ></IconButton>
-          </Box>
-          <Box>
-            <IconButton
-              variant="subtle"
-              icon={<Icon as={<Feather name="heart" />} />}
-              onPress={handleSendLike}
-            ></IconButton>
-          </Box>
+          {isShowSendLike && (
+            <Box>
+              <LoadingButtonIcon
+                onPress={handleSendLike}
+                isLoading={isLoadingSendLike}
+              >
+                <FontAwesome color="white" size={20} name="heart" />
+              </LoadingButtonIcon>
+            </Box>
+          )}
         </HStack>
       </Box>
       <Box style={aspectRatio(640 / 860)}>
-        <Box position="absolute" zIndex={100} right={4} top={4}>
-          <Box safeAreaTop />
+        <Box position="absolute" zIndex={100} left={4} top={4}>
+          <SafeAreaView />
           <Box zIndex={100}>
-            <Button>
-              <ButtonIcon as={CloseIcon} />
+            <Button height={40} width={40} onPress={goBack}>
+              <ChevronLeftIcon color="$white" />
             </Button>
-            <IconButton
-              variant="subtle"
-              icon={<CloseIcon />}
-              onPress={goBack}
-            ></IconButton>
           </Box>
         </Box>
         <Box
@@ -141,12 +142,14 @@ export const ProfileNearbyScreen: React.FC<FCProps> = props => {
         <Box px={4}>
           <HStack space={3}>
             <Box>
-              <Text fontSize={28} fontWeight="bold">
+              <Text fontSize={28} fontWeight="bold" lineHeight={28}>
                 {user?.nickname}
               </Text>
             </Box>
             <Box>
-              <Text fontSize={28}>{user?.age}</Text>
+              <Text fontSize={28} lineHeight={28}>
+                {user?.age}
+              </Text>
             </Box>
           </HStack>
         </Box>
@@ -164,7 +167,7 @@ export const ProfileNearbyScreen: React.FC<FCProps> = props => {
             {_.isNumber(user?.distance) && (
               <HStack alignItems="center" space={2}>
                 <Box>
-                  <Icon as={MaterialIcons} name="location-on" size={6} />
+                  {/* <Icon as={MaterialIcons} name="location-on" /> */}
                 </Box>
                 <Box>
                   <Text fontSize={20}>
