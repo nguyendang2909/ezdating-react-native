@@ -82,6 +82,7 @@ export const SignInWithOtpPhoneNumberScreen: FC<FCProps> = props => {
         return;
       }
       const idToken = await credential.user.getIdToken();
+
       const signInWithPhoneNumber = await authApi.signInWithPhoneNumber({
         token: idToken,
       });

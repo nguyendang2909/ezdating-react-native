@@ -12,13 +12,14 @@ import {
   REHYDRATE,
 } from 'redux-persist';
 import createSagaMiddleware from 'redux-saga';
+import thunk from 'redux-thunk';
 
 import { api } from '../services/api';
 import { appReducer } from './app.store';
 import { likedMeReducer } from './liked-me.store';
 import { likeReducer } from './likes.store';
-import { matchReducer } from './match.store';
-import { messageReducer } from './messages.store';
+import { matchReducer } from './match/match.store';
+import { messageReducer } from './message/message.store';
 import { nearbyUserReducer } from './nearby-user.store';
 import { appSaga } from './saga';
 import { swipeUserReducer } from './swipe-user.store';
@@ -74,7 +75,7 @@ export const store = configureStore({
         // ],
         // ignoredPaths: ['meta.baseQueryMeta.request'],
       },
-    }).concat(api.middleware, sagaMiddleware);
+    }).concat(api.middleware, sagaMiddleware, thunk);
 
     // if (__DEV__ && !process.env.JEST_WORKER_ID) {
     //   const createDebugger = require('redux-flipper').default;

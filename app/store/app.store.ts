@@ -10,7 +10,9 @@ const initialState: AppStore.AppState = {
   refreshToken: undefined,
   profile: {},
   osPermissions: {},
-  socket: {},
+  socket: {
+    connectedAt: moment().toISOString(),
+  },
 };
 
 export const appSlice = createSlice({
@@ -19,16 +21,13 @@ export const appSlice = createSlice({
   reducers: {
     updateProfile: (state, action: PayloadAction<Entity.User>) => {
       const { payload } = action;
-
       state.profile = payload;
     },
     updateAccessToken: (state, action: PayloadAction<ApiResponse.Tokens>) => {
       const { payload } = action;
-
       if (payload.accessToken) {
         state.accessToken = payload.accessToken;
       }
-
       if (payload.refreshToken) {
         state.refreshToken = payload.refreshToken;
       }

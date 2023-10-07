@@ -1,60 +1,39 @@
 import { messagesApi } from 'app/services/api/messages.api';
-import { messageActions } from 'app/store/messages.store';
+import {
+  getManyNewestMessages,
+  getManyNextMessages,
+  refreshMessages,
+} from 'app/store/message/message.action';
 import { socketStoreActions } from 'app/store/socket.store';
 import _ from 'lodash';
-import moment from 'moment';
-import { useCallback, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 
+import { useAppDispatch } from './usAppDispatch';
 import { useAppSelector } from './useAppSelector';
 
 export const useGetMessages = ({ matchId }: { matchId: string }) => {
-  const dispatch = useDispatch();
-  const messages = useAppSelector(state => state.messages.data[matchId]);
+  const dispatch = useAppDispatch();
+  const messages = useAppSelector(state => state.messages.data[matchId]) || [];
   const messagesLength = messages?.length || 0;
-  const [isReachedEnd, setReachedEnd] = useState<boolean>(true);
-  const [isLoadingNewest, setLoadingNewest] = useState<boolean>(false);
-  const [isLoadingNext, setLoadingNext] = useState<boolean>(false);
-  const [isFetchedFirstTime, setFetchedFirstTime] = useState<boolean>(false);
+  const isReachedEnd = !!useAppSelector(state => {
+    return state.messages.info[matchId]?.isReachedEnd;
+  });
+  const isLoading = !!useAppSelector(state => {
+    return state.messages.info[matchId]?.isLoading;
+  });
+  const isLoadingNewest = !!useAppSelector(state => {
+    return state.messages.info[matchId]?.isLoadingNewest;
+  });
+  const isLoadingNext = !!useAppSelector(state => {
+    return state.messages.info[matchId]?.isLoadingNext;
+  });
   const lastRefreshedAt = useAppSelector(
     s => s.messages.info[matchId]?.lastRefreshedAt,
   );
-  const lastConnectedSocket = useAppSelector(s => s.app.socket.connectedAt);
-
-  const fetchFirst = useCallback(async () => {
-    setFetchedFirstTime(true);
-    setLoadingNewest(true);
-    try {
-      const data = await messagesApi.getMany({
-        matchId,
-      });
-      dispatch(messageActions.addMany(data));
-      messagesApi.handlePagination(data.pagination, setReachedEnd);
-    } catch (err) {
-    } finally {
-      setLoadingNewest(false);
-      dispatch(messageActions.updateRefreshTime({ matchId }));
-    }
-  }, [dispatch, matchId]);
 
   useEffect(() => {
-    if (
-      !isFetchedFirstTime &&
-      !isLoadingNewest &&
-      (!messagesLength ||
-        !lastRefreshedAt ||
-        moment(lastConnectedSocket).isAfter(moment(lastRefreshedAt)))
-    ) {
-      fetchFirst();
-    }
-  }, [
-    fetchFirst,
-    isFetchedFirstTime,
-    isLoadingNewest,
-    lastConnectedSocket,
-    lastRefreshedAt,
-    messagesLength,
-  ]);
+    dispatch(refreshMessages({ matchId }));
+  }, [dispatch, matchId]);
 
   const lastMessageId = _.first(messages)?._id as string;
 
@@ -70,30 +49,12 @@ export const useGetMessages = ({ matchId }: { matchId: string }) => {
   }, [dispatch, lastMessageId, matchId]);
 
   const fetchNewest = async () => {
-    if (isLoadingNewest) {
-      return;
-    }
-    await fetchFirst();
+    dispatch(getManyNewestMessages({ matchId }));
   };
 
   const fetchNext = async () => {
-    if (isReachedEnd || isLoadingNext) {
-      return;
-    }
-    try {
-      const nextCursor = messagesApi.getCursor(messages);
-      const data = await messagesApi.getMany({
-        matchId,
-        _next: nextCursor,
-      });
-      if (data) {
-        dispatch(messageActions.addMany(data));
-        messagesApi.handlePagination(data.pagination, setReachedEnd);
-      }
-    } catch (err) {
-    } finally {
-      setLoadingNext(false);
-    }
+    const _next = messagesApi.getCursor(messages);
+    dispatch(getManyNextMessages({ matchId, ...(_next ? { _next } : {}) }));
   };
 
   return {
@@ -102,7 +63,9 @@ export const useGetMessages = ({ matchId }: { matchId: string }) => {
     fetchNext,
     isLoadingNewest,
     isLoadingNext,
-    isFetchedFirstTime,
     length: messagesLength,
+    isReachedEnd,
+    lastRefreshedAt,
+    isLoading,
   };
 };

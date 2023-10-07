@@ -1,0 +1,233 @@
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { matchesService } from 'app/services/matches.service';
+import { ApiResponse } from 'app/types';
+import { AppStore } from 'app/types/app-store.type';
+import { Entity } from 'app/types/entity.type';
+import { SocketRequest } from 'app/types/socket-request.type';
+import moment from 'moment';
+
+import { appActions } from '../app.store';
+
+const initialState: AppStore.MatchState = {
+  data: [],
+  infoMatches: {
+    isLoading: false,
+    isLoadingNewest: false,
+    isLoadingNext: false,
+    isReachedEnd: true,
+  },
+  infoConversations: {
+    isLoading: false,
+    isLoadingNewest: false,
+    isLoadingNext: false,
+    isReachedEnd: true,
+  },
+};
+
+export const matchSlice = createSlice({
+  name: 'match',
+  initialState,
+  reducers: {
+    // Matches
+    refreshMatches: (
+      state,
+      { payload: { data, pagination } }: PayloadAction<ApiResponse.Matches>,
+    ) => {
+      state.infoMatches = {
+        ...state.infoMatches,
+        isReachedEnd: !pagination._next,
+        lastRefreshedAt: moment().toISOString(),
+      };
+      const matches = matchesService.formatMany(data);
+      state.data = matchesService.sortAndUniq(matches, state.data);
+    },
+
+    addManyNewestMatches: (
+      state,
+      { payload: { data, pagination } }: PayloadAction<ApiResponse.Matches>,
+    ) => {
+      state.infoMatches = {
+        ...state.infoMatches,
+        isReachedEnd: !pagination._next,
+        lastRefreshedAt: moment().toISOString(),
+      };
+      const matches = matchesService.formatMany(data);
+      state.data = matchesService.sortAndUniq(matches, state.data);
+    },
+
+    addManyNextMatches: (
+      state,
+      { payload: { data, pagination } }: PayloadAction<ApiResponse.Matches>,
+    ) => {
+      state.infoMatches = {
+        ...state.infoMatches,
+        isReachedEnd: !pagination._next,
+        lastRefreshedAt: moment().toISOString(),
+      };
+      const matches = matchesService.formatMany(data);
+      state.data = matchesService.sortAndUniq(matches, state.data);
+    },
+
+    updateMatchesRefreshTime: state => {
+      state.infoMatches.lastRefreshedAt = moment().toISOString();
+    },
+
+    setMatchesLoading: (state, { payload }: PayloadAction<boolean>) => {
+      state.infoMatches.isLoading = payload;
+    },
+
+    setMatchesLoadingNewest: (state, { payload }: PayloadAction<boolean>) => {
+      state.infoMatches.isLoadingNewest = payload;
+    },
+
+    setMatchesLoadingNext: (state, { payload }: PayloadAction<boolean>) => {
+      state.infoMatches.isLoadingNext = payload;
+    },
+
+    // Conversations
+    updateWhenUpdateSentMessage: (
+      state,
+      action: PayloadAction<Entity.Message>,
+    ) => {
+      if (!state.data?.length) {
+        return;
+      }
+      const message = action.payload;
+      const stateDataLength = state.data.length;
+      for (let i = 0; i < stateDataLength; i += 1) {
+        const stateData = state.data[i];
+        if (stateData._id === message._matchId) {
+          state.data[i] = {
+            ...stateData,
+            lastMessage: message.text,
+            _lastMessageUserId: message._userId,
+            lastMessageAt: message._userId,
+            read: true,
+          };
+          return;
+        }
+      }
+    },
+
+    updateWhenReceivingMessage: (
+      state,
+      action: PayloadAction<Entity.Message>,
+    ) => {
+      if (!state.data?.length) {
+        return;
+      }
+      const message = action.payload;
+      const stateDataLength = state.data.length;
+      for (let i = 0; i < stateDataLength; i += 1) {
+        const stateData = state.data[i];
+        if (stateData._id === message._matchId) {
+          state.data[i] = {
+            ...stateData,
+            lastMessage: message.text,
+            _lastMessageUserId: message._userId,
+            lastMessageAt: message._userId,
+            read: false,
+          };
+          return;
+        }
+      }
+    },
+
+    readMessage: (state, action: PayloadAction<SocketRequest.ReadMessage>) => {
+      const { payload } = action;
+      const matchId = payload.matchId;
+      if (!state.data.length) {
+        return;
+      }
+      const matchIndex = state.data.findIndex(item => item._id === matchId);
+      if (matchIndex >= 0) {
+        state.data[matchIndex].read = true;
+      }
+    },
+
+    refreshConversations: (
+      state,
+      {
+        payload: { data, pagination },
+      }: PayloadAction<ApiResponse.Conversations>,
+    ) => {
+      state.infoConversations = {
+        ...state.infoConversations,
+        isReachedEnd: !pagination._next,
+        lastRefreshedAt: moment().toISOString(),
+      };
+      const matches = matchesService.formatMany(data);
+      state.data = matchesService.sortAndUniq(matches, state.data);
+    },
+
+    addManyNewestConversations: (
+      state,
+      {
+        payload: { data, pagination },
+      }: PayloadAction<ApiResponse.Conversations>,
+    ) => {
+      state.infoConversations = {
+        ...state.infoConversations,
+        isReachedEnd: !pagination._next,
+        lastRefreshedAt: moment().toISOString(),
+      };
+      const matches = matchesService.formatMany(data);
+      state.data = matchesService.sortAndUniq(matches, state.data);
+    },
+
+    addManyNextConversations: (
+      state,
+      {
+        payload: { data, pagination },
+      }: PayloadAction<ApiResponse.Conversations>,
+    ) => {
+      state.infoConversations = {
+        ...state.infoConversations,
+        isReachedEnd: !pagination._next,
+        lastRefreshedAt: moment().toISOString(),
+      };
+      const matches = matchesService.formatMany(data);
+      state.data = matchesService.sortAndUniq(matches, state.data);
+    },
+
+    // updateConversationsRefreshTime: state => {
+    //   state.infoConversations.lastRefreshedAt = moment().toISOString();
+    // },
+
+    setConversationsLoading: (state, { payload }: PayloadAction<boolean>) => {
+      state.infoConversations.isLoading = payload;
+    },
+
+    setConversationsLoadingNewest: (
+      state,
+      { payload }: PayloadAction<boolean>,
+    ) => {
+      state.infoConversations.isLoadingNewest = payload;
+    },
+
+    setConversationsLoadingNext: (
+      state,
+      { payload }: PayloadAction<boolean>,
+    ) => {
+      state.infoConversations.isLoadingNext = payload;
+    },
+  },
+  extraReducers: builder => {
+    builder.addCase(appActions.logout, state => {
+      state.data = [];
+    });
+  },
+});
+
+export const matchActions = matchSlice.actions;
+
+export const matchSelects = {
+  conversations: (state: AppStore.RootState) => {
+    return state.match.data.filter(e => !!e._lastMessageId);
+  },
+  matches: (state: AppStore.RootState) => {
+    return state.match.data.filter(e => !e._lastMessageId);
+  },
+};
+
+export const matchReducer = matchSlice.reducer;

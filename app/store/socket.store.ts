@@ -6,17 +6,29 @@ import {
   SOCKET_TO_CLIENT_EVENTS,
   SOCKET_TO_SERVER_EVENTS,
 } from 'app/constants';
+import { AppStore } from 'app/types';
 import { Entity } from 'app/types/entity.type';
 import { SocketRequest } from 'app/types/socket-request.type';
 import { eventChannel } from 'redux-saga';
-import { ActionPattern, call, put, select, take } from 'redux-saga/effects';
+import {
+  ActionPattern,
+  call,
+  put,
+  select as RSSelect,
+  take,
+} from 'redux-saga/effects';
 import { io, Socket } from 'socket.io-client';
 
 import { appActions } from './app.store';
-import { matchActions } from './match.store';
-import { messageActions } from './messages.store';
+import { matchActions } from './match';
+import { messageActions } from './message/message.store';
 
 let socket: Socket;
+
+export function* select<T>(selector: (state: AppStore.RootState) => T) {
+  const slice: T = yield RSSelect(selector);
+  return slice;
+}
 
 function setupSocketIo(token: string) {
   disconnectWebSocket();

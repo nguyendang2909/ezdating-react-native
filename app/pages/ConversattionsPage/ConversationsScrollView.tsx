@@ -16,11 +16,12 @@ import { NoConversationBox } from './NoConversationBox';
 
 export const ConversationsScrollView: React.FC = () => {
   const {
-    fetchNext,
+    fetchNext: fetchNextConversations,
     length: conversationsLength,
     data: conversations,
     isLoadingNewest: isLoadingNewestConversations,
     fetchNewest: fetchNewestConversations,
+    lastRefreshedAt: conversationsLastRefreshedAt,
   } = useGetConversations();
 
   const {
@@ -31,7 +32,7 @@ export const ConversationsScrollView: React.FC = () => {
 
   const handleScroll = async (e: NativeSyntheticEvent<NativeScrollEvent>) => {
     if (!scrollUtil.isCloseToBottom(e)) {
-      fetchNext();
+      fetchNextConversations();
     }
   };
 
@@ -49,7 +50,7 @@ export const ConversationsScrollView: React.FC = () => {
       scrollEventThrottle={16}
       refreshControl={
         <RefreshControl
-          refreshing={isLoadingNewestConversations || isLoadingNewestMatches}
+          refreshing={isLoadingNewestConversations}
           onRefresh={handleRefresh}
         ></RefreshControl>
       }
@@ -58,7 +59,7 @@ export const ConversationsScrollView: React.FC = () => {
         <MatchCards matches={matches} />
       </Box>
 
-      {conversationsLength ? (
+      {conversationsLength && conversationsLastRefreshedAt ? (
         <>
           <Box px={16} mt={8}>
             <Text bold>Messages</Text>

@@ -1,73 +1,46 @@
 import { conversationsApi } from 'app/services/api/conversations.api';
-import { matchActions, matchSelects } from 'app/store/match.store';
-import { useCallback, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import {
+  getManyNewestConversations,
+  getManyNextConversations,
+  refreshConversations,
+} from 'app/store/match/conversation.action';
+import { matchSelects } from 'app/store/match/match.store';
+import { useEffect } from 'react';
 
+import { useAppDispatch } from './usAppDispatch';
 import { useAppSelector } from './useAppSelector';
 
 export const useGetConversations = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const conversations = useAppSelector(matchSelects.conversations);
+
+  const isLoading = useAppSelector(s => s.match.infoConversations.isLoading);
+  const isReachedEnd = useAppSelector(
+    s => s.match.infoConversations.isReachedEnd,
+  );
+  const isLoadingNext = useAppSelector(
+    s => s.match.infoConversations.isLoadingNext,
+  );
+  const isLoadingNewest = useAppSelector(
+    s => s.match.infoConversations.isLoadingNewest,
+  );
+  const lastRefreshedAt = useAppSelector(
+    s => s.match.infoConversations.lastRefreshedAt,
+  );
   const conversationsLength = conversations.length;
-  const [isReachedEnd, setReachedEnd] = useState<boolean>(true);
-  const [isLoadingNewest, setLoadingNewest] = useState<boolean>(false);
-  const [isLoadingNext, setLoadingNext] = useState<boolean>(false);
-  const [isFetchedFirstTime, setFetchFirstTime] = useState<boolean>(false);
-
-  const fetchFirst = useCallback(async () => {
-    setFetchFirstTime(true);
-
-    setLoadingNewest(true);
-
-    try {
-      const { data, pagination } = await conversationsApi.getMany();
-
-      if (data) {
-        dispatch(matchActions.addMany(data));
-      }
-
-      conversationsApi.handlePagination(pagination, setReachedEnd);
-    } catch (err) {
-    } finally {
-      setLoadingNewest(false);
-    }
-  }, [dispatch]);
 
   useEffect(() => {
-    if (!isFetchedFirstTime && !conversationsLength && !isLoadingNewest) {
-      fetchFirst();
-    }
-  }, [conversationsLength, fetchFirst, isFetchedFirstTime, isLoadingNewest]);
+    dispatch(refreshConversations());
+  }, [dispatch]);
 
   const fetchNewest = async () => {
-    if (isLoadingNewest) {
-      return;
-    }
-
-    await fetchFirst();
+    dispatch(getManyNewestConversations());
   };
 
   const fetchNext = async () => {
-    if (isReachedEnd) {
-      return;
-    }
-    if (isLoadingNext) {
-      return;
-    }
-    try {
-      const nextCursor = conversationsApi.getCursor(conversations);
-      const { data, pagination } = await conversationsApi.getMany({
-        _next: nextCursor,
-      });
-      if (data) {
-        dispatch(matchActions.addMany(data));
-      }
-      conversationsApi.handlePagination(pagination, setReachedEnd);
-    } catch (err) {
-    } finally {
-      setLoadingNext(false);
-    }
+    const _next = conversationsApi.getCursor(conversations);
+    dispatch(getManyNextConversations({ ...(_next ? { _next } : {}) }));
   };
 
   return {
@@ -77,6 +50,8 @@ export const useGetConversations = () => {
     fetchNext,
     isLoadingNewest,
     isLoadingNext,
-    isFetchedFirstTime,
+    isLoading,
+    isReachedEnd,
+    lastRefreshedAt,
   };
 };

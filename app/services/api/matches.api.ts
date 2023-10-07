@@ -15,22 +15,11 @@ class MatchesApi extends CommonApi {
     return data;
   }
 
-  async getMany({
-    params = {},
-    data,
-  }: {
-    params?: ApiRequest.FindManyMatches;
-    data?: Entity.Match[];
-  } = {}) {
-    const _next = this.getCursor(data);
-
+  async getMany(params?: ApiRequest.FindManyMatches) {
     const response = await api.get<ApiResponse.PaginatedResponse<Entity.Match>>(
       API_URL.matches,
       {
-        params: {
-          ...params,
-          ...(_next ? { _next } : {}),
-        },
+        params,
       },
     );
 

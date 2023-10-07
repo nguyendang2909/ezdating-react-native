@@ -20,6 +20,10 @@ export declare namespace ApiResponse {
     type: string;
   };
 
+  type Matches = PaginatedResponse<Entity.Match>;
+
+  type Conversations = PaginatedResponse<Entity.Match>;
+
   type SuccessResponse = FetchData<{ success: boolean }>;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

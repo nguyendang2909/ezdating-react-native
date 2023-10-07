@@ -1,6 +1,6 @@
 import { nearbyUsersApi } from 'app/services/api/nearby-users.api';
+import { nearbyUsersService } from 'app/services/nearby-users.service';
 import { nearbyUserActions } from 'app/store/nearby-user.store';
-import moment from 'moment';
 import { useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -13,11 +13,34 @@ export const useGetNearbyUsers = () => {
   const [isReachedEnd, setReachedEnd] = useState<boolean>(true);
   const [isLoadingNewest, setLoadingNewest] = useState<boolean>(false);
   const [isLoadingNext, setLoadingNext] = useState<boolean>(false);
+  const [isLoading, setLoading] = useState<boolean>(false);
   const lastRefreshedAt = useAppSelector(
     s => s.nearbyUser.info.lastRefreshedAt,
   );
 
   const fetchFirst = useCallback(async () => {
+    setLoading(true);
+    try {
+      const { data, pagination } = await nearbyUsersApi.getMany();
+      dispatch(nearbyUserActions.addManyFirst(data || []));
+      nearbyUsersApi.handlePagination(pagination, setReachedEnd);
+    } catch (err) {
+    } finally {
+      setLoading(false);
+      dispatch(nearbyUserActions.updateRefreshTime());
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (!isLoading && nearbyUsersService.isRefreshOrStale(lastRefreshedAt)) {
+      fetchFirst();
+    }
+  }, [fetchFirst, isLoading, lastRefreshedAt, length]);
+
+  const fetchNewest = async () => {
+    if (isLoadingNewest || isLoading) {
+      return;
+    }
     setLoadingNewest(true);
     try {
       const { data, pagination } = await nearbyUsersApi.getMany();
@@ -28,24 +51,6 @@ export const useGetNearbyUsers = () => {
       setLoadingNewest(false);
       dispatch(nearbyUserActions.updateRefreshTime());
     }
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (
-      !isLoadingNewest &&
-      (!length ||
-        !lastRefreshedAt ||
-        moment().diff(moment(lastRefreshedAt), 'hours') >= 1)
-    ) {
-      fetchFirst();
-    }
-  }, [fetchFirst, isLoadingNewest, lastRefreshedAt, length]);
-
-  const fetchNewest = async () => {
-    if (isLoadingNewest) {
-      return;
-    }
-    await fetchFirst();
   };
 
   const fetchNext = async () => {
@@ -72,5 +77,7 @@ export const useGetNearbyUsers = () => {
     isLoadingNewest,
     isLoadingNext,
     length,
+    isLoading,
+    lastRefreshedAt,
   };
 };

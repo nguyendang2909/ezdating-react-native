@@ -1,6 +1,8 @@
+import { Action } from '@reduxjs/toolkit';
 import { store } from 'app/store';
 import { AuthorizationResult } from 'react-native-geolocation-service';
 import { IMessage } from 'react-native-gifted-chat';
+import { ThunkAction } from 'redux-thunk';
 
 import { Entity } from './entity.type';
 
@@ -21,14 +23,11 @@ export declare namespace AppStore {
   };
 
   type ConversationState = {
-    data: Entity.Match[];
-    info: {
-      lastRefreshedAt?: string;
-    };
+    data: AppStore.Match[];
   };
 
   type Match = Entity.Match & {
-    lastRefreshedAt?: string;
+    lastRefreshedAt: string;
   };
 
   type ChatMessage = IMessage & { uuid?: string };
@@ -39,13 +38,30 @@ export declare namespace AppStore {
       string,
       {
         lastRefreshedAt?: string;
+        isLoading?: boolean;
+        isLoadingNewest?: boolean;
+        isLoadingNext?: boolean;
+        isReachedEnd?: boolean;
       }
     >;
   };
 
   type MatchState = {
-    data?: Entity.Match[];
-    isReachedEnd?: boolean;
+    data: Match[];
+    infoMatches: {
+      lastRefreshedAt?: string;
+      isLoading: boolean;
+      isLoadingNewest: boolean;
+      isLoadingNext: boolean;
+      isReachedEnd: boolean;
+    };
+    infoConversations: {
+      lastRefreshedAt?: string;
+      isLoading: boolean;
+      isLoadingNewest: boolean;
+      isLoadingNext: boolean;
+      isReachedEnd: boolean;
+    };
   };
 
   type Messages = Partial<{
@@ -91,3 +107,10 @@ export declare namespace AppStore {
     };
   };
 }
+
+export type AppThunkAction = ThunkAction<
+  void,
+  AppStore.RootState,
+  unknown,
+  Action
+>;

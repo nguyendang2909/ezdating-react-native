@@ -8,8 +8,8 @@ export class CommonService {
     this.staleTime = APP_CONFIG.STALE_TIME.DEFAULT;
   }
 
-  isStale(time?: string): boolean {
-    if (time && moment().diff(moment(time), 'milliseconds') < this.staleTime) {
+  public isStale(time: string): boolean {
+    if (moment().diff(moment(time), 'milliseconds') < this.staleTime) {
       return false;
     }
 

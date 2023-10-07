@@ -1,73 +1,38 @@
-import { matchesApi } from 'app/services/api/matches.api';
-import { matchActions, matchSelects } from 'app/store/match.store';
-import { useCallback, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import {
+  getManyNewestMatches,
+  refreshMatches,
+} from 'app/store/match/match.action';
+import { matchSelects } from 'app/store/match/match.store';
+import { useEffect } from 'react';
 
+import { useAppDispatch } from './usAppDispatch';
 import { useAppSelector } from './useAppSelector';
 
 export const useGetMatches = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const matches = useAppSelector(matchSelects.matches);
+  const lastRefreshedAt = useAppSelector(
+    s => s.match.infoMatches.lastRefreshedAt,
+  );
+  const isReachedEnd = useAppSelector(s => s.match.infoMatches.isReachedEnd);
+  const isLoading = useAppSelector(s => s.match.infoMatches.isLoading);
+  const isLoadingNext = useAppSelector(s => s.match.infoMatches.isLoadingNext);
+  const isLoadingNewest = useAppSelector(
+    s => s.match.infoMatches.isLoadingNewest,
+  );
   const matchesLength = matches.length;
-  const [isReachedEnd, setReachedEnd] = useState<boolean>(true);
-  const [isLoadingNewest, setLoadingNewest] = useState<boolean>(false);
-  const [isLoadingNext, setLoadingNext] = useState<boolean>(false);
-  const [isFetchedFirstTime, setFetchFirstTime] = useState<boolean>(false);
-
-  const fetchFirst = useCallback(async () => {
-    setFetchFirstTime(true);
-
-    setLoadingNewest(true);
-
-    try {
-      const { data, pagination } = await matchesApi.getMany();
-
-      if (data) {
-        dispatch(matchActions.addMany(data));
-      }
-
-      matchesApi.handlePagination(pagination, setReachedEnd);
-    } catch (err) {
-    } finally {
-      setLoadingNewest(false);
-    }
-  }, [dispatch]);
 
   useEffect(() => {
-    if (!isFetchedFirstTime && !matchesLength && !isLoadingNewest) {
-      fetchFirst();
-    }
-  }, [matchesLength, fetchFirst, isFetchedFirstTime, isLoadingNewest]);
+    dispatch(refreshMatches());
+  }, [dispatch]);
 
   const fetchNewest = async () => {
-    if (isLoadingNewest) {
-      return;
-    }
-
-    await fetchFirst();
+    dispatch(getManyNewestMatches());
   };
 
   const fetchNext = async () => {
-    if (isReachedEnd) {
-      return;
-    }
-    if (isLoadingNext) {
-      return;
-    }
-    try {
-      const nextCursor = matchesApi.getCursor(matches);
-      const { data, pagination } = await matchesApi.getMany({
-        _next: nextCursor,
-      });
-      if (data) {
-        dispatch(matchActions.addMany(data));
-      }
-      matchesApi.handlePagination(pagination, setReachedEnd);
-    } catch (err) {
-    } finally {
-      setLoadingNext(false);
-    }
+    dispatch(getManyNewestMatches());
   };
 
   return {
@@ -77,6 +42,8 @@ export const useGetMatches = () => {
     fetchNext,
     isLoadingNewest,
     isLoadingNext,
-    isFetchedFirstTime,
+    isReachedEnd,
+    isLoading,
+    lastRefreshedAt,
   };
 };

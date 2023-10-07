@@ -8,12 +8,9 @@ import { api } from './api';
 
 class ConversationsApi extends CommonApi {
   async getMany(params?: ApiRequest.FindManyConversations) {
-    const response = await api.get<ApiResponse.PaginatedResponse<Entity.Match>>(
-      API_URL.conversations,
-      {
-        params,
-      },
-    );
+    const response = await api.get<ApiResponse.Matches>(API_URL.conversations, {
+      params,
+    });
 
     return response.data;
   }

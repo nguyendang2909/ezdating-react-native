@@ -5,7 +5,7 @@ import { AppStore } from 'app/types/app-store.type';
 import { Entity } from 'app/types/entity.type';
 import moment from 'moment';
 
-import { appActions } from './app.store';
+import { appActions } from '../app.store';
 
 const initialState: AppStore.MessageState = {
   data: {},
@@ -16,27 +16,61 @@ export const messageSlice = createSlice({
   name: 'message',
   initialState,
   reducers: {
-    addMany: (
+    refreshMany: (
       state,
       {
-        payload: { _matchId: matchId, data: payloadData },
+        payload: { _matchId: matchId, data: payloadData, pagination },
       }: PayloadAction<ApiResponse.MessagesData>,
     ) => {
-      const stateInfo = state.info[matchId];
-      if (!stateInfo) {
-        state.info[matchId] = {
-          lastRefreshedAt: moment().toDate().toISOString(),
-        };
-      } else {
-        stateInfo.lastRefreshedAt = moment().toDate().toISOString();
-      }
+      state.info[matchId] = {
+        ...state.info[matchId],
+        isReachedEnd: !pagination._next,
+        lastRefreshedAt: moment().toISOString(),
+      };
       const messages = messagesService.formatMany(payloadData);
       const stateData = state.data[matchId];
-      if (!stateData?.length) {
-        state.data[matchId] = messages;
-        return;
-      }
-      state.data[matchId] = messagesService.sortAndUniq(messages, stateData);
+      state.data[matchId] = messagesService.sortAndUniq(
+        messages,
+        stateData || [],
+      );
+    },
+
+    addManyNewest: (
+      state,
+      {
+        payload: { _matchId: matchId, data: payloadData, pagination },
+      }: PayloadAction<ApiResponse.MessagesData>,
+    ) => {
+      state.info[matchId] = {
+        ...state.info[matchId],
+        isReachedEnd: !pagination._next,
+        lastRefreshedAt: moment().toISOString(),
+      };
+      const messages = messagesService.formatMany(payloadData);
+      const stateData = state.data[matchId];
+      state.data[matchId] = messagesService.sortAndUniq(
+        messages,
+        stateData || [],
+      );
+    },
+
+    addManyNext: (
+      state,
+      {
+        payload: { _matchId: matchId, data: payloadData, pagination },
+      }: PayloadAction<ApiResponse.MessagesData>,
+    ) => {
+      state.info[matchId] = {
+        ...state.info[matchId],
+        isReachedEnd: !pagination._next,
+        lastRefreshedAt: moment().toISOString(),
+      };
+      const messages = messagesService.formatMany(payloadData);
+      const stateData = state.data[matchId];
+      state.data[matchId] = messagesService.sortAndUniq(
+        messages,
+        stateData || [],
+      );
     },
 
     receiveMsg: (state, action: PayloadAction<Entity.Message>) => {
@@ -106,7 +140,59 @@ export const messageSlice = createSlice({
       }
       state.info[matchId].lastRefreshedAt = lastRefreshedAt;
     },
+
+    setLoading: (
+      state,
+      {
+        payload: { matchId, isLoading },
+      }: PayloadAction<{ matchId: string; isLoading: boolean }>,
+    ) => {
+      if (!state.info[matchId]) {
+        state.info.matchId = {
+          isLoading,
+        };
+
+        return;
+      }
+
+      state.info[matchId].isLoading = isLoading;
+    },
+
+    setLoadingNewest: (
+      state,
+      {
+        payload: { matchId, isLoading },
+      }: PayloadAction<{ matchId: string; isLoading: boolean }>,
+    ) => {
+      if (!state.info[matchId]) {
+        state.info.matchId = {
+          isLoadingNewest: isLoading,
+        };
+
+        return;
+      }
+
+      state.info[matchId].isLoadingNewest = isLoading;
+    },
+
+    setLoadingNext: (
+      state,
+      {
+        payload: { matchId, isLoading },
+      }: PayloadAction<{ matchId: string; isLoading: boolean }>,
+    ) => {
+      if (!state.info[matchId]) {
+        state.info.matchId = {
+          isLoadingNext: isLoading,
+        };
+
+        return;
+      }
+
+      state.info[matchId].isLoadingNext = isLoading;
+    },
   },
+
   extraReducers: builder => {
     builder.addCase(appActions.logout, state => {
       state.data = {};

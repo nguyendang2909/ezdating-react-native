@@ -1,10 +1,10 @@
 import { matchesApi } from 'app/services/api/matches.api';
-import { matchActions } from 'app/store/match.store';
+import { messagesService } from 'app/services/messages.service';
+import { matchActions } from 'app/store/match/match.store';
 import { useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { useAppSelector } from './useAppSelector';
-import { messagesService } from 'app/services/messages.service';
 
 export const useGetMatch = (matchId: string) => {
   const dispatch = useDispatch();
