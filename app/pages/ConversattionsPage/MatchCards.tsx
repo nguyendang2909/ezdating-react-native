@@ -1,14 +1,17 @@
 import { Box, ScrollView, Text } from '@gluestack-ui/themed';
 import { useNavigation } from '@react-navigation/native';
-import { useGetMatches } from 'app/hooks/useGetMatches';
+import { AppStore } from 'app/types';
 import { Entity } from 'app/types/entity.type';
 import { HStack, Image, Pressable } from 'native-base';
 import React from 'react';
 import { Dimensions } from 'react-native';
 
-export const MatchCards: React.FC = () => {
+type MatchCardsProps = {
+  matches: AppStore.Match[];
+};
+
+export const MatchCards: React.FC<MatchCardsProps> = ({ matches }) => {
   const navigation = useNavigation();
-  const { data: matches } = useGetMatches();
 
   const cardWidth = Dimensions.get('window').width / 4;
   const imageCardHeight = (cardWidth / 640) * 860;

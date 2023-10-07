@@ -1,6 +1,7 @@
 import { Box, ScrollView, Text, View } from '@gluestack-ui/themed';
 import { ConversationBox } from 'app/containers/Conversation/ConversationBox';
 import { useGetConversations } from 'app/hooks/useGetConversations';
+import { useGetMatches } from 'app/hooks/useGetMatches';
 import { scrollUtil } from 'app/utils/scroll.util';
 import React from 'react';
 import {
@@ -18,14 +19,25 @@ export const ConversationsScrollView: React.FC = () => {
     fetchNext,
     length: conversationsLength,
     data: conversations,
-    isLoadingNewest,
-    fetchNewest,
+    isLoadingNewest: isLoadingNewestConversations,
+    fetchNewest: fetchNewestConversations,
   } = useGetConversations();
+
+  const {
+    data: matches,
+    isLoadingNewest: isLoadingNewestMatches,
+    fetchNewest: fetchNewestMatches,
+  } = useGetMatches();
 
   const handleScroll = async (e: NativeSyntheticEvent<NativeScrollEvent>) => {
     if (!scrollUtil.isCloseToBottom(e)) {
       fetchNext();
     }
+  };
+
+  const handleRefresh = () => {
+    fetchNewestConversations();
+    fetchNewestMatches();
   };
 
   return (
@@ -37,13 +49,13 @@ export const ConversationsScrollView: React.FC = () => {
       scrollEventThrottle={16}
       refreshControl={
         <RefreshControl
-          refreshing={isLoadingNewest}
-          onRefresh={fetchNewest}
+          refreshing={isLoadingNewestConversations || isLoadingNewestMatches}
+          onRefresh={handleRefresh}
         ></RefreshControl>
       }
     >
       <Box>
-        <MatchCards />
+        <MatchCards matches={matches} />
       </Box>
 
       {conversationsLength ? (

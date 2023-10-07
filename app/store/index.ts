@@ -54,8 +54,6 @@ const persistedReducer = persistReducer(
       'user',
       'like',
       'likedMe',
-      'nearbyUser',
-      'swipeUser',
       'messages',
     ],
   },
