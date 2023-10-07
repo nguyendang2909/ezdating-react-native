@@ -1,5 +1,5 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { useTranslate } from 'app/hooks/useFormatMessage';
+import { useMessages } from 'app/hooks';
 import { AppStackScreenProps } from 'app/navigators';
 import { ConversationsScreen } from 'app/screens/ConversationsScreen';
 import { DatingNearbyScreen } from 'app/screens/DatingNearbyScreen';
@@ -25,7 +25,7 @@ type FCProps = AppStackScreenProps<'Home'>;
 const Tab = createBottomTabNavigator<HomeTabParamList>();
 
 export const HomeNavigator: FC<FCProps> = () => {
-  const t = useTranslate();
+  const { formatMessage } = useMessages();
 
   const { bottom } = useSafeAreaInsets();
 
@@ -56,7 +56,7 @@ export const HomeNavigator: FC<FCProps> = () => {
         component={DatingSwipeScreen}
         options={{
           tabBarShowLabel: false,
-          //   tabBarLabel: t('Swipe'),
+          //   tabBarLabel: formatMessage('Swipe'),
           tabBarIcon: ({ focused }) => (
             <FontAwesome
               name="globe"
@@ -71,7 +71,7 @@ export const HomeNavigator: FC<FCProps> = () => {
         component={DatingNearbyScreen}
         options={{
           tabBarShowLabel: false,
-          //   tabBarLabel: t('Nearby'),
+          //   tabBarLabel: formatMessage('Nearby'),
           tabBarIcon: ({ focused }) => (
             <MaterialIcons
               name="location-on"
@@ -86,7 +86,7 @@ export const HomeNavigator: FC<FCProps> = () => {
         component={ConversationsScreen}
         options={{
           tabBarShowLabel: false,
-          tabBarLabel: t('Messages'),
+          tabBarLabel: formatMessage('Messages'),
           tabBarIcon: ({ focused }) => (
             <MaterialCommunityIcons
               name="chat"
@@ -101,7 +101,7 @@ export const HomeNavigator: FC<FCProps> = () => {
         component={ProfileScreen}
         options={{
           tabBarShowLabel: false,
-          tabBarLabel: t('Profile'),
+          tabBarLabel: formatMessage('Profile'),
           tabBarIcon: ({ focused }) => (
             <MaterialCommunityIcons
               name="account"

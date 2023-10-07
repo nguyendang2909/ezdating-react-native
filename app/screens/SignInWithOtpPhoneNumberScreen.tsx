@@ -1,7 +1,7 @@
 import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import { useNavigation } from '@react-navigation/native';
 import { OtpInput } from 'app/components/Input/OtpInput';
-import { useTranslate } from 'app/hooks/useFormatMessage';
+import { useMessages } from 'app/hooks';
 import { authApi } from 'app/services/api/auth.api';
 import { usersApi } from 'app/services/api/users.api';
 import { appActions } from 'app/store/app.store';
@@ -47,7 +47,7 @@ type ResendStatus = ValueOf<typeof ResendStatusObj>;
 const maximumCodeLength = 6;
 
 export const SignInWithOtpPhoneNumberScreen: FC<FCProps> = props => {
-  const t = useTranslate();
+  const { formatMessage } = useMessages();
   const { goBack } = useNavigation();
   const { otpConfirm, user } = props.route.params;
   const dispatch = useDispatch();
@@ -147,7 +147,7 @@ export const SignInWithOtpPhoneNumberScreen: FC<FCProps> = props => {
                   onPress={handleResendingOtpCode}
                   style={marginLeft(spacing.sm)}
                 >
-                  {t('Resend')}
+                  {formatMessage('Resend')}
                 </Link>
               </HStack>
             </View>
@@ -186,7 +186,7 @@ export const SignInWithOtpPhoneNumberScreen: FC<FCProps> = props => {
                 testID="register-button"
                 onPress={handleSignUp}
               >
-                {t('Sign in')}
+                {formatMessage('Sign in')}
               </Button>
             </View>
           </Box>

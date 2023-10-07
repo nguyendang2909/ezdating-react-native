@@ -1,8 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import { FormControlInput } from 'app/components/Form/FormControlInput';
 import { HeaderSaveModal } from 'app/components/Header/HeaderSaveModal';
-import { useAppSelector } from 'app/hooks';
-import { useTranslate } from 'app/hooks/useFormatMessage';
+import { useAppSelector, useMessages } from 'app/hooks';
 import { usersApi } from 'app/services/api/users.api';
 import { appActions } from 'app/store/app.store';
 import { useFormik } from 'formik';
@@ -12,7 +11,7 @@ import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 
 export const EditInfoNicknameScreen = () => {
-  const t = useTranslate();
+  const { formatMessage } = useMessages();
 
   const dispatch = useDispatch();
 
@@ -58,7 +57,7 @@ export const EditInfoNicknameScreen = () => {
 
       <View mt={4} mb={4} px={4}>
         <FormControlInput
-          label={t('Nickname')}
+          label={formatMessage('Nickname')}
           value={formik.values.nickname}
           onChange={formik.handleChange('nickname')}
           placeholder={t('Please enter your nickname')}

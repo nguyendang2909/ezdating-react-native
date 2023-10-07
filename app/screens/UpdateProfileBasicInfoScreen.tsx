@@ -4,8 +4,7 @@ import { FormControlInput } from 'app/components/Form/FormControlInput';
 import { RelationshipGoalFormControl } from 'app/components/Form/RelationshipGoalFormControl';
 import { SelectGenderFormControl } from 'app/components/Form/SelectGenderForm';
 import { UserGender, UserRelationshipGoal } from 'app/constants';
-import { useAppSelector } from 'app/hooks';
-import { useTranslate } from 'app/hooks/useFormatMessage';
+import { useAppSelector, useMessages } from 'app/hooks';
 import { usersApi } from 'app/services/api/users.api';
 import { flexGrow } from 'app/styles';
 import { FormParams } from 'app/types/form-params.type';
@@ -16,7 +15,7 @@ import React, { FC } from 'react';
 import * as Yup from 'yup';
 
 export const UpdateProfileBasicInfoScreen: FC = () => {
-  const t = useTranslate();
+  const { formatMessage } = useMessages();
 
   const profile = useAppSelector(state => state.app.profile);
   const { navigate } = useNavigation();
@@ -33,11 +32,15 @@ export const UpdateProfileBasicInfoScreen: FC = () => {
     },
     enableReinitialize: true,
     validationSchema: Yup.object().shape({
-      nickname: Yup.string().required(t('Please enter your nickname')),
-      gender: Yup.number().required(t('Please enter your gender')),
-      birthday: Yup.string().required(t('Please enter your birthday')),
+      nickname: Yup.string().required(
+        formatMessage('Please enter your nickname'),
+      ),
+      gender: Yup.number().required(formatMessage('Please enter your gender')),
+      birthday: Yup.string().required(
+        formatMessage('Please enter your birthday'),
+      ),
       relationshipGoal: Yup.string().required(
-        t('Please choose your desire relation.'),
+        formatMessage('Please choose your desire relation.'),
       ),
       introduce: Yup.string().max(500).notRequired(),
     }),
@@ -73,10 +76,10 @@ export const UpdateProfileBasicInfoScreen: FC = () => {
                 <View mb="4">
                   <FormControlInput
                     isRequired
-                    label={t('Nickname')}
+                    label={formatMessage('Nickname')}
                     value={formik.values.nickname}
                     onChange={formik.handleChange('nickname')}
-                    placeholder={t('Please enter your nickname')}
+                    placeholder={formatMessage('Please enter your nickname')}
                     error={
                       formik.touched.nickname
                         ? formik.errors.nickname
@@ -124,7 +127,7 @@ export const UpdateProfileBasicInfoScreen: FC = () => {
 
                 <View mb="4">
                   <FormControlInput
-                    label={t('Introduce')}
+                    label={formatMessage('Introduce')}
                     value={formik.values.introduce}
                     onChange={formik.handleChange('introduce')}
                     placeholder={t('Please enter your introduce')}
@@ -146,7 +149,7 @@ export const UpdateProfileBasicInfoScreen: FC = () => {
                   formik.handleSubmit();
                 }}
               >
-                {t('Continue')}
+                {formatMessage('Continue')}
               </Button>
             </View>
           </View>

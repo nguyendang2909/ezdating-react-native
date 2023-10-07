@@ -1,9 +1,9 @@
 import { useNavigation } from '@react-navigation/native';
+import { useMessages } from 'app/hooks/useMessages';
 import { Button } from 'native-base';
 import React from 'react';
 
 import { Header, HeaderProps } from './Header';
-import { useMessages } from 'app/hooks/useMessages';
 
 type FCProps = HeaderProps & {
   onSave: () => void;

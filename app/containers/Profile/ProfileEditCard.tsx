@@ -1,11 +1,11 @@
 import { useNavigation } from '@react-navigation/native';
-import { useTranslate } from 'app/hooks/useFormatMessage';
+import { useMessages } from 'app/hooks';
 import { Center, Icon, Pressable, Text, View, VStack } from 'native-base';
 import React from 'react';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 export const ProfileEditCard: React.FC = () => {
-  const t = useTranslate();
+  const { formatMessage } = useMessages();
 
   const { navigate } = useNavigation();
   const onPress = () => {
@@ -34,7 +34,7 @@ export const ProfileEditCard: React.FC = () => {
                 </View>
               </Center>
               <Center>
-                <Text>{t('Profile')}</Text>
+                <Text>{formatMessage('Profile')}</Text>
               </Center>
             </VStack>
           </View>

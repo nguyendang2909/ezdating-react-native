@@ -1,10 +1,10 @@
-import { useTranslate } from 'app/hooks/useFormatMessage';
+import { useMessages } from 'app/hooks';
 import { Center, Icon, Text, View, VStack } from 'native-base';
 import React from 'react';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 export const ProfileVisitorsCard: React.FC = () => {
-  const t = useTranslate();
+  const { formatMessage } = useMessages();
   return (
     <>
       <View
@@ -24,7 +24,7 @@ export const ProfileVisitorsCard: React.FC = () => {
             </View>
           </Center>
           <Center>
-            <Text>{t('Liked you')}</Text>
+            <Text>{formatMessage('Liked you')}</Text>
           </Center>
         </VStack>
       </View>

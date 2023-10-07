@@ -2,8 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import { UploadPhotoCard } from 'app/components/Form/UploadPhotoCard';
 import { LoadingScreen } from 'app/components/Screen/LoadingScreen';
 import { PhotoRequestPermission } from 'app/containers/Photos/PhotoRequestPermission.ios';
-import { useAppSelector } from 'app/hooks';
-import { useTranslate } from 'app/hooks/useFormatMessage';
+import { useAppSelector, useMessages } from 'app/hooks';
 import { AppStackScreenProps } from 'app/navigators';
 import { mediaFilesApi } from 'app/services/api/media-files.api';
 import { usersApi } from 'app/services/api/users.api';
@@ -41,7 +40,7 @@ import { useDispatch } from 'react-redux';
 type FCProps = AppStackScreenProps<'UpdateProfilePhotos'>;
 
 export const UpdateProfilePhotosScreen: React.FC<FCProps> = () => {
-  const t = useTranslate();
+  const { formatMessage } = useMessages();
 
   const toast = useToast();
   const { navigate, goBack } = useNavigation();
@@ -81,7 +80,7 @@ export const UpdateProfilePhotosScreen: React.FC<FCProps> = () => {
       } catch (err) {
         console.log(err);
         toast.show({
-          title: t('Update failed, please try again.'),
+          title: formatMessage('Update failed, please try again.'),
           placement: 'top-right',
         });
       }
@@ -105,7 +104,7 @@ export const UpdateProfilePhotosScreen: React.FC<FCProps> = () => {
           await mediaFilesApi.removePhoto(removePhotoIndex);
         } catch (err) {
           toast.show({
-            title: t('Remove failed, please try again.'),
+            title: formatMessage('Remove failed, please try again.'),
             placement: 'top-right',
           });
         } finally {
@@ -151,10 +150,10 @@ export const UpdateProfilePhotosScreen: React.FC<FCProps> = () => {
                   <ChevronLeftIcon />
                 </IconButton>
               </View>
-              <Heading>{t('Photos')}</Heading>
+              <Heading>{formatMessage('Photos')}</Heading>
               <View mt="4">
                 <Text>
-                  {t(
+                  {formatMessage(
                     'Add picture profile (Please choose photos that clearly shows your face, up to 6 photos)',
                   )}
                 </Text>
@@ -213,7 +212,7 @@ export const UpdateProfilePhotosScreen: React.FC<FCProps> = () => {
                 formik.handleSubmit();
               }}
             >
-              {t('Complete')}
+              {formatMessage('Complete')}
             </Button>
           </View>
         </View>
@@ -225,18 +224,18 @@ export const UpdateProfilePhotosScreen: React.FC<FCProps> = () => {
       >
         <Actionsheet.Content>
           <View mb="8">
-            <Text color="gray.500">{t('Remove photo')}</Text>
+            <Text color="gray.500">{formatMessage('Remove photo')}</Text>
           </View>
           <Divider borderColor="gray.300" />
           <Actionsheet.Item
             onPress={handleRemovePhotoCardById}
             style={[justifyContentCenter, alignItemsCenter]}
           >
-            <Text color="red.500">{t('Remove')}</Text>
+            <Text color="red.500">{formatMessage('Remove')}</Text>
           </Actionsheet.Item>
           <Divider borderColor="gray.300" />
           <Actionsheet.Item style={[justifyContentCenter, alignItemsCenter]}>
-            <Text>{t('Cancel')}</Text>
+            <Text>{formatMessage('Cancel')}</Text>
           </Actionsheet.Item>
         </Actionsheet.Content>
       </Actionsheet>

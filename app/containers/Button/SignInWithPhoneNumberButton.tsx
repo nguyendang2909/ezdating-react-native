@@ -1,11 +1,11 @@
 import { useNavigation } from '@react-navigation/native';
 import { FontAwesome } from 'app/components/Icon/Lib';
-import { useTranslate } from 'app/hooks/useFormatMessage';
+import { useMessages } from 'app/hooks';
 import { Button, Icon } from 'native-base';
 import React, { FC } from 'react';
 
 export const SignInWithPhoneNumberButton: FC = () => {
-  const t = useTranslate();
+  const { formatMessage } = useMessages();
 
   const { navigate } = useNavigation();
 
@@ -18,7 +18,7 @@ export const SignInWithPhoneNumberButton: FC = () => {
       onPress={handlePress}
       startIcon={<Icon as={<FontAwesome name="mobile-phone" />} />}
     >
-      {t('Sign in with phone number')}
+      {formatMessage('Sign in with phone number')}
     </Button>
   );
 };

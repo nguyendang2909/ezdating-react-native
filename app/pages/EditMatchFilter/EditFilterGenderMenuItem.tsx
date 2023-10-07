@@ -9,7 +9,7 @@ import {
 import { MaterialCommunityIcons } from 'app/components/Icon/Lib';
 import { MenuItem } from 'app/components/Menu/MenuItem';
 import { UserGender, UserGenderMessages, UserGenders } from 'app/constants';
-import { useTranslate } from 'app/hooks/useFormatMessage';
+import { useMessages } from 'app/hooks';
 import React, { useState } from 'react';
 
 type FCProps = {
@@ -21,7 +21,7 @@ export const EditFilterGenderMenuItem: React.FC<FCProps> = ({
   value,
   onChange,
 }) => {
-  const t = useTranslate();
+  const { formatMessage } = useMessages();
 
   const [isInit, setInit] = useState<boolean>(false);
   const [showActionsheet, setShowActionsheet] = React.useState(false);
@@ -51,7 +51,7 @@ export const EditFilterGenderMenuItem: React.FC<FCProps> = ({
           <ActionsheetContent>
             <Box mb={16}>
               <Heading size="sm" textAlign="center">
-                {t('Show me')}
+                {formatMessage('Show me')}
               </Heading>
             </Box>
             {Object.values(UserGenders).map(e => {
@@ -64,7 +64,7 @@ export const EditFilterGenderMenuItem: React.FC<FCProps> = ({
                   }}
                 >
                   <Text fontWeight={e === value ? 'bold' : undefined}>
-                    {t(UserGenderMessages[e])}
+                    {formatMessage(UserGenderMessages[e])}
                   </Text>
                 </ActionsheetItem>
               );

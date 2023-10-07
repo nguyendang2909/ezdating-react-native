@@ -1,10 +1,10 @@
 import { FontAwesome } from 'app/components/Icon/Lib';
-import { useTranslate } from 'app/hooks/useFormatMessage';
+import { useMessages } from 'app/hooks';
 import { Button, Icon } from 'native-base';
 import React, { FC } from 'react';
 
 export const SignInWithGoogleButton: FC = () => {
-  const t = useTranslate();
+  const { formatMessage } = useMessages();
   // const { navigate } = useNavigation();
 
   // const handlePress = () => {};
@@ -15,7 +15,7 @@ export const SignInWithGoogleButton: FC = () => {
       // onPress={handlePress}
       startIcon={<Icon as={<FontAwesome name="google" />} />}
     >
-      {t('Sign in with Google')}
+      {formatMessage('Sign in with Google')}
     </Button>
   );
 };

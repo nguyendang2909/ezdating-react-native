@@ -1,7 +1,7 @@
 import { BirthDayFormControl } from 'app/components/Form/BirthDayFormControl';
 import { FormControlInput } from 'app/components/Form/FormControlInput';
 import { SelectGenderFormControl } from 'app/components/Form/SelectGenderForm';
-import { useTranslate } from 'app/hooks/useFormatMessage';
+import { useMessages } from 'app/hooks';
 import { api } from 'app/services/api';
 import { usersApi } from 'app/services/api/users.api';
 import { FormParams } from 'app/types/form-params.type';
@@ -11,7 +11,7 @@ import React, { FC } from 'react';
 import * as Yup from 'yup';
 
 export const InputBasicInforForm: FC = () => {
-  const t = useTranslate();
+  const { formatMessage } = useMessages();
 
   const { data: profileData } = api.useGetMyProfileQuery();
   const profile = profileData?.data;
@@ -25,9 +25,13 @@ export const InputBasicInforForm: FC = () => {
     },
     enableReinitialize: true,
     validationSchema: Yup.object().shape({
-      nickname: Yup.string().required(t('Please enter your nickname')),
-      gender: Yup.string().required(t('Please enter your gender')),
-      birthday: Yup.string().required(t('Please enter your birthday')),
+      nickname: Yup.string().required(
+        formatMessage('Please enter your nickname'),
+      ),
+      gender: Yup.string().required(formatMessage('Please enter your gender')),
+      birthday: Yup.string().required(
+        formatMessage('Please enter your birthday'),
+      ),
       // relationshipGoal: Yup.string().required(
       //   t('Please choose your w!', { w: t('desire relation') }),
       // ),
@@ -56,10 +60,10 @@ export const InputBasicInforForm: FC = () => {
       <View flex="1" px="4">
         <View mb="4">
           <FormControlInput
-            label={t('Nickname')}
+            label={formatMessage('Nickname')}
             value={formik.values.nickname}
             onChange={formik.handleChange('nickname')}
-            placeholder={t('Please enter your nickname')}
+            placeholder={formatMessage('Please enter your nickname')}
             error={formik.errors.nickname}
           />
         </View>
@@ -82,10 +86,10 @@ export const InputBasicInforForm: FC = () => {
 
         <View mb="4">
           <FormControlInput
-            label={t('Introduce')}
+            label={formatMessage('Introduce')}
             value={formik.values.introduce}
             onChange={formik.handleChange('introduce')}
-            placeholder={t('Please enter your introduce')}
+            placeholder={formatMessage('Please enter your introduce')}
             error={formik.errors.nickname}
             maxLength={500}
           />
@@ -98,7 +102,7 @@ export const InputBasicInforForm: FC = () => {
             formik.handleSubmit();
           }}
         >
-          {t('Continue')}
+          {formatMessage('Continue')}
         </Button>
       </View>
     </>

@@ -1,4 +1,4 @@
-import { useTranslate } from 'app/hooks/useFormatMessage';
+import { useMessages } from 'app/hooks';
 import { TxKey } from 'app/types';
 import {
   ChevronRightIcon,
@@ -27,7 +27,7 @@ export const MenuItem: React.FC<FCProps> = ({
   valueTx,
   onPress,
 }) => {
-  const t = useTranslate();
+  const { formatMessage } = useMessages();
 
   return (
     <Pressable
@@ -51,7 +51,7 @@ export const MenuItem: React.FC<FCProps> = ({
 
               {(!!title || !!titleTx) && (
                 <View>
-                  <Text>{title || (!!titleTx && t(titleTx))}</Text>
+                  <Text>{title || (!!titleTx && formatMessage(titleTx))}</Text>
                 </View>
               )}
 
@@ -59,7 +59,7 @@ export const MenuItem: React.FC<FCProps> = ({
 
               {(!!value || !!valueTx) && (
                 <View mr={2}>
-                  <Text>{valueTx ? t(valueTx) : value}</Text>
+                  <Text>{valueTx ? formatMessage(valueTx) : value}</Text>
                 </View>
               )}
 

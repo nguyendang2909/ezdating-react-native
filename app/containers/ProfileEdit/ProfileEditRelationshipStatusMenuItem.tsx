@@ -5,8 +5,7 @@ import {
   UserRelationshipStatuses,
   UserRelationshipStatusMessages,
 } from 'app/constants';
-import { useAppSelector } from 'app/hooks';
-import { useTranslate } from 'app/hooks/useFormatMessage';
+import { useAppSelector, useMessages } from 'app/hooks';
 import { ApiRequest } from 'app/types/api-request.type';
 import { Actionsheet, Box, Heading, Text, useDisclose } from 'native-base';
 import React, { useState } from 'react';
@@ -18,7 +17,7 @@ type FCProps = {
 export const ProfileEditRelationshipStatusMenuItem: React.FC<FCProps> = ({
   onPress,
 }) => {
-  const t = useTranslate();
+  const { formatMessage } = useMessages();
 
   const currentValue = useAppSelector(
     state => state.app.profile?.relationshipStatus,
@@ -54,7 +53,7 @@ export const ProfileEditRelationshipStatusMenuItem: React.FC<FCProps> = ({
           <Actionsheet.Content>
             <Box mb={4}>
               <Heading size="sm" textAlign="center">
-                {t('Relationship goal')}
+                {formatMessage('Relationship goal')}
               </Heading>
             </Box>
             {Object.values(UserRelationshipStatuses).map(value => {
@@ -68,7 +67,7 @@ export const ProfileEditRelationshipStatusMenuItem: React.FC<FCProps> = ({
                   <Text
                     fontWeight={currentValue === value ? 'bold' : undefined}
                   >
-                    {t(UserRelationshipStatusMessages[value])}
+                    {formatMessage(UserRelationshipStatusMessages[value])}
                   </Text>
                 </Actionsheet.Item>
               );

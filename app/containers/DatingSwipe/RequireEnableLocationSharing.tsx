@@ -1,4 +1,4 @@
-import { useTranslate } from 'app/hooks/useFormatMessage';
+import { useMessages } from 'app/hooks';
 import { locationPermissionsService } from 'app/services/location-permissions.service';
 import { Button, Heading, Text, View } from 'native-base';
 import React from 'react';
@@ -12,7 +12,7 @@ type FCProps = {
 export const RequireEnalbeLocationSharing: React.FC<FCProps> = ({
   onChange,
 }) => {
-  const t = useTranslate();
+  const { formatMessage } = useMessages();
 
   const handlePress = async () => {
     const permission = await locationPermissionsService.request();
@@ -46,7 +46,7 @@ export const RequireEnalbeLocationSharing: React.FC<FCProps> = ({
 
       <View mt={7} alignItems="center" px={4}>
         <Button w="full" onPress={handlePress}>
-          {t('Open settings')}
+          {formatMessage('Open settings')}
         </Button>
       </View>
     </View>

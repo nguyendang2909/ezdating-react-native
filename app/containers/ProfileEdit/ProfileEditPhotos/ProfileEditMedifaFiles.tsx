@@ -1,6 +1,5 @@
 import { useActionSheet } from '@expo/react-native-action-sheet';
-import { useAppSelector } from 'app/hooks';
-import { useTranslate } from 'app/hooks/useFormatMessage';
+import { useAppSelector, useMessages } from 'app/hooks';
 import { mediaFilesApi } from 'app/services/api/media-files.api';
 import { usersApi } from 'app/services/api/users.api';
 import { appActions } from 'app/store/app.store';
@@ -17,7 +16,7 @@ import { useDispatch } from 'react-redux';
 import { ProfileEditMediaFileCard } from './MediaFileCard';
 
 export const ProfileEditPhotos: React.FC = () => {
-  const t = useTranslate();
+  const { formatMessage } = useMessages();
   const dispatch = useDispatch();
 
   // const [submitRemovePhoto] = api.useRemovePhotoMutation();
@@ -135,7 +134,7 @@ export const ProfileEditPhotos: React.FC = () => {
       showActionSheetWithOptions(
         {
           showSeparators: true,
-          options: [t('Remove the photo'), t('Cancel')],
+          options: [formatMessage('Remove the photo'), formatMessage('Cancel')],
           cancelButtonIndex: 1,
           useModal: true,
         },
@@ -151,7 +150,7 @@ export const ProfileEditPhotos: React.FC = () => {
       showActionSheetWithOptions(
         {
           showSeparators: true,
-          options: [t('Upload the photo'), t('Cancel')],
+          options: [formatMessage('Upload the photo'), formatMessage('Cancel')],
           cancelButtonIndex: 1,
           useModal: true,
         },

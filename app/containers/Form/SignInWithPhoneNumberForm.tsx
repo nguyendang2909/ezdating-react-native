@@ -2,7 +2,7 @@ import { View } from '@gluestack-ui/themed';
 import auth from '@react-native-firebase/auth';
 import { useNavigation } from '@react-navigation/native';
 import { LoadingButton } from 'app/components/Button/LoadingButton';
-import { useTranslate } from 'app/hooks/useFormatMessage';
+import { useMessages } from 'app/hooks';
 import { messages } from 'app/locales/messages';
 import {
   flexDirectionRow,
@@ -33,7 +33,7 @@ import CountryPicker, {
 import FeatherIcons from 'react-native-vector-icons/Feather';
 
 export const SignInWithPhoneNumberForm: FC = () => {
-  const t = useTranslate();
+  const { formatMessage } = useMessages();
   const { navigate } = useNavigation();
   const [isOpenSearchCountry, setOpenSearchCountry] = useState<boolean>(false);
   const [countryCode, setCountryCode] = useState<CountryCode>('VN');
@@ -100,7 +100,9 @@ export const SignInWithPhoneNumberForm: FC = () => {
         <View style={marginBottom(spacing.lg)}>
           <View style={widthFull}>
             <FormControl style={widthFull} isInvalid={!!errorCode} isRequired>
-              <FormControl.Label>{t('Phone number')}</FormControl.Label>
+              <FormControl.Label>
+                {formatMessage('Phone number')}
+              </FormControl.Label>
               <HStack space={4} style={[flexDirectionRow, widthFull]}>
                 <View style={width(120)}>
                   <TouchableOpacity onPress={handleOpenSearchCountry}>
@@ -142,7 +144,7 @@ export const SignInWithPhoneNumberForm: FC = () => {
                     testID="phoneNumber"
                     variant="underlined"
                     onChangeText={formik.handleChange('phoneNumber')}
-                    placeholder={t('Phone number')}
+                    placeholder={formatMessage('Phone number')}
                     onBlur={formik.handleBlur('phoneNumber')}
                     autoFocus
                   ></Input>
@@ -154,7 +156,9 @@ export const SignInWithPhoneNumberForm: FC = () => {
                   position="absolute"
                   leftIcon={<WarningOutlineIcon size="xs" />}
                 >
-                  {!!errorCode && messages[errorCode] && t(errorCode)}
+                  {!!errorCode &&
+                    messages[errorCode] &&
+                    formatMessage(errorCode)}
                 </FormControl.ErrorMessage>
               </View>
             </FormControl>
@@ -166,7 +170,7 @@ export const SignInWithPhoneNumberForm: FC = () => {
             onPress={handlePressSubmit}
             isLoading={formik.isSubmitting}
           >
-            {t('Next')}
+            {formatMessage('Next')}
           </LoadingButton>
         </View>
       </View>

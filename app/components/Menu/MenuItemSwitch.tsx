@@ -1,4 +1,4 @@
-import { useTranslate } from 'app/hooks/useFormatMessage';
+import { useMessages } from 'app/hooks';
 import { TxKey } from 'app/types';
 import { HStack, Icon, Switch, Text, View } from 'native-base';
 import React from 'react';
@@ -18,7 +18,7 @@ export const MenuItemSwitch: React.FC<FCProps> = ({
   value,
   onToggle,
 }) => {
-  const t = useTranslate();
+  const { formatMessage } = useMessages();
 
   return (
     <View px={4} py={2}>
@@ -31,7 +31,7 @@ export const MenuItemSwitch: React.FC<FCProps> = ({
 
         {(!!title || !!titleTx) && (
           <View>
-            <Text>{title || (!!titleTx && t(titleTx))}</Text>
+            <Text>{title || (!!titleTx && formatMessage(titleTx))}</Text>
           </View>
         )}
 

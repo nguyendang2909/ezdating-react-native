@@ -1,7 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import { HeaderSave } from 'app/components/Header/HeaderSave';
-import { useAppSelector } from 'app/hooks';
-import { useTranslate } from 'app/hooks/useFormatMessage';
+import { useAppSelector, useMessages } from 'app/hooks';
 import { api } from 'app/services/api';
 import { useFormik } from 'formik';
 import { useToast, View } from 'native-base';
@@ -9,7 +8,7 @@ import React from 'react';
 import * as Yup from 'yup';
 
 export const EditInfoWeightScreen = () => {
-  const t = useTranslate();
+  const { formatMessage } = useMessages();
   const { goBack } = useNavigation();
 
   const toast = useToast();
@@ -24,7 +23,7 @@ export const EditInfoWeightScreen = () => {
       weight: value || 50,
     },
     validationSchema: Yup.object().shape({
-      weight: Yup.number().required(t('Please enter your weight.')),
+      weight: Yup.number().required(formatMessage('Please enter your weight.')),
     }),
 
     onSubmit: async values => {
@@ -32,7 +31,7 @@ export const EditInfoWeightScreen = () => {
         await submitUpdateProfile(values);
       } catch (err) {
         toast.show({
-          title: t('Update failed, please try again.'),
+          title: formatMessage('Update failed, please try again.'),
           placement: 'top',
         });
       }

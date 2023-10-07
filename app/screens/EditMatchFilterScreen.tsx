@@ -2,8 +2,7 @@ import { Box, Divider, ScrollView, Text, View } from '@gluestack-ui/themed';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
 import { useNavigation } from '@react-navigation/native';
 import { HeaderSaveDone } from 'app/components/Header/HeaderSaveDone';
-import { useAppSelector } from 'app/hooks';
-import { useTranslate } from 'app/hooks/useFormatMessage';
+import { useAppSelector, useMessages } from 'app/hooks';
 import { EditFilterGenderMenuItem } from 'app/pages/EditMatchFilter/EditFilterGenderMenuItem';
 import { nearbyUsersApi } from 'app/services/api/nearby-users.api';
 import { usersApi } from 'app/services/api/users.api';
@@ -23,7 +22,7 @@ import { AppStackScreenProps } from '../navigators';
 export const EditMatchFilterScreen: React.FC<
   AppStackScreenProps<'EditMatchFilter'>
 > = () => {
-  const t = useTranslate();
+  const { formatMessage } = useMessages();
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const { width } = Dimensions.get('window');
@@ -54,7 +53,7 @@ export const EditMatchFilterScreen: React.FC<
       } catch (err) {
         Toast.show({
           type: 'error',
-          text1: t('Update failed, please try again.'),
+          text1: formatMessage('Update failed, please try again.'),
         });
       }
       dispatch(nearbyUserActions.updateRefreshTime());
@@ -101,7 +100,7 @@ export const EditMatchFilterScreen: React.FC<
             <View py={16}>
               <View mx={16}>
                 <HStack justifyContent="space-between">
-                  <Text>{t('Distance preference')}</Text>
+                  <Text>{formatMessage('Distance preference')}</Text>
                   <Text>{formik.values.filterMaxDistance} km</Text>
                 </HStack>
               </View>
@@ -137,7 +136,7 @@ export const EditMatchFilterScreen: React.FC<
             <View py={16}>
               <View mx={16}>
                 <HStack justifyContent="space-between">
-                  <Text>{t('Age preference')}</Text>
+                  <Text>{formatMessage('Age preference')}</Text>
                   <Text>
                     {formik.values.filterMinAge} - {formik.values.filterMaxAge}
                   </Text>

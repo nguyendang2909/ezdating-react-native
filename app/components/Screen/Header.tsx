@@ -1,4 +1,4 @@
-import { useTranslate } from 'app/hooks/useFormatMessage';
+import { useMessages } from 'app/hooks';
 import { alignItemsCenter } from 'app/styles';
 import { colors, spacing } from 'app/theme';
 import { TxKey } from 'app/types';
@@ -18,7 +18,7 @@ export const Header: FC<FCProps> = ({
   leftIcon: LeftIcon,
   onPressLeftIcon,
 }) => {
-  const t = useTranslate();
+  const { formatMessage } = useMessages();
 
   return (
     <View>
@@ -33,7 +33,7 @@ export const Header: FC<FCProps> = ({
                 onPress={onPressLeftIcon}
               />
             )}
-            {!!textTx && <Text color="light">{t(textTx)}</Text>}
+            {!!textTx && <Text color="light">{formatMessage(textTx)}</Text>}
           </HStack>
         </HStack>
       </Box>
