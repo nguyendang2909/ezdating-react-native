@@ -27,7 +27,9 @@ export const EditInfoNicknameScreen = () => {
       nickname: currentNickname || '',
     },
     validationSchema: Yup.object().shape({
-      nickname: Yup.string().required(t('Please enter your nickname')),
+      nickname: Yup.string().required(
+        formatMessage('Please enter your nickname'),
+      ),
     }),
 
     onSubmit: async values => {
@@ -60,7 +62,7 @@ export const EditInfoNicknameScreen = () => {
           label={formatMessage('Nickname')}
           value={formik.values.nickname}
           onChange={formik.handleChange('nickname')}
-          placeholder={t('Please enter your nickname')}
+          placeholder={formatMessage('Please enter your nickname')}
           error={formik.errors.nickname}
         />
       </View>

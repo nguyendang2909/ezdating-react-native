@@ -27,7 +27,7 @@ export const RequireEnalbeLocationSharing: React.FC<FCProps> = ({
   return (
     <View flex={1} justifyContent="center">
       <View alignItems="center" px={4}>
-        <Heading size="sm">{t('Unable to connect')}</Heading>
+        <Heading size="sm">{formatMessage('Unable to connect')}</Heading>
       </View>
 
       <View mt={5} alignItems="center" px={4}>

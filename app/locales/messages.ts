@@ -295,4 +295,20 @@ export const messages = defineMessages({
     defaultMessage: 'Sending',
     id: '0b60888020',
   },
+  'km away': {
+    defaultMessage: 'km away',
+    id: 'dd0facd552',
+  },
+  'Update successfully.': {
+    defaultMessage: 'Update successfully.',
+    id: 'fd103b4716',
+  },
+  Details: {
+    defaultMessage: 'Details',
+    id: '2efd3326e2',
+  },
+  'Education level': {
+    defaultMessage: 'Education level',
+    id: '674de4adbe',
+  },
 });

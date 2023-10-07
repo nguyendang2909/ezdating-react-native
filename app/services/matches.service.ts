@@ -36,7 +36,7 @@ class MatchesService extends CommonService {
   sortAndUniq(news: AppStore.Match[], olds: AppStore.Match[]) {
     return _.chain([...news, ...olds])
       .uniqBy('_id')
-      .orderBy(['_lastMessageUserId', '_id'], ['desc', 'desc'])
+      .orderBy(['lastMessageAt', 'createdAt'], ['desc', 'desc'])
       .value();
   }
 }

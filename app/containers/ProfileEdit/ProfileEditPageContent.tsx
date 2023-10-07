@@ -1,6 +1,6 @@
 import { useMessages } from 'app/hooks';
 import { usersApi } from 'app/services/api/users.api';
-import { profileNotificationsService } from 'app/services/notifications/profile-notifications.service';
+import { notificationsService } from 'app/services/notifications/notifications.service';
 import { appActions } from 'app/store/app.store';
 import { paddingHorizontal } from 'app/styles';
 import { colors, spacing } from 'app/theme';
@@ -29,16 +29,13 @@ export const ProfileEditPageContent: React.FC = () => {
   const handleEditProfile = async (payload: ApiRequest.UpdateProfile) => {
     try {
       await usersApi.updateProfile(payload);
-
-      profileNotificationsService.success();
-
+      notificationsService.updateSuccess();
       const profile = await usersApi.getMyProfile();
-
       if (profile.data) {
         dispatch(appActions.updateProfile(profile.data));
       }
     } catch (err) {
-      profileNotificationsService.fail();
+      notificationsService.updateFail();
     }
   };
 

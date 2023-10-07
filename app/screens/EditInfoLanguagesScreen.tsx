@@ -49,10 +49,10 @@ export const EditInfoLanguagesScreen = () => {
 
       <View mt={4} mb={4} px={4}>
         {/* <FormControlInput
-          label={t('Gender')}
+          label={formatMessage('Gender')}
           value={formik.values.gender}
           onChange={formik.handleChange('nickname')}
-          placeholder={t('Please enter your w', {
+          placeholder={formatMessage('Please enter your w', {
             w: t('nickname'),
           })}
           error={formik.errors.gender}

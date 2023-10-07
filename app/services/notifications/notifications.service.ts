@@ -1,22 +1,19 @@
+import { formatMessage } from 'app/locales/locale';
+import Toast from 'react-native-toast-message';
+
 class NotificationsService {
-  // success(value: TxKey) {
-  //   Toast.show({
-  //     placement: 'top',
-  //     description: t('Update w successfully', {
-  //       w: t(value),
-  //     }),
-  //     title: t('Success'),
-  //   });
-  // }
-  // fail(value: TxKey) {
-  //   Toast.show({
-  //     placement: 'top',
-  //     description: t('Update w failed!', {
-  //       w: t(value),
-  //     }),
-  //     title: t('Fail'),
-  //   });
-  // }
+  updateSuccess() {
+    Toast.show({
+      text1: formatMessage('Update successfully.'),
+    });
+  }
+
+  updateFail() {
+    Toast.show({
+      text1: formatMessage('Update failed, please try again.'),
+      type: 'error',
+    });
+  }
 }
 
 export const notificationsService = new NotificationsService();

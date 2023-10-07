@@ -59,7 +59,9 @@ export const MenuItem: React.FC<FCProps> = ({
 
               {(!!value || !!valueTx) && (
                 <View mr={2}>
-                  <Text>{valueTx ? formatMessage(valueTx) : value}</Text>
+                  <Text numberOfLines={1} ellipsizeMode="tail" maxWidth={48}>
+                    {valueTx ? formatMessage(valueTx) : value}
+                  </Text>
                 </View>
               )}
 

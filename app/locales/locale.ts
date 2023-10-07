@@ -21,8 +21,8 @@ const intl = createIntl(
   cache,
 );
 
-const { formatMessage } = intl;
+const { formatMessage: intlFormatMessage } = intl;
 
-export const translate = (e: TxKey) => {
-  return formatMessage(messages[e]);
+export const formatMessage = (e: TxKey) => {
+  return intlFormatMessage(messages[e]);
 };

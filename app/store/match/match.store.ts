@@ -87,26 +87,22 @@ export const matchSlice = createSlice({
     // Conversations
     updateWhenUpdateSentMessage: (
       state,
-      action: PayloadAction<Entity.Message>,
+      { payload }: PayloadAction<Entity.Message>,
     ) => {
-      if (!state.data?.length) {
-        return;
+      const stateIndex = state.data.findIndex(e => e._id === payload._matchId);
+      console.log(stateIndex);
+      console.log(111, payload.createdAt);
+      if (stateIndex >= 0) {
+        state.data[stateIndex] = {
+          ...state.data[stateIndex],
+          lastMessageAt: payload.createdAt,
+          lastMessage: payload.text,
+          _lastMessageUserId: payload._userId,
+          _lastMessageId: payload._id,
+          read: true,
+        };
       }
-      const message = action.payload;
-      const stateDataLength = state.data.length;
-      for (let i = 0; i < stateDataLength; i += 1) {
-        const stateData = state.data[i];
-        if (stateData._id === message._matchId) {
-          state.data[i] = {
-            ...stateData,
-            lastMessage: message.text,
-            _lastMessageUserId: message._userId,
-            lastMessageAt: message._userId,
-            read: true,
-          };
-          return;
-        }
-      }
+      state.data = matchesService.sortAndUniq([], state.data);
     },
 
     updateWhenReceivingMessage: (
@@ -223,10 +219,10 @@ export const matchActions = matchSlice.actions;
 
 export const matchSelects = {
   conversations: (state: AppStore.RootState) => {
-    return state.match.data.filter(e => !!e._lastMessageId);
+    return state.match.data.filter(e => !!e.lastMessageAt);
   },
   matches: (state: AppStore.RootState) => {
-    return state.match.data.filter(e => !e._lastMessageId);
+    return state.match.data.filter(e => !e.lastMessageAt);
   },
 };
 

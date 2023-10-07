@@ -64,7 +64,14 @@ export function* initializeWebSocket() {
             break;
           case SOCKET_TO_CLIENT_EVENTS.UPDATE_SENT_MESSAGE:
             yield put(messageActions.updateMsg(data));
-            yield put(matchActions.updateWhenUpdateSentMessage(data));
+            // eslint-disable-next-line no-case-declarations
+            const conversation: AppStore.Match | undefined = yield select(s =>
+              s.match.data.find(i => i._id === data._matchId),
+            );
+            if (conversation) {
+              yield put(matchActions.updateWhenUpdateSentMessage(data));
+            }
+
             break;
           default:
             break;

@@ -53,7 +53,7 @@ export const ProfileEditRelationshipStatusMenuItem: React.FC<FCProps> = ({
           <Actionsheet.Content>
             <Box mb={4}>
               <Heading size="sm" textAlign="center">
-                {formatMessage('Relationship goal')}
+                {formatMessage('Relationship status')}
               </Heading>
             </Box>
             {Object.values(UserRelationshipStatuses).map(value => {

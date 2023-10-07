@@ -138,7 +138,7 @@ export const SignInWithOtpPhoneNumberScreen: FC<FCProps> = props => {
               ></IconButton>
             </View>
             <View>
-              <Heading size="2xl">{t('Enter your code')}</Heading>
+              <Heading size="2xl">{formatMessage('Enter your code')}</Heading>
             </View>
             <View style={marginTop(spacing.md)}>
               <HStack>
@@ -191,7 +191,7 @@ export const SignInWithOtpPhoneNumberScreen: FC<FCProps> = props => {
             </View>
           </Box>
           <View>
-            <Text textAlign="center">{t('AppName')}</Text>
+            <Text textAlign="center">{formatMessage('AppName')}</Text>
           </View>
         </Pressable>
       </Box>

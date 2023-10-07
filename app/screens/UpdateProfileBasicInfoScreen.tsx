@@ -69,7 +69,7 @@ export const UpdateProfileBasicInfoScreen: FC = () => {
           <View flex="1">
             <ScrollView style={flexGrow}>
               <View px="4" py="4">
-                <Heading>{t('Your profile')}</Heading>
+                <Heading>{formatMessage('Your profile')}</Heading>
               </View>
 
               <View px="4">
@@ -130,7 +130,7 @@ export const UpdateProfileBasicInfoScreen: FC = () => {
                     label={formatMessage('Introduce')}
                     value={formik.values.introduce}
                     onChange={formik.handleChange('introduce')}
-                    placeholder={t('Please enter your introduce')}
+                    placeholder={formatMessage('Please enter your introduce')}
                     maxLength={500}
                     error={
                       formik.touched.introduce

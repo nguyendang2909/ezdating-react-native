@@ -3,7 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 import { HeaderSaveModal } from 'app/components/Header/HeaderSaveModal';
 import { useAppSelector, useMessages } from 'app/hooks';
 import { api } from 'app/services/api';
-import { profileNotificationsService } from 'app/services/notifications/profile-notifications.service';
+import { notificationsService } from 'app/services/notifications/notifications.service';
 import { useFormik } from 'formik';
 import { Box, Text, View } from 'native-base';
 import React from 'react';
@@ -30,11 +30,11 @@ export const EditInfoWeightScreen = () => {
       try {
         await submitUpdateProfile(values);
 
-        profileNotificationsService.success();
+        notificationsService.updateSuccess();
 
         goBack();
       } catch (err) {
-        profileNotificationsService.fail();
+        notificationsService.updateFail();
       }
     },
   });

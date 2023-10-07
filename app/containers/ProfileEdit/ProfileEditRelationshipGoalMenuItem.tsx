@@ -21,16 +21,13 @@ export const ProfileEditRelationshipGoalMenuItem: React.FC<FCProps> = ({
   const currentRelationshipGoal = useAppSelector(
     state => state.app.profile?.relationshipGoal,
   );
-
   const [isInit, setInit] = useState<boolean>(false);
-
   const { isOpen, onOpen, onClose } = useDisclose();
-
   const handleChange = (relationshipGoal: UserRelationshipGoal) => {
+    console.log(relationshipGoal);
     onClose();
     onPress({ relationshipGoal });
   };
-
   const handleOpen = () => {
     setInit(true);
     onOpen();
