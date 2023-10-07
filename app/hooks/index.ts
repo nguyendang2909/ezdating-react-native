@@ -3,4 +3,5 @@ export * from './useAppSelector';
 export * from './useGetConversations';
 export * from './useGetMatches';
 export * from './useGetMessages';
+export * from './useGetNearbyUsers';
 export * from './useMessages';

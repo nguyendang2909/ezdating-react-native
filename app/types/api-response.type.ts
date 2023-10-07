@@ -22,6 +22,8 @@ export declare namespace ApiResponse {
 
   type Matches = PaginatedResponse<Entity.Match>;
 
+  type Users = PaginatedResponse<Entity.User>;
+
   type Conversations = PaginatedResponse<Entity.Match>;
 
   type SuccessResponse = FetchData<{ success: boolean }>;

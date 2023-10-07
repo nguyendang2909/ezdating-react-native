@@ -1,6 +1,5 @@
 import { messagesApi } from 'app/services/api/messages.api';
 import { ApiRequest, AppThunkAction } from 'app/types';
-import axios from 'axios';
 import moment from 'moment';
 
 import { messageActions } from './message.store';
@@ -57,7 +56,10 @@ export const getManyNextMessages =
     const isLoadingNext = state.messages.info[matchId]
       ? state.messages.info[matchId].isLoadingNext
       : false;
-    if (isLoadingNext) {
+    const isReachedEnd = state.messages.info[matchId]
+      ? state.messages.info[matchId].isReachedEnd
+      : false;
+    if (isLoadingNext || isReachedEnd) {
       return;
     }
     try {
@@ -65,9 +67,6 @@ export const getManyNextMessages =
       const data = await messagesApi.getMany(payload);
       dispatch(messageActions.addManyNext(data));
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        console.log(error.response?.data?.message);
-      }
     } finally {
       dispatch(messageActions.setLoadingNext({ matchId, isLoading: false }));
     }

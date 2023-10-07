@@ -7,7 +7,7 @@ import { EditFilterGenderMenuItem } from 'app/pages/EditMatchFilter/EditFilterGe
 import { nearbyUsersApi } from 'app/services/api/nearby-users.api';
 import { usersApi } from 'app/services/api/users.api';
 import { appActions } from 'app/store/app.store';
-import { nearbyUserActions } from 'app/store/nearby-user.store';
+import { nearbyUserActions } from 'app/store/nearby-user/nearby-user.store';
 import { colors } from 'app/theme';
 import { FormParams } from 'app/types/form-params.type';
 import { useFormik } from 'formik';

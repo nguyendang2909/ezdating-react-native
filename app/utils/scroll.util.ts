@@ -5,7 +5,7 @@ class ScrollUtil {
     {
       nativeEvent: { layoutMeasurement, contentOffset, contentSize },
     }: NativeSyntheticEvent<NativeScrollEvent>,
-    paddingToBottom = 20,
+    paddingToBottom = 80,
   ) => {
     return (
       layoutMeasurement.height + contentOffset.y >=

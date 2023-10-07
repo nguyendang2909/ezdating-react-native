@@ -93,6 +93,8 @@ export declare namespace ApiRequest {
 
   type FindManyMatches = Pagination;
 
+  type FindManyNearbyUses = Pagination;
+
   type SendLike = {
     targetUserId: string;
   };

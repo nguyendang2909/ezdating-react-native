@@ -60,11 +60,13 @@ export const messageSlice = createSlice({
         payload: { _matchId: matchId, data: payloadData, pagination },
       }: PayloadAction<ApiResponse.MessagesData>,
     ) => {
+      console.log(111, pagination);
       state.info[matchId] = {
         ...state.info[matchId],
         isReachedEnd: !pagination._next,
         lastRefreshedAt: moment().toISOString(),
       };
+      console.log(111, state.info[matchId]);
       const messages = messagesService.formatMany(payloadData);
       const stateData = state.data[matchId];
       state.data[matchId] = messagesService.sortAndUniq(

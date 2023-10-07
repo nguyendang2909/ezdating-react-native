@@ -20,7 +20,7 @@ import { likedMeReducer } from './liked-me.store';
 import { likeReducer } from './likes.store';
 import { matchReducer } from './match/match.store';
 import { messageReducer } from './message/message.store';
-import { nearbyUserReducer } from './nearby-user.store';
+import { nearbyUserReducer } from './nearby-user/nearby-user.store';
 import { appSaga } from './saga';
 import { swipeUserReducer } from './swipe-user.store';
 // import theme from './theme';

@@ -46,8 +46,9 @@ export const getManyNextMatches =
   (payload?: ApiRequest.FindManyMatches): AppThunkAction =>
   async (dispatch, getState) => {
     const state = getState();
-    const isLoadingNext = state.match.infoMatches.isLoadingNewest;
-    if (isLoadingNext) {
+    const isLoadingNext = state.match.infoMatches.isLoadingNext;
+    const isReachedEnd = state.match.infoMatches.isReachedEnd;
+    if (isLoadingNext || isReachedEnd) {
       return;
     }
     try {

@@ -50,17 +50,17 @@ export declare namespace AppStore {
     data: Match[];
     infoMatches: {
       lastRefreshedAt?: string;
-      isLoading: boolean;
-      isLoadingNewest: boolean;
-      isLoadingNext: boolean;
-      isReachedEnd: boolean;
+      isLoading?: boolean;
+      isLoadingNewest?: boolean;
+      isLoadingNext?: boolean;
+      isReachedEnd?: boolean;
     };
     infoConversations: {
       lastRefreshedAt?: string;
-      isLoading: boolean;
-      isLoadingNewest: boolean;
-      isLoadingNext: boolean;
-      isReachedEnd: boolean;
+      isLoading?: boolean;
+      isLoadingNewest?: boolean;
+      isLoadingNext?: boolean;
+      isReachedEnd?: boolean;
     };
   };
 
@@ -79,6 +79,10 @@ export declare namespace AppStore {
     data: Entity.User[];
     info: {
       lastRefreshedAt?: string;
+      isLoading?: boolean;
+      isLoadingNewest?: boolean;
+      isLoadingNext?: boolean;
+      isReachedEnd?: boolean;
     };
   };
 

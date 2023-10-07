@@ -46,8 +46,9 @@ export const getManyNextConversations =
   (payload?: ApiRequest.FindManyConversations): AppThunkAction =>
   async (dispatch, getState) => {
     const state = getState();
-    const isLoadingNext = state.match.infoConversations.isLoadingNewest;
-    if (isLoadingNext) {
+    const isLoadingNext = state.match.infoConversations.isLoadingNext;
+    const isReachedEnd = state.match.infoMatches.isReachedEnd;
+    if (isLoadingNext || isReachedEnd) {
       return;
     }
     try {
