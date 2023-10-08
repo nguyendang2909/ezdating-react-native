@@ -1,6 +1,11 @@
 import { Text, View } from '@gluestack-ui/themed';
 import { DetailRow } from 'app/components';
 import {
+  FontAwesome,
+  MaterialCommunityIcons,
+  MaterialIcons,
+} from 'app/components/Icon/Lib';
+import {
   UserRelationshipGoalMessages,
   UserRelationshipStatusMessages,
 } from 'app/constants';
@@ -22,6 +27,7 @@ export const NearbyUserDetails: React.FC<{ user: Entity.User }> = ({
       {!!user.relationshipGoal && (
         <View>
           <DetailRow
+            leftIcon={{ icon: FontAwesome, name: 'search' }}
             titleTx="Looking for"
             valueTx={UserRelationshipGoalMessages[user.relationshipGoal]}
           />
@@ -31,6 +37,10 @@ export const NearbyUserDetails: React.FC<{ user: Entity.User }> = ({
       {!!user.relationshipStatus && (
         <View mt={8}>
           <DetailRow
+            leftIcon={{
+              icon: MaterialCommunityIcons,
+              name: 'cards-playing-heart-multiple',
+            }}
             titleTx="Relationship status"
             valueTx={UserRelationshipStatusMessages[user.relationshipStatus]}
           />
@@ -39,19 +49,50 @@ export const NearbyUserDetails: React.FC<{ user: Entity.User }> = ({
 
       {!!user.height && (
         <View mt={8}>
-          <DetailRow titleTx="Height" value={`${user.height} cm`} />
+          <DetailRow
+            leftIcon={{
+              icon: MaterialCommunityIcons,
+              name: 'human-male-height',
+            }}
+            titleTx="Height"
+            value={`${user.height} cm`}
+          />
         </View>
       )}
 
       {!!user.weight && (
         <View mt={8}>
-          <DetailRow titleTx="Weight" value={`${user.weight} kg`} />
+          <DetailRow
+            leftIcon={{
+              name: 'weight',
+              icon: MaterialCommunityIcons,
+            }}
+            titleTx="Weight"
+            value={`${user.weight} kg`}
+          />
+        </View>
+      )}
+
+      {!!user.jobTitle && (
+        <View mt={8}>
+          <DetailRow
+            leftIcon={{
+              icon: MaterialIcons,
+              name: 'work',
+            }}
+            titleTx="Job title"
+            value={user.jobTitle}
+          />
         </View>
       )}
 
       {!!user.educationLevel && (
         <View mt={8}>
           <DetailRow
+            leftIcon={{
+              icon: MaterialCommunityIcons,
+              name: 'school',
+            }}
             titleTx="Education level"
             value={user.educationLevel.toString()}
           />

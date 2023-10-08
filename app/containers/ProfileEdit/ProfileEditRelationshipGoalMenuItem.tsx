@@ -1,4 +1,4 @@
-import { MaterialIcons } from 'app/components/Icon/Lib';
+import { FontAwesome } from 'app/components/Icon/Lib';
 import { MenuItem } from 'app/components/Menu/MenuItem';
 import {
   UserRelationshipGoal,
@@ -37,7 +37,7 @@ export const ProfileEditRelationshipGoalMenuItem: React.FC<FCProps> = ({
     <>
       <MenuItem
         titleTx="Looking for"
-        leftIcon={<MaterialIcons name="add-to-photos" />}
+        leftIcon={<FontAwesome name="search" />}
         {...(currentRelationshipGoal
           ? {
               valueTx: UserRelationshipGoalMessages[currentRelationshipGoal],

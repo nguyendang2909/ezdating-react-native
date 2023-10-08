@@ -1,4 +1,5 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { GradientIcon } from 'app/components/Icon/GradientIcon';
 import { useMessages } from 'app/hooks';
 import { AppStackScreenProps } from 'app/navigators';
 import { ConversationsScreen } from 'app/screens/ConversationsScreen';
@@ -58,10 +59,18 @@ export const HomeNavigator: FC<FCProps> = () => {
           tabBarShowLabel: false,
           //   tabBarLabel: formatMessage('Swipe'),
           tabBarIcon: ({ focused }) => (
-            <FontAwesome
-              name="globe"
-              color={focused ? '#ff6036' : colors.palette.neutral400}
+            <GradientIcon
+              {...(!focused
+                ? {
+                    colors: [
+                      colors.palette.neutral500,
+                      colors.palette.neutral500,
+                    ],
+                  }
+                : {})}
               size={30}
+              name="globe"
+              icon={FontAwesome}
             />
           ),
         }}
@@ -73,10 +82,18 @@ export const HomeNavigator: FC<FCProps> = () => {
           tabBarShowLabel: false,
           //   tabBarLabel: formatMessage('Nearby'),
           tabBarIcon: ({ focused }) => (
-            <MaterialIcons
-              name="location-on"
-              color={focused ? '#ff6036' : colors.palette.neutral400}
+            <GradientIcon
+              {...(!focused
+                ? {
+                    colors: [
+                      colors.palette.neutral500,
+                      colors.palette.neutral500,
+                    ],
+                  }
+                : {})}
               size={30}
+              name="location-on"
+              icon={MaterialIcons}
             />
           ),
         }}
@@ -88,10 +105,18 @@ export const HomeNavigator: FC<FCProps> = () => {
           tabBarShowLabel: false,
           tabBarLabel: formatMessage('Messages'),
           tabBarIcon: ({ focused }) => (
-            <MaterialCommunityIcons
-              name="chat"
-              color={focused ? '#ff6036' : colors.palette.neutral400}
+            <GradientIcon
+              {...(!focused
+                ? {
+                    colors: [
+                      colors.palette.neutral500,
+                      colors.palette.neutral500,
+                    ],
+                  }
+                : {})}
               size={30}
+              name="chat"
+              icon={MaterialCommunityIcons}
             />
           ),
         }}
@@ -103,10 +128,18 @@ export const HomeNavigator: FC<FCProps> = () => {
           tabBarShowLabel: false,
           tabBarLabel: formatMessage('Profile'),
           tabBarIcon: ({ focused }) => (
-            <MaterialCommunityIcons
-              name="account"
-              color={focused ? '#ff6036' : colors.palette.neutral400}
+            <GradientIcon
+              {...(!focused
+                ? {
+                    colors: [
+                      colors.palette.neutral500,
+                      colors.palette.neutral500,
+                    ],
+                  }
+                : {})}
               size={30}
+              name="account"
+              icon={MaterialCommunityIcons}
             />
           ),
         }}

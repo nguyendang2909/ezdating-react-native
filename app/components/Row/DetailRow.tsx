@@ -1,12 +1,14 @@
-import { HStack, Icon, Text, View } from '@gluestack-ui/themed';
+import { Box, Text, View } from '@gluestack-ui/themed';
 import { useMessages } from 'app/hooks';
 import { TxKey } from 'app/types';
 import React from 'react';
 
+import { GradientIcon, GradientIconProps } from '../Icon/GradientIcon';
+
 type FCProps = {
   title?: string;
   titleTx?: TxKey;
-  leftIcon?: React.ReactElement;
+  leftIcon?: GradientIconProps;
   value?: string;
   valueTx?: TxKey;
 };
@@ -22,17 +24,25 @@ export const DetailRow: React.FC<FCProps> = ({
 
   return (
     <>
-      <View px={16} py={16} backgroundColor="$backgroundLight0" rounded={16}>
-        <HStack alignItems="center">
+      <View
+        px={16}
+        py={16}
+        backgroundColor="$backgroundLight0"
+        rounded={16}
+        flex={1}
+      >
+        <Box flexDirection="row" alignItems="center">
           {!!leftIcon && (
-            <View mr={2}>
-              <Icon as={leftIcon} />
+            <View mr={8}>
+              <GradientIcon size={20} {...leftIcon} />
             </View>
           )}
 
           {(!!title || !!titleTx) && (
             <View>
-              <Text>{title || (!!titleTx && formatMessage(titleTx))}</Text>
+              <Text numberOfLines={1} ellipsizeMode="tail" textAlign="left">
+                {title || (!!titleTx && formatMessage(titleTx))}
+              </Text>
             </View>
           )}
 
@@ -45,7 +55,7 @@ export const DetailRow: React.FC<FCProps> = ({
               </Text>
             </View>
           )}
-        </HStack>
+        </Box>
       </View>
     </>
   );

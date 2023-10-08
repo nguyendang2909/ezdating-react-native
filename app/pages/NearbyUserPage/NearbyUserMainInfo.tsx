@@ -1,4 +1,5 @@
 import { Box, HStack, Text } from '@gluestack-ui/themed';
+import { GradientIcon } from 'app/components/Icon/GradientIcon';
 import { MaterialIcons } from 'app/components/Icon/Lib';
 import { useMessages } from 'app/hooks';
 import _ from 'lodash';
@@ -46,7 +47,11 @@ export const NearbyUserMainInfo: React.FC<FCProps> = ({
           {_.isNumber(distance) && (
             <HStack alignItems="center" rowGap={8}>
               <Box>
-                <MaterialIcons name="location-on" size={24} />
+                <GradientIcon
+                  icon={MaterialIcons}
+                  name="location-on"
+                  size={24}
+                />
               </Box>
               <Box>
                 <Text fontSize={20}>
