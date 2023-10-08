@@ -173,7 +173,8 @@ export const SignInWithOtpPhoneNumberScreen: FC<FCProps> = props => {
                     style={posititionAbsolute}
                     leftIcon={<WarningOutlineIcon size="xs" />}
                   >
-                    {isError && t('Wrong verification code, try again!')}
+                    {isError &&
+                      formatMessage('Wrong verification code, try again!')}
                   </FormControl.ErrorMessage>
                 </View>
               </FormControl>

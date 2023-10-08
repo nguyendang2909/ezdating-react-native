@@ -61,7 +61,7 @@ export type AppStackParamList = {
   LikedMe: undefined;
   Main: undefined;
   Messages: {
-    conversation: Entity.Match;
+    matchId: string;
   };
   ProfileEdit: undefined;
   ProfileNearby: {

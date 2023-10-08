@@ -2,7 +2,6 @@ import {
   Box,
   FlatList,
   Image,
-  LinearGradient,
   Pressable,
   Spinner,
   Text,
@@ -19,6 +18,8 @@ import {
   RefreshControl,
 } from 'react-native';
 import { useDispatch } from 'react-redux';
+
+import { LinearGradient } from '../../components';
 
 export const LikedMeContent: React.FC = () => {
   const dispatch = useDispatch();

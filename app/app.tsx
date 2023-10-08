@@ -1,6 +1,7 @@
 import './utils/ignoreWarnings';
 
 import { ActionSheetProvider } from '@expo/react-native-action-sheet';
+import { config as gluestackConfig } from '@gluestack-ui/config';
 import { GluestackUIProvider } from '@gluestack-ui/themed';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useFonts } from 'expo-font';
@@ -28,7 +29,6 @@ import { setupReactotron } from './services/reactotron';
 import { persistor, store } from './store';
 import { customFontsToLoad } from './theme';
 import { defaultTheme } from './theme/default-theme';
-import { glueStackConfig } from './theme/glue-stack.config';
 import * as storage from './utils/storage';
 
 // Set up Reactotron, which is a free desktop app for inspecting and debugging
@@ -121,7 +121,7 @@ function App(props: AppProps) {
           <ConnectProfile />
           <SafeAreaProvider initialMetrics={initialWindowMetrics}>
             <ErrorBoundary catchErrors={Config.catchErrors}>
-              <GluestackUIProvider config={glueStackConfig}>
+              <GluestackUIProvider config={gluestackConfig}>
                 <NativeBaseProvider
                   theme={defaultTheme}
                   config={nativeBaseConfig}

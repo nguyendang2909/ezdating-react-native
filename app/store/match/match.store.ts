@@ -29,6 +29,15 @@ export const matchSlice = createSlice({
   initialState,
   reducers: {
     // Matches
+    addOneMatch: (
+      state,
+      {
+        payload: { data, currentUserId },
+      }: PayloadAction<{ data: Entity.Match; currentUserId: string }>,
+    ) => {
+      const match = matchesService.formatOne(data, currentUserId);
+      state.data = matchesService.sortAndUniq([match], state.data);
+    },
     refreshMatches: (
       state,
       { payload: { data, pagination } }: PayloadAction<ApiResponse.Matches>,
@@ -211,6 +220,8 @@ export const matchSlice = createSlice({
   extraReducers: builder => {
     builder.addCase(appActions.logout, state => {
       state.data = [];
+      state.infoConversations = {};
+      state.infoMatches = {};
     });
   },
 });

@@ -1,14 +1,11 @@
-import {
-  Box,
-  Image,
-  LinearGradient,
-  Pressable,
-  Text,
-} from '@gluestack-ui/themed';
+import { Box, Pressable, Text } from '@gluestack-ui/themed';
 import { useNavigation } from '@react-navigation/native';
 import { Entity } from 'app/types';
 import _ from 'lodash';
 import React from 'react';
+import { Image, StyleSheet } from 'react-native';
+
+import { LinearGradient } from '../../components';
 
 type NearbyUserItemProps = {
   user: Entity.User;
@@ -34,8 +31,6 @@ export const NearbyUserItem: React.FC<NearbyUserItemProps> = ({ user }) => {
           width="$full"
           position="absolute"
           borderRadius={8}
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
           colors={['#00000000', '#00000000', '#00000000', '#000000']}
           justifyContent="flex-end"
         >
@@ -51,9 +46,7 @@ export const NearbyUserItem: React.FC<NearbyUserItemProps> = ({ user }) => {
 
         <Box>
           <Image
-            w="$full"
-            aspectRatio={640 / 860}
-            borderRadius={8}
+            style={style.image}
             alt="avatar"
             source={{
               uri: user.mediaFiles?.length ? user.mediaFiles[0].location : '',
@@ -64,3 +57,11 @@ export const NearbyUserItem: React.FC<NearbyUserItemProps> = ({ user }) => {
     </Box>
   );
 };
+
+const style = StyleSheet.create({
+  image: {
+    aspectRatio: 640 / 860,
+    borderRadius: 8,
+    width: '100%',
+  },
+});

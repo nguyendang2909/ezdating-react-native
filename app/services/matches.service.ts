@@ -22,14 +22,18 @@ class MatchesService extends CommonService {
     }));
   }
 
-  formatOne(
-    payload: Entity.Match,
-    options?: Partial<AppStore.Match>,
-  ): AppStore.Match {
+  formatOne(payload: Entity.Match, currentUserId: string): AppStore.Match {
+    const { userOne, userTwo, ...rest } = payload;
     return {
-      ...payload,
+      ...rest,
+      ...(userOne?._id === currentUserId
+        ? {
+            targetUser: userTwo,
+          }
+        : {
+            targetUser: userOne,
+          }),
       lastRefreshedAt: moment().toISOString(),
-      ...options,
     };
   }
 

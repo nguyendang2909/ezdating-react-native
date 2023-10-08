@@ -60,3 +60,23 @@ export const getManyNextMatches =
       dispatch(matchActions.setMatchesLoadingNext(false));
     }
   };
+
+export const getOneMatch =
+  (matchId: string): AppThunkAction =>
+  async (dispatch, getState) => {
+    const state = getState();
+    const socketConnectedAt = state.app.socket.connectedAt;
+    const match = state.match.data.find(e => e._id === matchId);
+    const currentUserId = state.app.profile._id || '';
+    const lastRefreshedAt = match?.lastRefreshedAt;
+    if (
+      lastRefreshedAt &&
+      moment(lastRefreshedAt).isAfter(moment(socketConnectedAt))
+    ) {
+      return;
+    }
+    try {
+      const { data } = await matchesApi.getOne(matchId);
+      dispatch(matchActions.addOneMatch({ data, currentUserId }));
+    } catch (err) {}
+  };

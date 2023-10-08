@@ -24,6 +24,9 @@ api.interceptors.response.use(
     return response;
   },
   async error => {
+    if (process.env.NODE_ENV === 'development') {
+      console.log(error.response?.data?.message);
+    }
     const originalRequest = error.config;
 
     if (error.response.status === 401 && !originalRequest._retry) {

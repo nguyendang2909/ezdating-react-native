@@ -76,6 +76,8 @@ export declare namespace Entity {
       userTwoRead: boolean;
       targetUser: User;
       read: boolean;
+      userOne: Entity.User;
+      userTwo: Entity.User;
     }>;
 
   type Message = BaseEntity &

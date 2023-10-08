@@ -1,7 +1,9 @@
-import { Box, LinearGradient, View } from '@gluestack-ui/themed';
+import { Box, View } from '@gluestack-ui/themed';
 import MaskedView from '@react-native-masked-view/masked-view';
 import React from 'react';
 import { Icon } from 'react-native-vector-icons/Icon';
+
+import { LinearGradient } from '../LinearGradient';
 
 export type FCProps = {
   size?: number;

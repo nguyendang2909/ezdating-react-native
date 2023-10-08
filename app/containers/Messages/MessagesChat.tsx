@@ -2,7 +2,6 @@ import { KeyboardAvoidingView, Spinner } from '@gluestack-ui/themed';
 import { useGetMessages } from 'app/hooks/useGetMessages';
 import { socketStoreActions } from 'app/store/socket.store';
 import { ChatUser } from 'app/types';
-import { Entity } from 'app/types/entity.type';
 import { scrollUtil } from 'app/utils/scroll.util';
 import React, { useCallback } from 'react';
 import {
@@ -24,18 +23,17 @@ import { RenderAvatar } from './RenderAvatar';
 import { RenderMessage } from './RenderMessage';
 
 type FCProps = {
-  conversation: Entity.Match;
+  matchId: string;
   currentUser: ChatUser;
   targetUser: ChatUser;
 };
 export const MessagesChat: React.FC<FCProps> = ({
-  conversation,
+  matchId,
   currentUser,
   targetUser,
 }) => {
   const dispatch = useDispatch();
 
-  const matchId = conversation._id;
   const {
     data: messages = [],
     fetchNext,

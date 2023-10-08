@@ -2,17 +2,18 @@ import { useNavigation } from '@react-navigation/native';
 import { MessagesChat } from 'app/containers/Messages/MessagesChat';
 import { MessageByConversationHeader } from 'app/containers/Messages/MessagesHeader';
 import { useAppSelector } from 'app/hooks';
+import { useGetMatch } from 'app/hooks/useGetMatch';
 import { AppStackScreenProps } from 'app/navigators';
 import { ChatUser } from 'app/types';
 import { StatusBar } from 'native-base';
-import React, { FC } from 'react';
+import React, { FC, useMemo } from 'react';
 import { SafeAreaView } from 'react-native';
 
 type FCProps = AppStackScreenProps<'Messages'>;
 
 export const MessagesScreen: FC<FCProps> = props => {
-  const { conversation } = props.route.params;
-
+  const { matchId } = props.route.params;
+  const { data: match } = useGetMatch(matchId);
   const currentUser: ChatUser = useAppSelector(state => {
     const profile = state.app.profile;
     return {
@@ -23,29 +24,41 @@ export const MessagesScreen: FC<FCProps> = props => {
         : undefined,
     };
   });
-
+  const targetUser = useMemo(
+    () => ({
+      _id: match.targetUser?._id || '',
+      avatar: match.targetUser?.mediaFiles?.length
+        ? match.targetUser.mediaFiles[0].location
+        : undefined,
+      name: match.targetUser?.nickname,
+    }),
+    [
+      match.targetUser?._id,
+      match.targetUser.mediaFiles,
+      match.targetUser?.nickname,
+    ],
+  );
   const { goBack } = useNavigation();
-
-  if (!conversation || !conversation._id) {
+  if (!matchId) {
     goBack();
-
     return <></>;
   }
 
   return (
     <>
       <StatusBar barStyle="default" />
-      <MessageByConversationHeader />
+      <MessageByConversationHeader match={match} />
       <MessagesChat
-        conversation={conversation}
+        matchId={matchId}
         currentUser={currentUser}
-        targetUser={{
-          _id: conversation.targetUser?._id || '',
-          avatar: conversation.targetUser?.mediaFiles?.length
-            ? conversation.targetUser.mediaFiles[0].location
-            : undefined,
-          name: conversation.targetUser?.nickname,
-        }}
+        targetUser={targetUser}
+        // targetUser={{
+        //   _id: conversation.targetUser?._id || '',
+        //   avatar: conversation.targetUser?.mediaFiles?.length
+        //     ? conversation.targetUser.mediaFiles[0].location
+        //     : undefined,
+        //   name: conversation.targetUser?.nickname,
+        // }}
       />
       <SafeAreaView />
     </>

@@ -1,13 +1,13 @@
 import { Box, Button, ChevronLeftIcon, ScrollView } from '@gluestack-ui/themed';
 import { useNavigation } from '@react-navigation/native';
 import { BoxSafeView } from 'app/components';
-import { useMessages } from 'app/hooks';
 import { AppStackScreenProps } from 'app/navigators';
 import {
   NearbyUserDetails,
   NearbyUserIntroduce,
   NearbyUserMainInfo,
 } from 'app/pages';
+import { NearbyUserActions } from 'app/pages/NearbyUserPage/NearbyUserActions';
 import { NearbyUserImages } from 'app/pages/NearbyUserPage/NearbyUserImages';
 import React from 'react';
 import { SafeAreaView } from 'react-native';
@@ -15,8 +15,6 @@ import { SafeAreaView } from 'react-native';
 type FCProps = AppStackScreenProps<'ProfileNearby'>;
 
 export const ProfileNearbyScreen: React.FC<FCProps> = props => {
-  const { formatMessage } = useMessages();
-
   const user = props.route.params.user;
 
   const { goBack } = useNavigation();
@@ -24,12 +22,22 @@ export const ProfileNearbyScreen: React.FC<FCProps> = props => {
   return (
     <>
       <Box flex={1}>
+        <Box position="absolute" bottom={10} left={0} right={0} zIndex={999}>
+          <NearbyUserActions targetUserId={user._id} />
+          <SafeAreaView />
+        </Box>
         <ScrollView flex={1} backgroundColor="$backgroundLight100">
           <Box aspectRatio={640 / 860}>
             <Box position="absolute" zIndex={100}>
               <SafeAreaView />
               <Box ml={16} mt={16} zIndex={100}>
-                <Button height={40} width={40} onPress={goBack}>
+                <Button
+                  height={40}
+                  width={40}
+                  onPress={goBack}
+                  rounded={100}
+                  bgColor="$red600"
+                >
                   <ChevronLeftIcon color="$white" />
                 </Button>
               </Box>
@@ -54,21 +62,6 @@ export const ProfileNearbyScreen: React.FC<FCProps> = props => {
             <Box px={16} mt={16}>
               <NearbyUserDetails user={user} />
             </Box>
-
-            {/* {!!user?.relationshipGoal && (
-          <Box mt={2} px={4}>
-            <Box>
-              <HStack>
-                <Box>
-                  <Text>Looking for</Text>
-                </Box>
-                <Box>{user?.relationshipGoal}</Box>
-              </HStack>
-            </Box>
-          </Box>
-        )} */}
-
-            {/* <Box></Box> */}
           </Box>
 
           <BoxSafeView bottom />

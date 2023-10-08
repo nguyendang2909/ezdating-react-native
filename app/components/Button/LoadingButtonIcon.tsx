@@ -18,6 +18,8 @@ export const LoadingButtonIcon: React.FC<LoadingButtonIconProps> = ({
       py={0}
       height={size}
       width={size}
+      rounded={100}
+      bgColor="$red600"
       {...buttonProps}
       disabled={isLoading}
     >

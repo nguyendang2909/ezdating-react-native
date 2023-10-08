@@ -104,4 +104,8 @@ export declare namespace ApiRequest {
   };
 
   type FindManyLikedMe = Pagination;
+
+  type CreateMatch = {
+    targetUserId: string;
+  };
 }

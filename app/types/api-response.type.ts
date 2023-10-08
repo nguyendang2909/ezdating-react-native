@@ -20,6 +20,8 @@ export declare namespace ApiResponse {
     type: string;
   };
 
+  type MatchData = FetchData<Entity.Match>;
+
   type Matches = PaginatedResponse<Entity.Match>;
 
   type Users = PaginatedResponse<Entity.User>;

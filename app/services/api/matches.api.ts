@@ -7,11 +7,18 @@ import { Entity } from 'app/types/entity.type';
 import { api } from './api';
 
 class MatchesApi extends CommonApi {
+  public async createOne(body: ApiRequest.CreateMatch) {
+    const { data } = await api.post<ApiResponse.MatchData>(
+      API_URL.matches,
+      body,
+    );
+    return data;
+  }
+
   public async getOne(id: string) {
     const { data } = await api.get<ApiResponse.FetchData<Entity.Match>>(
       `${API_URL.matches}/${id}`,
     );
-
     return data;
   }
 
@@ -22,7 +29,6 @@ class MatchesApi extends CommonApi {
         params,
       },
     );
-
     return response.data;
   }
 

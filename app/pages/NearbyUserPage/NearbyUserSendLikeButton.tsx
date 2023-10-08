@@ -5,10 +5,12 @@ import { likesApi } from 'app/services/api/likes.api';
 import React, { useState } from 'react';
 
 type FCProps = {
-  userId: string;
+  targetUserId: string;
 };
 
-export const NearbyUserSendLikeButton: React.FC<FCProps> = ({ userId }) => {
+export const NearbyUserSendLikeButton: React.FC<FCProps> = ({
+  targetUserId,
+}) => {
   const [isShowSendLike, setShowSendLike] = useState<boolean>(true);
   const [isLoadingSendLike, setLoadingSendLike] = useState<boolean>(false);
 
@@ -16,7 +18,7 @@ export const NearbyUserSendLikeButton: React.FC<FCProps> = ({ userId }) => {
     try {
       setLoadingSendLike(true);
       await likesApi.send({
-        targetUserId: userId,
+        targetUserId,
       });
       setShowSendLike(false);
     } catch (err) {
@@ -30,10 +32,12 @@ export const NearbyUserSendLikeButton: React.FC<FCProps> = ({ userId }) => {
       {isShowSendLike && (
         <Box>
           <LoadingButtonIcon
+            height={48}
+            width={48}
             onPress={handleSendLike}
             isLoading={isLoadingSendLike}
           >
-            <FontAwesome color="white" size={20} name="heart" />
+            <FontAwesome color="white" size={24} name="heart" />
           </LoadingButtonIcon>
         </Box>
       )}

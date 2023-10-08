@@ -1,6 +1,8 @@
-import { Box, LinearGradient, Text } from '@gluestack-ui/themed';
+import { Box, Text } from '@gluestack-ui/themed';
 import { useMessages } from 'app/hooks';
 import React from 'react';
+
+import { LinearGradient } from '../../components';
 
 export const NoConversationBox: React.FC = () => {
   const { formatMessage } = useMessages();

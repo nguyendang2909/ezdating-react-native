@@ -1,5 +1,5 @@
 import { useMutation, UseMutationOptions } from '@tanstack/react-query';
-import { authApi } from 'app/services/api/auth.service';
+import { authApi } from 'app/services/api/auth.api';
 import { ApiResponse } from 'app/types/api-response.type';
 import { AxiosError } from 'axios';
 
