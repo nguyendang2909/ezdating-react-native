@@ -21,7 +21,7 @@ export const SignInWithPhoneNumberScreen: FC<FCProps> = _props => {
           <View>
             <BackIconButton></BackIconButton>
           </View>
-          <Heading size="2xl">
+          <Heading fontSize={40}>
             {formatMessage('What is your phone number?')}
           </Heading>
           <Text>

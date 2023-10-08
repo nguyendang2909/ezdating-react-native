@@ -1,5 +1,5 @@
+import { Text } from '@gluestack-ui/themed';
 import { useAppSelector } from 'app/hooks';
-import { Text } from 'native-base';
 import React from 'react';
 
 export const ProfileHeaderNickname: React.FC = () => {
@@ -7,7 +7,7 @@ export const ProfileHeaderNickname: React.FC = () => {
 
   return (
     <>
-      <Text fontSize="xl" fontWeight="bold">
+      <Text fontSize={26} fontWeight="bold" numberOfLines={1}>
         {nickname}
       </Text>
     </>

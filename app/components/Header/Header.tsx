@@ -212,13 +212,7 @@ export function Header(props: HeaderProps) {
             ]}
             pointerEvents="none"
           >
-            <Text
-              fontWeight="$medium"
-              size="md"
-              style={[$title, $titleStyleOverride]}
-            >
-              {titleContent}
-            </Text>
+            <Text style={[$title, $titleStyleOverride]}>{titleContent}</Text>
           </View>
         )}
 
@@ -263,7 +257,7 @@ function HeaderAction(props: HeaderActionProps) {
         disabled={!onPress}
         activeOpacity={0.8}
       >
-        <Text fontWeight="$medium" size="md" style={$actionText}>
+        <Text fontWeight="$medium" style={$actionText}>
           {content}
         </Text>
       </TouchableOpacity>
@@ -285,10 +279,6 @@ function HeaderAction(props: HeaderActionProps) {
 
   return <View style={[$actionFillerContainer, { backgroundColor }]} />;
 }
-
-const $container: ViewStyle = {
-  width: '100%',
-};
 
 const $title: TextStyle = {
   textAlign: 'center',
