@@ -1,6 +1,7 @@
+import { Icon } from '@gluestack-ui/themed';
 import { useNavigation } from '@react-navigation/native';
-import { Icon, IconButton } from 'native-base';
 import React from 'react';
+import { TouchableOpacity } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 
 export const ProfileSettingIconButton: React.FC = () => {
@@ -11,10 +12,13 @@ export const ProfileSettingIconButton: React.FC = () => {
 
   return (
     <>
-      <IconButton
+      <TouchableOpacity onPress={handlePress}>
+        <Icon color="$textDark600" as={Feather} name="settings" size="xl" />
+      </TouchableOpacity>
+      {/* <Icon
         onPress={handlePress}
         icon={<Icon size="2xl" as={<Feather name="settings" />} />}
-      ></IconButton>
+      ></Icon> */}
     </>
   );
 };

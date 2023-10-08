@@ -1,7 +1,9 @@
 import { Box, LinearGradient, Text } from '@gluestack-ui/themed';
+import { useMessages } from 'app/hooks';
 import React from 'react';
 
 export const NoConversationBox: React.FC = () => {
+  const { formatMessage } = useMessages();
   return (
     <>
       <Box flex={1} justifyContent="center" alignItems="center">
@@ -23,9 +25,9 @@ export const NoConversationBox: React.FC = () => {
           </Box>
           <Box mt={8}>
             <Text textAlign="center">
-              Matches will appear here once you start to Like people. You can
-              message them directly from here when you’re ready to spark up the
-              conversation.
+              {formatMessage(
+                'Matches will appear here once you start to Like people. You can message them directly from here when you’re ready to spark up the conversation.',
+              )}
             </Text>
           </Box>
         </Box>

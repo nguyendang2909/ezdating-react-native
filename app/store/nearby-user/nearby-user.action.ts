@@ -43,7 +43,8 @@ export const getManyNextNearbyUsers =
   async (dispatch, getState) => {
     const state = getState();
     const isLoadingNext = state.nearbyUser.info.isLoadingNext;
-    if (isLoadingNext) {
+    const isReachedEnd = state.nearbyUser.info.isReachedEnd;
+    if (isLoadingNext || isReachedEnd) {
       return;
     }
     try {

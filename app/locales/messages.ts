@@ -311,4 +311,10 @@ export const messages = defineMessages({
     defaultMessage: 'Education level',
     id: '674de4adbe',
   },
+  'Matches will appear here once you start to Like people. You can message them directly from here when you’re ready to spark up the conversation.':
+    {
+      defaultMessage:
+        'Matches will appear here once you start to Like people. You can message them directly from here when you’re ready to spark up the conversation.',
+      id: '5914c8ac38',
+    },
 });
