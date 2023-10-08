@@ -15,17 +15,17 @@ export const useGetConversations = () => {
 
   const conversations = useAppSelector(matchSelects.conversations);
 
-  const isLoading = useAppSelector(s => s.match.infoConversations.isLoading);
-  const isReachedEnd = useAppSelector(
+  const isLoading = !!useAppSelector(s => s.match.infoConversations.isLoading);
+  const isReachedEnd = !!useAppSelector(
     s => s.match.infoConversations.isReachedEnd,
   );
-  const isLoadingNext = useAppSelector(
+  const isLoadingNext = !!useAppSelector(
     s => s.match.infoConversations.isLoadingNext,
   );
-  const isLoadingNewest = useAppSelector(
+  const isLoadingNewest = !!useAppSelector(
     s => s.match.infoConversations.isLoadingNewest,
   );
-  const lastRefreshedAt = useAppSelector(
+  const lastRefreshedAt = !!useAppSelector(
     s => s.match.infoConversations.lastRefreshedAt,
   );
   const conversationsLength = conversations.length;

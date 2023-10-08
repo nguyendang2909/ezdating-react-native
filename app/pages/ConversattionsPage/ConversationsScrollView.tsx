@@ -24,11 +24,7 @@ export const ConversationsScrollView: React.FC = () => {
     lastRefreshedAt: conversationsLastRefreshedAt,
   } = useGetConversations();
 
-  const {
-    data: matches,
-    isLoadingNewest: isLoadingNewestMatches,
-    fetchNewest: fetchNewestMatches,
-  } = useGetMatches();
+  const { data: matches, fetchNewest: fetchNewestMatches } = useGetMatches();
 
   const handleScroll = async (e: NativeSyntheticEvent<NativeScrollEvent>) => {
     if (!scrollUtil.isCloseToBottom(e)) {
