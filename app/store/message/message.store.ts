@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { endpoints } from 'app/services/api';
 import { messagesService } from 'app/services/messages.service';
-import { ApiResponse } from 'app/types/api-response.type';
 import { AppStore } from 'app/types/app-store.type';
 import { Entity } from 'app/types/entity.type';
 import moment from 'moment';
@@ -16,65 +16,6 @@ export const messageSlice = createSlice({
   name: 'message',
   initialState,
   reducers: {
-    refreshMany: (
-      state,
-      {
-        payload: { _matchId: matchId, data: payloadData, pagination },
-      }: PayloadAction<ApiResponse.MessagesData>,
-    ) => {
-      state.info[matchId] = {
-        ...state.info[matchId],
-        isReachedEnd: !pagination._next,
-        lastRefreshedAt: moment().toISOString(),
-      };
-      const messages = messagesService.formatMany(payloadData);
-      const stateData = state.data[matchId];
-      state.data[matchId] = messagesService.sortAndUniq(
-        messages,
-        stateData || [],
-      );
-    },
-
-    addManyNewest: (
-      state,
-      {
-        payload: { _matchId: matchId, data: payloadData, pagination },
-      }: PayloadAction<ApiResponse.MessagesData>,
-    ) => {
-      state.info[matchId] = {
-        ...state.info[matchId],
-        isReachedEnd: !pagination._next,
-        lastRefreshedAt: moment().toISOString(),
-      };
-      const messages = messagesService.formatMany(payloadData);
-      const stateData = state.data[matchId];
-      state.data[matchId] = messagesService.sortAndUniq(
-        messages,
-        stateData || [],
-      );
-    },
-
-    addManyNext: (
-      state,
-      {
-        payload: { _matchId: matchId, data: payloadData, pagination },
-      }: PayloadAction<ApiResponse.MessagesData>,
-    ) => {
-      console.log(111, pagination);
-      state.info[matchId] = {
-        ...state.info[matchId],
-        isReachedEnd: !pagination._next,
-        lastRefreshedAt: moment().toISOString(),
-      };
-      console.log(111, state.info[matchId]);
-      const messages = messagesService.formatMany(payloadData);
-      const stateData = state.data[matchId];
-      state.data[matchId] = messagesService.sortAndUniq(
-        messages,
-        stateData || [],
-      );
-    },
-
     receiveMsg: (state, action: PayloadAction<Entity.Message>) => {
       const { payload } = action;
       const matchId = payload._matchId;
@@ -142,57 +83,6 @@ export const messageSlice = createSlice({
       }
       state.info[matchId].lastRefreshedAt = lastRefreshedAt;
     },
-
-    setLoading: (
-      state,
-      {
-        payload: { matchId, isLoading },
-      }: PayloadAction<{ matchId: string; isLoading: boolean }>,
-    ) => {
-      if (!state.info[matchId]) {
-        state.info.matchId = {
-          isLoading,
-        };
-
-        return;
-      }
-
-      state.info[matchId].isLoading = isLoading;
-    },
-
-    setLoadingNewest: (
-      state,
-      {
-        payload: { matchId, isLoading },
-      }: PayloadAction<{ matchId: string; isLoading: boolean }>,
-    ) => {
-      if (!state.info[matchId]) {
-        state.info.matchId = {
-          isLoadingNewest: isLoading,
-        };
-
-        return;
-      }
-
-      state.info[matchId].isLoadingNewest = isLoading;
-    },
-
-    setLoadingNext: (
-      state,
-      {
-        payload: { matchId, isLoading },
-      }: PayloadAction<{ matchId: string; isLoading: boolean }>,
-    ) => {
-      if (!state.info[matchId]) {
-        state.info.matchId = {
-          isLoadingNext: isLoading,
-        };
-
-        return;
-      }
-
-      state.info[matchId].isLoadingNext = isLoading;
-    },
   },
 
   extraReducers: builder => {
@@ -200,45 +90,55 @@ export const messageSlice = createSlice({
       state.data = {};
       state.info = {};
     });
-    // builder.addMatcher(
-    //   api.endpoints.getNextConversations.matchFulfilled,
-    //   (state, action) => {
-    //     const { data: conversationsData, pagination: paginationData } =
-    //       action.payload;
-
-    //     if (!conversationsData || !paginationData) {
-    //       return;
-    //     }
-
-    //     state.data = state.data.concat(conversationsData);
-
-    //     state.pagination = paginationData;
-    //   },
-    // );
-    // builder.addMatcher(
-    //   api.endpoints.getNextMessages.matchFulfilled,
-    //   (state, action) => {
-    //     const { data: messagesData, pagination, _matchId } = action.payload;
-
-    //     if (!messagesData || !pagination || !_matchId) {
-    //       return;
-    //     }
-
-    //     const oldConversation = state.messages[_matchId];
-
-    //     if (!oldConversation) {
-    //       state.messages[_matchId] = {
-    //         pagination,
-    //         data: messagesData,
-    //       };
-    //     } else {
-    //       state.messages[_matchId] = {
-    //         pagination,
-    //         data: (oldConversation.data || []).concat(messagesData),
-    //       };
-    //     }
-    //   },
-    // );
+    builder
+      .addMatcher(
+        endpoints.refreshMessages.matchFulfilled,
+        (state, { payload: { _matchId, data, pagination } }) => {
+          state.info[_matchId] = {
+            ...state.info[_matchId],
+            isReachedEnd: !pagination._next,
+            lastRefreshedAt: moment().toISOString(),
+          };
+          const messages = messagesService.formatMany(data);
+          const stateData = state.data[_matchId];
+          state.data[_matchId] = messagesService.sortAndUniq(
+            messages,
+            stateData || [],
+          );
+        },
+      )
+      .addMatcher(
+        endpoints.getNewestMessages.matchFulfilled,
+        (state, { payload: { _matchId, data, pagination } }) => {
+          state.info[_matchId] = {
+            ...state.info[_matchId],
+            isReachedEnd: !pagination._next,
+            lastRefreshedAt: moment().toISOString(),
+          };
+          const messages = messagesService.formatMany(data);
+          const stateData = state.data[_matchId];
+          state.data[_matchId] = messagesService.sortAndUniq(
+            messages,
+            stateData || [],
+          );
+        },
+      )
+      .addMatcher(
+        endpoints.getNewestMessages.matchFulfilled,
+        (state, { payload: { _matchId, data, pagination } }) => {
+          state.info[_matchId] = {
+            ...state.info[_matchId],
+            isReachedEnd: !pagination._next,
+            lastRefreshedAt: moment().toISOString(),
+          };
+          const messages = messagesService.formatMany(data);
+          const stateData = state.data[_matchId];
+          state.data[_matchId] = messagesService.sortAndUniq(
+            messages,
+            stateData || [],
+          );
+        },
+      );
   },
 });
 

@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { endpoints } from 'app/services/api';
 import { matchesService } from 'app/services/matches.service';
-import { ApiResponse } from 'app/types';
 import { AppStore } from 'app/types/app-store.type';
 import { Entity } from 'app/types/entity.type';
 import { SocketRequest } from 'app/types/socket-request.type';
@@ -15,9 +14,6 @@ const initialState: AppStore.MatchState = {
     isReachedEnd: true,
   },
   infoConversations: {
-    isLoading: false,
-    isLoadingNewest: false,
-    isLoadingNext: false,
     isReachedEnd: true,
   },
 };
@@ -36,48 +32,6 @@ export const matchSlice = createSlice({
       const match = matchesService.formatOne(data, currentUserId);
       state.data = matchesService.sortAndUniq([match], state.data);
     },
-    // refreshMatches: (
-    //   state,
-    //   { payload: { data, pagination } }: PayloadAction<ApiResponse.Matches>,
-    // ) => {
-    //   state.infoMatches = {
-    //     ...state.infoMatches,
-    //     isReachedEnd: !pagination._next,
-    //     lastRefreshedAt: moment().toISOString(),
-    //   };
-    //   const matches = matchesService.formatMany(data);
-    //   state.data = matchesService.sortAndUniq(matches, state.data);
-    // },
-
-    // addManyNewestMatches: (
-    //   state,
-    //   { payload: { data, pagination } }: PayloadAction<ApiResponse.Matches>,
-    // ) => {
-    //   state.infoMatches = {
-    //     ...state.infoMatches,
-    //     isReachedEnd: !pagination._next,
-    //     lastRefreshedAt: moment().toISOString(),
-    //   };
-    //   const matches = matchesService.formatMany(data);
-    //   state.data = matchesService.sortAndUniq(matches, state.data);
-    // },
-
-    // addManyNextMatches: (
-    //   state,
-    //   { payload: { data, pagination } }: PayloadAction<ApiResponse.Matches>,
-    // ) => {
-    //   state.infoMatches = {
-    //     ...state.infoMatches,
-    //     isReachedEnd: !pagination._next,
-    //     lastRefreshedAt: moment().toISOString(),
-    //   };
-    //   const matches = matchesService.formatMany(data);
-    //   state.data = matchesService.sortAndUniq(matches, state.data);
-    // },
-
-    updateMatchesRefreshTime: state => {
-      state.infoMatches.lastRefreshedAt = moment().toISOString();
-    },
 
     // Conversations
     updateWhenUpdateSentMessage: (
@@ -85,8 +39,6 @@ export const matchSlice = createSlice({
       { payload }: PayloadAction<Entity.Message>,
     ) => {
       const stateIndex = state.data.findIndex(e => e._id === payload._matchId);
-      console.log(stateIndex);
-      console.log(111, payload.createdAt);
       if (stateIndex >= 0) {
         state.data[stateIndex] = {
           ...state.data[stateIndex],
@@ -136,72 +88,52 @@ export const matchSlice = createSlice({
       }
     },
 
-    refreshConversations: (
-      state,
-      {
-        payload: { data, pagination },
-      }: PayloadAction<ApiResponse.Conversations>,
-    ) => {
-      state.infoConversations = {
-        ...state.infoConversations,
-        isReachedEnd: !pagination._next,
-        lastRefreshedAt: moment().toISOString(),
-      };
-      const matches = matchesService.formatMany(data);
-      state.data = matchesService.sortAndUniq(matches, state.data);
-    },
+    // refreshConversations: (
+    //   state,
+    //   {
+    //     payload: { data, pagination },
+    //   }: PayloadAction<ApiResponse.Conversations>,
+    // ) => {
+    //   state.infoConversations = {
+    //     ...state.infoConversations,
+    //     isReachedEnd: !pagination._next,
+    //     lastRefreshedAt: moment().toISOString(),
+    //   };
+    //   const matches = matchesService.formatMany(data);
+    //   state.data = matchesService.sortAndUniq(matches, state.data);
+    // },
 
-    addManyNewestConversations: (
-      state,
-      {
-        payload: { data, pagination },
-      }: PayloadAction<ApiResponse.Conversations>,
-    ) => {
-      state.infoConversations = {
-        ...state.infoConversations,
-        isReachedEnd: !pagination._next,
-        lastRefreshedAt: moment().toISOString(),
-      };
-      const matches = matchesService.formatMany(data);
-      state.data = matchesService.sortAndUniq(matches, state.data);
-    },
+    // addManyNewestConversations: (
+    //   state,
+    //   {
+    //     payload: { data, pagination },
+    //   }: PayloadAction<ApiResponse.Conversations>,
+    // ) => {
+    //   state.infoConversations = {
+    //     ...state.infoConversations,
+    //     isReachedEnd: !pagination._next,
+    //     lastRefreshedAt: moment().toISOString(),
+    //   };
+    //   const matches = matchesService.formatMany(data);
+    //   state.data = matchesService.sortAndUniq(matches, state.data);
+    // },
 
-    addManyNextConversations: (
-      state,
-      {
-        payload: { data, pagination },
-      }: PayloadAction<ApiResponse.Conversations>,
-    ) => {
-      state.infoConversations = {
-        ...state.infoConversations,
-        isReachedEnd: !pagination._next,
-        lastRefreshedAt: moment().toISOString(),
-      };
-      const matches = matchesService.formatMany(data);
-      state.data = matchesService.sortAndUniq(matches, state.data);
-    },
+    // addManyNextConversations: (
+    //   state,
+    //   { payload: { data, pagination } }: PayloadAction<ApiResponse.Matches>,
+    // ) => {
+    //   state.infoConversations = {
+    //     ...state.infoConversations,
+    //     isReachedEnd: !pagination._next,
+    //     lastRefreshedAt: moment().toISOString(),
+    //   };
+    //   const matches = matchesService.formatMany(data);
+    //   state.data = matchesService.sortAndUniq(matches, state.data);
+    // },
 
     // updateConversationsRefreshTime: state => {
     //   state.infoConversations.lastRefreshedAt = moment().toISOString();
     // },
-
-    setConversationsLoading: (state, { payload }: PayloadAction<boolean>) => {
-      state.infoConversations.isLoading = payload;
-    },
-
-    setConversationsLoadingNewest: (
-      state,
-      { payload }: PayloadAction<boolean>,
-    ) => {
-      state.infoConversations.isLoadingNewest = payload;
-    },
-
-    setConversationsLoadingNext: (
-      state,
-      { payload }: PayloadAction<boolean>,
-    ) => {
-      state.infoConversations.isLoadingNext = payload;
-    },
   },
   extraReducers: builder => {
     builder.addCase(appActions.logout, state => {
@@ -241,6 +173,42 @@ export const matchSlice = createSlice({
           state.infoMatches = {
             ...state.infoMatches,
             isReachedEnd: !pagination._next,
+          };
+          const matches = matchesService.formatMany(data);
+          state.data = matchesService.sortAndUniq(matches, state.data);
+        },
+      )
+      .addMatcher(
+        endpoints.refreshConversations.matchFulfilled,
+        (state, { payload: { data, pagination } }) => {
+          state.infoConversations = {
+            ...state.infoConversations,
+            isReachedEnd: !pagination._next,
+            lastRefreshedAt: moment().toISOString(),
+          };
+          const matches = matchesService.formatMany(data);
+          state.data = matchesService.sortAndUniq(matches, state.data);
+        },
+      )
+      .addMatcher(
+        endpoints.getNewestConversations.matchFulfilled,
+        (state, { payload: { data, pagination } }) => {
+          state.infoConversations = {
+            ...state.infoConversations,
+            isReachedEnd: !pagination._next,
+            lastRefreshedAt: moment().toISOString(),
+          };
+          const matches = matchesService.formatMany(data);
+          state.data = matchesService.sortAndUniq(matches, state.data);
+        },
+      )
+      .addMatcher(
+        endpoints.getNextConversations.matchFulfilled,
+        (state, { payload: { data, pagination } }) => {
+          state.infoConversations = {
+            ...state.infoConversations,
+            isReachedEnd: !pagination._next,
+            lastRefreshedAt: moment().toISOString(),
           };
           const matches = matchesService.formatMany(data);
           state.data = matchesService.sortAndUniq(matches, state.data);

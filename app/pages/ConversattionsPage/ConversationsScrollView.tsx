@@ -1,7 +1,7 @@
 import { Box, ScrollView, Text, View } from '@gluestack-ui/themed';
 import { ConversationBox } from 'app/containers/Conversation/ConversationBox';
 import { useMatches } from 'app/hooks';
-import { useGetConversations } from 'app/hooks/useGetConversations';
+import { useConversations } from 'app/hooks/useConversations';
 import { scrollUtil } from 'app/utils/scroll.util';
 import React from 'react';
 import {
@@ -22,7 +22,7 @@ export const ConversationsScrollView: React.FC = () => {
     isLoadingNewest: isLoadingNewestConversations,
     fetchNewest: fetchNewestConversations,
     lastRefreshedAt: conversationsLastRefreshedAt,
-  } = useGetConversations();
+  } = useConversations();
 
   const { data: matches, fetchNewest: fetchNewestMatches } = useMatches();
 

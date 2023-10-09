@@ -118,13 +118,19 @@ export const api = createApi({
         method: 'GET',
       }),
     }),
-    refreshMatches: builder.query<ApiResponse.Matches, void>({
+    refreshMatches: builder.query<
+      ApiResponse.Matches,
+      ApiRequest.FindManyMatches
+    >({
       query: () => ({
         url: API_URL.matches,
         method: 'GET',
       }),
     }),
-    getNewestMatches: builder.mutation<ApiResponse.Matches, void>({
+    getNewestMatches: builder.mutation<
+      ApiResponse.Matches,
+      ApiRequest.FindManyMatches
+    >({
       query: () => ({
         url: API_URL.matches,
         method: 'GET',
@@ -136,6 +142,68 @@ export const api = createApi({
     >({
       query: params => ({
         url: API_URL.matches,
+        method: 'GET',
+        params,
+      }),
+    }),
+
+    // Match
+    refreshConversations: builder.query<
+      ApiResponse.Matches,
+      ApiRequest.FindManyConversations
+    >({
+      query: () => ({
+        url: API_URL.conversations,
+        method: 'GET',
+      }),
+    }),
+    getNewestConversations: builder.mutation<
+      ApiResponse.Matches,
+      ApiRequest.FindManyConversations
+    >({
+      query: () => ({
+        url: API_URL.conversations,
+        method: 'GET',
+      }),
+    }),
+    getNextConversations: builder.mutation<
+      ApiResponse.Matches,
+      ApiRequest.FindManyConversations
+    >({
+      query: params => ({
+        url: API_URL.conversations,
+        method: 'GET',
+        params,
+      }),
+    }),
+
+    // Messages
+    refreshMessages: builder.query<
+      ApiResponse.Messages,
+      ApiRequest.FindManyMessages
+    >({
+      query: params => ({
+        url: API_URL.messages,
+        method: 'GET',
+        params,
+      }),
+    }),
+    getNewestMessages: builder.mutation<
+      ApiResponse.Messages,
+      ApiRequest.FindManyMessages
+    >({
+      query: params => ({
+        url: API_URL.messages,
+        method: 'GET',
+        params,
+      }),
+    }),
+    getNextMessages: builder.mutation<
+      ApiResponse.Messages,
+      ApiRequest.FindManyMessages
+    >({
+      query: params => ({
+        url: API_URL.messages,
         method: 'GET',
         params,
       }),
@@ -197,40 +265,6 @@ export const api = createApi({
       }),
     }),
 
-    // Matches
-    getNextConversations: builder.query<
-      ApiResponse.FetchPaginationData<Entity.Match[]>,
-      { cursor?: string }
-    >({
-      query: params => ({
-        url: API_URL.conversations,
-        method: 'GET',
-        params,
-      }),
-    }),
-    getPreviousConversations: builder.query<
-      ApiResponse.FetchPaginationData<Entity.Match[]>,
-      { cursor?: string }
-    >({
-      query: params => ({
-        url: API_URL.conversations,
-        method: 'GET',
-        params,
-      }),
-    }),
-
-    // Messages
-    getNextMessages: builder.query<
-      ApiResponse.FetchPaginationData<Entity.Message[], { _matchId: string }>,
-      ApiRequest.FindManyMessages
-    >({
-      query: params => ({
-        url: `${API_URL.messages}`,
-        method: 'GET',
-        params,
-      }),
-    }),
-
     // Photos
     // uploadPhoto: builder.mutation<ApiResponse.Logged, ApiRequest.UploadPhoto>({
     //   query: body => {
@@ -283,4 +317,10 @@ export const {
   useRefreshMatchesQuery,
   useGetNewestMatchesMutation,
   useGetNextMatchesMutation,
+  useRefreshMessagesQuery,
+  useGetNewestMessagesMutation,
+  useGetNextMessagesMutation,
+  useRefreshConversationsQuery,
+  useGetNewestConversationsMutation,
+  useGetNextConversationsMutation,
 } = api;

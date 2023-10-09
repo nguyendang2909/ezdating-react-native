@@ -38,9 +38,6 @@ export declare namespace AppStore {
       string,
       {
         lastRefreshedAt?: string;
-        isLoading?: boolean;
-        isLoadingNewest?: boolean;
-        isLoadingNext?: boolean;
         isReachedEnd?: boolean;
       }
     >;
@@ -54,9 +51,6 @@ export declare namespace AppStore {
     };
     infoConversations: {
       lastRefreshedAt?: string;
-      isLoading?: boolean;
-      isLoadingNewest?: boolean;
-      isLoadingNext?: boolean;
       isReachedEnd?: boolean;
     };
   };

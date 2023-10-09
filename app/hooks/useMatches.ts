@@ -5,6 +5,7 @@ import {
 } from 'app/services/api';
 import { matchesService } from 'app/services/matches.service';
 import { matchSelects } from 'app/store/match/match.store';
+import moment from 'moment';
 
 import { useAppSelector } from './useAppSelector';
 
@@ -13,11 +14,17 @@ export const useMatches = () => {
   const lastRefreshedAt = useAppSelector(
     s => s.match.infoMatches.lastRefreshedAt,
   );
+  const socketConnectedAt = useAppSelector(s => s.app.socket.connectedAt);
   const isReachedEnd = useAppSelector(s => s.match.infoMatches.isReachedEnd);
-  const { isLoading } = useRefreshMatchesQuery(undefined, {
-    skip: !!lastRefreshedAt && !matchesService.isStale(lastRefreshedAt),
-  });
-  const [fetchNewest, { isLoading: isLoadingNewest }] =
+  const { isLoading } = useRefreshMatchesQuery(
+    {},
+    {
+      skip:
+        !!lastRefreshedAt &&
+        moment(lastRefreshedAt).isAfter(moment(socketConnectedAt)),
+    },
+  );
+  const [getNewestMatches, { isLoading: isLoadingNewest }] =
     useGetNewestMatchesMutation();
   const [getNextMatches, { isLoading: isLoadingNext }] =
     useGetNextMatchesMutation();
@@ -29,6 +36,10 @@ export const useMatches = () => {
       return;
     }
     getNextMatches({ _next });
+  };
+
+  const fetchNewest = () => {
+    getNewestMatches({});
   };
 
   return {

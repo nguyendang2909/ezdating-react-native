@@ -26,8 +26,6 @@ export declare namespace ApiResponse {
 
   type Users = PaginatedResponse<Entity.User>;
 
-  type Conversations = PaginatedResponse<Entity.Match>;
-
   type SuccessResponse = FetchData<{ success: boolean }>;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -52,7 +50,7 @@ export declare namespace ApiResponse {
     user?: Entity.User;
   }>;
 
-  type MessagesData = PaginatedResponse<Entity.Message> & {
+  type Messages = PaginatedResponse<Entity.Message> & {
     _matchId: string;
   };
 }

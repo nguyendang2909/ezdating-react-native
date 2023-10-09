@@ -39,7 +39,7 @@ const reducers = combineReducers({
   likedMe: likedMeReducer,
   nearbyUser: nearbyUserReducer,
   swipeUser: swipeUserReducer,
-  messages: messageReducer,
+  message: messageReducer,
 });
 
 const persistedReducer = persistReducer(
@@ -55,7 +55,7 @@ const persistedReducer = persistReducer(
       'user',
       'like',
       'likedMe',
-      'messages',
+      'message',
     ],
   },
   reducers,

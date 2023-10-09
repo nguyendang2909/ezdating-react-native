@@ -1,5 +1,5 @@
 import { KeyboardAvoidingView, Spinner } from '@gluestack-ui/themed';
-import { useGetMessages } from 'app/hooks/useGetMessages';
+import { useGetMessages } from 'app/hooks/useChatMessages';
 import { socketStoreActions } from 'app/store/socket.store';
 import { ChatUser } from 'app/types';
 import { scrollUtil } from 'app/utils/scroll.util';
