@@ -3,7 +3,6 @@ import './utils/ignoreWarnings';
 import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 import { config as gluestackConfig } from '@gluestack-ui/config';
 import { GluestackUIProvider } from '@gluestack-ui/themed';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useFonts } from 'expo-font';
 import * as Linking from 'expo-linking';
 import { NativeBaseProvider } from 'native-base';
@@ -73,8 +72,6 @@ interface AppProps {
   hideSplashScreen: () => Promise<void>;
 }
 
-const queryClient = new QueryClient();
-
 /**
  * This is the root component of our app.
  */
@@ -116,35 +113,33 @@ function App(props: AppProps) {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <QueryClientProvider client={queryClient}>
-          <ConnectSocket />
-          <ConnectProfile />
-          <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-            <ErrorBoundary catchErrors={Config.catchErrors}>
-              <GluestackUIProvider config={gluestackConfig}>
-                <NativeBaseProvider
-                  theme={defaultTheme}
-                  config={nativeBaseConfig}
-                >
-                  <ActionSheetProvider>
-                    <IntlProvider
-                      defaultLocale="en"
-                      locale={language}
-                      messages={translators[language] || translators.en}
-                    >
-                      <AppNavigator
-                        linking={linking}
-                        initialState={initialNavigationState}
-                        onStateChange={onNavigationStateChange}
-                      />
-                      <Toast />
-                    </IntlProvider>
-                  </ActionSheetProvider>
-                </NativeBaseProvider>
-              </GluestackUIProvider>
-            </ErrorBoundary>
-          </SafeAreaProvider>
-        </QueryClientProvider>
+        <ConnectSocket />
+        <ConnectProfile />
+        <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+          <ErrorBoundary catchErrors={Config.catchErrors}>
+            <GluestackUIProvider config={gluestackConfig}>
+              <NativeBaseProvider
+                theme={defaultTheme}
+                config={nativeBaseConfig}
+              >
+                <ActionSheetProvider>
+                  <IntlProvider
+                    defaultLocale="en"
+                    locale={language}
+                    messages={translators[language] || translators.en}
+                  >
+                    <AppNavigator
+                      linking={linking}
+                      initialState={initialNavigationState}
+                      onStateChange={onNavigationStateChange}
+                    />
+                    <Toast />
+                  </IntlProvider>
+                </ActionSheetProvider>
+              </NativeBaseProvider>
+            </GluestackUIProvider>
+          </ErrorBoundary>
+        </SafeAreaProvider>
       </PersistGate>
     </Provider>
   );
