@@ -1,12 +1,15 @@
+import { Box, Spinner } from '@gluestack-ui/themed';
 import { useNavigation } from '@react-navigation/native';
 import { UserStatuses } from 'app/constants';
 import { useAppSelector } from 'app/hooks';
+import { useGetMyProfileQuery } from 'app/services';
 import React, { useEffect } from 'react';
 
 export const MainScreen: React.FC = () => {
   const userStatus = useAppSelector(state => state.app.profile?.status);
-
   const navigation = useNavigation();
+
+  useGetMyProfileQuery();
 
   useEffect(() => {
     if (userStatus) {
@@ -19,5 +22,9 @@ export const MainScreen: React.FC = () => {
       }
     }
   }, [navigation, userStatus]);
-  return <></>;
+  return (
+    <Box flex={1} justifyContent="center" alignItems="center">
+      <Spinner />
+    </Box>
+  );
 };

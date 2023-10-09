@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { endpoints } from 'app/services';
 import { ApiResponse } from 'app/types/api-response.type';
 import { AppStore } from 'app/types/app-store.type';
 import { Entity } from 'app/types/entity.type';
@@ -54,30 +55,20 @@ export const appSlice = createSlice({
       state.socket.connectedAt = moment().toDate().toISOString();
     },
   },
-  extraReducers: _builder => {
-    // builder.addMatcher(
-    //   api.endpoints.signInWithPhoneNumber.matchFulfilled,
-    //   (state, action) => {
-    //     const tokens = action.payload.data;
-    //     const accessToken = tokens?.accessToken;
-    //     const refreshToken = tokens?.refreshToken;
-    //     if (!accessToken || !refreshToken) {
-    //       return;
-    //     }
-    //     state.accessToken = accessToken;
-    //     state.refreshToken = refreshToken;
-    //     state.isLogged = true;
-    //   },
-    // );
-    // builder.addMatcher(
-    //   api.endpoints.getMyProfile.matchFulfilled,
-    //   (state, action) => {
-    //     const user = action.payload.data;
-    //     if (user) {
-    //       state.profile = user;
-    //     }
-    //   },
-    // );
+  extraReducers: builder => {
+    builder.addMatcher(
+      endpoints.signInWithPhoneNumber.matchFulfilled,
+      (state, { payload: { data } }) => {
+        state.accessToken = data.accessToken;
+        state.refreshToken = data.refreshToken;
+      },
+    );
+    builder.addMatcher(
+      endpoints.getMyProfile.matchFulfilled,
+      (state, { payload: { data } }) => {
+        state.profile = data;
+      },
+    );
   },
 });
 

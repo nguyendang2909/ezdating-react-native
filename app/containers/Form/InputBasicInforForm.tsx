@@ -2,8 +2,7 @@ import { BirthDayFormControl } from 'app/components/Form/BirthDayFormControl';
 import { FormControlInput } from 'app/components/Form/FormControlInput';
 import { SelectGenderFormControl } from 'app/components/Form/SelectGenderForm';
 import { useMessages } from 'app/hooks';
-import { api } from 'app/services/api';
-import { usersApi } from 'app/services/api/users.api';
+import { api, useUpdateProfileMutation } from 'app/services/api';
 import { FormParams } from 'app/types/form-params.type';
 import { useFormik } from 'formik';
 import { Button, Spinner, View } from 'native-base';
@@ -12,6 +11,8 @@ import * as Yup from 'yup';
 
 export const InputBasicInforForm: FC = () => {
   const { formatMessage } = useMessages();
+
+  const [updateProfile] = useUpdateProfileMutation();
 
   const { data: profileData } = api.useGetMyProfileQuery();
   const profile = profileData?.data;
@@ -39,7 +40,7 @@ export const InputBasicInforForm: FC = () => {
     }),
     onSubmit: async values => {
       try {
-        const result = await usersApi.updateProfile(values);
+        await updateProfile(values).unwrap();
       } catch (err) {}
     },
   });

@@ -1,15 +1,16 @@
-import { usersApi } from 'app/services/api/users.api';
+import { useUpdateProfileMutation } from 'app/services';
 import React, { useEffect } from 'react';
 import Geolocation from 'react-native-geolocation-service';
 
 export const UpdateGeolocation: React.FC = () => {
+  const [updateProfile] = useUpdateProfileMutation();
   useEffect(() => {
     Geolocation.getCurrentPosition(
       async position => {
-        await usersApi.updateProfile({
+        await updateProfile({
           longitude: position.coords.longitude,
           latitude: position.coords.latitude,
-        });
+        }).unwrap();
       },
       error => {
         // See error code charts below.
@@ -17,7 +18,7 @@ export const UpdateGeolocation: React.FC = () => {
       },
       { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 },
     );
-  }, []);
+  }, [updateProfile]);
 
   return <></>;
 };

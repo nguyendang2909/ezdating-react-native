@@ -2,7 +2,7 @@ import { Picker } from '@react-native-picker/picker';
 import { useNavigation } from '@react-navigation/native';
 import { HeaderSaveModal } from 'app/components/Header/HeaderSaveModal';
 import { useAppSelector, useMessages } from 'app/hooks';
-import { usersApi } from 'app/services/api/users.api';
+import { useUpdateProfileMutation } from 'app/services';
 import { notificationsService } from 'app/services/notifications/notifications.service';
 import { useFormik } from 'formik';
 import { Box, Text, View } from 'native-base';
@@ -11,9 +11,8 @@ import * as Yup from 'yup';
 
 export const EditInfoHeightScreen = () => {
   const { formatMessage } = useMessages();
-
+  const [updateProfile] = useUpdateProfileMutation();
   const { goBack } = useNavigation();
-
   const currentHeight = useAppSelector(state => state.app.profile?.height);
 
   const formik = useFormik<{ height: number }>({
@@ -27,10 +26,8 @@ export const EditInfoHeightScreen = () => {
 
     onSubmit: async values => {
       try {
-        await usersApi.updateProfile(values);
-
+        await updateProfile(values).unwrap();
         notificationsService.updateSuccess();
-
         goBack();
       } catch (err) {
         notificationsService.updateFail();
@@ -45,13 +42,11 @@ export const EditInfoHeightScreen = () => {
         onSave={() => formik.handleSubmit()}
         isLoading={formik.isSubmitting}
       />
-
       <View mt={4} mb={4} px={4}>
         <Text color="gray.500">{`${formatMessage(
           'My height is',
         )} (${formatMessage('cm')}):`}</Text>
       </View>
-
       <View mt={4} mb={4} px={4}>
         <Picker
           selectedValue={formik.values.height}

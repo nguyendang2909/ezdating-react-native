@@ -1,13 +1,11 @@
 import { useMessages } from 'app/hooks';
-import { usersApi } from 'app/services/api/users.api';
+import { useUpdateProfileMutation } from 'app/services';
 import { notificationsService } from 'app/services/notifications/notifications.service';
-import { appActions } from 'app/store/app.store';
 import { paddingHorizontal } from 'app/styles';
 import { colors, spacing } from 'app/theme';
 import { ApiRequest } from 'app/types/api-request.type';
 import { Divider, Row, Text, View } from 'native-base';
 import React from 'react';
-import { useDispatch } from 'react-redux';
 
 import { ProfileEditBirthdayMenuItem } from './ProfileEditBirthdayMenuItem';
 import { ProfileEditGenderMenuItem } from './ProfileEditGenderMenuItem';
@@ -24,16 +22,12 @@ import { ProfileEditWeightMenuItem } from './ProfileEditWeight';
 
 export const ProfileEditPageContent: React.FC = () => {
   const { formatMessage } = useMessages();
-  const dispatch = useDispatch();
+  const [updateProfile] = useUpdateProfileMutation();
 
   const handleEditProfile = async (payload: ApiRequest.UpdateProfile) => {
     try {
-      await usersApi.updateProfile(payload);
+      await updateProfile(payload).unwrap();
       notificationsService.updateSuccess();
-      const profile = await usersApi.getMyProfile();
-      if (profile.data) {
-        dispatch(appActions.updateProfile(profile.data));
-      }
     } catch (err) {
       notificationsService.updateFail();
     }

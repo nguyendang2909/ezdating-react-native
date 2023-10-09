@@ -1,7 +1,6 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { endpoints } from 'app/services/api';
 import { nearbyUsersService } from 'app/services/nearby-users.service';
-import { ApiResponse } from 'app/types';
 import { AppStore } from 'app/types/app-store.type';
 import moment from 'moment';
 
@@ -17,47 +16,7 @@ const initialState: AppStore.NearbyState = {
 export const nearbyUserSlice = createSlice({
   name: 'nearbyUser',
   initialState,
-  reducers: {
-    refreshMany: (
-      state,
-      { payload: { data, pagination } }: PayloadAction<ApiResponse.Users>,
-    ) => {
-      // state.data = data;
-      // state.info = {
-      //   ...state.info,
-      //   isReachedEnd: !pagination._next,
-      //   lastRefreshedAt: moment().toISOString(),
-      // };
-    },
-
-    // addManyNewest: (
-    //   state,
-    //   { payload: { data, pagination } }: PayloadAction<ApiResponse.Users>,
-    // ) => {
-    //   state.data = nearbyUsersService.sortAndUniq(data, state.data);
-    //   state.info = {
-    //     ...state.info,
-    //     isReachedEnd: !pagination._next,
-    //     lastRefreshedAt: moment().toISOString(),
-    //   };
-    // },
-
-    addManyNext: (
-      state,
-      { payload: { data, pagination } }: PayloadAction<ApiResponse.Users>,
-    ) => {
-      // state.data = nearbyUsersService.sortAndUniq(data, state.data);
-      // state.info = {
-      //   ...state.info,
-      //   isReachedEnd: !pagination._next,
-      //   lastRefreshedAt: moment().toISOString(),
-      // };
-    },
-
-    updateRefreshTime: state => {
-      state.info.lastRefreshedAt = moment().toISOString();
-    },
-  },
+  reducers: {},
   extraReducers: builder => {
     builder.addCase(appActions.logout, state => {
       state.data = [];

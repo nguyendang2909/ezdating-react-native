@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import { HeaderSave } from 'app/components/Header/HeaderSave';
 import { useAppSelector, useMessages } from 'app/hooks';
-import { usersApi } from 'app/services/api/users.api';
+import { useUpdateProfileMutation } from 'app/services';
 import { useFormik } from 'formik';
 import { useToast, View } from 'native-base';
 import React from 'react';
@@ -9,6 +9,8 @@ import * as Yup from 'yup';
 
 export const EditInfoLanguagesScreen = () => {
   const { formatMessage } = useMessages();
+
+  const [updateProfile] = useUpdateProfileMutation();
 
   const { goBack } = useNavigation();
 
@@ -27,7 +29,7 @@ export const EditInfoLanguagesScreen = () => {
 
     onSubmit: async values => {
       try {
-        await usersApi.updateProfile(values);
+        await updateProfile(values).unwrap();
       } catch (err) {
         toast.show({
           title: formatMessage('Update failed, please try again.'),

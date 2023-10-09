@@ -4,8 +4,6 @@ import {
   useRemovePhotoMutation,
   useUploadPhotoMutation,
 } from 'app/services/api';
-import { usersApi } from 'app/services/api/users.api';
-import { appActions } from 'app/store/app.store';
 import { flexDirectionRow, flexWrapWrap, padding, width } from 'app/styles';
 import { spacing } from 'app/theme';
 import _ from 'lodash';
@@ -24,8 +22,6 @@ export const ProfileEditPhotos: React.FC = () => {
 
   const [uploadPhoto] = useUploadPhotoMutation();
   const [removePhoto] = useRemovePhotoMutation();
-
-  // const [submitRemovePhoto] = api.useRemovePhotoMutation();
 
   const mediaFiles =
     useAppSelector(state => state.app.profile?.mediaFiles) || [];
@@ -49,10 +45,6 @@ export const ProfileEditPhotos: React.FC = () => {
       newLoadings[index] = true;
       setLoadings(newLoadings);
       await removePhoto(_id).unwrap();
-      const profile = await usersApi.getMyProfile();
-      if (profile.data) {
-        dispatch(appActions.updateProfile(profile.data));
-      }
     } catch (err) {
     } finally {
       const newLoadings = _.cloneDeep(loadings);
@@ -102,10 +94,6 @@ export const ProfileEditPhotos: React.FC = () => {
       newLoadings[index] = true;
       setLoadings(newLoadings);
       await uploadPhoto({ file: photo }).unwrap();
-      const profile = await usersApi.getMyProfile();
-      if (profile.data) {
-        dispatch(appActions.updateProfile(profile.data));
-      }
     } catch (err) {
     } finally {
       const newLoadings = _.cloneDeep(loadings);

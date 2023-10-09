@@ -4,10 +4,10 @@ import { useNavigation } from '@react-navigation/native';
 import { HeaderSaveDone } from 'app/components/Header/HeaderSaveDone';
 import { useAppSelector, useMessages } from 'app/hooks';
 import { EditFilterGenderMenuItem } from 'app/pages/EditMatchFilter/EditFilterGenderMenuItem';
-import { nearbyUsersApi } from 'app/services/api/nearby-users.api';
-import { usersApi } from 'app/services/api/users.api';
-import { appActions } from 'app/store/app.store';
-import { nearbyUserActions } from 'app/store/nearby-user/nearby-user.store';
+import {
+  useRefreshNearbyUsersQuery,
+  useUpdateProfileMutation,
+} from 'app/services';
 import { colors } from 'app/theme';
 import { FormParams } from 'app/types/form-params.type';
 import { useFormik } from 'formik';
@@ -22,6 +22,8 @@ import { AppStackScreenProps } from '../navigators';
 export const EditMatchFilterScreen: React.FC<
   AppStackScreenProps<'EditMatchFilter'>
 > = () => {
+  const [updateProfile] = useUpdateProfileMutation();
+  const { refetch } = useRefreshNearbyUsersQuery();
   const { formatMessage } = useMessages();
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -45,28 +47,17 @@ export const EditMatchFilterScreen: React.FC<
     enableReinitialize: true,
     onSubmit: async values => {
       try {
-        await usersApi.updateProfile(values);
-        const profile = await usersApi.getMyProfile();
-        if (profile.data) {
-          dispatch(appActions.updateProfile(profile.data));
-        }
+        await updateProfile(values).unwrap();
       } catch (err) {
         Toast.show({
           type: 'error',
           text1: formatMessage('Update failed, please try again.'),
         });
       }
-      dispatch(nearbyUserActions.updateRefreshTime());
-
+      refetch();
       navigation.navigate('Home', {
         screen: 'DatingNearby',
       });
-
-      try {
-        const nearbyUsersData = await nearbyUsersApi.getMany();
-
-        dispatch(nearbyUserActions.addManyFirst(nearbyUsersData.data || []));
-      } catch (err) {}
     },
   });
 

@@ -1,35 +1,12 @@
 import { Image } from '@gluestack-ui/themed';
 import { useAppSelector } from 'app/hooks';
-import { swipeUsersApi } from 'app/services/api/swipe-users.api';
-import { swipeUserActions } from 'app/store/swipe-user.store';
 import { View } from 'native-base';
-import React, { useCallback, useEffect } from 'react';
+import React from 'react';
 import { Dimensions, StyleSheet } from 'react-native';
-import { useDispatch } from 'react-redux';
 import { TinderCard } from 'rn-tinder-card';
 
 export const DatingSwipeSearching: React.FC = () => {
-  const dispatch = useDispatch();
-
   const swipeUsers = useAppSelector(state => state.swipeUser.data);
-
-  const fetchFirstTime = useCallback(async () => {
-    const swipeUsersData = await swipeUsersApi.getMany();
-
-    // if (swipeUsersData.pagination?._next === null) {
-    //   setReachedEnd(true);
-    // }
-
-    if (swipeUsersData.data?.length) {
-      dispatch(swipeUserActions.addMany(swipeUsersData.data));
-    } else {
-      // setReachedEnd(true);
-    }
-  }, [dispatch]);
-
-  useEffect(() => {
-    fetchFirstTime();
-  }, [fetchFirstTime]);
 
   const width = Dimensions.get('window').width;
 

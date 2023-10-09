@@ -8,8 +8,6 @@ import {
   useRemovePhotoMutation,
   useUploadPhotoMutation,
 } from 'app/services/api';
-import { usersApi } from 'app/services/api/users.api';
-import { appActions } from 'app/store/app.store';
 import {
   alignItemsCenter,
   flexDirectionRow,
@@ -73,14 +71,6 @@ export const UpdateProfilePhotosScreen: React.FC<FCProps> = () => {
               return uploadPhoto(payload).unwrap();
             }),
           );
-        }
-        const userData = await usersApi.getMyProfile();
-
-        if (userData.data) {
-          dispatch(appActions.updateProfile(userData.data));
-          navigate('Home', {
-            screen: 'DatingSwipe',
-          });
         }
       } catch (err) {
         console.log(err);

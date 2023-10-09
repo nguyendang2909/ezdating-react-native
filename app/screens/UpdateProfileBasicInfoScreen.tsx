@@ -5,7 +5,7 @@ import { RelationshipGoalFormControl } from 'app/components/Form/RelationshipGoa
 import { SelectGenderFormControl } from 'app/components/Form/SelectGenderForm';
 import { UserGender, UserRelationshipGoal } from 'app/constants';
 import { useAppSelector, useMessages } from 'app/hooks';
-import { usersApi } from 'app/services/api/users.api';
+import { useUpdateBasicProfileMutation } from 'app/services';
 import { flexGrow } from 'app/styles';
 import { FormParams } from 'app/types/form-params.type';
 import { useFormik } from 'formik';
@@ -16,6 +16,8 @@ import * as Yup from 'yup';
 
 export const UpdateProfileBasicInfoScreen: FC = () => {
   const { formatMessage } = useMessages();
+
+  const [updateBasicProfile] = useUpdateBasicProfileMutation();
 
   const profile = useAppSelector(state => state.app.profile);
   const { navigate } = useNavigation();
@@ -46,7 +48,7 @@ export const UpdateProfileBasicInfoScreen: FC = () => {
     }),
     onSubmit: async values => {
       try {
-        await usersApi.updateBasicProfile(values);
+        await updateBasicProfile(values).unwrap();
         navigate('UpdateProfilePhotos');
       } catch (err) {
         console.log(err);

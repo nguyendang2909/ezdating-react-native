@@ -154,7 +154,7 @@ export const api = createApi({
       }),
     }),
 
-    // Likes
+    // Converstaions
     refreshConversations: builder.query<
       ApiResponse.Matches,
       ApiRequest.FindManyConversations
@@ -216,6 +216,15 @@ export const api = createApi({
     sendLike: builder.mutation<void, ApiRequest.SendLike>({
       query: body => ({
         url: API_URL.likes,
+        method: 'POST',
+        body,
+      }),
+    }),
+
+    // Views
+    sendView: builder.mutation<void, ApiRequest.SendView>({
+      query: body => ({
+        url: API_URL.views,
         method: 'POST',
         body,
       }),
@@ -352,6 +361,8 @@ export const api = createApi({
 export const {
   endpoints,
   useGetMyProfileQuery,
+  useUpdateProfileMutation,
+  useUpdateBasicProfileMutation,
   useSignInWithPhoneNumberMutation,
   useLogoutMutation,
   useRefreshNearbyUsersQuery,

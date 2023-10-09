@@ -2,9 +2,10 @@ import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import { useNavigation } from '@react-navigation/native';
 import { OtpInput } from 'app/components/Input/OtpInput';
 import { useMessages } from 'app/hooks';
-import { useSignInWithPhoneNumberMutation } from 'app/services/api';
-import { usersApi } from 'app/services/api/users.api';
-import { appActions } from 'app/store/app.store';
+import {
+  useGetMyProfileQuery,
+  useSignInWithPhoneNumberMutation,
+} from 'app/services/api';
 import {
   flexGrow,
   heightFull,
@@ -52,6 +53,8 @@ export const SignInWithOtpPhoneNumberScreen: FC<FCProps> = props => {
   const { otpConfirm, user } = props.route.params;
   const dispatch = useDispatch();
   const [signInWithPhoneNumberMutation] = useSignInWithPhoneNumberMutation();
+  const [isSkipProfile, setSkipProfile] = useState<boolean>(false);
+  useGetMyProfileQuery(undefined, { skip: true });
 
   const [isSubmiting, setIsSubmitting] = useState<boolean>(false);
   const [isError, setError] = useState<boolean>(false);
@@ -83,16 +86,9 @@ export const SignInWithOtpPhoneNumberScreen: FC<FCProps> = props => {
         return;
       }
       const idToken = await credential.user.getIdToken();
-      const signInWithPhoneNumber = await signInWithPhoneNumberMutation({
+      await signInWithPhoneNumberMutation({
         token: idToken,
       }).unwrap();
-      if (signInWithPhoneNumber.data) {
-        dispatch(appActions.updateAccessToken(signInWithPhoneNumber.data));
-      }
-      const myProfile = await usersApi.getMyProfile();
-      if (myProfile.data) {
-        dispatch(appActions.updateProfile(myProfile.data));
-      }
     } catch (err) {
       setError(true);
       setResendStatus(ResendStatusObj.nonResent);

@@ -2,8 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import { FormControlInput } from 'app/components/Form/FormControlInput';
 import { HeaderSaveModal } from 'app/components/Header/HeaderSaveModal';
 import { useAppSelector, useMessages } from 'app/hooks';
-import { usersApi } from 'app/services/api/users.api';
-import { appActions } from 'app/store/app.store';
+import { useUpdateProfileMutation } from 'app/services';
 import { useFormik } from 'formik';
 import { Box, useToast, View } from 'native-base';
 import React from 'react';
@@ -12,6 +11,8 @@ import * as Yup from 'yup';
 
 export const EditInfoNicknameScreen = () => {
   const { formatMessage } = useMessages();
+
+  const [updateProfile] = useUpdateProfileMutation();
 
   const dispatch = useDispatch();
 
@@ -34,13 +35,7 @@ export const EditInfoNicknameScreen = () => {
 
     onSubmit: async values => {
       try {
-        await usersApi.updateProfile(values);
-
-        const profile = await usersApi.getMyProfile();
-
-        if (profile.data) {
-          dispatch(appActions.updateProfile(profile.data));
-        }
+        await updateProfile(values).unwrap();
       } catch (err) {
         toast.show({ title: 'Update nickname failed', placement: 'top' });
       }
