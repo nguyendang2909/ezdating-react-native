@@ -16,7 +16,7 @@ import thunk from 'redux-thunk';
 
 import { api } from '../services/api';
 import { appReducer } from './app.store';
-import { likedMeReducer } from './liked-me.store';
+import { likedMeReducer } from './liked-me/liked-me.store';
 import { likeReducer } from './likes.store';
 import { matchReducer } from './match/match.store';
 import { messageReducer } from './message/message.store';

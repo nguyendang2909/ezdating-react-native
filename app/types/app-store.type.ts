@@ -30,6 +30,10 @@ export declare namespace AppStore {
     lastRefreshedAt: string;
   };
 
+  type Like = Entity.Like & {
+    lastRefreshedAt: string;
+  };
+
   type ChatMessage = IMessage & { uuid?: string };
 
   type MessageState = {
@@ -83,7 +87,11 @@ export declare namespace AppStore {
   };
 
   type LikedMeState = {
-    data?: Entity.Like[];
+    data: Like[];
+    info: {
+      lastRefreshedAt?: string;
+      isReachedEnd?: boolean;
+    };
   };
 
   type PhotoActionType = 'delete' | 'create' | undefined;

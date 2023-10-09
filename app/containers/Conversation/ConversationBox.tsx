@@ -14,7 +14,7 @@ export const ConversationBox: React.FC<FCProps> = ({ data }) => {
 
   const handlePress = useCallback(() => {
     navigation.navigate('Messages', {
-      conversation: data,
+      matchId: data._id,
     });
   }, [data, navigation]);
 

@@ -146,8 +146,15 @@ export const api = createApi({
         params,
       }),
     }),
+    createMatch: builder.mutation<ApiResponse.Match, ApiRequest.CreateMatch>({
+      query: body => ({
+        url: API_URL.matches,
+        method: 'POST',
+        body,
+      }),
+    }),
 
-    // Match
+    // Likes
     refreshConversations: builder.query<
       ApiResponse.Matches,
       ApiRequest.FindManyConversations
@@ -174,6 +181,43 @@ export const api = createApi({
         url: API_URL.conversations,
         method: 'GET',
         params,
+      }),
+    }),
+
+    // Likes
+    refreshLikedMe: builder.query<
+      ApiResponse.Likes,
+      ApiRequest.FindManyLikedMe
+    >({
+      query: () => ({
+        url: API_URL.likedMe,
+        method: 'GET',
+      }),
+    }),
+    getNewestLikedMe: builder.mutation<
+      ApiResponse.Matches,
+      ApiRequest.FindManyLikedMe
+    >({
+      query: () => ({
+        url: API_URL.likedMe,
+        method: 'GET',
+      }),
+    }),
+    getNextLikedMe: builder.mutation<
+      ApiResponse.Matches,
+      ApiRequest.FindManyLikedMe
+    >({
+      query: params => ({
+        url: API_URL.likedMe,
+        method: 'GET',
+        params,
+      }),
+    }),
+    sendLike: builder.mutation<void, ApiRequest.SendLike>({
+      query: body => ({
+        url: API_URL.likes,
+        method: 'POST',
+        body,
       }),
     }),
 
@@ -266,42 +310,42 @@ export const api = createApi({
     }),
 
     // Photos
-    // uploadPhoto: builder.mutation<ApiResponse.Logged, ApiRequest.UploadPhoto>({
-    //   query: body => {
-    //     const { file } = body;
-    //     const formData = new FormData();
-    //     formData.append('file', {
-    //       uri: Platform.OS === 'ios' ? `file:///${file.path}` : file.path,
-    //       type: 'image/jpeg',
-    //       name: 'image.jpg',
-    //     });
+    uploadPhoto: builder.mutation<ApiResponse.Logged, ApiRequest.UploadPhoto>({
+      query: body => {
+        const { file } = body;
+        const formData = new FormData();
+        formData.append('file', {
+          uri: Platform.OS === 'ios' ? `file:///${file.path}` : file.path,
+          type: 'image/jpeg',
+          name: 'image.jpg',
+        });
 
-    //     return {
-    //       url: API_URL.photos,
-    //       method: 'POST',
-    //       body: formData,
-    //     };
-    //   },
-    //   invalidatesTags: (result, error) => {
-    //     if (error) {
-    //       return [];
-    //     }
-    //     return ['Profile'];
-    //   },
-    // }),
+        return {
+          url: API_URL.photos,
+          method: 'POST',
+          body: formData,
+        };
+      },
+      invalidatesTags: (result, error) => {
+        if (error) {
+          return [];
+        }
+        return ['Profile'];
+      },
+    }),
 
-    // removePhoto: builder.mutation<ApiResponse.RemoveData, string>({
-    //   query: (id: string) => ({
-    //     url: `${API_URL.photos}/${id}`,
-    //     method: 'DELETE',
-    //   }),
-    //   invalidatesTags: (result, error) => {
-    //     if (error) {
-    //       return [];
-    //     }
-    //     return ['Profile'];
-    //   },
-    // }),
+    removePhoto: builder.mutation<ApiResponse.RemoveData, string>({
+      query: (id: string) => ({
+        url: `${API_URL.photos}/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: (result, error) => {
+        if (error) {
+          return [];
+        }
+        return ['Profile'];
+      },
+    }),
   }),
 });
 
@@ -323,4 +367,11 @@ export const {
   useRefreshConversationsQuery,
   useGetNewestConversationsMutation,
   useGetNextConversationsMutation,
+  useRefreshLikedMeQuery,
+  useGetNewestLikedMeMutation,
+  useGetNextLikedMeMutation,
+  useSendLikeMutation,
+  useUploadPhotoMutation,
+  useRemovePhotoMutation,
+  useCreateMatchMutation,
 } = api;

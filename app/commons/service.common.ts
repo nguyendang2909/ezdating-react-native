@@ -1,6 +1,7 @@
 import { APP_CONFIG } from 'app/config/config.app';
 import { ApiResponse } from 'app/types';
 import { Buffer } from 'buffer';
+import _ from 'lodash';
 import moment from 'moment';
 
 export class CommonService {

@@ -1,5 +1,5 @@
 import { KeyboardAvoidingView, Spinner } from '@gluestack-ui/themed';
-import { useGetMessages } from 'app/hooks/useChatMessages';
+import { useChatMessages } from 'app/hooks/useChatMessages';
 import { socketStoreActions } from 'app/store/socket.store';
 import { ChatUser } from 'app/types';
 import { scrollUtil } from 'app/utils/scroll.util';
@@ -38,7 +38,7 @@ export const MessagesChat: React.FC<FCProps> = ({
     data: messages = [],
     fetchNext,
     isLoadingNext,
-  } = useGetMessages({ matchId });
+  } = useChatMessages({ matchId });
 
   const handleSend = useCallback(
     (messages: IChatMessage[] = []) => {

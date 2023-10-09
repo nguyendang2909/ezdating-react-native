@@ -4,7 +4,10 @@ import { LoadingScreen } from 'app/components/Screen/LoadingScreen';
 import { PhotoRequestPermission } from 'app/containers/Photos/PhotoRequestPermission.ios';
 import { useAppSelector, useMessages } from 'app/hooks';
 import { AppStackScreenProps } from 'app/navigators';
-import { mediaFilesApi } from 'app/services/api/media-files.api';
+import {
+  useRemovePhotoMutation,
+  useUploadPhotoMutation,
+} from 'app/services/api';
 import { usersApi } from 'app/services/api/users.api';
 import { appActions } from 'app/store/app.store';
 import {
@@ -48,6 +51,8 @@ export const UpdateProfilePhotosScreen: React.FC<FCProps> = () => {
     number | string | undefined
   >(undefined);
   const dispatch = useDispatch();
+  const [uploadPhoto] = useUploadPhotoMutation();
+  const [removePhoto] = useRemovePhotoMutation();
   const mediaFiles = useAppSelector(state => state.app.profile?.mediaFiles);
   const profilePublicPhotosLength = mediaFiles?.length || 0;
 
@@ -65,7 +70,7 @@ export const UpdateProfilePhotosScreen: React.FC<FCProps> = () => {
                 ...(index === 0 ? { isAvatar: true } : {}),
               };
 
-              return mediaFilesApi.uploadPhoto(payload);
+              return uploadPhoto(payload).unwrap();
             }),
           );
         }
@@ -101,7 +106,7 @@ export const UpdateProfilePhotosScreen: React.FC<FCProps> = () => {
         try {
           formik.setSubmitting(true);
           handleCloseRemovePhotoCard();
-          await mediaFilesApi.removePhoto(removePhotoIndex);
+          await removePhoto(removePhotoIndex).unwrap();
         } catch (err) {
           toast.show({
             title: formatMessage('Remove failed, please try again.'),

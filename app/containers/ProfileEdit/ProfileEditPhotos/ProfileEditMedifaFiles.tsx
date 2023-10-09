@@ -1,6 +1,9 @@
 import { useActionSheet } from '@expo/react-native-action-sheet';
 import { useAppSelector, useMessages } from 'app/hooks';
-import { mediaFilesApi } from 'app/services/api/media-files.api';
+import {
+  useRemovePhotoMutation,
+  useUploadPhotoMutation,
+} from 'app/services/api';
 import { usersApi } from 'app/services/api/users.api';
 import { appActions } from 'app/store/app.store';
 import { flexDirectionRow, flexWrapWrap, padding, width } from 'app/styles';
@@ -18,6 +21,9 @@ import { ProfileEditMediaFileCard } from './MediaFileCard';
 export const ProfileEditPhotos: React.FC = () => {
   const { formatMessage } = useMessages();
   const dispatch = useDispatch();
+
+  const [uploadPhoto] = useUploadPhotoMutation();
+  const [removePhoto] = useRemovePhotoMutation();
 
   // const [submitRemovePhoto] = api.useRemovePhotoMutation();
 
@@ -40,24 +46,17 @@ export const ProfileEditPhotos: React.FC = () => {
   const handleRemoveMediaFile = async (index: number, _id: string) => {
     try {
       const newLoadings = _.cloneDeep(loadings);
-
       newLoadings[index] = true;
-
       setLoadings(newLoadings);
-
-      await mediaFilesApi.removePhoto(_id);
-
+      await removePhoto(_id).unwrap();
       const profile = await usersApi.getMyProfile();
-
       if (profile.data) {
         dispatch(appActions.updateProfile(profile.data));
       }
     } catch (err) {
     } finally {
       const newLoadings = _.cloneDeep(loadings);
-
       newLoadings[index] = false;
-
       setLoadings(newLoadings);
     }
   };
@@ -66,12 +65,10 @@ export const ProfileEditPhotos: React.FC = () => {
     try {
       if (Platform.OS === 'ios') {
         const permission = await check(PERMISSIONS.IOS.PHOTO_LIBRARY);
-
         if (permission !== RESULTS.GRANTED) {
           const requestPermission = await request(
             PERMISSIONS.IOS.PHOTO_LIBRARY,
           );
-
           if (
             requestPermission !== RESULTS.LIMITED &&
             requestPermission !== RESULTS.GRANTED
@@ -83,21 +80,17 @@ export const ProfileEditPhotos: React.FC = () => {
         }
       } else if (Platform.OS === 'android') {
         const permission = await check(PERMISSIONS.ANDROID.CAMERA);
-
         if (permission !== RESULTS.GRANTED) {
           const requestPermission = await request(PERMISSIONS.ANDROID.CAMERA);
-
           if (
             requestPermission !== RESULTS.LIMITED &&
             requestPermission !== RESULTS.GRANTED
           ) {
             console.log('Permissions to access camera has been blocked');
-
             return;
           }
         }
       }
-
       const photo = await ImageCropPicker.openPicker({
         width: 640,
         height: 860,
@@ -105,26 +98,18 @@ export const ProfileEditPhotos: React.FC = () => {
         mediaType: 'photo',
         forceJpg: true,
       });
-
       const newLoadings = _.cloneDeep(loadings);
-
       newLoadings[index] = true;
-
       setLoadings(newLoadings);
-
-      await mediaFilesApi.uploadPhoto({ file: photo });
-
+      await uploadPhoto({ file: photo }).unwrap();
       const profile = await usersApi.getMyProfile();
-
       if (profile.data) {
         dispatch(appActions.updateProfile(profile.data));
       }
     } catch (err) {
     } finally {
       const newLoadings = _.cloneDeep(loadings);
-
       newLoadings[index] = false;
-
       setLoadings(newLoadings);
     }
   };

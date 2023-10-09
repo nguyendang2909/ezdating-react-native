@@ -1,4 +1,5 @@
 import { CommonService } from 'app/commons/service.common';
+import { AppStore } from 'app/types';
 import { Entity } from 'app/types/entity.type';
 import _ from 'lodash';
 import { IMessage } from 'react-native-gifted-chat';
@@ -29,6 +30,10 @@ class MessagesService extends CommonService {
       .uniqBy('_id')
       .orderBy('_id', 'desc')
       .value();
+  }
+
+  public getCursor(data: AppStore.ChatMessage[]): string | undefined {
+    return this.getCursorByField('createdAt', data);
   }
 }
 

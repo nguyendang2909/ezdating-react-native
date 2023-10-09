@@ -87,53 +87,6 @@ export const matchSlice = createSlice({
         state.data[matchIndex].read = true;
       }
     },
-
-    // refreshConversations: (
-    //   state,
-    //   {
-    //     payload: { data, pagination },
-    //   }: PayloadAction<ApiResponse.Conversations>,
-    // ) => {
-    //   state.infoConversations = {
-    //     ...state.infoConversations,
-    //     isReachedEnd: !pagination._next,
-    //     lastRefreshedAt: moment().toISOString(),
-    //   };
-    //   const matches = matchesService.formatMany(data);
-    //   state.data = matchesService.sortAndUniq(matches, state.data);
-    // },
-
-    // addManyNewestConversations: (
-    //   state,
-    //   {
-    //     payload: { data, pagination },
-    //   }: PayloadAction<ApiResponse.Conversations>,
-    // ) => {
-    //   state.infoConversations = {
-    //     ...state.infoConversations,
-    //     isReachedEnd: !pagination._next,
-    //     lastRefreshedAt: moment().toISOString(),
-    //   };
-    //   const matches = matchesService.formatMany(data);
-    //   state.data = matchesService.sortAndUniq(matches, state.data);
-    // },
-
-    // addManyNextConversations: (
-    //   state,
-    //   { payload: { data, pagination } }: PayloadAction<ApiResponse.Matches>,
-    // ) => {
-    //   state.infoConversations = {
-    //     ...state.infoConversations,
-    //     isReachedEnd: !pagination._next,
-    //     lastRefreshedAt: moment().toISOString(),
-    //   };
-    //   const matches = matchesService.formatMany(data);
-    //   state.data = matchesService.sortAndUniq(matches, state.data);
-    // },
-
-    // updateConversationsRefreshTime: state => {
-    //   state.infoConversations.lastRefreshedAt = moment().toISOString();
-    // },
   },
   extraReducers: builder => {
     builder.addCase(appActions.logout, state => {

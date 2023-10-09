@@ -1,11 +1,8 @@
 import { useNavigation } from '@react-navigation/native';
 import { LoadingButtonIcon } from 'app/components/Button/LoadingButtonIcon';
 import { Ionicons } from 'app/components/Icon/Lib';
-import {
-  useAppDispatch,
-  useAppSelector,
-  useCreateMatchMutation,
-} from 'app/hooks';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { useCreateMatchMutation } from 'app/services/api';
 import { matchActions } from 'app/store/match';
 import React from 'react';
 
@@ -19,13 +16,13 @@ export const NearbyUserSendMessageButton: React.FC<FCProps> = ({
   const currentUserId = useAppSelector(s => s.app.profile._id) || '';
   const navigation = useNavigation();
   const dispatch = useAppDispatch();
-  const createMatchMutation = useCreateMatchMutation();
+  const [createMatch, { isLoading }] = useCreateMatchMutation();
 
   const handleChat = async () => {
     try {
-      const fetchData = await createMatchMutation.mutateAsync({
+      const fetchData = await createMatch({
         targetUserId,
-      });
+      }).unwrap();
       dispatch(matchActions.addMatch({ data: fetchData.data, currentUserId }));
 
       navigation.goBack();
@@ -40,7 +37,7 @@ export const NearbyUserSendMessageButton: React.FC<FCProps> = ({
       height={48}
       width={48}
       onPress={handleChat}
-      isLoading={createMatchMutation.isLoading}
+      isLoading={isLoading}
     >
       <Ionicons color="white" size={24} name="chatbubble-ellipses-outline" />
     </LoadingButtonIcon>

@@ -3,7 +3,7 @@ import {
   useGetNextConversationsMutation,
   useRefreshConversationsQuery,
 } from 'app/services/api';
-import { conversationsApi } from 'app/services/api/conversations.api';
+import { conversationsService } from 'app/services/conversationsService';
 import { matchSelects } from 'app/store/match/match.store';
 import moment from 'moment';
 
@@ -37,7 +37,7 @@ export const useConversations = () => {
   };
 
   const fetchNext = async () => {
-    const _next = conversationsApi.getCursor(conversations);
+    const _next = conversationsService.getCursor(conversations);
     if (isReachedEnd || !_next) {
       return;
     }

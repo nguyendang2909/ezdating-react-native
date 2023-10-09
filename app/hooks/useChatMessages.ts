@@ -2,7 +2,7 @@ import {
   useGetNewestMessagesMutation,
   useRefreshMessagesQuery,
 } from 'app/services/api';
-import { messagesApi } from 'app/services/api/messages.api';
+import { messagesService } from 'app/services/messages.service';
 import { socketStoreActions } from 'app/store/socket.store';
 import _ from 'lodash';
 import moment from 'moment';
@@ -22,7 +22,7 @@ export const useChatMessages = ({ matchId }: { matchId: string }) => {
     state => state.app.socket.connectedAt,
   );
   const lastRefreshedAt = useAppSelector(
-    state => state.message.info[matchId].lastRefreshedAt,
+    state => state.message.info[matchId]?.lastRefreshedAt,
   );
   const { isLoading } = useRefreshMessagesQuery(
     { matchId },
@@ -56,7 +56,7 @@ export const useChatMessages = ({ matchId }: { matchId: string }) => {
   };
 
   const fetchNext = async () => {
-    const _next = messagesApi.getCursor(messages);
+    const _next = messagesService.getCursor(messages);
     if (isReachedEnd || !_next) {
       return;
     }
