@@ -28,17 +28,13 @@ const baseQuery = fetchBaseQuery({
 export const api = createApi({
   baseQuery: async (args, baseQueryApi, extraOptions) => {
     await mutex.waitForUnlock();
-
     let result = await baseQuery(args, baseQueryApi, extraOptions);
-
     if (result.error && [401, 403].includes(result.error.status as number)) {
       if (!mutex.isLocked()) {
         const release = await mutex.acquire();
-
         try {
           const refreshToken = (baseQueryApi.getState() as AppStore.RootState)
             .app?.refreshToken;
-
           const refreshResult = (await baseQuery(
             {
               method: 'POST',
@@ -55,7 +51,6 @@ export const api = createApi({
             baseQueryApi.dispatch(
               appActions.updateAccessToken(refreshResult.data),
             );
-
             result = await baseQuery(args, baseQueryApi, extraOptions);
           } else {
             baseQueryApi.dispatch(appActions.logout());
@@ -73,16 +68,24 @@ export const api = createApi({
   },
   tagTypes: ['Profile'],
   endpoints: builder => ({
-    // signInWithPhoneNumber: builder.mutation<
-    //   ApiResponse.Logged,
-    //   ApiRequest.SignInWithPhoneNumber
-    // >({
-    //   query: body => ({
-    //     url: API_URL.signInWithPhoneNumber,
-    //     method: 'POST',
-    //     body,
-    //   }),
-    // }),
+    signInWithPhoneNumber: builder.mutation<
+      ApiResponse.Logged,
+      ApiRequest.SignInWithPhoneNumber
+    >({
+      query: body => ({
+        url: API_URL.signInWithPhoneNumber,
+        method: 'POST',
+        body,
+      }),
+    }),
+
+    logout: builder.mutation<void, ApiRequest.Logout>({
+      query: body => ({
+        url: API_URL.logout,
+        method: 'POST',
+        body,
+      }),
+    }),
 
     getSwipeUsers: builder.query<
       ApiResponse.FetchData<Entity.User[]>,
@@ -226,4 +229,4 @@ export const api = createApi({
   }),
 });
 
-export const { useGetMyProfileQuery } = api;
+export const { useGetMyProfileQuery, useSignInWithPhoneNumberMutation } = api;

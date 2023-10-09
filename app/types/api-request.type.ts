@@ -42,6 +42,10 @@ export declare namespace ApiRequest {
     token: string;
   };
 
+  type Logout = {
+    refreshToken: string;
+  };
+
   type UpdateProfile = Partial<{
     birthday?: string;
     company?: string;
