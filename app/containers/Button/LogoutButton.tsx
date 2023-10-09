@@ -1,8 +1,7 @@
 import { Button } from '@gluestack-ui/themed';
 import { LoadingButton } from 'app/components/Button/LoadingButton';
-import { useLogoutMutation } from 'app/hooks/useLogoutMutation';
 import { messages } from 'app/locales/messages';
-import { api } from 'app/services/api';
+import { api, useLogoutMutation } from 'app/services/api/root-api';
 import { appActions } from 'app/store/app.store';
 import React from 'react';
 import { useIntl } from 'react-intl';
@@ -14,11 +13,11 @@ export const LogoutButton: React.FC<FC> = () => {
   const t = useIntl();
   const dispatch = useDispatch();
 
-  const logoutMutation = useLogoutMutation();
+  const [logoutMutation, { isLoading }] = useLogoutMutation();
 
   const handleLogout = async () => {
     try {
-      await logoutMutation.mutateAsync();
+      await logoutMutation().unwrap();
     } catch (err) {}
 
     dispatch(appActions.logout());
@@ -28,10 +27,7 @@ export const LogoutButton: React.FC<FC> = () => {
 
   return (
     <>
-      <LoadingButton
-        isLoading={logoutMutation.isLoading}
-        onPress={handleLogout}
-      >
+      <LoadingButton isLoading={isLoading} onPress={handleLogout}>
         {t.formatMessage(messages.Logout)}
       </LoadingButton>
     </>

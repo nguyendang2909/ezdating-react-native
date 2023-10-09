@@ -73,16 +73,24 @@ export const api = createApi({
   },
   tagTypes: ['Profile'],
   endpoints: builder => ({
-    // signInWithPhoneNumber: builder.mutation<
-    //   ApiResponse.Logged,
-    //   ApiRequest.SignInWithPhoneNumber
-    // >({
-    //   query: body => ({
-    //     url: API_URL.signInWithPhoneNumber,
-    //     method: 'POST',
-    //     body,
-    //   }),
-    // }),
+    // Auth
+    signInWithPhoneNumber: builder.mutation<
+      ApiResponse.Logged,
+      ApiRequest.SignInWithPhoneNumber
+    >({
+      query: body => ({
+        url: API_URL.signInWithPhoneNumber,
+        method: 'POST',
+        body,
+      }),
+    }),
+
+    logout: builder.mutation<void, void>({
+      query: () => ({
+        url: API_URL.logout,
+        method: 'POST',
+      }),
+    }),
 
     getSwipeUsers: builder.query<
       ApiResponse.FetchData<Entity.User[]>,
@@ -225,3 +233,5 @@ export const api = createApi({
     // }),
   }),
 });
+
+export const { useSignInWithPhoneNumberMutation, useLogoutMutation } = api;

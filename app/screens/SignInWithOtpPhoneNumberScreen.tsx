@@ -2,7 +2,7 @@ import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import { useNavigation } from '@react-navigation/native';
 import { OtpInput } from 'app/components/Input/OtpInput';
 import { useMessages } from 'app/hooks';
-import { authApi } from 'app/services/api/auth.api';
+import { useSignInWithPhoneNumberMutation } from 'app/services/api/root-api';
 import { usersApi } from 'app/services/api/users.api';
 import { appActions } from 'app/store/app.store';
 import {
@@ -58,6 +58,8 @@ export const SignInWithOtpPhoneNumberScreen: FC<FCProps> = props => {
   const [resendStatus, setResendStatus] = useState<ResendStatus>(
     ResendStatusObj.nonResent,
   );
+  const [signInWithPhoneNumberMutation] = useSignInWithPhoneNumberMutation();
+
   const [otpConfirmation, setOtpConfirmation] = useState<
     FirebaseAuthTypes.ConfirmationResult | undefined
   >(otpConfirm);
@@ -83,9 +85,9 @@ export const SignInWithOtpPhoneNumberScreen: FC<FCProps> = props => {
       }
       const idToken = await credential.user.getIdToken();
 
-      const signInWithPhoneNumber = await authApi.signInWithPhoneNumber({
+      const signInWithPhoneNumber = await signInWithPhoneNumberMutation({
         token: idToken,
-      });
+      }).unwrap();
 
       if (signInWithPhoneNumber.data) {
         dispatch(appActions.updateAccessToken(signInWithPhoneNumber.data));
