@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { endpoints } from 'app/services/api';
 import { matchesService } from 'app/services/matches.service';
 import { ApiResponse } from 'app/types';
 import { AppStore } from 'app/types/app-store.type';
@@ -11,9 +12,6 @@ import { appActions } from '../app.store';
 const initialState: AppStore.MatchState = {
   data: [],
   infoMatches: {
-    isLoading: false,
-    isLoadingNewest: false,
-    isLoadingNext: false,
     isReachedEnd: true,
   },
   infoConversations: {
@@ -29,7 +27,7 @@ export const matchSlice = createSlice({
   initialState,
   reducers: {
     // Matches
-    addOneMatch: (
+    addMatch: (
       state,
       {
         payload: { data, currentUserId },
@@ -38,59 +36,47 @@ export const matchSlice = createSlice({
       const match = matchesService.formatOne(data, currentUserId);
       state.data = matchesService.sortAndUniq([match], state.data);
     },
-    refreshMatches: (
-      state,
-      { payload: { data, pagination } }: PayloadAction<ApiResponse.Matches>,
-    ) => {
-      state.infoMatches = {
-        ...state.infoMatches,
-        isReachedEnd: !pagination._next,
-        lastRefreshedAt: moment().toISOString(),
-      };
-      const matches = matchesService.formatMany(data);
-      state.data = matchesService.sortAndUniq(matches, state.data);
-    },
+    // refreshMatches: (
+    //   state,
+    //   { payload: { data, pagination } }: PayloadAction<ApiResponse.Matches>,
+    // ) => {
+    //   state.infoMatches = {
+    //     ...state.infoMatches,
+    //     isReachedEnd: !pagination._next,
+    //     lastRefreshedAt: moment().toISOString(),
+    //   };
+    //   const matches = matchesService.formatMany(data);
+    //   state.data = matchesService.sortAndUniq(matches, state.data);
+    // },
 
-    addManyNewestMatches: (
-      state,
-      { payload: { data, pagination } }: PayloadAction<ApiResponse.Matches>,
-    ) => {
-      state.infoMatches = {
-        ...state.infoMatches,
-        isReachedEnd: !pagination._next,
-        lastRefreshedAt: moment().toISOString(),
-      };
-      const matches = matchesService.formatMany(data);
-      state.data = matchesService.sortAndUniq(matches, state.data);
-    },
+    // addManyNewestMatches: (
+    //   state,
+    //   { payload: { data, pagination } }: PayloadAction<ApiResponse.Matches>,
+    // ) => {
+    //   state.infoMatches = {
+    //     ...state.infoMatches,
+    //     isReachedEnd: !pagination._next,
+    //     lastRefreshedAt: moment().toISOString(),
+    //   };
+    //   const matches = matchesService.formatMany(data);
+    //   state.data = matchesService.sortAndUniq(matches, state.data);
+    // },
 
-    addManyNextMatches: (
-      state,
-      { payload: { data, pagination } }: PayloadAction<ApiResponse.Matches>,
-    ) => {
-      state.infoMatches = {
-        ...state.infoMatches,
-        isReachedEnd: !pagination._next,
-        lastRefreshedAt: moment().toISOString(),
-      };
-      const matches = matchesService.formatMany(data);
-      state.data = matchesService.sortAndUniq(matches, state.data);
-    },
+    // addManyNextMatches: (
+    //   state,
+    //   { payload: { data, pagination } }: PayloadAction<ApiResponse.Matches>,
+    // ) => {
+    //   state.infoMatches = {
+    //     ...state.infoMatches,
+    //     isReachedEnd: !pagination._next,
+    //     lastRefreshedAt: moment().toISOString(),
+    //   };
+    //   const matches = matchesService.formatMany(data);
+    //   state.data = matchesService.sortAndUniq(matches, state.data);
+    // },
 
     updateMatchesRefreshTime: state => {
       state.infoMatches.lastRefreshedAt = moment().toISOString();
-    },
-
-    setMatchesLoading: (state, { payload }: PayloadAction<boolean>) => {
-      state.infoMatches.isLoading = payload;
-    },
-
-    setMatchesLoadingNewest: (state, { payload }: PayloadAction<boolean>) => {
-      state.infoMatches.isLoadingNewest = payload;
-    },
-
-    setMatchesLoadingNext: (state, { payload }: PayloadAction<boolean>) => {
-      state.infoMatches.isLoadingNext = payload;
     },
 
     // Conversations
@@ -223,6 +209,43 @@ export const matchSlice = createSlice({
       state.infoConversations = {};
       state.infoMatches = {};
     });
+
+    builder
+      .addMatcher(
+        endpoints.refreshMatches.matchFulfilled,
+        (state, { payload: { data, pagination } }) => {
+          state.infoMatches = {
+            ...state.infoMatches,
+            isReachedEnd: !pagination._next,
+            lastRefreshedAt: moment().toISOString(),
+          };
+          const matches = matchesService.formatMany(data);
+          state.data = matchesService.sortAndUniq(matches, state.data);
+        },
+      )
+      .addMatcher(
+        endpoints.getNewestMatches.matchFulfilled,
+        (state, { payload: { data, pagination } }) => {
+          state.infoMatches = {
+            ...state.infoMatches,
+            isReachedEnd: !pagination._next,
+            lastRefreshedAt: moment().toISOString(),
+          };
+          const matches = matchesService.formatMany(data);
+          state.data = matchesService.sortAndUniq(matches, state.data);
+        },
+      )
+      .addMatcher(
+        endpoints.getNextMatches.matchFulfilled,
+        (state, { payload: { data, pagination } }) => {
+          state.infoMatches = {
+            ...state.infoMatches,
+            isReachedEnd: !pagination._next,
+          };
+          const matches = matchesService.formatMany(data);
+          state.data = matchesService.sortAndUniq(matches, state.data);
+        },
+      );
   },
 });
 

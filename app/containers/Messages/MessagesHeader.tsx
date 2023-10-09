@@ -17,7 +17,7 @@ import { SafeAreaView, TouchableOpacity } from 'react-native';
 
 import { BackIconButton } from '../IconButton/BackIconButton';
 export type FCProps = {
-  match: AppStore.Match;
+  match?: AppStore.Match;
 };
 export const MessageByConversationHeader: React.FC<FCProps> = ({ match }) => {
   const handlePressSetting = () => {};
@@ -40,11 +40,11 @@ export const MessageByConversationHeader: React.FC<FCProps> = ({ match }) => {
               <View pointerEvents="none">
                 <Avatar height={40} width={40}>
                   <AvatarFallbackText>
-                    {match.targetUser?.nickname}
+                    {match?.targetUser?.nickname}
                   </AvatarFallbackText>
                   <AvatarImage
                     source={{
-                      uri: match.targetUser?.mediaFiles?.length
+                      uri: match?.targetUser?.mediaFiles?.length
                         ? match.targetUser?.mediaFiles[0].location
                         : undefined,
                     }}
@@ -55,11 +55,11 @@ export const MessageByConversationHeader: React.FC<FCProps> = ({ match }) => {
               <VStack>
                 <View>
                   <Text fontWeight="$bold" fontSize={16}>
-                    {match.targetUser?.nickname}
+                    {match?.targetUser?.nickname}
                   </Text>
                 </View>
                 <View>
-                  <Text fontSize={14}>{match.targetUser?.age}</Text>
+                  <Text fontSize={14}>{match?.targetUser?.age}</Text>
                 </View>
               </VStack>
             </HStack>

@@ -43,6 +43,10 @@ class MatchesService extends CommonService {
       .orderBy(['lastMessageAt', 'createdAt'], ['desc', 'desc'])
       .value();
   }
+
+  public getCursor(data: Entity.Match[]): string | undefined {
+    return this.getCursorByField(['createdAt'], data);
+  }
 }
 
 export const matchesService = new MatchesService();

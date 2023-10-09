@@ -87,6 +87,60 @@ export const api = createApi({
       }),
     }),
 
+    // NearbyUser
+    refreshNearbyUsers: builder.query<ApiResponse.Users, void>({
+      query: () => ({
+        url: API_URL.usersNearby,
+        method: 'GET',
+      }),
+    }),
+    getNewestUsers: builder.mutation<ApiResponse.Users, void>({
+      query: () => ({
+        url: API_URL.usersNearby,
+        method: 'GET',
+      }),
+    }),
+    getNextNearbyUsers: builder.mutation<
+      ApiResponse.Users,
+      ApiRequest.FindManyNearbyUses
+    >({
+      query: params => ({
+        url: API_URL.usersNearby,
+        method: 'GET',
+        params,
+      }),
+    }),
+
+    // Match
+    getMatch: builder.query<ApiResponse.Match, string>({
+      query: id => ({
+        url: `${API_URL.matches}/${id}`,
+        method: 'GET',
+      }),
+    }),
+    refreshMatches: builder.query<ApiResponse.Matches, void>({
+      query: () => ({
+        url: API_URL.matches,
+        method: 'GET',
+      }),
+    }),
+    getNewestMatches: builder.mutation<ApiResponse.Matches, void>({
+      query: () => ({
+        url: API_URL.matches,
+        method: 'GET',
+      }),
+    }),
+    getNextMatches: builder.mutation<
+      ApiResponse.Matches,
+      ApiRequest.FindManyMatches
+    >({
+      query: params => ({
+        url: API_URL.matches,
+        method: 'GET',
+        params,
+      }),
+    }),
+
     getSwipeUsers: builder.query<
       ApiResponse.FetchData<Entity.User[]>,
       ApiRequest.FindManySwipeUsers
@@ -140,18 +194,6 @@ export const api = createApi({
         url: API_URL.myProfileBasicInfo,
         method: 'PATCH',
         body,
-      }),
-    }),
-
-    // Users
-    getUsersNearby: builder.query<
-      ApiResponse.FetchPaginationData<Entity.User[]>,
-      ApiRequest.SearchUsersNearby
-    >({
-      query: ({ params }) => ({
-        url: API_URL.usersNearby,
-        method: 'GET',
-        params,
       }),
     }),
 
@@ -229,4 +271,16 @@ export const api = createApi({
   }),
 });
 
-export const { useGetMyProfileQuery, useSignInWithPhoneNumberMutation } = api;
+export const {
+  endpoints,
+  useGetMyProfileQuery,
+  useSignInWithPhoneNumberMutation,
+  useLogoutMutation,
+  useRefreshNearbyUsersQuery,
+  useGetNextNearbyUsersMutation,
+  useGetNewestUsersMutation,
+  useGetMatchQuery,
+  useRefreshMatchesQuery,
+  useGetNewestMatchesMutation,
+  useGetNextMatchesMutation,
+} = api;

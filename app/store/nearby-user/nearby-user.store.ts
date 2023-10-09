@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { endpoints } from 'app/services/api';
 import { nearbyUsersService } from 'app/services/nearby-users.service';
 import { ApiResponse } from 'app/types';
 import { AppStore } from 'app/types/app-store.type';
@@ -9,9 +10,6 @@ import { appActions } from '../app.store';
 const initialState: AppStore.NearbyState = {
   data: [],
   info: {
-    isLoading: false,
-    isLoadingNewest: false,
-    isLoadingNext: false,
     isReachedEnd: false,
   },
 };
@@ -24,52 +22,40 @@ export const nearbyUserSlice = createSlice({
       state,
       { payload: { data, pagination } }: PayloadAction<ApiResponse.Users>,
     ) => {
-      state.data = data;
-      state.info = {
-        ...state.info,
-        isReachedEnd: !pagination._next,
-        lastRefreshedAt: moment().toISOString(),
-      };
+      // state.data = data;
+      // state.info = {
+      //   ...state.info,
+      //   isReachedEnd: !pagination._next,
+      //   lastRefreshedAt: moment().toISOString(),
+      // };
     },
 
-    addManyNewest: (
-      state,
-      { payload: { data, pagination } }: PayloadAction<ApiResponse.Users>,
-    ) => {
-      state.data = nearbyUsersService.sortAndUniq(data, state.data);
-      state.info = {
-        ...state.info,
-        isReachedEnd: !pagination._next,
-        lastRefreshedAt: moment().toISOString(),
-      };
-    },
+    // addManyNewest: (
+    //   state,
+    //   { payload: { data, pagination } }: PayloadAction<ApiResponse.Users>,
+    // ) => {
+    //   state.data = nearbyUsersService.sortAndUniq(data, state.data);
+    //   state.info = {
+    //     ...state.info,
+    //     isReachedEnd: !pagination._next,
+    //     lastRefreshedAt: moment().toISOString(),
+    //   };
+    // },
 
     addManyNext: (
       state,
       { payload: { data, pagination } }: PayloadAction<ApiResponse.Users>,
     ) => {
-      state.data = nearbyUsersService.sortAndUniq(data, state.data);
-      state.info = {
-        ...state.info,
-        isReachedEnd: !pagination._next,
-        lastRefreshedAt: moment().toISOString(),
-      };
+      // state.data = nearbyUsersService.sortAndUniq(data, state.data);
+      // state.info = {
+      //   ...state.info,
+      //   isReachedEnd: !pagination._next,
+      //   lastRefreshedAt: moment().toISOString(),
+      // };
     },
 
     updateRefreshTime: state => {
       state.info.lastRefreshedAt = moment().toISOString();
-    },
-
-    setLoading: (state, { payload }: PayloadAction<boolean>) => {
-      state.info.isLoading = payload;
-    },
-
-    setLoadingNewest: (state, { payload }: PayloadAction<boolean>) => {
-      state.info.isLoadingNewest = payload;
-    },
-
-    setLoadingNext: (state, { payload }: PayloadAction<boolean>) => {
-      state.info.isLoadingNext = payload;
     },
   },
   extraReducers: builder => {
@@ -77,6 +63,39 @@ export const nearbyUserSlice = createSlice({
       state.data = [];
       state.info = {};
     });
+    builder
+      .addMatcher(
+        endpoints.refreshNearbyUsers.matchFulfilled,
+        (state, { payload: { data, pagination } }) => {
+          state.data = data;
+          state.info = {
+            ...state.info,
+            isReachedEnd: !pagination._next,
+            lastRefreshedAt: moment().toISOString(),
+          };
+        },
+      )
+      .addMatcher(
+        endpoints.getNewestUsers.matchFulfilled,
+        (state, { payload: { data, pagination } }) => {
+          state.data = nearbyUsersService.sortAndUniq(data, state.data);
+          state.info = {
+            ...state.info,
+            isReachedEnd: !pagination._next,
+            lastRefreshedAt: moment().toISOString(),
+          };
+        },
+      )
+      .addMatcher(
+        endpoints.getNextNearbyUsers.matchFulfilled,
+        (state, { payload: { data, pagination } }) => {
+          state.data = nearbyUsersService.sortAndUniq(data, state.data);
+          state.info = {
+            ...state.info,
+            isReachedEnd: !pagination._next,
+          };
+        },
+      );
   },
 });
 

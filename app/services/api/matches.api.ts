@@ -31,10 +31,6 @@ class MatchesApi extends CommonApi {
     );
     return response.data;
   }
-
-  public getCursor(data: Entity.Match[]): string | undefined {
-    return this.getCursorByField(['createdAt'], data);
-  }
 }
 
 export const matchesApi = new MatchesApi();

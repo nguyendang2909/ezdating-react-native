@@ -1,5 +1,4 @@
 export * from './api';
-export * from './auth.api';
 export * from './conversations.api';
 export * from './likedMe.api';
 export * from './likes.api';

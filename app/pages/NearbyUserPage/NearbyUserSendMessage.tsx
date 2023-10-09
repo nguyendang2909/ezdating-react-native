@@ -26,9 +26,7 @@ export const NearbyUserSendMessageButton: React.FC<FCProps> = ({
       const fetchData = await createMatchMutation.mutateAsync({
         targetUserId,
       });
-      dispatch(
-        matchActions.addOneMatch({ data: fetchData.data, currentUserId }),
-      );
+      dispatch(matchActions.addMatch({ data: fetchData.data, currentUserId }));
 
       navigation.goBack();
       navigation.navigate('Messages', {
