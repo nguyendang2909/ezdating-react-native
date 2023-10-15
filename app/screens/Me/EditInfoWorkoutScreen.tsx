@@ -7,7 +7,7 @@ import { useToast, View } from 'native-base';
 import React from 'react';
 import * as Yup from 'yup';
 
-export const EditInfoWeightScreen = () => {
+export const EditInfoWorkoutScreen = () => {
   const { formatMessage } = useMessages();
   const { goBack } = useNavigation();
 

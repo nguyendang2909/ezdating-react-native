@@ -6,7 +6,7 @@ import { textAlignCenter } from 'app/styles';
 import React, { FC } from 'react';
 import { SafeAreaView } from 'react-native';
 
-import { AppStackScreenProps } from '../navigators';
+import { AppStackScreenProps } from '../../navigators';
 
 type FCProps = AppStackScreenProps<'SignInWithPhoneNumber'>;
 

@@ -8,22 +8,22 @@ import {
   NativeStackScreenProps,
 } from '@react-navigation/native-stack';
 import { useAppSelector } from 'app/hooks';
-import { EditInfoHeightScreen } from 'app/screens/EditInfoHeightScreen';
-import { EditInfoNicknameScreen } from 'app/screens/EditInfoNicknameScreen';
-import { EditInfoWeightScreen } from 'app/screens/EditInfoWeightScreen';
-import { EditMatchFilterScreen } from 'app/screens/EditMatchFilterScreen';
-import { LikedMeScreen } from 'app/screens/LikedMeScreen';
-import { MainScreen } from 'app/screens/MainScreen';
-import { MessagesScreen } from 'app/screens/MessagesScreen';
-import { ProfileEditScreen } from 'app/screens/ProfileEditScreen';
-import { ProfileNearbyScreen } from 'app/screens/ProfileNearbyScreen';
-import { ProfileSettingScreen } from 'app/screens/ProfileSettingScreen';
+import { EditInfoHeightScreen } from 'app/screens/Me/EditInfoHeightScreen';
+import { EditInfoNicknameScreen } from 'app/screens/Me/EditInfoNicknameScreen';
+import { EditInfoWeightScreen } from 'app/screens/Me/EditInfoWeightScreen';
+import { EditMatchFilterScreen } from 'app/screens/DatingNearby/EditMatchFilterScreen';
+import { LikedMeScreen } from 'app/screens/Me/LikedMeScreen';
+import { MainScreen } from 'app/screens/Pre/MainScreen';
+import { MessagesScreen } from 'app/screens/Conversations/MessagesScreen';
+import { ProfileEditScreen } from 'app/screens/Me/ProfileEditScreen';
+import { ProfileNearbyScreen } from 'app/screens/DatingNearby/ProfileNearbyScreen';
+import { ProfileSettingScreen } from 'app/screens/Me/ProfileSettingScreen';
 import { SelectRelationshipScreen } from 'app/screens/SelectLookingForScreen';
-import { SignInScreen } from 'app/screens/SignInScreen';
-import { SignInWithOtpPhoneNumberScreen } from 'app/screens/SignInWithOtpPhoneNumberScreen';
-import { SignInWithPhoneNumberScreen } from 'app/screens/SignInWithPhoneNumberScreen';
-import { UpdateProfileBasicInfoScreen } from 'app/screens/UpdateProfileBasicInfoScreen';
-import { UpdateProfilePhotosScreen } from 'app/screens/UpdateProfilePhotosScreen';
+import { SignInScreen } from 'app/screens/Auth/SignInScreen';
+import { SignInWithOtpPhoneNumberScreen } from 'app/screens/Auth/SignInWithOtpPhoneNumberScreen';
+import { SignInWithPhoneNumberScreen } from 'app/screens/Auth/SignInWithPhoneNumberScreen';
+import { UpdateProfileBasicInfoScreen } from 'app/screens/Pre/UpdateProfileBasicInfoScreen';
+import { UpdateProfilePhotosScreen } from 'app/screens/Pre/UpdateProfilePhotosScreen';
 import { colors } from 'app/theme';
 import {
   ReactNavDarkTheme,

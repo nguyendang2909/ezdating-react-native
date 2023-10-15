@@ -4,10 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { HeaderSaveDone } from 'app/components/Header/HeaderSaveDone';
 import { useAppSelector, useMessages } from 'app/hooks';
 import { EditFilterGenderMenuItem } from 'app/pages/EditMatchFilter/EditFilterGenderMenuItem';
-import {
-  useRefreshNearbyUsersQuery,
-  useUpdateProfileMutation,
-} from 'app/services';
+import { useRefreshNearbyUsersQuery, useUpdateProfileMutation } from 'app/services';
 import { colors } from 'app/theme';
 import { FormParams } from 'app/types/form-params.type';
 import { useFormik } from 'formik';
@@ -17,11 +14,9 @@ import { Dimensions } from 'react-native';
 import Toast from 'react-native-toast-message';
 import { useDispatch } from 'react-redux';
 
-import { AppStackScreenProps } from '../navigators';
+import { AppStackScreenProps } from '../../navigators';
 
-export const EditMatchFilterScreen: React.FC<
-  AppStackScreenProps<'EditMatchFilter'>
-> = () => {
+export const EditMatchFilterScreen: React.FC<AppStackScreenProps<'EditMatchFilter'>> = () => {
   const [updateProfile] = useUpdateProfileMutation();
   const { refetch } = useRefreshNearbyUsersQuery();
   const { formatMessage } = useMessages();
@@ -29,12 +24,9 @@ export const EditMatchFilterScreen: React.FC<
   const dispatch = useDispatch();
   const { width } = Dimensions.get('window');
 
-  const filterMaxDistance =
-    useAppSelector(state => state.app.profile?.filterMaxDistance) || 1;
-  const filterMinAge =
-    useAppSelector(state => state.app.profile?.filterMinAge) || 18;
-  const filterMaxAge =
-    useAppSelector(state => state.app.profile?.filterMaxAge) || 99;
+  const filterMaxDistance = useAppSelector(state => state.app.profile?.filterMaxDistance) || 1;
+  const filterMinAge = useAppSelector(state => state.app.profile?.filterMinAge) || 18;
+  const filterMaxAge = useAppSelector(state => state.app.profile?.filterMaxAge) || 99;
   const filterGender = useAppSelector(state => state.app.profile?.filterGender);
 
   const formik = useFormik<FormParams.UpdateMatchFilter>({
@@ -134,17 +126,9 @@ export const EditMatchFilterScreen: React.FC<
                 </HStack>
               </View>
 
-              <View
-                px={16}
-                w="$full"
-                justifyContent="center"
-                alignItems="center"
-              >
+              <View px={16} w="$full" justifyContent="center" alignItems="center">
                 <MultiSlider
-                  values={[
-                    formik.values.filterMinAge,
-                    formik.values.filterMaxAge,
-                  ]}
+                  values={[formik.values.filterMinAge, formik.values.filterMaxAge]}
                   sliderLength={width - 48}
                   onValuesChange={handleChangeAges}
                   min={18}

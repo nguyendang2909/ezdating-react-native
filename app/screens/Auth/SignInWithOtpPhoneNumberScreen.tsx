@@ -29,7 +29,7 @@ import React, { FC, useCallback, useEffect, useState } from 'react';
 import { Keyboard, Pressable, View } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-import { AppStackScreenProps } from '../navigators';
+import { AppStackScreenProps } from '../../navigators';
 
 type FCProps = AppStackScreenProps<'SignInWithOtpPhoneNumber'>;
 
