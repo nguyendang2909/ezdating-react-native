@@ -1,4 +1,4 @@
-import { View, VStack } from 'native-base';
+import { View, VStack } from '@gluestack-ui/themed';
 import React from 'react';
 
 import { ProfileAvatar } from './ProfileAvatar';
@@ -11,7 +11,7 @@ export const ProfileHeader: React.FC = () => {
         <View>
           <ProfileAvatar />
         </View>
-        <View>
+        <View px={32}>
           <ProfileHeaderNickname />
         </View>
       </VStack>
