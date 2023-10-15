@@ -1,17 +1,13 @@
 import './utils/ignoreWarnings';
 
 import { ActionSheetProvider } from '@expo/react-native-action-sheet';
-import { config as gluestackConfig } from '@gluestack-ui/config';
 import { GluestackUIProvider } from '@gluestack-ui/themed';
 import { useFonts } from 'expo-font';
 import * as Linking from 'expo-linking';
 import { NativeBaseProvider } from 'native-base';
 import React from 'react';
 import { IntlProvider } from 'react-intl';
-import {
-  initialWindowMetrics,
-  SafeAreaProvider,
-} from 'react-native-safe-area-context';
+import { initialWindowMetrics, SafeAreaProvider } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/lib/integration/react';
@@ -26,7 +22,7 @@ import { AppNavigator, useNavigationPersistence } from './navigators';
 import { ErrorBoundary } from './screens/ErrorScreen/ErrorBoundary';
 import { setupReactotron } from './services/reactotron';
 import { persistor, store } from './store';
-import { customFontsToLoad } from './theme';
+import { customFontsToLoad, gluestackUIConfig } from './theme';
 import { defaultTheme } from './theme/default-theme';
 import * as storage from './utils/storage';
 
@@ -117,11 +113,8 @@ function App(props: AppProps) {
         <ConnectProfile />
         <SafeAreaProvider initialMetrics={initialWindowMetrics}>
           <ErrorBoundary catchErrors={Config.catchErrors}>
-            <GluestackUIProvider config={gluestackConfig}>
-              <NativeBaseProvider
-                theme={defaultTheme}
-                config={nativeBaseConfig}
-              >
+            <GluestackUIProvider config={gluestackUIConfig}>
+              <NativeBaseProvider theme={defaultTheme} config={nativeBaseConfig}>
                 <ActionSheetProvider>
                   <IntlProvider
                     defaultLocale="en"

@@ -33,8 +33,7 @@ export const api = createApi({
       if (!mutex.isLocked()) {
         const release = await mutex.acquire();
         try {
-          const refreshToken = (baseQueryApi.getState() as AppStore.RootState)
-            .app?.refreshToken;
+          const refreshToken = (baseQueryApi.getState() as AppStore.RootState).app?.refreshToken;
           const refreshResult = (
             await baseQuery(
               {
@@ -48,11 +47,8 @@ export const api = createApi({
               extraOptions,
             )
           ).data as ApiResponse.FetchData<ApiResponse.Tokens>;
-
           if (refreshResult.data) {
-            baseQueryApi.dispatch(
-              appActions.updateAccessToken(refreshResult.data),
-            );
+            baseQueryApi.dispatch(appActions.updateAccessToken(refreshResult.data));
             result = await baseQuery(args, baseQueryApi, extraOptions);
           } else {
             baseQueryApi.dispatch(appActions.logout());
@@ -70,10 +66,7 @@ export const api = createApi({
   },
   tagTypes: ['Profile'],
   endpoints: builder => ({
-    signInWithPhoneNumber: builder.mutation<
-      ApiResponse.Logged,
-      ApiRequest.SignInWithPhoneNumber
-    >({
+    signInWithPhoneNumber: builder.mutation<ApiResponse.Logged, ApiRequest.SignInWithPhoneNumber>({
       query: body => ({
         url: API_URL.signInWithPhoneNumber,
         method: 'POST',
@@ -102,10 +95,7 @@ export const api = createApi({
         method: 'GET',
       }),
     }),
-    getNextNearbyUsers: builder.mutation<
-      ApiResponse.Users,
-      ApiRequest.FindManyNearbyUses
-    >({
+    getNextNearbyUsers: builder.mutation<ApiResponse.Users, ApiRequest.FindManyNearbyUses>({
       query: params => ({
         url: API_URL.usersNearby,
         method: 'GET',
@@ -120,28 +110,19 @@ export const api = createApi({
         method: 'GET',
       }),
     }),
-    refreshMatches: builder.query<
-      ApiResponse.Matches,
-      ApiRequest.FindManyMatches
-    >({
+    refreshMatches: builder.query<ApiResponse.Matches, ApiRequest.FindManyMatches>({
       query: () => ({
         url: API_URL.matches,
         method: 'GET',
       }),
     }),
-    getNewestMatches: builder.mutation<
-      ApiResponse.Matches,
-      ApiRequest.FindManyMatches
-    >({
+    getNewestMatches: builder.mutation<ApiResponse.Matches, ApiRequest.FindManyMatches>({
       query: () => ({
         url: API_URL.matches,
         method: 'GET',
       }),
     }),
-    getNextMatches: builder.mutation<
-      ApiResponse.Matches,
-      ApiRequest.FindManyMatches
-    >({
+    getNextMatches: builder.mutation<ApiResponse.Matches, ApiRequest.FindManyMatches>({
       query: params => ({
         url: API_URL.matches,
         method: 'GET',
@@ -157,28 +138,21 @@ export const api = createApi({
     }),
 
     // Converstaions
-    refreshConversations: builder.query<
-      ApiResponse.Matches,
-      ApiRequest.FindManyConversations
-    >({
+    refreshConversations: builder.query<ApiResponse.Matches, ApiRequest.FindManyConversations>({
       query: () => ({
         url: API_URL.conversations,
         method: 'GET',
       }),
     }),
-    getNewestConversations: builder.mutation<
-      ApiResponse.Matches,
-      ApiRequest.FindManyConversations
-    >({
-      query: () => ({
-        url: API_URL.conversations,
-        method: 'GET',
-      }),
-    }),
-    getNextConversations: builder.mutation<
-      ApiResponse.Matches,
-      ApiRequest.FindManyConversations
-    >({
+    getNewestConversations: builder.mutation<ApiResponse.Matches, ApiRequest.FindManyConversations>(
+      {
+        query: () => ({
+          url: API_URL.conversations,
+          method: 'GET',
+        }),
+      },
+    ),
+    getNextConversations: builder.mutation<ApiResponse.Matches, ApiRequest.FindManyConversations>({
       query: params => ({
         url: API_URL.conversations,
         method: 'GET',
@@ -187,28 +161,19 @@ export const api = createApi({
     }),
 
     // Likes
-    refreshLikedMe: builder.query<
-      ApiResponse.Likes,
-      ApiRequest.FindManyLikedMe
-    >({
+    refreshLikedMe: builder.query<ApiResponse.Likes, ApiRequest.FindManyLikedMe>({
       query: () => ({
         url: API_URL.likedMe,
         method: 'GET',
       }),
     }),
-    getNewestLikedMe: builder.mutation<
-      ApiResponse.Matches,
-      ApiRequest.FindManyLikedMe
-    >({
+    getNewestLikedMe: builder.mutation<ApiResponse.Matches, ApiRequest.FindManyLikedMe>({
       query: () => ({
         url: API_URL.likedMe,
         method: 'GET',
       }),
     }),
-    getNextLikedMe: builder.mutation<
-      ApiResponse.Matches,
-      ApiRequest.FindManyLikedMe
-    >({
+    getNextLikedMe: builder.mutation<ApiResponse.Matches, ApiRequest.FindManyLikedMe>({
       query: params => ({
         url: API_URL.likedMe,
         method: 'GET',
@@ -233,30 +198,21 @@ export const api = createApi({
     }),
 
     // Messages
-    refreshMessages: builder.query<
-      ApiResponse.Messages,
-      ApiRequest.FindManyMessages
-    >({
+    refreshMessages: builder.query<ApiResponse.Messages, ApiRequest.FindManyMessages>({
       query: params => ({
         url: API_URL.messages,
         method: 'GET',
         params,
       }),
     }),
-    getNewestMessages: builder.mutation<
-      ApiResponse.Messages,
-      ApiRequest.FindManyMessages
-    >({
+    getNewestMessages: builder.mutation<ApiResponse.Messages, ApiRequest.FindManyMessages>({
       query: params => ({
         url: API_URL.messages,
         method: 'GET',
         params,
       }),
     }),
-    getNextMessages: builder.mutation<
-      ApiResponse.Messages,
-      ApiRequest.FindManyMessages
-    >({
+    getNextMessages: builder.mutation<ApiResponse.Messages, ApiRequest.FindManyMessages>({
       query: params => ({
         url: API_URL.messages,
         method: 'GET',
@@ -274,10 +230,7 @@ export const api = createApi({
       }),
     }),
 
-    getMatches: builder.query<
-      ApiResponse.FetchData<Entity.Match[]>,
-      ApiRequest.FindManyMatches
-    >({
+    getMatches: builder.query<ApiResponse.FetchData<Entity.Match[]>, ApiRequest.FindManyMatches>({
       query: () => ({
         url: API_URL.matches,
         method: 'GET',
@@ -292,10 +245,7 @@ export const api = createApi({
       }),
       providesTags: ['Profile'],
     }),
-    updateProfile: builder.mutation<
-      ApiResponse.Logged,
-      ApiRequest.UpdateProfile
-    >({
+    updateProfile: builder.mutation<ApiResponse.Logged, ApiRequest.UpdateProfile>({
       query: body => ({
         url: API_URL.me,
         method: 'PATCH',
@@ -309,10 +259,7 @@ export const api = createApi({
       },
     }),
 
-    updateBasicProfile: builder.mutation<
-      ApiResponse.Logged,
-      ApiRequest.UpdateProfileBasicInfo
-    >({
+    updateBasicProfile: builder.mutation<ApiResponse.Logged, ApiRequest.UpdateProfileBasicInfo>({
       query: body => ({
         url: API_URL.myProfileBasicInfo,
         method: 'PATCH',
