@@ -5,7 +5,7 @@
 //   phD = 'phD',
 // }
 
-import { TxKey } from './types';
+import { AppStackParamList, TxKey } from './types';
 
 // export enum ESmoking {
 //   nonSmoker = 'nonSmoker',
@@ -137,8 +137,7 @@ export const UserEducationLevels = {
   professor: 7,
 } as const;
 
-export type UserEducationLevel =
-  (typeof UserEducationLevels)[keyof typeof UserEducationLevels];
+export type UserEducationLevel = (typeof UserEducationLevels)[keyof typeof UserEducationLevels];
 
 export const UserJobs = {
   freelancer: 1,
@@ -161,8 +160,7 @@ export const MediaFileTypes = {
   video: 2,
 } as const;
 
-export type MediaFileType =
-  (typeof MediaFileTypes)[keyof typeof MediaFileTypes];
+export type MediaFileType = (typeof MediaFileTypes)[keyof typeof MediaFileTypes];
 
 export const WeeklyCoins = [10, 20, 40, 70, 110, 160, 220];
 
@@ -174,8 +172,7 @@ export const DevicePlatforms = {
   android: 3,
 } as const;
 
-export type DevicePlatform =
-  (typeof DevicePlatforms)[keyof typeof DevicePlatforms];
+export type DevicePlatform = (typeof DevicePlatforms)[keyof typeof DevicePlatforms];
 
 export const SOCKET_TO_SERVER_EVENTS = {
   SEND_MESSAGE: 'sendMsg',
@@ -192,29 +189,46 @@ export const SOCKET_TO_CLIENT_EVENTS = {
 } as const;
 
 // Const
-export const UserRelationshipGoalMessages: Record<UserRelationshipGoal, TxKey> =
-  {
-    [UserRelationshipGoals.boyGirlFriend]: 'Boy/Girl friend',
-    [UserRelationshipGoals.getMarried]: 'Get married',
-    [UserRelationshipGoals.makeFriends]: 'Make friends',
-    [UserRelationshipGoals.oneNightStand]: 'One-Night stand',
-    [UserRelationshipGoals.sexPartner]: 'Sex partner',
-  };
+export const UserRelationshipGoalMessages: Record<UserRelationshipGoal, TxKey> = {
+  [UserRelationshipGoals.boyGirlFriend]: 'Boy/Girl friend',
+  [UserRelationshipGoals.getMarried]: 'Get married',
+  [UserRelationshipGoals.makeFriends]: 'Make friends',
+  [UserRelationshipGoals.oneNightStand]: 'One-Night stand',
+  [UserRelationshipGoals.sexPartner]: 'Sex partner',
+};
 
 export const UserGenderMessages: Record<UserGender, TxKey> = {
   [UserGenders.male]: 'Male',
   [UserGenders.female]: 'Female',
 };
 
-export const UserRelationshipStatusMessages: Record<
-  UserRelationshipStatus,
-  TxKey
-> = {
+export const UserRelationshipStatusMessages: Record<UserRelationshipStatus, TxKey> = {
   [UserRelationshipStatuses.divorcedWithChildren]: 'Divorced with children',
-  [UserRelationshipStatuses.divorcedWithoutChildren]:
-    'Divorced without children',
+  [UserRelationshipStatuses.divorcedWithoutChildren]: 'Divorced without children',
   [UserRelationshipStatuses.haveBoyGirlFriend]: 'Have boy/girl friend',
   [UserRelationshipStatuses.married]: 'Married',
   [UserRelationshipStatuses.single]: 'Single',
   [UserRelationshipStatuses.singleMomDad]: 'Single mom/dad',
 };
+
+export const SCREENS: Record<keyof AppStackParamList, keyof AppStackParamList> = {
+  EditInfoHeight: 'EditInfoHeight',
+  EditInfoNickname: 'EditInfoNickname',
+  EditInfoWeight: 'EditInfoWeight',
+  EditMatchFilter: 'EditMatchFilter',
+  UpdateProfileBasicInfo: 'UpdateProfileBasicInfo',
+  UpdateProfilePhotos: 'UpdateProfilePhotos',
+  Home: 'Home',
+  LikedMe: 'LikedMe',
+  Main: 'Main',
+  Messages: 'Messages',
+  ProfileEdit: 'ProfileEdit',
+  ProfileNearby: 'ProfileNearby',
+  ProfileSetting: 'ProfileSetting',
+  SelectRelationshipGoal: 'SelectRelationshipGoal',
+  SignIn: 'SignIn',
+  SignInWithOtpPhoneNumber: 'SignInWithOtpPhoneNumber',
+  SignInWithPhoneNumber: 'SignInWithPhoneNumber',
+  Welcome: 'Welcome',
+  ChatProfile: 'ChatProfile',
+} as const;
