@@ -24,8 +24,10 @@ export const appSlice = createSlice({
       const { payload } = action;
       state.profile = payload;
     },
-    updateAccessToken: (state, action: PayloadAction<ApiResponse.Tokens>) => {
-      const { payload } = action;
+    updateAccessToken: (
+      state,
+      { payload }: PayloadAction<ApiResponse.Tokens>,
+    ) => {
       if (payload.accessToken) {
         state.accessToken = payload.accessToken;
       }

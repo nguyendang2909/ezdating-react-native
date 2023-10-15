@@ -35,17 +35,19 @@ export const api = createApi({
         try {
           const refreshToken = (baseQueryApi.getState() as AppStore.RootState)
             .app?.refreshToken;
-          const refreshResult = (await baseQuery(
-            {
-              method: 'POST',
-              url: '/auth/tokens/access-token',
-              body: {
-                refreshToken,
+          const refreshResult = (
+            await baseQuery(
+              {
+                method: 'POST',
+                url: '/auth/tokens/access-token',
+                body: {
+                  refreshToken,
+                },
               },
-            },
-            baseQueryApi,
-            extraOptions,
-          )) as ApiResponse.FetchData<ApiResponse.Tokens>;
+              baseQueryApi,
+              extraOptions,
+            )
+          ).data as ApiResponse.FetchData<ApiResponse.Tokens>;
 
           if (refreshResult.data) {
             baseQueryApi.dispatch(
