@@ -7,7 +7,7 @@ export const ProfileHeaderNickname: React.FC = () => {
 
   return (
     <>
-      <Text fontSize="xl" fontWeight="bold">
+      <Text fontSize="xl" fontWeight="bold" isTruncated>
         {nickname}
       </Text>
     </>

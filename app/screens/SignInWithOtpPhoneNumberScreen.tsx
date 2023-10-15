@@ -2,10 +2,7 @@ import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import { useNavigation } from '@react-navigation/native';
 import { OtpInput } from 'app/components/Input/OtpInput';
 import { useMessages } from 'app/hooks';
-import {
-  useGetMyProfileQuery,
-  useSignInWithPhoneNumberMutation,
-} from 'app/services/api';
+import { useGetMyProfileQuery, useSignInWithPhoneNumberMutation } from 'app/services/api';
 import {
   flexGrow,
   heightFull,
@@ -28,10 +25,9 @@ import {
   Text,
   WarningOutlineIcon,
 } from 'native-base';
-import React, { FC, useState } from 'react';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 import { Keyboard, Pressable, View } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { useDispatch } from 'react-redux';
 
 import { AppStackScreenProps } from '../navigators';
 
@@ -51,51 +47,60 @@ export const SignInWithOtpPhoneNumberScreen: FC<FCProps> = props => {
   const { formatMessage } = useMessages();
   const { goBack } = useNavigation();
   const { otpConfirm, user } = props.route.params;
-  const dispatch = useDispatch();
   const [signInWithPhoneNumberMutation] = useSignInWithPhoneNumberMutation();
-  const [isSkipProfile, setSkipProfile] = useState<boolean>(false);
   useGetMyProfileQuery(undefined, { skip: true });
 
   const [isSubmiting, setIsSubmitting] = useState<boolean>(false);
   const [isError, setError] = useState<boolean>(false);
   const [otpCode, setOTPCode] = useState('');
-  const [resendStatus, setResendStatus] = useState<ResendStatus>(
-    ResendStatusObj.nonResent,
-  );
+  const [resendStatus, setResendStatus] = useState<ResendStatus>(ResendStatusObj.nonResent);
   const [otpConfirmation, setOtpConfirmation] = useState<
     FirebaseAuthTypes.ConfirmationResult | undefined
   >(otpConfirm);
+
+  const signUp = useCallback(
+    async (e: string) => {
+      setError(false);
+      setIsSubmitting(true);
+      if (!otpConfirmation) {
+        goBack();
+        return;
+      }
+      try {
+        const credential = await otpConfirmation.confirm(e);
+        if (!credential) {
+          return;
+        }
+        const idToken = await credential.user.getIdToken();
+        await signInWithPhoneNumberMutation({
+          token: idToken,
+        }).unwrap();
+      } catch (err) {
+        setError(true);
+        setResendStatus(ResendStatusObj.nonResent);
+      } finally {
+        setIsSubmitting(false);
+      }
+    },
+    [goBack, otpConfirmation, signInWithPhoneNumberMutation],
+  );
+
+  useEffect(() => {
+    if (!otpConfirmation) {
+      goBack();
+    }
+  }, [goBack, otpConfirmation]);
+
+  useEffect(() => {
+    if (otpCode.length === 6) {
+      signUp(otpCode);
+    }
+  }, [otpCode, signUp]);
 
   if (!otpConfirm) {
     goBack();
     return <></>;
   }
-
-  const handleSignUp = async () => {
-    setError(false);
-    setIsSubmitting(true);
-
-    if (!otpConfirmation) {
-      goBack();
-      return;
-    }
-
-    try {
-      const credential = await otpConfirmation.confirm(otpCode);
-      if (!credential) {
-        return;
-      }
-      const idToken = await credential.user.getIdToken();
-      await signInWithPhoneNumberMutation({
-        token: idToken,
-      }).unwrap();
-    } catch (err) {
-      setError(true);
-      setResendStatus(ResendStatusObj.nonResent);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
 
   const handleResendingOtpCode = async () => {
     if (resendStatus === ResendStatusObj.resending) {
@@ -112,13 +117,15 @@ export const SignInWithOtpPhoneNumberScreen: FC<FCProps> = props => {
     } catch (err) {}
   };
 
+  const handleSignUp = () => {
+    signUp(otpCode);
+  };
+
   return (
     <>
       <Box style={heightFull} safeAreaY>
         <Pressable style={flexGrow} onPress={Keyboard.dismiss}>
-          <View
-            style={[paddingHorizontal(spacing.lg), paddingVertical(spacing.lg)]}
-          >
+          <View style={[paddingHorizontal(spacing.lg), paddingVertical(spacing.lg)]}>
             <View>
               <IconButton
                 borderRadius="full"
@@ -133,38 +140,24 @@ export const SignInWithOtpPhoneNumberScreen: FC<FCProps> = props => {
             <View style={marginTop(spacing.md)}>
               <HStack>
                 <Text fontWeight={600}>{user?.phoneNumber}</Text>
-                <Link
-                  onPress={handleResendingOtpCode}
-                  style={marginLeft(spacing.sm)}
-                >
+                <Link onPress={handleResendingOtpCode} style={marginLeft(spacing.sm)}>
                   {formatMessage('Resend')}
                 </Link>
               </HStack>
             </View>
           </View>
 
-          <Box
-            style={[
-              flexGrow,
-              paddingHorizontal(spacing.lg),
-              marginTop(spacing.lg),
-            ]}
-          >
+          <Box style={[flexGrow, paddingHorizontal(spacing.lg), marginTop(spacing.lg)]}>
             <HStack space="2" style={paddingVertical(spacing.lg)}>
               <FormControl isInvalid={isError}>
-                <OtpInput
-                  code={otpCode}
-                  setCode={setOTPCode}
-                  maximumLength={maximumCodeLength}
-                />
+                <OtpInput code={otpCode} setCode={setOTPCode} maximumLength={maximumCodeLength} />
                 <View>
                   <FormControl.ErrorMessage
                     textAlign="center"
                     style={posititionAbsolute}
                     leftIcon={<WarningOutlineIcon size="xs" />}
                   >
-                    {isError &&
-                      formatMessage('Wrong verification code, try again!')}
+                    {isError && formatMessage('Wrong verification code, try again!')}
                   </FormControl.ErrorMessage>
                 </View>
               </FormControl>
