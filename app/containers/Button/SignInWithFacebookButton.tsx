@@ -1,6 +1,6 @@
+import { Button, ButtonIcon, ButtonText } from '@gluestack-ui/themed';
 import { FontAwesome } from 'app/components/Icon/Lib';
 import { useMessages } from 'app/hooks';
-import { Button, Icon } from 'native-base';
 import React, { FC } from 'react';
 
 export const SignInWithFacebookButton: FC = () => {
@@ -10,12 +10,9 @@ export const SignInWithFacebookButton: FC = () => {
   // const handlePress = () => {};
 
   return (
-    <Button
-      // onPress={handlePress}
-      startIcon={<Icon as={<FontAwesome name="facebook" />} />}
-      colorScheme="blue"
-    >
-      {formatMessage('Sign in with Facebook')}
+    <Button backgroundColor="$blue600">
+      <ButtonIcon mr={8} as={FontAwesome} name="facebook"></ButtonIcon>
+      <ButtonText>{formatMessage('Sign in with Facebook')}</ButtonText>
     </Button>
   );
 };

@@ -31,6 +31,7 @@ module.exports = {
     'simple-import-sort/exports': 'error', // Export configuration for `eslint-plugin-simple-import-sort`
     'unused-imports/no-unused-imports': 'error',
     "react/prop-types": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
     'unused-imports/no-unused-vars': [
       'warn',
       {

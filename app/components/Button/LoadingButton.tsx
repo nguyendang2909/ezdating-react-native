@@ -11,12 +11,7 @@ export const LoadingButton: React.FC<LoadingButtonProps> = ({
   ...buttonProps
 }) => {
   return (
-    <Button
-      rounded={100}
-      bgColor="$red600"
-      {...buttonProps}
-      disabled={isLoading}
-    >
+    <Button rounded={100} bgColor="$red600" {...buttonProps} disabled={isLoading}>
       {isLoading ? <ButtonSpinner /> : <ButtonText>{children}</ButtonText>}
     </Button>
   );

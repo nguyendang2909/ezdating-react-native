@@ -1,6 +1,6 @@
+import { Button, ButtonIcon, ButtonText } from '@gluestack-ui/themed';
 import { FontAwesome } from 'app/components/Icon/Lib';
 import { useMessages } from 'app/hooks';
-import { Button, Icon } from 'native-base';
 import React, { FC } from 'react';
 
 export const SignInWithGoogleButton: FC = () => {
@@ -11,11 +11,12 @@ export const SignInWithGoogleButton: FC = () => {
 
   return (
     <Button
-      colorScheme="amber"
+      backgroundColor="$amber600"
+
       // onPress={handlePress}
-      startIcon={<Icon as={<FontAwesome name="google" />} />}
     >
-      {formatMessage('Sign in with Google')}
+      <ButtonIcon mr={8} as={FontAwesome} name="google"></ButtonIcon>
+      <ButtonText>{formatMessage('Sign in with Google')}</ButtonText>
     </Button>
   );
 };

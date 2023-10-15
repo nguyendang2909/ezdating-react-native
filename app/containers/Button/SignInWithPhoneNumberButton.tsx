@@ -1,7 +1,7 @@
+import { Button, ButtonIcon, ButtonText } from '@gluestack-ui/themed';
 import { useNavigation } from '@react-navigation/native';
 import { FontAwesome } from 'app/components/Icon/Lib';
 import { useMessages } from 'app/hooks';
-import { Button, Icon } from 'native-base';
 import React, { FC } from 'react';
 
 export const SignInWithPhoneNumberButton: FC = () => {
@@ -14,11 +14,9 @@ export const SignInWithPhoneNumberButton: FC = () => {
   };
 
   return (
-    <Button
-      onPress={handlePress}
-      startIcon={<Icon as={<FontAwesome name="mobile-phone" />} />}
-    >
-      {formatMessage('Sign in with phone number')}
+    <Button onPress={handlePress}>
+      <ButtonIcon mr={8} as={FontAwesome} name="mobile-phone" />
+      <ButtonText>{formatMessage('Sign in with phone number')}</ButtonText>
     </Button>
   );
 };

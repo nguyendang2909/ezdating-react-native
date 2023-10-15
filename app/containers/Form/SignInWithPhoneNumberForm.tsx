@@ -4,32 +4,16 @@ import { useNavigation } from '@react-navigation/native';
 import { LoadingButton } from 'app/components/Button/LoadingButton';
 import { useMessages } from 'app/hooks';
 import { messages } from 'app/locales/messages';
-import {
-  flexDirectionRow,
-  flexGrow,
-  marginBottom,
-  marginTop,
-  width,
-  widthFull,
-} from 'app/styles';
+import { flexDirectionRow, flexGrow, marginBottom, marginTop, width, widthFull } from 'app/styles';
 import { spacing } from 'app/theme';
 import { TxKey } from 'app/types';
 import { FormParams } from 'app/types/form-params.type';
 import { useFormik } from 'formik';
 import { isValidPhoneNumber } from 'libphonenumber-js/max';
-import {
-  FormControl,
-  HStack,
-  Icon,
-  Input,
-  WarningOutlineIcon,
-} from 'native-base';
+import { FormControl, HStack, Icon, Input, WarningOutlineIcon } from 'native-base';
 import React, { FC, useState } from 'react';
 import { TouchableOpacity } from 'react-native';
-import CountryPicker, {
-  Country,
-  CountryCode,
-} from 'react-native-country-picker-modal';
+import CountryPicker, { Country, CountryCode } from 'react-native-country-picker-modal';
 import FeatherIcons from 'react-native-vector-icons/Feather';
 
 export const SignInWithPhoneNumberForm: FC = () => {
@@ -63,9 +47,7 @@ export const SignInWithPhoneNumberForm: FC = () => {
           setErrorCode('Please enter a valid phone number!');
           return;
         }
-        const confirmation = await auth().signInWithPhoneNumber(
-          fullPhoneNumber,
-        );
+        const confirmation = await auth().signInWithPhoneNumber(fullPhoneNumber);
         navigate('SignInWithOtpPhoneNumber', {
           otpConfirm: confirmation,
           user: { phoneNumber: fullPhoneNumber },
@@ -100,9 +82,7 @@ export const SignInWithPhoneNumberForm: FC = () => {
         <View style={marginBottom(spacing.lg)}>
           <View style={widthFull}>
             <FormControl style={widthFull} isInvalid={!!errorCode} isRequired>
-              <FormControl.Label>
-                {formatMessage('Phone number')}
-              </FormControl.Label>
+              <FormControl.Label>{formatMessage('Phone number')}</FormControl.Label>
               <HStack space={4} style={[flexDirectionRow, widthFull]}>
                 <View style={width(120)}>
                   <TouchableOpacity onPress={handleOpenSearchCountry}>
@@ -156,9 +136,7 @@ export const SignInWithPhoneNumberForm: FC = () => {
                   position="absolute"
                   leftIcon={<WarningOutlineIcon size="xs" />}
                 >
-                  {!!errorCode &&
-                    messages[errorCode] &&
-                    formatMessage(errorCode)}
+                  {!!errorCode && messages[errorCode] && formatMessage(errorCode)}
                 </FormControl.ErrorMessage>
               </View>
             </FormControl>
@@ -166,10 +144,7 @@ export const SignInWithPhoneNumberForm: FC = () => {
         </View>
 
         <View style={marginTop(spacing.lg)}>
-          <LoadingButton
-            onPress={handlePressSubmit}
-            isLoading={formik.isSubmitting}
-          >
+          <LoadingButton onPress={handlePressSubmit} isLoading={formik.isSubmitting}>
             {formatMessage('Next')}
           </LoadingButton>
         </View>

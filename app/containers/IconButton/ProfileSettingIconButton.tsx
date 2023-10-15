@@ -13,7 +13,7 @@ export const ProfileSettingIconButton: React.FC = () => {
   return (
     <>
       <TouchableOpacity onPress={handlePress}>
-        <Icon color="$textDark600" as={Feather} name="settings" size="xl" />
+        <Icon color="$textDark600" as={Feather} name="settings" size={24} />
       </TouchableOpacity>
       {/* <Icon
         onPress={handlePress}

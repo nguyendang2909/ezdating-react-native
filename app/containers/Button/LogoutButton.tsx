@@ -1,5 +1,4 @@
-import { Button } from '@gluestack-ui/themed';
-import { LoadingButton } from 'app/components/Button/LoadingButton';
+import { Button, ButtonText } from '@gluestack-ui/themed';
 import { useAppSelector } from 'app/hooks';
 import { messages } from 'app/locales/messages';
 import { api, useLogoutMutation } from 'app/services/api';
@@ -27,9 +26,9 @@ export const LogoutButton: React.FC<FC> = () => {
 
   return (
     <>
-      <LoadingButton isLoading={isLoading} onPress={handleLogout}>
-        {t.formatMessage(messages.Logout)}
-      </LoadingButton>
+      <Button onPress={handleLogout}>
+        <ButtonText>{t.formatMessage(messages.Logout)}</ButtonText>
+      </Button>
     </>
   );
 };

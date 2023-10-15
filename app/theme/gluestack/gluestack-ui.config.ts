@@ -714,7 +714,7 @@ declare module '@gluestack-ui/themed' {
   interface UIComponents extends Omit<Components, keyof IComponents>, IComponents {}
 }
 
-export const config = {
+export const gluestackConfig = {
   ...gluestackUIConfig,
   components: componentsConfig,
 };
