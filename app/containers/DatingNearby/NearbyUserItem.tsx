@@ -1,12 +1,11 @@
 import { Box, Pressable, Text } from '@gluestack-ui/themed';
 import { useNavigation } from '@react-navigation/native';
 import { Entity } from 'app/types';
-import { mediaFileUtil } from 'app/utils/media-files.util';
 import _ from 'lodash';
 import React from 'react';
-import { Image, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 
-import { LinearGradient } from '../../components';
+import { CacheImage, LinearGradient } from '../../components';
 
 type NearbyUserItemProps = {
   user: Entity.User;
@@ -45,13 +44,10 @@ export const NearbyUserItem: React.FC<NearbyUserItemProps> = ({ user }) => {
         </LinearGradient>
 
         <Box>
-          <Image
+          <CacheImage
             style={style.image}
-            alt="avatar"
-            source={{
-              uri: user.mediaFiles?.length ? mediaFileUtil.getUrl(user.mediaFiles[0].key) : '',
-            }}
-          ></Image>
+            url={user.mediaFiles?.length ? user.mediaFiles[0]?.key : undefined}
+          ></CacheImage>
         </Box>
       </Pressable>
     </Box>

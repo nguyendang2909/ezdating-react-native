@@ -1,7 +1,7 @@
+import { CacheImage } from 'app/components';
 import { MaterialIcons } from 'app/components/Icon/Lib';
 import {
   alignItemsCenter,
-  alignSelfStretch,
   aspectRatio,
   backgroundColor,
   borderColor,
@@ -9,9 +9,9 @@ import {
   flex,
   justifyContentCenter,
 } from 'app/styles';
-import { Icon, Image, Spinner, View } from 'native-base';
+import { Icon, Spinner, View } from 'native-base';
 import React from 'react';
-import { TouchableHighlight } from 'react-native';
+import { StyleSheet, TouchableHighlight } from 'react-native';
 
 type FCProps = {
   onPress: () => void;
@@ -20,6 +20,9 @@ type FCProps = {
 };
 
 export const ProfileEditMediaFileCard: React.FC<FCProps> = ({ onPress, value, isLoading }) => {
+  const imageStyle = {
+    opacity: isLoading ? 0.5 : undefined,
+  };
   return (
     <TouchableHighlight
       onPress={onPress}
@@ -32,12 +35,10 @@ export const ProfileEditMediaFileCard: React.FC<FCProps> = ({ onPress, value, is
     >
       {value ? (
         <>
-          <Image
-            opacity={isLoading ? 0.5 : undefined}
-            style={[flex(1), justifyContentCenter, alignSelfStretch, borderRadius(20)]}
-            alt="profile-photo"
-            source={{ uri: value }}
-            resizeMode="cover"
+          <CacheImage
+            style={[styles.image, imageStyle]}
+            url={value}
+            // resizeMode="cover"
           />
           {isLoading && (
             <View
@@ -60,3 +61,12 @@ export const ProfileEditMediaFileCard: React.FC<FCProps> = ({ onPress, value, is
     </TouchableHighlight>
   );
 };
+
+const styles = StyleSheet.create({
+  image: {
+    alignSelf: 'stretch',
+    borderRadius: 20,
+    flex: 1,
+    justifyContent: 'center',
+  },
+});

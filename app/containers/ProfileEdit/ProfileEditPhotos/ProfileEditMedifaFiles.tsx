@@ -3,7 +3,6 @@ import { useAppSelector, useMessages } from 'app/hooks';
 import { useRemovePhotoMutation, useUploadPhotoMutation } from 'app/services/api';
 import { flexDirectionRow, flexWrapWrap, padding, width } from 'app/styles';
 import { spacing } from 'app/theme';
-import { mediaFileUtil } from 'app/utils/media-files.util';
 import _ from 'lodash';
 import { HStack, View } from 'native-base';
 import React, { useState } from 'react';
@@ -130,7 +129,7 @@ export const ProfileEditPhotos: React.FC = () => {
           return (
             <View key={index} style={[padding(spacing.xxs), width('33%')]}>
               <ProfileEditMediaFileCard
-                value={mediaFileUtil.getUrl(item?.key)}
+                value={item?.key}
                 isLoading={isLoading}
                 onPress={() => {
                   if (!isLoading) {

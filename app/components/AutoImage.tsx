@@ -27,9 +27,7 @@ export function useAutoImage(
   remoteUri: string,
   dimensions?: [maxWidth: number, maxHeight: number],
 ): [width: number, height: number] {
-  const [[remoteWidth, remoteHeight], setRemoteImageDimensions] = useState([
-    0, 0,
-  ]);
+  const [[remoteWidth, remoteHeight], setRemoteImageDimensions] = useState([0, 0]);
   const remoteAspectRatio = remoteWidth / remoteHeight;
   const [maxWidth, maxHeight] = dimensions ?? [];
 
@@ -42,10 +40,7 @@ export function useAutoImage(
   if (Number.isNaN(remoteAspectRatio)) return [0, 0];
 
   if (maxWidth && maxHeight) {
-    const aspectRatio = Math.min(
-      maxWidth / remoteWidth,
-      maxHeight / remoteHeight,
-    );
+    const aspectRatio = Math.min(maxWidth / remoteWidth, maxHeight / remoteHeight);
     return [remoteWidth * aspectRatio, remoteHeight * aspectRatio];
   } else if (maxWidth) {
     return [maxWidth, maxWidth / remoteAspectRatio];
