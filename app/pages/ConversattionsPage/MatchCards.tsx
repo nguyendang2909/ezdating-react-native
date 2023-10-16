@@ -2,6 +2,7 @@ import { Box, ScrollView, Text } from '@gluestack-ui/themed';
 import { useNavigation } from '@react-navigation/native';
 import { AppStore } from 'app/types';
 import { Entity } from 'app/types/entity.type';
+import { mediaFileUtil } from 'app/utils/media-files.util';
 import { HStack, Image, Pressable } from 'native-base';
 import React from 'react';
 import { Dimensions } from 'react-native';
@@ -33,7 +34,7 @@ export const MatchCards: React.FC<MatchCardsProps> = ({ matches }) => {
           <HStack space={2}>
             {matches?.map((item, index) => {
               const imageUrl = item.targetUser?.mediaFiles?.length
-                ? item.targetUser.mediaFiles[0].location
+                ? mediaFileUtil.getUrl(item.targetUser.mediaFiles[0].key)
                 : '';
 
               return (

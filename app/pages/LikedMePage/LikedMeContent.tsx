@@ -1,6 +1,7 @@
 import { Box, FlatList, Pressable, Spinner, Text } from '@gluestack-ui/themed';
 import { useLikedMe } from 'app/hooks/useLikedMe';
 import { Entity } from 'app/types/entity.type';
+import { mediaFileUtil } from 'app/utils/media-files.util';
 import { scrollUtil } from 'app/utils/scroll.util';
 import React from 'react';
 import {
@@ -14,13 +15,7 @@ import {
 import { LinearGradient } from '../../components';
 
 export const LikedMeContent: React.FC = () => {
-  const {
-    data: likes,
-    isLoadingNewest,
-    isLoadingNext,
-    fetchNewest,
-    fetchNext,
-  } = useLikedMe();
+  const { data: likes, isLoadingNewest, isLoadingNext, fetchNewest, fetchNext } = useLikedMe();
 
   const handleScroll = async (e: NativeSyntheticEvent<NativeScrollEvent>) => {
     if (!scrollUtil.isCloseToBottom(e)) {
@@ -35,10 +30,7 @@ export const LikedMeContent: React.FC = () => {
       <FlatList
         showsVerticalScrollIndicator={false}
         refreshControl={
-          <RefreshControl
-            refreshing={isLoadingNewest}
-            onRefresh={fetchNewest}
-          ></RefreshControl>
+          <RefreshControl refreshing={isLoadingNewest} onRefresh={fetchNewest}></RefreshControl>
         }
         numColumns={2}
         data={likes}
@@ -82,7 +74,7 @@ export const LikedMeContent: React.FC = () => {
                     alt="avatar"
                     source={{
                       uri: item.user?.mediaFiles?.length
-                        ? item.user.mediaFiles[0].location
+                        ? mediaFileUtil.getUrl(item.user.mediaFiles[0].key)
                         : '',
                     }}
                   ></Image>

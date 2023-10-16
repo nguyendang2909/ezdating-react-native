@@ -1,5 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import { Entity } from 'app/types/entity.type';
+import { mediaFileUtil } from 'app/utils/media-files.util';
 import { Avatar, Box, HStack, Pressable, Text } from 'native-base';
 import React, { useCallback } from 'react';
 
@@ -29,7 +30,7 @@ export const ConversationBox: React.FC<FCProps> = ({ data }) => {
                   size={16}
                   source={{
                     uri: data.targetUser?.mediaFiles?.length
-                      ? data.targetUser?.mediaFiles[0].location
+                      ? mediaFileUtil.getUrl(data.targetUser?.mediaFiles[0].key)
                       : undefined,
                   }}
                 ></Avatar>

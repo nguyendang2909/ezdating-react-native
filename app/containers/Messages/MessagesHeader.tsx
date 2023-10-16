@@ -13,6 +13,7 @@ import {
 } from '@gluestack-ui/themed';
 import { useNavigation } from '@react-navigation/native';
 import { AppStore } from 'app/types';
+import { mediaFileUtil } from 'app/utils/media-files.util';
 import React from 'react';
 import { SafeAreaView, TouchableOpacity } from 'react-native';
 
@@ -47,7 +48,7 @@ export const MessageByConversationHeader: React.FC<FCProps> = ({ match }) => {
                   <AvatarImage
                     source={{
                       uri: match?.targetUser?.mediaFiles?.length
-                        ? match.targetUser?.mediaFiles[0].location
+                        ? mediaFileUtil.getUrl(match.targetUser?.mediaFiles[0].key)
                         : undefined,
                     }}
                   />

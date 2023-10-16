@@ -7,10 +7,7 @@ class ScrollUtil {
     }: NativeSyntheticEvent<NativeScrollEvent>,
     paddingToBottom = 80,
   ) => {
-    return (
-      layoutMeasurement.height + contentOffset.y >=
-      contentSize.height - paddingToBottom
-    );
+    return layoutMeasurement.height + contentOffset.y >= contentSize.height - paddingToBottom;
   };
 
   isCloseToTop({
@@ -18,10 +15,7 @@ class ScrollUtil {
   }: NativeSyntheticEvent<NativeScrollEvent>) {
     const paddingToTop = 80;
 
-    return (
-      contentSize.height - layoutMeasurement.height - paddingToTop <=
-      contentOffset.y
-    );
+    return contentSize.height - layoutMeasurement.height - paddingToTop <= contentOffset.y;
   }
 }
 

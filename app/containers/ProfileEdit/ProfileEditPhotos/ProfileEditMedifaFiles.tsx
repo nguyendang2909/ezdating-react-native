@@ -1,11 +1,9 @@
 import { useActionSheet } from '@expo/react-native-action-sheet';
 import { useAppSelector, useMessages } from 'app/hooks';
-import {
-  useRemovePhotoMutation,
-  useUploadPhotoMutation,
-} from 'app/services/api';
+import { useRemovePhotoMutation, useUploadPhotoMutation } from 'app/services/api';
 import { flexDirectionRow, flexWrapWrap, padding, width } from 'app/styles';
 import { spacing } from 'app/theme';
+import { mediaFileUtil } from 'app/utils/media-files.util';
 import _ from 'lodash';
 import { HStack, View } from 'native-base';
 import React, { useState } from 'react';
@@ -23,17 +21,9 @@ export const ProfileEditPhotos: React.FC = () => {
   const [uploadPhoto] = useUploadPhotoMutation();
   const [removePhoto] = useRemovePhotoMutation();
 
-  const mediaFiles =
-    useAppSelector(state => state.app.profile?.mediaFiles) || [];
+  const mediaFiles = useAppSelector(state => state.app.profile?.mediaFiles) || [];
 
-  const [loadings, setLoadings] = useState<boolean[]>([
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-  ]);
+  const [loadings, setLoadings] = useState<boolean[]>([false, false, false, false, false, false]);
 
   const mediaFilesLength = mediaFiles.length;
 
@@ -58,13 +48,8 @@ export const ProfileEditPhotos: React.FC = () => {
       if (Platform.OS === 'ios') {
         const permission = await check(PERMISSIONS.IOS.PHOTO_LIBRARY);
         if (permission !== RESULTS.GRANTED) {
-          const requestPermission = await request(
-            PERMISSIONS.IOS.PHOTO_LIBRARY,
-          );
-          if (
-            requestPermission !== RESULTS.LIMITED &&
-            requestPermission !== RESULTS.GRANTED
-          ) {
+          const requestPermission = await request(PERMISSIONS.IOS.PHOTO_LIBRARY);
+          if (requestPermission !== RESULTS.LIMITED && requestPermission !== RESULTS.GRANTED) {
             console.log('Permissions to access camera has been blocked');
 
             return;
@@ -74,10 +59,7 @@ export const ProfileEditPhotos: React.FC = () => {
         const permission = await check(PERMISSIONS.ANDROID.CAMERA);
         if (permission !== RESULTS.GRANTED) {
           const requestPermission = await request(PERMISSIONS.ANDROID.CAMERA);
-          if (
-            requestPermission !== RESULTS.LIMITED &&
-            requestPermission !== RESULTS.GRANTED
-          ) {
+          if (requestPermission !== RESULTS.LIMITED && requestPermission !== RESULTS.GRANTED) {
             console.log('Permissions to access camera has been blocked');
             return;
           }
@@ -148,7 +130,7 @@ export const ProfileEditPhotos: React.FC = () => {
           return (
             <View key={index} style={[padding(spacing.xxs), width('33%')]}>
               <ProfileEditMediaFileCard
-                value={item?.location}
+                value={mediaFileUtil.getUrl(item?.key)}
                 isLoading={isLoading}
                 onPress={() => {
                   if (!isLoading) {

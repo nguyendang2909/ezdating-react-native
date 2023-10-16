@@ -1,6 +1,7 @@
 import { Box, Pressable, Text } from '@gluestack-ui/themed';
 import { useNavigation } from '@react-navigation/native';
 import { Entity } from 'app/types';
+import { mediaFileUtil } from 'app/utils/media-files.util';
 import _ from 'lodash';
 import React from 'react';
 import { Image, StyleSheet } from 'react-native';
@@ -38,8 +39,7 @@ export const NearbyUserItem: React.FC<NearbyUserItemProps> = ({ user }) => {
             <Text fontWeight="bold" color="$white" numberOfLines={1}>
               {user.nickname}
               {', '}
-              {!_.isUndefined(user.distance) &&
-                `${_.round(user.distance, 1)} km`}
+              {!_.isUndefined(user.distance) && `${_.round(user.distance, 1)} km`}
             </Text>
           </Box>
         </LinearGradient>
@@ -49,7 +49,7 @@ export const NearbyUserItem: React.FC<NearbyUserItemProps> = ({ user }) => {
             style={style.image}
             alt="avatar"
             source={{
-              uri: user.mediaFiles?.length ? user.mediaFiles[0].location : '',
+              uri: user.mediaFiles?.length ? mediaFileUtil.getUrl(user.mediaFiles[0].key) : '',
             }}
           ></Image>
         </Box>

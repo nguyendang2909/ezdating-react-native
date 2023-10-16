@@ -1,5 +1,6 @@
 import { Image } from '@gluestack-ui/themed';
 import { useAppSelector } from 'app/hooks';
+import { mediaFileUtil } from 'app/utils/media-files.util';
 import { View } from 'native-base';
 import React from 'react';
 import { Dimensions, StyleSheet } from 'react-native';
@@ -14,7 +15,7 @@ export const DatingSwipeSearching: React.FC = () => {
     <View flex={1}>
       {swipeUsers?.map((item, index) => {
         const imageUrl = item.mediaFiles?.length
-          ? item.mediaFiles[0].location
+          ? mediaFileUtil.getUrl(item.mediaFiles[0].key)
           : '';
 
         return (
@@ -42,12 +43,7 @@ export const DatingSwipeSearching: React.FC = () => {
               //   Alert.alert('Swiped left');
               // }}
             >
-              <Image
-                w="$full"
-                h="$full"
-                alt={item._id}
-                source={{ uri: imageUrl }}
-              />
+              <Image w="$full" h="$full" alt={item._id} source={{ uri: imageUrl }} />
             </TinderCard>
           </View>
         );

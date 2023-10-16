@@ -27,10 +27,7 @@ export class CommonService {
     throw new Error('Not implemented!');
   }
 
-  protected getCursorByField<T>(
-    field: keyof T | (keyof T)[],
-    data: T[],
-  ): string | undefined {
+  protected getCursorByField<T>(field: keyof T | (keyof T)[], data: T[]): string | undefined {
     const dataLength = data.length;
     if (!dataLength) {
       return undefined;
@@ -50,10 +47,7 @@ export class CommonService {
     return lastField ? this.encodeFromString(lastField) : undefined;
   }
 
-  handlePagination = (
-    pagination: ApiResponse.Pagination,
-    fn: (v: boolean) => void,
-  ) => {
+  handlePagination = (pagination: ApiResponse.Pagination, fn: (v: boolean) => void) => {
     if (pagination._next) {
       fn(false);
       return;

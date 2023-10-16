@@ -4,10 +4,7 @@ import { LoadingScreen } from 'app/components/Screen/LoadingScreen';
 import { PhotoRequestPermission } from 'app/containers/Photos/PhotoRequestPermission.ios';
 import { useAppSelector, useMessages } from 'app/hooks';
 import { AppStackScreenProps } from 'app/navigators';
-import {
-  useRemovePhotoMutation,
-  useUploadPhotoMutation,
-} from 'app/services/api';
+import { useRemovePhotoMutation, useUploadPhotoMutation } from 'app/services/api';
 import {
   alignItemsCenter,
   flexDirectionRow,
@@ -20,6 +17,7 @@ import {
 import { spacing } from 'app/theme';
 import { ApiRequest } from 'app/types/api-request.type';
 import { FormParams } from 'app/types/form-params.type';
+import { mediaFileUtil } from 'app/utils/media-files.util';
 import { useFormik } from 'formik';
 import {
   Actionsheet,
@@ -45,9 +43,7 @@ export const UpdateProfilePhotosScreen: React.FC<FCProps> = () => {
 
   const toast = useToast();
   const { navigate, goBack } = useNavigation();
-  const [removePhotoIndex, setRemovePhotoIndex] = useState<
-    number | string | undefined
-  >(undefined);
+  const [removePhotoIndex, setRemovePhotoIndex] = useState<number | string | undefined>(undefined);
   const dispatch = useDispatch();
   const [uploadPhoto] = useUploadPhotoMutation();
   const [removePhoto] = useRemovePhotoMutation();
@@ -87,9 +83,7 @@ export const UpdateProfilePhotosScreen: React.FC<FCProps> = () => {
       if (typeof removePhotoIndex === 'number') {
         formik.setFieldValue(
           'photos',
-          formik.values.photos.filter(
-            (value, index) => index !== removePhotoIndex,
-          ),
+          formik.values.photos.filter((value, index) => index !== removePhotoIndex),
         );
         handleCloseRemovePhotoCard();
       } else if (typeof removePhotoIndex === 'string') {
@@ -159,13 +153,10 @@ export const UpdateProfilePhotosScreen: React.FC<FCProps> = () => {
               <HStack style={[flexDirectionRow, flexWrapWrap]}>
                 {mediaFiles?.map(item => {
                   return (
-                    <View
-                      key={item._id}
-                      style={[padding(spacing.xxs), width('33%')]}
-                    >
+                    <View key={item._id} style={[padding(spacing.xxs), width('33%')]}>
                       <UploadPhotoCard
                         key={item._id}
-                        value={item.location}
+                        value={mediaFileUtil.getUrl(item.key)}
                         onPress={() => {
                           if (item._id) {
                             handleClickPhotoCard(item._id);
@@ -175,27 +166,18 @@ export const UpdateProfilePhotosScreen: React.FC<FCProps> = () => {
                     </View>
                   );
                 })}
-                {[...Array(6 - profilePublicPhotosLength)].map(
-                  (item, index) => {
-                    return (
-                      <View
-                        key={index}
-                        style={[padding(spacing.xxs), width('33%')]}
-                      >
-                        <UploadPhotoCard
-                          value={
-                            formik.values.photos[index]
-                              ? formik.values.photos[index].path
-                              : ''
-                          }
-                          onPress={() => {
-                            handleClickPhotoCard(index);
-                          }}
-                        />
-                      </View>
-                    );
-                  },
-                )}
+                {[...Array(6 - profilePublicPhotosLength)].map((item, index) => {
+                  return (
+                    <View key={index} style={[padding(spacing.xxs), width('33%')]}>
+                      <UploadPhotoCard
+                        value={formik.values.photos[index] ? formik.values.photos[index].path : ''}
+                        onPress={() => {
+                          handleClickPhotoCard(index);
+                        }}
+                      />
+                    </View>
+                  );
+                })}
               </HStack>
             </View>
           </View>
@@ -213,10 +195,7 @@ export const UpdateProfilePhotosScreen: React.FC<FCProps> = () => {
         </View>
       </Box>
 
-      <Actionsheet
-        isOpen={removePhotoIndex !== undefined}
-        onClose={handleCloseRemovePhotoCard}
-      >
+      <Actionsheet isOpen={removePhotoIndex !== undefined} onClose={handleCloseRemovePhotoCard}>
         <Actionsheet.Content>
           <View mb="8">
             <Text color="gray.500">{formatMessage('Remove photo')}</Text>

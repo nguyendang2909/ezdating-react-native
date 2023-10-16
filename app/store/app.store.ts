@@ -24,10 +24,7 @@ export const appSlice = createSlice({
       const { payload } = action;
       state.profile = payload;
     },
-    updateAccessToken: (
-      state,
-      { payload }: PayloadAction<ApiResponse.Tokens>,
-    ) => {
+    updateAccessToken: (state, { payload }: PayloadAction<ApiResponse.Tokens>) => {
       if (payload.accessToken) {
         state.accessToken = payload.accessToken;
       }
@@ -41,10 +38,7 @@ export const appSlice = createSlice({
       state.profile = {};
       state.socket = {};
     },
-    setOsLocationPermission: (
-      state,
-      action: PayloadAction<AuthorizationResult>,
-    ) => {
+    setOsLocationPermission: (state, action: PayloadAction<AuthorizationResult>) => {
       if (state.osPermissions) {
         state.osPermissions.locationService = action.payload;
       } else {
@@ -65,12 +59,9 @@ export const appSlice = createSlice({
         state.refreshToken = data.refreshToken;
       },
     );
-    builder.addMatcher(
-      endpoints.getMyProfile.matchFulfilled,
-      (state, { payload: { data } }) => {
-        state.profile = data;
-      },
-    );
+    builder.addMatcher(endpoints.getMyProfile.matchFulfilled, (state, { payload: { data } }) => {
+      state.profile = data;
+    });
   },
 });
 

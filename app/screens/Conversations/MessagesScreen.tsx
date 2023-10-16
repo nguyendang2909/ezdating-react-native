@@ -5,6 +5,7 @@ import { useAppSelector } from 'app/hooks';
 import { useMatch } from 'app/hooks/useMatch';
 import { AppStackScreenProps } from 'app/navigators';
 import { ChatUser } from 'app/types';
+import { mediaFileUtil } from 'app/utils/media-files.util';
 import { StatusBar } from 'native-base';
 import React, { FC, useMemo } from 'react';
 import { SafeAreaView } from 'react-native';
@@ -19,14 +20,16 @@ export const MessagesScreen: FC<FCProps> = props => {
     return {
       _id: profile?._id || '',
       name: profile?.nickname,
-      avatar: profile?.mediaFiles?.length ? profile.mediaFiles[0].location : undefined,
+      avatar: profile?.mediaFiles?.length
+        ? mediaFileUtil.getUrl(profile.mediaFiles[0].key)
+        : undefined,
     };
   });
   const targetUser = useMemo(
     () => ({
       _id: match?.targetUser?._id || '',
       avatar: match?.targetUser?.mediaFiles?.length
-        ? match.targetUser.mediaFiles[0].location
+        ? mediaFileUtil.getUrl(match.targetUser.mediaFiles[0].key)
         : undefined,
       name: match?.targetUser?.nickname,
     }),

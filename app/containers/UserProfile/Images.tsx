@@ -1,5 +1,6 @@
 import { Image, View } from '@gluestack-ui/themed';
 import { Entity } from 'app/types';
+import { mediaFileUtil } from 'app/utils/media-files.util';
 import React from 'react';
 import { Dimensions } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
@@ -24,7 +25,7 @@ export const UserProfileImages: React.FC<FCProps> = ({ mediaFiles }) => {
               height="100%"
               width="100%"
               source={{
-                uri: item.location,
+                uri: mediaFileUtil.getUrl(item.key),
               }}
               alt="profile"
             ></Image>

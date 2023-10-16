@@ -19,11 +19,7 @@ type FCProps = {
   isLoading?: boolean;
 };
 
-export const ProfileEditMediaFileCard: React.FC<FCProps> = ({
-  onPress,
-  value,
-  isLoading,
-}) => {
+export const ProfileEditMediaFileCard: React.FC<FCProps> = ({ onPress, value, isLoading }) => {
   return (
     <TouchableHighlight
       onPress={onPress}
@@ -38,12 +34,7 @@ export const ProfileEditMediaFileCard: React.FC<FCProps> = ({
         <>
           <Image
             opacity={isLoading ? 0.5 : undefined}
-            style={[
-              flex(1),
-              justifyContentCenter,
-              alignSelfStretch,
-              borderRadius(20),
-            ]}
+            style={[flex(1), justifyContentCenter, alignSelfStretch, borderRadius(20)]}
             alt="profile-photo"
             source={{ uri: value }}
             resizeMode="cover"
@@ -63,11 +54,7 @@ export const ProfileEditMediaFileCard: React.FC<FCProps> = ({
         </>
       ) : (
         <View style={[flex(1), justifyContentCenter, alignItemsCenter]}>
-          {isLoading ? (
-            <Spinner />
-          ) : (
-            <Icon size={10} as={<MaterialIcons name="add-to-photos" />} />
-          )}
+          {isLoading ? <Spinner /> : <Icon size={10} as={<MaterialIcons name="add-to-photos" />} />}
         </View>
       )}
     </TouchableHighlight>
