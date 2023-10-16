@@ -1,4 +1,4 @@
-import { Box, HStack, Text } from '@gluestack-ui/themed';
+import { Box, HStack, Text, View } from '@gluestack-ui/themed';
 import { GradientIcon } from 'app/components/Icon/GradientIcon';
 import { MaterialIcons } from 'app/components/Icon/Lib';
 import { useMessages } from 'app/hooks';
@@ -11,18 +11,14 @@ type FCProps = {
   distance?: number;
 };
 
-export const NearbyUserMainInfo: React.FC<FCProps> = ({
-  nickname,
-  age,
-  distance,
-}) => {
+export const NearbyUserMainInfo: React.FC<FCProps> = ({ nickname, age, distance }) => {
   const { formatMessage } = useMessages();
 
   return (
     <Box backgroundColor="$backgroundLight0" px={16} py={16} rounded={16}>
       <Box>
-        <HStack>
-          <Box flex={1}>
+        <View flexDirection="row">
+          <Box>
             <Text
               fontSize={28}
               fontWeight="bold"
@@ -39,7 +35,7 @@ export const NearbyUserMainInfo: React.FC<FCProps> = ({
               {age}
             </Text>
           </Box>
-        </HStack>
+        </View>
       </Box>
 
       <Box mt={8}>
@@ -47,16 +43,11 @@ export const NearbyUserMainInfo: React.FC<FCProps> = ({
           {_.isNumber(distance) && (
             <HStack alignItems="center" rowGap={8}>
               <Box>
-                <GradientIcon
-                  icon={MaterialIcons}
-                  name="location-on"
-                  size={24}
-                />
+                <GradientIcon icon={MaterialIcons} name="location-on" size={24} />
               </Box>
               <Box>
                 <Text fontSize={20}>
-                  {Math.round((distance || 0) / 1000)}{' '}
-                  {formatMessage('km away')}
+                  {Math.round((distance || 0) / 1000)} {formatMessage('km away')}
                 </Text>
               </Box>
             </HStack>

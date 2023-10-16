@@ -5,7 +5,9 @@ import { HomeTabParamList } from 'app/navigators';
 import { Entity } from '.';
 
 export type AppStackParamList = {
-  ChatProfile: undefined;
+  ChatProfile: {
+    user: Entity.User;
+  };
   EditInfoHeight: undefined;
   EditInfoNickname: undefined;
   EditInfoWeight: undefined;

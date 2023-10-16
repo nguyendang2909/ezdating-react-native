@@ -38,7 +38,7 @@ export const HomeNavigator: FC<FCProps> = () => {
         tabBarStyle: [
           backgroundColor(colors.background),
           borderTopColor(colors.transparent),
-          { height: bottom + 70 },
+          { height: bottom + 48 },
         ],
         tabBarActiveTintColor: colors.text,
         tabBarInactiveTintColor: colors.text,
@@ -62,10 +62,7 @@ export const HomeNavigator: FC<FCProps> = () => {
             <GradientIcon
               {...(!focused
                 ? {
-                    colors: [
-                      colors.palette.neutral500,
-                      colors.palette.neutral500,
-                    ],
+                    colors: [colors.palette.neutral500, colors.palette.neutral500],
                   }
                 : {})}
               size={30}
@@ -85,10 +82,7 @@ export const HomeNavigator: FC<FCProps> = () => {
             <GradientIcon
               {...(!focused
                 ? {
-                    colors: [
-                      colors.palette.neutral500,
-                      colors.palette.neutral500,
-                    ],
+                    colors: [colors.palette.neutral500, colors.palette.neutral500],
                   }
                 : {})}
               size={30}
@@ -108,10 +102,7 @@ export const HomeNavigator: FC<FCProps> = () => {
             <GradientIcon
               {...(!focused
                 ? {
-                    colors: [
-                      colors.palette.neutral500,
-                      colors.palette.neutral500,
-                    ],
+                    colors: [colors.palette.neutral500, colors.palette.neutral500],
                   }
                 : {})}
               size={30}
@@ -131,10 +122,7 @@ export const HomeNavigator: FC<FCProps> = () => {
             <GradientIcon
               {...(!focused
                 ? {
-                    colors: [
-                      colors.palette.neutral500,
-                      colors.palette.neutral500,
-                    ],
+                    colors: [colors.palette.neutral500, colors.palette.neutral500],
                   }
                 : {})}
               size={30}

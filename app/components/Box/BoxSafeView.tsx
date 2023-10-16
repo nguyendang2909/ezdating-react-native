@@ -9,10 +9,5 @@ type BoxSafeViewProps = {
 export const BoxSafeView: React.FC<BoxSafeViewProps> = ({ top, bottom }) => {
   const insets = useSafeAreaInsets();
 
-  return (
-    <Box
-      {...(top ? { mt: insets.top } : {})}
-      {...(bottom ? { mt: insets.bottom } : {})}
-    />
-  );
+  return <Box {...(top ? { mt: insets.top } : {})} {...(bottom ? { mt: insets.bottom } : {})} />;
 };

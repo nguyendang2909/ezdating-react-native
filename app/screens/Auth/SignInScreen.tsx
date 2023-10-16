@@ -4,13 +4,7 @@ import { SignInWithGoogleButton } from 'app/containers/Button/SignInWithGoogleBu
 import { SignInWithPhoneNumberButton } from 'app/containers/Button/SignInWithPhoneNumberButton';
 import { useAppSelector } from 'app/hooks';
 import { AppStackScreenProps } from 'app/navigators';
-import {
-  backgroundColor,
-  heightFull,
-  posititionAbsolute,
-  widthFull,
-  zIndex,
-} from 'app/styles';
+import { backgroundColor, heightFull, posititionAbsolute, widthFull, zIndex } from 'app/styles';
 import React, { FC } from 'react';
 import { ImageBackground } from 'react-native';
 
@@ -23,7 +17,7 @@ export const SignInScreen: FC<FCProps> = () => {
   return (
     <>
       <ImageBackground
-        source={require('../../assets/images/Couples-home.jpeg')}
+        source={require('../../../assets/images/Couples-home.jpeg')}
         style={[widthFull, heightFull, posititionAbsolute, zIndex(1)]}
       ></ImageBackground>
       <View

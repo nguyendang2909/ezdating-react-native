@@ -18,7 +18,7 @@ export const MatchCards: React.FC<MatchCardsProps> = ({ matches }) => {
 
   const handlePressCard = (conversation: Entity.Match) => {
     navigation.navigate('Messages', {
-      conversation,
+      matchId: conversation._id,
     });
   };
 

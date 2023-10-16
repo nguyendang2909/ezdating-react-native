@@ -4,12 +4,7 @@ import { useMatches } from 'app/hooks';
 import { useConversations } from 'app/hooks/useConversations';
 import { scrollUtil } from 'app/utils/scroll.util';
 import React from 'react';
-import {
-  NativeScrollEvent,
-  NativeSyntheticEvent,
-  RefreshControl,
-  ViewStyle,
-} from 'react-native';
+import { NativeScrollEvent, NativeSyntheticEvent, RefreshControl, ViewStyle } from 'react-native';
 
 import { MatchCards } from './MatchCards';
 import { NoConversationBox } from './NoConversationBox';

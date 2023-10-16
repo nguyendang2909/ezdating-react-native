@@ -7,7 +7,7 @@ import Carousel from 'react-native-reanimated-carousel';
 type FCProps = {
   mediaFiles: Entity.MediaFile[];
 };
-export const NearbyUserImages: React.FC<FCProps> = ({ mediaFiles }) => {
+export const UserProfileImages: React.FC<FCProps> = ({ mediaFiles }) => {
   const width = Dimensions.get('window').width;
 
   return (

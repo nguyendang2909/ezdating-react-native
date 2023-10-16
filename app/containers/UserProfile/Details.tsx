@@ -1,21 +1,12 @@
 import { Text, View } from '@gluestack-ui/themed';
 import { DetailRow } from 'app/components';
-import {
-  FontAwesome,
-  MaterialCommunityIcons,
-  MaterialIcons,
-} from 'app/components/Icon/Lib';
-import {
-  UserRelationshipGoalMessages,
-  UserRelationshipStatusMessages,
-} from 'app/constants';
+import { FontAwesome, MaterialCommunityIcons, MaterialIcons } from 'app/components/Icon/Lib';
+import { UserRelationshipGoalMessages, UserRelationshipStatusMessages } from 'app/constants';
 import { useMessages } from 'app/hooks';
 import { Entity } from 'app/types';
 import React from 'react';
 
-export const NearbyUserDetails: React.FC<{ user: Entity.User }> = ({
-  user,
-}) => {
+export const UserProfileDetails: React.FC<{ user: Entity.User }> = ({ user }) => {
   const { formatMessage } = useMessages();
 
   return (
