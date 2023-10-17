@@ -1,4 +1,5 @@
 import './utils/ignoreWarnings';
+import './handlers';
 
 import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 import { GluestackUIProvider } from '@gluestack-ui/themed';

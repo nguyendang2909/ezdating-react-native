@@ -17,4 +17,5 @@ export const API_URL = {
   users: '/users',
   usersNearby: '/users/nearby',
   views: '/views',
+  signedDevices: '/signed-devices',
 };

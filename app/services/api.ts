@@ -304,6 +304,15 @@ export const api = createApi({
         return ['Profile'];
       },
     }),
+
+    // Signed devices
+    updateSignedDevice: builder.mutation<void, ApiRequest.UpdateSignedDevice>({
+      query: body => ({
+        url: API_URL.signedDevices,
+        method: 'PATCH',
+        body,
+      }),
+    }),
   }),
 });
 
@@ -334,4 +343,5 @@ export const {
   useUploadPhotoMutation,
   useRemovePhotoMutation,
   useCreateMatchMutation,
+  useUpdateSignedDeviceMutation,
 } = api;

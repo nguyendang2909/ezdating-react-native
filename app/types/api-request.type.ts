@@ -1,4 +1,5 @@
 import {
+  DevicePlatform,
   UserGender,
   UserRelationshipGoal,
   UserRelationshipStatus,
@@ -111,5 +112,11 @@ export declare namespace ApiRequest {
 
   type CreateMatch = {
     targetUserId: string;
+  };
+
+  type UpdateSignedDevice = {
+    refreshToken: string;
+    deviceToken: string;
+    devicePlatform: DevicePlatform;
   };
 }

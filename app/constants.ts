@@ -170,6 +170,7 @@ export const DevicePlatforms = {
   web: 1,
   ios: 2,
   android: 3,
+  other: 4,
 } as const;
 
 export type DevicePlatform = (typeof DevicePlatforms)[keyof typeof DevicePlatforms];
