@@ -7,12 +7,7 @@ import { ProfileEditPageContent } from './ProfileEditPageContent';
 
 export const ProfileEditScrollView: React.FC = () => {
   return (
-    <ScrollView
-      flex={1}
-      pt={2}
-      pb={4}
-      style={backgroundColor(colors.backgroundSecondary)}
-    >
+    <ScrollView flex={1} pt={2} pb={4} style={backgroundColor(colors.backgroundSecondary)}>
       <ProfileEditPageContent />
     </ScrollView>
   );

@@ -4,41 +4,24 @@ import { socketStoreActions } from 'app/store/socket.store';
 import { ChatUser } from 'app/types';
 import { scrollUtil } from 'app/utils/scroll.util';
 import React, { useCallback } from 'react';
-import {
-  NativeScrollEvent,
-  NativeSyntheticEvent,
-  Platform,
-} from 'react-native';
-import {
-  AvatarProps,
-  GiftedChat,
-  IChatMessage,
-  IMessage,
-} from 'react-native-gifted-chat';
+import { NativeScrollEvent, NativeSyntheticEvent, Platform } from 'react-native';
+import { AvatarProps, GiftedChat, IChatMessage, IMessage } from 'react-native-gifted-chat';
 import { useDispatch } from 'react-redux';
 import { v4 as uuidV4 } from 'uuid';
 
-import { ChatSpinner } from './ChatSpinner';
-import { RenderAvatar } from './RenderAvatar';
-import { RenderMessage } from './RenderMessage';
+import { ChatSpinner } from '../../containers/Messages/ChatSpinner';
+import { RenderAvatar } from '../../containers/Messages/RenderAvatar';
+import { RenderMessage } from '../../containers/Messages/RenderMessage';
 
 type FCProps = {
   matchId: string;
   currentUser: ChatUser;
   targetUser: ChatUser;
 };
-export const MessagesChat: React.FC<FCProps> = ({
-  matchId,
-  currentUser,
-  targetUser,
-}) => {
+export const MessagesChat: React.FC<FCProps> = ({ matchId, currentUser, targetUser }) => {
   const dispatch = useDispatch();
 
-  const {
-    data: messages = [],
-    fetchNext,
-    isLoadingNext,
-  } = useChatMessages({ matchId });
+  const { data: messages = [], fetchNext, isLoadingNext } = useChatMessages({ matchId });
 
   const handleSend = useCallback(
     (messages: IChatMessage[] = []) => {
@@ -57,13 +40,7 @@ export const MessagesChat: React.FC<FCProps> = ({
 
   const renderAvatar = useCallback(
     (props: AvatarProps<IMessage>) => {
-      return (
-        <RenderAvatar
-          avatarProps={props}
-          currentUser={currentUser}
-          targetUser={targetUser}
-        />
-      );
+      return <RenderAvatar avatarProps={props} currentUser={currentUser} targetUser={targetUser} />;
     },
     [currentUser, targetUser],
   );
@@ -105,10 +82,7 @@ export const MessagesChat: React.FC<FCProps> = ({
         }}
       />
       {Platform.OS === 'android' && (
-        <KeyboardAvoidingView
-          behavior={'padding'}
-          keyboardVerticalOffset={80}
-        />
+        <KeyboardAvoidingView behavior={'padding'} keyboardVerticalOffset={80} />
       )}
     </>
   );

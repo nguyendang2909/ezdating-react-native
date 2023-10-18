@@ -34,10 +34,7 @@ export const matchSlice = createSlice({
     },
 
     // Conversations
-    updateWhenUpdateSentMessage: (
-      state,
-      { payload }: PayloadAction<Entity.Message>,
-    ) => {
+    updateWhenUpdateSentMessage: (state, { payload }: PayloadAction<Entity.Message>) => {
       const stateIndex = state.data.findIndex(e => e._id === payload._matchId);
       if (stateIndex >= 0) {
         state.data[stateIndex] = {
@@ -52,10 +49,7 @@ export const matchSlice = createSlice({
       state.data = matchesService.sortAndUniq([], state.data);
     },
 
-    updateWhenReceivingMessage: (
-      state,
-      action: PayloadAction<Entity.Message>,
-    ) => {
+    updateWhenReceivingMessage: (state, action: PayloadAction<Entity.Message>) => {
       if (!state.data?.length) {
         return;
       }
@@ -166,7 +160,15 @@ export const matchSlice = createSlice({
           const matches = matchesService.formatMany(data);
           state.data = matchesService.sortAndUniq(matches, state.data);
         },
-      );
+      )
+      .addMatcher(endpoints.unmatch.matchFulfilled, (state, { payload: { data } }) => {
+        const matchId = data._id;
+        if (matchId) {
+          console.log(11111, matchId);
+          console.log(state.data.find(e => e._id === matchId));
+          state.data = state.data.filter(e => e._id !== matchId);
+        }
+      });
   },
 });
 

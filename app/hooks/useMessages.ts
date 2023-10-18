@@ -3,9 +3,7 @@ import { TxKey } from 'app/types';
 import axios from 'axios';
 import { useIntl } from 'react-intl';
 
-export const getMessageFromResponse = (
-  error: unknown,
-): (typeof messages)[TxKey] => {
+export const getMessageFromResponse = (error: unknown): (typeof messages)[TxKey] => {
   if (axios.isAxiosError(error)) {
     const message = error.response?.data?.message as TxKey;
 

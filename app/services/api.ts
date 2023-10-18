@@ -104,6 +104,12 @@ export const api = createApi({
     }),
 
     // Match
+    unmatch: builder.mutation<ApiResponse.Unmatch, { id: string }>({
+      query: ({ id }) => ({
+        url: `${API_URL.unmatch}/${id}`,
+        method: 'POST',
+      }),
+    }),
     getMatch: builder.query<ApiResponse.Match, string>({
       query: id => ({
         url: `${API_URL.matches}/${id}`,
@@ -344,4 +350,5 @@ export const {
   useRemovePhotoMutation,
   useCreateMatchMutation,
   useUpdateSignedDeviceMutation,
+  useUnmatchMutation,
 } = api;

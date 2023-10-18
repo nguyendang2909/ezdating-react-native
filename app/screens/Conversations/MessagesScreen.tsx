@@ -1,9 +1,9 @@
 import { useNavigation } from '@react-navigation/native';
-import { MessagesChat } from 'app/containers/Messages/MessagesChat';
-import { MessageByConversationHeader } from 'app/containers/Messages/MessagesHeader';
 import { useAppSelector } from 'app/hooks';
 import { useMatch } from 'app/hooks/useMatch';
 import { AppStackScreenProps } from 'app/navigators';
+import { MessagesChat } from 'app/pages/Messages/MessagesChat';
+import { MessagesHeader } from 'app/pages/Messages/MessagesHeader';
 import { ChatUser } from 'app/types';
 import { mediaFileUtil } from 'app/utils/media-files.util';
 import { StatusBar } from 'native-base';
@@ -44,7 +44,7 @@ export const MessagesScreen: FC<FCProps> = props => {
   return (
     <>
       <StatusBar barStyle="default" />
-      <MessageByConversationHeader match={match} />
+      <MessagesHeader match={match} />
       <MessagesChat matchId={matchId} currentUser={currentUser} targetUser={targetUser} />
       <SafeAreaView />
     </>

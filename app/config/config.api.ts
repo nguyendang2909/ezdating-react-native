@@ -7,6 +7,7 @@ export const API_URL = {
   likes: '/likes',
   logout: '/auth/logout',
   matches: '/matches',
+  unmatch: '/matches/unmatch',
   messages: '/messages',
   me: '/me',
   myProfileBasicInfo: '/me/basic-info',

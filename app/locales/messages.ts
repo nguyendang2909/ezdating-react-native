@@ -5,12 +5,11 @@ export const messages = defineMessages({
   'About me': { defaultMessage: 'About me', id: 'd48efc4ceb' },
   Account: { defaultMessage: 'Account', id: '4f0c8c6ae3' },
   'Add languages': { defaultMessage: 'Add languages', id: '1e2d09cb8d' },
-  'Add picture profile (Please choose photos that clearly shows your face, up to 6 photos)':
-    {
-      defaultMessage:
-        'Add picture profile (Please choose photos that clearly shows your face, up to 6 photos)',
-      id: 'e1308d4521',
-    },
+  'Add picture profile (Please choose photos that clearly shows your face, up to 6 photos)': {
+    defaultMessage:
+      'Add picture profile (Please choose photos that clearly shows your face, up to 6 photos)',
+    id: 'e1308d4521',
+  },
   'Age preference': { defaultMessage: 'Age preference', id: 'd7923f26b0' },
   Birthday: { defaultMessage: 'Birthday', id: 'ca781df71a' },
   Cancel: { defaultMessage: 'Cancel', id: 'e3b158c1b6' },
@@ -317,4 +316,40 @@ export const messages = defineMessages({
         'Matches will appear here once you start to Like people. You can message them directly from here when you’re ready to spark up the conversation.',
       id: '5914c8ac38',
     },
+  'Safety Toolkit': {
+    defaultMessage: ' Safety Toolkit',
+    id: '197e092dfb',
+  },
+  Unmatch: {
+    defaultMessage: 'Unmatch',
+    id: '7dd73255a5',
+  },
+  'No longer interested? Remove them from your matches.': {
+    defaultMessage: 'No longer interested? Remove them from your matches.',
+    id: '9d31c68fb1',
+  },
+  Block: {
+    defaultMessage: 'Block',
+    id: '529e54ecaa',
+  },
+  "You won't see them, and they won't see you": {
+    defaultMessage: "You won't see them, and they won't see you",
+    id: '3ca7129eb3',
+  },
+  Report: {
+    defaultMessage: 'Report',
+    id: 'c794f3e8c6',
+  },
+  "Don't worry - we won't tell them": {
+    defaultMessage: "Don't worry - we won't tell them",
+    id: '0d36e3e59a',
+  },
+  'Would you like to unmatch with this user? This cannot be undone.': {
+    defaultMessage: 'Would you like to unmatch with this user? This cannot be undone.',
+    id: 'ac2750de71',
+  },
+  Yes: {
+    defaultMessage: 'Yes',
+    id: '6b99acba1e',
+  },
 });

@@ -5,8 +5,6 @@ import {
   AvatarImage,
   Box,
   HStack,
-  Icon,
-  InfoIcon,
   Text,
   View,
   VStack,
@@ -17,14 +15,13 @@ import { mediaFileUtil } from 'app/utils/media-files.util';
 import React from 'react';
 import { SafeAreaView, TouchableOpacity } from 'react-native';
 
-import { BackIconButton } from '../IconButton/BackIconButton';
+import { BackIconButton } from '../../containers/IconButton/BackIconButton';
+import { MessagesSetting } from './MessagesSetting';
 export type FCProps = {
   match?: AppStore.Match;
 };
-export const MessageByConversationHeader: React.FC<FCProps> = ({ match }) => {
+export const MessagesHeader: React.FC<FCProps> = ({ match }) => {
   const navigation = useNavigation();
-
-  const handlePressSetting = () => {};
 
   const handlePressProfile = () => {
     if (match?.targetUser) {
@@ -69,9 +66,7 @@ export const MessageByConversationHeader: React.FC<FCProps> = ({ match }) => {
           </TouchableOpacity>
         </HStack>
         <Box pr={16}>
-          <TouchableOpacity onPress={handlePressSetting}>
-            <Icon height={28} width={28} as={InfoIcon} />
-          </TouchableOpacity>
+          <MessagesSetting matchId={match?._id} />
         </Box>
       </View>
     </>

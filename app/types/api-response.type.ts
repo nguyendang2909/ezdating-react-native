@@ -28,6 +28,8 @@ export declare namespace ApiResponse {
 
   type Users = PaginatedResponse<Entity.User>;
 
+  type Unmatch = FetchData<{ _id?: string }>;
+
   type SuccessResponse = FetchData<{ success: boolean }>;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
