@@ -1,13 +1,6 @@
 import { UserGender, UserGenderMessages, UserGenders } from 'app/constants';
 import { useMessages } from 'app/hooks/useMessages';
-import {
-  Button,
-  FormControl,
-  HStack,
-  Stack,
-  View,
-  WarningOutlineIcon,
-} from 'native-base';
+import { Button, FormControl, HStack, Stack, View, WarningOutlineIcon } from 'native-base';
 import React, { FC } from 'react';
 
 type FCProps = {
@@ -17,12 +10,7 @@ type FCProps = {
   isRequired?: boolean;
 };
 
-export const SelectGenderFormControl: FC<FCProps> = ({
-  onChange,
-  error,
-  value,
-  isRequired,
-}) => {
+export const SelectGenderFormControl: FC<FCProps> = ({ onChange, error, value, isRequired }) => {
   const { formatMessage } = useMessages();
 
   return (
