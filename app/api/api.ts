@@ -26,6 +26,13 @@ export const api = createApi({
   baseQuery: async (args, baseQueryApi, extraOptions) => {
     await mutex.waitForUnlock();
     let result = await baseQuery(args, baseQueryApi, extraOptions);
+    if (process.env.NODE_ENV === 'development') {
+      if (result.error) {
+        console.log(
+          `Request to url: ${result.meta?.request.url} with query: ${result.meta?.request.body} error: ${result.error.data}`,
+        );
+      }
+    }
     if (result.error && [401, 403].includes(result.error.status as number)) {
       if (!mutex.isLocked()) {
         const release = await mutex.acquire();

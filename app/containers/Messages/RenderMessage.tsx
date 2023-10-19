@@ -1,5 +1,4 @@
-import { Box, Text } from '@gluestack-ui/themed';
-import { translate } from 'app/locales/locale';
+import { Box, Spinner, Text } from '@gluestack-ui/themed';
 import React from 'react';
 import { IMessage, Message } from 'react-native-gifted-chat';
 
@@ -22,7 +21,7 @@ export const RenderMessage: React.FC = ({
   const smallBorder = 4;
 
   return (
-    <Box flexDirection="column">
+    <Box flexDirection="column" justifyContent="flex-end">
       <Box
         p={8}
         bgColor={isCurrentMe ? '$blue500' : '$blueGray100'}
@@ -38,10 +37,8 @@ export const RenderMessage: React.FC = ({
         <Text color={isCurrentMe ? '$white' : '$darkBlue900'}>{currentMessage?.text}</Text>
       </Box>
       {isPrevMe && currentMessage?.sent === false && nextMessage?.sent !== false && (
-        <Box>
-          <Text fontSize={12} textAlign="right">
-            {translate('Sending')}
-          </Text>
+        <Box alignItems="flex-end">
+          <Spinner />
         </Box>
       )}
     </Box>

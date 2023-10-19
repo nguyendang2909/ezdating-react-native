@@ -1,4 +1,6 @@
 import { KeyboardAvoidingView, Spinner } from '@gluestack-ui/themed';
+import { ChatSpinner } from 'app/containers/Messages/ChatSpinner';
+import { RenderMessage } from 'app/containers/Messages/RenderMessage';
 import { useChatMessages } from 'app/hooks/useChatMessages';
 import { socketStoreActions } from 'app/store/socket.store';
 import { ChatUser } from 'app/types';
@@ -9,9 +11,7 @@ import { AvatarProps, GiftedChat, IChatMessage, IMessage } from 'react-native-gi
 import { useDispatch } from 'react-redux';
 import { v4 as uuidV4 } from 'uuid';
 
-import { ChatSpinner } from '../../containers/Messages/ChatSpinner';
 import { RenderAvatar } from '../../containers/Messages/RenderAvatar';
-import { RenderMessage } from '../../containers/Messages/RenderMessage';
 
 type FCProps = {
   matchId: string;

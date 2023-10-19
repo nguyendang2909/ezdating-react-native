@@ -1,4 +1,4 @@
-import { useGetMatchQuery } from 'app/services';
+import { useGetMatchQuery } from 'app/api';
 import { matchActions } from 'app/store/match';
 import { useEffect } from 'react';
 
