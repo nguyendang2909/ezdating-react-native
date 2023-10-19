@@ -43,9 +43,7 @@ export const EditInfoHeightScreen = () => {
         isLoading={formik.isSubmitting}
       />
       <View mt={4} mb={4} px={4}>
-        <Text color="gray.500">{`${formatMessage(
-          'My height is',
-        )} (${formatMessage('cm')}):`}</Text>
+        <Text color="gray.500">{`${formatMessage('My height is')} (${formatMessage('cm')}):`}</Text>
       </View>
       <View mt={4} mb={4} px={4}>
         <Picker
@@ -54,9 +52,7 @@ export const EditInfoHeightScreen = () => {
         >
           {Array.from({ length: 100 }, (value, index) => {
             const heightValue = index + 100;
-            return (
-              <Picker.Item label={heightValue.toString()} value={heightValue} />
-            );
+            return <Picker.Item label={heightValue.toString()} value={heightValue} />;
           })}
         </Picker>
       </View>

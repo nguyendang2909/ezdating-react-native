@@ -1,9 +1,9 @@
 import { createStyle } from '@gluestack-style/react';
 
 export const PopoverContent = createStyle({
-  'bg': '$backgroundLight50',
-  'rounded': '$lg',
-  'overflow': 'hidden',
+  bg: '$backgroundLight50',
+  rounded: '$lg',
+  overflow: 'hidden',
   ':initial': {
     opacity: 0,
   },
@@ -23,11 +23,11 @@ export const PopoverContent = createStyle({
     },
   },
   // @ts-ignore
-  '_dark': {
+  _dark: {
     bg: '$backgroundDark900',
   },
 
-  'defaultProps': {
+  defaultProps: {
     softShadow: '3',
   },
 });

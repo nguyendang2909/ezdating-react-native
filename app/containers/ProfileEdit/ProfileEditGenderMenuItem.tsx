@@ -53,9 +53,7 @@ export const ProfileEditGenderMenuItem: React.FC<FCProps> = ({ onPress }) => {
                     handleChange(value);
                   }}
                 >
-                  <Text
-                    fontWeight={currentValue === value ? 'bold' : undefined}
-                  >
+                  <Text fontWeight={currentValue === value ? 'bold' : undefined}>
                     {formatMessage(UserGenderMessages[value])}
                   </Text>
                 </Actionsheet.Item>

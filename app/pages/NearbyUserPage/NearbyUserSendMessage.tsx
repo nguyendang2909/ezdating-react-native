@@ -10,9 +10,7 @@ type FCProps = {
   targetUserId: string;
 };
 
-export const NearbyUserSendMessageButton: React.FC<FCProps> = ({
-  targetUserId,
-}) => {
+export const NearbyUserSendMessageButton: React.FC<FCProps> = ({ targetUserId }) => {
   const currentUserId = useAppSelector(s => s.app.profile._id) || '';
   const navigation = useNavigation();
   const dispatch = useAppDispatch();
@@ -33,12 +31,7 @@ export const NearbyUserSendMessageButton: React.FC<FCProps> = ({
   };
 
   return (
-    <LoadingButtonIcon
-      height={48}
-      width={48}
-      onPress={handleChat}
-      isLoading={isLoading}
-    >
+    <LoadingButtonIcon height={48} width={48} onPress={handleChat} isLoading={isLoading}>
       <Ionicons color="white" size={24} name="chatbubble-ellipses-outline" />
     </LoadingButtonIcon>
   );

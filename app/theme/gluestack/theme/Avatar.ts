@@ -8,7 +8,7 @@ export const Avatar = createStyle({
   bg: '$primary600',
   variants: {
     size: {
-      'xs': {
+      xs: {
         w: '$6',
         h: '$6',
 
@@ -22,7 +22,7 @@ export const Avatar = createStyle({
         },
       },
 
-      'sm': {
+      sm: {
         w: '$8',
         h: '$8',
 
@@ -36,7 +36,7 @@ export const Avatar = createStyle({
         },
       },
 
-      'md': {
+      md: {
         w: '$12',
         h: '$12',
 
@@ -50,7 +50,7 @@ export const Avatar = createStyle({
         },
       },
 
-      'lg': {
+      lg: {
         w: '$16',
         h: '$16',
 
@@ -64,7 +64,7 @@ export const Avatar = createStyle({
         },
       },
 
-      'xl': {
+      xl: {
         w: '$24',
         h: '$24',
 

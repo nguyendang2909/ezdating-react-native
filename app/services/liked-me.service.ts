@@ -10,10 +10,7 @@ class LikedMeService extends CommonService {
     this.staleTime = APP_CONFIG.STALE_TIME.DEFAULT;
   }
 
-  formatMany(
-    payload: Entity.Like[],
-    options?: Partial<AppStore.Match>,
-  ): AppStore.Match[] {
+  formatMany(payload: Entity.Like[], options?: Partial<AppStore.Match>): AppStore.Match[] {
     const lastRefreshedAt = moment().toISOString();
     return payload.map(e => ({
       ...e,

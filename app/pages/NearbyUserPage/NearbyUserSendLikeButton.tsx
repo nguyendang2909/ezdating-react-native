@@ -8,9 +8,7 @@ type FCProps = {
   targetUserId: string;
 };
 
-export const NearbyUserSendLikeButton: React.FC<FCProps> = ({
-  targetUserId,
-}) => {
+export const NearbyUserSendLikeButton: React.FC<FCProps> = ({ targetUserId }) => {
   const [sendLike] = useSendLikeMutation();
   const [isShowSendLike, setShowSendLike] = useState<boolean>(true);
   const [isLoadingSendLike, setLoadingSendLike] = useState<boolean>(false);

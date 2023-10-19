@@ -12,12 +12,7 @@ type FCProps = {
   onPressLeftIcon?: () => void;
 };
 
-export const Header: FC<FCProps> = ({
-  bg,
-  textTx,
-  leftIcon: LeftIcon,
-  onPressLeftIcon,
-}) => {
+export const Header: FC<FCProps> = ({ bg, textTx, leftIcon: LeftIcon, onPressLeftIcon }) => {
   const { formatMessage } = useMessages();
 
   return (

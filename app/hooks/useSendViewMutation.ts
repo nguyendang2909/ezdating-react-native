@@ -6,11 +6,7 @@ import { AxiosError } from 'axios';
 
 export const useSendViewMutation = (
   options?: Omit<
-    UseMutationOptions<
-      ApiResponse.SuccessResponse,
-      AxiosError,
-      ApiRequest.SendView
-    >,
+    UseMutationOptions<ApiResponse.SuccessResponse, AxiosError, ApiRequest.SendView>,
     'mutationFn'
   >,
 ) => {

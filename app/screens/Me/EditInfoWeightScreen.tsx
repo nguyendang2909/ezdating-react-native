@@ -48,9 +48,7 @@ export const EditInfoWeightScreen = () => {
       />
 
       <View mt={4} mb={4} px={4}>
-        <Text color="gray.500">{`${formatMessage(
-          'My weight is',
-        )} (${formatMessage('kg')}):`}</Text>
+        <Text color="gray.500">{`${formatMessage('My weight is')} (${formatMessage('kg')}):`}</Text>
       </View>
 
       <View mt={4} mb={4} px={4}>
@@ -61,9 +59,7 @@ export const EditInfoWeightScreen = () => {
           {Array.from({ length: 100 }, (value, index) => {
             const heightValue = index + 30;
 
-            return (
-              <Picker.Item label={heightValue.toString()} value={heightValue} />
-            );
+            return <Picker.Item label={heightValue.toString()} value={heightValue} />;
           })}
         </Picker>
       </View>

@@ -14,15 +14,12 @@ export const useLikedMe = () => {
   const lastRefreshedAt = useAppSelector(s => s.likedMe.info.lastRefreshedAt);
   const socketConnectedAt = useAppSelector(s => s.app.socket.connectedAt);
   const length = likedMe.length;
-  const [getNewest, { isLoading: isLoadingNewest }] =
-    useGetNewestLikedMeMutation();
+  const [getNewest, { isLoading: isLoadingNewest }] = useGetNewestLikedMeMutation();
   const [getNext, { isLoading: isLoadingNext }] = useGetNextLikedMeMutation();
   const { isLoading } = useRefreshLikedMeQuery(
     {},
     {
-      skip:
-        !!lastRefreshedAt &&
-        moment(lastRefreshedAt).isAfter(moment(socketConnectedAt)),
+      skip: !!lastRefreshedAt && moment(lastRefreshedAt).isAfter(moment(socketConnectedAt)),
     },
   );
 

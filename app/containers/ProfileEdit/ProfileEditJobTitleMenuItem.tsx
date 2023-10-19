@@ -8,8 +8,7 @@ type FCProps = {
 };
 
 export const ProfileEditJobTitleMenuItem: React.FC<FCProps> = ({ onPress }) => {
-  const currentValue =
-    useAppSelector(state => state.app.profile?.introduce) || '';
+  const currentValue = useAppSelector(state => state.app.profile?.introduce) || '';
 
   const [value, setValue] = useState<string>(currentValue);
 
@@ -29,12 +28,7 @@ export const ProfileEditJobTitleMenuItem: React.FC<FCProps> = ({ onPress }) => {
     <>
       <View px={4} py={4}>
         <View>
-          <Input
-            maxLength={100}
-            variant="unstyled"
-            value={value}
-            onChangeText={setValue}
-          />
+          <Input maxLength={100} variant="unstyled" value={value} onChangeText={setValue} />
         </View>
         <View>
           <Text textAlign="right">{100 - value.length}</Text>

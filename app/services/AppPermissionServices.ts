@@ -1,6 +1,4 @@
-import Geolocation, {
-  AuthorizationResult,
-} from 'react-native-geolocation-service';
+import Geolocation, { AuthorizationResult } from 'react-native-geolocation-service';
 
 class Service {
   async requestGeolocation(): Promise<AuthorizationResult> {

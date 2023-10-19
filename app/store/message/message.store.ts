@@ -70,10 +70,7 @@ export const messageSlice = createSlice({
       }
     },
 
-    updateRefreshTime: (
-      state,
-      { payload: { matchId } }: PayloadAction<{ matchId: string }>,
-    ) => {
+    updateRefreshTime: (state, { payload: { matchId } }: PayloadAction<{ matchId: string }>) => {
       const lastRefreshedAt = moment().toISOString();
       if (!state.info[matchId]) {
         state.info[matchId] = {
@@ -101,10 +98,7 @@ export const messageSlice = createSlice({
           };
           const messages = messagesService.formatMany(data);
           const stateData = state.data[_matchId];
-          state.data[_matchId] = messagesService.sortAndUniq(
-            messages,
-            stateData || [],
-          );
+          state.data[_matchId] = messagesService.sortAndUniq(messages, stateData || []);
         },
       )
       .addMatcher(
@@ -117,10 +111,7 @@ export const messageSlice = createSlice({
           };
           const messages = messagesService.formatMany(data);
           const stateData = state.data[_matchId];
-          state.data[_matchId] = messagesService.sortAndUniq(
-            messages,
-            stateData || [],
-          );
+          state.data[_matchId] = messagesService.sortAndUniq(messages, stateData || []);
         },
       )
       .addMatcher(
@@ -133,10 +124,7 @@ export const messageSlice = createSlice({
           };
           const messages = messagesService.formatMany(data);
           const stateData = state.data[_matchId];
-          state.data[_matchId] = messagesService.sortAndUniq(
-            messages,
-            stateData || [],
-          );
+          state.data[_matchId] = messagesService.sortAndUniq(messages, stateData || []);
         },
       );
   },

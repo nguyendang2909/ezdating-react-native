@@ -26,13 +26,9 @@ export const InputBasicInforForm: FC = () => {
     },
     enableReinitialize: true,
     validationSchema: Yup.object().shape({
-      nickname: Yup.string().required(
-        formatMessage('Please enter your nickname'),
-      ),
+      nickname: Yup.string().required(formatMessage('Please enter your nickname')),
       gender: Yup.string().required(formatMessage('Please enter your gender')),
-      birthday: Yup.string().required(
-        formatMessage('Please enter your birthday'),
-      ),
+      birthday: Yup.string().required(formatMessage('Please enter your birthday')),
       // relationshipGoal: Yup.string().required(
       //   t('Please choose your w!', { w: t('desire relation') }),
       // ),

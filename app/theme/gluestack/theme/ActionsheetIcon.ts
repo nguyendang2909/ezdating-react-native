@@ -6,7 +6,7 @@ export const ActionsheetIcon = createStyle({
   },
   color: '$backgroundLight500',
   _dark: {
-    //@ts-ignore
+    // @ts-ignore
     color: '$backgroundDark400',
   },
 });

@@ -11,11 +11,7 @@ type FCProps = HeaderProps & {
   isLoading: boolean;
 };
 
-export const HeaderSaveModal: React.FC<FCProps> = ({
-  onSave,
-  isLoading,
-  ...props
-}) => {
+export const HeaderSaveModal: React.FC<FCProps> = ({ onSave, isLoading, ...props }) => {
   const t = useIntl();
   const { goBack } = useNavigation();
 

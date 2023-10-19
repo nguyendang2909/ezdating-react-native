@@ -12,7 +12,6 @@ import { HStack } from 'native-base';
 import React from 'react';
 import { Dimensions } from 'react-native';
 import Toast from 'react-native-toast-message';
-import { useDispatch } from 'react-redux';
 
 import { AppStackScreenProps } from '../../navigators';
 
@@ -21,7 +20,6 @@ export const EditMatchFilterScreen: React.FC<AppStackScreenProps<'EditMatchFilte
   const { refetch } = useRefreshNearbyUsersQuery();
   const { formatMessage } = useMessages();
   const navigation = useNavigation();
-  const dispatch = useDispatch();
   const { width } = Dimensions.get('window');
 
   const filterMaxDistance = useAppSelector(state => state.app.profile?.filterMaxDistance) || 1;

@@ -17,7 +17,7 @@ export const TextareaInput = createStyle({
     },
   },
   _web: {
-    'cursor': 'text',
+    cursor: 'text',
     ':disabled': {
       cursor: 'not-allowed',
     },

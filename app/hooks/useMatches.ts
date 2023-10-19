@@ -11,23 +11,17 @@ import { useAppSelector } from './useAppSelector';
 
 export const useMatches = () => {
   const matches = useAppSelector(matchSelects.matches);
-  const lastRefreshedAt = useAppSelector(
-    s => s.match.infoMatches.lastRefreshedAt,
-  );
+  const lastRefreshedAt = useAppSelector(s => s.match.infoMatches.lastRefreshedAt);
   const socketConnectedAt = useAppSelector(s => s.app.socket.connectedAt);
   const isReachedEnd = useAppSelector(s => s.match.infoMatches.isReachedEnd);
   const { isLoading } = useRefreshMatchesQuery(
     {},
     {
-      skip:
-        !!lastRefreshedAt &&
-        moment(lastRefreshedAt).isAfter(moment(socketConnectedAt)),
+      skip: !!lastRefreshedAt && moment(lastRefreshedAt).isAfter(moment(socketConnectedAt)),
     },
   );
-  const [getNewestMatches, { isLoading: isLoadingNewest }] =
-    useGetNewestMatchesMutation();
-  const [getNextMatches, { isLoading: isLoadingNext }] =
-    useGetNextMatchesMutation();
+  const [getNewestMatches, { isLoading: isLoadingNewest }] = useGetNewestMatchesMutation();
+  const [getNextMatches, { isLoading: isLoadingNext }] = useGetNextMatchesMutation();
   const matchesLength = matches.length;
 
   const fetchNext = () => {

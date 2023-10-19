@@ -1,6 +1,6 @@
 import { useActionSheet } from '@expo/react-native-action-sheet';
 import { useAppSelector, useMessages } from 'app/hooks';
-import { useRemovePhotoMutation, useUploadPhotoMutation } from 'app/services/api';
+import { useRemovePhotoMutation, useUploadPhotoMutation } from 'app/services/api/media-files.api';
 import { flexDirectionRow, flexWrapWrap, padding, width } from 'app/styles';
 import { spacing } from 'app/theme';
 import _ from 'lodash';
@@ -9,13 +9,11 @@ import React, { useState } from 'react';
 import { Platform } from 'react-native';
 import ImageCropPicker from 'react-native-image-crop-picker';
 import { check, PERMISSIONS, request, RESULTS } from 'react-native-permissions';
-import { useDispatch } from 'react-redux';
 
 import { ProfileEditMediaFileCard } from './MediaFileCard';
 
 export const ProfileEditPhotos: React.FC = () => {
   const { formatMessage } = useMessages();
-  const dispatch = useDispatch();
 
   const [uploadPhoto] = useUploadPhotoMutation();
   const [removePhoto] = useRemovePhotoMutation();

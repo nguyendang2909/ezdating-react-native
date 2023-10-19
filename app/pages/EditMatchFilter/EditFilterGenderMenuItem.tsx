@@ -17,10 +17,7 @@ type FCProps = {
   onChange: (gender: UserGender) => void;
 };
 
-export const EditFilterGenderMenuItem: React.FC<FCProps> = ({
-  value,
-  onChange,
-}) => {
+export const EditFilterGenderMenuItem: React.FC<FCProps> = ({ value, onChange }) => {
   const { formatMessage } = useMessages();
 
   const [isInit, setInit] = useState<boolean>(false);

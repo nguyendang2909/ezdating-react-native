@@ -11,24 +11,17 @@ import { useAppSelector } from './useAppSelector';
 
 export const useConversations = () => {
   const conversations = useAppSelector(matchSelects.conversations);
-  const isReachedEnd = !!useAppSelector(
-    s => s.match.infoConversations.isReachedEnd,
-  );
-  const lastRefreshedAt = useAppSelector(
-    s => s.match.infoConversations.lastRefreshedAt,
-  );
+  const isReachedEnd = !!useAppSelector(s => s.match.infoConversations.isReachedEnd);
+  const lastRefreshedAt = useAppSelector(s => s.match.infoConversations.lastRefreshedAt);
   const socketConnectedAt = useAppSelector(s => s.app.socket.connectedAt);
   const conversationsLength = conversations.length;
   const [getNewestConversations, { isLoading: isLoadingNewest }] =
     useGetNewestConversationsMutation();
-  const [getNextConversations, { isLoading: isLoadingNext }] =
-    useGetNextConversationsMutation();
+  const [getNextConversations, { isLoading: isLoadingNext }] = useGetNextConversationsMutation();
   const { isLoading } = useRefreshConversationsQuery(
     {},
     {
-      skip:
-        !!lastRefreshedAt &&
-        moment(lastRefreshedAt).isAfter(moment(socketConnectedAt)),
+      skip: !!lastRefreshedAt && moment(lastRefreshedAt).isAfter(moment(socketConnectedAt)),
     },
   );
 

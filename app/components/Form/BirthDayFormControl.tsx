@@ -2,14 +2,7 @@ import 'moment/min/locales';
 
 import { messages } from 'app/locales/messages';
 import moment from 'moment';
-import {
-  ChevronDownIcon,
-  FormControl,
-  Input,
-  Stack,
-  View,
-  WarningOutlineIcon,
-} from 'native-base';
+import { ChevronDownIcon, FormControl, Input, Stack, View, WarningOutlineIcon } from 'native-base';
 import React, { FC, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { Pressable } from 'react-native';
@@ -23,12 +16,7 @@ type FCProps = {
   isRequired?: boolean;
 };
 
-export const BirthDayFormControl: FC<FCProps> = ({
-  value,
-  onChange,
-  error,
-  isRequired,
-}) => {
+export const BirthDayFormControl: FC<FCProps> = ({ value, onChange, error, isRequired }) => {
   const t = useIntl();
 
   const [deviceLocale] = RNLocalize.getLocales();
@@ -48,33 +36,25 @@ export const BirthDayFormControl: FC<FCProps> = ({
     <>
       <FormControl {...(isRequired ? { isRequired } : {})} isInvalid={!!error}>
         <Stack>
-          <FormControl.Label>
-            {t.formatMessage(messages.Birthday)}
-          </FormControl.Label>
+          <FormControl.Label>{t.formatMessage(messages.Birthday)}</FormControl.Label>
           <Pressable onPress={showDatePicker}>
             <Input
               testID="birthday"
               size="lg"
               value={
                 value
-                  ? moment(value, 'YYYY-MM-DD')
-                      .locale(deviceLocale.languageCode)
-                      .format('L')
+                  ? moment(value, 'YYYY-MM-DD').locale(deviceLocale.languageCode).format('L')
                   : ''
               }
               onPressIn={showDatePicker}
               isReadOnly
               variant="underlined"
-              placeholder={t.formatMessage(
-                messages['Please enter your birthday'],
-              )}
+              placeholder={t.formatMessage(messages['Please enter your birthday'])}
               InputRightElement={<ChevronDownIcon />}
             ></Input>
           </Pressable>
           <View pb={2}>
-            <FormControl.ErrorMessage
-              leftIcon={<WarningOutlineIcon size="xs" />}
-            >
+            <FormControl.ErrorMessage leftIcon={<WarningOutlineIcon size="xs" />}>
               {error}
             </FormControl.ErrorMessage>
           </View>

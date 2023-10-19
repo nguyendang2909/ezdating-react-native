@@ -18,9 +18,7 @@ class MessagesService extends CommonService {
       ...data,
       user: { _id: entity._userId || '' },
       text: text || '',
-      createdAt: createdAt
-        ? new Date(createdAt).getTime()
-        : new Date().getTime(),
+      createdAt: createdAt ? new Date(createdAt).getTime() : new Date().getTime(),
       ...options,
     };
   }

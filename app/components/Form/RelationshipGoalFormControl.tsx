@@ -76,26 +76,20 @@ export const RelationshipGoalFormControl: React.FC<FCProps> = ({
     <>
       <FormControl {...(isRequired ? { isRequired } : {})} isInvalid={!!error}>
         <Stack>
-          <FormControl.Label>
-            {formatMessage('What are you looking for here?')}
-          </FormControl.Label>
+          <FormControl.Label>{formatMessage('What are you looking for here?')}</FormControl.Label>
           <Pressable onPress={handlePress}>
             <Input
               isReadOnly
               size="lg"
               variant="underlined"
               placeholder={formatMessage('Please select')}
-              value={
-                value ? formatMessage(UserRelationshipGoalMessages[value]) : ''
-              }
+              value={value ? formatMessage(UserRelationshipGoalMessages[value]) : ''}
               InputRightElement={<ChevronDownIcon />}
               onPressIn={handlePress}
             ></Input>
           </Pressable>
           <View pb={2}>
-            <FormControl.ErrorMessage
-              leftIcon={<WarningOutlineIcon size="xs" />}
-            >
+            <FormControl.ErrorMessage leftIcon={<WarningOutlineIcon size="xs" />}>
               {error}
             </FormControl.ErrorMessage>
           </View>

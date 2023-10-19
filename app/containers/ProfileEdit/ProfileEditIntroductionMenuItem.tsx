@@ -7,11 +7,8 @@ type FCProps = {
   onPress: (payload: ApiRequest.UpdateProfile) => void;
 };
 
-export const ProfileEditIntroduceMenuItem: React.FC<FCProps> = ({
-  onPress,
-}) => {
-  const introduceState =
-    useAppSelector(state => state.app.profile?.introduce) || '';
+export const ProfileEditIntroduceMenuItem: React.FC<FCProps> = ({ onPress }) => {
+  const introduceState = useAppSelector(state => state.app.profile?.introduce) || '';
   const [introduce, setIntroduce] = useState<string>(introduceState);
 
   useEffect(() => {
@@ -33,12 +30,7 @@ export const ProfileEditIntroduceMenuItem: React.FC<FCProps> = ({
     <>
       <View px={4} py={2}>
         <View>
-          <Input
-            maxLength={500}
-            variant="unstyled"
-            value={introduce}
-            onChangeText={setIntroduce}
-          />
+          <Input maxLength={500} variant="unstyled" value={introduce} onChangeText={setIntroduce} />
         </View>
       </View>
     </>

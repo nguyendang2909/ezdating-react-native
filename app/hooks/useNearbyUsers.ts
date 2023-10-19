@@ -11,16 +11,12 @@ export const useNearbyUsers = () => {
   const nearbyUsers = useAppSelector(state => state.nearbyUser.data);
   const length = nearbyUsers.length;
   const isReachedEnd = !!useAppSelector(s => s.nearbyUser.info.isReachedEnd);
-  const lastRefreshedAt = useAppSelector(
-    s => s.nearbyUser.info.lastRefreshedAt,
-  );
+  const lastRefreshedAt = useAppSelector(s => s.nearbyUser.info.lastRefreshedAt);
   const { isLoading } = useRefreshNearbyUsersQuery(undefined, {
     skip: !!lastRefreshedAt && !nearbyUsersService.isStale(lastRefreshedAt),
   });
-  const [fetchNewest, { isLoading: isLoadingNewest }] =
-    useGetNewestUsersMutation();
-  const [fetchNextNearbyUsers, { isLoading: isLoadingNext }] =
-    useGetNextNearbyUsersMutation();
+  const [fetchNewest, { isLoading: isLoadingNewest }] = useGetNewestUsersMutation();
+  const [fetchNextNearbyUsers, { isLoading: isLoadingNext }] = useGetNextNearbyUsersMutation();
 
   const fetchNext = () => {
     const _next = nearbyUsersService.getCursor(nearbyUsers);

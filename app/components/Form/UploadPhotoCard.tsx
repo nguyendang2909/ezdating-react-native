@@ -32,12 +32,7 @@ export const UploadPhotoCard: React.FC<FCProps> = ({ onPress, value }) => {
       {value ? (
         <>
           <Image
-            style={[
-              flex(1),
-              justifyContentCenter,
-              alignSelfStretch,
-              borderRadius(20),
-            ]}
+            style={[flex(1), justifyContentCenter, alignSelfStretch, borderRadius(20)]}
             alt="profile-photo"
             source={{ uri: value }}
             resizeMode="cover"

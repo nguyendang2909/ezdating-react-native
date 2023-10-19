@@ -7,7 +7,7 @@ export const CheckboxIcon = createStyle({
   ':disabled': {
     opacity: 0.4,
   },
-  '_dark': {
+  _dark: {
     ':checked': {
       color: '$backgroundDark0',
     },

@@ -90,6 +90,8 @@ module.exports = {
             "varsIgnorePattern": "^_"
           }
         ],
+        '@typescript-eslint/no-empty-interface': 1,
+        '@typescript-eslint/no-empty-function': 1,
       },
     },
   ],

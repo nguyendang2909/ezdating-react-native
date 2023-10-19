@@ -7,9 +7,7 @@ type FCProps = {
   onPress: (payload: ApiRequest.UpdateProfile) => void;
 };
 
-export const ProfileShowMyDistanceMenuItem: React.FC<FCProps> = ({
-  onPress,
-}) => {
+export const ProfileShowMyDistanceMenuItem: React.FC<FCProps> = ({ onPress }) => {
   const currentValue = useAppSelector(state => state.app.profile?.hideDistance);
 
   const [isEnable, setEnable] = useState<boolean | undefined>(currentValue);
@@ -22,11 +20,7 @@ export const ProfileShowMyDistanceMenuItem: React.FC<FCProps> = ({
 
   return (
     <>
-      <MenuItemSwitch
-        titleTx="Don't show my distance"
-        value={isEnable}
-        onToggle={setEnable}
-      />
+      <MenuItemSwitch titleTx="Don't show my distance" value={isEnable} onToggle={setEnable} />
     </>
   );
 };

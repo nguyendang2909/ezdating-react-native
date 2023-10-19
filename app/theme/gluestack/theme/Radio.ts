@@ -65,7 +65,7 @@ export const Radio = createStyle({
     size: 'md',
   },
   _web: {
-    'cursor': 'pointer',
+    cursor: 'pointer',
     ':disabled': {
       cursor: 'not-allowed',
     },

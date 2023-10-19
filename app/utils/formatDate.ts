@@ -11,11 +11,7 @@ const getLocale = (): Locale => {
   return locale === 'ar' ? ar : locale === 'ko' ? ko : en;
 };
 
-export const formatDate = (
-  date: string,
-  dateFormat?: string,
-  options?: Options,
-) => {
+export const formatDate = (date: string, dateFormat?: string, options?: Options) => {
   const locale = getLocale();
   const dateOptions = {
     ...options,

@@ -14,13 +14,9 @@ type FCProps = {
   onPress: (payload: ApiRequest.UpdateProfile) => void;
 };
 
-export const ProfileEditRelationshipGoalMenuItem: React.FC<FCProps> = ({
-  onPress,
-}) => {
+export const ProfileEditRelationshipGoalMenuItem: React.FC<FCProps> = ({ onPress }) => {
   const { formatMessage } = useMessages();
-  const currentRelationshipGoal = useAppSelector(
-    state => state.app.profile?.relationshipGoal,
-  );
+  const currentRelationshipGoal = useAppSelector(state => state.app.profile?.relationshipGoal);
   const [isInit, setInit] = useState<boolean>(false);
   const { isOpen, onOpen, onClose } = useDisclose();
   const handleChange = (relationshipGoal: UserRelationshipGoal) => {
@@ -62,11 +58,7 @@ export const ProfileEditRelationshipGoalMenuItem: React.FC<FCProps> = ({
                     handleChange(value);
                   }}
                 >
-                  <Text
-                    fontWeight={
-                      currentRelationshipGoal === value ? 'bold' : undefined
-                    }
-                  >
+                  <Text fontWeight={currentRelationshipGoal === value ? 'bold' : undefined}>
                     {formatMessage(UserRelationshipGoalMessages[value])}
                   </Text>
                 </Actionsheet.Item>

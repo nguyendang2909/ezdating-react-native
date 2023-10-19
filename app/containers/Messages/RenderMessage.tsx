@@ -29,29 +29,21 @@ export const RenderMessage: React.FC = ({
         ml={isCurrentMe ? 64 : undefined}
         mr={!isCurrentMe ? 64 : undefined}
         sx={{
-          borderTopLeftRadius:
-            isCurrentMe || isPrevMe ? bigBorder : smallBorder,
-          borderBottomLeftRadius:
-            isCurrentMe || isNextMe ? bigBorder : smallBorder,
-          borderTopRightRadius:
-            isCurrentMe && isPrevMe ? smallBorder : bigBorder,
-          borderBottomRightRadius:
-            isCurrentMe && isNextMe ? smallBorder : bigBorder,
+          borderTopLeftRadius: isCurrentMe || isPrevMe ? bigBorder : smallBorder,
+          borderBottomLeftRadius: isCurrentMe || isNextMe ? bigBorder : smallBorder,
+          borderTopRightRadius: isCurrentMe && isPrevMe ? smallBorder : bigBorder,
+          borderBottomRightRadius: isCurrentMe && isNextMe ? smallBorder : bigBorder,
         }}
       >
-        <Text color={isCurrentMe ? '$white' : '$darkBlue900'}>
-          {currentMessage?.text}
-        </Text>
+        <Text color={isCurrentMe ? '$white' : '$darkBlue900'}>{currentMessage?.text}</Text>
       </Box>
-      {isPrevMe &&
-        currentMessage?.sent === false &&
-        nextMessage?.sent !== false && (
-          <Box>
-            <Text fontSize={12} textAlign="right">
-              {translate('Sending')}
-            </Text>
-          </Box>
-        )}
+      {isPrevMe && currentMessage?.sent === false && nextMessage?.sent !== false && (
+        <Box>
+          <Text fontSize={12} textAlign="right">
+            {translate('Sending')}
+          </Text>
+        </Box>
+      )}
     </Box>
   );
 };

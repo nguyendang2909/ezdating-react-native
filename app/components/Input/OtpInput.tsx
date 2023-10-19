@@ -36,10 +36,7 @@ export const OtpInput: FC<FCProps> = ({ code, setCode, maximumLength = 6 }) => {
   return (
     <View style={[alignItemsCenter, justifyContentCenter]}>
       <Pressable onPress={handleOnPress}>
-        <HStack
-          space={2}
-          style={[flexDirectionRow, justifyContentSpaceEvenly, widthFull]}
-        >
+        <HStack space={2} style={[flexDirectionRow, justifyContentSpaceEvenly, widthFull]}>
           {boxArray.map((_: number, index: number) => {
             const digit = code[index] || '';
 

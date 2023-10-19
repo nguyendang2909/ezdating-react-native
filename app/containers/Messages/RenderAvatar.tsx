@@ -1,9 +1,4 @@
-import {
-  Avatar,
-  AvatarFallbackText,
-  AvatarImage,
-  Box,
-} from '@gluestack-ui/themed';
+import { Avatar, AvatarFallbackText, AvatarImage, Box } from '@gluestack-ui/themed';
 import { ChatUser } from 'app/types';
 import React from 'react';
 import { AvatarProps, IMessage } from 'react-native-gifted-chat';
@@ -14,11 +9,7 @@ type FCProps = {
   targetUser: ChatUser;
 };
 
-export const RenderAvatar: React.FC<FCProps> = ({
-  avatarProps,
-  currentUser,
-  targetUser,
-}) => {
+export const RenderAvatar: React.FC<FCProps> = ({ avatarProps, currentUser, targetUser }) => {
   const { currentMessage } = avatarProps;
   const userId = currentMessage?.user._id;
   const isCurrentUser = userId === currentUser._id;

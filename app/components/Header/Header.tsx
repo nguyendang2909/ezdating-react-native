@@ -11,10 +11,7 @@ import {
 } from 'react-native';
 
 import { colors, spacing } from '../../theme';
-import {
-  ExtendedEdge,
-  useSafeAreaInsetsStyle,
-} from '../../utils/useSafeAreaInsetsStyle';
+import { ExtendedEdge, useSafeAreaInsetsStyle } from '../../utils/useSafeAreaInsetsStyle';
 import { Icon, IconTypes } from '../Icon';
 
 export interface HeaderProps {
@@ -181,10 +178,7 @@ export function Header(props: HeaderProps) {
   const titleContent = titleTx ? formatMessage(titleTx) : title;
 
   return (
-    <View
-      w="$full"
-      style={[$containerInsets, { backgroundColor }, $containerStyleOverride]}
-    >
+    <View w="$full" style={[$containerInsets, { backgroundColor }, $containerStyleOverride]}>
       <View
         height={56}
         flexDirection="row"
@@ -212,11 +206,7 @@ export function Header(props: HeaderProps) {
             ]}
             pointerEvents="none"
           >
-            <Text
-              fontWeight="$medium"
-              size="md"
-              style={[$title, $titleStyleOverride]}
-            >
+            <Text fontWeight="$medium" size="md" style={[$title, $titleStyleOverride]}>
               {titleContent}
             </Text>
           </View>
@@ -285,10 +275,6 @@ function HeaderAction(props: HeaderActionProps) {
 
   return <View style={[$actionFillerContainer, { backgroundColor }]} />;
 }
-
-const $container: ViewStyle = {
-  width: '100%',
-};
 
 const $title: TextStyle = {
   textAlign: 'center',

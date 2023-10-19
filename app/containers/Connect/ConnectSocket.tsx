@@ -1,9 +1,5 @@
 import { useAppSelector } from 'app/hooks';
-import {
-  disconnectWebSocket,
-  getSocket,
-  socketStoreActions,
-} from 'app/store/socket.store';
+import { disconnectWebSocket, getSocket, socketStoreActions } from 'app/store/socket.store';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 

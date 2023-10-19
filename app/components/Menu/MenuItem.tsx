@@ -1,13 +1,6 @@
 import { useMessages } from 'app/hooks';
 import { TxKey } from 'app/types';
-import {
-  ChevronRightIcon,
-  HStack,
-  Icon,
-  Pressable,
-  Text,
-  View,
-} from 'native-base';
+import { ChevronRightIcon, HStack, Icon, Pressable, Text, View } from 'native-base';
 import React from 'react';
 
 type FCProps = {

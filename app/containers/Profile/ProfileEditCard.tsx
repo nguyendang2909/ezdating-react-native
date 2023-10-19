@@ -26,11 +26,7 @@ export const ProfileEditCard: React.FC = () => {
             <VStack space="1">
               <Center>
                 <View>
-                  <Icon
-                    size={10}
-                    color="#DE685A"
-                    as={<MaterialIcons name="account-circle" />}
-                  />
+                  <Icon size={10} color="#DE685A" as={<MaterialIcons name="account-circle" />} />
                 </View>
               </Center>
               <Center>

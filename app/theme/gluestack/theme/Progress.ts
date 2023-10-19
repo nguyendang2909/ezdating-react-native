@@ -6,31 +6,31 @@ export const Progress = createStyle({
   w: '100%',
   variants: {
     size: {
-      'xs': {
+      xs: {
         h: '$1',
         _filledTrack: {
           h: '$1',
         },
       },
-      'sm': {
+      sm: {
         h: '$2',
         _filledTrack: {
           h: '$2',
         },
       },
-      'md': {
+      md: {
         h: '$3',
         _filledTrack: {
           h: '$3',
         },
       },
-      'lg': {
+      lg: {
         h: '$4',
         _filledTrack: {
           h: '$4',
         },
       },
-      'xl': {
+      xl: {
         h: '$5',
         _filledTrack: {
           h: '$5',

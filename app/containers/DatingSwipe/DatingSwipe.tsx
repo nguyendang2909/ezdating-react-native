@@ -11,10 +11,7 @@ export const DatingSwipe: React.FC = () => {
   const handlePermission = async () => {
     const currentPermission = await locationPermissionsService.check();
 
-    if (
-      currentPermission === 'blocked' ||
-      currentPermission === 'unavailable'
-    ) {
+    if (currentPermission === 'blocked' || currentPermission === 'unavailable') {
       setPermission(currentPermission);
       return;
     }
@@ -38,12 +35,7 @@ export const DatingSwipe: React.FC = () => {
     }
 
     if (
-      [
-        RESULTS.BLOCKED,
-        RESULTS.DENIED,
-        RESULTS.UNAVAILABLE,
-        RESULTS.LIMITED,
-      ].includes(permission)
+      [RESULTS.BLOCKED, RESULTS.DENIED, RESULTS.UNAVAILABLE, RESULTS.LIMITED].includes(permission)
     ) {
       return <RequireEnalbeLocationSharing onChange={setPermission} />;
     }

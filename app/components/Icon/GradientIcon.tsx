@@ -12,12 +12,7 @@ export type FCProps = {
   colors?: (string | number)[];
 };
 
-export const GradientIcon: React.FC<FCProps> = ({
-  size = 24,
-  icon: Component,
-  name,
-  colors,
-}) => {
+export const GradientIcon: React.FC<FCProps> = ({ size = 24, icon: Component, name, colors }) => {
   return (
     <Box
       as={MaskedView}

@@ -10,11 +10,7 @@ type FCProps = HeaderProps & {
   isLoading: boolean;
 };
 
-export const HeaderSaveDone: React.FC<FCProps> = ({
-  onSave,
-  isLoading,
-  ...props
-}) => {
+export const HeaderSaveDone: React.FC<FCProps> = ({ onSave, isLoading, ...props }) => {
   const { formatMessage } = useMessages();
   const navigation = useNavigation();
 

@@ -56,27 +56,27 @@ export const Text = createStyle({
         fontSize: '$2xs',
         lineHeight: '$2xs',
       },
-      'xs': {
+      xs: {
         fontSize: '$xs',
         lineHeight: '$sm',
       },
 
-      'sm': {
+      sm: {
         fontSize: '$sm',
         lineHeight: '$sm',
       },
 
-      'md': {
+      md: {
         fontSize: '$md',
         lineHeight: '$md',
       },
 
-      'lg': {
+      lg: {
         fontSize: '$lg',
         lineHeight: '$xl',
       },
 
-      'xl': {
+      xl: {
         fontSize: '$xl',
         lineHeight: '$xl',
       },

@@ -13,24 +13,12 @@ type FCProps = {
   valueTx?: TxKey;
 };
 
-export const DetailRow: React.FC<FCProps> = ({
-  title,
-  titleTx,
-  leftIcon,
-  value,
-  valueTx,
-}) => {
+export const DetailRow: React.FC<FCProps> = ({ title, titleTx, leftIcon, value, valueTx }) => {
   const { formatMessage } = useMessages();
 
   return (
     <>
-      <View
-        px={16}
-        py={16}
-        backgroundColor="$backgroundLight0"
-        rounded={16}
-        flex={1}
-      >
+      <View px={16} py={16} backgroundColor="$backgroundLight0" rounded={16} flex={1}>
         <Box flexDirection="row" alignItems="center">
           {!!leftIcon && (
             <View mr={8}>

@@ -7,9 +7,7 @@ const VALUE_OBJECT = { x: 1 };
 const VALUE_STRING = JSON.stringify(VALUE_OBJECT);
 
 beforeEach(() =>
-  (AsyncStorage.getItem as jest.Mock).mockReturnValue(
-    Promise.resolve(VALUE_STRING),
-  ),
+  (AsyncStorage.getItem as jest.Mock).mockReturnValue(Promise.resolve(VALUE_STRING)),
 );
 afterEach(() => jest.clearAllMocks());
 

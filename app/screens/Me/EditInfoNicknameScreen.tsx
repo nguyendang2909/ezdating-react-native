@@ -6,15 +6,12 @@ import { useUpdateProfileMutation } from 'app/services';
 import { useFormik } from 'formik';
 import { Box, useToast, View } from 'native-base';
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 
 export const EditInfoNicknameScreen = () => {
   const { formatMessage } = useMessages();
 
   const [updateProfile] = useUpdateProfileMutation();
-
-  const dispatch = useDispatch();
 
   const { goBack } = useNavigation();
 
@@ -28,9 +25,7 @@ export const EditInfoNicknameScreen = () => {
       nickname: currentNickname || '',
     },
     validationSchema: Yup.object().shape({
-      nickname: Yup.string().required(
-        formatMessage('Please enter your nickname'),
-      ),
+      nickname: Yup.string().required(formatMessage('Please enter your nickname')),
     }),
 
     onSubmit: async values => {

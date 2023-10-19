@@ -15,43 +15,43 @@ export const BaseIcon = createStyle({
           size: 12,
         },
       },
-      'xs': {
+      xs: {
         h: '$3.5',
         w: '$3.5',
         props: {
-          //@ts-ignore
+          // @ts-ignore
           size: 14,
         },
       },
-      'sm': {
+      sm: {
         h: '$4',
         w: '$4',
         props: {
-          //@ts-ignore
+          // @ts-ignore
           size: 16,
         },
       },
-      'md': {
+      md: {
         h: '$4.5',
         w: '$4.5',
         props: {
-          //@ts-ignore
+          // @ts-ignore
           size: 18,
         },
       },
-      'lg': {
+      lg: {
         h: '$5',
         w: '$5',
         props: {
-          //@ts-ignore
+          // @ts-ignore
           size: 20,
         },
       },
-      'xl': {
+      xl: {
         h: '$6',
         w: '$6',
         props: {
-          //@ts-ignore
+          // @ts-ignore
           size: 24,
         },
       },
@@ -65,12 +65,12 @@ export const BaseIcon = createStyle({
 export const Icon = createStyle({
   props: {
     size: 'md',
-    //@ts-ignore
+    // @ts-ignore
     fill: 'none',
   },
   color: '$backgroundLight800',
   _dark: {
-    //@ts-ignore
+    // @ts-ignore
     color: '$backgroundDark400',
   },
 });

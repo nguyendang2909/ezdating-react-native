@@ -14,10 +14,7 @@ import {
 } from 'react-native';
 
 import { colors } from '../theme';
-import {
-  ExtendedEdge,
-  useSafeAreaInsetsStyle,
-} from '../utils/useSafeAreaInsetsStyle';
+import { ExtendedEdge, useSafeAreaInsetsStyle } from '../utils/useSafeAreaInsetsStyle';
 
 interface BaseScreenProps {
   /**
@@ -83,10 +80,7 @@ interface AutoScreenProps extends Omit<ScrollScreenProps, 'preset'> {
   scrollEnabledToggleThreshold?: { percent?: number; point?: number };
 }
 
-export type ScreenProps =
-  | ScrollScreenProps
-  | FixedScreenProps
-  | AutoScreenProps;
+export type ScreenProps = ScrollScreenProps | FixedScreenProps | AutoScreenProps;
 
 const isIos = Platform.OS === 'ios';
 
@@ -103,22 +97,14 @@ function useAutoPreset(props: AutoScreenProps) {
   const [scrollEnabled, setScrollEnabled] = useState(true);
 
   function updateScrollState() {
-    if (
-      scrollViewHeight.current === null ||
-      scrollViewContentHeight.current === null
-    )
-      return;
+    if (scrollViewHeight.current === null || scrollViewContentHeight.current === null) return;
 
     // check whether content fits the screen then toggle scroll state according to it
     const contentFitsScreen = (function () {
       if (point) {
-        return (
-          scrollViewContentHeight.current < scrollViewHeight.current - point
-        );
+        return scrollViewContentHeight.current < scrollViewHeight.current - point;
       } else {
-        return (
-          scrollViewContentHeight.current < scrollViewHeight.current * percent
-        );
+        return scrollViewContentHeight.current < scrollViewHeight.current * percent;
       }
     })();
 
@@ -172,9 +158,7 @@ function ScreenWithScrolling(props: ScreenProps) {
 
   const ref = useRef<ScrollView>();
 
-  const { scrollEnabled, onContentSizeChange, onLayout } = useAutoPreset(
-    props as AutoScreenProps,
-  );
+  const { scrollEnabled, onContentSizeChange, onLayout } = useAutoPreset(props as AutoScreenProps);
 
   // Add native behavior of pressing the active tab to scroll to the top of the content
   // More info at: https://reactnavigation.org/docs/use-scroll-to-top/

@@ -15,9 +15,7 @@ class NearbyUsersService extends CommonService {
       return undefined;
     }
     const minDistance = users[users.length - 1].distance;
-    const excludedUserIds = users
-      .filter(e => e.distance === minDistance)
-      .map(e => e._id);
+    const excludedUserIds = users.filter(e => e.distance === minDistance).map(e => e._id);
     const cursor = {
       minDistance,
       excludedUserIds,

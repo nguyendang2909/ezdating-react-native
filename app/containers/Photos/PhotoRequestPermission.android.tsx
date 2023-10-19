@@ -10,12 +10,8 @@ const AndroidCheckAndRequestPermission = async (permission: Permission) => {
 
 export const PhotoRequestPermission: React.FC = () => {
   useEffect(() => {
-    AndroidCheckAndRequestPermission(
-      PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
-    );
-    AndroidCheckAndRequestPermission(
-      PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
-    );
+    AndroidCheckAndRequestPermission(PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE);
+    AndroidCheckAndRequestPermission(PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE);
     AndroidCheckAndRequestPermission(PermissionsAndroid.PERMISSIONS.CAMERA);
   }, []);
 

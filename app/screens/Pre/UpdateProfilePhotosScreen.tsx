@@ -34,7 +34,6 @@ import {
 } from 'native-base';
 import React, { useState } from 'react';
 import ImageCropPicker from 'react-native-image-crop-picker';
-import { useDispatch } from 'react-redux';
 
 type FCProps = AppStackScreenProps<'UpdateProfilePhotos'>;
 
@@ -42,9 +41,8 @@ export const UpdateProfilePhotosScreen: React.FC<FCProps> = () => {
   const { formatMessage } = useMessages();
 
   const toast = useToast();
-  const { navigate, goBack } = useNavigation();
+  const { goBack } = useNavigation();
   const [removePhotoIndex, setRemovePhotoIndex] = useState<number | string | undefined>(undefined);
-  const dispatch = useDispatch();
   const [uploadPhoto] = useUploadPhotoMutation();
   const [removePhoto] = useRemovePhotoMutation();
   const mediaFiles = useAppSelector(state => state.app.profile?.mediaFiles);

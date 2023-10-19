@@ -26,24 +26,16 @@ export const UpdateProfileBasicInfoScreen: FC = () => {
     initialValues: {
       nickname: profile?.nickname,
       gender: profile?.gender,
-      birthday: profile?.birthday
-        ? moment(profile?.birthday).format('YYYY-MM-DD')
-        : undefined,
+      birthday: profile?.birthday ? moment(profile?.birthday).format('YYYY-MM-DD') : undefined,
       relationshipGoal: profile?.relationshipGoal,
       introduce: profile?.introduce,
     },
     enableReinitialize: true,
     validationSchema: Yup.object().shape({
-      nickname: Yup.string().required(
-        formatMessage('Please enter your nickname'),
-      ),
+      nickname: Yup.string().required(formatMessage('Please enter your nickname')),
       gender: Yup.number().required(formatMessage('Please enter your gender')),
-      birthday: Yup.string().required(
-        formatMessage('Please enter your birthday'),
-      ),
-      relationshipGoal: Yup.string().required(
-        formatMessage('Please choose your desire relation.'),
-      ),
+      birthday: Yup.string().required(formatMessage('Please enter your birthday')),
+      relationshipGoal: Yup.string().required(formatMessage('Please choose your desire relation.')),
       introduce: Yup.string().max(500).notRequired(),
     }),
     onSubmit: async values => {
@@ -82,11 +74,7 @@ export const UpdateProfileBasicInfoScreen: FC = () => {
                     value={formik.values.nickname}
                     onChange={formik.handleChange('nickname')}
                     placeholder={formatMessage('Please enter your nickname')}
-                    error={
-                      formik.touched.nickname
-                        ? formik.errors.nickname
-                        : undefined
-                    }
+                    error={formik.touched.nickname ? formik.errors.nickname : undefined}
                   />
                 </View>
 
@@ -95,9 +83,7 @@ export const UpdateProfileBasicInfoScreen: FC = () => {
                     isRequired
                     value={formik.values.gender}
                     onChange={handleChangeGender}
-                    error={
-                      formik.touched.gender ? formik.errors.gender : undefined
-                    }
+                    error={formik.touched.gender ? formik.errors.gender : undefined}
                   />
                 </View>
 
@@ -106,11 +92,7 @@ export const UpdateProfileBasicInfoScreen: FC = () => {
                     isRequired
                     value={formik.values.birthday}
                     onChange={formik.handleChange('birthday')}
-                    error={
-                      formik.touched.birthday
-                        ? formik.errors.birthday
-                        : undefined
-                    }
+                    error={formik.touched.birthday ? formik.errors.birthday : undefined}
                   />
                 </View>
 
@@ -120,9 +102,7 @@ export const UpdateProfileBasicInfoScreen: FC = () => {
                     value={formik.values.relationshipGoal}
                     onChange={handleChangeRelationshipGoal}
                     error={
-                      formik.touched.relationshipGoal
-                        ? formik.errors.relationshipGoal
-                        : undefined
+                      formik.touched.relationshipGoal ? formik.errors.relationshipGoal : undefined
                     }
                   />
                 </View>
@@ -134,11 +114,7 @@ export const UpdateProfileBasicInfoScreen: FC = () => {
                     onChange={formik.handleChange('introduce')}
                     placeholder={formatMessage('Please enter your introduce')}
                     maxLength={500}
-                    error={
-                      formik.touched.introduce
-                        ? formik.errors.introduce
-                        : undefined
-                    }
+                    error={formik.touched.introduce ? formik.errors.introduce : undefined}
                   />
                 </View>
               </View>

@@ -71,7 +71,7 @@ export const Checkbox = createStyle({
   },
 
   _web: {
-    'cursor': 'pointer',
+    cursor: 'pointer',
     ':disabled': {
       cursor: 'not-allowed',
     },

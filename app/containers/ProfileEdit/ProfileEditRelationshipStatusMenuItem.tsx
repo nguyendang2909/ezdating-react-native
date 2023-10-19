@@ -14,14 +14,10 @@ type FCProps = {
   onPress: (payload: ApiRequest.UpdateProfile) => void;
 };
 
-export const ProfileEditRelationshipStatusMenuItem: React.FC<FCProps> = ({
-  onPress,
-}) => {
+export const ProfileEditRelationshipStatusMenuItem: React.FC<FCProps> = ({ onPress }) => {
   const { formatMessage } = useMessages();
 
-  const currentValue = useAppSelector(
-    state => state.app.profile?.relationshipStatus,
-  );
+  const currentValue = useAppSelector(state => state.app.profile?.relationshipStatus);
 
   const [isInit, setInit] = useState<boolean>(false);
 
@@ -42,9 +38,7 @@ export const ProfileEditRelationshipStatusMenuItem: React.FC<FCProps> = ({
       <MenuItem
         titleTx="Relationship status"
         leftIcon={<MaterialIcons name="person" />}
-        {...(currentValue
-          ? { valueTx: UserRelationshipStatusMessages[currentValue] }
-          : {})}
+        {...(currentValue ? { valueTx: UserRelationshipStatusMessages[currentValue] } : {})}
         onPress={handleOpen}
       />
 
@@ -64,9 +58,7 @@ export const ProfileEditRelationshipStatusMenuItem: React.FC<FCProps> = ({
                     handleChange(value);
                   }}
                 >
-                  <Text
-                    fontWeight={currentValue === value ? 'bold' : undefined}
-                  >
+                  <Text fontWeight={currentValue === value ? 'bold' : undefined}>
                     {formatMessage(UserRelationshipStatusMessages[value])}
                   </Text>
                 </Actionsheet.Item>

@@ -1,10 +1,4 @@
-import {
-  FormControl,
-  Input,
-  Stack,
-  View,
-  WarningOutlineIcon,
-} from 'native-base';
+import { FormControl, Input, Stack, View, WarningOutlineIcon } from 'native-base';
 import React from 'react';
 
 type FCProps = {
@@ -42,10 +36,7 @@ export const FormControlInput: React.FC<FCProps> = ({
           maxLength={maxLength}
         ></Input>
         <View pb={2}>
-          <FormControl.ErrorMessage
-            position="absolute"
-            leftIcon={<WarningOutlineIcon size="xs" />}
-          >
+          <FormControl.ErrorMessage position="absolute" leftIcon={<WarningOutlineIcon size="xs" />}>
             {error}
           </FormControl.ErrorMessage>
         </View>

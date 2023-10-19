@@ -2,21 +2,12 @@ import 'react-native-get-random-values';
 
 import { PayloadAction } from '@reduxjs/toolkit';
 import Config from 'app/config';
-import {
-  SOCKET_TO_CLIENT_EVENTS,
-  SOCKET_TO_SERVER_EVENTS,
-} from 'app/constants';
+import { SOCKET_TO_CLIENT_EVENTS, SOCKET_TO_SERVER_EVENTS } from 'app/constants';
 import { AppStore } from 'app/types';
 import { Entity } from 'app/types/entity.type';
 import { SocketRequest } from 'app/types/socket-request.type';
 import { eventChannel } from 'redux-saga';
-import {
-  ActionPattern,
-  call,
-  put,
-  select as RSSelect,
-  take,
-} from 'redux-saga/effects';
+import { ActionPattern, call, put, select as RSSelect, take } from 'redux-saga/effects';
 import { io, Socket } from 'socket.io-client';
 
 import { appActions } from './app.store';
@@ -100,15 +91,12 @@ function createSocketChannel() {
       emit({ type: SOCKET_TO_CLIENT_EVENTS.NEW_MESSAGE, data: msg });
     });
 
-    socket.on(
-      SOCKET_TO_CLIENT_EVENTS.UPDATE_SENT_MESSAGE,
-      (msg: Entity.Message) => {
-        emit({
-          type: SOCKET_TO_CLIENT_EVENTS.UPDATE_SENT_MESSAGE,
-          data: msg,
-        });
-      },
-    );
+    socket.on(SOCKET_TO_CLIENT_EVENTS.UPDATE_SENT_MESSAGE, (msg: Entity.Message) => {
+      emit({
+        type: SOCKET_TO_CLIENT_EVENTS.UPDATE_SENT_MESSAGE,
+        data: msg,
+      });
+    });
 
     const unsubscribe = () => {
       socket.off('msg');

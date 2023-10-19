@@ -20,11 +20,7 @@ export const ProfileShowAgeMenuItem: React.FC<FCProps> = ({ onPress }) => {
 
   return (
     <>
-      <MenuItemSwitch
-        titleTx="Don't show my age"
-        value={isEnable}
-        onToggle={setEnable}
-      />
+      <MenuItemSwitch titleTx="Don't show my age" value={isEnable} onToggle={setEnable} />
     </>
   );
 };

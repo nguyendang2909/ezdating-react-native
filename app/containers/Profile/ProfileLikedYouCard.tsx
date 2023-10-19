@@ -27,11 +27,7 @@ export const ProfileLikedYouCard: React.FC = () => {
               <VStack space="1">
                 <Center>
                   <View>
-                    <Icon
-                      size={10}
-                      color="#DE685A"
-                      as={<FontAwesome name="heart" />}
-                    />
+                    <Icon size={10} color="#DE685A" as={<FontAwesome name="heart" />} />
                   </View>
                 </Center>
                 <Center>

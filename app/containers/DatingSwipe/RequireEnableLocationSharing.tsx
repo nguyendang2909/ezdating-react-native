@@ -9,9 +9,7 @@ type FCProps = {
   onChange: (value: PermissionStatus | null) => void;
 };
 
-export const RequireEnalbeLocationSharing: React.FC<FCProps> = ({
-  onChange,
-}) => {
+export const RequireEnalbeLocationSharing: React.FC<FCProps> = ({ onChange }) => {
   const { formatMessage } = useMessages();
 
   const handlePress = async () => {
@@ -32,15 +30,14 @@ export const RequireEnalbeLocationSharing: React.FC<FCProps> = ({
 
       <View mt={5} alignItems="center" px={4}>
         <Text textAlign="center">
-          To use EZ Dating, you need to enable your location sharing so we can
-          show you who&apos;s around.
+          To use EZ Dating, you need to enable your location sharing so we can show you who&apos;s
+          around.
         </Text>
       </View>
 
       <View mt={5} alignItems="center" px={4}>
         <Text textAlign="center">
-          Go to Settings {'>'} EZDating {'>'} Location {'>'} Enable Location
-          While Using the App
+          Go to Settings {'>'} EZDating {'>'} Location {'>'} Enable Location While Using the App
         </Text>
       </View>
 

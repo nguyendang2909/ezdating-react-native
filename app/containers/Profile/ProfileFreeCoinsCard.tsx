@@ -8,20 +8,11 @@ export const ProfileFreeCoinsCard: React.FC = () => {
 
   return (
     <>
-      <View
-        borderWidth="1"
-        borderRadius="2xl"
-        borderColor="coolGray.200"
-        py="4"
-      >
+      <View borderWidth="1" borderRadius="2xl" borderColor="coolGray.200" py="4">
         <VStack space="1">
           <Center>
             <View>
-              <Icon
-                size={10}
-                color="#e9ad03"
-                as={<FontAwesome5 name="coins" />}
-              />
+              <Icon size={10} color="#e9ad03" as={<FontAwesome5 name="coins" />} />
             </View>
           </Center>
           <Center>

@@ -108,9 +108,4 @@ export declare namespace AppStore {
   };
 }
 
-export type AppThunkAction = ThunkAction<
-  void,
-  AppStore.RootState,
-  unknown,
-  Action
->;
+export type AppThunkAction = ThunkAction<void, AppStore.RootState, unknown, Action>;

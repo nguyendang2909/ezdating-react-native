@@ -1,21 +1,14 @@
 import { Box, ButtonSpinner, FlatList } from '@gluestack-ui/themed';
-import { useNavigation } from '@react-navigation/native';
 import { useNearbyUsers } from 'app/hooks/useNearbyUsers';
 import { Entity } from 'app/types/entity.type';
 import { scrollUtil } from 'app/utils/scroll.util';
 import { Spinner } from 'native-base';
 import React from 'react';
-import {
-  NativeScrollEvent,
-  NativeSyntheticEvent,
-  RefreshControl,
-} from 'react-native';
+import { NativeScrollEvent, NativeSyntheticEvent, RefreshControl } from 'react-native';
 
 import { NearbyUserItem } from './NearbyUserItem';
 
 export const DatingNearbyFlatList: React.FC = () => {
-  const navigator = useNavigation();
-
   const {
     data: nearbyUsers,
     fetchNext,
@@ -39,10 +32,7 @@ export const DatingNearbyFlatList: React.FC = () => {
           <FlatList
             showsVerticalScrollIndicator={false}
             refreshControl={
-              <RefreshControl
-                refreshing={isLoadingNewest}
-                onRefresh={fetchNewest}
-              ></RefreshControl>
+              <RefreshControl refreshing={isLoadingNewest} onRefresh={fetchNewest}></RefreshControl>
             }
             onScroll={handleScroll}
             numColumns={2}
@@ -58,9 +48,7 @@ export const DatingNearbyFlatList: React.FC = () => {
             }
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
-            renderItem={({ item }: { item: Entity.User }) => (
-              <NearbyUserItem user={item} />
-            )}
+            renderItem={({ item }: { item: Entity.User }) => <NearbyUserItem user={item} />}
           ></FlatList>
         </>
       ) : (

@@ -16,17 +16,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Platform } from 'react-native';
 import { ArgType } from 'reactotron-core-client';
 
-import {
-  goBack,
-  navigate,
-  resetRoot,
-} from '../../navigators/navigationUtilities';
+import { goBack, navigate, resetRoot } from '../../navigators/navigationUtilities';
 import { clear } from '../../utils/storage';
 import { Reactotron } from './reactotronClient';
-import {
-  DEFAULT_REACTOTRON_CONFIG,
-  ReactotronConfig,
-} from './reactotronConfig';
+import { DEFAULT_REACTOTRON_CONFIG, ReactotronConfig } from './reactotronConfig';
 import { fakeReactotron } from './reactotronFake';
 
 /**

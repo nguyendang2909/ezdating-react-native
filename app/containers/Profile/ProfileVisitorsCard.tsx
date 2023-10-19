@@ -7,20 +7,11 @@ export const ProfileVisitorsCard: React.FC = () => {
   const { formatMessage } = useMessages();
   return (
     <>
-      <View
-        borderWidth="1"
-        borderRadius="2xl"
-        borderColor="coolGray.200"
-        py="4"
-      >
+      <View borderWidth="1" borderRadius="2xl" borderColor="coolGray.200" py="4">
         <VStack space="1">
           <Center>
             <View>
-              <Icon
-                size={10}
-                color="#2e536f"
-                as={<MaterialIcons name="remove-red-eye" />}
-              />
+              <Icon size={10} color="#2e536f" as={<MaterialIcons name="remove-red-eye" />} />
             </View>
           </Center>
           <Center>
