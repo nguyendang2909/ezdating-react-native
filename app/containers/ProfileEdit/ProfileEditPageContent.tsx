@@ -1,5 +1,5 @@
+import { useUpdateProfileMutation } from 'app/api';
 import { useMessages } from 'app/hooks';
-import { useUpdateProfileMutation } from 'app/services';
 import { notificationsService } from 'app/services/notifications/notifications.service';
 import { paddingHorizontal } from 'app/styles';
 import { colors, spacing } from 'app/theme';

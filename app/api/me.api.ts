@@ -37,5 +37,9 @@ const meApi = api.injectEndpoints({
   }),
 });
 
-export const { useGetMyProfileQuery, useUpdateProfileMutation, useUpdateBasicProfileMutation } =
-  meApi;
+export const {
+  useGetMyProfileQuery,
+  useUpdateProfileMutation,
+  useUpdateBasicProfileMutation,
+  endpoints: meEndpoints,
+} = meApi;

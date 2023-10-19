@@ -2,7 +2,7 @@ import {
   useGetNewestConversationsMutation,
   useGetNextConversationsMutation,
   useRefreshConversationsQuery,
-} from 'app/services/api';
+} from 'app/api';
 import { conversationsService } from 'app/services/conversationsService';
 import { matchSelects } from 'app/store/match/match.store';
 import moment from 'moment';

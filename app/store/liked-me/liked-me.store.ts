@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { endpoints } from 'app/services/api';
+import { endpoints } from 'app/api';
 import { likedMeService } from 'app/services/liked-me.service';
 import { AppStore } from 'app/types/app-store.type';
 import moment from 'moment';

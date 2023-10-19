@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import { api } from 'app/services/api';
+import { api } from 'app/api';
 import { MMKV } from 'react-native-mmkv';
 import {
   FLUSH,

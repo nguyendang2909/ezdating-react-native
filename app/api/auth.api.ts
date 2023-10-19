@@ -23,4 +23,8 @@ const authApi = api.injectEndpoints({
   }),
 });
 
-export const { useSignInWithPhoneNumberMutation, useLogoutMutation } = authApi;
+export const {
+  useSignInWithPhoneNumberMutation,
+  useLogoutMutation,
+  endpoints: authEndpoints,
+} = authApi;

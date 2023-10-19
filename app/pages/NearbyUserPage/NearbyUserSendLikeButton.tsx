@@ -1,7 +1,7 @@
 import { Box } from '@gluestack-ui/themed';
+import { useSendLikeMutation } from 'app/api';
 import { LoadingButtonIcon } from 'app/components/Button/LoadingButtonIcon';
 import { FontAwesome } from 'app/components/Icon/Lib';
-import { useSendLikeMutation } from 'app/services/api';
 import React, { useState } from 'react';
 
 type FCProps = {

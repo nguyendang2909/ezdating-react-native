@@ -1,5 +1,5 @@
 import { useMutation, UseMutationOptions } from '@tanstack/react-query';
-import { viewsApi } from 'app/services/api/views.api';
+import { viewsApi } from 'app/api/views.api';
 import { ApiRequest } from 'app/types/api-request.type';
 import { ApiResponse } from 'app/types/api-response.type';
 import { AxiosError } from 'axios';

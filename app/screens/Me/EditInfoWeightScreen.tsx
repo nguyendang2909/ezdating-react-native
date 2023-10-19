@@ -1,8 +1,8 @@
 import { Picker } from '@react-native-picker/picker';
 import { useNavigation } from '@react-navigation/native';
+import { api } from 'app/api';
 import { HeaderSaveModal } from 'app/components/Header/HeaderSaveModal';
 import { useAppSelector, useMessages } from 'app/hooks';
-import { api } from 'app/services/api';
 import { notificationsService } from 'app/services/notifications/notifications.service';
 import { useFormik } from 'formik';
 import { Box, Text, View } from 'native-base';

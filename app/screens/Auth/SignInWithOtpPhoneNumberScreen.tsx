@@ -1,8 +1,8 @@
 import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import { useNavigation } from '@react-navigation/native';
+import { useGetMyProfileQuery, useSignInWithPhoneNumberMutation } from 'app/api';
 import { OtpInput } from 'app/components/Input/OtpInput';
 import { useMessages } from 'app/hooks';
-import { useGetMyProfileQuery, useSignInWithPhoneNumberMutation } from 'app/services/api';
 import {
   flexGrow,
   heightFull,

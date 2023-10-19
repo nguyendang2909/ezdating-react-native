@@ -1,10 +1,10 @@
 import { Box, Divider, ScrollView, Text, View } from '@gluestack-ui/themed';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
 import { useNavigation } from '@react-navigation/native';
+import { useRefreshNearbyUsersQuery, useUpdateProfileMutation } from 'app/api';
 import { HeaderSaveDone } from 'app/components/Header/HeaderSaveDone';
 import { useAppSelector, useMessages } from 'app/hooks';
 import { EditFilterGenderMenuItem } from 'app/pages/EditMatchFilter/EditFilterGenderMenuItem';
-import { useRefreshNearbyUsersQuery, useUpdateProfileMutation } from 'app/services';
 import { colors } from 'app/theme';
 import { FormParams } from 'app/types/form-params.type';
 import { useFormik } from 'formik';

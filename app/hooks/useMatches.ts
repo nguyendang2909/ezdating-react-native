@@ -2,7 +2,7 @@ import {
   useGetNewestMatchesMutation,
   useGetNextMatchesMutation,
   useRefreshMatchesQuery,
-} from 'app/services/api';
+} from 'app/api';
 import { matchesService } from 'app/services/matches.service';
 import { matchSelects } from 'app/store/match/match.store';
 import moment from 'moment';

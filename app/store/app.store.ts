@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { endpoints } from 'app/services';
+import { authEndpoints, meEndpoints } from 'app/api';
 import { ApiResponse } from 'app/types/api-response.type';
 import { AppStore } from 'app/types/app-store.type';
 import { Entity } from 'app/types/entity.type';
@@ -53,13 +53,13 @@ export const appSlice = createSlice({
   },
   extraReducers: builder => {
     builder.addMatcher(
-      endpoints.signInWithPhoneNumber.matchFulfilled,
+      authEndpoints.signInWithPhoneNumber.matchFulfilled,
       (state, { payload: { data } }) => {
         state.accessToken = data.accessToken;
         state.refreshToken = data.refreshToken;
       },
     );
-    builder.addMatcher(endpoints.getMyProfile.matchFulfilled, (state, { payload: { data } }) => {
+    builder.addMatcher(meEndpoints.getMyProfile.matchFulfilled, (state, { payload: { data } }) => {
       state.profile = data;
     });
   },

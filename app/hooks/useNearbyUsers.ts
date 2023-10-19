@@ -2,7 +2,7 @@ import {
   useGetNewestUsersMutation,
   useGetNextNearbyUsersMutation,
   useRefreshNearbyUsersQuery,
-} from 'app/services/api';
+} from 'app/api';
 import { nearbyUsersService } from 'app/services/nearby-users.service';
 
 import { useAppSelector } from './useAppSelector';

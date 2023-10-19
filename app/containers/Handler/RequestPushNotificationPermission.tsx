@@ -1,6 +1,6 @@
 import messaging from '@react-native-firebase/messaging';
+import { useUpdateSignedDeviceMutation } from 'app/api';
 import { useAppSelector } from 'app/hooks';
-import { useUpdateSignedDeviceMutation } from 'app/services';
 import { signedDevicesService } from 'app/services/signed-devices.service';
 import React, { useCallback, useEffect } from 'react';
 

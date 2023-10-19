@@ -43,4 +43,5 @@ export const {
   useRefreshNearbyUsersQuery,
   useGetNextNearbyUsersMutation,
   useGetNewestUsersMutation,
+  endpoints: userEndpoints,
 } = usersApi;

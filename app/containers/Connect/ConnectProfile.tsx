@@ -1,5 +1,5 @@
+import { useGetMyProfileQuery } from 'app/api';
 import { useAppSelector } from 'app/hooks';
-import { useGetMyProfileQuery } from 'app/services/api';
 import React from 'react';
 
 export const ConnectProfile: React.FC = () => {

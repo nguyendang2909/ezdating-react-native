@@ -1,8 +1,8 @@
 import { Button } from '@gluestack-ui/themed';
+import { api, useLogoutMutation } from 'app/api';
 import { LoadingButton } from 'app/components/Button/LoadingButton';
 import { useAppSelector } from 'app/hooks';
 import { messages } from 'app/locales/messages';
-import { api, useLogoutMutation } from 'app/services/api';
 import { appActions } from 'app/store/app.store';
 import React from 'react';
 import { useIntl } from 'react-intl';

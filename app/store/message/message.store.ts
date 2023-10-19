@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { endpoints } from 'app/services/api';
+import { endpoints } from 'app/api';
 import { messagesService } from 'app/services/messages.service';
 import { AppStore } from 'app/types/app-store.type';
 import { Entity } from 'app/types/entity.type';

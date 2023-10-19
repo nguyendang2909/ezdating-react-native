@@ -14,7 +14,7 @@ import {
 import createSagaMiddleware from 'redux-saga';
 import thunk from 'redux-thunk';
 
-import { api } from '../services/api';
+import { api } from '../api';
 import { appReducer } from './app.store';
 import { likedMeReducer } from './liked-me/liked-me.store';
 import { likeReducer } from './likes.store';

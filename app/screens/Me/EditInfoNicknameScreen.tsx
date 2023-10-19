@@ -1,8 +1,8 @@
 import { useNavigation } from '@react-navigation/native';
+import { useUpdateProfileMutation } from 'app/api';
 import { FormControlInput } from 'app/components/Form/FormControlInput';
 import { HeaderSaveModal } from 'app/components/Header/HeaderSaveModal';
 import { useAppSelector, useMessages } from 'app/hooks';
-import { useUpdateProfileMutation } from 'app/services';
 import { useFormik } from 'formik';
 import { Box, useToast, View } from 'native-base';
 import React from 'react';

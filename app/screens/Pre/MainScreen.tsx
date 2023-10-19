@@ -1,8 +1,8 @@
 import { Box, Spinner } from '@gluestack-ui/themed';
 import { useNavigation } from '@react-navigation/native';
+import { useGetMyProfileQuery } from 'app/api';
 import { UserStatuses } from 'app/constants';
 import { useAppSelector } from 'app/hooks';
-import { useGetMyProfileQuery } from 'app/services';
 import React, { useEffect } from 'react';
 
 export const MainScreen: React.FC = () => {

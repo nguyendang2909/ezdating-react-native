@@ -1,4 +1,4 @@
-import { useUpdateProfileMutation } from 'app/services';
+import { useUpdateProfileMutation } from 'app/api';
 import React, { useEffect } from 'react';
 import Geolocation from 'react-native-geolocation-service';
 

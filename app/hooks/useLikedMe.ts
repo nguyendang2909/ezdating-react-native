@@ -2,7 +2,7 @@ import {
   useGetNewestLikedMeMutation,
   useGetNextLikedMeMutation,
   useRefreshLikedMeQuery,
-} from 'app/services/api';
+} from 'app/api';
 import { likedMeService } from 'app/services/liked-me.service';
 import moment from 'moment';
 

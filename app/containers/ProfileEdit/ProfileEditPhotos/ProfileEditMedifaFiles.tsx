@@ -1,6 +1,6 @@
 import { useActionSheet } from '@expo/react-native-action-sheet';
+import { useRemovePhotoMutation, useUploadPhotoMutation } from 'app/api/media-files.api';
 import { useAppSelector, useMessages } from 'app/hooks';
-import { useRemovePhotoMutation, useUploadPhotoMutation } from 'app/services/api/media-files.api';
 import { flexDirectionRow, flexWrapWrap, padding, width } from 'app/styles';
 import { spacing } from 'app/theme';
 import _ from 'lodash';

@@ -1,4 +1,4 @@
-import { useGetNewestMessagesMutation, useRefreshMessagesQuery } from 'app/services/api';
+import { useGetNewestMessagesMutation, useRefreshMessagesQuery } from 'app/api';
 import { messagesService } from 'app/services/messages.service';
 import { socketStoreActions } from 'app/store/socket.store';
 import _ from 'lodash';

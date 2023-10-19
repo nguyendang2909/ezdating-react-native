@@ -1,8 +1,8 @@
+import { useGetMyProfileQuery, useUpdateProfileMutation } from 'app/api';
 import { BirthDayFormControl } from 'app/components/Form/BirthDayFormControl';
 import { FormControlInput } from 'app/components/Form/FormControlInput';
 import { SelectGenderFormControl } from 'app/components/Form/SelectGenderForm';
 import { useMessages } from 'app/hooks';
-import { api, useUpdateProfileMutation } from 'app/services/api';
 import { FormParams } from 'app/types/form-params.type';
 import { useFormik } from 'formik';
 import { Button, Spinner, View } from 'native-base';
@@ -14,7 +14,7 @@ export const InputBasicInforForm: FC = () => {
 
   const [updateProfile] = useUpdateProfileMutation();
 
-  const { data: profileData } = api.useGetMyProfileQuery();
+  const { data: profileData } = useGetMyProfileQuery();
   const profile = profileData?.data;
   const formik = useFormik<FormParams.BasicInfo>({
     initialValues: {
