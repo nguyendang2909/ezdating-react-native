@@ -29,7 +29,9 @@ export const api = createApi({
     if (process.env.NODE_ENV === 'development') {
       if (result.error) {
         console.log(
-          `Request to url: ${result.meta?.request.url} with query: ${result.meta?.request.body} error: ${result.error.data}`,
+          `Request ${JSON.stringify(args)} ${baseQueryApi} error: ${JSON.stringify(
+            result.error.data,
+          )}`,
         );
       }
     }

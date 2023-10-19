@@ -27,7 +27,6 @@ export const ProfileEditPageContent: React.FC = () => {
   const handleEditProfile = async (payload: ApiRequest.UpdateProfile) => {
     try {
       await updateProfile(payload).unwrap();
-      notificationsService.updateSuccess();
     } catch (err) {
       notificationsService.updateFail();
     }
