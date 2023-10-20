@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { endpoints } from 'app/api';
+import { matchEndpoints } from 'app/api';
 import { matchesService } from 'app/services/matches.service';
 import { AppStore } from 'app/types/app-store.type';
 import { Entity } from 'app/types/entity.type';
@@ -88,10 +88,9 @@ export const matchSlice = createSlice({
       state.infoConversations = {};
       state.infoMatches = {};
     });
-
     builder
       .addMatcher(
-        endpoints.refreshMatches.matchFulfilled,
+        matchEndpoints.refreshMatches.matchFulfilled,
         (state, { payload: { data, pagination } }) => {
           state.infoMatches = {
             ...state.infoMatches,
@@ -103,7 +102,7 @@ export const matchSlice = createSlice({
         },
       )
       .addMatcher(
-        endpoints.getNewestMatches.matchFulfilled,
+        matchEndpoints.getNewestMatches.matchFulfilled,
         (state, { payload: { data, pagination } }) => {
           state.infoMatches = {
             ...state.infoMatches,
@@ -115,7 +114,7 @@ export const matchSlice = createSlice({
         },
       )
       .addMatcher(
-        endpoints.getNextMatches.matchFulfilled,
+        matchEndpoints.getNextMatches.matchFulfilled,
         (state, { payload: { data, pagination } }) => {
           state.infoMatches = {
             ...state.infoMatches,
@@ -126,7 +125,7 @@ export const matchSlice = createSlice({
         },
       )
       .addMatcher(
-        endpoints.refreshConversations.matchFulfilled,
+        matchEndpoints.refreshConversations.matchFulfilled,
         (state, { payload: { data, pagination } }) => {
           state.infoConversations = {
             ...state.infoConversations,
@@ -138,7 +137,7 @@ export const matchSlice = createSlice({
         },
       )
       .addMatcher(
-        endpoints.getNewestConversations.matchFulfilled,
+        matchEndpoints.getNewestConversations.matchFulfilled,
         (state, { payload: { data, pagination } }) => {
           state.infoConversations = {
             ...state.infoConversations,
@@ -150,7 +149,7 @@ export const matchSlice = createSlice({
         },
       )
       .addMatcher(
-        endpoints.getNextConversations.matchFulfilled,
+        matchEndpoints.getNextConversations.matchFulfilled,
         (state, { payload: { data, pagination } }) => {
           state.infoConversations = {
             ...state.infoConversations,
@@ -161,11 +160,9 @@ export const matchSlice = createSlice({
           state.data = matchesService.sortAndUniq(matches, state.data);
         },
       )
-      .addMatcher(endpoints.unmatch.matchFulfilled, (state, { payload: { data } }) => {
+      .addMatcher(matchEndpoints.unmatch.matchFulfilled, (state, { payload: { data } }) => {
         const matchId = data._id;
         if (matchId) {
-          console.log(11111, matchId);
-          console.log(state.data.find(e => e._id === matchId));
           state.data = state.data.filter(e => e._id !== matchId);
         }
       });

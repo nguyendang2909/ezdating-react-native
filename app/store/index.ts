@@ -46,17 +46,7 @@ const persistedReducer = persistReducer(
   {
     key: 'root',
     storage: AsyncStorage,
-    whitelist: [
-      'theme',
-      'auth',
-      'app',
-      'conversation',
-      'match',
-      'user',
-      'like',
-      'likedMe',
-      'message',
-    ],
+    whitelist: ['theme', 'app', 'match', 'user', 'message'],
   },
   reducers,
 );

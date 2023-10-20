@@ -4,6 +4,7 @@ import Geolocation from 'react-native-geolocation-service';
 
 export const UpdateGeolocation: React.FC = () => {
   const [updateProfile] = useUpdateProfileMutation();
+
   useEffect(() => {
     Geolocation.getCurrentPosition(
       async position => {

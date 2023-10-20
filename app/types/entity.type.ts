@@ -7,6 +7,7 @@ import {
   UserRole,
   UserStatus,
 } from 'app/constants';
+import { Membership } from '.';
 
 export declare namespace Entity {
   type BaseEntity = {
@@ -49,15 +50,17 @@ export declare namespace Entity {
       filterMaxAge?: number;
       filterMaxDistance?: number;
       filterMinAge?: number;
-      lastActivatedAt: string;
-      mediaFiles: MediaFile[];
-      nickname: string;
-      password: string;
-      phoneNumber: string;
-      relationshipStatus: UserRelationshipStatus;
-      role: UserRole;
+      lastActivatedAt?: string;
+      mediaFiles?: MediaFile[];
+      membership?: Membership;
+      nickname?: string;
+      password?: string;
+      phoneNumber?: string;
+      relationshipStatus?: UserRelationshipStatus;
+      role?: UserRole;
       weight: number;
       status?: UserStatus;
+
       // jobTitle: string;
       // school: string;
       // smoking: ESmoking;

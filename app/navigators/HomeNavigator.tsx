@@ -1,11 +1,13 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { GradientIcon } from 'app/components/Icon/GradientIcon';
+import { AntDesign } from 'app/components/Icon/Lib';
 import { useMessages } from 'app/hooks';
 import { AppStackScreenProps } from 'app/navigators';
 import { ConversationsScreen } from 'app/screens/Conversations/ConversationsScreen';
 import { DatingNearbyScreen } from 'app/screens/DatingNearby/DatingNearbyScreen';
 import { DatingSwipeScreen } from 'app/screens/DatingSwipe/DatingSwipeScreen';
 import { ProfileScreen } from 'app/screens/Me/ProfileScreen';
+import { StarScreen } from 'app/screens/Star/StarScreen';
 import { backgroundColor, borderTopColor } from 'app/styles';
 import { colors, spacing } from 'app/theme';
 import React, { FC } from 'react';
@@ -19,6 +21,7 @@ export type HomeTabParamList = {
   DatingNearby: undefined;
   Conversations: undefined;
   Profile: undefined;
+  Star: undefined;
 };
 
 type FCProps = AppStackScreenProps<'Home'>;
@@ -88,6 +91,26 @@ export const HomeNavigator: FC<FCProps> = () => {
               size={30}
               name="location-on"
               icon={MaterialIcons}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Star"
+        component={StarScreen}
+        options={{
+          tabBarShowLabel: false,
+          //   tabBarLabel: formatMessage('Nearby'),
+          tabBarIcon: ({ focused }) => (
+            <GradientIcon
+              {...(!focused
+                ? {
+                    colors: [colors.palette.neutral500, colors.palette.neutral500],
+                  }
+                : {})}
+              size={30}
+              name="star"
+              icon={AntDesign}
             />
           ),
         }}

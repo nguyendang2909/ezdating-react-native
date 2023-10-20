@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { endpoints } from 'app/api';
+import { userEndpoints } from 'app/api';
 import { nearbyUsersService } from 'app/services/nearby-users.service';
 import { AppStore } from 'app/types/app-store.type';
 import moment from 'moment';
@@ -24,7 +24,7 @@ export const nearbyUserSlice = createSlice({
     });
     builder
       .addMatcher(
-        endpoints.refreshNearbyUsers.matchFulfilled,
+        userEndpoints.refreshNearbyUsers.matchFulfilled,
         (state, { payload: { data, pagination } }) => {
           state.data = data;
           state.info = {
@@ -35,7 +35,7 @@ export const nearbyUserSlice = createSlice({
         },
       )
       .addMatcher(
-        endpoints.getNewestUsers.matchFulfilled,
+        userEndpoints.getNewestUsers.matchFulfilled,
         (state, { payload: { data, pagination } }) => {
           state.data = nearbyUsersService.sortAndUniq(data, state.data);
           state.info = {
@@ -46,7 +46,7 @@ export const nearbyUserSlice = createSlice({
         },
       )
       .addMatcher(
-        endpoints.getNextNearbyUsers.matchFulfilled,
+        userEndpoints.getNextNearbyUsers.matchFulfilled,
         (state, { payload: { data, pagination } }) => {
           state.data = nearbyUsersService.sortAndUniq(data, state.data);
           state.info = {

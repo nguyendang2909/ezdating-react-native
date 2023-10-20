@@ -1,5 +1,6 @@
 export * from './AutoImage';
 export * from './Box';
+export * from './Card';
 export * from './Header/Header';
 export * from './Icon';
 export * from './Image';

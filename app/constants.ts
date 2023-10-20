@@ -232,4 +232,11 @@ export const SCREENS: Record<keyof AppStackParamList, keyof AppStackParamList> =
   SignInWithPhoneNumber: 'SignInWithPhoneNumber',
   Welcome: 'Welcome',
   ChatProfile: 'ChatProfile',
+  LikedMeProfile: 'LikedMeProfile',
 } as const;
+
+export const MEMBERSHIPS = {
+  FREE: 1,
+  GOLD: 2,
+  PLATINUM: 3,
+};

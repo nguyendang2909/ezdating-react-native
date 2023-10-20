@@ -79,4 +79,5 @@ export const {
   useRefreshConversationsQuery,
   useGetNewestConversationsMutation,
   useGetNextConversationsMutation,
+  endpoints: matchEndpoints,
 } = matchesApi;

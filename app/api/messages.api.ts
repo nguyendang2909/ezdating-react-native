@@ -30,5 +30,9 @@ const messagesApi = api.injectEndpoints({
   }),
 });
 
-export const { useRefreshMessagesQuery, useGetNewestMessagesMutation, useGetNextMessagesMutation } =
-  messagesApi;
+export const {
+  useRefreshMessagesQuery,
+  useGetNewestMessagesMutation,
+  useGetNextMessagesMutation,
+  endpoints: messageEndpoints,
+} = messagesApi;

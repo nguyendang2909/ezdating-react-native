@@ -16,6 +16,7 @@ import {
 import { LikedMeScreen } from 'app/screens/Me/LikedMeScreen';
 import { ProfileSettingScreen } from 'app/screens/Me/ProfileSettingScreen';
 import { MainScreen } from 'app/screens/Pre/MainScreen';
+import { LikedMeProfileScreen } from 'app/screens/Star/LikedMeProfileScreen';
 import { colors } from 'app/theme';
 import React from 'react';
 
@@ -79,6 +80,7 @@ export const MainStack: React.FC = () => {
       <Stack.Screen name={SCREENS.Messages} component={MessagesScreen} />
       <Stack.Screen name={SCREENS.EditMatchFilter} component={EditMatchFilterScreen}></Stack.Screen>
       <Stack.Screen name={SCREENS.ChatProfile} component={ChatProfileScreen}></Stack.Screen>
+      <Stack.Screen name={SCREENS.LikedMeProfile} component={LikedMeProfileScreen}></Stack.Screen>
     </Stack.Navigator>
   );
 };

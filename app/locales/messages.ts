@@ -352,4 +352,8 @@ export const messages = defineMessages({
     defaultMessage: 'Yes',
     id: '6b99acba1e',
   },
+  'Update to Gold to see people who already liked you.': {
+    defaultMessage: 'Update to Gold to see people who already liked you.',
+    id: '6ab6b58adb',
+  },
 });

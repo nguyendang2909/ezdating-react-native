@@ -40,4 +40,5 @@ export const {
   useGetNewestLikedMeMutation,
   useGetNextLikedMeMutation,
   useSendLikeMutation,
+  endpoints: likeEndpoints,
 } = likesApi;

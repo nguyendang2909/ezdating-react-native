@@ -1,6 +1,6 @@
 import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import { useNavigation } from '@react-navigation/native';
-import { useGetMyProfileQuery, useSignInWithPhoneNumberMutation } from 'app/api';
+import { useSignInWithPhoneNumberMutation } from 'app/api';
 import { OtpInput } from 'app/components/Input/OtpInput';
 import { useMessages } from 'app/hooks';
 import {
@@ -48,7 +48,6 @@ export const SignInWithOtpPhoneNumberScreen: FC<FCProps> = props => {
   const { goBack } = useNavigation();
   const { otpConfirm, user } = props.route.params;
   const [signInWithPhoneNumberMutation] = useSignInWithPhoneNumberMutation();
-  useGetMyProfileQuery(undefined, { skip: true });
 
   const [isSubmiting, setIsSubmitting] = useState<boolean>(false);
   const [isError, setError] = useState<boolean>(false);

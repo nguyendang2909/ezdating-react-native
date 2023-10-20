@@ -20,7 +20,6 @@ class NearbyUsersService extends CommonService {
       minDistance,
       excludedUserIds,
     };
-
     return this.encodeFromObj(cursor);
   }
 }

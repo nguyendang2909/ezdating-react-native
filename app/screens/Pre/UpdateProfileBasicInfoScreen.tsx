@@ -1,11 +1,11 @@
 import { useNavigation } from '@react-navigation/native';
+import { useUpdateBasicProfileMutation } from 'app/api';
 import { BirthDayFormControl } from 'app/components/Form/BirthDayFormControl';
 import { FormControlInput } from 'app/components/Form/FormControlInput';
 import { RelationshipGoalFormControl } from 'app/components/Form/RelationshipGoalFormControl';
 import { SelectGenderFormControl } from 'app/components/Form/SelectGenderForm';
 import { UserGender, UserRelationshipGoal } from 'app/constants';
 import { useAppSelector, useMessages } from 'app/hooks';
-import { useUpdateBasicProfileMutation } from 'app/services';
 import { flexGrow } from 'app/styles';
 import { FormParams } from 'app/types/form-params.type';
 import { useFormik } from 'formik';

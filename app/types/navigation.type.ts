@@ -16,6 +16,9 @@ export type AppStackParamList = {
   UpdateProfilePhotos: undefined;
   Home: NavigatorScreenParams<HomeTabParamList>;
   LikedMe: undefined;
+  LikedMeProfile: {
+    user: Entity.User;
+  };
   Main: undefined;
   Messages: {
     matchId: string;

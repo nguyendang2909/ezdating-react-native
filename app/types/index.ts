@@ -1,3 +1,4 @@
+import { MEMBERSHIPS } from 'app/constants';
 import { messages } from 'app/locales/messages';
 
 export * from './api-request.type';
@@ -22,6 +23,8 @@ export type ChatUser = {
   name?: string;
   avatar?: string;
 };
+
+export type Membership = (typeof MEMBERSHIPS)[keyof typeof MEMBERSHIPS];
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator

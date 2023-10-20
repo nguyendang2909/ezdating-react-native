@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { endpoints } from 'app/api';
+import { likeEndpoints } from 'app/api';
 import { likedMeService } from 'app/services/liked-me.service';
 import { AppStore } from 'app/types/app-store.type';
 import moment from 'moment';
@@ -22,7 +22,7 @@ export const likedMeSlice = createSlice({
     });
     builder
       .addMatcher(
-        endpoints.refreshLikedMe.matchFulfilled,
+        likeEndpoints.refreshLikedMe.matchFulfilled,
         (state, { payload: { data, pagination } }) => {
           state.info = {
             ...state.info,
@@ -34,7 +34,7 @@ export const likedMeSlice = createSlice({
         },
       )
       .addMatcher(
-        endpoints.getNewestLikedMe.matchFulfilled,
+        likeEndpoints.getNewestLikedMe.matchFulfilled,
         (state, { payload: { data, pagination } }) => {
           state.info = {
             ...state.info,
@@ -46,7 +46,7 @@ export const likedMeSlice = createSlice({
         },
       )
       .addMatcher(
-        endpoints.getNextLikedMe.matchFulfilled,
+        likeEndpoints.getNextLikedMe.matchFulfilled,
         (state, { payload: { data, pagination } }) => {
           state.info = {
             ...state.info,

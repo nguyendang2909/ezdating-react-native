@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { endpoints } from 'app/api';
+import { messageEndpoints } from 'app/api';
 import { messagesService } from 'app/services/messages.service';
 import { AppStore } from 'app/types/app-store.type';
 import { Entity } from 'app/types/entity.type';
@@ -89,7 +89,7 @@ export const messageSlice = createSlice({
     });
     builder
       .addMatcher(
-        endpoints.refreshMessages.matchFulfilled,
+        messageEndpoints.refreshMessages.matchFulfilled,
         (state, { payload: { _matchId, data, pagination } }) => {
           state.info[_matchId] = {
             ...state.info[_matchId],
@@ -102,7 +102,7 @@ export const messageSlice = createSlice({
         },
       )
       .addMatcher(
-        endpoints.getNewestMessages.matchFulfilled,
+        messageEndpoints.getNewestMessages.matchFulfilled,
         (state, { payload: { _matchId, data, pagination } }) => {
           state.info[_matchId] = {
             ...state.info[_matchId],
@@ -115,7 +115,7 @@ export const messageSlice = createSlice({
         },
       )
       .addMatcher(
-        endpoints.getNewestMessages.matchFulfilled,
+        messageEndpoints.getNewestMessages.matchFulfilled,
         (state, { payload: { _matchId, data, pagination } }) => {
           state.info[_matchId] = {
             ...state.info[_matchId],
