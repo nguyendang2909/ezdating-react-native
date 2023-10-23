@@ -2,9 +2,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AppStore } from 'app/types/app-store.type';
 import { Entity } from 'app/types/entity.type';
 
-import { appActions } from './app.store';
+import { appActions } from '../app.store';
 
-const initialState: AppStore.SwipeUserState = {};
+const initialState: AppStore.SwipeUserState = {
+  data: [],
+  info: {},
+};
 
 export const swipeUserSlice = createSlice({
   name: 'swipeUser',
@@ -33,11 +36,16 @@ export const swipeUserSlice = createSlice({
 
       state.data = state.data.concat(payload);
     },
+
+    removeOneByUserId: (state, { payload }: PayloadAction<string>) => {
+      state.data = state.data.filter(e => e._id === payload);
+    },
   },
 
   extraReducers: builder => {
     builder.addCase(appActions.logout, state => {
-      state.data = undefined;
+      state.data = [];
+      state.info = {};
     });
   },
 });

@@ -15,7 +15,6 @@ import { PersistGate } from 'redux-persist/lib/integration/react';
 
 import Config from './config';
 import { nativeBaseConfig } from './config/native-base.config';
-import { ConnectProfile } from './containers/Connect/ConnectProfile';
 import { ConnectSocket } from './containers/Connect/ConnectSocket';
 import { translators } from './locales';
 import { language } from './locales/locale';
@@ -109,7 +108,6 @@ function App(props: AppProps) {
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <ConnectSocket />
-          <ConnectProfile />
           <ErrorBoundary catchErrors={Config.catchErrors}>
             <GluestackUIProvider config={gluestackConfig}>
               <NativeBaseProvider theme={defaultTheme} config={nativeBaseConfig}>

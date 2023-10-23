@@ -22,7 +22,7 @@ import { matchReducer } from './match/match.store';
 import { messageReducer } from './message/message.store';
 import { nearbyUserReducer } from './nearby-user/nearby-user.store';
 import { appSaga } from './saga';
-import { swipeUserReducer } from './swipe-user.store';
+import { swipeUserReducer } from './swipe-user/swipe-user.store';
 // import theme from './theme';
 import { userReducer } from './user.store';
 

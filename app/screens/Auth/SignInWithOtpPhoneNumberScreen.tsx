@@ -2,6 +2,7 @@ import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import { useNavigation } from '@react-navigation/native';
 import { useSignInWithPhoneNumberMutation } from 'app/api';
 import { OtpInput } from 'app/components/Input/OtpInput';
+import { BackIconButton } from 'app/containers/IconButton/BackIconButton';
 import { useMessages } from 'app/hooks';
 import {
   flexGrow,
@@ -20,14 +21,12 @@ import {
   FormControl,
   Heading,
   HStack,
-  IconButton,
   Link,
   Text,
   WarningOutlineIcon,
 } from 'native-base';
 import React, { FC, useCallback, useEffect, useState } from 'react';
 import { Keyboard, Pressable, View } from 'react-native';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import { AppStackScreenProps } from '../../navigators';
 
@@ -126,12 +125,7 @@ export const SignInWithOtpPhoneNumberScreen: FC<FCProps> = props => {
         <Pressable style={flexGrow} onPress={Keyboard.dismiss}>
           <View style={[paddingHorizontal(spacing.lg), paddingVertical(spacing.lg)]}>
             <View>
-              <IconButton
-                borderRadius="full"
-                size={36}
-                onPress={goBack}
-                icon={<MaterialIcons name="chevron-left" size={36} />}
-              ></IconButton>
+              <BackIconButton />
             </View>
             <View>
               <Heading size="2xl">{formatMessage('Enter your code')}</Heading>

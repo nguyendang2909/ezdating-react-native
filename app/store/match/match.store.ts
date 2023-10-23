@@ -39,30 +39,24 @@ export const matchSlice = createSlice({
       if (stateIndex >= 0) {
         state.data[stateIndex] = {
           ...state.data[stateIndex],
-          lastMessageAt: payload.createdAt,
-          lastMessage: payload.text,
-          _lastMessageUserId: payload._userId,
-          _lastMessageId: payload._id,
+          lastMessage: payload,
           read: true,
         };
       }
       state.data = matchesService.sortAndUniq([], state.data);
     },
 
-    updateWhenReceivingMessage: (state, action: PayloadAction<Entity.Message>) => {
+    updateWhenReceivingMessage: (state, { payload }: PayloadAction<Entity.Message>) => {
       if (!state.data?.length) {
         return;
       }
-      const message = action.payload;
       const stateDataLength = state.data.length;
       for (let i = 0; i < stateDataLength; i += 1) {
         const stateData = state.data[i];
-        if (stateData._id === message._matchId) {
+        if (stateData._id === payload._matchId) {
           state.data[i] = {
             ...stateData,
-            lastMessage: message.text,
-            _lastMessageUserId: message._userId,
-            lastMessageAt: message._userId,
+            lastMessage: payload,
             read: false,
           };
           return;
@@ -165,6 +159,10 @@ export const matchSlice = createSlice({
         if (matchId) {
           state.data = state.data.filter(e => e._id !== matchId);
         }
+      })
+      .addMatcher(matchEndpoints.getMatch.matchFulfilled, (state, { payload: { data } }) => {
+        // const match = matchesService.formatOne(data);
+        // state.data = matchesService.sortAndUniq([match], state.data);
       });
   },
 });
@@ -173,10 +171,10 @@ export const matchActions = matchSlice.actions;
 
 export const matchSelects = {
   conversations: (state: AppStore.RootState) => {
-    return state.match.data.filter(e => !!e.lastMessageAt);
+    return state.match.data.filter(e => !!e.lastMessage);
   },
   matches: (state: AppStore.RootState) => {
-    return state.match.data.filter(e => !e.lastMessageAt);
+    return state.match.data.filter(e => !e.lastMessage);
   },
 };
 

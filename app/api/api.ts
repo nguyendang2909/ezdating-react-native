@@ -13,6 +13,7 @@ const baseQuery = fetchBaseQuery({
     return queryString.stringify(params);
   },
   baseUrl: Config.API_URL,
+  timeout: 15000,
   prepareHeaders: (headers, { getState }) => {
     const accessToken = (getState() as AppStore.RootState)?.app?.accessToken;
     if (accessToken) {

@@ -60,6 +60,7 @@ export const appSlice = createSlice({
       },
     );
     builder.addMatcher(meEndpoints.getMyProfile.matchFulfilled, (state, { payload: { data } }) => {
+      console.log(111);
       state.profile = data;
     });
   },

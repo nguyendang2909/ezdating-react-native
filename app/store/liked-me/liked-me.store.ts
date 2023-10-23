@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { likeEndpoints } from 'app/api';
 import { likedMeService } from 'app/services/liked-me.service';
 import { AppStore } from 'app/types/app-store.type';
@@ -14,12 +14,17 @@ const initialState: AppStore.LikedMeState = {
 export const likedMeSlice = createSlice({
   name: 'likedMe',
   initialState,
-  reducers: {},
+  reducers: {
+    removeOneByUserId: (state, { payload }: PayloadAction<string>) => {
+      state.data = state.data.filter(e => e._userId === payload);
+    },
+  },
   extraReducers: builder => {
     builder.addCase(appActions.logout, state => {
       state.data = [];
       state.info = {};
     });
+
     builder
       .addMatcher(
         likeEndpoints.refreshLikedMe.matchFulfilled,

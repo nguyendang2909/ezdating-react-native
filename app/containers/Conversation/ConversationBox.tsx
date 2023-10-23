@@ -56,7 +56,7 @@ export const ConversationBox: React.FC<FCProps> = ({ data }) => {
                     numberOfLines={1}
                     marginRight={24}
                   >
-                    {data.lastMessage}
+                    {data.lastMessage?.text}
                   </Text>
                 </Box>
               </Box>

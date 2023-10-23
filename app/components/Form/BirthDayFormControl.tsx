@@ -7,7 +7,8 @@ import React, { FC, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { Pressable } from 'react-native';
 import * as RNLocalize from 'react-native-localize';
-import DateTimePickerModal from 'react-native-modal-datetime-picker';
+
+import { BirthdayPicker } from '../Picker';
 
 type FCProps = {
   error?: string;
@@ -24,10 +25,11 @@ export const BirthDayFormControl: FC<FCProps> = ({ value, onChange, error, isReq
   const showDatePicker = () => {
     setDatePickerVisibility(true);
   };
-  const handleConfirm = (date: Date) => {
-    onChange(moment(date).format('YYYY-MM-DD'));
+  const handleConfirm = (date: string) => {
+    onChange(date);
     hideDatePicker();
   };
+
   const hideDatePicker = () => {
     setDatePickerVisibility(false);
   };
@@ -60,12 +62,11 @@ export const BirthDayFormControl: FC<FCProps> = ({ value, onChange, error, isReq
           </View>
         </Stack>
       </FormControl>
-      <DateTimePickerModal
-        testID="datePickerModal"
-        isVisible={isDatePickerVisible}
-        mode="date"
-        onConfirm={handleConfirm}
+      <BirthdayPicker
+        isOpen={isDatePickerVisible}
         onCancel={hideDatePicker}
+        onConfirm={handleConfirm}
+        value={value}
       />
     </>
   );

@@ -1,11 +1,11 @@
 import { useUpdateProfileMutation } from 'app/api';
 import { useMessages } from 'app/hooks';
-import { notificationsService } from 'app/services/notifications/notifications.service';
 import { paddingHorizontal } from 'app/styles';
 import { colors, spacing } from 'app/theme';
 import { ApiRequest } from 'app/types/api-request.type';
 import { Divider, Row, Text, View } from 'native-base';
 import React from 'react';
+import Toast from 'react-native-toast-message';
 
 import { ProfileEditBirthdayMenuItem } from './ProfileEditBirthdayMenuItem';
 import { ProfileEditGenderMenuItem } from './ProfileEditGenderMenuItem';
@@ -21,14 +21,17 @@ import { ProfileShowMyDistanceMenuItem } from './ProfileEditShowDistanceMenuItem
 import { ProfileEditWeightMenuItem } from './ProfileEditWeight';
 
 export const ProfileEditPageContent: React.FC = () => {
-  const { formatMessage } = useMessages();
+  const { formatMessage, formatErrorMessage } = useMessages();
   const [updateProfile] = useUpdateProfileMutation();
 
   const handleEditProfile = async (payload: ApiRequest.UpdateProfile) => {
     try {
       await updateProfile(payload).unwrap();
     } catch (err) {
-      notificationsService.updateFail();
+      Toast.show({
+        text1: formatErrorMessage(err),
+        type: 'error',
+      });
     }
   };
 

@@ -11,8 +11,10 @@ import { ActionPattern, call, put, select as RSSelect, take } from 'redux-saga/e
 import { io, Socket } from 'socket.io-client';
 
 import { appActions } from './app.store';
+import { likedMeActions } from './liked-me';
 import { matchActions } from './match';
 import { messageActions } from './message/message.store';
+import { swipeUserActions } from './swipe-user/swipe-user.store';
 
 let socket: Socket;
 
@@ -55,14 +57,20 @@ export function* initializeWebSocket() {
             break;
           case SOCKET_TO_CLIENT_EVENTS.UPDATE_SENT_MESSAGE:
             yield put(messageActions.updateMsg(data));
-            // eslint-disable-next-line no-case-declarations
             const conversation: AppStore.Match | undefined = yield select(s =>
               s.match.data.find(i => i._id === data._matchId),
             );
             if (conversation) {
               yield put(matchActions.updateWhenUpdateSentMessage(data));
             }
-
+            break;
+          case SOCKET_TO_CLIENT_EVENTS.MATCH:
+            const currentUserId: string = yield select(state => state.app.profile._id);
+            yield put(matchActions.addMatch({ data, currentUserId }));
+            const targetUserId =
+              data.userOne?._id === currentUserId ? data.userTwo?._id : data.userOne?._id;
+            yield put(likedMeActions.removeOneByUserId(targetUserId));
+            yield put(swipeUserActions.addMany)
             break;
           default:
             break;
@@ -94,6 +102,13 @@ function createSocketChannel() {
     socket.on(SOCKET_TO_CLIENT_EVENTS.UPDATE_SENT_MESSAGE, (msg: Entity.Message) => {
       emit({
         type: SOCKET_TO_CLIENT_EVENTS.UPDATE_SENT_MESSAGE,
+        data: msg,
+      });
+    });
+
+    socket.on(SOCKET_TO_CLIENT_EVENTS.MATCH, (msg: Entity.Message) => {
+      emit({
+        type: SOCKET_TO_CLIENT_EVENTS.MATCH,
         data: msg,
       });
     });

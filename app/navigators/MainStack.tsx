@@ -1,4 +1,5 @@
 import { SCREENS } from 'app/constants';
+import { ConnectProfile } from 'app/containers/Connect/ConnectProfile';
 import {
   EditMatchFilterScreen,
   MessagesScreen,
@@ -25,62 +26,68 @@ import { Stack } from './Stack';
 
 export const MainStack: React.FC = () => {
   return (
-    <Stack.Navigator
-      screenOptions={{
-        headerShown: false,
-        navigationBarColor: colors.background,
-      }}
-      initialRouteName="Main"
-    >
-      <Stack.Screen name={SCREENS.Main} component={MainScreen} />
-      <Stack.Screen name={SCREENS.Home} component={HomeNavigator} />
+    <>
+      <ConnectProfile />
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+          navigationBarColor: colors.background,
+        }}
+        initialRouteName="Main"
+      >
+        <Stack.Screen name={SCREENS.Main} component={MainScreen} />
+        <Stack.Screen name={SCREENS.Home} component={HomeNavigator} />
 
-      <Stack.Screen
-        name={SCREENS.EditInfoHeight}
-        component={EditInfoHeightScreen}
-        options={{
-          presentation: 'modal',
-        }}
-      />
-      <Stack.Screen
-        name={SCREENS.EditInfoNickname}
-        component={EditInfoNicknameScreen}
-        options={{
-          presentation: 'modal',
-        }}
-      />
-      <Stack.Screen
-        name={SCREENS.EditInfoWeight}
-        component={EditInfoWeightScreen}
-        options={{
-          presentation: 'modal',
-        }}
-      />
-      <Stack.Screen name={SCREENS.LikedMe} component={LikedMeScreen} />
-      <Stack.Screen
-        name={SCREENS.UpdateProfileBasicInfo}
-        component={UpdateProfileBasicInfoScreen}
-      />
-      <Stack.Screen name={SCREENS.UpdateProfilePhotos} component={UpdateProfilePhotosScreen} />
-      <Stack.Screen
-        name={SCREENS.ProfileEdit}
-        component={ProfileEditScreen}
-        options={{
-          presentation: 'card',
-        }}
-      />
-      <Stack.Screen
-        name={SCREENS.ProfileNearby}
-        component={ProfileNearbyScreen}
-        options={{
-          presentation: 'containedModal',
-        }}
-      ></Stack.Screen>
-      <Stack.Screen name={SCREENS.ProfileSetting} component={ProfileSettingScreen} />
-      <Stack.Screen name={SCREENS.Messages} component={MessagesScreen} />
-      <Stack.Screen name={SCREENS.EditMatchFilter} component={EditMatchFilterScreen}></Stack.Screen>
-      <Stack.Screen name={SCREENS.ChatProfile} component={ChatProfileScreen}></Stack.Screen>
-      <Stack.Screen name={SCREENS.LikedMeProfile} component={LikedMeProfileScreen}></Stack.Screen>
-    </Stack.Navigator>
+        <Stack.Screen
+          name={SCREENS.EditInfoHeight}
+          component={EditInfoHeightScreen}
+          options={{
+            presentation: 'modal',
+          }}
+        />
+        <Stack.Screen
+          name={SCREENS.EditInfoNickname}
+          component={EditInfoNicknameScreen}
+          options={{
+            presentation: 'modal',
+          }}
+        />
+        <Stack.Screen
+          name={SCREENS.EditInfoWeight}
+          component={EditInfoWeightScreen}
+          options={{
+            presentation: 'modal',
+          }}
+        />
+        <Stack.Screen name={SCREENS.LikedMe} component={LikedMeScreen} />
+        <Stack.Screen
+          name={SCREENS.UpdateProfileBasicInfo}
+          component={UpdateProfileBasicInfoScreen}
+        />
+        <Stack.Screen name={SCREENS.UpdateProfilePhotos} component={UpdateProfilePhotosScreen} />
+        <Stack.Screen
+          name={SCREENS.ProfileEdit}
+          component={ProfileEditScreen}
+          options={{
+            presentation: 'card',
+          }}
+        />
+        <Stack.Screen
+          name={SCREENS.ProfileNearby}
+          component={ProfileNearbyScreen}
+          options={{
+            presentation: 'containedModal',
+          }}
+        ></Stack.Screen>
+        <Stack.Screen name={SCREENS.ProfileSetting} component={ProfileSettingScreen} />
+        <Stack.Screen name={SCREENS.Messages} component={MessagesScreen} />
+        <Stack.Screen
+          name={SCREENS.EditMatchFilter}
+          component={EditMatchFilterScreen}
+        ></Stack.Screen>
+        <Stack.Screen name={SCREENS.ChatProfile} component={ChatProfileScreen}></Stack.Screen>
+        <Stack.Screen name={SCREENS.LikedMeProfile} component={LikedMeProfileScreen}></Stack.Screen>
+      </Stack.Navigator>
+    </>
   );
 };

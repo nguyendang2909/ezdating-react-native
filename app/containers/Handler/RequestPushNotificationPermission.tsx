@@ -12,17 +12,21 @@ export const RequestNotificationPermission: React.FC = () => {
     if (!refreshToken) {
       return;
     }
-    const authorizationStatus = await messaging().requestPermission();
-    if (
-      authorizationStatus === messaging.AuthorizationStatus.AUTHORIZED ||
-      authorizationStatus === messaging.AuthorizationStatus.PROVISIONAL
-    ) {
-      const deviceToken = await messaging().getToken();
-      await updateSignedDevice({
-        devicePlatform: signedDevicesService.getDevicePlatform(),
-        refreshToken,
-        deviceToken,
-      }).unwrap();
+    try {
+      const authorizationStatus = await messaging().requestPermission();
+      if (
+        authorizationStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+        authorizationStatus === messaging.AuthorizationStatus.PROVISIONAL
+      ) {
+        const deviceToken = await messaging().getToken();
+        await updateSignedDevice({
+          devicePlatform: signedDevicesService.getDevicePlatform(),
+          refreshToken,
+          deviceToken,
+        }).unwrap();
+      }
+    } catch (err) {
+      console.log(err);
     }
   }, [refreshToken, updateSignedDevice]);
 

@@ -5,5 +5,6 @@ export * from './Header/Header';
 export * from './Icon';
 export * from './Image';
 export * from './LinearGradient';
+export * from './Picker';
 export * from './Row';
 export * from './Screen';

@@ -7,6 +7,7 @@ import {
   UserRole,
   UserStatus,
 } from 'app/constants';
+
 import { Membership } from '.';
 
 export declare namespace Entity {
@@ -67,22 +68,6 @@ export declare namespace Entity {
       // workout: EWorkout;
     }>;
 
-  type Match = BaseEntity &
-    Partial<{
-      _userOneId: string;
-      _userTwoId: string;
-      _lastMessageId: string;
-      _lastMessageUserId: string;
-      lastMessage: string;
-      lastMessageAt: string;
-      userOneRead: boolean;
-      userTwoRead: boolean;
-      targetUser: User;
-      read: boolean;
-      userOne: Entity.User;
-      userTwo: Entity.User;
-    }>;
-
   type Message = BaseEntity &
     Partial<{
       _matchId: string;
@@ -96,6 +81,19 @@ export declare namespace Entity {
       text?: string;
       uuid?: string;
       video?: string;
+    }>;
+
+  type Match = BaseEntity &
+    Partial<{
+      _userOneId: string;
+      _userTwoId: string;
+      lastMessage: Message;
+      userOneRead: boolean;
+      userTwoRead: boolean;
+      targetUser: User;
+      read: boolean;
+      userOne: Entity.User;
+      userTwo: Entity.User;
     }>;
 
   type Like = BaseEntity &

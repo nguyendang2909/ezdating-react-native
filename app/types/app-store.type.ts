@@ -79,7 +79,11 @@ export declare namespace AppStore {
   };
 
   type SwipeUserState = {
-    data?: Entity.User[];
+    data: Entity.User[];
+    info: {
+      lastRefreshedAt?: string;
+      isReachedEnd?: boolean;
+    };
   };
 
   type LikesState = {

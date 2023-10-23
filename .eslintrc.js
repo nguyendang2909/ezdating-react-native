@@ -92,6 +92,7 @@ module.exports = {
         ],
         '@typescript-eslint/no-empty-interface': 1,
         '@typescript-eslint/no-empty-function': 1,
+        'no-case-declarations': 0,
       },
     },
   ],

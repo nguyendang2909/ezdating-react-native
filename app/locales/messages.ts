@@ -356,4 +356,8 @@ export const messages = defineMessages({
     defaultMessage: 'Update to Gold to see people who already liked you.',
     id: '6ab6b58adb',
   },
+  'Please make sure you are over 18 years old': {
+    defaultMessage: 'Please make sure you are over 18 years old',
+    id: 'efc7d11716',
+  },
 });
