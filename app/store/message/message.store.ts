@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { messageEndpoints } from 'app/api';
 import { messagesService } from 'app/services/messages.service';
+import { Message } from 'app/types';
 import { AppStore } from 'app/types/app-store.type';
-import { Entity } from 'app/types/entity.type';
 import moment from 'moment';
 
 import { appActions } from '../app.store';
@@ -16,7 +16,7 @@ export const messageSlice = createSlice({
   name: 'message',
   initialState,
   reducers: {
-    receiveMsg: (state, action: PayloadAction<Entity.Message>) => {
+    receiveMsg: (state, action: PayloadAction<Message>) => {
       const { payload } = action;
       const matchId = payload._matchId;
       if (!matchId) {
@@ -31,7 +31,7 @@ export const messageSlice = createSlice({
       state.data[matchId] = [message].concat(oldMessages);
     },
 
-    sendMsg: (state, { payload }: PayloadAction<Entity.Message>) => {
+    sendMsg: (state, { payload }: PayloadAction<Message>) => {
       const matchId = payload._matchId;
       if (!matchId) {
         return;
@@ -45,7 +45,7 @@ export const messageSlice = createSlice({
       state.data[matchId] = [message].concat(oldMessages);
     },
 
-    updateMsg: (state, action: PayloadAction<Entity.Message>) => {
+    updateMsg: (state, action: PayloadAction<Message>) => {
       const { payload } = action;
       const { uuid, _matchId: matchId } = payload;
       if (!matchId || !uuid) {

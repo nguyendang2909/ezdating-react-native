@@ -1,29 +1,29 @@
 import { Box, Pressable, Text } from '@gluestack-ui/themed';
 import { useNavigation } from '@react-navigation/native';
-import { Entity } from 'app/types';
+import { Profile } from 'app/types';
 import _ from 'lodash';
 import React from 'react';
 import { StyleSheet } from 'react-native';
 
 import { CacheImage, LinearGradient } from '../../components';
 
-type NearbyUserItemProps = {
-  user: Entity.User;
+type NearbyProfileItemProps = {
+  profile: Profile;
 };
 
-export const NearbyUserItem: React.FC<NearbyUserItemProps> = ({ user }) => {
+export const NearbyProfileItem: React.FC<NearbyProfileItemProps> = ({ profile }) => {
   const navigation = useNavigation();
 
   const handlePressCard = () => {
-    if (user._id) {
+    if (profile._id) {
       navigation.navigate('ProfileNearby', {
-        user,
+        profile,
       });
     }
   };
 
   return (
-    <Box key={user._id} px={4} py={4} w="$1/2">
+    <Box key={profile._id} px={4} py={4} w="$1/2">
       <Pressable onPress={handlePressCard}>
         <LinearGradient
           zIndex={100}
@@ -36,9 +36,9 @@ export const NearbyUserItem: React.FC<NearbyUserItemProps> = ({ user }) => {
         >
           <Box px={4} py={4}>
             <Text fontWeight="bold" color="$white" numberOfLines={1}>
-              {user.nickname}
+              {profile.nickname}
               {', '}
-              {!_.isUndefined(user.distance) && `${_.round(user.distance, 1)} km`}
+              {!_.isUndefined(profile.distance) && `${_.round(profile.distance, 1)} km`}
             </Text>
           </Box>
         </LinearGradient>
@@ -46,7 +46,7 @@ export const NearbyUserItem: React.FC<NearbyUserItemProps> = ({ user }) => {
         <Box>
           <CacheImage
             style={style.image}
-            url={user.mediaFiles?.length ? user.mediaFiles[0]?.key : undefined}
+            url={profile.mediaFiles?.length ? profile.mediaFiles[0]?.key : undefined}
           ></CacheImage>
         </Box>
       </Pressable>

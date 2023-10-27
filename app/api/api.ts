@@ -36,7 +36,7 @@ export const api = createApi({
         );
       }
     }
-    if (result.error && [401, 403].includes(result.error.status as number)) {
+    if (result.error && (result.error.status as number) === 401) {
       if (!mutex.isLocked()) {
         const release = await mutex.acquire();
         try {
@@ -59,6 +59,7 @@ export const api = createApi({
             result = await baseQuery(args, baseQueryApi, extraOptions);
           } else {
             baseQueryApi.dispatch(appActions.logout());
+            baseQueryApi.dispatch(api.util.resetApiState());
           }
         } finally {
           release();

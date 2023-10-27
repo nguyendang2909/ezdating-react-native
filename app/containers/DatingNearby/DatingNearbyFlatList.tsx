@@ -1,12 +1,12 @@
 import { Box, ButtonSpinner, FlatList } from '@gluestack-ui/themed';
 import { useNearbyUsers } from 'app/hooks/useNearbyUsers';
-import { Entity } from 'app/types/entity.type';
+import { Profile } from 'app/types';
 import { scrollUtil } from 'app/utils/scroll.util';
 import { Spinner } from 'native-base';
 import React from 'react';
 import { NativeScrollEvent, NativeSyntheticEvent, RefreshControl } from 'react-native';
 
-import { NearbyUserItem } from './NearbyUserItem';
+import { NearbyProfileItem } from './NearbyProfileItem';
 
 export const DatingNearbyFlatList: React.FC = () => {
   const {
@@ -48,7 +48,7 @@ export const DatingNearbyFlatList: React.FC = () => {
             }
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
-            renderItem={({ item }: { item: Entity.User }) => <NearbyUserItem user={item} />}
+            renderItem={({ item }: { item: Profile }) => <NearbyProfileItem profile={item} />}
           ></FlatList>
         </>
       ) : (

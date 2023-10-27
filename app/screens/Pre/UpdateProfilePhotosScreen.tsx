@@ -1,7 +1,8 @@
-import { useNavigation } from '@react-navigation/native';
+import { StackActions, useNavigation } from '@react-navigation/native';
 import { useRemovePhotoMutation, useUploadPhotoMutation } from 'app/api';
 import { UploadPhotoCard } from 'app/components/Form/UploadPhotoCard';
 import { LoadingScreen } from 'app/components/Screen/LoadingScreen';
+import { SCREENS } from 'app/constants';
 import { PhotoRequestPermission } from 'app/containers/Photos/PhotoRequestPermission.ios';
 import { useAppSelector, useMessages } from 'app/hooks';
 import { AppStackScreenProps } from 'app/navigators';
@@ -34,11 +35,13 @@ import {
 } from 'native-base';
 import React, { useState } from 'react';
 import ImageCropPicker from 'react-native-image-crop-picker';
+import Toast from 'react-native-toast-message';
 
 type FCProps = AppStackScreenProps<'UpdateProfilePhotos'>;
 
 export const UpdateProfilePhotosScreen: React.FC<FCProps> = () => {
   const { formatMessage } = useMessages();
+  const navigation = useNavigation();
 
   const toast = useToast();
   const { goBack } = useNavigation();
@@ -54,6 +57,7 @@ export const UpdateProfilePhotosScreen: React.FC<FCProps> = () => {
     },
     onSubmit: async values => {
       try {
+        navigation.dispatch(StackActions.replace(SCREENS.Home, { screen: 'DatingSwipe' }));
         if (values.photos.length) {
           await Promise.all(
             values.photos.map((item, index) => {
@@ -65,12 +69,13 @@ export const UpdateProfilePhotosScreen: React.FC<FCProps> = () => {
               return uploadPhoto(payload).unwrap();
             }),
           );
+          Toast.show({
+            text1: formatMessage('Uploaded photos successfully'),
+          });
         }
       } catch (err) {
-        console.log(err);
-        toast.show({
-          title: formatMessage('Update failed, please try again.'),
-          placement: 'top-right',
+        Toast.show({
+          text1: formatMessage('Update failed, please try again.'),
         });
       }
     },

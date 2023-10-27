@@ -1,28 +1,39 @@
-import { useNavigation } from '@react-navigation/native';
-import { useUpdateBasicProfileMutation } from 'app/api';
+import { StackActions, useNavigation } from '@react-navigation/native';
+import { useCreateProfileMutation, useGetProfileMutation } from 'app/api';
 import { BirthDayFormControl } from 'app/components/Form/BirthDayFormControl';
 import { FormControlInput } from 'app/components/Form/FormControlInput';
 import { RelationshipGoalFormControl } from 'app/components/Form/RelationshipGoalFormControl';
 import { SelectGenderFormControl } from 'app/components/Form/SelectGenderForm';
-import { UserGender, UserRelationshipGoal } from 'app/constants';
+import { UserGender } from 'app/constants/constants';
 import { useAppSelector, useMessages } from 'app/hooks';
+import { appActions } from 'app/store/app.store';
 import { flexGrow } from 'app/styles';
-import { FormParams } from 'app/types/form-params.type';
+import { FormParams, RelationshipGoal } from 'app/types';
 import { useFormik } from 'formik';
 import moment from 'moment';
 import { Box, Button, Heading, ScrollView, View } from 'native-base';
 import React, { FC } from 'react';
+import Toast from 'react-native-toast-message';
+import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 
-export const UpdateProfileBasicInfoScreen: FC = () => {
+export const CreateProfileForm: FC = () => {
   const { formatMessage } = useMessages();
-
-  const [updateBasicProfile] = useUpdateBasicProfileMutation();
-
+  const [createProfile] = useCreateProfileMutation();
   const profile = useAppSelector(state => state.app.profile);
-  const { navigate } = useNavigation();
+  const navigation = useNavigation();
+  const [getProfile] = useGetProfileMutation();
+  const dispatch = useDispatch();
 
-  const formik = useFormik<FormParams.BasicInfo>({
+  const handleChangeGender = (value: UserGender) => {
+    formik.setFieldValue('gender', value);
+  };
+
+  const handleChangeRelationshipGoal = (value: RelationshipGoal) => {
+    formik.setFieldValue('relationshipGoal', value);
+  };
+
+  const formik = useFormik<FormParams.CreateProfile>({
     initialValues: {
       nickname: profile?.nickname,
       gender: profile?.gender,
@@ -40,21 +51,25 @@ export const UpdateProfileBasicInfoScreen: FC = () => {
     }),
     onSubmit: async values => {
       try {
-        await updateBasicProfile(values).unwrap();
-        navigate('UpdateProfilePhotos');
-      } catch (err) {
-        console.log(err);
+        const { nickname, gender, birthday, relationshipGoal, introduce } = values;
+        if (nickname && gender && birthday && relationshipGoal) {
+          await createProfile({ nickname, gender, birthday, relationshipGoal, introduce }).unwrap();
+          navigation.dispatch(StackActions.replace('UpdateProfilePhotos'));
+        }
+      } catch (error) {
+        if ('status' in error && error.status === 409) {
+          try {
+            const profile = await getProfile().unwrap();
+            dispatch(appActions.setProfile(profile.data));
+            navigation.dispatch(StackActions.replace('UpdateProfilePhotos'));
+          } catch (err) {}
+        }
+        Toast.show({
+          text1: formatMessage('Oops, something went wrong. Please try again.'),
+        });
       }
     },
   });
-
-  const handleChangeGender = (value: UserGender) => {
-    formik.setFieldValue('gender', value);
-  };
-
-  const handleChangeRelationshipGoal = (value: UserRelationshipGoal) => {
-    formik.setFieldValue('relationshipGoal', value);
-  };
 
   return (
     <>

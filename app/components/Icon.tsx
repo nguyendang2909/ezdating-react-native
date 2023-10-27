@@ -96,6 +96,8 @@ export function Icon(props: IconProps) {
       {...WrapperProps}
       style={$containerStyleOverride}
     >
+      {/* 
+// @ts-ignore */}
       <Image
         style={[
           $imageStyle,

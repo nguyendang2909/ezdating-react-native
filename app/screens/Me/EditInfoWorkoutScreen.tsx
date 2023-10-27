@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import { api } from 'app/api';
+import { useUpdateProfileMutation } from 'app/api';
 import { HeaderSave } from 'app/components/Header/HeaderSave';
 import { useAppSelector, useMessages } from 'app/hooks';
 import { useFormik } from 'formik';
@@ -15,7 +15,7 @@ export const EditInfoWorkoutScreen = () => {
 
   const value = useAppSelector(state => state.app.profile?.weight);
 
-  const [submitUpdateProfile] = api.useUpdateProfileMutation();
+  const [updateProfile] = useUpdateProfileMutation();
 
   const formik = useFormik<{ weight: number }>({
     enableReinitialize: true,
@@ -28,7 +28,7 @@ export const EditInfoWorkoutScreen = () => {
 
     onSubmit: async values => {
       try {
-        await submitUpdateProfile(values);
+        await updateProfile(values).unwrap();
       } catch (err) {
         toast.show({
           title: formatMessage('Update failed, please try again.'),

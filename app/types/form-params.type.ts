@@ -1,8 +1,8 @@
-import { UserGender, UserRelationshipGoal } from 'app/constants';
 import { CountryCode } from 'libphonenumber-js';
 import { Image } from 'react-native-image-crop-picker';
 
 import { ApiRequest } from './api-request.type';
+import { Gender, RelationshipGoal } from './data.type';
 
 export declare namespace FormParams {
   type LoginByEmail = ApiRequest.LoginByEmail;
@@ -18,13 +18,12 @@ export declare namespace FormParams {
     countryCode: CountryCode;
   };
 
-  type BasicInfo = {
+  type CreateProfile = {
     nickname?: string;
     birthday?: string;
-    gender?: UserGender;
-    relationshipGoal?: UserRelationshipGoal;
+    gender?: Gender;
+    relationshipGoal?: RelationshipGoal;
     introduce?: string;
-    haveBasicInfor?: boolean;
   };
 
   type UpdateProfilePhoto = {
@@ -36,7 +35,7 @@ export declare namespace FormParams {
     company?: string;
     // drinking?: EDrinking;
     // educationLevel?: EEducationLevel;
-    gender?: UserGender;
+    gender?: Gender;
     jobTitle?: string;
     haveBasicInfo?: boolean;
     introduce?: string;
@@ -45,7 +44,7 @@ export declare namespace FormParams {
     longitude?: number;
     photos?: string[];
     school?: string;
-    relationshipGoal: UserRelationshipGoal;
+    relationshipGoal: RelationshipGoal;
     // smoking?: ESmoking;
     // workout?: EWorkout;
   };
@@ -53,7 +52,7 @@ export declare namespace FormParams {
   type UpdateMatchFilter = {
     filterMinAge: number;
     filterMaxAge: number;
-    filterGender?: UserGender;
+    filterGender?: Gender;
     filterMaxDistance: number;
   };
 

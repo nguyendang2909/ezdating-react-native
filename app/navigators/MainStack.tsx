@@ -1,10 +1,10 @@
 import { SCREENS } from 'app/constants';
 import { ConnectProfile } from 'app/containers/Connect/ConnectProfile';
 import {
+  CreateProfileScreen,
   EditMatchFilterScreen,
   MessagesScreen,
   ProfileNearbyScreen,
-  UpdateProfileBasicInfoScreen,
   UpdateProfilePhotosScreen,
 } from 'app/screens';
 import { ChatProfileScreen } from 'app/screens/Conversations/ChatProfile';
@@ -60,10 +60,7 @@ export const MainStack: React.FC = () => {
           }}
         />
         <Stack.Screen name={SCREENS.LikedMe} component={LikedMeScreen} />
-        <Stack.Screen
-          name={SCREENS.UpdateProfileBasicInfo}
-          component={UpdateProfileBasicInfoScreen}
-        />
+        <Stack.Screen name={SCREENS.CreateProfile} component={CreateProfileScreen} />
         <Stack.Screen name={SCREENS.UpdateProfilePhotos} component={UpdateProfilePhotosScreen} />
         <Stack.Screen
           name={SCREENS.ProfileEdit}

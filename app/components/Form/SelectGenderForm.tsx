@@ -1,6 +1,9 @@
-import { UserGender, UserGenderMessages, UserGenders } from 'app/constants';
+import { Button, ButtonText, View } from '@gluestack-ui/themed';
+import { ARR_GENDERS } from 'app/constants';
+import { GENDER_MESSAGES, UserGender } from 'app/constants/constants';
 import { useMessages } from 'app/hooks/useMessages';
-import { Button, FormControl, HStack, Stack, View, WarningOutlineIcon } from 'native-base';
+import { Gender } from 'app/types';
+import { FormControl, HStack, Stack, WarningOutlineIcon } from 'native-base';
 import React, { FC } from 'react';
 
 type FCProps = {
@@ -17,21 +20,18 @@ export const SelectGenderFormControl: FC<FCProps> = ({ onChange, error, value, i
     <FormControl {...(isRequired ? { isRequired } : {})} isInvalid={!!error}>
       <Stack>
         <FormControl.Label>{formatMessage('Gender')}</FormControl.Label>
-
         <HStack space="sm">
-          {Object.values(UserGenders).map(item => {
+          {ARR_GENDERS.map(item => {
+            const variant = value === item ? 'solid' : 'outline';
+
             return (
-              <View flex={1} key={item}>
-                <Button
-                  variant={value === item ? 'solid' : 'outline'}
-                  w="full"
-                  onPress={() => {
-                    onChange(item);
-                  }}
-                >
-                  {formatMessage(UserGenderMessages[item])}
-                </Button>
-              </View>
+              <SelectGenderItem
+                key={item}
+                variant={variant}
+                item={item}
+                value={value}
+                onChange={onChange}
+              />
             );
           })}
         </HStack>
@@ -41,5 +41,28 @@ export const SelectGenderFormControl: FC<FCProps> = ({ onChange, error, value, i
         </FormControl.ErrorMessage>
       </Stack>
     </FormControl>
+  );
+};
+
+type SelectGenderItemProps = {
+  item: Gender;
+  value?: Gender;
+  variant: 'solid' | 'outline';
+  onChange: (gender: UserGender) => void;
+};
+
+const SelectGenderItem: FC<SelectGenderItemProps> = ({ item, onChange, variant }) => {
+  const { formatMessage } = useMessages();
+
+  const handleChange = () => {
+    onChange(item);
+  };
+
+  return (
+    <View flex={1} key={item}>
+      <Button variant={variant} onPress={handleChange}>
+        <ButtonText>{formatMessage(GENDER_MESSAGES[item])}</ButtonText>
+      </Button>
+    </View>
   );
 };

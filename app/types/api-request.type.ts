@@ -1,10 +1,6 @@
-import {
-  DevicePlatform,
-  UserGender,
-  UserRelationshipGoal,
-  UserRelationshipStatus,
-} from 'app/constants';
 import { Image } from 'react-native-image-crop-picker';
+
+import { DevicePlatform, Gender, RelationshipGoal, RelationshipStatus } from './data.type';
 
 export declare namespace ApiRequest {
   type FindAll = {
@@ -52,10 +48,10 @@ export declare namespace ApiRequest {
     company?: string;
     // drinking?: EDrinking;
     // educationLevel?: EEducationLevel;
-    gender?: UserGender;
+    gender?: Gender;
     filterMinAge?: number;
     filterMaxAge?: number;
-    filterGender?: UserGender;
+    filterGender?: Gender;
     filterMaxDistance?: number;
     jobTitle?: string;
     haveBasicInfo?: boolean;
@@ -69,20 +65,20 @@ export declare namespace ApiRequest {
     longitude?: number;
     photos?: string[];
     school?: string;
-    relationshipGoal: UserRelationshipGoal;
-    relationshipStatus: UserRelationshipStatus;
+    relationshipGoal: RelationshipGoal;
+    relationshipStatus: RelationshipStatus;
     weight?: number;
     // smoking?: ESmoking;
     // workout?: EWorkout;
   }>;
 
-  type UpdateProfileBasicInfo = Partial<{
+  type CreateProfile = {
     nickname: string;
-    gender: UserGender;
+    gender: Gender;
     birthday: string;
-    relationshipGoal: UserRelationshipGoal;
+    relationshipGoal: RelationshipGoal;
     introduce?: string;
-  }>;
+  };
 
   type SearchUsersNearby = Pagination;
 
@@ -94,11 +90,11 @@ export declare namespace ApiRequest {
 
   type FindManyMessages = FindMany<{ matchId: string }>;
 
-  type FindManySwipeUsers = FindMany<object>;
+  type FindManySwipeProfiles = FindMany<object>;
 
   type FindManyMatches = Pagination;
 
-  type FindManyNearbyUses = Pagination;
+  type FindManyNearbyProfiles = Pagination;
 
   type SendLike = {
     targetUserId: string;

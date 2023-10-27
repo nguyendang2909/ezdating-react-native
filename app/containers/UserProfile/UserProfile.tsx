@@ -7,15 +7,15 @@ import {
   UserProfileDetails,
   UserProfileImages,
 } from 'app/pages';
-import { Entity } from 'app/types';
+import { Profile } from 'app/types';
 import React from 'react';
 import { SafeAreaView } from 'react-native';
 
 type UserProfileScrollViewProps = {
-  user: Entity.User;
+  profile: Profile;
 };
 
-export const UserProfile: React.FC<UserProfileScrollViewProps> = ({ user }) => {
+export const UserProfile: React.FC<UserProfileScrollViewProps> = ({ profile }) => {
   const { goBack } = useNavigation();
 
   return (
@@ -30,22 +30,26 @@ export const UserProfile: React.FC<UserProfileScrollViewProps> = ({ user }) => {
           </Box>
         </Box>
 
-        <UserProfileImages mediaFiles={user.mediaFiles || []} />
+        <UserProfileImages mediaFiles={profile.mediaFiles || []} />
       </Box>
 
       <Box flex={1} mt={16}>
         <Box px={16}>
-          <NearbyUserMainInfo nickname={user.nickname} age={user.age} distance={user.distance} />
+          <NearbyUserMainInfo
+            nickname={profile.nickname}
+            age={profile.age}
+            distance={profile.distance}
+          />
         </Box>
 
-        {!!user.introduce && (
+        {!!profile.introduce && (
           <Box px={16} mt={16}>
-            <NearbyUserIntroduce introduce={user.introduce} />
+            <NearbyUserIntroduce introduce={profile.introduce} />
           </Box>
         )}
 
         <Box px={16} mt={16}>
-          <UserProfileDetails user={user} />
+          <UserProfileDetails profile={profile} />
         </Box>
       </Box>
 

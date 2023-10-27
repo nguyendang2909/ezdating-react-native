@@ -1,6 +1,6 @@
 import { CommonService } from 'app/commons/service.common';
 import { APP_CONFIG } from 'app/config/config.app';
-import { AppStore, Entity } from 'app/types';
+import { AppStore, Like } from 'app/types';
 import _ from 'lodash';
 import moment from 'moment';
 
@@ -10,7 +10,7 @@ class LikedMeService extends CommonService {
     this.staleTime = APP_CONFIG.STALE_TIME.DEFAULT;
   }
 
-  formatMany(payload: Entity.Like[], options?: Partial<AppStore.Match>): AppStore.Match[] {
+  formatMany(payload: Like[], options?: Partial<AppStore.LikeData>): AppStore.LikeData[] {
     const lastRefreshedAt = moment().toISOString();
     return payload.map(e => ({
       ...e,
@@ -19,7 +19,7 @@ class LikedMeService extends CommonService {
     }));
   }
 
-  formatOne(payload: Entity.Like): AppStore.Match {
+  formatOne(payload: Like): AppStore.LikeData {
     const { ...rest } = payload;
     return {
       ...rest,
@@ -28,14 +28,14 @@ class LikedMeService extends CommonService {
     };
   }
 
-  sortAndUniq(news: AppStore.Like[], olds: AppStore.Like[]) {
+  sortAndUniq(news: AppStore.LikeData[], olds: AppStore.LikeData[]) {
     return _.chain([...news, ...olds])
       .uniqBy('_id')
       .orderBy(['createdAt'], ['desc'])
       .value();
   }
 
-  public getCursor(data: Entity.Like[]): string | undefined {
+  public getCursor(data: Like[]): string | undefined {
     return this.getCursorByField('createdAt', data);
   }
 }

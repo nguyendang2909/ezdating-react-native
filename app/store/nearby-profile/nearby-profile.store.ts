@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { userEndpoints } from 'app/api';
-import { nearbyUsersService } from 'app/services/nearby-users.service';
+import { profileEndpoints } from 'app/api';
+import { nearbyProfilesService } from 'app/services';
 import { AppStore } from 'app/types/app-store.type';
 import moment from 'moment';
 
@@ -13,8 +13,8 @@ const initialState: AppStore.NearbyState = {
   },
 };
 
-export const nearbyUserSlice = createSlice({
-  name: 'nearbyUser',
+export const nearbyProfileSlice = createSlice({
+  name: 'nearbyProfile',
   initialState,
   reducers: {},
   extraReducers: builder => {
@@ -24,7 +24,7 @@ export const nearbyUserSlice = createSlice({
     });
     builder
       .addMatcher(
-        userEndpoints.refreshNearbyUsers.matchFulfilled,
+        profileEndpoints.refreshNearbyProfiles.matchFulfilled,
         (state, { payload: { data, pagination } }) => {
           state.data = data;
           state.info = {
@@ -35,9 +35,9 @@ export const nearbyUserSlice = createSlice({
         },
       )
       .addMatcher(
-        userEndpoints.getNewestUsers.matchFulfilled,
+        profileEndpoints.getNewestNearbyProfiles.matchFulfilled,
         (state, { payload: { data, pagination } }) => {
-          state.data = nearbyUsersService.sortAndUniq(data, state.data);
+          state.data = nearbyProfilesService.sortAndUniq(data, state.data);
           state.info = {
             ...state.info,
             isReachedEnd: !pagination._next,
@@ -46,9 +46,9 @@ export const nearbyUserSlice = createSlice({
         },
       )
       .addMatcher(
-        userEndpoints.getNextNearbyUsers.matchFulfilled,
+        profileEndpoints.getNextNearbyProfiles.matchFulfilled,
         (state, { payload: { data, pagination } }) => {
-          state.data = nearbyUsersService.sortAndUniq(data, state.data);
+          state.data = nearbyProfilesService.sortAndUniq(data, state.data);
           state.info = {
             ...state.info,
             isReachedEnd: !pagination._next,
@@ -58,6 +58,6 @@ export const nearbyUserSlice = createSlice({
   },
 });
 
-export const nearbyUserActions = nearbyUserSlice.actions;
+export const nearbyProfileActions = nearbyProfileSlice.actions;
 
-export const nearbyUserReducer = nearbyUserSlice.reducer;
+export const nearbyProfileReducer = nearbyProfileSlice.reducer;

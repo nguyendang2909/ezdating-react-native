@@ -1,11 +1,11 @@
 import { useNavigation } from '@react-navigation/native';
-import { Entity } from 'app/types/entity.type';
+import { Match } from 'app/types';
 import { mediaFileUtil } from 'app/utils/media-files.util';
 import { Avatar, Box, HStack, Pressable, Text } from 'native-base';
 import React, { useCallback } from 'react';
 
 type FCProps = {
-  data: Entity.Match;
+  data: Match;
 };
 
 export const ConversationBox: React.FC<FCProps> = ({ data }) => {
@@ -29,8 +29,8 @@ export const ConversationBox: React.FC<FCProps> = ({ data }) => {
                 <Avatar
                   size={16}
                   source={{
-                    uri: data.targetUser?.mediaFiles?.length
-                      ? mediaFileUtil.getUrl(data.targetUser?.mediaFiles[0].key)
+                    uri: data.targetProfile?.mediaFiles?.length
+                      ? mediaFileUtil.getUrl(data.targetProfile?.mediaFiles[0].key)
                       : undefined,
                   }}
                 ></Avatar>
@@ -44,7 +44,7 @@ export const ConversationBox: React.FC<FCProps> = ({ data }) => {
                     numberOfLines={1}
                     marginRight={24}
                   >
-                    {data.targetUser?.nickname}
+                    {data.targetProfile?.nickname}
                   </Text>
                 </Box>
                 <Box>

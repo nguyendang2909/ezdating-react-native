@@ -12,7 +12,7 @@ const matchesApi = api.injectEndpoints({
         method: 'POST',
       }),
     }),
-    getMatch: builder.query<ApiResponse.Match, string>({
+    getMatch: builder.query<ApiResponse.MatchData, string>({
       query: id => ({
         url: `${API_URL.matches}/${id}`,
         method: 'GET',
@@ -37,7 +37,7 @@ const matchesApi = api.injectEndpoints({
         params,
       }),
     }),
-    createMatch: builder.mutation<ApiResponse.Match, ApiRequest.CreateMatch>({
+    createMatch: builder.mutation<ApiResponse.MatchData, ApiRequest.CreateMatch>({
       query: body => ({
         url: API_URL.matches,
         method: 'POST',

@@ -1,11 +1,9 @@
 import { FontAwesome } from 'app/components/Icon/Lib';
 import { MenuItem } from 'app/components/Menu/MenuItem';
-import {
-  UserRelationshipGoal,
-  UserRelationshipGoalMessages,
-  UserRelationshipGoals,
-} from 'app/constants';
+import { RELATIONSHIP_GOALS } from 'app/constants';
+import { RELATIONSHIP_GOAL_MESSAGES } from 'app/constants/constants';
 import { useAppSelector, useMessages } from 'app/hooks';
+import { RelationshipGoal } from 'app/types';
 import { ApiRequest } from 'app/types/api-request.type';
 import { Actionsheet, Box, Heading, Text, useDisclose } from 'native-base';
 import React, { useState } from 'react';
@@ -19,8 +17,7 @@ export const ProfileEditRelationshipGoalMenuItem: React.FC<FCProps> = ({ onPress
   const currentRelationshipGoal = useAppSelector(state => state.app.profile?.relationshipGoal);
   const [isInit, setInit] = useState<boolean>(false);
   const { isOpen, onOpen, onClose } = useDisclose();
-  const handleChange = (relationshipGoal: UserRelationshipGoal) => {
-    console.log(relationshipGoal);
+  const handleChange = (relationshipGoal: RelationshipGoal) => {
     onClose();
     onPress({ relationshipGoal });
   };
@@ -36,7 +33,7 @@ export const ProfileEditRelationshipGoalMenuItem: React.FC<FCProps> = ({ onPress
         leftIcon={<FontAwesome name="search" />}
         {...(currentRelationshipGoal
           ? {
-              valueTx: UserRelationshipGoalMessages[currentRelationshipGoal],
+              valueTx: RELATIONSHIP_GOAL_MESSAGES[currentRelationshipGoal],
             }
           : {})}
         onPress={handleOpen}
@@ -50,7 +47,7 @@ export const ProfileEditRelationshipGoalMenuItem: React.FC<FCProps> = ({ onPress
                 {formatMessage('Relationship goal')}
               </Heading>
             </Box>
-            {Object.values(UserRelationshipGoals).map(value => {
+            {Object.values(RELATIONSHIP_GOALS).map(value => {
               return (
                 <Actionsheet.Item
                   key={value}
@@ -59,7 +56,7 @@ export const ProfileEditRelationshipGoalMenuItem: React.FC<FCProps> = ({ onPress
                   }}
                 >
                   <Text fontWeight={currentRelationshipGoal === value ? 'bold' : undefined}>
-                    {formatMessage(UserRelationshipGoalMessages[value])}
+                    {formatMessage(RELATIONSHIP_GOAL_MESSAGES[value])}
                   </Text>
                 </Actionsheet.Item>
               );

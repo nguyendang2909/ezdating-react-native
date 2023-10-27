@@ -1,4 +1,5 @@
 import { createNavigationContainerRef, NavigationState } from '@react-navigation/native';
+import { AppStackParamList } from 'app/types';
 import { useEffect, useRef, useState } from 'react';
 import { BackHandler, Platform } from 'react-native';
 
@@ -6,7 +7,7 @@ import Config from '../config';
 import type { PersistNavigationConfig } from '../config/config.base';
 import * as storage from '../utils/storage';
 import { useIsMounted } from '../utils/useIsMounted';
-import type { AppStackParamList, NavigationProps } from './AppNavigator';
+import type { NavigationProps } from './AppNavigator';
 
 type Storage = typeof storage;
 
@@ -118,11 +119,13 @@ export function useNavigationPersistence(storage: Storage, persistenceKey: strin
 
   const onNavigationStateChange: NavigationProps['onStateChange'] = state => {
     const previousRouteName = routeNameRef.current;
+    // @ts-ignore
     const currentRouteName = getActiveRouteName(state);
 
     if (previousRouteName !== currentRouteName) {
       // track screens.
       if (__DEV__) {
+        // @ts-ignore
         console.tron.log(currentRouteName);
       }
     }

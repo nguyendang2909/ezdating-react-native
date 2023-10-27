@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { authEndpoints, meEndpoints } from 'app/api';
+import { authEndpoints, profileEndpoints } from 'app/api';
+import { User } from 'app/types';
 import { ApiResponse } from 'app/types/api-response.type';
 import { AppStore } from 'app/types/app-store.type';
-import { Entity } from 'app/types/entity.type';
 import moment from 'moment';
 import { AuthorizationResult } from 'react-native-geolocation-service';
 
@@ -10,6 +10,7 @@ const initialState: AppStore.AppState = {
   accessToken: undefined,
   refreshToken: undefined,
   profile: {},
+  user: {},
   osPermissions: {},
   socket: {
     connectedAt: moment().toISOString(),
@@ -20,7 +21,11 @@ export const appSlice = createSlice({
   name: 'app',
   initialState,
   reducers: {
-    updateProfile: (state, action: PayloadAction<Entity.User>) => {
+    setUser: (state, action: PayloadAction<User>) => {
+      const { payload } = action;
+      state.profile = payload;
+    },
+    setProfile: (state, action: PayloadAction<User>) => {
       const { payload } = action;
       state.profile = payload;
     },
@@ -36,6 +41,7 @@ export const appSlice = createSlice({
       state.accessToken = undefined;
       state.refreshToken = undefined;
       state.profile = {};
+      state.user = {};
       state.socket = {};
     },
     setOsLocationPermission: (state, action: PayloadAction<AuthorizationResult>) => {
@@ -52,17 +58,20 @@ export const appSlice = createSlice({
     },
   },
   extraReducers: builder => {
-    builder.addMatcher(
-      authEndpoints.signInWithPhoneNumber.matchFulfilled,
-      (state, { payload: { data } }) => {
-        state.accessToken = data.accessToken;
-        state.refreshToken = data.refreshToken;
-      },
-    );
-    builder.addMatcher(meEndpoints.getMyProfile.matchFulfilled, (state, { payload: { data } }) => {
-      console.log(111);
-      state.profile = data;
-    });
+    builder
+      .addMatcher(
+        authEndpoints.signInWithPhoneNumber.matchFulfilled,
+        (state, { payload: { data } }) => {
+          state.accessToken = data.accessToken;
+          state.refreshToken = data.refreshToken;
+        },
+      )
+      .addMatcher(profileEndpoints.getMyProfile.matchFulfilled, (state, { payload: { data } }) => {
+        state.profile = data;
+      })
+      .addMatcher(profileEndpoints.createProfile.matchFulfilled, (state, { payload: { data } }) => {
+        state.profile = data;
+      });
   },
 });
 

@@ -1,2 +1,2 @@
-export * from './UpdateProfileBasicInfoScreen';
+export * from './CreateProfileScreen';
 export * from './UpdateProfilePhotosScreen';

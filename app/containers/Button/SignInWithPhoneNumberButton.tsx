@@ -15,6 +15,8 @@ export const SignInWithPhoneNumberButton: FC = () => {
 
   return (
     <Button onPress={handlePress}>
+      {/*
+      @ts-ignore */}
       <ButtonIcon mr={8} as={FontAwesome} name="mobile-phone" />
       <ButtonText>{formatMessage('Sign in with phone number')}</ButtonText>
     </Button>

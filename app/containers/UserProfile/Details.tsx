@@ -1,12 +1,12 @@
 import { Text, View } from '@gluestack-ui/themed';
 import { DetailRow } from 'app/components';
 import { FontAwesome, MaterialCommunityIcons, MaterialIcons } from 'app/components/Icon/Lib';
-import { UserRelationshipGoalMessages, UserRelationshipStatusMessages } from 'app/constants';
+import { RELATIONSHIP_GOAL_MESSAGES, RELATIONSHIP_STATUS_MESSAGES } from 'app/constants/constants';
 import { useMessages } from 'app/hooks';
-import { Entity } from 'app/types';
+import { Profile } from 'app/types';
 import React from 'react';
 
-export const UserProfileDetails: React.FC<{ user: Entity.User }> = ({ user }) => {
+export const UserProfileDetails: React.FC<{ profile: Profile }> = ({ profile }) => {
   const { formatMessage } = useMessages();
 
   return (
@@ -15,17 +15,17 @@ export const UserProfileDetails: React.FC<{ user: Entity.User }> = ({ user }) =>
         <Text bold>{formatMessage('Details')}</Text>
       </View>
 
-      {!!user.relationshipGoal && (
+      {!!profile.relationshipGoal && (
         <View>
           <DetailRow
             leftIcon={{ icon: FontAwesome, name: 'search' }}
             titleTx="Looking for"
-            valueTx={UserRelationshipGoalMessages[user.relationshipGoal]}
+            valueTx={RELATIONSHIP_GOAL_MESSAGES[profile.relationshipGoal]}
           />
         </View>
       )}
 
-      {!!user.relationshipStatus && (
+      {!!profile.relationshipStatus && (
         <View mt={8}>
           <DetailRow
             leftIcon={{
@@ -33,12 +33,12 @@ export const UserProfileDetails: React.FC<{ user: Entity.User }> = ({ user }) =>
               name: 'cards-playing-heart-multiple',
             }}
             titleTx="Relationship status"
-            valueTx={UserRelationshipStatusMessages[user.relationshipStatus]}
+            valueTx={RELATIONSHIP_STATUS_MESSAGES[profile.relationshipStatus]}
           />
         </View>
       )}
 
-      {!!user.height && (
+      {!!profile.height && (
         <View mt={8}>
           <DetailRow
             leftIcon={{
@@ -46,12 +46,12 @@ export const UserProfileDetails: React.FC<{ user: Entity.User }> = ({ user }) =>
               name: 'human-male-height',
             }}
             titleTx="Height"
-            value={`${user.height} cm`}
+            value={`${profile.height} cm`}
           />
         </View>
       )}
 
-      {!!user.weight && (
+      {!!profile.weight && (
         <View mt={8}>
           <DetailRow
             leftIcon={{
@@ -59,12 +59,12 @@ export const UserProfileDetails: React.FC<{ user: Entity.User }> = ({ user }) =>
               icon: MaterialCommunityIcons,
             }}
             titleTx="Weight"
-            value={`${user.weight} kg`}
+            value={`${profile.weight} kg`}
           />
         </View>
       )}
 
-      {!!user.jobTitle && (
+      {!!profile.jobTitle && (
         <View mt={8}>
           <DetailRow
             leftIcon={{
@@ -72,12 +72,12 @@ export const UserProfileDetails: React.FC<{ user: Entity.User }> = ({ user }) =>
               name: 'work',
             }}
             titleTx="Job title"
-            value={user.jobTitle}
+            value={profile.jobTitle}
           />
         </View>
       )}
 
-      {!!user.educationLevel && (
+      {!!profile.educationLevel && (
         <View mt={8}>
           <DetailRow
             leftIcon={{
@@ -85,7 +85,7 @@ export const UserProfileDetails: React.FC<{ user: Entity.User }> = ({ user }) =>
               name: 'school',
             }}
             titleTx="Education level"
-            value={user.educationLevel.toString()}
+            value={profile.educationLevel.toString()}
           />
         </View>
       )}

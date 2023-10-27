@@ -1,4 +1,4 @@
-import { Entity } from './entity.type';
+import { Like, Match, MediaFile, Message, Profile, User } from './entity.type';
 
 export declare namespace ApiResponse {
   type Pagination = {
@@ -20,13 +20,13 @@ export declare namespace ApiResponse {
     type: string;
   };
 
-  type Match = FetchData<Entity.Match>;
+  type MatchData = FetchData<Match>;
 
-  type Matches = PaginatedResponse<Entity.Match>;
+  type Matches = PaginatedResponse<Match>;
 
-  type Likes = PaginatedResponse<Entity.Like>;
+  type Likes = PaginatedResponse<Like>;
 
-  type Users = PaginatedResponse<Entity.User>;
+  type Profiles = PaginatedResponse<Profile>;
 
   type Unmatch = FetchData<{ _id?: string }>;
 
@@ -44,17 +44,18 @@ export declare namespace ApiResponse {
 
   type RemoveData = FetchData<{ success: true }>;
 
-  type UploadedFileListData = FetchData<Entity.MediaFile[]>;
+  type UploadedFileListData = FetchData<MediaFile[]>;
 
-  type UserData = FetchData<Entity.User>;
+  type UserData = FetchData<User>;
+
+  type ProfileData = FetchData<Profile>;
 
   type Logged = FetchData<{
     accessToken: string;
     refreshToken: string;
-    user?: Entity.User;
   }>;
 
-  type Messages = PaginatedResponse<Entity.Message> & {
+  type Messages = PaginatedResponse<Message> & {
     _matchId: string;
   };
 }

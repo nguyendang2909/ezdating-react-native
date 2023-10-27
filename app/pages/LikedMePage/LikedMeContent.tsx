@@ -1,6 +1,5 @@
 import { Box, FlatList, Pressable, Spinner, Text } from '@gluestack-ui/themed';
 import { useLikedMe } from 'app/hooks/useLikedMe';
-import { Entity } from 'app/types/entity.type';
 import { mediaFileUtil } from 'app/utils/media-files.util';
 import { scrollUtil } from 'app/utils/scroll.util';
 import React from 'react';

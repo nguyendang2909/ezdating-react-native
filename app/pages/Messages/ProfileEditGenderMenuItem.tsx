@@ -1,6 +1,7 @@
 import { MaterialCommunityIcons } from 'app/components/Icon/Lib';
 import { MenuItem } from 'app/components/Menu/MenuItem';
-import { UserGender, UserGenderMessages, UserGenders } from 'app/constants';
+import { GENDERS } from 'app/constants';
+import { GENDER_MESSAGES, UserGender } from 'app/constants/constants';
 import { useAppSelector, useMessages } from 'app/hooks';
 import { ApiRequest } from 'app/types/api-request.type';
 import { Actionsheet, Box, Heading, Text, useDisclose } from 'native-base';
@@ -33,7 +34,7 @@ export const ProfileEditGenderMenuItem: React.FC<FCProps> = ({ onPress }) => {
       <MenuItem
         titleTx="Gender"
         leftIcon={<MaterialCommunityIcons name="gender-male-female" />}
-        {...(currentValue ? { valueTx: UserGenderMessages[currentValue] } : {})}
+        {...(currentValue ? { valueTx: GENDER_MESSAGES[currentValue] } : {})}
         onPress={handleOpen}
       />
 
@@ -45,7 +46,7 @@ export const ProfileEditGenderMenuItem: React.FC<FCProps> = ({ onPress }) => {
                 {formatMessage('Gender')}
               </Heading>
             </Box>
-            {Object.values(UserGenders).map(value => {
+            {Object.values(GENDERS).map(value => {
               return (
                 <Actionsheet.Item
                   key={value}
@@ -54,7 +55,7 @@ export const ProfileEditGenderMenuItem: React.FC<FCProps> = ({ onPress }) => {
                   }}
                 >
                   <Text fontWeight={currentValue === value ? 'bold' : undefined}>
-                    {formatMessage(UserGenderMessages[value])}
+                    {formatMessage(GENDER_MESSAGES[value])}
                   </Text>
                 </Actionsheet.Item>
               );

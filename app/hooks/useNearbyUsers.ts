@@ -1,9 +1,9 @@
 import {
-  useGetNewestUsersMutation,
-  useGetNextNearbyUsersMutation,
-  useRefreshNearbyUsersQuery,
+  useGetNewestNearbyProfilesMutation,
+  useGetNextNearbyProfilesMutation,
+  useRefreshNearbyProfilesQuery,
 } from 'app/api';
-import { nearbyUsersService } from 'app/services/nearby-users.service';
+import { nearbyProfilesService } from 'app/services';
 
 import { useAppSelector } from './useAppSelector';
 
@@ -12,14 +12,14 @@ export const useNearbyUsers = () => {
   const length = nearbyUsers.length;
   const isReachedEnd = !!useAppSelector(s => s.nearbyUser.info.isReachedEnd);
   const lastRefreshedAt = useAppSelector(s => s.nearbyUser.info.lastRefreshedAt);
-  const { isLoading } = useRefreshNearbyUsersQuery(undefined, {
-    skip: !!lastRefreshedAt && !nearbyUsersService.isStale(lastRefreshedAt),
+  const { isLoading } = useRefreshNearbyProfilesQuery(undefined, {
+    skip: !!lastRefreshedAt && !nearbyProfilesService.isStale(lastRefreshedAt),
   });
-  const [fetchNewest, { isLoading: isLoadingNewest }] = useGetNewestUsersMutation();
-  const [fetchNextNearbyUsers, { isLoading: isLoadingNext }] = useGetNextNearbyUsersMutation();
+  const [fetchNewest, { isLoading: isLoadingNewest }] = useGetNewestNearbyProfilesMutation();
+  const [fetchNextNearbyUsers, { isLoading: isLoadingNext }] = useGetNextNearbyProfilesMutation();
 
   const fetchNext = () => {
-    const _next = nearbyUsersService.getCursor(nearbyUsers);
+    const _next = nearbyProfilesService.getCursor(nearbyUsers);
     if (isReachedEnd || !_next) {
       return;
     }

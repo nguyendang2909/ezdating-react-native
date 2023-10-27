@@ -1,7 +1,8 @@
+import { Button, Text } from '@gluestack-ui/themed';
 import React, { ErrorInfo } from 'react';
 import { ScrollView, TextStyle, View, ViewStyle } from 'react-native';
 
-import { Button, Icon, Screen, Text } from '../../components';
+import { Icon, Screen } from '../../components';
 import { colors, spacing } from '../../theme';
 
 export interface ErrorDetailsProps {
@@ -19,25 +20,22 @@ export function ErrorDetails(props: ErrorDetailsProps) {
     >
       <View style={$topSection}>
         <Icon icon="ladybug" size={64} />
-        <Text style={$heading} preset="subheading" tx="errorScreen.title" />
-        <Text tx="errorScreen.friendlySubtitle" />
+        <Text style={$heading}>Error</Text>
+        <Text>Error sub</Text>
       </View>
 
       <ScrollView style={$errorSection} contentContainerStyle={$errorSectionContentContainer}>
-        <Text style={$errorContent} weight="bold" text={`${props.error}`.trim()} />
-        <Text
-          selectable
-          style={$errorBacktrace}
-          text={`${props.errorInfo.componentStack}`.trim()}
-        />
+        <Text style={$errorContent} fontWeight="bold">
+          {`props.error`.trim()}
+        </Text>
+        <Text selectable style={$errorBacktrace}>
+          {`${props.errorInfo.componentStack}`.trim()}
+        </Text>
       </ScrollView>
 
-      <Button
-        preset="reversed"
-        style={$resetButton}
-        onPress={props.onReset}
-        tx="errorScreen.reset"
-      />
+      <Button style={$resetButton} onPress={props.onReset}>
+        <Text>Reset</Text>
+      </Button>
     </Screen>
   );
 }

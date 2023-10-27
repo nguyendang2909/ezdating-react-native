@@ -1,35 +1,52 @@
 import { Box, Spinner } from '@gluestack-ui/themed';
-import { useNavigation } from '@react-navigation/native';
-import { useGetMyProfileQuery } from 'app/api';
-import { UserStatuses } from 'app/constants';
+import { StackActions, useNavigation } from '@react-navigation/native';
+import { api, useGetMyProfileQuery, useLogoutMutation } from 'app/api';
+import { SCREENS } from 'app/constants';
 import { useAppSelector } from 'app/hooks';
-import { dispatch } from 'app/store';
 import { appActions } from 'app/store/app.store';
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
 export const MainScreen: React.FC = () => {
-  const userStatus = useAppSelector(state => state.app.profile?.status);
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
-  const { data } = useGetMyProfileQuery();
+  const [logout] = useLogoutMutation();
+  const refreshToken = useAppSelector(s => s.app.refreshToken);
+  const profile = useAppSelector(s => s.app.profile);
+
+  const { error } = useGetMyProfileQuery();
+
+  const handleLogout = useCallback(async () => {
+    try {
+      if (refreshToken) {
+        await logout({ refreshToken }).unwrap();
+      }
+    } catch (err) {}
+
+    dispatch(appActions.logout());
+    dispatch(api.util.resetApiState());
+  }, [dispatch, logout, refreshToken]);
 
   useEffect(() => {
-    if (userStatus) {
-      if (userStatus !== UserStatuses.registered) {
-        navigation.navigate('Home', {
-          screen: 'DatingSwipe',
-        });
+    if (profile._id) {
+      if (!profile.mediaFiles?.length) {
+        navigation.dispatch(StackActions.replace(SCREENS.UpdateProfilePhotos));
+        return;
+      }
+      navigation.dispatch(StackActions.replace(SCREENS.Home, { screen: 'DatingSwipe' }));
+    }
+  }, [navigation, profile._id, profile.mediaFiles]);
+
+  useEffect(() => {
+    if (error) {
+      if ('status' in error && error.status === 404) {
+        navigation.dispatch(StackActions.replace(SCREENS.CreateProfile));
       } else {
-        navigation.navigate('UpdateProfileBasicInfo');
+        handleLogout();
       }
     }
-  }, [navigation, userStatus]);
-
-  useEffect(() => {
-    if (data && !data.data) {
-      dispatch(appActions.logout());
-    }
-  }, [data]);
+  }, [error, handleLogout, navigation]);
 
   return (
     <Box flex={1} justifyContent="center" alignItems="center">

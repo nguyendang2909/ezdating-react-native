@@ -1,5 +1,5 @@
 import { Pressable, Text, View } from '@gluestack-ui/themed';
-import { Entity } from 'app/types';
+import { Profile } from 'app/types';
 import React from 'react';
 import { StyleSheet } from 'react-native';
 
@@ -8,7 +8,7 @@ import { LinearGradient } from '../LinearGradient';
 
 type TargetUserCardProps = {
   onPress?: () => void;
-  targetUser?: Entity.User;
+  targetUser?: Profile;
 };
 
 export const TargetUserCard: React.FC<TargetUserCardProps> = ({ onPress, targetUser }) => {
@@ -33,7 +33,7 @@ export const TargetUserCard: React.FC<TargetUserCardProps> = ({ onPress, targetU
       <View>
         <CacheImage
           style={style.image}
-          url={targetUser.mediaFiles?.length ? targetUser.mediaFiles[0].key : undefined}
+          url={targetUser?.mediaFiles?.length ? targetUser.mediaFiles[0].key : undefined}
         ></CacheImage>
       </View>
     </Pressable>

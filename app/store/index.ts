@@ -20,9 +20,9 @@ import { likedMeReducer } from './liked-me/liked-me.store';
 import { likeReducer } from './likes.store';
 import { matchReducer } from './match/match.store';
 import { messageReducer } from './message/message.store';
-import { nearbyUserReducer } from './nearby-user/nearby-user.store';
+import { nearbyProfileReducer } from './nearby-profile/nearby-profile.store';
 import { appSaga } from './saga';
-import { swipeUserReducer } from './swipe-user/swipe-user.store';
+import { swipeProfileReducer } from './swipe-profile';
 // import theme from './theme';
 import { userReducer } from './user.store';
 
@@ -37,8 +37,8 @@ const reducers = combineReducers({
   app: appReducer,
   like: likeReducer,
   likedMe: likedMeReducer,
-  nearbyUser: nearbyUserReducer,
-  swipeUser: swipeUserReducer,
+  nearbyUser: nearbyProfileReducer,
+  swipeUser: swipeProfileReducer,
   message: messageReducer,
 });
 
@@ -83,6 +83,4 @@ setupListeners(store.dispatch);
 
 sagaMiddleware.run(appSaga);
 
-export const dispatch = store.dispatch;
-
-export const getState = store.getState();
+export const { getState, dispatch } = store;

@@ -1,11 +1,9 @@
 import { MaterialIcons } from 'app/components/Icon/Lib';
 import { MenuItem } from 'app/components/Menu/MenuItem';
-import {
-  UserRelationshipStatus,
-  UserRelationshipStatuses,
-  UserRelationshipStatusMessages,
-} from 'app/constants';
+import { RELATIONSHIP_STATUSES } from 'app/constants';
+import { RELATIONSHIP_STATUS_MESSAGES } from 'app/constants/constants';
 import { useAppSelector, useMessages } from 'app/hooks';
+import { RelationshipStatus } from 'app/types';
 import { ApiRequest } from 'app/types/api-request.type';
 import { Actionsheet, Box, Heading, Text, useDisclose } from 'native-base';
 import React, { useState } from 'react';
@@ -23,7 +21,7 @@ export const ProfileEditRelationshipStatusMenuItem: React.FC<FCProps> = ({ onPre
 
   const { isOpen, onOpen, onClose } = useDisclose();
 
-  const handleChange = (relationshipStatus: UserRelationshipStatus) => {
+  const handleChange = (relationshipStatus: RelationshipStatus) => {
     onClose();
     onPress({ relationshipStatus });
   };
@@ -38,7 +36,7 @@ export const ProfileEditRelationshipStatusMenuItem: React.FC<FCProps> = ({ onPre
       <MenuItem
         titleTx="Relationship status"
         leftIcon={<MaterialIcons name="person" />}
-        {...(currentValue ? { valueTx: UserRelationshipStatusMessages[currentValue] } : {})}
+        {...(currentValue ? { valueTx: RELATIONSHIP_STATUS_MESSAGES[currentValue] } : {})}
         onPress={handleOpen}
       />
 
@@ -50,7 +48,7 @@ export const ProfileEditRelationshipStatusMenuItem: React.FC<FCProps> = ({ onPre
                 {formatMessage('Relationship status')}
               </Heading>
             </Box>
-            {Object.values(UserRelationshipStatuses).map(value => {
+            {Object.values(RELATIONSHIP_STATUSES).map(value => {
               return (
                 <Actionsheet.Item
                   key={value}
@@ -59,7 +57,7 @@ export const ProfileEditRelationshipStatusMenuItem: React.FC<FCProps> = ({ onPre
                   }}
                 >
                   <Text fontWeight={currentValue === value ? 'bold' : undefined}>
-                    {formatMessage(UserRelationshipStatusMessages[value])}
+                    {formatMessage(RELATIONSHIP_STATUS_MESSAGES[value])}
                   </Text>
                 </Actionsheet.Item>
               );

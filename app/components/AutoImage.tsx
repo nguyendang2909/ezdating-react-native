@@ -65,6 +65,7 @@ export function AutoImage(props: AutoImageProps) {
       web: (source?.uri as string) ?? (source as string),
       default: source?.uri as string,
     }),
+    // @ts-ignore
     [maxWidth, maxHeight],
   );
 

@@ -13,7 +13,7 @@
     "sourceMap": true,
     "target": "esnext",
     "lib": ["esnext", "dom"],
-    "skipLibCheck": false,
+    "skipLibCheck": true,
     "strictNullChecks": true,
     "resolveJsonModule": true,
     "baseUrl": "./"

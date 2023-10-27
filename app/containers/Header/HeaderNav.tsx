@@ -1,10 +1,10 @@
 import { useNavigation } from '@react-navigation/native';
 import { Header } from 'app/components';
-import { TxKeyPath } from 'app/i18n';
+import { TxKey } from 'app/types';
 import React from 'react';
 
 type FCProps = {
-  titleTx?: TxKeyPath;
+  titleTx?: TxKey;
   title?: string;
 };
 

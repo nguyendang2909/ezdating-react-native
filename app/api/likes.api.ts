@@ -12,13 +12,13 @@ const likesApi = api.injectEndpoints({
         method: 'GET',
       }),
     }),
-    getNewestLikedMe: builder.mutation<ApiResponse.Matches, ApiRequest.FindManyLikedMe>({
+    getNewestLikedMe: builder.mutation<ApiResponse.Likes, ApiRequest.FindManyLikedMe>({
       query: () => ({
         url: API_URL.likedMe,
         method: 'GET',
       }),
     }),
-    getNextLikedMe: builder.mutation<ApiResponse.Matches, ApiRequest.FindManyLikedMe>({
+    getNextLikedMe: builder.mutation<ApiResponse.Likes, ApiRequest.FindManyLikedMe>({
       query: params => ({
         url: API_URL.likedMe,
         method: 'GET',

@@ -1,17 +1,16 @@
 import { CommonService } from 'app/commons/service.common';
-import { AppStore } from 'app/types';
-import { Entity } from 'app/types/entity.type';
+import { AppStore, Message } from 'app/types';
 import _ from 'lodash';
 import { IMessage } from 'react-native-gifted-chat';
 
 class MessagesService extends CommonService {
-  formatMany(entity: Entity.Message[]): IMessage[] {
+  formatMany(entity: Message[]): IMessage[] {
     const messages = entity.map(e => this.formatOne(e));
 
     return messages;
   }
 
-  formatOne(entity: Entity.Message, options?: Partial<IMessage>): IMessage {
+  formatOne(entity: Message, options?: Partial<IMessage>): IMessage {
     const { createdAt, text, ...data } = entity;
 
     return {

@@ -62,6 +62,7 @@ export class ErrorBoundary extends Component<Props, State> {
       <ErrorDetails
         onReset={this.resetError}
         error={this.state.error}
+        // @ts-ignore
         errorInfo={this.state.errorInfo}
       />
     ) : (

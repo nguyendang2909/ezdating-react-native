@@ -1,17 +1,17 @@
 import { CommonService } from 'app/commons/service.common';
-import { DevicePlatforms } from 'app/constants';
+import { DEVICE_PLATFORMS } from 'app/constants';
 import { Platform } from 'react-native';
 
 class SignedDevicesService extends CommonService {
   getDevicePlatform() {
     const os = Platform.OS;
     if (os === 'ios') {
-      return DevicePlatforms.ios;
+      return DEVICE_PLATFORMS.IOS;
     }
     if (os === 'android') {
-      return DevicePlatforms.android;
+      return DEVICE_PLATFORMS.ANDROID;
     }
-    return DevicePlatforms.other;
+    return DEVICE_PLATFORMS.OTHER;
   }
 }
 

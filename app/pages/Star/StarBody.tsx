@@ -2,7 +2,6 @@ import { FlatList, Spinner, Text, View } from '@gluestack-ui/themed';
 import { MEMBERSHIPS } from 'app/constants';
 import { useAppSelector, useMessages } from 'app/hooks';
 import { useLikedMe } from 'app/hooks/useLikedMe';
-import { Entity } from 'app/types';
 import { scrollUtil } from 'app/utils/scroll.util';
 import React from 'react';
 import { NativeScrollEvent, NativeSyntheticEvent, RefreshControl } from 'react-native';

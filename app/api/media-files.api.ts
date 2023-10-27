@@ -11,6 +11,7 @@ const mediaFilesApi = api.injectEndpoints({
       query: body => {
         const { file } = body;
         const formData = new FormData();
+        // @ts-ignore
         formData.append('file', {
           uri: Platform.OS === 'ios' ? `file:///${file.path}` : file.path,
           type: 'image/jpeg',

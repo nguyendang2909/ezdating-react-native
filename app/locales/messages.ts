@@ -360,4 +360,12 @@ export const messages = defineMessages({
     defaultMessage: 'Please make sure you are over 18 years old',
     id: 'efc7d11716',
   },
+  'Oops, something went wrong. Please try again.': {
+    defaultMessage: 'Oops, something went wrong. Please try again.',
+    id: '311ca8f3d4',
+  },
+  'Uploaded photos successfully': {
+    defaultMessage: 'Uploaded photos successfully',
+    id: 'edcff4251f',
+  },
 });

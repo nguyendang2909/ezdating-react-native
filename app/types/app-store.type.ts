@@ -4,7 +4,7 @@ import { AuthorizationResult } from 'react-native-geolocation-service';
 import { IMessage } from 'react-native-gifted-chat';
 import { ThunkAction } from 'redux-thunk';
 
-import { Entity } from './entity.type';
+import { Like, Match, Message, Profile, User } from './entity.type';
 
 export declare namespace AppStore {
   type RootState = ReturnType<typeof store.getState>;
@@ -13,7 +13,8 @@ export declare namespace AppStore {
     accessToken?: string;
     refreshToken?: string;
     isLogged?: boolean;
-    profile: Partial<Entity.User>;
+    profile: Partial<Profile>;
+    user: Partial<User>;
     osPermissions?: {
       locationService?: AuthorizationResult;
     };
@@ -23,14 +24,14 @@ export declare namespace AppStore {
   };
 
   type ConversationState = {
-    data: AppStore.Match[];
+    data: AppStore.MatchData[];
   };
 
-  type Match = Entity.Match & {
+  type MatchData = Match & {
     lastRefreshedAt: string;
   };
 
-  type Like = Entity.Like & {
+  type LikeData = Like & {
     lastRefreshedAt: string;
   };
 
@@ -48,7 +49,7 @@ export declare namespace AppStore {
   };
 
   type MatchState = {
-    data: Match[];
+    data: MatchData[];
     infoMatches: {
       lastRefreshedAt?: string;
       isReachedEnd?: boolean;
@@ -60,26 +61,26 @@ export declare namespace AppStore {
   };
 
   type Messages = Partial<{
-    [T: string]: Entity.Message[];
+    [T: string]: Message[];
   }>;
 
   type UserState = {
     swipe?: {
-      data?: Entity.User[];
+      data?: User[];
     };
-    data?: Record<string, Entity.User>;
+    data?: Record<string, User>;
   };
 
   type NearbyState = {
-    data: Entity.User[];
+    data: Profile[];
     info: {
       lastRefreshedAt?: string;
       isReachedEnd?: boolean;
     };
   };
 
-  type SwipeUserState = {
-    data: Entity.User[];
+  type SwipeProfileState = {
+    data: Profile[];
     info: {
       lastRefreshedAt?: string;
       isReachedEnd?: boolean;
@@ -87,11 +88,11 @@ export declare namespace AppStore {
   };
 
   type LikesState = {
-    data?: Entity.Like[];
+    data?: Like[];
   };
 
   type LikedMeState = {
-    data: Like[];
+    data: LikeData[];
     info: {
       lastRefreshedAt?: string;
       isReachedEnd?: boolean;

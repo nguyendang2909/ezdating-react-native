@@ -41,6 +41,7 @@ export function useSafeAreaInsetsStyle(
   return safeAreaEdges.reduce((acc, e) => {
     return {
       ...acc,
+      // @ts-ignore
       [`${property}${propertySuffixMap[e]}`]: insets[edgeInsetMap[e] ?? e],
     };
   }, {});

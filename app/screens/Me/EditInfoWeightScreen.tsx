@@ -1,6 +1,6 @@
 import { Picker } from '@react-native-picker/picker';
 import { useNavigation } from '@react-navigation/native';
-import { api } from 'app/api';
+import { useUpdateProfileMutation } from 'app/api';
 import { HeaderSaveModal } from 'app/components/Header/HeaderSaveModal';
 import { useAppSelector, useMessages } from 'app/hooks';
 import { notificationsService } from 'app/services/notifications/notifications.service';
@@ -15,7 +15,7 @@ export const EditInfoWeightScreen = () => {
 
   const value = useAppSelector(state => state.app.profile?.weight);
 
-  const [submitUpdateProfile] = api.useUpdateProfileMutation();
+  const [submitUpdateProfile] = useUpdateProfileMutation();
 
   const formik = useFormik<{ weight: number }>({
     enableReinitialize: true,

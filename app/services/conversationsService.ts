@@ -1,6 +1,6 @@
 import { CommonService } from 'app/commons/service.common';
 import { APP_CONFIG } from 'app/config/config.app';
-import { AppStore, Entity } from 'app/types';
+import { AppStore, Match } from 'app/types';
 import _ from 'lodash';
 import moment from 'moment';
 
@@ -10,7 +10,7 @@ class ConversationsService extends CommonService {
     this.staleTime = APP_CONFIG.STALE_TIME.DEFAULT;
   }
 
-  formatMany(payload: Entity.Match[], options?: Partial<AppStore.Match>): AppStore.Match[] {
+  formatMany(payload: Match[], options?: Partial<AppStore.MatchData>): AppStore.MatchData[] {
     const lastRefreshedAt = moment().toISOString();
     return payload.map(e => ({
       ...e,
@@ -19,30 +19,36 @@ class ConversationsService extends CommonService {
     }));
   }
 
-  formatOne(payload: Entity.Match, currentUserId: string): AppStore.Match {
-    const { userOne, userTwo, ...rest } = payload;
+  formatOne(payload: Match, currentUserId: string): AppStore.MatchData {
+    const { profileOne, profileTwo, ...rest } = payload;
     return {
       ...rest,
-      ...(userOne?._id === currentUserId
+      ...(profileOne?._id === currentUserId
         ? {
-            targetUser: userTwo,
+            targetProfile: profileTwo,
           }
         : {
-            targetUser: userOne,
+            targetProfile: profileOne,
           }),
       lastRefreshedAt: moment().toISOString(),
     };
   }
 
-  sortAndUniq(news: AppStore.Match[], olds: AppStore.Match[]) {
+  sortAndUniq(news: AppStore.MatchData[], olds: AppStore.MatchData[]) {
     return _.chain([...news, ...olds])
       .uniqBy('_id')
       .orderBy(['lastMessageAt', 'createdAt'], ['desc', 'desc'])
       .value();
   }
 
-  public getCursor(data: Entity.Match[]): string | undefined {
-    return this.getCursorByField('lastMessageAt', data);
+  public getCursor(data: Match[]): string | undefined {
+    const dataLength = data.length;
+    if (!dataLength) {
+      return undefined;
+    }
+    const lastData = data[dataLength - 1];
+    const lastField = lastData.lastMessage?._id;
+    return lastField ? this.encodeFromString(lastField) : undefined;
   }
 }
 

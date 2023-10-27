@@ -15,6 +15,8 @@ export const SignInWithGoogleButton: FC = () => {
 
       // onPress={handlePress}
     >
+      {/* 
+      @ts-ignore */}
       <ButtonIcon mr={8} as={FontAwesome} name="google"></ButtonIcon>
       <ButtonText>{formatMessage('Sign in with Google')}</ButtonText>
     </Button>

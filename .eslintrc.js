@@ -46,7 +46,8 @@ module.exports = {
         "idInterpolationPattern": "[sha512:contenthash:hex:10]"
       }
     ],
-    "formatjs/enforce-default-message": ["error", "literal"]
+    "formatjs/enforce-default-message": ["error", "literal"],
+    "react/react-in-jsx-scope": "off"
   },
   "parserOptions": {
     "ecmaFeatures": {

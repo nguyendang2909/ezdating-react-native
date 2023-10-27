@@ -1,4 +1,3 @@
-import { MEMBERSHIPS } from 'app/constants';
 import { messages } from 'app/locales/messages';
 
 export * from './api-request.type';
@@ -6,25 +5,24 @@ export * from './api-response.type';
 export * from './app-store.type';
 export * from './common.type';
 export * from './configs.type';
+export * from './data.type';
 export * from './entity.type';
 export * from './form-params.type';
 export * from './navigation.type';
 export * from './socket-request.type';
 export * from './socket-response.type';
 
-export type Message = typeof messages;
+export type AppMessage = typeof messages;
 
-export type TxKey = keyof Message;
+export type TxKey = keyof AppMessage;
 
-export type TxKeyValue = Message[TxKey];
+export type TxKeyValue = AppMessage[TxKey];
 
 export type ChatUser = {
   _id: string;
   name?: string;
   avatar?: string;
 };
-
-export type Membership = (typeof MEMBERSHIPS)[keyof typeof MEMBERSHIPS];
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator

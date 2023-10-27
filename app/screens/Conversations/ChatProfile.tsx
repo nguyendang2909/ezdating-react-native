@@ -6,12 +6,12 @@ import React from 'react';
 type ChatProfileProps = AppStackScreenProps<'ChatProfile'>;
 
 export const ChatProfileScreen: React.FC<ChatProfileProps> = props => {
-  const user = props.route.params.user;
+  const profile = props.route.params.profile;
 
   return (
     <>
       <ScrollView flex={1} backgroundColor="$backgroundLight100">
-        <UserProfile user={user} />
+        <UserProfile profile={profile} />
       </ScrollView>
     </>
   );

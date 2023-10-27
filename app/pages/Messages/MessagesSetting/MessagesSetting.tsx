@@ -103,6 +103,8 @@ export const MessagesSetting: React.FC<{ matchId?: string }> = ({ matchId }) => 
               <ActionsheetDragIndicator />
             </ActionsheetDragIndicatorWrapper>
             <ActionsheetItem flexDirection="row" onPress={handlePressUnmatch}>
+              {/* 
+              @ts-ignore */}
               <Icon as={MaterialCommunityIcons} name="close-circle" size="xl" color="$amber600" />
               <View pl={16}>
                 <ActionsheetItemText bold>{formatMessage('Unmatch')}</ActionsheetItemText>
@@ -112,6 +114,8 @@ export const MessagesSetting: React.FC<{ matchId?: string }> = ({ matchId }) => 
               </View>
             </ActionsheetItem>
             <ActionsheetItem flexDirection="row" onPress={() => {}}>
+              {/* 
+              @ts-ignore */}
               <Icon as={MaterialIcons} name="block" size="xl" />
               <View pl={16}>
                 <ActionsheetItemText bold>{formatMessage('Block')}</ActionsheetItemText>
@@ -121,6 +125,8 @@ export const MessagesSetting: React.FC<{ matchId?: string }> = ({ matchId }) => 
               </View>
             </ActionsheetItem>
             <ActionsheetItem flexDirection="row" onPress={() => {}}>
+              {/* 
+              @ts-ignore */}
               <Icon as={MaterialIcons} name="report" size="xl" />
               <View pl={16}>
                 <ActionsheetItemText bold>{formatMessage('Report')}</ActionsheetItemText>

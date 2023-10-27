@@ -8,13 +8,15 @@ import {
 } from '@gluestack-ui/themed';
 import { MaterialCommunityIcons } from 'app/components/Icon/Lib';
 import { MenuItem } from 'app/components/Menu/MenuItem';
-import { UserGender, UserGenderMessages, UserGenders } from 'app/constants';
+import { GENDERS } from 'app/constants';
+import { GENDER_MESSAGES, UserGender } from 'app/constants/constants';
 import { useMessages } from 'app/hooks';
+import { Gender } from 'app/types';
 import React, { useState } from 'react';
 
 type FCProps = {
-  value?: UserGender;
-  onChange: (gender: UserGender) => void;
+  value?: Gender;
+  onChange: (gender: Gender) => void;
 };
 
 export const EditFilterGenderMenuItem: React.FC<FCProps> = ({ value, onChange }) => {
@@ -39,7 +41,7 @@ export const EditFilterGenderMenuItem: React.FC<FCProps> = ({ value, onChange })
       <MenuItem
         titleTx="Gender"
         leftIcon={<MaterialCommunityIcons name="gender-male-female" />}
-        {...(value ? { valueTx: UserGenderMessages[value] } : {})}
+        {...(value ? { valueTx: GENDER_MESSAGES[value] } : {})}
         onPress={handleOpen}
       />
 
@@ -51,17 +53,16 @@ export const EditFilterGenderMenuItem: React.FC<FCProps> = ({ value, onChange })
                 {formatMessage('Show me')}
               </Heading>
             </Box>
-            {Object.values(UserGenders).map(e => {
+            {Object.values(GENDERS).map(e => {
               return (
                 <ActionsheetItem
                   key={e}
                   onPress={() => {
-                    console.log(11, e);
                     handleChange(e);
                   }}
                 >
                   <Text fontWeight={e === value ? 'bold' : undefined}>
-                    {formatMessage(UserGenderMessages[e])}
+                    {formatMessage(GENDER_MESSAGES[e])}
                   </Text>
                 </ActionsheetItem>
               );

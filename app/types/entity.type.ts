@@ -1,106 +1,93 @@
 import {
+  EducationLevel,
+  Gender,
   MediaFileType,
-  UserEducationLevel,
-  UserGender,
-  UserRelationshipGoal,
-  UserRelationshipStatus,
+  Membership,
+  RelationshipGoal,
+  RelationshipStatus,
   UserRole,
   UserStatus,
-} from 'app/constants';
+} from './data.type';
 
-import { Membership } from '.';
+export type BaseEntity = {
+  _id: string;
+  createdAt?: string;
+  updatedAt?: string;
+};
 
-export declare namespace Entity {
-  type BaseEntity = {
-    _id: string;
-    createdAt?: string;
-    updatedAt?: string;
-  };
+export type MediaFile = BaseEntity & {
+  key: string;
+  location: string;
+  type: MediaFileType;
+};
 
-  type MediaFile = BaseEntity &
-    Partial<{
-      _userId: string;
-      key: string;
-      location: string;
-      // eslint-disable-next-line no-use-before-define
-      type: MediaFileType;
-    }>;
+export type User = BaseEntity & {
+  coins?: number;
+  email?: string;
+  phoneNumber?: string;
+  role?: UserRole;
+  weight: number;
+  status?: UserStatus;
+};
 
-  type User = BaseEntity &
-    Partial<{
-      age?: number;
-      birthday?: string;
-      coins?: number;
-      company?: string;
-      distance?: number;
-      educationLevel: UserEducationLevel;
-      email: string;
-      // company?: string;
-      // drinking?: EDrinking;
-      // educationLevel?: EEducationLevel;
-      gender?: UserGender;
-      geolocation: string;
-      height: number;
-      hideAge: boolean;
-      hideDistance: boolean;
-      introduce: string;
-      jobTitle: string;
-      languages: string[];
-      relationshipGoal?: UserRelationshipGoal;
-      filterGender?: UserGender;
-      filterMaxAge?: number;
-      filterMaxDistance?: number;
-      filterMinAge?: number;
-      lastActivatedAt?: string;
-      mediaFiles?: MediaFile[];
-      membership?: Membership;
-      nickname?: string;
-      password?: string;
-      phoneNumber?: string;
-      relationshipStatus?: UserRelationshipStatus;
-      role?: UserRole;
-      weight: number;
-      status?: UserStatus;
+export type Profile = BaseEntity & {
+  _userId: string;
+  age?: number;
+  birthday?: string;
+  company?: string;
+  educationLevel?: EducationLevel;
+  filterGender?: Gender;
+  filterMaxDistance?: number;
+  filterMaxAge?: number;
+  filterMinAge?: number;
+  gender?: Gender;
+  geolocation?: object;
+  height?: number;
+  introduce?: string;
+  jobTitle?: string;
+  hideAge?: boolean;
+  hideDistance?: boolean;
+  lastActivatedAt?: Date;
+  languages?: string[];
+  mediaFiles?: MediaFile[];
+  membership?: Membership;
+  nickname?: string;
+  relationshipGoal?: RelationshipGoal;
+  relationshipStatus?: RelationshipStatus;
+  school?: string;
+  weight?: number;
+  distance?: number;
+};
 
-      // jobTitle: string;
-      // school: string;
-      // smoking: ESmoking;
-      // workout: EWorkout;
-    }>;
+export type Message = BaseEntity & {
+  _matchId?: string;
+  _userId?: string;
+  replyMessage?: Message;
+  audio?: string;
+  image?: string;
+  // likeUserIds?: string[];
+  // loveUserIds?: string[];
+  text?: string;
+  uuid?: string;
+  video?: string;
+};
 
-  type Message = BaseEntity &
-    Partial<{
-      _matchId: string;
-      _replyMessageId?: string;
-      _userId: string;
-      replyMessage?: Message;
-      audio: string;
-      image?: string;
-      // likeUserIds?: string[];
-      // loveUserIds?: string[];
-      text?: string;
-      uuid?: string;
-      video?: string;
-    }>;
+export type Match = BaseEntity & {
+  _userOneId: string;
+  _userTwoId: string;
+  lastMessage?: Message;
+  userOneRead?: boolean;
+  userTwoRead?: boolean;
+  targetProfile?: Profile;
+  read?: boolean;
+  profileOne?: Profile;
+  profileTwo?: Profile;
+};
 
-  type Match = BaseEntity &
-    Partial<{
-      _userOneId: string;
-      _userTwoId: string;
-      lastMessage: Message;
-      userOneRead: boolean;
-      userTwoRead: boolean;
-      targetUser: User;
-      read: boolean;
-      userOne: Entity.User;
-      userTwo: Entity.User;
-    }>;
-
-  type Like = BaseEntity &
-    Partial<{
-      _userId?: string;
-      _targetUserId?: string;
-      isMatched?: boolean;
-      user?: User;
-    }>;
-}
+export type Like = BaseEntity &
+  Partial<{
+    _userId?: string;
+    _targetUserId?: string;
+    isMatched?: boolean;
+    profile?: Profile;
+  }>;

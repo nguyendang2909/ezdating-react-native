@@ -27,13 +27,13 @@ export const MessagesScreen: FC<FCProps> = props => {
   });
   const targetUser = useMemo(
     () => ({
-      _id: match?.targetUser?._id || '',
-      avatar: match?.targetUser?.mediaFiles?.length
-        ? mediaFileUtil.getUrl(match.targetUser.mediaFiles[0].key)
+      _id: match?.targetProfile?._id || '',
+      avatar: match?.targetProfile?.mediaFiles?.length
+        ? mediaFileUtil.getUrl(match.targetProfile.mediaFiles[0].key)
         : undefined,
-      name: match?.targetUser?.nickname,
+      name: match?.targetProfile?.nickname,
     }),
-    [match?.targetUser?._id, match?.targetUser?.mediaFiles, match?.targetUser?.nickname],
+    [match?.targetProfile?._id, match?.targetProfile?.mediaFiles, match?.targetProfile?.nickname],
   );
   const { goBack } = useNavigation();
   if (!matchId) {

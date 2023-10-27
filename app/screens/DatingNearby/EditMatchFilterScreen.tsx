@@ -1,7 +1,7 @@
 import { Box, Divider, ScrollView, Text, View } from '@gluestack-ui/themed';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
 import { useNavigation } from '@react-navigation/native';
-import { useRefreshNearbyUsersQuery, useUpdateProfileMutation } from 'app/api';
+import { useRefreshNearbyProfilesQuery, useUpdateProfileMutation } from 'app/api';
 import { HeaderSaveDone } from 'app/components/Header/HeaderSaveDone';
 import { useAppSelector, useMessages } from 'app/hooks';
 import { EditFilterGenderMenuItem } from 'app/pages/EditMatchFilter/EditFilterGenderMenuItem';
@@ -17,7 +17,7 @@ import { AppStackScreenProps } from '../../navigators';
 
 export const EditMatchFilterScreen: React.FC<AppStackScreenProps<'EditMatchFilter'>> = () => {
   const [updateProfile] = useUpdateProfileMutation();
-  const { refetch } = useRefreshNearbyUsersQuery();
+  const { refetch } = useRefreshNearbyProfilesQuery();
   const { formatMessage } = useMessages();
   const navigation = useNavigation();
   const { width } = Dimensions.get('window');

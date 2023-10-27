@@ -3,8 +3,7 @@ import 'react-native-get-random-values';
 import { PayloadAction } from '@reduxjs/toolkit';
 import Config from 'app/config';
 import { SOCKET_TO_CLIENT_EVENTS, SOCKET_TO_SERVER_EVENTS } from 'app/constants';
-import { AppStore } from 'app/types';
-import { Entity } from 'app/types/entity.type';
+import { AppStore, Message } from 'app/types';
 import { SocketRequest } from 'app/types/socket-request.type';
 import { eventChannel } from 'redux-saga';
 import { ActionPattern, call, put, select as RSSelect, take } from 'redux-saga/effects';
@@ -14,7 +13,6 @@ import { appActions } from './app.store';
 import { likedMeActions } from './liked-me';
 import { matchActions } from './match';
 import { messageActions } from './message/message.store';
-import { swipeUserActions } from './swipe-user/swipe-user.store';
 
 let socket: Socket;
 
@@ -57,7 +55,7 @@ export function* initializeWebSocket() {
             break;
           case SOCKET_TO_CLIENT_EVENTS.UPDATE_SENT_MESSAGE:
             yield put(messageActions.updateMsg(data));
-            const conversation: AppStore.Match | undefined = yield select(s =>
+            const conversation: AppStore.MatchData | undefined = yield select(s =>
               s.match.data.find(i => i._id === data._matchId),
             );
             if (conversation) {
@@ -70,7 +68,7 @@ export function* initializeWebSocket() {
             const targetUserId =
               data.userOne?._id === currentUserId ? data.userTwo?._id : data.userOne?._id;
             yield put(likedMeActions.removeOneByUserId(targetUserId));
-            yield put(swipeUserActions.addMany)
+            // TODO: Remove on swipe
             break;
           default:
             break;
@@ -95,18 +93,18 @@ function createSocketChannel() {
       console.log('====error====', msg);
     });
 
-    socket.on(SOCKET_TO_CLIENT_EVENTS.NEW_MESSAGE, (msg: Entity.Message) => {
+    socket.on(SOCKET_TO_CLIENT_EVENTS.NEW_MESSAGE, (msg: Message) => {
       emit({ type: SOCKET_TO_CLIENT_EVENTS.NEW_MESSAGE, data: msg });
     });
 
-    socket.on(SOCKET_TO_CLIENT_EVENTS.UPDATE_SENT_MESSAGE, (msg: Entity.Message) => {
+    socket.on(SOCKET_TO_CLIENT_EVENTS.UPDATE_SENT_MESSAGE, (msg: Message) => {
       emit({
         type: SOCKET_TO_CLIENT_EVENTS.UPDATE_SENT_MESSAGE,
         data: msg,
       });
     });
 
-    socket.on(SOCKET_TO_CLIENT_EVENTS.MATCH, (msg: Entity.Message) => {
+    socket.on(SOCKET_TO_CLIENT_EVENTS.MATCH, (msg: Message) => {
       emit({
         type: SOCKET_TO_CLIENT_EVENTS.MATCH,
         data: msg,

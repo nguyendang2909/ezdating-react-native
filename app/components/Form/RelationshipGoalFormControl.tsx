@@ -1,10 +1,16 @@
-import { useActionSheet } from '@expo/react-native-action-sheet';
 import {
-  UserRelationshipGoal,
-  UserRelationshipGoalMessages,
-  UserRelationshipGoals,
-} from 'app/constants';
+  Actionsheet,
+  ActionsheetContent,
+  ActionsheetItem,
+  Box,
+  Heading,
+  Text,
+} from '@gluestack-ui/themed';
+import { ARR_RELATIONSHIP_GOALS } from 'app/constants';
+import { RELATIONSHIP_GOAL_MESSAGES } from 'app/constants/constants';
+import { useDisclose } from 'app/hooks';
 import { useMessages } from 'app/hooks/useMessages';
+import { RelationshipGoal } from 'app/types';
 import {
   ChevronDownIcon,
   FormControl,
@@ -14,13 +20,13 @@ import {
   View,
   WarningOutlineIcon,
 } from 'native-base';
-import React from 'react';
+import React, { useState } from 'react';
 
 type FCProps = {
   error?: string;
   isRequired?: boolean;
   onChange: (value: number) => void;
-  value?: UserRelationshipGoal;
+  value?: RelationshipGoal;
 };
 
 export const RelationshipGoalFormControl: React.FC<FCProps> = ({
@@ -31,45 +37,15 @@ export const RelationshipGoalFormControl: React.FC<FCProps> = ({
 }) => {
   const { formatMessage } = useMessages();
 
-  const { showActionSheetWithOptions } = useActionSheet();
-
-  const handlePress = () => {
-    const options = [
-      formatMessage('Lover'),
-      formatMessage('Friend'),
-      formatMessage('Partner'),
-      formatMessage('Marriage'),
-      formatMessage('One-Night stand'),
-      formatMessage('Cancel'),
-    ];
-    const cancelButtonIndex = 5;
-    showActionSheetWithOptions(
-      {
-        showSeparators: true,
-        options,
-        cancelButtonIndex,
-        useModal: true,
-      },
-      (selectedIndex: number) => {
-        switch (selectedIndex) {
-          case 0:
-            onChange(UserRelationshipGoals.boyGirlFriend);
-            break;
-          case 1:
-            onChange(UserRelationshipGoals.getMarried);
-            break;
-          case 2:
-            onChange(UserRelationshipGoals.makeFriends);
-            break;
-          case 3:
-            onChange(UserRelationshipGoals.oneNightStand);
-            break;
-          case 4:
-            onChange(UserRelationshipGoals.sexPartner);
-            break;
-        }
-      },
-    );
+  const [isInit, setInit] = useState<boolean>(false);
+  const { isOpen, onOpen, onClose } = useDisclose();
+  const handleChange = (relationshipGoal: RelationshipGoal) => {
+    onClose();
+    onChange(relationshipGoal);
+  };
+  const handleOpen = () => {
+    setInit(true);
+    onOpen();
   };
 
   return (
@@ -77,15 +53,15 @@ export const RelationshipGoalFormControl: React.FC<FCProps> = ({
       <FormControl {...(isRequired ? { isRequired } : {})} isInvalid={!!error}>
         <Stack>
           <FormControl.Label>{formatMessage('What are you looking for here?')}</FormControl.Label>
-          <Pressable onPress={handlePress}>
+          <Pressable onPress={handleOpen}>
             <Input
               isReadOnly
               size="lg"
               variant="underlined"
               placeholder={formatMessage('Please select')}
-              value={value ? formatMessage(UserRelationshipGoalMessages[value]) : ''}
+              value={value ? formatMessage(RELATIONSHIP_GOAL_MESSAGES[value]) : ''}
               InputRightElement={<ChevronDownIcon />}
-              onPressIn={handlePress}
+              onPressIn={handleOpen}
             ></Input>
           </Pressable>
           <View pb={2}>
@@ -95,6 +71,32 @@ export const RelationshipGoalFormControl: React.FC<FCProps> = ({
           </View>
         </Stack>
       </FormControl>
+
+      {isInit && (
+        <Actionsheet isOpen={isOpen} onClose={onClose}>
+          <ActionsheetContent>
+            <Box mb={4}>
+              <Heading size="sm" textAlign="center">
+                {formatMessage('Relationship goal')}
+              </Heading>
+            </Box>
+            {ARR_RELATIONSHIP_GOALS.map(e => {
+              return (
+                <ActionsheetItem
+                  key={e}
+                  onPress={() => {
+                    handleChange(e);
+                  }}
+                >
+                  <Text fontWeight={e === value ? 'bold' : undefined}>
+                    {formatMessage(RELATIONSHIP_GOAL_MESSAGES[e])}
+                  </Text>
+                </ActionsheetItem>
+              );
+            })}
+          </ActionsheetContent>
+        </Actionsheet>
+      )}
     </>
   );
 };

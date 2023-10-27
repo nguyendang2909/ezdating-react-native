@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { matchEndpoints } from 'app/api';
 import { matchesService } from 'app/services/matches.service';
+import { Match, Message } from 'app/types';
 import { AppStore } from 'app/types/app-store.type';
-import { Entity } from 'app/types/entity.type';
 import { SocketRequest } from 'app/types/socket-request.type';
 import moment from 'moment';
 
@@ -25,16 +25,14 @@ export const matchSlice = createSlice({
     // Matches
     addMatch: (
       state,
-      {
-        payload: { data, currentUserId },
-      }: PayloadAction<{ data: Entity.Match; currentUserId: string }>,
+      { payload: { data, currentUserId } }: PayloadAction<{ data: Match; currentUserId: string }>,
     ) => {
       const match = matchesService.formatOne(data, currentUserId);
       state.data = matchesService.sortAndUniq([match], state.data);
     },
 
     // Conversations
-    updateWhenUpdateSentMessage: (state, { payload }: PayloadAction<Entity.Message>) => {
+    updateWhenUpdateSentMessage: (state, { payload }: PayloadAction<Message>) => {
       const stateIndex = state.data.findIndex(e => e._id === payload._matchId);
       if (stateIndex >= 0) {
         state.data[stateIndex] = {
@@ -46,7 +44,7 @@ export const matchSlice = createSlice({
       state.data = matchesService.sortAndUniq([], state.data);
     },
 
-    updateWhenReceivingMessage: (state, { payload }: PayloadAction<Entity.Message>) => {
+    updateWhenReceivingMessage: (state, { payload }: PayloadAction<Message>) => {
       if (!state.data?.length) {
         return;
       }

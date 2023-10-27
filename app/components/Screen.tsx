@@ -117,6 +117,7 @@ function useAutoPreset(props: AutoScreenProps) {
 
   function onContentSizeChange(w: number, h: number) {
     // update scroll-view content height
+    // @ts-ignore
     scrollViewContentHeight.current = h;
     updateScrollState();
   }
@@ -124,6 +125,7 @@ function useAutoPreset(props: AutoScreenProps) {
   function onLayout(e: LayoutChangeEvent) {
     const { height } = e.nativeEvent.layout;
     // update scroll-view  height
+    // @ts-ignore
     scrollViewHeight.current = height;
     updateScrollState();
   }
@@ -162,9 +164,11 @@ function ScreenWithScrolling(props: ScreenProps) {
 
   // Add native behavior of pressing the active tab to scroll to the top of the content
   // More info at: https://reactnavigation.org/docs/use-scroll-to-top/
+  // @ts-ignore
   useScrollToTop(ref);
 
   return (
+    // @ts-ignore
     <ScrollView
       {...{ keyboardShouldPersistTaps, scrollEnabled, ref }}
       {...ScrollViewProps}

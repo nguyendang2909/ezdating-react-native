@@ -1,12 +1,12 @@
 import { Image, View } from '@gluestack-ui/themed';
-import { Entity } from 'app/types';
+import { MediaFile } from 'app/types';
 import { mediaFileUtil } from 'app/utils/media-files.util';
 import React from 'react';
 import { Dimensions } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
 
 type FCProps = {
-  mediaFiles: Entity.MediaFile[];
+  mediaFiles: MediaFile[];
 };
 export const UserProfileImages: React.FC<FCProps> = ({ mediaFiles }) => {
   const width = Dimensions.get('window').width;

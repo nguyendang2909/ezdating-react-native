@@ -1,14 +1,13 @@
 import { Box, ScrollView, Text } from '@gluestack-ui/themed';
 import { useNavigation } from '@react-navigation/native';
-import { AppStore } from 'app/types';
-import { Entity } from 'app/types/entity.type';
+import { AppStore, Match } from 'app/types';
 import { mediaFileUtil } from 'app/utils/media-files.util';
 import { HStack, Image, Pressable } from 'native-base';
 import React from 'react';
 import { Dimensions } from 'react-native';
 
 type MatchCardsProps = {
-  matches: AppStore.Match[];
+  matches: AppStore.MatchData[];
 };
 
 export const MatchCards: React.FC<MatchCardsProps> = ({ matches }) => {
@@ -17,7 +16,7 @@ export const MatchCards: React.FC<MatchCardsProps> = ({ matches }) => {
   const cardWidth = Dimensions.get('window').width / 4;
   const imageCardHeight = (cardWidth / 640) * 860;
 
-  const handlePressCard = (conversation: Entity.Match) => {
+  const handlePressCard = (conversation: Match) => {
     navigation.navigate('Messages', {
       matchId: conversation._id,
     });
@@ -33,8 +32,8 @@ export const MatchCards: React.FC<MatchCardsProps> = ({ matches }) => {
         <Box mx={16}>
           <HStack space={2}>
             {matches?.map((item, index) => {
-              const imageUrl = item.targetUser?.mediaFiles?.length
-                ? mediaFileUtil.getUrl(item.targetUser.mediaFiles[0].key)
+              const imageUrl = item.targetProfile?.mediaFiles?.length
+                ? mediaFileUtil.getUrl(item.targetProfile.mediaFiles[0].key)
                 : '';
 
               return (
@@ -59,7 +58,7 @@ export const MatchCards: React.FC<MatchCardsProps> = ({ matches }) => {
                   </Box>
                   <Box>
                     <Text fontWeight="bold" numberOfLines={1}>
-                      {item.targetUser?.nickname}
+                      {item.targetProfile?.nickname}
                     </Text>
                   </Box>
                 </Pressable>

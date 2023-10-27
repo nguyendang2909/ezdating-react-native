@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import { api } from 'app/api';
+import { useUpdateProfileMutation } from 'app/api';
 import { HeaderSave } from 'app/components/Header/HeaderSave';
 import { useAppSelector, useMessages } from 'app/hooks';
 import { useFormik } from 'formik';
@@ -10,12 +10,10 @@ import * as Yup from 'yup';
 export const EditInfoInterestScreen = () => {
   const { formatMessage } = useMessages();
   const { goBack } = useNavigation();
-
   const toast = useToast();
+  const [updateProfile] = useUpdateProfileMutation();
 
   const value = useAppSelector(state => state.app.profile?.weight);
-
-  const [submitUpdateProfile] = api.useUpdateProfileMutation();
 
   const formik = useFormik<{ weight: number }>({
     enableReinitialize: true,
@@ -28,7 +26,7 @@ export const EditInfoInterestScreen = () => {
 
     onSubmit: async values => {
       try {
-        await submitUpdateProfile(values);
+        await updateProfile(values).unwrap();
       } catch (err) {
         toast.show({
           title: formatMessage('Update failed, please try again.'),
