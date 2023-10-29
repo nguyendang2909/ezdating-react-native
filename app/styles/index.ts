@@ -46,7 +46,7 @@ export const fontSize = (value: number): TextStyle => ({
   fontSize: value,
 });
 
-export const height = (value: number): ViewStyle => ({
+export const height = (value: number) => ({
   height: value,
 });
 
@@ -124,7 +124,7 @@ export const textAlignCenter: TextStyle = {
   textAlign: 'center',
 };
 
-export const width = (value: string | number): ViewStyle => ({
+export const width = (value: string | number) => ({
   width: value,
 });
 

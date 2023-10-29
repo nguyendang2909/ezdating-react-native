@@ -1,10 +1,11 @@
 import { Box, ScrollView, Text } from '@gluestack-ui/themed';
 import { useNavigation } from '@react-navigation/native';
-import { AppStore, Match } from 'app/types';
-import { mediaFileUtil } from 'app/utils/media-files.util';
-import { HStack, Image, Pressable } from 'native-base';
-import React from 'react';
+import { AppStore } from 'app/types';
+import { HStack } from 'native-base';
+import React, { useCallback, useMemo } from 'react';
 import { Dimensions } from 'react-native';
+
+import { MatchCardItem } from './MatchCardItem';
 
 type MatchCardsProps = {
   matches: AppStore.MatchData[];
@@ -13,14 +14,17 @@ type MatchCardsProps = {
 export const MatchCards: React.FC<MatchCardsProps> = ({ matches }) => {
   const navigation = useNavigation();
 
-  const cardWidth = Dimensions.get('window').width / 4;
-  const imageCardHeight = (cardWidth / 640) * 860;
+  const cardWidth = useMemo(() => Dimensions.get('window').width / 4, []);
+  const cardHeight = useMemo(() => (cardWidth / 640) * 860, [cardWidth]);
 
-  const handlePressCard = (conversation: Match) => {
-    navigation.navigate('Messages', {
-      matchId: conversation._id,
-    });
-  };
+  const handlePressCard = useCallback(
+    (matchId: string) => {
+      navigation.navigate('Messages', {
+        matchId,
+      });
+    },
+    [navigation],
+  );
 
   return (
     <>
@@ -32,36 +36,14 @@ export const MatchCards: React.FC<MatchCardsProps> = ({ matches }) => {
         <Box mx={16}>
           <HStack space={2}>
             {matches?.map((item, index) => {
-              const imageUrl = item.targetProfile?.mediaFiles?.length
-                ? mediaFileUtil.getUrl(item.targetProfile.mediaFiles[0].key)
-                : '';
-
               return (
-                <Pressable
+                <MatchCardItem
                   key={item._id || index}
-                  p={1}
+                  match={item}
                   width={cardWidth}
-                  onPress={() => {
-                    handlePressCard(item);
-                  }}
-                >
-                  <Box>
-                    <Image
-                      borderRadius={8}
-                      height={imageCardHeight}
-                      width={cardWidth}
-                      alt="avatar"
-                      source={{
-                        uri: imageUrl,
-                      }}
-                    ></Image>
-                  </Box>
-                  <Box>
-                    <Text fontWeight="bold" numberOfLines={1}>
-                      {item.targetProfile?.nickname}
-                    </Text>
-                  </Box>
-                </Pressable>
+                  height={cardHeight}
+                  onPress={handlePressCard}
+                />
               );
             })}
           </HStack>

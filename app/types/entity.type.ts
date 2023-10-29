@@ -31,7 +31,6 @@ export type User = BaseEntity & {
 };
 
 export type Profile = BaseEntity & {
-  _userId: string;
   age?: number;
   birthday?: string;
   company?: string;
@@ -73,21 +72,20 @@ export type Message = BaseEntity & {
 };
 
 export type Match = BaseEntity & {
-  _userOneId: string;
-  _userTwoId: string;
   lastMessage?: Message;
   userOneRead?: boolean;
-  userTwoRead?: boolean;
-  targetProfile?: Profile;
   read?: boolean;
-  profileOne?: Profile;
-  profileTwo?: Profile;
+  targetProfile: Profile;
 };
 
-export type Like = BaseEntity &
-  Partial<{
-    _userId?: string;
-    _targetUserId?: string;
-    isMatched?: boolean;
-    profile?: Profile;
-  }>;
+export type Like = BaseEntity & {
+  profile: Profile;
+  targetProfile: Profile;
+  isMatched?: boolean;
+};
+
+export type View = BaseEntity & {
+  profile?: Profile;
+  targetProfile?: Profile;
+  isLiked?: boolean;
+};

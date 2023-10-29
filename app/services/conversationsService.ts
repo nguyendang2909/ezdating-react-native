@@ -19,17 +19,9 @@ class ConversationsService extends CommonService {
     }));
   }
 
-  formatOne(payload: Match, currentUserId: string): AppStore.MatchData {
-    const { profileOne, profileTwo, ...rest } = payload;
+  formatOne(payload: Match): AppStore.MatchData {
     return {
-      ...rest,
-      ...(profileOne?._id === currentUserId
-        ? {
-            targetProfile: profileTwo,
-          }
-        : {
-            targetProfile: profileOne,
-          }),
+      ...payload,
       lastRefreshedAt: moment().toISOString(),
     };
   }

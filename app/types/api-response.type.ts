@@ -11,7 +11,7 @@ export declare namespace ApiResponse {
     [P in keyof R]?: R[P];
   } & {
     data: T;
-    type: string;
+    type?: string;
   };
 
   type PaginatedResponse<T> = {

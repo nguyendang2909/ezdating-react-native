@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useCreateMatchMutation } from 'app/api';
 import { LoadingButtonIcon } from 'app/components/Button/LoadingButtonIcon';
 import { Ionicons } from 'app/components/Icon/Lib';
-import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { useAppDispatch } from 'app/hooks';
 import { matchActions } from 'app/store/match';
 import React from 'react';
 
@@ -11,7 +11,6 @@ type FCProps = {
 };
 
 export const NearbyUserSendMessageButton: React.FC<FCProps> = ({ targetUserId }) => {
-  const currentUserId = useAppSelector(s => s.app.profile._id) || '';
   const navigation = useNavigation();
   const dispatch = useAppDispatch();
   const [createMatch, { isLoading }] = useCreateMatchMutation();
@@ -21,8 +20,7 @@ export const NearbyUserSendMessageButton: React.FC<FCProps> = ({ targetUserId })
       const fetchData = await createMatch({
         targetUserId,
       }).unwrap();
-      dispatch(matchActions.addMatch({ data: fetchData.data, currentUserId }));
-
+      dispatch(matchActions.addMatch(fetchData));
       navigation.goBack();
       navigation.navigate('Messages', {
         matchId: fetchData.data?._id,

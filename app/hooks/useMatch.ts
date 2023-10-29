@@ -18,7 +18,7 @@ export const useMatch = (matchId: string) => {
 
   useEffect(() => {
     if (data && currentUserId) {
-      dispatch(matchActions.addMatch({ data: data.data, currentUserId }));
+      dispatch(matchActions.addMatch(data));
     }
   }, [currentUserId, data, dispatch]);
 

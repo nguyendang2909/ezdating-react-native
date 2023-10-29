@@ -63,11 +63,18 @@ export function* initializeWebSocket() {
             }
             break;
           case SOCKET_TO_CLIENT_EVENTS.MATCH:
-            const currentUserId: string = yield select(state => state.app.profile._id);
-            yield put(matchActions.addMatch({ data, currentUserId }));
-            const targetUserId =
-              data.userOne?._id === currentUserId ? data.userTwo?._id : data.userOne?._id;
-            yield put(likedMeActions.removeOneByUserId(targetUserId));
+            yield put(matchActions.addMatch({ data }));
+            if (data.targetProfile?._id) {
+              yield put(likedMeActions.removeOneByUserId(data.targetProfile._id));
+            }
+            // TODO: Remove on swipe
+            break;
+          case SOCKET_TO_CLIENT_EVENTS.CANCEL_MATCH:
+            console.log(1111);
+            // yield put(matchActions.addMatch({ data }));
+            // if (data.targetProfile?._id) {
+            //   yield put(likedMeActions.removeOneByUserId(data.targetProfile._id));
+            // }
             // TODO: Remove on swipe
             break;
           default:

@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { matchEndpoints } from 'app/api';
 import { matchesService } from 'app/services/matches.service';
-import { Match, Message } from 'app/types';
+import { ApiResponse, Message } from 'app/types';
 import { AppStore } from 'app/types/app-store.type';
 import { SocketRequest } from 'app/types/socket-request.type';
 import moment from 'moment';
@@ -23,11 +23,8 @@ export const matchSlice = createSlice({
   initialState,
   reducers: {
     // Matches
-    addMatch: (
-      state,
-      { payload: { data, currentUserId } }: PayloadAction<{ data: Match; currentUserId: string }>,
-    ) => {
-      const match = matchesService.formatOne(data, currentUserId);
+    addMatch: (state, { payload: { data } }: PayloadAction<ApiResponse.MatchData>) => {
+      const match = matchesService.formatOne(data);
       state.data = matchesService.sortAndUniq([match], state.data);
     },
 
