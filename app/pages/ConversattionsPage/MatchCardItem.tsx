@@ -1,5 +1,5 @@
 import { Box, Pressable, Text } from '@gluestack-ui/themed';
-import { CacheImage } from 'app/components';
+import { CacheImage, LinearGradient } from 'app/components';
 import { height, width } from 'app/styles';
 import { Match } from 'app/types';
 import _ from 'lodash';
@@ -23,6 +23,8 @@ export const MatchCardItem: FC<MatchCardItemProps> = ({
     onPress(match._id);
   }, [match._id, onPress]);
 
+  const url = _.get(match, 'targetProfile.mediaFiles[0].key');
+  console.log(url);
   return (
     <Pressable p={1} width={widthValue} onPress={handlePress}>
       <Box>
@@ -30,6 +32,13 @@ export const MatchCardItem: FC<MatchCardItemProps> = ({
           style={[styles.image, height(heightValue), width(widthValue)]}
           url={_.get(match, 'targetProfile.mediaFiles[0].key')}
         ></CacheImage>
+        <LinearGradient
+          position="absolute"
+          colors={['#fd267a', '#ff6036']}
+          height={heightValue}
+          width={widthValue}
+          borderRadius={8}
+        />
       </Box>
       <Box>
         <Text fontWeight="bold" numberOfLines={1}>
@@ -43,5 +52,6 @@ export const MatchCardItem: FC<MatchCardItemProps> = ({
 const styles = StyleSheet.create({
   image: {
     borderRadius: 8,
+    zIndex: 10,
   },
 });

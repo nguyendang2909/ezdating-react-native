@@ -16,7 +16,7 @@ export const likedMeSlice = createSlice({
   initialState,
   reducers: {
     removeOneByUserId: (state, { payload }: PayloadAction<string>) => {
-      state.data = state.data.filter(e => e.profile._id === payload);
+      state.data = state.data.filter(e => e.profile?._id !== payload);
     },
   },
   extraReducers: builder => {

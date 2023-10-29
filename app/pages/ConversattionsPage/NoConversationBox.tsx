@@ -12,8 +12,6 @@ export const NoConversationBox: React.FC = () => {
         <Box px={16}>
           <Box alignItems="center">
             <LinearGradient
-              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-              // @ts-ignore
               colors={['#fd267a', '#ff6036']}
               height={129}
               width={96}

@@ -28,6 +28,10 @@ export const matchSlice = createSlice({
       state.data = matchesService.sortAndUniq([match], state.data);
     },
 
+    unmatch: (state, { payload }: PayloadAction<{ _id: string }>) => {
+      state.data = state.data.filter(e => e._id !== payload._id);
+    },
+
     // Conversations
     updateWhenUpdateSentMessage: (state, { payload }: PayloadAction<Message>) => {
       const stateIndex = state.data.findIndex(e => e._id === payload._matchId);
@@ -87,7 +91,10 @@ export const matchSlice = createSlice({
             lastRefreshedAt: moment().toISOString(),
           };
           const matches = matchesService.formatMany(data);
-          state.data = matchesService.sortAndUniq(matches, state.data);
+          state.data = matches;
+          // TODO: improve
+          // state.data = matchesService.sortAndUniq(matches, state.data);
+          // state.data = matchesService.sortAndUniq(matches, state.data);
         },
       )
       .addMatcher(
@@ -99,7 +106,9 @@ export const matchSlice = createSlice({
             lastRefreshedAt: moment().toISOString(),
           };
           const matches = matchesService.formatMany(data);
-          state.data = matchesService.sortAndUniq(matches, state.data);
+          state.data = matches;
+          // TODO: improve
+          // state.data = matchesService.sortAndUniq(matches, state.data);
         },
       )
       .addMatcher(

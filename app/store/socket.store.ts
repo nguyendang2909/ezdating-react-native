@@ -3,7 +3,7 @@ import 'react-native-get-random-values';
 import { PayloadAction } from '@reduxjs/toolkit';
 import Config from 'app/config';
 import { SOCKET_TO_CLIENT_EVENTS, SOCKET_TO_SERVER_EVENTS } from 'app/constants';
-import { AppStore, Message } from 'app/types';
+import { AppStore, Match, Message } from 'app/types';
 import { SocketRequest } from 'app/types/socket-request.type';
 import { eventChannel } from 'redux-saga';
 import { ActionPattern, call, put, select as RSSelect, take } from 'redux-saga/effects';
@@ -69,12 +69,9 @@ export function* initializeWebSocket() {
             }
             // TODO: Remove on swipe
             break;
-          case SOCKET_TO_CLIENT_EVENTS.CANCEL_MATCH:
+          case SOCKET_TO_CLIENT_EVENTS.UNMATCH:
             console.log(1111);
-            // yield put(matchActions.addMatch({ data }));
-            // if (data.targetProfile?._id) {
-            //   yield put(likedMeActions.removeOneByUserId(data.targetProfile._id));
-            // }
+            yield put(matchActions.unmatch(data));
             // TODO: Remove on swipe
             break;
           default:
@@ -111,9 +108,23 @@ function createSocketChannel() {
       });
     });
 
-    socket.on(SOCKET_TO_CLIENT_EVENTS.MATCH, (msg: Message) => {
+    socket.on(SOCKET_TO_CLIENT_EVENTS.EDIT_SENT_MESSAGE, (msg: Message) => {
+      emit({
+        type: SOCKET_TO_CLIENT_EVENTS.EDIT_SENT_MESSAGE,
+        data: msg,
+      });
+    });
+
+    socket.on(SOCKET_TO_CLIENT_EVENTS.MATCH, (msg: Match) => {
       emit({
         type: SOCKET_TO_CLIENT_EVENTS.MATCH,
+        data: msg,
+      });
+    });
+
+    socket.on(SOCKET_TO_CLIENT_EVENTS.UNMATCH, (msg: { _id: string }) => {
+      emit({
+        type: SOCKET_TO_CLIENT_EVENTS.UNMATCH,
         data: msg,
       });
     });
