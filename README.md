@@ -100,3 +100,8 @@ This is a great place to put miscellaneous helpers and utilities. Things like da
 
 This directory will hold your Jest configs and mocks.
 
+
+
+# Start
+Add file android/local.properties with content:
+sdk.dir = /Users/quynh/Library/Android/sdk

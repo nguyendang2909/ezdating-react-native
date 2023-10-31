@@ -3495,25 +3495,25 @@
   dependencies:
     invariant "^2.2.4"
 
-"@react-native-firebase/app@^18.0.0":
-  version "18.0.0"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/app/-/app-18.0.0.tgz#10036e5a480b1143bd88a50643f14ba0e9c62f82"
-  integrity sha512-jvxitPNkcxE6IyGHiOGaURA42ZHBesTeSLbOfqQL6ZtTkQ0sPkFk6VPM2OR5s5S2NfOCfd9dddOhFLIX5VE3ig==
+"@react-native-firebase/app@^18.6.0":
+  version "18.6.0"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/app/-/app-18.6.0.tgz#939c92fda17c2641079314f30d52797db43a673e"
+  integrity sha512-pJwq2D0VBk8QvmIw6qZ5P3Y5Uaq4LL9NarAcTdEIA342VlhmTB1rovcYHE/F/hohdGBwFzi5qXAQnZmTxv27sg==
   dependencies:
-    opencollective-postinstall "^2.0.1"
+    opencollective-postinstall "^2.0.3"
     superstruct "^0.6.2"
 
-"@react-native-firebase/auth@^18.0.0":
-  version "18.0.0"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/auth/-/auth-18.0.0.tgz#b938f41410b2492a7298e72f2cc6e239a9c1e756"
-  integrity sha512-9FOsvNH/w5+Cr48nxuJ3Lb85vxFe2A45w37OMxzfZCnLYXJJBvlF1espy3SCMKzwA31RN9+D0jH7OavacKbpzw==
+"@react-native-firebase/auth@^18.6.0":
+  version "18.6.0"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/auth/-/auth-18.6.0.tgz#0940644fceec3454e2351d33205e1074fa93bd69"
+  integrity sha512-Z0UL1nLEy/98Lb4HTeemTbvezEDO9boVEy0bPijH/SYw3gOUoKzHCBVgTIhQb8X6BHpcSYsSHSD+pwp4bfcbzw==
   dependencies:
-    plist "^3.0.5"
+    plist "^3.1.0"
 
-"@react-native-firebase/messaging@^18.5.0":
-  version "18.5.0"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/messaging/-/messaging-18.5.0.tgz#2a80b25816470e9843682e031a3a113566067ce6"
-  integrity sha512-y1FApYxBMcygmbWBqUPFC+fCfvx6Yf6TdZewun7kPwx+S+tkYzoKx1IsXtxOXtqyJjCNEYirjFgNrs5SSd02zA==
+"@react-native-firebase/messaging@^18.6.0":
+  version "18.6.0"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/messaging/-/messaging-18.6.0.tgz#be0a7b8841c65a7b6d4dfd8407e9e216e7b57633"
+  integrity sha512-0fBDvbu13MJazAJhiT1rm//hnxhzOSu1ZpqmGUKpNu73llxPqVYDk4L8uZ7WBRtu3e6TP7Mw8IfH3gGB1qeelA==
 
 "@react-native-google-signin/google-signin@^10.1.0":
   version "10.1.0"
@@ -5273,6 +5273,11 @@
   dependencies:
     "@webassemblyjs/ast" "1.11.6"
     "@xtuc/long" "4.2.2"
+
+"@xmldom/xmldom@^0.8.8":
+  version "0.8.10"
+  resolved "https://registry.yarnpkg.com/@xmldom/xmldom/-/xmldom-0.8.10.tgz#a1337ca426aa61cef9fe15b5b28e340a72f6fa99"
+  integrity sha512-2WALfTl4xo2SkGCYRt6rDTFfk9R1czmBvUQy12gK2KuRKIpWEhcbbzy8EZXtz/jkRqHX8bFEc6FC1HjX4TUWYw==
 
 "@xmldom/xmldom@~0.7.7":
   version "0.7.11"
@@ -12093,7 +12098,7 @@ open@^8.0.4, open@^8.0.9, open@^8.3.0:
     is-docker "^2.1.1"
     is-wsl "^2.2.0"
 
-opencollective-postinstall@^2.0.1:
+opencollective-postinstall@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/opencollective-postinstall/-/opencollective-postinstall-2.0.3.tgz#7a0fff978f6dbfa4d006238fbac98ed4198c3259"
   integrity sha512-8AV/sCtuzUeTo8gQK5qDZzARrulB3egtLzFgteqB2tcT4Mw7B8Kt7JcDHmltjz6FOAHsvTevk70gZEbhM4ZS9Q==
@@ -12449,6 +12454,15 @@ plist@^3.0.2, plist@^3.0.5:
   resolved "https://registry.yarnpkg.com/plist/-/plist-3.0.6.tgz#7cfb68a856a7834bca6dbfe3218eb9c7740145d3"
   integrity sha512-WiIVYyrp8TD4w8yCvyeIr+lkmrGRd5u0VbRnU+tP/aRLxP/YadJUYOMZJ/6hIa3oUyVCsycXvtNRgd5XBJIbiA==
   dependencies:
+    base64-js "^1.5.1"
+    xmlbuilder "^15.1.1"
+
+plist@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/plist/-/plist-3.1.0.tgz#797a516a93e62f5bde55e0b9cc9c967f860893c9"
+  integrity sha512-uysumyrvkUX0rX/dEVqt8gC3sTBzd4zoWfLeS29nb53imdaXVvLINYXTI2GNqzaMuvacNx4uJQ8+b3zXR0pkgQ==
+  dependencies:
+    "@xmldom/xmldom" "^0.8.8"
     base64-js "^1.5.1"
     xmlbuilder "^15.1.1"
 
