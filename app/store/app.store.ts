@@ -66,6 +66,17 @@ export const appSlice = createSlice({
           state.refreshToken = data.refreshToken;
         },
       )
+      .addMatcher(authEndpoints.signInWithGoogle.matchFulfilled, (state, { payload: { data } }) => {
+        state.accessToken = data.accessToken;
+        state.refreshToken = data.refreshToken;
+      })
+      .addMatcher(
+        authEndpoints.signInWithFacebook.matchFulfilled,
+        (state, { payload: { data } }) => {
+          state.accessToken = data.accessToken;
+          state.refreshToken = data.refreshToken;
+        },
+      )
       .addMatcher(profileEndpoints.getMyProfile.matchFulfilled, (state, { payload: { data } }) => {
         state.profile = data;
       })

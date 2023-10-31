@@ -13,6 +13,22 @@ const authApi = api.injectEndpoints({
       }),
     }),
 
+    signInWithGoogle: builder.mutation<ApiResponse.Logged, ApiRequest.SignInWithGoogle>({
+      query: body => ({
+        url: API_URL.signInWithGoogle,
+        method: 'POST',
+        body,
+      }),
+    }),
+
+    signInWithFacebook: builder.mutation<ApiResponse.Logged, ApiRequest.SignInWithFacebook>({
+      query: body => ({
+        url: API_URL.signInWithFacebook,
+        method: 'POST',
+        body,
+      }),
+    }),
+
     logout: builder.mutation<void, ApiRequest.Logout>({
       query: body => ({
         url: API_URL.logout,
@@ -25,6 +41,8 @@ const authApi = api.injectEndpoints({
 
 export const {
   useSignInWithPhoneNumberMutation,
+  useSignInWithFacebookMutation,
+  useSignInWithGoogleMutation,
   useLogoutMutation,
   endpoints: authEndpoints,
 } = authApi;

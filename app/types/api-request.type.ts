@@ -22,6 +22,14 @@ export declare namespace ApiRequest {
     token: string;
   };
 
+  type SignInWithGoogle = {
+    token: string;
+  };
+
+  type SignInWithFacebook = {
+    token: string;
+  };
+
   type LoginByEmail = {
     email: string;
     password: string;

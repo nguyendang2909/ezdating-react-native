@@ -1,6 +1,6 @@
 import { View, VStack } from '@gluestack-ui/themed';
 import { SignInWithFacebookButton } from 'app/containers/Button/SignInWithFacebookButton';
-import { SignInWithGoogleButton } from 'app/containers/Button/SignInWithGoogleButton';
+import { SignInWithGoogleButton } from 'app/pages/sign-in/sign-in-with-google/SignInWithGoogleButton';
 import { SignInWithPhoneNumberButton } from 'app/containers/Button/SignInWithPhoneNumberButton';
 import { useAppSelector } from 'app/hooks';
 import { AppStackScreenProps } from 'app/navigators';

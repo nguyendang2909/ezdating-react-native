@@ -14,6 +14,8 @@ export const API_URL = {
   profilesNearby: '/profiles/nearby',
   profilesSwipe: '/profiles/swipe',
   signInWithPhoneNumber: '/auth/sign-in/phone-number',
+  signInWithGoogle: '/auth/sign-in/google',
+  signInWithFacebook: '/auth/sign-in/facebook',
   mediaFiles: '/media-files',
   users: '/users',
   views: '/views',
