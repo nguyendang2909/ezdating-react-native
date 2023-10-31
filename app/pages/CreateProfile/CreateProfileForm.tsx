@@ -1,3 +1,4 @@
+import { KeyboardAvoidingView } from '@gluestack-ui/themed';
 import { StackActions, useNavigation } from '@react-navigation/native';
 import { useCreateProfileMutation, useGetProfileMutation } from 'app/api';
 import { BirthDayFormControl } from 'app/components/Form/BirthDayFormControl';
@@ -13,6 +14,7 @@ import { useFormik } from 'formik';
 import moment from 'moment';
 import { Box, Button, Heading, ScrollView, View } from 'native-base';
 import React, { FC } from 'react';
+import { Platform } from 'react-native';
 import Toast from 'react-native-toast-message';
 import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
@@ -147,6 +149,7 @@ export const CreateProfileForm: FC = () => {
             </View>
           </View>
         </View>
+        {Platform.OS === 'android' && <KeyboardAvoidingView behavior={'padding'} />}
       </Box>
     </>
   );
