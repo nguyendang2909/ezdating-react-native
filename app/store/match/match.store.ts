@@ -91,10 +91,9 @@ export const matchSlice = createSlice({
             lastRefreshedAt: moment().toISOString(),
           };
           const matches = matchesService.formatMany(data);
-          state.data = matches;
           // TODO: improve
           // state.data = matchesService.sortAndUniq(matches, state.data);
-          // state.data = matchesService.sortAndUniq(matches, state.data);
+          state.data = matchesService.sortAndUniq(matches, state.data);
         },
       )
       .addMatcher(
@@ -106,9 +105,8 @@ export const matchSlice = createSlice({
             lastRefreshedAt: moment().toISOString(),
           };
           const matches = matchesService.formatMany(data);
-          state.data = matches;
           // TODO: improve
-          // state.data = matchesService.sortAndUniq(matches, state.data);
+          state.data = matchesService.sortAndUniq(matches, state.data);
         },
       )
       .addMatcher(
@@ -165,8 +163,8 @@ export const matchSlice = createSlice({
         }
       })
       .addMatcher(matchEndpoints.getMatch.matchFulfilled, (state, { payload: { data } }) => {
-        // const match = matchesService.formatOne(data);
-        // state.data = matchesService.sortAndUniq([match], state.data);
+        const match = matchesService.formatOne(data);
+        state.data = matchesService.sortAndUniq([match], state.data);
       });
   },
 });

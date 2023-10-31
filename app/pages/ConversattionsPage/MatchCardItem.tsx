@@ -24,13 +24,13 @@ export const MatchCardItem: FC<MatchCardItemProps> = ({
   }, [match._id, onPress]);
 
   const url = _.get(match, 'targetProfile.mediaFiles[0].key');
-  console.log(url);
+
   return (
     <Pressable p={1} width={widthValue} onPress={handlePress}>
       <Box>
         <CacheImage
           style={[styles.image, height(heightValue), width(widthValue)]}
-          url={_.get(match, 'targetProfile.mediaFiles[0].key')}
+          url={url}
         ></CacheImage>
         <LinearGradient
           position="absolute"
