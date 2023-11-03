@@ -178,7 +178,11 @@ export function Header(props: HeaderProps) {
   const titleContent = titleTx ? formatMessage(titleTx) : title;
 
   return (
-    <View w="$full" style={[$containerInsets, { backgroundColor }, $containerStyleOverride]}>
+    <View
+      w="$full"
+      {...(backgroundColor ? { backgroundColor } : {})}
+      style={[$containerInsets, $containerStyleOverride]}
+    >
       <View
         height={56}
         flexDirection="row"

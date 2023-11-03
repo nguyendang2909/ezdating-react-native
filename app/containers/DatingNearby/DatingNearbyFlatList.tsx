@@ -27,7 +27,7 @@ export const DatingNearbyFlatList: React.FC = () => {
 
   return (
     <>
-      {nearbyUsers.length && lastRefreshedAt ? (
+      {lastRefreshedAt ? (
         <>
           <FlatList
             showsVerticalScrollIndicator={false}

@@ -1,6 +1,6 @@
-import { ScrollView, View } from '@gluestack-ui/themed';
-import { LogoutButton } from 'app/containers/Button/LogoutButton';
+import { View } from '@gluestack-ui/themed';
 import { ProfileSettingHeader } from 'app/containers/ProfileSetting/ProfileSettingHeader';
+import { ProfileSettingScrollView } from 'app/pages/profile-settings';
 import React, { FC } from 'react';
 
 export const ProfileSettingScreen: FC = () => {
@@ -8,12 +8,8 @@ export const ProfileSettingScreen: FC = () => {
     <>
       <ProfileSettingHeader />
 
-      <View flex={1}>
-        <ScrollView>
-          <View px={12}>
-            <LogoutButton />
-          </View>
-        </ScrollView>
+      <View flex={1} backgroundColor="$backgroundLight100">
+        <ProfileSettingScrollView />
       </View>
     </>
   );

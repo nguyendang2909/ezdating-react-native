@@ -368,4 +368,8 @@ export const messages = defineMessages({
     defaultMessage: 'Uploaded photos successfully',
     id: 'edcff4251f',
   },
+  'Discovery settings': {
+    defaultMessage: 'Discovery settings',
+    id: '33a697826b',
+  },
 });

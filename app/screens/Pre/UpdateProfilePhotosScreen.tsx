@@ -117,14 +117,16 @@ export const UpdateProfilePhotosScreen: React.FC<FCProps> = () => {
         setRemovePhotoIndex(index);
         return;
       }
-      const photo = await ImageCropPicker.openPicker({
-        width: 640,
-        height: 860,
-        cropping: true,
-        mediaType: 'photo',
-        forceJpg: true,
-      });
-      formik.setFieldValue('photos', formik.values.photos.concat(photo));
+      try {
+        const photo = await ImageCropPicker.openPicker({
+          width: 640,
+          height: 860,
+          cropping: true,
+          mediaType: 'photo',
+          forceJpg: true,
+        });
+        formik.setFieldValue('photos', formik.values.photos.concat(photo));
+      } catch (err) {}
     } else if (typeof index === 'string') {
       setRemovePhotoIndex(index);
     }
