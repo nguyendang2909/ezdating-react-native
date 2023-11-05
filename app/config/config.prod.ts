@@ -7,5 +7,5 @@
  */
 export default {
   API_URL: 'https://besmittenapi.mttn.vn',
-  MEFIA_FILE_URL: 'https://vdating-staging.s3.ap-southeast-1.amazonaws.com',
+  MEDIA_FILE_URL: 'https://vdating-staging.s3.ap-southeast-1.amazonaws.com',
 };

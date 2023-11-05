@@ -8,3 +8,7 @@ export const getMinBirthDateTime = (): Date => {
 export const getMaxBirthDateTime = (): Date => {
   return moment().subtract(AGES.MAX, 'years').utc().startOf('date').toDate();
 };
+
+export const getAgeFromTime = (time: string): number => {
+  return moment().diff(time, 'years');
+};

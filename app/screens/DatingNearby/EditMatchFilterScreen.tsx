@@ -1,7 +1,7 @@
 import { Box, Divider, ScrollView, Text, View } from '@gluestack-ui/themed';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
 import { useNavigation } from '@react-navigation/native';
-import { useRefreshNearbyProfilesQuery, useUpdateProfileMutation } from 'app/api';
+import { useUpdateProfileMutation } from 'app/api';
 import { HeaderSaveDone } from 'app/components/Header/HeaderSaveDone';
 import { useAppSelector, useMessages } from 'app/hooks';
 import { EditFilterGenderMenuItem } from 'app/pages/EditMatchFilter/EditFilterGenderMenuItem';
@@ -17,7 +17,6 @@ import { AppStackScreenProps } from '../../navigators';
 
 export const EditMatchFilterScreen: React.FC<AppStackScreenProps<'EditMatchFilter'>> = () => {
   const [updateProfile] = useUpdateProfileMutation();
-  const { refetch } = useRefreshNearbyProfilesQuery();
   const { formatMessage } = useMessages();
   const navigation = useNavigation();
   const { width } = Dimensions.get('window');
@@ -36,18 +35,21 @@ export const EditMatchFilterScreen: React.FC<AppStackScreenProps<'EditMatchFilte
     },
     enableReinitialize: true,
     onSubmit: async values => {
-      try {
-        await updateProfile(values).unwrap();
-      } catch (err) {
-        Toast.show({
-          type: 'error',
-          text1: formatMessage('Update failed, please try again.'),
+      updateProfile(values)
+        .unwrap()
+        .catch(() => {
+          Toast.show({
+            type: 'error',
+            text1: formatMessage('Update failed, please try again.'),
+          });
+        });
+      if (navigation.canGoBack()) {
+        navigation.goBack();
+      } else {
+        navigation.navigate('Home', {
+          screen: 'DatingNearby',
         });
       }
-      refetch();
-      navigation.navigate('Home', {
-        screen: 'DatingNearby',
-      });
     },
   });
 

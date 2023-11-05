@@ -1,15 +1,24 @@
+import { useNavigation } from '@react-navigation/native';
 import { Header } from 'app/components';
-import { DatingSwipe } from 'app/containers/DatingSwipe/DatingSwipe';
 import { UpdateGeolocation } from 'app/containers/Home/UpdateGeoLocation';
+import { DatingSwipeWrapper } from 'app/pages/dating-swipe';
 // import { UpdateGeolocation } from 'app/containers/Home/UpdateGeolocation';
 import { colors } from 'app/theme';
 import { Box } from 'native-base';
 import React, { FC } from 'react';
 
 export const DatingSwipeScreen: FC = () => {
+  const navigation = useNavigation();
+
   return (
     <>
-      <Header titleTx="AppName" />
+      <Header
+        titleTx="AppName"
+        rightIcon="settings"
+        onRightPress={() => {
+          navigation.navigate('EditMatchFilter');
+        }}
+      />
       <UpdateGeolocation />
       <Box flex={1} safeAreaY backgroundColor={colors.primary}>
         {/* <TouchableOpacity>
@@ -39,7 +48,7 @@ export const DatingSwipeScreen: FC = () => {
         </LinearGradient> */}
 
         {/* <GradientIcon icon={FontAwesome} name="heart" /> */}
-        <DatingSwipe />
+        <DatingSwipeWrapper />
       </Box>
     </>
   );

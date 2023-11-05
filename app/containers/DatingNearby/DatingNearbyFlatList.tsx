@@ -16,6 +16,7 @@ export const DatingNearbyFlatList: React.FC = () => {
     isLoadingNext,
     fetchNewest,
     lastRefreshedAt,
+    isLoading,
   } = useNearbyUsers();
 
   const handleScroll = async (e: NativeSyntheticEvent<NativeScrollEvent>) => {
@@ -27,7 +28,7 @@ export const DatingNearbyFlatList: React.FC = () => {
 
   return (
     <>
-      {lastRefreshedAt ? (
+      {!isLoading ? (
         <>
           <FlatList
             showsVerticalScrollIndicator={false}
