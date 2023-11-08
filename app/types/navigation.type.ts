@@ -38,4 +38,7 @@ export type AppStackParamList = {
   };
   SignInWithPhoneNumber: undefined;
   Welcome: undefined;
+  DATING_SWIPE_PROFILE: {
+    profile: Profile;
+  };
 };

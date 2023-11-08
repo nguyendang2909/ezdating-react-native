@@ -1,24 +1,11 @@
-import { HStack, View } from '@gluestack-ui/themed';
+import { Profile } from 'app/types';
 import { FC } from 'react';
-
-import { DatingSwipeCloseButton } from './dating-swipe-close-button';
-import { DatingSwipeSendLikeButton } from './dating-swipe-send-like-button';
+import Swiper from 'react-native-deck-swiper';
 
 type DatingSwipeButtonStackProps = {
-  targetUserId: string;
+  swiper: Swiper<Profile>;
 };
 
-export const DatingSwipeButtonStack: FC<DatingSwipeButtonStackProps> = ({ targetUserId }) => {
-  return (
-    <>
-      <HStack justifyContent="center">
-        <View>
-          <DatingSwipeCloseButton />
-        </View>
-        <View>
-          <DatingSwipeSendLikeButton targetUserId={targetUserId} />
-        </View>
-      </HStack>
-    </>
-  );
+export const DatingSwipeButtonStack: FC<DatingSwipeButtonStackProps> = ({ swiper }) => {
+  return <></>;
 };

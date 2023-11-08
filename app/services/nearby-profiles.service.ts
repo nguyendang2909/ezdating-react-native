@@ -6,7 +6,7 @@ class NearbyProfilesService extends CommonService {
   sortAndUniq(news: Profile[], olds: Profile[]) {
     return _.chain([...news, ...olds])
       .uniqBy('_id')
-      .orderBy(['distance', '_id'], ['asc', 'asc'])
+      .orderBy('distance', 'asc')
       .value();
   }
 
@@ -14,13 +14,8 @@ class NearbyProfilesService extends CommonService {
     if (!profiles.length) {
       return undefined;
     }
-    const minDistance = profiles[profiles.length - 1].distance;
-    const excludedUserIds = profiles.filter(e => e.distance === minDistance).map(e => e._id);
-    const cursor = {
-      minDistance,
-      excludedUserIds,
-    };
-    return this.encodeFromObj(cursor);
+    const distance = profiles[profiles.length - 1].distance;
+    return this.encodeFromString(`${distance}`);
   }
 }
 

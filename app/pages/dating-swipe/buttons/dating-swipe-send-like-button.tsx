@@ -1,32 +1,22 @@
 import { Box } from '@gluestack-ui/themed';
-import { useSendLikeMutation } from 'app/api';
 import { FontAwesome } from 'app/components';
-import { LoadingButtonIcon } from 'app/components/Button/LoadingButtonIcon';
+import { ButtonIcon } from 'app/components/Button';
 import React from 'react';
 
 type FCProps = {
-  targetUserId: string;
+  onPress: (e?: boolean) => void;
 };
 
-export const DatingSwipeSendLikeButton: React.FC<FCProps> = ({ targetUserId }) => {
-  const [sendLike, { isLoading: isLoadingSendLike }] = useSendLikeMutation();
-
+export const DatingSwipeSendLikeButton: React.FC<FCProps> = ({ onPress }) => {
   const handleSendLike = async () => {
-    sendLike({
-      targetUserId,
-    });
+    onPress();
   };
 
   return (
     <Box>
-      <LoadingButtonIcon
-        height={48}
-        width={48}
-        onPress={handleSendLike}
-        isLoading={isLoadingSendLike}
-      >
+      <ButtonIcon height={48} width={48} onPress={handleSendLike}>
         <FontAwesome color="white" size={24} name="heart" />
-      </LoadingButtonIcon>
+      </ButtonIcon>
     </Box>
   );
 };

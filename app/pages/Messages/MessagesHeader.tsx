@@ -13,7 +13,7 @@ import { useNavigation } from '@react-navigation/native';
 import { AppStore } from 'app/types';
 import { mediaFileUtil } from 'app/utils/media-files.util';
 import React from 'react';
-import { SafeAreaView, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 
 import { BackIconButton } from '../../containers/IconButton/BackIconButton';
 import { MessagesSetting } from './MessagesSetting';
@@ -32,8 +32,6 @@ export const MessagesHeader: React.FC<FCProps> = ({ match }) => {
 
   return (
     <>
-      <SafeAreaView />
-
       <View h={56} flexDirection="row" alignItems="center" justifyContent="space-between">
         <HStack columnGap={8} justifyContent="center" alignItems="center">
           <BackIconButton />

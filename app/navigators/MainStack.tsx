@@ -2,6 +2,7 @@ import { SCREENS } from 'app/constants';
 import { ConnectProfile } from 'app/containers/Connect/ConnectProfile';
 import {
   CreateProfileScreen,
+  DatingSwipeProfileScreen,
   EditMatchFilterScreen,
   MessagesScreen,
   ProfileNearbyScreen,
@@ -33,57 +34,47 @@ export const MainStack: React.FC = () => {
           headerShown: false,
           navigationBarColor: colors.background,
         }}
-        initialRouteName="Main"
+        initialRouteName={SCREENS.Main}
       >
-        <Stack.Screen name={SCREENS.Main} component={MainScreen} />
-        <Stack.Screen name={SCREENS.Home} component={HomeNavigator} />
+        <Stack.Group>
+          <Stack.Screen name={SCREENS.Main} component={MainScreen} />
+          <Stack.Screen name={SCREENS.Home} component={HomeNavigator} />
+          <Stack.Screen name={SCREENS.LikedMe} component={LikedMeScreen} />
+          <Stack.Screen name={SCREENS.CreateProfile} component={CreateProfileScreen} />
+          <Stack.Screen name={SCREENS.UpdateProfilePhotos} component={UpdateProfilePhotosScreen} />
+          <Stack.Screen name={SCREENS.ProfileEdit} component={ProfileEditScreen} />
+          <Stack.Screen name={SCREENS.ProfileSetting} component={ProfileSettingScreen} />
+          <Stack.Screen name={SCREENS.Messages} component={MessagesScreen} />
+          <Stack.Screen
+            name={SCREENS.EditMatchFilter}
+            component={EditMatchFilterScreen}
+          ></Stack.Screen>
+          <Stack.Screen name={SCREENS.ChatProfile} component={ChatProfileScreen}></Stack.Screen>
+          <Stack.Screen
+            name={SCREENS.LikedMeProfile}
+            component={LikedMeProfileScreen}
+          ></Stack.Screen>
+        </Stack.Group>
 
-        <Stack.Screen
-          name={SCREENS.EditInfoHeight}
-          component={EditInfoHeightScreen}
-          options={{
+        <Stack.Group
+          screenOptions={{
             presentation: 'modal',
           }}
-        />
+        >
+          <Stack.Screen name={SCREENS.EditInfoHeight} component={EditInfoHeightScreen} />
+          <Stack.Screen name={SCREENS.EditInfoNickname} component={EditInfoNicknameScreen} />
+          <Stack.Screen name={SCREENS.EditInfoWeight} component={EditInfoWeightScreen} />
+        </Stack.Group>
+        <Stack.Group screenOptions={{ presentation: 'containedModal' }}>
+          <Stack.Screen name={SCREENS.ProfileNearby} component={ProfileNearbyScreen}></Stack.Screen>
+        </Stack.Group>
         <Stack.Screen
-          name={SCREENS.EditInfoNickname}
-          component={EditInfoNicknameScreen}
-          options={{
-            presentation: 'modal',
-          }}
-        />
-        <Stack.Screen
-          name={SCREENS.EditInfoWeight}
-          component={EditInfoWeightScreen}
-          options={{
-            presentation: 'modal',
-          }}
-        />
-        <Stack.Screen name={SCREENS.LikedMe} component={LikedMeScreen} />
-        <Stack.Screen name={SCREENS.CreateProfile} component={CreateProfileScreen} />
-        <Stack.Screen name={SCREENS.UpdateProfilePhotos} component={UpdateProfilePhotosScreen} />
-        <Stack.Screen
-          name={SCREENS.ProfileEdit}
-          component={ProfileEditScreen}
-          options={{
-            presentation: 'card',
-          }}
-        />
-        <Stack.Screen
-          name={SCREENS.ProfileNearby}
-          component={ProfileNearbyScreen}
+          name={SCREENS.DATING_SWIPE_PROFILE}
+          component={DatingSwipeProfileScreen}
           options={{
             presentation: 'containedModal',
           }}
         ></Stack.Screen>
-        <Stack.Screen name={SCREENS.ProfileSetting} component={ProfileSettingScreen} />
-        <Stack.Screen name={SCREENS.Messages} component={MessagesScreen} />
-        <Stack.Screen
-          name={SCREENS.EditMatchFilter}
-          component={EditMatchFilterScreen}
-        ></Stack.Screen>
-        <Stack.Screen name={SCREENS.ChatProfile} component={ChatProfileScreen}></Stack.Screen>
-        <Stack.Screen name={SCREENS.LikedMeProfile} component={LikedMeProfileScreen}></Stack.Screen>
       </Stack.Navigator>
     </>
   );

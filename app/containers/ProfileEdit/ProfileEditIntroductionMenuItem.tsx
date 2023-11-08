@@ -1,7 +1,8 @@
 import { useAppSelector } from 'app/hooks';
 import { ApiRequest } from 'app/types/api-request.type';
+import _ from 'lodash';
 import { Input, View } from 'native-base';
-import React, { useEffect, useState } from 'react';
+import React, { useRef } from 'react';
 
 type FCProps = {
   onPress: (payload: ApiRequest.UpdateProfile) => void;
@@ -9,28 +10,25 @@ type FCProps = {
 
 export const ProfileEditIntroduceMenuItem: React.FC<FCProps> = ({ onPress }) => {
   const introduceState = useAppSelector(state => state.app.profile?.introduce) || '';
-  const [introduce, setIntroduce] = useState<string>(introduceState);
 
-  useEffect(() => {
-    const timeout =
-      introduceState !== introduce
-        ? setTimeout(() => {
-            onPress({ introduce: introduceState });
-          }, 2000)
-        : null;
+  const handleDebounce = useRef(
+    _.debounce((e: ApiRequest.UpdateProfile) => onPress(e), 3000),
+  ).current;
 
-    return () => {
-      if (timeout) {
-        clearTimeout(timeout);
-      }
-    };
-  }, [introduce]);
+  const handleChange = (e: string) => {
+    handleDebounce({ introduce: e });
+  };
 
   return (
     <>
       <View px={4} py={2}>
         <View>
-          <Input maxLength={500} variant="unstyled" value={introduce} onChangeText={setIntroduce} />
+          <Input
+            maxLength={500}
+            variant="unstyled"
+            defaultValue={introduceState}
+            onChangeText={handleChange}
+          />
         </View>
       </View>
     </>

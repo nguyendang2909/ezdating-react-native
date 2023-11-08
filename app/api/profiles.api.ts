@@ -1,5 +1,5 @@
 import { API_URL } from 'app/config/config.api';
-import { ApiRequest, ApiResponse, Profile } from 'app/types';
+import { ApiRequest, ApiResponse } from 'app/types';
 
 import { api } from './api';
 
@@ -73,16 +73,28 @@ const profilesApi = api.injectEndpoints({
       }),
     }),
 
-    // Swipe users
-    getSwipeProfiles: builder.query<
-      ApiResponse.FetchData<Profile[]>,
-      ApiRequest.FindManySwipeProfiles
-    >({
+    // Swipe profiles
+    refreshSwipeProfiles: builder.query<ApiResponse.Profiles, void>({
       query: () => ({
-        url: API_URL.profilesSwipe,
+        url: API_URL.profilesNearby,
         method: 'GET',
       }),
     }),
+    // getNewestSwipeProfiles: builder.mutation<ApiResponse.Profiles, void>({
+    //   query: () => ({
+    //     url: API_URL.profilesNearby,
+    //     method: 'GET',
+    //   }),
+    // }),
+    getNextSwipeProfiles: builder.mutation<ApiResponse.Profiles, ApiRequest.FindManyNearbyProfiles>(
+      {
+        query: params => ({
+          url: API_URL.profilesNearby,
+          method: 'GET',
+          params,
+        }),
+      },
+    ),
   }),
 });
 
@@ -93,7 +105,9 @@ export const {
   useRefreshNearbyProfilesQuery,
   useGetNewestNearbyProfilesMutation,
   useGetNextNearbyProfilesMutation,
-  useGetSwipeProfilesQuery,
+  useRefreshSwipeProfilesQuery,
+  // useGetNewestSwipeProfilesMutation,
+  useGetNextSwipeProfilesMutation,
   useGetProfileMutation,
   endpoints: profileEndpoints,
 } = profilesApi;

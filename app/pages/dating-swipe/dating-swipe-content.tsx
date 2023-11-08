@@ -1,167 +1,109 @@
-import { useAppSelector } from 'app/hooks';
+import { HStack } from '@gluestack-ui/themed';
+import { useSendLikeMutation } from 'app/api';
+import { useMessages, useSwipeProfiles } from 'app/hooks';
 import { Profile } from 'app/types';
+import _ from 'lodash';
 import { View } from 'native-base';
 import React, { useRef } from 'react';
 import { Dimensions, StyleSheet } from 'react-native';
 import Swiper from 'react-native-deck-swiper';
 
+import { DatingSwipeCloseButton } from './buttons/dating-swipe-close-button';
+import { DatingSwipeSendLikeButton } from './buttons/dating-swipe-send-like-button';
 import { DatingSwipeCard } from './cards';
 import { DatingSwipeNoCard } from './cards/dating-swipe-no-card';
 
+const getKeyExtractor = (card: Profile) => {
+  return _.get(card, '_id', `${Math.floor(Math.random() * 10000 + 1)}`);
+};
+
 export const DatingSwipeContent: React.FC = () => {
-  const swipeUsers = useAppSelector(state => state.nearbyUser.data);
+  const { formatMessage } = useMessages();
+  const { data: swipeProfiles, length: swipeProfileLength } = useSwipeProfiles();
   const width = Dimensions.get('window').width;
   const height = (width / 640) * 860;
-  const swipeRef = useRef<Swiper<any>>(null);
+  const swipeRef = useRef<Swiper<Profile>>(null);
+
+  const [sendLike, { isLoading: isLoadingSendLike }] = useSendLikeMutation();
 
   const passProfile = () => {};
 
-  const matchProfile = () => {};
+  const matchProfile = (cardIndex: number) => {
+    if (swipeProfiles[cardIndex] && swipeProfiles[cardIndex]._id) {
+      sendLike({ targetUserId: swipeProfiles[cardIndex]._id });
+    }
+  };
 
   return (
-    <View style={{ height: '100%' }}>
+    <View flex={1}>
       <Swiper
         ref={swipeRef}
         containerStyle={styles.swiper}
-        cards={swipeUsers}
-        stackSize={5}
+        cards={swipeProfiles}
+        stackSize={3}
         cardIndex={0}
         animateCardOpacity
         verticalSwipe={false}
         onSwipedLeft={passProfile}
         onSwipedRight={matchProfile}
+        keyExtractor={getKeyExtractor}
         overlayLabels={{
           left: {
-            title: 'NOPE',
+            title: formatMessage('NOPE'),
             style: leftLabel,
           },
           right: {
-            title: 'LIKE',
+            title: formatMessage('LIKE'),
             style: rightLabel,
           },
         }}
-        renderCard={(card: Profile) =>
-          card ? (
+        swipeBackCard={false}
+        renderCard={(card: Profile) => {
+          return card ? (
             <DatingSwipeCard width={width} height={height} key={card._id} profile={card} />
           ) : (
             <DatingSwipeNoCard />
-          )
-        }
+          );
+        }}
       />
+
+      {!!swipeRef.current && !!swipeProfileLength && (
+        <View flex={1} alignItems="center" justifyContent="center">
+          <View height={height} width={width} justifyContent="flex-end" marginBottom={8}>
+            <HStack columnGap={16} justifyContent="center">
+              <View>
+                <DatingSwipeCloseButton onPress={swipeRef.current.swipeLeft} />
+              </View>
+              <View>
+                <DatingSwipeSendLikeButton onPress={swipeRef.current.swipeRight} />
+              </View>
+            </HStack>
+          </View>
+          {/* <View>
+            <DatingSwipeProfileInfoButton targetProfile={targetProfile} />
+          </View> */}
+
+          {/* <DatingSwipeButtonStack swiper={swipeRef.current} />
+           */}
+        </View>
+      )}
     </View>
   );
-
-  // return (
-  //   <View style={styles.wrapper}>
-  //     {swipeUsers.map((profile, index) => {
-  //       const imageUrl = _.get(profile, 'mediaFiles[0].key');
-  //       return (
-  //         <View style={styles.cardContainer} pointerEvents="box-none" key={profile._id}>
-  //           <TinderCard
-  //             cardWidth={width}
-  //             cardHeight={height}
-  //             OverlayLabelRight={OverlayRight}
-  //             OverlayLabelLeft={OverlayLeft}
-  //             OverlayLabelTop={OverlayTop}
-  //             cardStyle={styles.card}
-  //             onSwipedRight={() => {
-  //               Alert.alert('Swiped right');
-  //             }}
-  //             onSwipedTop={() => {
-  //               Alert.alert('Swiped Top');
-  //             }}
-  //             onSwipedLeft={() => {
-  //               Alert.alert('Swiped left');
-  //             }}
-  //           >
-  //             <LinearGradient
-  //               zIndex={100}
-  //               height="$full"
-  //               width="$full"
-  //               position="absolute"
-  //               borderRadius={8}
-  //               colors={['#00000000', '#00000000', '#00000000', '#000000']}
-  //               justifyContent="flex-end"
-  //             >
-  //               <Box px={16} py={16}>
-  //                 <HStack columnGap={8}>
-  //                   {!!profile.nickname && (
-  //                     <Text
-  //                       fontSize={28}
-  //                       fontWeight="bold"
-  //                       color="$white"
-  //                       numberOfLines={1}
-  //                       lineHeight={28}
-  //                       textShadowColor="rgba(0, 0, 0, 0.75)"
-  //                       textShadowOffset={{ width: -1, height: 1 }}
-  //                       textShadowRadius={2}
-  //                     >
-  //                       {profile.nickname}
-  //                     </Text>
-  //                   )}
-  //                   {!!profile.birthday && (
-  //                     <AgeText
-  //                       birthday={profile.birthday}
-  //                       hideAge={profile.hideAge}
-  //                       fontSize={28}
-  //                       color="$white"
-  //                       numberOfLines={1}
-  //                       lineHeight={28}
-  //                       textShadowColor="rgba(0, 0, 0, 0.75)"
-  //                       textShadowOffset={{ width: -1, height: 1 }}
-  //                       textShadowRadius={2}
-  //                     />
-  //                   )}
-  //                 </HStack>
-
-  //                 {!_.isUndefined(profile.distance) && (
-  //                   <DistanceText
-  //                     distance={profile.distance}
-  //                     fontSize={22}
-  //                     color="$white"
-  //                     numberOfLines={1}
-  //                     lineHeight={28}
-  //                     textShadowColor="rgba(0, 0, 0, 0.75)"
-  //                     textShadowOffset={{ width: -1, height: 1 }}
-  //                     textShadowRadius={2}
-  //                   />
-  //                 )}
-  //                 {!!profile.introduce && (
-  //                   <Text
-  //                     color="$white"
-  //                     numberOfLines={5}
-  //                     textShadowColor="rgba(0, 0, 0, 0.75)"
-  //                     textShadowOffset={{ width: -1, height: 1 }}
-  //                     textShadowRadius={2}
-  //                   >
-  //                     {profile.introduce}
-  //                   </Text>
-  //                 )}
-  //                 <View>
-  //                   <DatingSwipeButtonStack targetUserId={profile._id} />
-  //                 </View>
-  //               </Box>
-  //             </LinearGradient>
-  //             <CacheImage url={imageUrl} style={styles.image} />
-  //           </TinderCard>
-  //         </View>
-  //       );
-  //     })}
-  //   </View>
-  // );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    marginTop: -24,
+    // flex: 1,
+    // marginTop: -24,
   },
   swiper: {
     backgroundColor: 'transparent',
+    // marginTop: -30,
   },
 });
 
 const leftLabel = StyleSheet.create({
+  // eslint-disable-next-line react-native/no-unused-styles, react-native/no-color-literals
   label: {
     color: 'red',
     textAlign: 'right',
@@ -169,6 +111,7 @@ const leftLabel = StyleSheet.create({
 });
 
 const rightLabel = StyleSheet.create({
+  // eslint-disable-next-line react-native/no-unused-styles, react-native/no-color-literals
   label: {
     color: '#4DED30',
   },

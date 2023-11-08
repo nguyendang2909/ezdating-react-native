@@ -1,8 +1,8 @@
+import { Header } from 'app/components';
+import { ProfileSettingIconButton } from 'app/containers/IconButton/ProfileSettingIconButton';
 import { ProfileEditCard } from 'app/containers/Profile/ProfileEditCard';
 import { ProfileFreeCoinsCard } from 'app/containers/Profile/ProfileFreeCoinsCard';
 import { ProfileHeader } from 'app/containers/Profile/ProfileHeader';
-import { ProfileLikedYouCard } from 'app/containers/Profile/ProfileLikedYouCard';
-import { ProfileTopBar } from 'app/containers/Profile/ProfileTopBar';
 import { ProfileVisitorsCard } from 'app/containers/Profile/ProfileVisitorsCard';
 import { colors } from 'app/theme';
 import { Box, HStack, View, VStack } from 'native-base';
@@ -11,10 +11,14 @@ import React, { FC } from 'react';
 export const ProfileScreen: FC = () => {
   return (
     <>
-      <Box safeArea backgroundColor={colors.primary}>
-        <View px={4} pt={4}>
-          <ProfileTopBar />
-        </View>
+      <Header
+        RightActionComponent={
+          <View mr={4}>
+            <ProfileSettingIconButton />
+          </View>
+        }
+      />
+      <Box backgroundColor={colors.primary}>
         <View>
           <ProfileHeader />
         </View>
@@ -25,11 +29,6 @@ export const ProfileScreen: FC = () => {
               <View flex="1">
                 <ProfileEditCard />
               </View>
-              <View flex="1">
-                <ProfileLikedYouCard />
-              </View>
-            </HStack>
-            <HStack space={4}>
               <View flex="1">
                 <ProfileVisitorsCard />
               </View>

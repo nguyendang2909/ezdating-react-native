@@ -15,7 +15,6 @@ export const NearbyUserActions: React.FC<FCProps> = ({ targetUserId }) => {
         <Box>
           <NearbyUserSendMessageButton targetUserId={targetUserId} />
         </Box>
-
         <NearbyUserSendLikeButton targetUserId={targetUserId} />
       </HStack>
     </>

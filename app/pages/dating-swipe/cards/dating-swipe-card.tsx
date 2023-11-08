@@ -5,8 +5,6 @@ import _ from 'lodash';
 import React from 'react';
 import { StyleSheet } from 'react-native';
 
-import { DatingSwipeButtonStack } from '../buttons';
-
 interface CardProps {
   profile: Profile;
   height: number;
@@ -27,7 +25,7 @@ export const DatingSwipeCard: React.FC<CardProps> = ({ profile, height, width })
         colors={['#00000000', '#00000000', '#00000000', '#000000']}
         justifyContent="flex-end"
       >
-        <View px={16} py={16}>
+        <View px={16} py={16} marginBottom={48}>
           <HStack columnGap={8}>
             {!!profile.nickname && (
               <Text
@@ -81,9 +79,6 @@ export const DatingSwipeCard: React.FC<CardProps> = ({ profile, height, width })
               {profile.introduce}
             </Text>
           )}
-          <View>
-            <DatingSwipeButtonStack targetUserId={profile._id} />
-          </View>
         </View>
       </LinearGradient>
       <CacheImage url={imageUrl} style={styles.image} />

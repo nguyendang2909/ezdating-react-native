@@ -11,3 +11,4 @@ export * from './Picker';
 export * from './Row';
 export * from './Screen';
 export * from './Text';
+export * from './View';

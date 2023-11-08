@@ -372,4 +372,16 @@ export const messages = defineMessages({
     defaultMessage: 'Discovery settings',
     id: '33a697826b',
   },
+  NOPE: {
+    defaultMessage: 'NOPE',
+    id: 'b62dfe7082',
+  },
+  LIKE: {
+    defaultMessage: 'LIKE',
+    id: '5409bc3d64',
+  },
+  'Second look': {
+    defaultMessage: 'Second look',
+    id: '088d435e42',
+  },
 });

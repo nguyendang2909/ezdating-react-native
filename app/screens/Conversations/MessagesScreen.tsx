@@ -1,4 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
+import { ViewSafeArea } from 'app/components';
 import { useAppSelector } from 'app/hooks';
 import { useMatch } from 'app/hooks/useMatch';
 import { AppStackScreenProps } from 'app/navigators';
@@ -8,7 +9,6 @@ import { ChatUser } from 'app/types';
 import { mediaFileUtil } from 'app/utils/media-files.util';
 import { StatusBar } from 'native-base';
 import React, { FC, useMemo } from 'react';
-import { SafeAreaView } from 'react-native';
 
 type FCProps = AppStackScreenProps<'Messages'>;
 
@@ -44,9 +44,10 @@ export const MessagesScreen: FC<FCProps> = props => {
   return (
     <>
       <StatusBar barStyle="default" />
+      <ViewSafeArea top />
       <MessagesHeader match={match} />
       <MessagesChat matchId={matchId} currentUser={currentUser} targetUser={targetUser} />
-      <SafeAreaView />
+      <ViewSafeArea bottom />
     </>
   );
 };

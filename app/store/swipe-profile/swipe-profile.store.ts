@@ -1,6 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { profileEndpoints } from 'app/api';
+import { swipeProfilesService } from 'app/services/swipe-profiles.service';
 import { Profile } from 'app/types';
 import { AppStore } from 'app/types/app-store.type';
+import moment from 'moment';
 
 import { appActions } from '../app.store';
 
@@ -32,8 +35,8 @@ export const swipeProfileSlice = createSlice({
       state.data = state.data.concat(payload);
     },
 
-    removeOneByUserId: (state, { payload }: PayloadAction<string>) => {
-      state.data = state.data.filter(e => e._id === payload);
+    removeOneByProfileId: (state, { payload }: PayloadAction<string>) => {
+      state.data = state.data.filter(e => e._id !== payload);
     },
   },
 
@@ -42,6 +45,39 @@ export const swipeProfileSlice = createSlice({
       state.data = [];
       state.info = {};
     });
+    builder
+      .addMatcher(
+        profileEndpoints.refreshSwipeProfiles.matchFulfilled,
+        (state, { payload: { data, pagination } }) => {
+          state.data = data;
+          state.info = {
+            ...state.info,
+            isReachedEnd: !pagination._next,
+            lastRefreshedAt: moment().toISOString(),
+          };
+        },
+      )
+      // .addMatcher(
+      //   profileEndpoints.getNewestSwipeProfiles.matchFulfilled,
+      //   (state, { payload: { data, pagination } }) => {
+      //     state.data = swipeProfilesService.sortAndUniq(data, state.data);
+      //     state.info = {
+      //       ...state.info,
+      //       isReachedEnd: !pagination._next,
+      //       lastRefreshedAt: moment().toISOString(),
+      //     };
+      //   },
+      // )
+      .addMatcher(
+        profileEndpoints.getNextSwipeProfiles.matchFulfilled,
+        (state, { payload: { data, pagination } }) => {
+          state.data = swipeProfilesService.sortAndUniq(data, state.data);
+          state.info = {
+            ...state.info,
+            isReachedEnd: !pagination._next,
+          };
+        },
+      );
   },
 });
 

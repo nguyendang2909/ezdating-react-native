@@ -11,7 +11,7 @@ import { ProfileEditBirthdayMenuItem } from './ProfileEditBirthdayMenuItem';
 import { ProfileEditGenderMenuItem } from './ProfileEditGenderMenuItem';
 import { ProfileEditHeightMenuItem } from './ProfileEditHeightMenuItem';
 import { ProfileEditIntroduceMenuItem } from './ProfileEditIntroductionMenuItem';
-import { ProfileEditLanguagesMenuItem } from './ProfileEditLanguagesMenuItem';
+import { ProfileEditJobTitleMenuItem } from './ProfileEditJobTitleMenuItem';
 import { ProfileEditNicknameMenuItem } from './ProfileEditNicknameMenuItem';
 import { ProfileEditPhotos } from './ProfileEditPhotos/ProfileEditMedifaFiles';
 import { ProfileEditRelationshipGoalMenuItem } from './ProfileEditRelationshipGoalMenuItem';
@@ -94,7 +94,7 @@ export const ProfileEditPageContent: React.FC = () => {
         </View>
       </View>
 
-      <View mt={4}>
+      {/* <View mt={4}>
         <View mx={4} mb={2}>
           <Text bold={true} textTransform="uppercase">
             {formatMessage('Languages')}
@@ -103,7 +103,7 @@ export const ProfileEditPageContent: React.FC = () => {
         <View backgroundColor={colors.background}>
           <ProfileEditLanguagesMenuItem />
         </View>
-      </View>
+      </View> */}
 
       <View mt={4}>
         <View mx={4} mb={2}>
@@ -112,7 +112,7 @@ export const ProfileEditPageContent: React.FC = () => {
           </Text>
         </View>
         <View backgroundColor={colors.background}>
-          <ProfileEditIntroduceMenuItem onPress={handleEditProfile} />
+          <ProfileEditJobTitleMenuItem onPress={handleEditProfile} />
         </View>
       </View>
 

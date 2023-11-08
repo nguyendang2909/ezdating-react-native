@@ -19,6 +19,7 @@ export const SCREENS = {
   Welcome: 'Welcome',
   ChatProfile: 'ChatProfile',
   LikedMeProfile: 'LikedMeProfile',
+  DATING_SWIPE_PROFILE: 'DATING_SWIPE_PROFILE',
 } as const;
 
 export const AGES = {
