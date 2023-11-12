@@ -1,3 +1,3 @@
 export * from './DatingNearbyScreen';
-export * from './EditMatchFilterScreen';
+export * from './dating-nearby-filter.screen';
 export * from './ProfileNearbyScreen';

@@ -11,7 +11,7 @@ export type AppStackParamList = {
   EditInfoHeight: undefined;
   EditInfoNickname: undefined;
   EditInfoWeight: undefined;
-  EditMatchFilter: undefined;
+  dating_nearby_filter: undefined;
   CreateProfile: undefined;
   UpdateProfilePhotos: undefined;
   Home: NavigatorScreenParams<HomeTabParamList>;

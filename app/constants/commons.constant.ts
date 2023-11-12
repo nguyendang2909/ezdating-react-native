@@ -2,7 +2,7 @@ export const SCREENS = {
   EditInfoHeight: 'EditInfoHeight',
   EditInfoNickname: 'EditInfoNickname',
   EditInfoWeight: 'EditInfoWeight',
-  EditMatchFilter: 'EditMatchFilter',
+  DATING_NEARBY_FILTER: 'dating_nearby_filter',
   CreateProfile: 'CreateProfile',
   UpdateProfilePhotos: 'UpdateProfilePhotos',
   Home: 'Home',

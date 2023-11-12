@@ -1,6 +1,7 @@
 import { StatusBar } from '@gluestack-ui/themed';
 import { useNavigation } from '@react-navigation/native';
 import { Header } from 'app/components';
+import { SCREENS } from 'app/constants';
 import { DatingNearbyWrapper } from 'app/pages/dating-nearby/dating-nearby-wrapper';
 import React, { FC } from 'react';
 
@@ -13,7 +14,7 @@ export const DatingNearbyScreen: FC = () => {
         titleTx="Nearby"
         rightIcon="settings"
         onRightPress={() => {
-          navigate.navigate('EditMatchFilter');
+          navigate.navigate(SCREENS.DATING_NEARBY_FILTER);
         }}
       />
       <DatingNearbyWrapper />

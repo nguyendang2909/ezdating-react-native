@@ -1,12 +1,12 @@
 import { Box, Divider, ScrollView, Text, View } from '@gluestack-ui/themed';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
 import { useNavigation } from '@react-navigation/native';
-import { useUpdateProfileMutation } from 'app/api';
+import { useGetNewestNearbyProfilesMutation, useUpdateMyProfileFilterMutation } from 'app/api';
 import { HeaderSaveDone } from 'app/components/Header/HeaderSaveDone';
-import { useAppSelector, useMessages } from 'app/hooks';
+import { useAppSelector, useGeolocation, useMessages } from 'app/hooks';
 import { EditFilterGenderMenuItem } from 'app/pages/EditMatchFilter/EditFilterGenderMenuItem';
 import { colors } from 'app/theme';
-import { FormParams } from 'app/types';
+import { ApiRequest, FormParams } from 'app/types';
 import { useFormik } from 'formik';
 import { HStack } from 'native-base';
 import React from 'react';
@@ -15,11 +15,15 @@ import Toast from 'react-native-toast-message';
 
 import { AppStackScreenProps } from '../../navigators';
 
-export const EditMatchFilterScreen: React.FC<AppStackScreenProps<'EditMatchFilter'>> = () => {
-  const [updateProfile] = useUpdateProfileMutation();
-  const { formatMessage } = useMessages();
+export const DatingNearbyFilterScreen: React.FC<
+  AppStackScreenProps<'dating_nearby_filter'>
+> = () => {
+  const [updateMyProfileFilter] = useUpdateMyProfileFilterMutation();
+  const { formatMessage, formatErrorMessage } = useMessages();
   const navigation = useNavigation();
   const { width } = Dimensions.get('window');
+  const { longitude, latitude } = useGeolocation();
+  const [getNewestNearbyProfiles] = useGetNewestNearbyProfilesMutation();
 
   const maxDistance = useAppSelector(state => state.app.profileFilter.maxDistance) || 50;
   const minAge = useAppSelector(state => state.app.profileFilter.minAge) || 18;
@@ -35,14 +39,7 @@ export const EditMatchFilterScreen: React.FC<AppStackScreenProps<'EditMatchFilte
     },
     enableReinitialize: true,
     onSubmit: async values => {
-      updateProfile(values)
-        .unwrap()
-        .catch(() => {
-          Toast.show({
-            type: 'error',
-            text1: formatMessage('Update failed, please try again.'),
-          });
-        });
+      handleUpdateMyProfileFilter(values);
       if (navigation.canGoBack()) {
         navigation.goBack();
       } else {
@@ -53,19 +50,33 @@ export const EditMatchFilterScreen: React.FC<AppStackScreenProps<'EditMatchFilte
     },
   });
 
+  const handleUpdateMyProfileFilter = async (body: ApiRequest.UpdateProfileFilter) => {
+    try {
+      await updateMyProfileFilter(body).unwrap();
+      if (longitude && latitude) {
+        getNewestNearbyProfiles({ longitude, latitude });
+      }
+    } catch (error) {
+      Toast.show({
+        type: 'error',
+        text1: formatErrorMessage(error),
+      });
+    }
+  };
+
   const handleChangeFilterMaxDistance = (e: number[]) => {
     if (e[0] && e[0] !== formik.values.minAge) {
-      formik.setFieldValue('filterMaxDistance', e[0]);
+      formik.setFieldValue('maxDistance', e[0]);
     }
   };
 
   const handleChangeAges = (e: number[]) => {
     if (e[0] && e[0] !== formik.values.minAge) {
-      formik.setFieldValue('filterMinAge', e[0]);
+      formik.setFieldValue('minAge', e[0]);
     }
 
     if (e[1] && e[1] !== formik.values.maxAge) {
-      formik.setFieldValue('filterMaxAge', e[1]);
+      formik.setFieldValue('maxAge', e[1]);
     }
   };
 

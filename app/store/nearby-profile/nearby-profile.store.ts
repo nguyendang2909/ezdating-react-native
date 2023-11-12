@@ -37,7 +37,7 @@ export const nearbyProfileSlice = createSlice({
       .addMatcher(
         profileEndpoints.getNewestNearbyProfiles.matchFulfilled,
         (state, { payload: { data, pagination } }) => {
-          state.data = nearbyProfilesService.sortAndUniq(data, state.data);
+          state.data = nearbyProfilesService.sortAndUniq(data, []);
           state.info = {
             ...state.info,
             isReachedEnd: !pagination._next,

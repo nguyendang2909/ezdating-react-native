@@ -4,7 +4,6 @@ import { locationPermissionsService } from 'app/services/location-permissions.se
 import React, { useEffect, useState } from 'react';
 import { PermissionStatus, RESULTS } from 'react-native-permissions';
 
-import { UpdateGeolocation } from '../../containers/Home/UpdateGeoLocation';
 import { DatingSwipeContent } from './dating-swipe-content';
 
 export const DatingSwipeWrapper: React.FC = () => {
@@ -29,7 +28,6 @@ export const DatingSwipeWrapper: React.FC = () => {
     if (permission === 'granted') {
       return (
         <>
-          <UpdateGeolocation />
           <DatingSwipeContent />
         </>
       );

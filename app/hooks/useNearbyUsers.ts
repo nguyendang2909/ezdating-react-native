@@ -5,11 +5,12 @@ import {
 } from 'app/api';
 import { nearbyProfilesService } from 'app/services';
 
+import { useGeolocation } from './use-geo-location';
 import { useAppSelector } from './useAppSelector';
 
 export const useNearbyProfiles = () => {
   const nearbyUsers = useAppSelector(state => state.nearbyUser.data);
-  const [longitude, latitude] = useAppSelector(s => s.app.profile.geolocation?.coordinates) || [];
+  const { longitude, latitude } = useGeolocation();
   const length = nearbyUsers.length;
   const isReachedEnd = !!useAppSelector(s => s.nearbyUser.info.isReachedEnd);
   const lastRefreshedAt = useAppSelector(s => s.nearbyUser.info.lastRefreshedAt);

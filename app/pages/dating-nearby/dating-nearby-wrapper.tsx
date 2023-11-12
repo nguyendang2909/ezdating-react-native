@@ -4,7 +4,6 @@ import { locationPermissionsService } from 'app/services/location-permissions.se
 import React, { useEffect, useState } from 'react';
 import { PermissionStatus, RESULTS } from 'react-native-permissions';
 
-import { UpdateGeolocation } from '../../containers/Home/UpdateGeoLocation';
 import { DatingNearbyFlatList } from './DatingNearbyFlatList';
 
 export const DatingNearbyWrapper: React.FC = () => {
@@ -29,7 +28,6 @@ export const DatingNearbyWrapper: React.FC = () => {
     if (permission === 'granted') {
       return (
         <>
-          <UpdateGeolocation />
           <DatingNearbyFlatList />
         </>
       );

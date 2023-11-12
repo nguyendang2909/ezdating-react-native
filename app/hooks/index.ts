@@ -1,4 +1,5 @@
 export * from './usAppDispatch';
+export * from './use-geo-location';
 export * from './use-swipe-profiles';
 export * from './useAppSelector';
 export * from './useChatMessages';

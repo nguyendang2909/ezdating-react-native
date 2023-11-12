@@ -2,8 +2,8 @@ import { SCREENS } from 'app/constants';
 import { ConnectProfile } from 'app/containers/Connect/ConnectProfile';
 import {
   CreateProfileScreen,
+  DatingNearbyFilterScreen,
   DatingSwipeProfileScreen,
-  EditMatchFilterScreen,
   MessagesScreen,
   ProfileNearbyScreen,
   UpdateProfilePhotosScreen,
@@ -46,8 +46,8 @@ export const MainStack: React.FC = () => {
           <Stack.Screen name={SCREENS.ProfileSetting} component={ProfileSettingScreen} />
           <Stack.Screen name={SCREENS.Messages} component={MessagesScreen} />
           <Stack.Screen
-            name={SCREENS.EditMatchFilter}
-            component={EditMatchFilterScreen}
+            name={SCREENS.DATING_NEARBY_FILTER}
+            component={DatingNearbyFilterScreen}
           ></Stack.Screen>
           <Stack.Screen name={SCREENS.ChatProfile} component={ChatProfileScreen}></Stack.Screen>
           <Stack.Screen

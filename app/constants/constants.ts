@@ -131,6 +131,7 @@ export const API_TAGS = {
   MY_USER: 'my_user',
   MY_PROFILE_FILTER: 'my_profile_filter',
   MY_PROFILE: 'my_profile',
+  NEARBY_PROFILES: 'nearby_profiles',
 } as const;
 
 export const ARR_API_TAGS = Object.values(API_TAGS);
