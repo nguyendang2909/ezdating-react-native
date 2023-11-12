@@ -1,7 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import Config from 'app/config';
+import { ARR_API_TAGS } from 'app/constants/constants';
 import { appActions } from 'app/store/app.store';
-import { ApiResponse } from 'app/types/api-response.type';
+import { ApiResponse } from 'app/types';
 import { AppStore } from 'app/types/app-store.type';
 import { Mutex } from 'async-mutex';
 import queryString from 'query-string';
@@ -72,7 +73,7 @@ export const api = createApi({
 
     return result;
   },
-  tagTypes: ['Profile'],
+  tagTypes: ARR_API_TAGS,
   endpoints: _builder => ({}),
 });
 

@@ -1,6 +1,6 @@
 import { HStack, Text, View } from '@gluestack-ui/themed';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
-import { useUpdateProfileMutation } from 'app/api';
+import { useUpdateMyProfileFilterMutation } from 'app/api';
 import { useAppSelector, useMessages } from 'app/hooks';
 import _ from 'lodash';
 import { useRef, useState } from 'react';
@@ -10,13 +10,13 @@ import Toast from 'react-native-toast-message';
 export const EditMaxDistanceAuto = () => {
   const { formatMessage, formatErrorMessage } = useMessages();
   const { width } = Dimensions.get('window');
-  const [updateProfile] = useUpdateProfileMutation();
-  const filterMaxDistance = useAppSelector(s => s.app.profile.filterMaxDistance) || 50;
+  const [updateMyProfileFilter] = useUpdateMyProfileFilterMutation();
+  const filterMaxDistance = useAppSelector(s => s.app.profileFilter.maxDistance) || 50;
   const [maxDistance, setMaxDistance] = useState<number>(filterMaxDistance);
 
   const handleSubmit = async (e: number) => {
     try {
-      await updateProfile({ filterMaxDistance: e }).unwrap();
+      await updateMyProfileFilter({ maxDistance: e }).unwrap();
     } catch (err) {
       setMaxDistance(filterMaxDistance);
       Toast.show({

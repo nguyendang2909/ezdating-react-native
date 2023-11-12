@@ -3,7 +3,7 @@ import { MenuItem } from 'app/components/Menu/MenuItem';
 import { GENDERS } from 'app/constants';
 import { GENDER_MESSAGES, UserGender } from 'app/constants/constants';
 import { useAppSelector, useMessages } from 'app/hooks';
-import { ApiRequest } from 'app/types/api-request.type';
+import { ApiRequest } from 'app/types';
 import { Actionsheet, Box, Heading, Text, useDisclose } from 'native-base';
 import React, { useState } from 'react';
 

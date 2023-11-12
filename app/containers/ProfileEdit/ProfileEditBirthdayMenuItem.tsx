@@ -2,7 +2,7 @@ import { BirthdayPicker } from 'app/components';
 import { MaterialCommunityIcons } from 'app/components/Icon/Lib';
 import { MenuItem } from 'app/components/Menu/MenuItem';
 import { useAppSelector, useDisclose } from 'app/hooks';
-import { ApiRequest } from 'app/types/api-request.type';
+import { ApiRequest } from 'app/types';
 import moment from 'moment';
 import React, { useState } from 'react';
 

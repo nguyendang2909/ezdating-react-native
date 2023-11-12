@@ -1,6 +1,6 @@
 import { KeyboardAvoidingView } from '@gluestack-ui/themed';
 import { StackActions, useNavigation } from '@react-navigation/native';
-import { useCreateProfileMutation, useGetProfileMutation } from 'app/api';
+import { useCreateProfileMutation, useFetchMyProfileMutation } from 'app/api';
 import { BirthDayFormControl } from 'app/components/Form/BirthDayFormControl';
 import { FormControlInput } from 'app/components/Form/FormControlInput';
 import { RelationshipGoalFormControl } from 'app/components/Form/RelationshipGoalFormControl';
@@ -24,7 +24,7 @@ export const CreateProfileForm: FC = () => {
   const [createProfile] = useCreateProfileMutation();
   const profile = useAppSelector(state => state.app.profile);
   const navigation = useNavigation();
-  const [getProfile] = useGetProfileMutation();
+  const [fetchMyProfile] = useFetchMyProfileMutation();
   const dispatch = useDispatch();
 
   const handleChangeGender = (value: UserGender) => {
@@ -61,7 +61,7 @@ export const CreateProfileForm: FC = () => {
       } catch (error) {
         if ('status' in error && error.status === 409) {
           try {
-            const profile = await getProfile().unwrap();
+            const profile = await fetchMyProfile().unwrap();
             dispatch(appActions.setProfile(profile.data));
             navigation.dispatch(StackActions.replace('UpdateProfilePhotos'));
           } catch (err) {}

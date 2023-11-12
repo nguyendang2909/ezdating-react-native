@@ -3,8 +3,7 @@ import { MenuItem } from 'app/components/Menu/MenuItem';
 import { RELATIONSHIP_STATUSES } from 'app/constants';
 import { RELATIONSHIP_STATUS_MESSAGES } from 'app/constants/constants';
 import { useAppSelector, useMessages } from 'app/hooks';
-import { RelationshipStatus } from 'app/types';
-import { ApiRequest } from 'app/types/api-request.type';
+import { ApiRequest, RelationshipStatus } from 'app/types';
 import { Actionsheet, Box, Heading, Text, useDisclose } from 'native-base';
 import React, { useState } from 'react';
 

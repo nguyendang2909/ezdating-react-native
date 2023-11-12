@@ -1,6 +1,6 @@
 import { HStack, Text, View } from '@gluestack-ui/themed';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
-import { useUpdateProfileMutation } from 'app/api';
+import { useUpdateMyProfileFilterMutation } from 'app/api';
 import { useAppSelector, useMessages } from 'app/hooks';
 import { ApiRequest } from 'app/types';
 import _ from 'lodash';
@@ -10,35 +10,33 @@ import Toast from 'react-native-toast-message';
 
 export const EditFilterAgeAuto = () => {
   const { formatMessage, formatErrorMessage } = useMessages();
-  const [updateProfile] = useUpdateProfileMutation();
+  const [updateProfileFilter] = useUpdateMyProfileFilterMutation();
 
-  const filterMinAge = useAppSelector(s => s.app.profile.filterMinAge) || 18;
-  const filterMaxAge = useAppSelector(state => state.app.profile?.filterMaxAge) || 99;
+  const minAge = useAppSelector(s => s.app.profileFilter.minAge) || 18;
+  const maxAge = useAppSelector(state => state.app.profileFilter.maxAge) || 99;
   const { width } = Dimensions.get('window');
 
-  const [min, setMin] = useState<number>(filterMinAge);
-  const [max, setMax] = useState<number>(filterMaxAge);
+  const [min, setMin] = useState<number>(minAge);
+  const [max, setMax] = useState<number>(maxAge);
 
   const handleChange = (e: number[]) => {
     if (e[0] && e[1]) {
       if (e[0] !== min || e[1] !== max) {
         setMin(e[0]);
         setMax(e[1]);
-        handleDebounce({ filterMinAge: e[0], filterMaxAge: e[1] });
+        handleDebounce({ minAge: e[0], maxAge: e[1] });
       }
     }
   };
 
   const handleDebounce = useRef(
-    _.debounce((e: ApiRequest.UpdateProfile) => handleSubmit(e), 3000),
+    _.debounce((e: ApiRequest.UpdateProfileFilter) => handleSubmit(e), 3000),
   ).current;
 
-  const handleSubmit = async (e: ApiRequest.UpdateProfile) => {
+  const handleSubmit = async (e: ApiRequest.UpdateProfileFilter) => {
     try {
-      await updateProfile(e).unwrap();
+      await updateProfileFilter(e).unwrap();
     } catch (err) {
-      setMin(filterMinAge);
-      setMax(filterMaxAge);
       Toast.show({
         text1: formatErrorMessage(err),
         type: 'error',

@@ -1,4 +1,4 @@
-import { API_URL } from 'app/config/config.api';
+import { API_ENDPOINTS } from 'app/config/config.api';
 import { ApiRequest, ApiResponse } from 'app/types';
 
 import { api } from './api';
@@ -7,7 +7,7 @@ const authApi = api.injectEndpoints({
   endpoints: builder => ({
     signInWithPhoneNumber: builder.mutation<ApiResponse.Logged, ApiRequest.SignInWithPhoneNumber>({
       query: body => ({
-        url: API_URL.signInWithPhoneNumber,
+        url: API_ENDPOINTS.AUTH_SIGN_IN_PHONE_NUMBER,
         method: 'POST',
         body,
       }),
@@ -15,7 +15,7 @@ const authApi = api.injectEndpoints({
 
     signInWithGoogle: builder.mutation<ApiResponse.Logged, ApiRequest.SignInWithGoogle>({
       query: body => ({
-        url: API_URL.signInWithGoogle,
+        url: API_ENDPOINTS.AUTH_SIGN_IN_GOOGLE,
         method: 'POST',
         body,
       }),
@@ -23,7 +23,7 @@ const authApi = api.injectEndpoints({
 
     signInWithFacebook: builder.mutation<ApiResponse.Logged, ApiRequest.SignInWithFacebook>({
       query: body => ({
-        url: API_URL.signInWithFacebook,
+        url: API_ENDPOINTS.AUTH_SIGN_IN_FACEBOOK,
         method: 'POST',
         body,
       }),
@@ -31,7 +31,7 @@ const authApi = api.injectEndpoints({
 
     logout: builder.mutation<void, ApiRequest.Logout>({
       query: body => ({
-        url: API_URL.logout,
+        url: API_ENDPOINTS.LOGOUT,
         method: 'POST',
         body,
       }),

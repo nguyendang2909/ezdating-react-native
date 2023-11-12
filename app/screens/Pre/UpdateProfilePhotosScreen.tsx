@@ -16,8 +16,7 @@ import {
   width,
 } from 'app/styles';
 import { spacing } from 'app/theme';
-import { ApiRequest } from 'app/types/api-request.type';
-import { FormParams } from 'app/types/form-params.type';
+import { ApiRequest, FormParams } from 'app/types';
 import { mediaFileUtil } from 'app/utils/media-files.util';
 import { useFormik } from 'formik';
 import {

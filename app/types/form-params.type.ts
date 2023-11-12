@@ -1,8 +1,8 @@
-import { CountryCode } from 'libphonenumber-js';
+import { CountryCode } from 'libphonenumber-js/types';
 import { Image } from 'react-native-image-crop-picker';
 
-import { ApiRequest } from './api-request.type';
 import { Gender, RelationshipGoal } from './data.type';
+import { ApiRequest } from './fe.type';
 
 export declare namespace FormParams {
   type LoginByEmail = ApiRequest.LoginByEmail;
@@ -37,7 +37,6 @@ export declare namespace FormParams {
     // educationLevel?: EEducationLevel;
     gender?: Gender;
     jobTitle?: string;
-    haveBasicInfo?: boolean;
     introduce?: string;
     nickname?: string;
     latitude?: number;
@@ -49,11 +48,12 @@ export declare namespace FormParams {
     // workout?: EWorkout;
   };
 
-  type UpdateMatchFilter = {
-    filterMinAge: number;
-    filterMaxAge: number;
-    filterGender?: Gender;
-    filterMaxDistance: number;
+  type UpdateProfileFilter = {
+    gender?: Gender;
+    maxDistance: number;
+    maxAge: number;
+    minAge: number;
+    relationshipGoal?: RelationshipGoal;
   };
 
   type SendMessage = {

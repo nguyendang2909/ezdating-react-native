@@ -1,4 +1,4 @@
-import { API_URL } from 'app/config/config.api';
+import { API_ENDPOINTS } from 'app/config';
 import { ApiRequest, ApiResponse } from 'app/types';
 
 import { api } from './api';
@@ -8,21 +8,21 @@ const messagesApi = api.injectEndpoints({
     // Messages
     refreshMessages: builder.query<ApiResponse.Messages, ApiRequest.FindManyMessages>({
       query: params => ({
-        url: API_URL.messages,
+        url: API_ENDPOINTS.MESSAGES,
         method: 'GET',
         params,
       }),
     }),
     getNewestMessages: builder.mutation<ApiResponse.Messages, ApiRequest.FindManyMessages>({
       query: params => ({
-        url: API_URL.messages,
+        url: API_ENDPOINTS.MESSAGES,
         method: 'GET',
         params,
       }),
     }),
     getNextMessages: builder.mutation<ApiResponse.Messages, ApiRequest.FindManyMessages>({
       query: params => ({
-        url: API_URL.messages,
+        url: API_ENDPOINTS.MESSAGES,
         method: 'GET',
         params,
       }),

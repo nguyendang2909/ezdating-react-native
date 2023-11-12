@@ -1,4 +1,4 @@
-import { ApiResponse } from 'app/types/api-response.type';
+import { ApiResponse } from 'app/types';
 import { Buffer } from 'buffer';
 import _ from 'lodash';
 

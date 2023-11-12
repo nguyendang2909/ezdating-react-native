@@ -126,3 +126,11 @@ export const RELATIONSHIP_STATUS_MESSAGES: Record<RelationshipStatus, TxKey> = {
   [RELATIONSHIP_STATUSES.SINGLE]: 'Single',
   [RELATIONSHIP_STATUSES.SINGLE_MOM_DAD]: 'Single mom/dad',
 };
+
+export const API_TAGS = {
+  MY_USER: 'my_user',
+  MY_PROFILE_FILTER: 'my_profile_filter',
+  MY_PROFILE: 'my_profile',
+} as const;
+
+export const ARR_API_TAGS = Object.values(API_TAGS);

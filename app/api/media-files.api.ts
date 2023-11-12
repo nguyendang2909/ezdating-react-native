@@ -1,4 +1,5 @@
-import { API_URL } from 'app/config/config.api';
+import { API_ENDPOINTS } from 'app/config/config.api';
+import { API_TAGS } from 'app/constants/constants';
 import { ApiRequest, ApiResponse } from 'app/types';
 import { Platform } from 'react-native';
 
@@ -19,7 +20,7 @@ const mediaFilesApi = api.injectEndpoints({
         });
 
         return {
-          url: API_URL.photos,
+          url: API_ENDPOINTS.PHOTOS,
           method: 'POST',
           body: formData,
         };
@@ -28,20 +29,20 @@ const mediaFilesApi = api.injectEndpoints({
         if (error) {
           return [];
         }
-        return ['Profile'];
+        return [API_TAGS.MY_PROFILE];
       },
     }),
 
     removePhoto: builder.mutation<ApiResponse.RemoveData, string>({
       query: (id: string) => ({
-        url: `${API_URL.photos}/${id}`,
+        url: `${API_ENDPOINTS.PHOTOS}/${id}`,
         method: 'DELETE',
       }),
       invalidatesTags: (result, error) => {
         if (error) {
           return [];
         }
-        return ['Profile'];
+        return [API_TAGS.MY_PROFILE];
       },
     }),
   }),

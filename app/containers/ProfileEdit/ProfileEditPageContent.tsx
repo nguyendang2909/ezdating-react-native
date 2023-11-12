@@ -2,7 +2,7 @@ import { useUpdateProfileMutation } from 'app/api';
 import { useMessages } from 'app/hooks';
 import { paddingHorizontal } from 'app/styles';
 import { colors, spacing } from 'app/theme';
-import { ApiRequest } from 'app/types/api-request.type';
+import { ApiRequest } from 'app/types';
 import { Divider, Row, Text, View } from 'native-base';
 import React from 'react';
 import Toast from 'react-native-toast-message';

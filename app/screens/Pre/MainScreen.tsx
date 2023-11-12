@@ -1,6 +1,6 @@
 import { Box, Spinner } from '@gluestack-ui/themed';
 import { StackActions, useNavigation } from '@react-navigation/native';
-import { api, useGetMyProfileQuery, useLogoutMutation } from 'app/api';
+import { api, useGetMyProfileFilterQuery, useGetMyProfileQuery, useLogoutMutation } from 'app/api';
 import { SCREENS } from 'app/constants';
 import { useAppSelector } from 'app/hooks';
 import { appActions } from 'app/store/app.store';
@@ -14,8 +14,8 @@ export const MainScreen: React.FC = () => {
   const [logout] = useLogoutMutation();
   const refreshToken = useAppSelector(s => s.app.refreshToken);
   const profile = useAppSelector(s => s.app.profile);
-
-  const { error } = useGetMyProfileQuery();
+  const { error: errorGetMyProfile } = useGetMyProfileQuery();
+  const { error: errorGetMyProfileFilter } = useGetMyProfileFilterQuery();
 
   const handleLogout = useCallback(async () => {
     try {
@@ -39,14 +39,14 @@ export const MainScreen: React.FC = () => {
   }, [navigation, profile._id, profile.mediaFiles]);
 
   useEffect(() => {
-    if (error) {
-      if ('status' in error && error.status === 404) {
+    if (errorGetMyProfile) {
+      if ('status' in errorGetMyProfile && errorGetMyProfile.status === 404) {
         navigation.dispatch(StackActions.replace(SCREENS.CreateProfile));
       } else {
         handleLogout();
       }
     }
-  }, [error, handleLogout, navigation]);
+  }, [errorGetMyProfile, errorGetMyProfileFilter, handleLogout, navigation]);
 
   return (
     <Box flex={1} justifyContent="center" alignItems="center">

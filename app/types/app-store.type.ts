@@ -4,7 +4,7 @@ import { AuthorizationResult } from 'react-native-geolocation-service';
 import { IMessage } from 'react-native-gifted-chat';
 import { ThunkAction } from 'redux-thunk';
 
-import { Like, Match, Message, Profile, User } from './entity.type';
+import { Like, Match, Message, Profile, ProfileFilter, User } from './fe.type';
 
 export declare namespace AppStore {
   type RootState = ReturnType<typeof store.getState>;
@@ -14,6 +14,7 @@ export declare namespace AppStore {
     refreshToken?: string;
     isLogged?: boolean;
     profile: Partial<Profile>;
+    profileFilter: Partial<ProfileFilter>;
     user: Partial<User>;
     osPermissions?: {
       locationService?: AuthorizationResult;

@@ -1,4 +1,4 @@
-import { API_URL } from 'app/config/config.api';
+import { API_ENDPOINTS } from 'app/config';
 import { ApiRequest } from 'app/types';
 
 import { api } from './api';
@@ -8,7 +8,7 @@ const viewsApi = api.injectEndpoints({
     // Views
     sendView: builder.mutation<void, ApiRequest.SendView>({
       query: body => ({
-        url: API_URL.views,
+        url: API_ENDPOINTS.VIEWS,
         method: 'POST',
         body,
       }),

@@ -8,7 +8,6 @@ export const UpdateGeolocation: React.FC = () => {
   useEffect(() => {
     Geolocation.getCurrentPosition(
       async position => {
-        console.log(position);
         await updateProfile({
           longitude: position.coords.longitude,
           latitude: position.coords.latitude,

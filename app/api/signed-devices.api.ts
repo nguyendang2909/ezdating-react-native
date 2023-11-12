@@ -1,4 +1,4 @@
-import { API_URL } from 'app/config/config.api';
+import { API_ENDPOINTS } from 'app/config';
 import { ApiRequest } from 'app/types';
 
 import { api } from './api';
@@ -8,7 +8,7 @@ const signedDevicesApi = api.injectEndpoints({
     // Signed devices
     updateSignedDevice: builder.mutation<void, ApiRequest.UpdateSignedDevice>({
       query: body => ({
-        url: API_URL.signedDevices,
+        url: API_ENDPOINTS.SIGNED_DEVICES,
         method: 'PATCH',
         body,
       }),

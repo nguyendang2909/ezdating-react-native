@@ -70,7 +70,6 @@ export function* initializeWebSocket() {
             // TODO: Remove on swipe
             break;
           case SOCKET_TO_CLIENT_EVENTS.UNMATCH:
-            console.log(1111);
             yield put(matchActions.unmatch(data));
             // TODO: Remove on swipe
             break;

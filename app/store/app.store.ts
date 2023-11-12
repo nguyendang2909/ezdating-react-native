@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { authEndpoints, profileEndpoints } from 'app/api';
-import { User } from 'app/types';
-import { ApiResponse } from 'app/types/api-response.type';
+import { authEndpoints, profileEndpoints, profileFilterEndpoints } from 'app/api';
+import { ApiResponse, Profile, ProfileFilter, User } from 'app/types';
 import { AppStore } from 'app/types/app-store.type';
 import moment from 'moment';
 import { AuthorizationResult } from 'react-native-geolocation-service';
@@ -15,19 +14,21 @@ const initialState: AppStore.AppState = {
   socket: {
     connectedAt: moment().toISOString(),
   },
+  profileFilter: {},
 };
 
 export const appSlice = createSlice({
   name: 'app',
   initialState,
   reducers: {
-    setUser: (state, action: PayloadAction<User>) => {
-      const { payload } = action;
+    setUser: (state, { payload }: PayloadAction<User>) => {
       state.profile = payload;
     },
-    setProfile: (state, action: PayloadAction<User>) => {
-      const { payload } = action;
+    setProfile: (state, { payload }: PayloadAction<Profile>) => {
       state.profile = payload;
+    },
+    setProfileFilter: (state, { payload }: PayloadAction<ProfileFilter>) => {
+      state.profileFilter = payload;
     },
     updateAccessToken: (state, { payload }: PayloadAction<ApiResponse.Tokens>) => {
       if (payload.accessToken) {
@@ -43,6 +44,7 @@ export const appSlice = createSlice({
       state.profile = {};
       state.user = {};
       state.socket = {};
+      state.profileFilter = {};
     },
     setOsLocationPermission: (state, action: PayloadAction<AuthorizationResult>) => {
       if (state.osPermissions) {
@@ -80,6 +82,12 @@ export const appSlice = createSlice({
       .addMatcher(profileEndpoints.getMyProfile.matchFulfilled, (state, { payload: { data } }) => {
         state.profile = data;
       })
+      .addMatcher(
+        profileFilterEndpoints.getMyProfileFilter.matchFulfilled,
+        (state, { payload: { data } }) => {
+          state.profileFilter = data;
+        },
+      )
       .addMatcher(profileEndpoints.createProfile.matchFulfilled, (state, { payload: { data } }) => {
         state.profile = data;
       });

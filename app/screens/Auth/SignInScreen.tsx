@@ -1,9 +1,8 @@
 import { View, VStack } from '@gluestack-ui/themed';
 import { SignInWithFacebookButton } from 'app/containers/Button/SignInWithFacebookButton';
-import { SignInWithGoogleButton } from 'app/pages/sign-in/sign-in-with-google/SignInWithGoogleButton';
 import { SignInWithPhoneNumberButton } from 'app/containers/Button/SignInWithPhoneNumberButton';
-import { useAppSelector } from 'app/hooks';
 import { AppStackScreenProps } from 'app/navigators';
+import { SignInWithGoogleButton } from 'app/pages/sign-in/sign-in-with-google/SignInWithGoogleButton';
 import { backgroundColor, heightFull, posititionAbsolute, widthFull, zIndex } from 'app/styles';
 import React, { FC } from 'react';
 import { ImageBackground } from 'react-native';
@@ -11,9 +10,6 @@ import { ImageBackground } from 'react-native';
 type FCProps = AppStackScreenProps<'SignIn'>;
 
 export const SignInScreen: FC<FCProps> = () => {
-  const app = useAppSelector(s => s.match);
-
-  console.log(app);
   return (
     <>
       <ImageBackground

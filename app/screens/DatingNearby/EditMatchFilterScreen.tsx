@@ -6,7 +6,7 @@ import { HeaderSaveDone } from 'app/components/Header/HeaderSaveDone';
 import { useAppSelector, useMessages } from 'app/hooks';
 import { EditFilterGenderMenuItem } from 'app/pages/EditMatchFilter/EditFilterGenderMenuItem';
 import { colors } from 'app/theme';
-import { FormParams } from 'app/types/form-params.type';
+import { FormParams } from 'app/types';
 import { useFormik } from 'formik';
 import { HStack } from 'native-base';
 import React from 'react';
@@ -21,17 +21,17 @@ export const EditMatchFilterScreen: React.FC<AppStackScreenProps<'EditMatchFilte
   const navigation = useNavigation();
   const { width } = Dimensions.get('window');
 
-  const filterMaxDistance = useAppSelector(state => state.app.profile?.filterMaxDistance) || 1;
-  const filterMinAge = useAppSelector(state => state.app.profile?.filterMinAge) || 18;
-  const filterMaxAge = useAppSelector(state => state.app.profile?.filterMaxAge) || 99;
-  const filterGender = useAppSelector(state => state.app.profile?.filterGender);
+  const maxDistance = useAppSelector(state => state.app.profileFilter.maxDistance) || 50;
+  const minAge = useAppSelector(state => state.app.profileFilter.minAge) || 18;
+  const maxAge = useAppSelector(state => state.app.profileFilter.maxAge) || 99;
+  const gender = useAppSelector(state => state.app.profileFilter.gender);
 
-  const formik = useFormik<FormParams.UpdateMatchFilter>({
+  const formik = useFormik<FormParams.UpdateProfileFilter>({
     initialValues: {
-      filterMinAge,
-      filterMaxAge,
-      filterGender,
-      filterMaxDistance,
+      minAge,
+      maxAge,
+      gender,
+      maxDistance,
     },
     enableReinitialize: true,
     onSubmit: async values => {
@@ -54,17 +54,17 @@ export const EditMatchFilterScreen: React.FC<AppStackScreenProps<'EditMatchFilte
   });
 
   const handleChangeFilterMaxDistance = (e: number[]) => {
-    if (e[0] && e[0] !== formik.values.filterMinAge) {
+    if (e[0] && e[0] !== formik.values.minAge) {
       formik.setFieldValue('filterMaxDistance', e[0]);
     }
   };
 
   const handleChangeAges = (e: number[]) => {
-    if (e[0] && e[0] !== formik.values.filterMinAge) {
+    if (e[0] && e[0] !== formik.values.minAge) {
       formik.setFieldValue('filterMinAge', e[0]);
     }
 
-    if (e[1] && e[1] !== formik.values.filterMaxAge) {
+    if (e[1] && e[1] !== formik.values.maxAge) {
       formik.setFieldValue('filterMaxAge', e[1]);
     }
   };
@@ -84,13 +84,13 @@ export const EditMatchFilterScreen: React.FC<AppStackScreenProps<'EditMatchFilte
               <View mx={16}>
                 <HStack justifyContent="space-between">
                   <Text>{formatMessage('Distance preference')}</Text>
-                  <Text>{formik.values.filterMaxDistance} km</Text>
+                  <Text>{formik.values.maxDistance} km</Text>
                 </HStack>
               </View>
 
               <View mx={16} alignItems="center">
                 <MultiSlider
-                  values={[formik.values.filterMaxDistance]}
+                  values={[formik.values.maxDistance]}
                   sliderLength={width - 48}
                   onValuesChange={handleChangeFilterMaxDistance}
                   min={0}
@@ -107,7 +107,7 @@ export const EditMatchFilterScreen: React.FC<AppStackScreenProps<'EditMatchFilte
 
             <View>
               <EditFilterGenderMenuItem
-                value={formik.values.filterGender}
+                value={formik.values.gender}
                 onChange={gender => {
                   formik.setFieldValue('filterGender', gender);
                 }}
@@ -121,14 +121,14 @@ export const EditMatchFilterScreen: React.FC<AppStackScreenProps<'EditMatchFilte
                 <HStack justifyContent="space-between">
                   <Text>{formatMessage('Age preference')}</Text>
                   <Text>
-                    {formik.values.filterMinAge} - {formik.values.filterMaxAge}
+                    {formik.values.minAge} - {formik.values.maxAge}
                   </Text>
                 </HStack>
               </View>
 
               <View px={16} w="$full" justifyContent="center" alignItems="center">
                 <MultiSlider
-                  values={[formik.values.filterMinAge, formik.values.filterMaxAge]}
+                  values={[formik.values.minAge, formik.values.maxAge]}
                   sliderLength={width - 48}
                   onValuesChange={handleChangeAges}
                   min={18}

@@ -6,7 +6,6 @@ export const LikedMeScreen: React.FC = () => {
   return (
     <>
       <LikedMeHeader />
-
       <LikedMeContent />
     </>
   );

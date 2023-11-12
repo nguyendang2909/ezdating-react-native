@@ -6,6 +6,7 @@ import { useMessages } from 'app/hooks';
 
 export const ProfileSettingScrollView = () => {
   const { formatMessage } = useMessages();
+
   return (
     <>
       <ScrollView>

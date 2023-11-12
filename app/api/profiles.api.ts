@@ -1,4 +1,5 @@
-import { API_URL } from 'app/config/config.api';
+import { API_ENDPOINTS } from 'app/config/config.api';
+import { API_TAGS } from 'app/constants/constants';
 import { ApiRequest, ApiResponse } from 'app/types';
 
 import { api } from './api';
@@ -6,24 +7,24 @@ import { api } from './api';
 const profilesApi = api.injectEndpoints({
   endpoints: builder => ({
     // Profile
-    getMyProfile: builder.query<ApiResponse.UserData, void>({
+    getMyProfile: builder.query<ApiResponse.ProfileData, void>({
       query: () => ({
-        url: API_URL.profileMe,
+        url: API_ENDPOINTS.PROFILES_ME,
         method: 'GET',
       }),
-      providesTags: ['Profile'],
+      providesTags: [API_TAGS.MY_PROFILE],
     }),
 
-    getProfile: builder.mutation<ApiResponse.UserData, void>({
+    fetchMyProfile: builder.mutation<ApiResponse.ProfileData, void>({
       query: () => ({
-        url: API_URL.profileMe,
+        url: API_ENDPOINTS.PROFILES_ME,
         method: 'GET',
       }),
     }),
 
     updateProfile: builder.mutation<ApiResponse.Logged, ApiRequest.UpdateProfile>({
       query: body => ({
-        url: API_URL.profileMe,
+        url: API_ENDPOINTS.PROFILES_ME,
         method: 'PATCH',
         body,
       }),
@@ -31,13 +32,13 @@ const profilesApi = api.injectEndpoints({
         if (error) {
           return [];
         }
-        return ['Profile'];
+        return [API_TAGS.MY_PROFILE];
       },
     }),
 
     createProfile: builder.mutation<ApiResponse.ProfileData, ApiRequest.CreateProfile>({
       query: body => ({
-        url: API_URL.profileMe,
+        url: API_ENDPOINTS.PROFILES_ME,
         method: 'POST',
         body,
       }),
@@ -45,20 +46,20 @@ const profilesApi = api.injectEndpoints({
         if (error) {
           return [];
         }
-        return ['Profile'];
+        return [API_TAGS.MY_PROFILE];
       },
     }),
 
     // NearbyUser
     refreshNearbyProfiles: builder.query<ApiResponse.Profiles, void>({
       query: () => ({
-        url: API_URL.profilesNearby,
+        url: API_ENDPOINTS.PROFILES_NEARBY,
         method: 'GET',
       }),
     }),
     getNewestNearbyProfiles: builder.mutation<ApiResponse.Profiles, void>({
       query: () => ({
-        url: API_URL.profilesNearby,
+        url: API_ENDPOINTS.PROFILES_NEARBY,
         method: 'GET',
       }),
     }),
@@ -67,7 +68,7 @@ const profilesApi = api.injectEndpoints({
       ApiRequest.FindManyNearbyProfiles
     >({
       query: params => ({
-        url: API_URL.profilesNearby,
+        url: API_ENDPOINTS.PROFILES_NEARBY,
         method: 'GET',
         params,
       }),
@@ -76,7 +77,7 @@ const profilesApi = api.injectEndpoints({
     // Swipe profiles
     refreshSwipeProfiles: builder.query<ApiResponse.Profiles, void>({
       query: () => ({
-        url: API_URL.profilesNearby,
+        url: API_ENDPOINTS.PROFILES_NEARBY,
         method: 'GET',
       }),
     }),
@@ -89,7 +90,7 @@ const profilesApi = api.injectEndpoints({
     getNextSwipeProfiles: builder.mutation<ApiResponse.Profiles, ApiRequest.FindManyNearbyProfiles>(
       {
         query: params => ({
-          url: API_URL.profilesNearby,
+          url: API_ENDPOINTS.PROFILES_NEARBY,
           method: 'GET',
           params,
         }),
@@ -108,6 +109,6 @@ export const {
   useRefreshSwipeProfilesQuery,
   // useGetNewestSwipeProfilesMutation,
   useGetNextSwipeProfilesMutation,
-  useGetProfileMutation,
+  useFetchMyProfileMutation,
   endpoints: profileEndpoints,
 } = profilesApi;

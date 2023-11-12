@@ -1,6 +1,6 @@
 import { MenuItemSwitch } from 'app/components/Menu/MenuItemSwitch';
 import { useAppSelector } from 'app/hooks';
-import { ApiRequest } from 'app/types/api-request.type';
+import { ApiRequest } from 'app/types';
 import React, { useState } from 'react';
 
 type FCProps = {

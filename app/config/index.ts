@@ -16,6 +16,7 @@
 import BaseConfig from './config.base';
 import DevConfig from './config.dev';
 import ProdConfig from './config.prod';
+export * from './config.api';
 
 let ExtraConfig = ProdConfig;
 

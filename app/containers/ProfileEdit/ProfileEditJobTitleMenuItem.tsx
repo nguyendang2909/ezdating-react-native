@@ -1,5 +1,5 @@
 import { useAppSelector } from 'app/hooks';
-import { ApiRequest } from 'app/types/api-request.type';
+import { ApiRequest } from 'app/types';
 import _ from 'lodash';
 import { Input, Text, View } from 'native-base';
 import React, { useRef, useState } from 'react';

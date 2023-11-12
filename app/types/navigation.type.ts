@@ -2,7 +2,7 @@ import { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import { NavigatorScreenParams } from '@react-navigation/native';
 import { HomeTabParamList } from 'app/navigators';
 
-import { Profile } from './entity.type';
+import { Profile } from './fe.type';
 
 export type AppStackParamList = {
   ChatProfile: {
