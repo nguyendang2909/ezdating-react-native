@@ -1,1 +1,1 @@
-export * from './NearbyUserPage';
+export * from './dating-nearby-profile';

@@ -21,7 +21,7 @@ export const useSwipeProfiles = () => {
     // if (isReachedEnd || !_next) {
     //   return;
     // }
-    fetchNextNearbyUsers({ _next });
+    // fetchNextNearbyUsers({ _next });
   };
 
   return {

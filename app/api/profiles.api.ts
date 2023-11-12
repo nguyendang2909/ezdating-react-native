@@ -51,16 +51,21 @@ const profilesApi = api.injectEndpoints({
     }),
 
     // NearbyUser
-    refreshNearbyProfiles: builder.query<ApiResponse.Profiles, void>({
-      query: () => ({
+    refreshNearbyProfiles: builder.query<ApiResponse.Profiles, ApiRequest.FindManyNearbyProfiles>({
+      query: params => ({
         url: API_ENDPOINTS.PROFILES_NEARBY,
         method: 'GET',
+        params,
       }),
     }),
-    getNewestNearbyProfiles: builder.mutation<ApiResponse.Profiles, void>({
-      query: () => ({
+    getNewestNearbyProfiles: builder.mutation<
+      ApiResponse.Profiles,
+      ApiRequest.FindManyNearbyProfiles
+    >({
+      query: params => ({
         url: API_ENDPOINTS.PROFILES_NEARBY,
         method: 'GET',
+        params,
       }),
     }),
     getNextNearbyProfiles: builder.mutation<

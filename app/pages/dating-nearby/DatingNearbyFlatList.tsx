@@ -1,5 +1,5 @@
 import { Box, ButtonSpinner, FlatList } from '@gluestack-ui/themed';
-import { useNearbyUsers } from 'app/hooks/useNearbyUsers';
+import { useNearbyProfiles } from 'app/hooks/useNearbyUsers';
 import { Profile } from 'app/types';
 import { scrollUtil } from 'app/utils/scroll.util';
 import { Spinner } from 'native-base';
@@ -17,7 +17,7 @@ export const DatingNearbyFlatList: React.FC = () => {
     fetchNewest,
     lastRefreshedAt,
     isLoading,
-  } = useNearbyUsers();
+  } = useNearbyProfiles();
 
   const handleScroll = async (e: NativeSyntheticEvent<NativeScrollEvent>) => {
     if (!scrollUtil.isCloseToBottom(e)) {

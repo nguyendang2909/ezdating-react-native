@@ -63,11 +63,11 @@ export const HomeNavigator: FC<FCProps> = () => {
           //   tabBarLabel: formatMessage('Swipe'),
           tabBarIcon: ({ focused }) => (
             <GradientIcon
-              // {...(!focused
-              //   ? {
-              //       colors: [colors.palette.neutral500, colors.palette.neutral500],
-              //     }
-              //   : {})}
+              {...(!focused
+                ? {
+                    colors: [colors.palette.neutral500, colors.palette.neutral500],
+                  }
+                : {})}
               size={30}
               name="globe"
               icon={FontAwesome}
@@ -83,11 +83,11 @@ export const HomeNavigator: FC<FCProps> = () => {
           //   tabBarLabel: formatMessage('Nearby'),
           tabBarIcon: ({ focused }) => (
             <GradientIcon
-              // {...(!focused
-              //   ? {
-              //       colors: [colors.palette.neutral500, colors.palette.neutral500],
-              //     }
-              //   : {})}
+              {...(!focused
+                ? {
+                    colors: [colors.palette.neutral500, colors.palette.neutral500],
+                  }
+                : {})}
               size={30}
               name="location-on"
               icon={MaterialIcons}
@@ -103,11 +103,11 @@ export const HomeNavigator: FC<FCProps> = () => {
           //   tabBarLabel: formatMessage('Nearby'),
           tabBarIcon: ({ focused }) => (
             <GradientIcon
-              // {...(!focused
-              //   ? {
-              //       colors: [colors.palette.neutral500, colors.palette.neutral500],
-              //     }
-              //   : {})}
+              {...(!focused
+                ? {
+                    colors: [colors.palette.neutral500, colors.palette.neutral500],
+                  }
+                : {})}
               size={30}
               name="star"
               icon={AntDesign}
@@ -123,11 +123,11 @@ export const HomeNavigator: FC<FCProps> = () => {
           tabBarLabel: formatMessage('Messages'),
           tabBarIcon: ({ focused }) => (
             <GradientIcon
-              // {...(!focused
-              //   ? {
-              //       colors: [colors.palette.neutral500, colors.palette.neutral500],
-              //     }
-              //   : {})}
+              {...(!focused
+                ? {
+                    colors: [colors.palette.neutral500, colors.palette.neutral500],
+                  }
+                : {})}
               size={30}
               name="chat"
               icon={MaterialCommunityIcons}
@@ -143,11 +143,11 @@ export const HomeNavigator: FC<FCProps> = () => {
           tabBarLabel: formatMessage('Profile'),
           tabBarIcon: ({ focused }) => (
             <GradientIcon
-              // {...(!focused
-              //   ? {
-              //       colors: [colors.palette.neutral500, colors.palette.neutral500],
-              //     }
-              //   : {})}
+              {...(!focused
+                ? {
+                    colors: [colors.palette.neutral500, colors.palette.neutral500],
+                  }
+                : {})}
               size={30}
               name="account"
               icon={MaterialCommunityIcons}

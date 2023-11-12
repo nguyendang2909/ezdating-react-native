@@ -1,7 +1,7 @@
 import { StatusBar } from '@gluestack-ui/themed';
 import { useNavigation } from '@react-navigation/native';
 import { Header } from 'app/components';
-import { DatingNearbyFlatList } from 'app/containers/DatingNearby/DatingNearbyFlatList';
+import { DatingNearbyWrapper } from 'app/pages/dating-nearby/dating-nearby-wrapper';
 import React, { FC } from 'react';
 
 export const DatingNearbyScreen: FC = () => {
@@ -16,7 +16,7 @@ export const DatingNearbyScreen: FC = () => {
           navigate.navigate('EditMatchFilter');
         }}
       />
-      <DatingNearbyFlatList />
+      <DatingNearbyWrapper />
     </>
   );
 };

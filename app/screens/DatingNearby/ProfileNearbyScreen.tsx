@@ -2,7 +2,7 @@ import { Box, ScrollView } from '@gluestack-ui/themed';
 import { ViewAndroidSafeArea } from 'app/components';
 import { UserProfile } from 'app/containers/UserProfile';
 import { AppStackScreenProps } from 'app/navigators';
-import { NearbyUserActions } from 'app/pages/NearbyUserPage/NearbyUserActions';
+import { NearbyUserActions } from 'app/pages/dating-nearby-profile/NearbyUserActions';
 import React from 'react';
 
 type FCProps = AppStackScreenProps<'ProfileNearby'>;

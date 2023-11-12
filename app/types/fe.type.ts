@@ -39,7 +39,10 @@ export type Profile = BaseEntity & {
   company?: string;
   educationLevel?: EducationLevel;
   gender?: Gender;
-  geolocation?: object;
+  geolocation?: {
+    coordinates?: [number, number];
+    type?: 'Point';
+  };
   height?: number;
   introduce?: string;
   jobTitle?: string;
@@ -201,7 +204,10 @@ export declare namespace ApiRequest {
 
   type FindManyMatches = Pagination;
 
-  type FindManyNearbyProfiles = Pagination;
+  type FindManyNearbyProfiles = Pagination & {
+    longitude: number;
+    latitude: number;
+  };
 
   type SendLike = {
     targetUserId: string;
