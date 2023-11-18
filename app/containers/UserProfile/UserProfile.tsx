@@ -1,15 +1,14 @@
 import { Box, Button, ChevronLeftIcon } from '@gluestack-ui/themed';
 import { useNavigation } from '@react-navigation/native';
-import { BoxSafeView } from 'app/components';
+import { BoxSafeView, ViewSafeArea } from 'app/components';
 import {
   NearbyUserIntroduce,
   NearbyUserMainInfo,
   UserProfileDetails,
-  UserProfileImages,
+  UserProfileImagesMemo,
 } from 'app/pages';
 import { Profile } from 'app/types';
 import React from 'react';
-import { SafeAreaView } from 'react-native';
 
 type UserProfileScrollViewProps = {
   profile: Profile;
@@ -22,7 +21,7 @@ export const UserProfile: React.FC<UserProfileScrollViewProps> = ({ profile }) =
     <>
       <Box aspectRatio={640 / 860}>
         <Box position="absolute" zIndex={100}>
-          <SafeAreaView />
+          <ViewSafeArea top />
           <Box ml={16} mt={16} zIndex={100}>
             <Button height={40} width={40} onPress={goBack} rounded={100} bgColor="$red600">
               <ChevronLeftIcon color="$white" />
@@ -30,7 +29,7 @@ export const UserProfile: React.FC<UserProfileScrollViewProps> = ({ profile }) =
           </Box>
         </Box>
 
-        <UserProfileImages mediaFiles={profile.mediaFiles || []} />
+        <UserProfileImagesMemo mediaFiles={profile.mediaFiles || []} />
       </Box>
 
       <Box flex={1} mt={16}>

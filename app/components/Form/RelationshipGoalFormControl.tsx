@@ -1,5 +1,6 @@
 import {
   Actionsheet,
+  ActionsheetBackdrop,
   ActionsheetContent,
   ActionsheetItem,
   Box,
@@ -74,6 +75,7 @@ export const RelationshipGoalFormControl: React.FC<FCProps> = ({
 
       {isInit && (
         <Actionsheet isOpen={isOpen} onClose={onClose}>
+          <ActionsheetBackdrop />
           <ActionsheetContent>
             <Box mb={4}>
               <Heading size="sm" textAlign="center">

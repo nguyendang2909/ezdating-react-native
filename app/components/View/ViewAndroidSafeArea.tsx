@@ -3,7 +3,7 @@ import { ComponentProps, FC, ReactNode } from 'react';
 import { Platform, StatusBar, StyleSheet } from 'react-native';
 
 type ViewAndroidSafeAreProps = ComponentProps<typeof View> & {
-  children: ReactNode;
+  children?: ReactNode;
 };
 
 export const ViewAndroidSafeArea: FC<ViewAndroidSafeAreProps> = ({ children, ...restProps }) => {

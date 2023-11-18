@@ -2,7 +2,7 @@ import { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import { NavigatorScreenParams } from '@react-navigation/native';
 import { HomeTabParamList } from 'app/navigators';
 
-import { Profile } from './fe.type';
+import { Like, Profile } from './fe.type';
 
 export type AppStackParamList = {
   ChatProfile: {
@@ -17,7 +17,7 @@ export type AppStackParamList = {
   Home: NavigatorScreenParams<HomeTabParamList>;
   LikedMe: undefined;
   LikedMeProfile: {
-    profile: Profile;
+    like: Like;
   };
   Main: undefined;
   Messages: {

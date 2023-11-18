@@ -1,6 +1,7 @@
 import { Image, View } from '@gluestack-ui/themed';
 import { MediaFile } from 'app/types';
 import { mediaFileUtil } from 'app/utils/media-files.util';
+import _ from 'lodash';
 import React from 'react';
 import { Dimensions } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
@@ -35,3 +36,7 @@ export const UserProfileImages: React.FC<FCProps> = ({ mediaFiles }) => {
     </>
   );
 };
+
+export const UserProfileImagesMemo = React.memo(UserProfileImages, (prev, next) => {
+  return _.isEqual(prev.mediaFiles, next.mediaFiles);
+});

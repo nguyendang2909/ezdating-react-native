@@ -384,4 +384,16 @@ export const messages = defineMessages({
     defaultMessage: 'Second look',
     id: '088d435e42',
   },
+  Country: {
+    defaultMessage: 'Country',
+    id: 'bce362f8e3',
+  },
+  City: {
+    defaultMessage: 'City',
+    id: '4c4e1f2127',
+  },
+  'Please choose your city': {
+    defaultMessage: "'Please choose your city",
+    id: '09a7f5a312',
+  },
 });

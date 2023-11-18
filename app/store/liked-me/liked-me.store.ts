@@ -57,10 +57,19 @@ export const likedMeSlice = createSlice({
             ...state.info,
             isReachedEnd: !pagination._next,
           };
-          const matches = likedMeService.formatMany(data);
-          state.data = likedMeService.sortAndUniq(matches, state.data);
+          const likes = likedMeService.formatMany(data);
+          state.data = likedMeService.sortAndUniq(likes, state.data);
         },
-      );
+      )
+      .addMatcher(likeEndpoints.getOneLikedMe.matchFulfilled, (state, { payload: { data } }) => {
+        const like = likedMeService.formatOne(data);
+        state.data = state.data.map(e => {
+          if (e._id === like._id) {
+            return like;
+          }
+          return e;
+        });
+      });
   },
 });
 

@@ -47,7 +47,8 @@ module.exports = {
       }
     ],
     "formatjs/enforce-default-message": ["error", "literal"],
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "react/display-name": "off",
   },
   "parserOptions": {
     "ecmaFeatures": {

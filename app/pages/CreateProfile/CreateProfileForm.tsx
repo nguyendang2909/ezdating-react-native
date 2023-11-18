@@ -4,9 +4,11 @@ import { useCreateProfileMutation, useFetchMyProfileMutation } from 'app/api';
 import { BirthDayFormControl } from 'app/components/Form/BirthDayFormControl';
 import { FormControlInput } from 'app/components/Form/FormControlInput';
 import { RelationshipGoalFormControl } from 'app/components/Form/RelationshipGoalFormControl';
+import { SelectCountryFormControl } from 'app/components/Form/select-country-form-control';
 import { SelectGenderFormControl } from 'app/components/Form/SelectGenderForm';
 import { UserGender } from 'app/constants/constants';
 import { useAppSelector, useMessages } from 'app/hooks';
+import { region } from 'app/locales/locale';
 import { appActions } from 'app/store/app.store';
 import { flexGrow } from 'app/styles';
 import { FormParams, RelationshipGoal } from 'app/types';
@@ -35,6 +37,14 @@ export const CreateProfileForm: FC = () => {
     formik.setFieldValue('relationshipGoal', value);
   };
 
+  const handleChangeCountryIso2 = (value: string) => {
+    formik.setFieldValue('countryIso2', value);
+  };
+
+  const handleChangeStateId = (value: string) => {
+    formik.setFieldValue('stateId', value);
+  };
+
   const formik = useFormik<FormParams.CreateProfile>({
     initialValues: {
       nickname: profile?.nickname,
@@ -42,6 +52,7 @@ export const CreateProfileForm: FC = () => {
       birthday: profile?.birthday ? moment(profile?.birthday).format('YYYY-MM-DD') : undefined,
       relationshipGoal: profile?.relationshipGoal,
       introduce: profile?.introduce,
+      countryIso2: region,
     },
     enableReinitialize: true,
     validationSchema: Yup.object().shape({
@@ -50,12 +61,20 @@ export const CreateProfileForm: FC = () => {
       birthday: Yup.string().required(formatMessage('Please enter your birthday')),
       relationshipGoal: Yup.string().required(formatMessage('Please choose your desire relation.')),
       introduce: Yup.string().max(500).notRequired(),
+      stateId: Yup.string().required(formatMessage('Please choose your city')),
     }),
     onSubmit: async values => {
       try {
-        const { nickname, gender, birthday, relationshipGoal, introduce } = values;
-        if (nickname && gender && birthday && relationshipGoal) {
-          await createProfile({ nickname, gender, birthday, relationshipGoal, introduce }).unwrap();
+        const { nickname, gender, birthday, relationshipGoal, introduce, stateId } = values;
+        if (nickname && gender && birthday && relationshipGoal && stateId) {
+          await createProfile({
+            nickname,
+            gender,
+            birthday,
+            relationshipGoal,
+            introduce,
+            stateId,
+          }).unwrap();
           navigation.dispatch(StackActions.replace('UpdateProfilePhotos'));
         }
       } catch (error) {
@@ -110,6 +129,19 @@ export const CreateProfileForm: FC = () => {
                     value={formik.values.birthday}
                     onChange={formik.handleChange('birthday')}
                     error={formik.touched.birthday ? formik.errors.birthday : undefined}
+                  />
+                </View>
+
+                <View mb="4">
+                  <SelectCountryFormControl
+                    isRequired
+                    countryValue={formik.values.countryIso2}
+                    cityValue={formik.values.stateId}
+                    onChangeCountry={handleChangeCountryIso2}
+                    onChangeCity={handleChangeStateId}
+                    error={
+                      formik.touched.relationshipGoal ? formik.errors.relationshipGoal : undefined
+                    }
                   />
                 </View>
 

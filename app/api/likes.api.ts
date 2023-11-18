@@ -32,6 +32,18 @@ const likesApi = api.injectEndpoints({
         body,
       }),
     }),
+    getLike: builder.mutation<void, string>({
+      query: id => ({
+        url: `${API_ENDPOINTS.LIKES}/${id}`,
+        method: 'GET',
+      }),
+    }),
+    getOneLikedMe: builder.query<ApiResponse.LikeData, string>({
+      query: id => ({
+        url: `${API_ENDPOINTS.LIKED_ME}/${id}`,
+        method: 'GET',
+      }),
+    }),
   }),
 });
 
@@ -40,5 +52,6 @@ export const {
   useGetNewestLikedMeMutation,
   useGetNextLikedMeMutation,
   useSendLikeMutation,
+  useGetOneLikedMeQuery,
   endpoints: likeEndpoints,
 } = likesApi;

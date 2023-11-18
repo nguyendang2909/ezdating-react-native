@@ -90,8 +90,8 @@ export type Match = BaseEntity & {
 };
 
 export type Like = BaseEntity & {
-  profile: Profile;
-  targetProfile: Profile;
+  profile?: Profile;
+  targetProfile?: Profile;
   isMatched?: boolean;
 };
 
@@ -188,6 +188,7 @@ export declare namespace ApiRequest {
     birthday: string;
     relationshipGoal: RelationshipGoal;
     introduce?: string;
+    stateId: string;
   };
 
   type SearchUsersNearby = Pagination;
@@ -255,6 +256,8 @@ export declare namespace ApiResponse {
   type Matches = PaginatedResponse<Match>;
 
   type Likes = PaginatedResponse<Like>;
+
+  type LikeData = FetchData<Like>;
 
   type Profiles = PaginatedResponse<Profile>;
 

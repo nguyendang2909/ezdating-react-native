@@ -23,7 +23,6 @@ class LikedMeService extends CommonService {
     const { ...rest } = payload;
     return {
       ...rest,
-
       lastRefreshedAt: moment().toISOString(),
     };
   }

@@ -24,6 +24,8 @@ export declare namespace FormParams {
     gender?: Gender;
     relationshipGoal?: RelationshipGoal;
     introduce?: string;
+    countryIso2: string;
+    stateId?: string;
   };
 
   type UpdateProfilePhoto = {
