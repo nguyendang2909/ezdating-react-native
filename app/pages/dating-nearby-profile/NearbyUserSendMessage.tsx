@@ -24,6 +24,7 @@ export const NearbyUserSendMessageButton: React.FC<FCProps> = ({ targetUserId })
       navigation.goBack();
       navigation.navigate('Messages', {
         matchId: fetchData.data?._id,
+        match: fetchData.data,
       });
     } catch (err) {}
   };

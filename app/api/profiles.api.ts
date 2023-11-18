@@ -92,15 +92,16 @@ const profilesApi = api.injectEndpoints({
     //     method: 'GET',
     //   }),
     // }),
-    getNextSwipeProfiles: builder.mutation<ApiResponse.Profiles, ApiRequest.FindManyNearbyProfiles>(
-      {
-        query: params => ({
-          url: API_ENDPOINTS.PROFILES_SWIPE,
-          method: 'GET',
-          params,
-        }),
-      },
-    ),
+    getNextSwipeProfiles: builder.mutation<
+      ApiResponse.Profiles,
+      ApiRequest.FindManyNextSwipeProfiles
+    >({
+      query: params => ({
+        url: API_ENDPOINTS.PROFILES_SWIPE,
+        method: 'GET',
+        params,
+      }),
+    }),
   }),
 });
 

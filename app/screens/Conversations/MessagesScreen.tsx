@@ -13,8 +13,9 @@ import React, { FC, useMemo } from 'react';
 type FCProps = AppStackScreenProps<'Messages'>;
 
 export const MessagesScreen: FC<FCProps> = props => {
-  const { matchId } = props.route.params;
-  const { data: match } = useMatch(matchId);
+  const { match: initialMatch, matchId } = props.route.params;
+  const { data: fetchedMatch } = useMatch(matchId);
+  const match = fetchedMatch || initialMatch;
   const currentUser: ChatUser = useAppSelector(state => {
     const profile = state.app.profile;
     return {
@@ -27,13 +28,13 @@ export const MessagesScreen: FC<FCProps> = props => {
   });
   const targetUser = useMemo(
     () => ({
-      _id: match?.targetProfile?._id || '',
-      avatar: match?.targetProfile?.mediaFiles?.length
+      _id: match.targetProfile?._id || '',
+      avatar: match.targetProfile?.mediaFiles?.length
         ? mediaFileUtil.getUrl(match.targetProfile.mediaFiles[0].key)
         : undefined,
       name: match?.targetProfile?.nickname,
     }),
-    [match?.targetProfile?._id, match?.targetProfile?.mediaFiles, match?.targetProfile?.nickname],
+    [match.targetProfile?._id, match?.targetProfile?.mediaFiles, match.targetProfile?.nickname],
   );
   const { goBack } = useNavigation();
   if (!matchId) {

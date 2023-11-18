@@ -10,7 +10,7 @@ type MatchCardItemProps = {
   match: Match;
   width: number;
   height: number;
-  onPress: (e: string) => void;
+  onPress: (e: Match) => void;
 };
 
 export const MatchCardItem: FC<MatchCardItemProps> = ({
@@ -20,8 +20,8 @@ export const MatchCardItem: FC<MatchCardItemProps> = ({
   onPress,
 }) => {
   const handlePress = useCallback(() => {
-    onPress(match._id);
-  }, [match._id, onPress]);
+    onPress(match);
+  }, [match, onPress]);
 
   const url = _.get(match, 'targetProfile.mediaFiles[0].key');
 

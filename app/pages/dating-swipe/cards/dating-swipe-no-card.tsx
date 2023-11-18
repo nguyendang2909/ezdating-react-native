@@ -1,17 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 export const DatingSwipeNoCard = () => {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.text}>No more profiles</Text>
-      {/* <Image
-        style={styles.image}
-        resizeMode="contain"
-        source={require('../../../../assets/images/sad.png')}
-      /> */}
-    </View>
-  );
+  return <View style={styles.container}></View>;
 };
 
 const styles = StyleSheet.create({

@@ -2,7 +2,7 @@ import { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import { NavigatorScreenParams } from '@react-navigation/native';
 import { HomeTabParamList } from 'app/navigators';
 
-import { Like, Profile } from './fe.type';
+import { Like, Match, Profile } from './fe.type';
 
 export type AppStackParamList = {
   ChatProfile: {
@@ -22,6 +22,7 @@ export type AppStackParamList = {
   Main: undefined;
   Messages: {
     matchId: string;
+    match: Match;
   };
   ProfileEdit: undefined;
   ProfileNearby: {

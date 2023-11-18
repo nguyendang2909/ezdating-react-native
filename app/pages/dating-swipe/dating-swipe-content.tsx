@@ -24,7 +24,12 @@ const getKeyExtractor = (card: Profile) => {
 export const DatingSwipeContent: React.FC = () => {
   const { formatMessage } = useMessages();
   const navigation = useNavigation();
-  const { data: swipeProfiles, length: swipeProfileLength, isLoading } = useSwipeProfiles();
+  const {
+    data: swipeProfiles,
+    length: swipeProfileLength,
+    isLoading,
+    fetchNext: fetchNextSwipeProfiles,
+  } = useSwipeProfiles();
   const { width, height: windowHeight } = Dimensions.get('window');
   const height = (width / 640) * 860;
   const x =
@@ -46,6 +51,7 @@ export const DatingSwipeContent: React.FC = () => {
 
   const passProfile = () => {
     setCardIndex(prev => prev + 1);
+    fetchNextSwipeProfilesIfNeeded();
   };
 
   const matchProfile = (cardIndex: number) => {
@@ -53,6 +59,7 @@ export const DatingSwipeContent: React.FC = () => {
     if (swipeProfiles[cardIndex] && swipeProfiles[cardIndex]._id) {
       sendLike({ targetUserId: swipeProfiles[cardIndex]._id });
     }
+    fetchNextSwipeProfilesIfNeeded();
   };
 
   const handleOpenProfile = () => {
@@ -72,8 +79,14 @@ export const DatingSwipeContent: React.FC = () => {
         style: rightLabel,
       },
     }),
-    [],
+    [formatMessage],
   );
+
+  const fetchNextSwipeProfilesIfNeeded = () => {
+    if (cardIndex >= swipeProfileLength - 15) {
+      fetchNextSwipeProfiles();
+    }
+  };
 
   return (
     <>
@@ -92,7 +105,7 @@ export const DatingSwipeContent: React.FC = () => {
           cardStyle={styles.card}
           overlayLabels={overlayLabels}
           swipeBackCard={false}
-          showSecondCard={true}
+          showSecondCard={swipeProfileLength > 0}
           renderCard={(card: Profile) => {
             return card ? (
               <DatingSwipeCard width={width} height={height} key={card._id} profile={card} />
@@ -104,23 +117,22 @@ export const DatingSwipeContent: React.FC = () => {
           }}
         ></Swiper>
       </View>
-      {!!swipeRef.current && !!swipeProfileLength && (
-        <View position="absolute" bottom={x} left={0} right={0} zIndex={999}>
-          <View>
-            <HStack columnGap={32} justifyContent="center">
-              <View>
-                <DatingSwipeCloseButton onPress={swipeRef.current.swipeLeft} />
-              </View>
-              <View>
-                <ProfileInfoButton onPress={handleOpenProfile} />
-              </View>
-              <View>
-                <DatingSwipeSendLikeButton onPress={swipeRef.current.swipeRight} />
-              </View>
-            </HStack>
-          </View>
+
+      <View position="absolute" bottom={x} left={0} right={0} zIndex={999}>
+        <View>
+          <HStack columnGap={32} justifyContent="center">
+            <View>
+              <DatingSwipeCloseButton onPress={swipeRef.current?.swipeLeft} />
+            </View>
+            <View>
+              <ProfileInfoButton onPress={handleOpenProfile} />
+            </View>
+            <View>
+              <DatingSwipeSendLikeButton onPress={swipeRef.current?.swipeRight} />
+            </View>
+          </HStack>
         </View>
-      )}
+      </View>
     </>
   );
 };

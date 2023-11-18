@@ -210,6 +210,8 @@ export declare namespace ApiRequest {
     latitude: number;
   };
 
+  type FindManyNextSwipeProfiles = Pagination;
+
   type SendLike = {
     targetUserId: string;
   };

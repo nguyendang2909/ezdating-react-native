@@ -4,12 +4,14 @@ import { ButtonIcon } from 'app/components/Button';
 import React from 'react';
 
 type DatingSwipeCloseButtonProps = {
-  onPress: (e?: boolean) => void;
+  onPress?: (e?: boolean) => void;
 };
 
 export const DatingSwipeCloseButton: React.FC<DatingSwipeCloseButtonProps> = ({ onPress }) => {
   const handlePress = () => {
-    onPress();
+    if (onPress) {
+      onPress();
+    }
   };
 
   return (

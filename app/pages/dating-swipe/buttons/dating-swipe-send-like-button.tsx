@@ -4,12 +4,14 @@ import { ButtonIcon } from 'app/components/Button';
 import React from 'react';
 
 type FCProps = {
-  onPress: (e?: boolean) => void;
+  onPress?: (e?: boolean) => void;
 };
 
 export const DatingSwipeSendLikeButton: React.FC<FCProps> = ({ onPress }) => {
   const handleSendLike = async () => {
-    onPress();
+    if (onPress) {
+      onPress();
+    }
   };
 
   return (

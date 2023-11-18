@@ -1,6 +1,6 @@
 import { Box, ScrollView, Text } from '@gluestack-ui/themed';
 import { useNavigation } from '@react-navigation/native';
-import { AppStore } from 'app/types';
+import { AppStore, Match } from 'app/types';
 import { HStack } from 'native-base';
 import React, { useCallback, useMemo } from 'react';
 import { Dimensions } from 'react-native';
@@ -18,9 +18,10 @@ export const MatchCards: React.FC<MatchCardsProps> = ({ matches }) => {
   const cardHeight = useMemo(() => (cardWidth / 640) * 860, [cardWidth]);
 
   const handlePressCard = useCallback(
-    (matchId: string) => {
+    (match: Match) => {
       navigation.navigate('Messages', {
-        matchId,
+        matchId: match._id,
+        match,
       });
     },
     [navigation],
