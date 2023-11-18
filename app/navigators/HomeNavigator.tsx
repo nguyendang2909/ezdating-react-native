@@ -1,6 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { GradientIcon } from 'app/components/Icon/GradientIcon';
 import { AntDesign } from 'app/components/Icon/Lib';
+import { APP_CONFIG } from 'app/config/config.app';
 import { UpdateGeolocation } from 'app/containers/Home/UpdateGeoLocation';
 import { useMessages } from 'app/hooks';
 import { AppStackScreenProps } from 'app/navigators';
@@ -10,7 +11,7 @@ import { DatingSwipeScreen } from 'app/screens/DatingSwipe/DatingSwipeScreen';
 import { ProfileScreen } from 'app/screens/Me/ProfileScreen';
 import { StarScreen } from 'app/screens/Star/StarScreen';
 import { backgroundColor, borderTopColor } from 'app/styles';
-import { colors, spacing } from 'app/theme';
+import { colors } from 'app/theme';
 import React, { FC } from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -44,7 +45,7 @@ export const HomeNavigator: FC<FCProps> = () => {
           tabBarStyle: [
             backgroundColor(colors.background),
             borderTopColor(colors.transparent),
-            { height: bottom + 48 },
+            { height: bottom + APP_CONFIG.SIZE.BOTTOM_BAR.HEIGHT },
           ],
           tabBarActiveTintColor: colors.text,
           tabBarInactiveTintColor: colors.text,
@@ -52,9 +53,6 @@ export const HomeNavigator: FC<FCProps> = () => {
             fontSize: 12,
             lineHeight: 16,
             flex: 1,
-          },
-          tabBarItemStyle: {
-            paddingTop: spacing.md,
           },
         }}
       >

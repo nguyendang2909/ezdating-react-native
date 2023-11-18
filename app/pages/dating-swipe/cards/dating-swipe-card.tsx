@@ -25,8 +25,8 @@ export const DatingSwipeCard: React.FC<CardProps> = ({ profile, height, width })
         colors={['#00000000', '#00000000', '#00000000', '#000000']}
         justifyContent="flex-end"
       >
-        <View px={16} py={16} marginBottom={48}>
-          <HStack columnGap={8}>
+        <View px={16} py={16} marginBottom={56}>
+          <HStack columnGap={8} pr={32}>
             {!!profile.nickname && (
               <Text
                 fontSize={28}
@@ -76,7 +76,7 @@ export const DatingSwipeCard: React.FC<CardProps> = ({ profile, height, width })
               textShadowOffset={{ width: -1, height: 1 }}
               textShadowRadius={2}
             >
-              {profile.introduce}
+              {profile.introduce}{' '}
             </Text>
           )}
         </View>

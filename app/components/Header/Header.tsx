@@ -1,4 +1,5 @@
 import { Text, View } from '@gluestack-ui/themed';
+import { APP_CONFIG } from 'app/config/config.app';
 import { useMessages } from 'app/hooks/useMessages';
 import { TxKey } from 'app/types';
 import React, { ReactElement } from 'react';
@@ -184,7 +185,7 @@ export function Header(props: HeaderProps) {
       style={[$containerInsets, $containerStyleOverride]}
     >
       <View
-        height={56}
+        height={APP_CONFIG.SIZE.TOP_BAR.HEIGHT}
         flexDirection="row"
         alignItems="center"
         justifyContent="space-between"

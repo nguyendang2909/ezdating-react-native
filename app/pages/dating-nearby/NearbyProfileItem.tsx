@@ -38,7 +38,7 @@ export const NearbyProfileItem: React.FC<NearbyProfileItemProps> = ({ profile })
             <Text fontWeight="bold" color="$white" numberOfLines={1}>
               {profile.nickname}
               {', '}
-              {!_.isUndefined(profile.distance) && `${_.round(profile.distance, 1)} km`}
+              {!_.isUndefined(profile.distance) && `${_.round((profile.distance || 0) / 1000)} km`}
             </Text>
           </Box>
         </LinearGradient>

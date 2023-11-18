@@ -82,7 +82,7 @@ const profilesApi = api.injectEndpoints({
     // Swipe profiles
     refreshSwipeProfiles: builder.query<ApiResponse.Profiles, void>({
       query: () => ({
-        url: API_ENDPOINTS.PROFILES_NEARBY,
+        url: API_ENDPOINTS.PROFILES_SWIPE,
         method: 'GET',
       }),
     }),
@@ -95,7 +95,7 @@ const profilesApi = api.injectEndpoints({
     getNextSwipeProfiles: builder.mutation<ApiResponse.Profiles, ApiRequest.FindManyNearbyProfiles>(
       {
         query: params => ({
-          url: API_ENDPOINTS.PROFILES_NEARBY,
+          url: API_ENDPOINTS.PROFILES_SWIPE,
           method: 'GET',
           params,
         }),

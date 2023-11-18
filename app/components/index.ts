@@ -7,6 +7,7 @@ export * from './Icon';
 export * from './Icon/index';
 export * from './Image';
 export * from './LinearGradient';
+export * from './Overlay';
 export * from './Picker';
 export * from './Row';
 export * from './Screen';

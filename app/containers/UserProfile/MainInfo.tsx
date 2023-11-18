@@ -47,7 +47,7 @@ export const NearbyUserMainInfo: React.FC<FCProps> = ({ nickname, age, distance 
               </Box>
               <Box>
                 <Text fontSize={20}>
-                  {Math.round((distance || 0) / 1000)} {formatMessage('km away')}
+                  {_.round((distance || 0) / 1000)} {formatMessage('km away')}
                 </Text>
               </Box>
             </HStack>
