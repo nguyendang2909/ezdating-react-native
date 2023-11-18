@@ -1,7 +1,7 @@
 import { Box, HStack } from '@gluestack-ui/themed';
+import { SendLikeButton } from 'app/containers/Button/send-like-button';
 import React from 'react';
 
-import { NearbyUserSendLikeButton } from './NearbyUserSendLikeButton';
 import { NearbyUserSendMessageButton } from './NearbyUserSendMessage';
 
 type FCProps = {
@@ -15,7 +15,7 @@ export const NearbyUserActions: React.FC<FCProps> = ({ targetUserId }) => {
         <Box>
           <NearbyUserSendMessageButton targetUserId={targetUserId} />
         </Box>
-        <NearbyUserSendLikeButton targetUserId={targetUserId} />
+        <SendLikeButton targetUserId={targetUserId} />
       </HStack>
     </>
   );

@@ -104,8 +104,11 @@ export const SelectCountryFormControl: React.FC<FCProps> = ({
               placeholder={formatMessage('Please select')}
               value={
                 statesOfCountry
-                  ? statesOfCountry.find((e: { _id: string | undefined }) => e._id === cityValue)
-                      ?.name
+                  ? (
+                      statesOfCountry.find(
+                        (e: { _id: string | undefined }) => e._id === cityValue,
+                      ) as any
+                    )?.name
                   : ''
               }
               InputRightElement={<ChevronDownIcon />}
