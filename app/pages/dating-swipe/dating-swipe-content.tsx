@@ -32,7 +32,7 @@ export const DatingSwipeContent: React.FC = () => {
   } = useSwipeProfiles();
   const { width, height: windowHeight } = Dimensions.get('window');
   const height = (width / 640) * 860;
-  const x =
+  const spaceX =
     (windowHeight - APP_CONFIG.SIZE.TOP_BAR.HEIGHT - APP_CONFIG.SIZE.BOTTOM_BAR.HEIGHT - height) /
     2;
   const swipeRef = useRef<Swiper<Profile>>(null);
@@ -118,7 +118,7 @@ export const DatingSwipeContent: React.FC = () => {
         ></Swiper>
       </View>
 
-      <View position="absolute" bottom={x} left={0} right={0} zIndex={999}>
+      <View position="absolute" bottom={spaceX} left={0} right={0} zIndex={999}>
         <View>
           <HStack columnGap={32} justifyContent="center">
             <View>
@@ -139,13 +139,15 @@ export const DatingSwipeContent: React.FC = () => {
 
 const styles = StyleSheet.create({
   card: {
-    bottom: 0,
-    justifyContent: 'center',
-    top: 0,
+    // bottom: 0,
+    // justifyContent: 'center',
+    // top: 0,
   },
   // eslint-disable-next-line react-native/no-color-literals
   swiper: {
-    backgroundColor: '#fff',
+    alignItems: 'center',
+    backgroundColor: 'black',
+    justifyContent: 'center',
   },
 });
 
