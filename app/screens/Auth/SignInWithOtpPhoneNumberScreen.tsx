@@ -75,6 +75,7 @@ export const SignInWithOtpPhoneNumberScreen: FC<FCProps> = props => {
         }).unwrap();
       } catch (err) {
         setError(true);
+        setOTPCode('');
         setResendStatus(ResendStatusObj.nonResent);
       } finally {
         setIsSubmitting(false);
