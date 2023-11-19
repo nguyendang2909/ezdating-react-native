@@ -13,7 +13,7 @@ import {
 
 import { colors, spacing } from '../../theme';
 import { ExtendedEdge, useSafeAreaInsetsStyle } from '../../utils/useSafeAreaInsetsStyle';
-import { Icon, IconTypes } from '../Icon';
+import { Icon, IconTypes } from '../Icons';
 
 export interface HeaderProps {
   /**

@@ -3,11 +3,11 @@ import { FontAwesome } from 'app/components';
 import { ButtonIcon } from 'app/components/Button';
 import React from 'react';
 
-type DatingSwipeCloseButtonProps = {
+type FCProps = {
   onPress?: (e?: boolean) => void;
 };
 
-export const DatingSwipeCloseButton: React.FC<DatingSwipeCloseButtonProps> = ({ onPress }) => {
+export const CloseIconButton: React.FC<FCProps> = ({ onPress }) => {
   const handlePress = () => {
     if (onPress) {
       onPress();

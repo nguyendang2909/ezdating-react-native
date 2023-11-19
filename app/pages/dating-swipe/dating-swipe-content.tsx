@@ -1,9 +1,7 @@
-import { HStack, View } from '@gluestack-ui/themed';
-import { useNavigation } from '@react-navigation/native';
+import { View } from '@gluestack-ui/themed';
 import { useSendLikeMutation, useSendViewMutation } from 'app/api';
 import { LoadingOverlay } from 'app/components';
 import { APP_CONFIG } from 'app/config/config.app';
-import { SCREENS } from 'app/constants';
 import { useMessages, useSwipeProfiles } from 'app/hooks';
 import { Profile } from 'app/types';
 import _ from 'lodash';
@@ -11,11 +9,9 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Dimensions, StyleSheet } from 'react-native';
 import Swiper from 'react-native-deck-swiper';
 
-import { DatingSwipeCloseButton } from './buttons/dating-swipe-close-button';
-import { DatingSwipeSendLikeButton } from './buttons/dating-swipe-send-like-button';
-import { ProfileInfoButton } from './buttons/profile-info-button';
 import { DatingSwipeCard } from './cards';
 import { DatingSwipeNoCard } from './cards/dating-swipe-no-card';
+import { DatingSwipeMenuActions } from './menu/dating-swipe-menu-actions';
 
 const getKeyExtractor = (card: Profile) => {
   return _.get(card, '_id', `${Math.floor(Math.random() * 10000 + 1)}`);
@@ -23,7 +19,6 @@ const getKeyExtractor = (card: Profile) => {
 
 export const DatingSwipeContent: React.FC = () => {
   const { formatMessage } = useMessages();
-  const navigation = useNavigation();
   const {
     data: swipeProfiles,
     length: swipeProfileLength,
@@ -60,12 +55,6 @@ export const DatingSwipeContent: React.FC = () => {
       sendLike({ targetUserId: swipeProfiles[cardIndex]._id });
     }
     fetchNextSwipeProfilesIfNeeded();
-  };
-
-  const handleOpenProfile = () => {
-    if (swipeProfiles[cardIndex] && swipeProfiles[cardIndex]._id) {
-      navigation.navigate(SCREENS.DATING_SWIPE_PROFILE, { profile: swipeProfiles[cardIndex] });
-    }
   };
 
   const overlayLabels = useMemo(
@@ -120,17 +109,10 @@ export const DatingSwipeContent: React.FC = () => {
 
       <View position="absolute" bottom={spaceX} left={0} right={0} zIndex={999}>
         <View>
-          <HStack columnGap={32} justifyContent="center">
-            <View>
-              <DatingSwipeCloseButton onPress={swipeRef.current?.swipeLeft} />
-            </View>
-            <View>
-              <ProfileInfoButton onPress={handleOpenProfile} />
-            </View>
-            <View>
-              <DatingSwipeSendLikeButton onPress={swipeRef.current?.swipeRight} />
-            </View>
-          </HStack>
+          <DatingSwipeMenuActions
+            currentSwipeRef={swipeRef.current}
+            profile={swipeProfiles[cardIndex]}
+          />
         </View>
       </View>
     </>

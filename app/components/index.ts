@@ -4,7 +4,7 @@ export * from './Box';
 export * from './Card';
 export * from './Header/Header';
 export * from './Icon';
-export * from './Icon/index';
+export * from './Icons';
 export * from './Image';
 export * from './LinearGradient';
 export * from './Overlay';
