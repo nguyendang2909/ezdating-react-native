@@ -1,5 +1,4 @@
 import { Box, Pressable, Text } from '@gluestack-ui/themed';
-import { useNavigation } from '@react-navigation/native';
 import { Profile } from 'app/types';
 import _ from 'lodash';
 import React from 'react';
@@ -9,17 +8,12 @@ import { CacheImage, LinearGradient } from '../../components';
 
 type NearbyProfileItemProps = {
   profile: Profile;
+  onOpen: (e: Profile) => void;
 };
 
-export const NearbyProfileItem: React.FC<NearbyProfileItemProps> = ({ profile }) => {
-  const navigation = useNavigation();
-
+export const NearbyProfileItem: React.FC<NearbyProfileItemProps> = ({ profile, onOpen }) => {
   const handlePressCard = () => {
-    if (profile._id) {
-      navigation.navigate('ProfileNearby', {
-        profile,
-      });
-    }
+    onOpen(profile);
   };
 
   return (

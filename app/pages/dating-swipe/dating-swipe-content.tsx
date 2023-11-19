@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
   // eslint-disable-next-line react-native/no-color-literals
   swiper: {
     alignItems: 'center',
-    backgroundColor: 'black',
+    backgroundColor: '#fff',
     justifyContent: 'center',
   },
 });

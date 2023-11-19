@@ -5,7 +5,7 @@ import { FontAwesome } from 'app/components/Icon/Lib';
 import React, { useState } from 'react';
 
 type FCProps = {
-  targetUserId: string;
+  targetUserId?: string;
 };
 
 export const SendLikeButton: React.FC<FCProps> = ({ targetUserId }) => {
@@ -13,6 +13,9 @@ export const SendLikeButton: React.FC<FCProps> = ({ targetUserId }) => {
   const [isShowSendLike, setShowSendLike] = useState<boolean>(true);
 
   const handleSendLike = async () => {
+    if (!targetUserId) {
+      return;
+    }
     try {
       await sendLike({
         targetUserId,

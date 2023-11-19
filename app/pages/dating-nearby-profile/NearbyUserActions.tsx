@@ -6,8 +6,8 @@ import React from 'react';
 import { SendMessageButton } from '.';
 
 type FCProps = {
-  targetUserId: string;
-  onClose?: () => void;
+  targetUserId?: string;
+  onClose: () => void;
 };
 
 export const NearbyUserActions: React.FC<FCProps> = ({ targetUserId, onClose }) => {
@@ -20,7 +20,7 @@ export const NearbyUserActions: React.FC<FCProps> = ({ targetUserId, onClose }) 
           </View>
         )}
         <View>
-          <SendMessageButton targetUserId={targetUserId} />
+          <SendMessageButton targetUserId={targetUserId} onClose={onClose} />
         </View>
         <SendLikeButton targetUserId={targetUserId} />
       </HStack>

@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import { useCreateMatchMutation } from 'app/api';
+import { useCreateMatchMutation, useGetMatchByTargetUserIdMutation } from 'app/api';
 import { MessageIconButton } from 'app/components/Button';
 import { useAppDispatch } from 'app/hooks';
 import { matchActions } from 'app/store/match';
@@ -7,13 +7,28 @@ import React from 'react';
 
 type FCProps = {
   targetUserId?: string;
-  onClose?: () => void;
+  onClose: () => void;
 };
 
 export const SendMessageButton: React.FC<FCProps> = ({ targetUserId, onClose }) => {
   const navigation = useNavigation();
   const dispatch = useAppDispatch();
-  const [createMatch, { isLoading }] = useCreateMatchMutation();
+  const [createMatch, { isLoading: isCreateMatchLoading }] = useCreateMatchMutation();
+  const [getMatchByTargetUserId, { isLoading: isGetMatchLoading }] =
+    useGetMatchByTargetUserIdMutation();
+
+  const isLoading = isCreateMatchLoading || isGetMatchLoading;
+
+  const handleGetMatch = async (targetUserId: string) => {
+    try {
+      const matchData = await getMatchByTargetUserId(targetUserId).unwrap();
+      onClose();
+      navigation.navigate('Messages', {
+        matchId: matchData.data?._id,
+        match: matchData.data,
+      });
+    } catch (err) {}
+  };
 
   const handleChat = async () => {
     if (!targetUserId) {
@@ -24,16 +39,16 @@ export const SendMessageButton: React.FC<FCProps> = ({ targetUserId, onClose }) 
         targetUserId,
       }).unwrap();
       dispatch(matchActions.addMatch(fetchData));
-      if (onClose) {
-        onClose();
-      } else {
-        navigation.goBack();
-      }
+      onClose();
       navigation.navigate('Messages', {
         matchId: fetchData.data?._id,
         match: fetchData.data,
       });
-    } catch (err) {}
+    } catch (error) {
+      if (error.status === 409) {
+        return await handleGetMatch(targetUserId);
+      }
+    }
   };
 
   return <MessageIconButton onPress={handleChat} isLoading={isLoading} />;

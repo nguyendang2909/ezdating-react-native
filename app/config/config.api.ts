@@ -7,6 +7,7 @@ export const API_ENDPOINTS = {
   LIKES: '/likes',
   LOGOUT: '/auth/logout',
   MATCHES: '/matches',
+  MATCHES_BY_TARGET_USER: '/matches/target-user',
   MEDIA_FILES: '/media-files',
   MESSAGES: '/messages',
   PHOTOS: '/media-files/photos',

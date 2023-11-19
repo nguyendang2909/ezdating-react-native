@@ -3,9 +3,7 @@ import { ConnectProfile } from 'app/containers/Connect/ConnectProfile';
 import {
   CreateProfileScreen,
   DatingNearbyFilterScreen,
-  DatingSwipeProfileScreen,
   MessagesScreen,
-  ProfileNearbyScreen,
   UpdateProfilePhotosScreen,
 } from 'app/screens';
 import { ChatProfileScreen } from 'app/screens/Conversations/ChatProfile';
@@ -65,16 +63,6 @@ export const MainStack: React.FC = () => {
           <Stack.Screen name={SCREENS.EditInfoNickname} component={EditInfoNicknameScreen} />
           <Stack.Screen name={SCREENS.EditInfoWeight} component={EditInfoWeightScreen} />
         </Stack.Group>
-        <Stack.Group screenOptions={{ presentation: 'containedModal' }}>
-          <Stack.Screen name={SCREENS.ProfileNearby} component={ProfileNearbyScreen}></Stack.Screen>
-        </Stack.Group>
-        <Stack.Screen
-          name={SCREENS.DATING_SWIPE_PROFILE}
-          component={DatingSwipeProfileScreen}
-          options={{
-            presentation: 'containedModal',
-          }}
-        ></Stack.Screen>
       </Stack.Navigator>
     </>
   );

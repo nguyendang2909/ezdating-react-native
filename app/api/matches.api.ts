@@ -18,6 +18,12 @@ const matchesApi = api.injectEndpoints({
         method: 'GET',
       }),
     }),
+    getMatchByTargetUserId: builder.mutation<ApiResponse.MatchData, string>({
+      query: userId => ({
+        url: `${API_ENDPOINTS.MATCHES_BY_TARGET_USER}/${userId}`,
+        method: 'GET',
+      }),
+    }),
     refreshMatches: builder.query<ApiResponse.Matches, ApiRequest.FindManyMatches>({
       query: () => ({
         url: API_ENDPOINTS.MATCHES,
@@ -79,5 +85,6 @@ export const {
   useRefreshConversationsQuery,
   useGetNewestConversationsMutation,
   useGetNextConversationsMutation,
+  useGetMatchByTargetUserIdMutation,
   endpoints: matchEndpoints,
 } = matchesApi;

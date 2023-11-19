@@ -16,7 +16,16 @@ type UserProfileScrollViewProps = {
 };
 
 export const UserProfile: React.FC<UserProfileScrollViewProps> = ({ profile, onClose }) => {
-  const { goBack } = useNavigation();
+  const navigation = useNavigation();
+
+  const handleClose = () => {
+    if (onClose) {
+      return onClose();
+    }
+    if (navigation.canGoBack()) {
+      return navigation.goBack();
+    }
+  };
 
   return (
     <>
@@ -24,13 +33,7 @@ export const UserProfile: React.FC<UserProfileScrollViewProps> = ({ profile, onC
         <Box position="absolute" zIndex={100}>
           <ViewSafeArea top />
           <Box ml={16} mt={16} zIndex={100}>
-            <Button
-              height={48}
-              width={48}
-              onPress={onClose || goBack}
-              rounded={100}
-              bgColor="$red600"
-            >
+            <Button height={48} width={48} onPress={handleClose} rounded={100} bgColor="$red600">
               <ChevronLeftIcon height={24} width={24} color="$white" />
             </Button>
           </Box>

@@ -165,7 +165,14 @@ export const matchSlice = createSlice({
       .addMatcher(matchEndpoints.getMatch.matchFulfilled, (state, { payload: { data } }) => {
         const match = matchesService.formatOne(data);
         state.data = matchesService.sortAndUniq([match], state.data);
-      });
+      })
+      .addMatcher(
+        matchEndpoints.getMatchByTargetUserId.matchFulfilled,
+        (state, { payload: { data } }) => {
+          const match = matchesService.formatOne(data);
+          state.data = matchesService.sortAndUniq([match], state.data);
+        },
+      );
   },
 });
 
