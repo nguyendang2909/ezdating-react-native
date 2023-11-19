@@ -64,7 +64,6 @@ export const SelectCountryFormControl: React.FC<FCProps> = ({
   };
 
   const handleChangeCity = (e: string) => {
-    console.log(e);
     onChangeCity(e);
     onCloseCity();
   };
@@ -142,7 +141,9 @@ export const SelectCountryFormControl: React.FC<FCProps> = ({
                     handleChangeCountry(item.iso2);
                   }}
                 >
-                  <Text fontWeight={item._id === cityValue ? 'bold' : undefined}>{item.name}</Text>
+                  <Text fontWeight={item.iso2 === countryValue ? 'bold' : undefined}>
+                    {item.name}
+                  </Text>
                 </ActionsheetItem>
               );
             }}

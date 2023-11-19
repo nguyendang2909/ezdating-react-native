@@ -393,7 +393,12 @@ export const messages = defineMessages({
     id: '4c4e1f2127',
   },
   'Please choose your city': {
-    defaultMessage: "'Please choose your city",
-    id: '09a7f5a312',
+    defaultMessage: 'Please choose your city',
+    id: '6c4a41f389',
   },
+  Location: {
+    defaultMessage: 'Location',
+    id: 'aef8ab336d',
+  },
+  None: { defaultMessage: 'None', id: 'e39d05b72f' },
 });

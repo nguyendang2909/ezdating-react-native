@@ -12,6 +12,7 @@ import { ProfileEditGenderMenuItem } from './ProfileEditGenderMenuItem';
 import { ProfileEditHeightMenuItem } from './ProfileEditHeightMenuItem';
 import { ProfileEditIntroduceMenuItem } from './ProfileEditIntroductionMenuItem';
 import { ProfileEditJobTitleMenuItem } from './ProfileEditJobTitleMenuItem';
+import { ProfileEditLocationMenuItem } from './ProfileEditLocationMenuItem';
 import { ProfileEditNicknameMenuItem } from './ProfileEditNicknameMenuItem';
 import { ProfileEditPhotos } from './ProfileEditPhotos/ProfileEditMedifaFiles';
 import { ProfileEditRelationshipGoalMenuItem } from './ProfileEditRelationshipGoalMenuItem';
@@ -76,6 +77,17 @@ export const ProfileEditPageContent: React.FC = () => {
         </View>
         <View backgroundColor={colors.background}>
           <ProfileEditIntroduceMenuItem onPress={handleEditProfile} />
+        </View>
+      </View>
+
+      <View mt={4}>
+        <View mx={4} mb={2}>
+          <Text bold={true} textTransform="uppercase">
+            {formatMessage('Location')}
+          </Text>
+        </View>
+        <View backgroundColor={colors.background}>
+          <ProfileEditLocationMenuItem onPress={handleEditProfile} />
         </View>
       </View>
 

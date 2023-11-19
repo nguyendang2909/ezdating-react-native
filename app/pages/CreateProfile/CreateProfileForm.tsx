@@ -139,9 +139,7 @@ export const CreateProfileForm: FC = () => {
                     cityValue={formik.values.stateId}
                     onChangeCountry={handleChangeCountryIso2}
                     onChangeCity={handleChangeStateId}
-                    error={
-                      formik.touched.relationshipGoal ? formik.errors.relationshipGoal : undefined
-                    }
+                    error={formik.touched.stateId ? formik.errors.stateId : undefined}
                   />
                 </View>
 

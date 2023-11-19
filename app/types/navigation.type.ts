@@ -9,9 +9,10 @@ export type AppStackParamList = {
     profile: Profile;
   };
   EditInfoHeight: undefined;
+  EDIT_INFO_LOCATION: undefined;
   EditInfoNickname: undefined;
   EditInfoWeight: undefined;
-  dating_nearby_filter: undefined;
+  DATING_NEARBY_FILTER: undefined;
   CreateProfile: undefined;
   UpdateProfilePhotos: undefined;
   Home: NavigatorScreenParams<HomeTabParamList>;

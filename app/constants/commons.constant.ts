@@ -2,7 +2,7 @@ export const SCREENS = {
   EditInfoHeight: 'EditInfoHeight',
   EditInfoNickname: 'EditInfoNickname',
   EditInfoWeight: 'EditInfoWeight',
-  DATING_NEARBY_FILTER: 'dating_nearby_filter',
+  DATING_NEARBY_FILTER: 'DATING_NEARBY_FILTER',
   CreateProfile: 'CreateProfile',
   UpdateProfilePhotos: 'UpdateProfilePhotos',
   Home: 'Home',
@@ -20,6 +20,7 @@ export const SCREENS = {
   ChatProfile: 'ChatProfile',
   LikedMeProfile: 'LikedMeProfile',
   DATING_SWIPE_PROFILE: 'DATING_SWIPE_PROFILE',
+  EDIT_INFO_LOCATION: 'EDIT_INFO_LOCATION',
 } as const;
 
 export const AGES = {

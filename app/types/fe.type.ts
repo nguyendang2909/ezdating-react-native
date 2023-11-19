@@ -33,6 +33,39 @@ export type User = BaseEntity & {
   status?: UserStatus;
 };
 
+export type Country = BaseEntity & {
+  name?: string;
+  iso3?: string;
+  numericCode?: string;
+  iso2?: string;
+  phoneCode?: string;
+  capital?: string;
+  currency?: string;
+  currencyName?: string;
+  currencySymbol?: string;
+  tld?: string;
+  native?: string;
+  region?: string;
+  subregion?: string;
+  translations?: string;
+  latitude?: string;
+  longitude?: string;
+  emoji?: string;
+  emojiU?: string;
+  sourceId?: number;
+};
+
+export type State = BaseEntity & {
+  name?: string;
+  country?: Country;
+  countryCode?: string;
+  iso2?: string;
+  type?: string;
+  latitude?: string;
+  longitude?: string;
+  sourceId?: string;
+};
+
 export type Profile = BaseEntity & {
   age?: number;
   birthday?: string;
@@ -58,6 +91,7 @@ export type Profile = BaseEntity & {
   school?: string;
   weight?: number;
   distance?: number;
+  state?: State;
 };
 
 export type ProfileFilter = BaseEntity &
@@ -170,6 +204,7 @@ export declare namespace ApiRequest {
     relationshipGoal: RelationshipGoal;
     relationshipStatus: RelationshipStatus;
     weight?: number;
+    stateId?: string;
     // smoking?: ESmoking;
     // workout?: EWorkout;
   }>;

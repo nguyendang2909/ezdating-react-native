@@ -13,6 +13,7 @@ import {
   EditInfoWeightScreen,
   ProfileEditScreen,
 } from 'app/screens/Me';
+import { EditInfoLocationScreen } from 'app/screens/Me/EditInfoLocationScreen';
 import { LikedMeScreen } from 'app/screens/Me/LikedMeScreen';
 import { ProfileSettingScreen } from 'app/screens/Me/ProfileSettingScreen';
 import { MainScreen } from 'app/screens/Pre/MainScreen';
@@ -52,6 +53,7 @@ export const MainStack: React.FC = () => {
             name={SCREENS.LikedMeProfile}
             component={LikedMeProfileScreen}
           ></Stack.Screen>
+          <Stack.Screen name={SCREENS.EDIT_INFO_LOCATION} component={EditInfoLocationScreen} />
         </Stack.Group>
 
         <Stack.Group
@@ -60,6 +62,7 @@ export const MainStack: React.FC = () => {
           }}
         >
           <Stack.Screen name={SCREENS.EditInfoHeight} component={EditInfoHeightScreen} />
+
           <Stack.Screen name={SCREENS.EditInfoNickname} component={EditInfoNicknameScreen} />
           <Stack.Screen name={SCREENS.EditInfoWeight} component={EditInfoWeightScreen} />
         </Stack.Group>
