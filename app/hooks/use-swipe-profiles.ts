@@ -7,7 +7,7 @@ export const useSwipeProfiles = () => {
   const swipeProfiles = useAppSelector(state => state.swipeUser.data) || [];
   const socketConnectedAt = useAppSelector(s => s.app.socket.connectedAt);
   const length = swipeProfiles.length;
-  const lastRefreshedAt = useAppSelector(s => s.nearbyUser.info.lastRefreshedAt);
+  const lastRefreshedAt = useAppSelector(s => s.swipeUser.info.lastRefreshedAt);
   const { isLoading } = useRefreshSwipeProfilesQuery(undefined, {
     skip: !!lastRefreshedAt && moment(lastRefreshedAt).isAfter(moment(socketConnectedAt)),
   });

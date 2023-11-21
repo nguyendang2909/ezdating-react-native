@@ -241,8 +241,8 @@ export declare namespace ApiRequest {
   type FindManyMatches = Pagination;
 
   type FindManyNearbyProfiles = Pagination & {
-    longitude: number;
-    latitude: number;
+    longitude?: number;
+    latitude?: number;
   };
 
   type FindManyNextSwipeProfiles = Pagination;

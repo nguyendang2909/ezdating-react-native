@@ -84,7 +84,7 @@ export const DatingSwipeContent: React.FC = () => {
           ref={swipeRef}
           containerStyle={styles.swiper}
           cards={swipeProfiles}
-          stackSize={5}
+          stackSize={2}
           // cardIndex={0}
           animateCardOpacity
           verticalSwipe={false}

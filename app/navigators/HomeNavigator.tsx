@@ -57,26 +57,6 @@ export const HomeNavigator: FC<FCProps> = () => {
         }}
       >
         <Tab.Screen
-          name="DatingSwipe"
-          component={DatingSwipeScreen}
-          options={{
-            tabBarShowLabel: false,
-            //   tabBarLabel: formatMessage('Swipe'),
-            tabBarIcon: ({ focused }) => (
-              <GradientIcon
-                {...(!focused
-                  ? {
-                      colors: [colors.palette.neutral500, colors.palette.neutral500],
-                    }
-                  : {})}
-                size={30}
-                name="globe"
-                icon={FontAwesome}
-              />
-            ),
-          }}
-        />
-        <Tab.Screen
           name="DatingNearby"
           component={DatingNearbyScreen}
           options={{
@@ -92,6 +72,26 @@ export const HomeNavigator: FC<FCProps> = () => {
                 size={30}
                 name="location-on"
                 icon={MaterialIcons}
+              />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="DatingSwipe"
+          component={DatingSwipeScreen}
+          options={{
+            tabBarShowLabel: false,
+            //   tabBarLabel: formatMessage('Swipe'),
+            tabBarIcon: ({ focused }) => (
+              <GradientIcon
+                {...(!focused
+                  ? {
+                      colors: [colors.palette.neutral500, colors.palette.neutral500],
+                    }
+                  : {})}
+                size={30}
+                name="globe"
+                icon={FontAwesome}
               />
             ),
           }}
