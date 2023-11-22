@@ -1,13 +1,6 @@
 import { Box, Spinner } from '@gluestack-ui/themed';
 import { StackActions, useNavigation } from '@react-navigation/native';
-import {
-  api,
-  useGetMyProfileFilterQuery,
-  useGetMyProfileQuery,
-  useLogoutMutation,
-  useRefreshNearbyProfilesQuery,
-  useRefreshSwipeProfilesQuery,
-} from 'app/api';
+import { api, useGetMyProfileFilterQuery, useGetMyProfileQuery, useLogoutMutation } from 'app/api';
 import { SCREENS } from 'app/constants';
 import { useAppSelector } from 'app/hooks';
 import { appActions } from 'app/store/app.store';
@@ -23,9 +16,6 @@ export const MainScreen: React.FC = () => {
   const profile = useAppSelector(s => s.app.profile);
   const { error: errorGetMyProfile } = useGetMyProfileQuery();
   const { error: errorGetMyProfileFilter } = useGetMyProfileFilterQuery();
-
-  useRefreshSwipeProfilesQuery();
-  useRefreshNearbyProfilesQuery({});
 
   const handleLogout = useCallback(async () => {
     try {

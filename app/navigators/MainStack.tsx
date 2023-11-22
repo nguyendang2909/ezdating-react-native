@@ -1,5 +1,6 @@
 import { SCREENS } from 'app/constants';
 import { ConnectProfile } from 'app/containers/Connect/ConnectProfile';
+import { PrefetchData } from 'app/containers/Prefetch/PrefetchData';
 import {
   CreateProfileScreen,
   DatingNearbyFilterScreen,
@@ -28,6 +29,7 @@ export const MainStack: React.FC = () => {
   return (
     <>
       <ConnectProfile />
+      <PrefetchData />
       <Stack.Navigator
         screenOptions={{
           headerShown: false,
