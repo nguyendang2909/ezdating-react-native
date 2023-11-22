@@ -1,7 +1,6 @@
 import { Header } from 'app/components';
 import { ProfileSettingIconButton } from 'app/containers/IconButton/ProfileSettingIconButton';
 import { ProfileEditCard } from 'app/containers/Profile/ProfileEditCard';
-import { ProfileFreeCoinsCard } from 'app/containers/Profile/ProfileFreeCoinsCard';
 import { ProfileHeader } from 'app/containers/Profile/ProfileHeader';
 import { ProfileVisitorsCard } from 'app/containers/Profile/ProfileVisitorsCard';
 import { colors } from 'app/theme';
@@ -32,9 +31,9 @@ export const ProfileScreen: FC = () => {
               <View flex="1">
                 <ProfileVisitorsCard />
               </View>
-              <View flex="1">
+              {/* <View flex="1">
                 <ProfileFreeCoinsCard />
-              </View>
+              </View> */}
             </HStack>
           </VStack>
         </View>
