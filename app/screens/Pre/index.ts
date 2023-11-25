@@ -1,2 +1,2 @@
-export * from './CreateProfileScreen';
-export * from './UpdateProfilePhotosScreen';
+export * from './create-basic-profile.screen';
+export * from './create-basic-photos.screen';

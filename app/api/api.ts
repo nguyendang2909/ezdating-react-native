@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import Config from 'app/config';
+import Config, { API_ENDPOINTS } from 'app/config';
 import { ARR_API_TAGS } from 'app/constants/constants';
 import { appActions } from 'app/store/app.store';
 import { ApiResponse } from 'app/types';
@@ -46,7 +46,7 @@ export const api = createApi({
             await baseQuery(
               {
                 method: 'POST',
-                url: '/auth/tokens/access-token',
+                url: API_ENDPOINTS.AUTH.TOKENS.ACCESS_TOKEN,
                 body: {
                   refreshToken,
                 },

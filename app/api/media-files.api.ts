@@ -20,7 +20,7 @@ const mediaFilesApi = api.injectEndpoints({
         });
 
         return {
-          url: API_ENDPOINTS.PHOTOS,
+          url: API_ENDPOINTS.PHOTOS.INDEX,
           method: 'POST',
           body: formData,
         };
@@ -35,7 +35,7 @@ const mediaFilesApi = api.injectEndpoints({
 
     removePhoto: builder.mutation<ApiResponse.RemoveData, string>({
       query: (id: string) => ({
-        url: `${API_ENDPOINTS.PHOTOS}/${id}`,
+        url: `${API_ENDPOINTS.PHOTOS.INDEX}/${id}`,
         method: 'DELETE',
       }),
       invalidatesTags: (result, error) => {

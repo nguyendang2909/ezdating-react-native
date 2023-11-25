@@ -1,25 +1,59 @@
 export const API_ENDPOINTS = {
-  AUTH_SIGN_IN_FACEBOOK: '/auth/sign-in/facebook',
-  AUTH_SIGN_IN_GOOGLE: '/auth/sign-in/google',
-  AUTH_SIGN_IN_PHONE_NUMBER: '/auth/sign-in/phone-number',
-  CONVERSATIONS: '/conversations',
-  LIKED_ME: '/likes/me',
-  LIKES: '/likes',
-  LOGOUT: '/auth/logout',
-  MATCHES: '/matches',
-  MATCHES_BY_TARGET_USER: '/matches/target-user',
-  MEDIA_FILES: '/media-files',
-  MESSAGES: '/messages',
-  PHOTOS: '/media-files/photos',
-  PROFILES: '/profiles',
-  PROFILE_FILTERS: '/profile-filters',
-  PROFILE_FILTERS_ME: '/profile-filters/me',
-  PROFILES_ME: '/profiles/me',
-  PROFILES_ME_GEOLOCATION: '/profiles/me/geolocation',
-  PROFILES_NEARBY: '/profiles/nearby',
-  PROFILES_SWIPE: '/profiles/swipe',
-  SIGNED_DEVICES: '/signed-devices',
-  UNMATCH: '/matches/unmatch',
-  USERS: '/users',
-  VIEWS: '/views',
+  AUTH: {
+    SIGN_IN: {
+      FACEBOOK: '/auth/sign-in/facebook',
+      GOOGLE: '/auth/sign-in/google',
+      PHONE_NUMBER: '/auth/sign-in/phone-number',
+    },
+    LOGOUT: '/auth/logout',
+    TOKENS: {
+      ACCESS_TOKEN: '/auth/tokens/access-token',
+    },
+  },
+  CONVERSATIONS: {
+    INDEX: '/conversations',
+  },
+  LIKES: {
+    INDEX: '/likes',
+    ME: '/likes/me',
+  },
+  MATCHES: {
+    INDEX: '/matches',
+    BY_TARGET_USER: '/matches/target-user',
+    UNMATCH: '/matches/unmatch',
+  },
+  MEDIA_FILES: {
+    INDEX: '/media-files',
+  },
+  MESSAGES: {
+    INDEX: '/messages',
+  },
+  PHOTOS: {
+    INDEX: '/media-files/photos',
+  },
+  PROFILE_FILTERS: {
+    INDEX: '/profile-filters',
+    ME: '/profile-filters/me',
+  },
+  PROFILES: {
+    INDEX: '/profiles',
+    ME: {
+      INDEX: '/profiles/me',
+      BASIC: '/profiles/me/basic',
+      BASIC_PHOTO: '/profiles/me/basic-photo',
+      GEOLOCATION: '/profiles/me/geolocation',
+    },
+    NEARBY: '/profiles/nearby',
+    SWIPE: '/profiles/swipe',
+  },
+  SIGNED_DEVICES: {
+    INDEX: '/signed-devices',
+  },
+  USERS: {
+    INDEX: '/users',
+    ME: '/users/me',
+  },
+  VIEWS: {
+    INDEX: '/views',
+  },
 };

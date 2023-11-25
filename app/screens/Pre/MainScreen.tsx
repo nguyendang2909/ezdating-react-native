@@ -1,6 +1,6 @@
-import { Box, Spinner } from '@gluestack-ui/themed';
 import { StackActions, useNavigation } from '@react-navigation/native';
 import { api, useGetMyProfileFilterQuery, useGetMyProfileQuery, useLogoutMutation } from 'app/api';
+import { LoadingOverlay } from 'app/components';
 import { SCREENS } from 'app/constants';
 import { useAppSelector } from 'app/hooks';
 import { appActions } from 'app/store/app.store';
@@ -31,7 +31,7 @@ export const MainScreen: React.FC = () => {
   useEffect(() => {
     if (profile._id) {
       if (!profile.mediaFiles?.length) {
-        navigation.dispatch(StackActions.replace(SCREENS.UpdateProfilePhotos));
+        navigation.dispatch(StackActions.replace(SCREENS.CREATE_BASIC_PHOTOS));
         return;
       }
       navigation.dispatch(StackActions.replace(SCREENS.Home, { screen: 'DatingSwipe' }));
@@ -41,16 +41,12 @@ export const MainScreen: React.FC = () => {
   useEffect(() => {
     if (errorGetMyProfile) {
       if ('status' in errorGetMyProfile && errorGetMyProfile.status === 404) {
-        navigation.dispatch(StackActions.replace(SCREENS.CreateProfile));
+        navigation.dispatch(StackActions.replace(SCREENS.CREATE_BASIC_PROFILE));
       } else {
         handleLogout();
       }
     }
   }, [errorGetMyProfile, errorGetMyProfileFilter, handleLogout, navigation]);
 
-  return (
-    <Box flex={1} justifyContent="center" alignItems="center">
-      <Spinner />
-    </Box>
-  );
+  return <LoadingOverlay />;
 };

@@ -8,39 +8,39 @@ const likesApi = api.injectEndpoints({
     // Likes
     refreshLikedMe: builder.query<ApiResponse.Likes, ApiRequest.FindManyLikedMe>({
       query: () => ({
-        url: API_ENDPOINTS.LIKED_ME,
+        url: API_ENDPOINTS.LIKES.ME,
         method: 'GET',
       }),
     }),
     getNewestLikedMe: builder.mutation<ApiResponse.Likes, ApiRequest.FindManyLikedMe>({
       query: () => ({
-        url: API_ENDPOINTS.LIKED_ME,
+        url: API_ENDPOINTS.LIKES.ME,
         method: 'GET',
       }),
     }),
     getNextLikedMe: builder.mutation<ApiResponse.Likes, ApiRequest.FindManyLikedMe>({
       query: params => ({
-        url: API_ENDPOINTS.LIKED_ME,
+        url: API_ENDPOINTS.LIKES.ME,
         method: 'GET',
         params,
       }),
     }),
     sendLike: builder.mutation<void, ApiRequest.SendLike>({
       query: body => ({
-        url: API_ENDPOINTS.LIKES,
+        url: API_ENDPOINTS.LIKES.INDEX,
         method: 'POST',
         body,
       }),
     }),
     getLike: builder.mutation<void, string>({
       query: id => ({
-        url: `${API_ENDPOINTS.LIKES}/${id}`,
+        url: `${API_ENDPOINTS.LIKES.INDEX}/${id}`,
         method: 'GET',
       }),
     }),
     getOneLikedMe: builder.query<ApiResponse.LikeData, string>({
       query: id => ({
-        url: `${API_ENDPOINTS.LIKED_ME}/${id}`,
+        url: `${API_ENDPOINTS.LIKES.ME}/${id}`,
         method: 'GET',
       }),
     }),

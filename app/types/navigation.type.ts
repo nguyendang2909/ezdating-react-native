@@ -13,8 +13,8 @@ export type AppStackParamList = {
   EditInfoNickname: undefined;
   EditInfoWeight: undefined;
   DATING_NEARBY_FILTER: undefined;
-  CreateProfile: undefined;
-  UpdateProfilePhotos: undefined;
+  CREATE_BASIC_PROFILE: undefined;
+  CREATE_BASIC_PHOTOS: undefined;
   Home: NavigatorScreenParams<HomeTabParamList>;
   LikedMe: undefined;
   LikedMeProfile: {

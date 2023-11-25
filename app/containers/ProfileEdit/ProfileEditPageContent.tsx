@@ -87,7 +87,7 @@ export const ProfileEditPageContent: React.FC = () => {
           </Text>
         </View>
         <View backgroundColor={colors.background}>
-          <ProfileEditLocationMenuItem onPress={handleEditProfile} />
+          <ProfileEditLocationMenuItem />
         </View>
       </View>
 

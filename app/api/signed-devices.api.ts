@@ -8,7 +8,7 @@ const signedDevicesApi = api.injectEndpoints({
     // Signed devices
     updateSignedDevice: builder.mutation<void, ApiRequest.UpdateSignedDevice>({
       query: body => ({
-        url: API_ENDPOINTS.SIGNED_DEVICES,
+        url: API_ENDPOINTS.SIGNED_DEVICES.INDEX,
         method: 'PATCH',
         body,
       }),

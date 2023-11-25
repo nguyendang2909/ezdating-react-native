@@ -9,7 +9,7 @@ const profileFiltersApi = api.injectEndpoints({
     // Profile
     getMyProfileFilter: builder.query<ApiResponse.ProfileFilterData, void>({
       query: () => ({
-        url: API_ENDPOINTS.PROFILE_FILTERS_ME,
+        url: API_ENDPOINTS.PROFILE_FILTERS.ME,
         method: 'GET',
       }),
       providesTags: [API_TAGS.MY_PROFILE_FILTER],
@@ -17,7 +17,7 @@ const profileFiltersApi = api.injectEndpoints({
 
     updateMyProfileFilter: builder.mutation<ApiResponse.Logged, ApiRequest.UpdateProfileFilter>({
       query: body => ({
-        url: API_ENDPOINTS.PROFILE_FILTERS_ME,
+        url: API_ENDPOINTS.PROFILE_FILTERS.ME,
         method: 'PATCH',
         body,
       }),

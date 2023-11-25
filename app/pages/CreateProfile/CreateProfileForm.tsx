@@ -1,11 +1,12 @@
 import { KeyboardAvoidingView } from '@gluestack-ui/themed';
 import { StackActions, useNavigation } from '@react-navigation/native';
-import { useCreateProfileMutation, useFetchMyProfileMutation } from 'app/api';
+import { useCreateBasicProfileMutation, useFetchMyProfileMutation } from 'app/api';
 import { BirthDayFormControl } from 'app/components/Form/BirthDayFormControl';
 import { FormControlInput } from 'app/components/Form/FormControlInput';
 import { RelationshipGoalFormControl } from 'app/components/Form/RelationshipGoalFormControl';
 import { SelectCountryFormControl } from 'app/components/Form/select-country-form-control';
 import { SelectGenderFormControl } from 'app/components/Form/SelectGenderForm';
+import { SCREENS } from 'app/constants';
 import { UserGender } from 'app/constants/constants';
 import { useAppSelector, useMessages } from 'app/hooks';
 import { region } from 'app/locales/locale';
@@ -23,7 +24,7 @@ import * as Yup from 'yup';
 
 export const CreateProfileForm: FC = () => {
   const { formatMessage } = useMessages();
-  const [createProfile] = useCreateProfileMutation();
+  const [createBasicProfile] = useCreateBasicProfileMutation();
   const profile = useAppSelector(state => state.app.profile);
   const navigation = useNavigation();
   const [fetchMyProfile] = useFetchMyProfileMutation();
@@ -67,7 +68,7 @@ export const CreateProfileForm: FC = () => {
       try {
         const { nickname, gender, birthday, relationshipGoal, introduce, stateId } = values;
         if (nickname && gender && birthday && relationshipGoal && stateId) {
-          await createProfile({
+          await createBasicProfile({
             nickname,
             gender,
             birthday,
@@ -75,14 +76,15 @@ export const CreateProfileForm: FC = () => {
             introduce,
             stateId,
           }).unwrap();
-          navigation.dispatch(StackActions.replace('UpdateProfilePhotos'));
+          navigation.dispatch(StackActions.replace(SCREENS.CREATE_BASIC_PHOTOS));
         }
       } catch (error) {
         if ('status' in error && error.status === 409) {
           try {
             const profile = await fetchMyProfile().unwrap();
             dispatch(appActions.setProfile(profile.data));
-            navigation.dispatch(StackActions.replace('UpdateProfilePhotos'));
+            navigation.dispatch(StackActions.replace(SCREENS.CREATE_BASIC_PHOTOS));
+            return;
           } catch (err) {}
         }
         Toast.show({

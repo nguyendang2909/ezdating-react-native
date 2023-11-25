@@ -88,9 +88,12 @@ export const appSlice = createSlice({
           state.profileFilter = data;
         },
       )
-      .addMatcher(profileEndpoints.createProfile.matchFulfilled, (state, { payload: { data } }) => {
-        state.profile = data;
-      });
+      .addMatcher(
+        profileEndpoints.createBasicProfile.matchFulfilled,
+        (state, { payload: { data } }) => {
+          state.profile = data;
+        },
+      );
   },
 });
 

@@ -16,7 +16,7 @@ import Toast from 'react-native-toast-message';
 import { AppStackScreenProps } from '../../navigators';
 
 export const DatingNearbyFilterScreen: React.FC<
-  AppStackScreenProps<'dating_nearby_filter'>
+  AppStackScreenProps<'DATING_NEARBY_FILTER'>
 > = () => {
   const [updateMyProfileFilter] = useUpdateMyProfileFilterMutation();
   const { formatMessage, formatErrorMessage } = useMessages();

@@ -8,44 +8,44 @@ const matchesApi = api.injectEndpoints({
     // Match
     unmatch: builder.mutation<ApiResponse.Unmatch, { id: string }>({
       query: ({ id }) => ({
-        url: `${API_ENDPOINTS.UNMATCH}/${id}`,
+        url: `${API_ENDPOINTS.MATCHES.UNMATCH}/${id}`,
         method: 'POST',
       }),
     }),
     getMatch: builder.query<ApiResponse.MatchData, string>({
       query: id => ({
-        url: `${API_ENDPOINTS.MATCHES}/${id}`,
+        url: `${API_ENDPOINTS.MATCHES.INDEX}/${id}`,
         method: 'GET',
       }),
     }),
     getMatchByTargetUserId: builder.mutation<ApiResponse.MatchData, string>({
       query: userId => ({
-        url: `${API_ENDPOINTS.MATCHES_BY_TARGET_USER}/${userId}`,
+        url: `${API_ENDPOINTS.MATCHES.BY_TARGET_USER}/${userId}`,
         method: 'GET',
       }),
     }),
     refreshMatches: builder.query<ApiResponse.Matches, ApiRequest.FindManyMatches>({
       query: () => ({
-        url: API_ENDPOINTS.MATCHES,
+        url: API_ENDPOINTS.MATCHES.INDEX,
         method: 'GET',
       }),
     }),
     getNewestMatches: builder.mutation<ApiResponse.Matches, ApiRequest.FindManyMatches>({
       query: () => ({
-        url: API_ENDPOINTS.MATCHES,
+        url: API_ENDPOINTS.MATCHES.INDEX,
         method: 'GET',
       }),
     }),
     getNextMatches: builder.mutation<ApiResponse.Matches, ApiRequest.FindManyMatches>({
       query: params => ({
-        url: API_ENDPOINTS.MATCHES,
+        url: API_ENDPOINTS.MATCHES.INDEX,
         method: 'GET',
         params,
       }),
     }),
     createMatch: builder.mutation<ApiResponse.MatchData, ApiRequest.CreateMatch>({
       query: body => ({
-        url: API_ENDPOINTS.MATCHES,
+        url: API_ENDPOINTS.MATCHES.INDEX,
         method: 'POST',
         body,
       }),
@@ -53,21 +53,21 @@ const matchesApi = api.injectEndpoints({
     // Converstaions
     refreshConversations: builder.query<ApiResponse.Matches, ApiRequest.FindManyConversations>({
       query: () => ({
-        url: API_ENDPOINTS.CONVERSATIONS,
+        url: API_ENDPOINTS.CONVERSATIONS.INDEX,
         method: 'GET',
       }),
     }),
     getNewestConversations: builder.mutation<ApiResponse.Matches, ApiRequest.FindManyConversations>(
       {
         query: () => ({
-          url: API_ENDPOINTS.CONVERSATIONS,
+          url: API_ENDPOINTS.CONVERSATIONS.INDEX,
           method: 'GET',
         }),
       },
     ),
     getNextConversations: builder.mutation<ApiResponse.Matches, ApiRequest.FindManyConversations>({
       query: params => ({
-        url: API_ENDPOINTS.CONVERSATIONS,
+        url: API_ENDPOINTS.CONVERSATIONS.INDEX,
         method: 'GET',
         params,
       }),

@@ -2,10 +2,10 @@ import { SCREENS } from 'app/constants';
 import { ConnectProfile } from 'app/containers/Connect/ConnectProfile';
 import { PrefetchData } from 'app/containers/Prefetch/PrefetchData';
 import {
-  CreateProfileScreen,
+  CreateBasicPhotosScreen,
+  CreateBasicProfileScreen,
   DatingNearbyFilterScreen,
   MessagesScreen,
-  UpdateProfilePhotosScreen,
 } from 'app/screens';
 import { ChatProfileScreen } from 'app/screens/Conversations/ChatProfile';
 import {
@@ -41,8 +41,8 @@ export const MainStack: React.FC = () => {
           <Stack.Screen name={SCREENS.Main} component={MainScreen} />
           <Stack.Screen name={SCREENS.Home} component={HomeNavigator} />
           <Stack.Screen name={SCREENS.LikedMe} component={LikedMeScreen} />
-          <Stack.Screen name={SCREENS.CreateProfile} component={CreateProfileScreen} />
-          <Stack.Screen name={SCREENS.UpdateProfilePhotos} component={UpdateProfilePhotosScreen} />
+          <Stack.Screen name={SCREENS.CREATE_BASIC_PROFILE} component={CreateBasicProfileScreen} />
+          <Stack.Screen name={SCREENS.CREATE_BASIC_PHOTOS} component={CreateBasicPhotosScreen} />
           <Stack.Screen name={SCREENS.ProfileEdit} component={ProfileEditScreen} />
           <Stack.Screen name={SCREENS.ProfileSetting} component={ProfileSettingScreen} />
           <Stack.Screen name={SCREENS.Messages} component={MessagesScreen} />

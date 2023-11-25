@@ -18,11 +18,9 @@ export const LogoutButton: React.FC<FC> = () => {
   const [logout, { isLoading }] = useLogoutMutation();
 
   const handleLogout = async () => {
-    try {
-      if (refreshToken) {
-        await logout({ refreshToken }).unwrap();
-      }
-    } catch (err) {}
+    if (refreshToken) {
+      logout({ refreshToken });
+    }
     dispatch(appActions.logout());
     dispatch(api.util.resetApiState());
   };

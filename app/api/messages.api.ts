@@ -8,21 +8,21 @@ const messagesApi = api.injectEndpoints({
     // Messages
     refreshMessages: builder.query<ApiResponse.Messages, ApiRequest.FindManyMessages>({
       query: params => ({
-        url: API_ENDPOINTS.MESSAGES,
+        url: API_ENDPOINTS.MESSAGES.INDEX,
         method: 'GET',
         params,
       }),
     }),
     getNewestMessages: builder.mutation<ApiResponse.Messages, ApiRequest.FindManyMessages>({
       query: params => ({
-        url: API_ENDPOINTS.MESSAGES,
+        url: API_ENDPOINTS.MESSAGES.INDEX,
         method: 'GET',
         params,
       }),
     }),
     getNextMessages: builder.mutation<ApiResponse.Messages, ApiRequest.FindManyMessages>({
       query: params => ({
-        url: API_ENDPOINTS.MESSAGES,
+        url: API_ENDPOINTS.MESSAGES.INDEX,
         method: 'GET',
         params,
       }),

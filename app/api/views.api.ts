@@ -8,7 +8,7 @@ const viewsApi = api.injectEndpoints({
     // Views
     sendView: builder.mutation<void, ApiRequest.SendView>({
       query: body => ({
-        url: API_ENDPOINTS.VIEWS,
+        url: API_ENDPOINTS.VIEWS.INDEX,
         method: 'POST',
         body,
       }),

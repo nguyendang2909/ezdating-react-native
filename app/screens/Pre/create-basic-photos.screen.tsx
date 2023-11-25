@@ -36,9 +36,9 @@ import React, { useState } from 'react';
 import ImageCropPicker from 'react-native-image-crop-picker';
 import Toast from 'react-native-toast-message';
 
-type FCProps = AppStackScreenProps<'UpdateProfilePhotos'>;
+type FCProps = AppStackScreenProps<'CREATE_BASIC_PHOTOS'>;
 
-export const UpdateProfilePhotosScreen: React.FC<FCProps> = () => {
+export const CreateBasicPhotosScreen: React.FC<FCProps> = () => {
   const { formatMessage } = useMessages();
   const navigation = useNavigation();
 
