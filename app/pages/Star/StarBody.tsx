@@ -1,5 +1,6 @@
 import { FlatList, Spinner, Text, View } from '@gluestack-ui/themed';
 import { useNavigation } from '@react-navigation/native';
+import { LoadingOverlay } from 'app/components';
 import { MEMBERSHIPS } from 'app/constants';
 import { useAppSelector, useMessages } from 'app/hooks';
 import { useLikedMe } from 'app/hooks/useLikedMe';
@@ -13,7 +14,14 @@ import { StarFlatListItem } from './StarFlastListItem';
 export const StarBody: React.FC = () => {
   const { formatMessage } = useMessages();
   const navigation = useNavigation();
-  const { data: likes, isLoadingNewest, isLoadingNext, fetchNewest, fetchNext } = useLikedMe();
+  const {
+    data: likes,
+    isLoadingNewest,
+    isLoadingNext,
+    fetchNewest,
+    fetchNext,
+    isLoading,
+  } = useLikedMe();
   const membership = useAppSelector(state => state.app.profile.membership) || MEMBERSHIPS.FREE;
 
   const handleScroll = async (e: NativeSyntheticEvent<NativeScrollEvent>) => {
@@ -32,6 +40,10 @@ export const StarBody: React.FC = () => {
     },
     [navigation],
   );
+
+  if (isLoading) {
+    return <LoadingOverlay />;
+  }
 
   return (
     <>
