@@ -1,5 +1,7 @@
 import { useActionSheet } from '@expo/react-native-action-sheet';
+import { StackActions, useNavigation } from '@react-navigation/native';
 import { useRemovePhotoMutation, useUploadPhotoMutation } from 'app/api/media-files.api';
+import { SCREENS } from 'app/constants';
 import { useAppSelector, useMessages } from 'app/hooks';
 import { flexDirectionRow, flexWrapWrap, padding, width } from 'app/styles';
 import { spacing } from 'app/theme';
@@ -9,19 +11,17 @@ import React, { useState } from 'react';
 import { Platform } from 'react-native';
 import ImageCropPicker from 'react-native-image-crop-picker';
 import { check, PERMISSIONS, request, RESULTS } from 'react-native-permissions';
+import Toast from 'react-native-toast-message';
 
 import { ProfileEditMediaFileCard } from './MediaFileCard';
 
 export const ProfileEditPhotos: React.FC = () => {
+  const navigation = useNavigation();
   const { formatMessage } = useMessages();
-
   const [uploadPhoto] = useUploadPhotoMutation();
   const [removePhoto] = useRemovePhotoMutation();
-
   const mediaFiles = useAppSelector(state => state.app.profile?.mediaFiles) || [];
-
   const [loadings, setLoadings] = useState<boolean[]>([false, false, false, false, false, false]);
-
   const mediaFilesLength = mediaFiles.length;
 
   const { showActionSheetWithOptions } = useActionSheet();
@@ -33,6 +33,9 @@ export const ProfileEditPhotos: React.FC = () => {
       setLoadings(newLoadings);
       await removePhoto(_id).unwrap();
     } catch (err) {
+      Toast.show({
+        text1: formatMessage('Remove failed, please try again.'),
+      });
     } finally {
       const newLoadings = _.cloneDeep(loadings);
       newLoadings[index] = false;
@@ -73,7 +76,10 @@ export const ProfileEditPhotos: React.FC = () => {
       newLoadings[index] = true;
       setLoadings(newLoadings);
       await uploadPhoto({ file: photo }).unwrap();
-    } catch (err) {
+    } catch (error) {
+      if (error.status === 404) {
+        navigation.dispatch(StackActions.replace(SCREENS.CREATE_BASIC_PROFILE));
+      }
     } finally {
       const newLoadings = _.cloneDeep(loadings);
       newLoadings[index] = false;

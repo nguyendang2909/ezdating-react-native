@@ -135,3 +135,10 @@ export const API_TAGS = {
 } as const;
 
 export const ARR_API_TAGS = Object.values(API_TAGS);
+
+export const API_METHODS = {
+  POST: 'POST',
+  GET: 'GET',
+  PATCH: 'PATCH',
+  DELETE: 'DELETE',
+};

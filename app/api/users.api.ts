@@ -6,7 +6,7 @@ import { api } from './api';
 
 const usersApi = api.injectEndpoints({
   endpoints: builder => ({
-    getMyProfile: builder.query<ApiResponse.ProfileData, void>({
+    getMyUser: builder.query<ApiResponse.ProfileData, void>({
       query: () => ({
         url: API_ENDPOINTS.USERS.ME,
         method: 'GET',
@@ -16,4 +16,4 @@ const usersApi = api.injectEndpoints({
   }),
 });
 
-export const { endpoints: userEndpoints } = usersApi;
+export const { useGetMyUserQuery, endpoints: userEndpoints } = usersApi;

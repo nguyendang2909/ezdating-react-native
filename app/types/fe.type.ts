@@ -184,6 +184,10 @@ export declare namespace ApiRequest {
     refreshToken: string;
   };
 
+  type RefreshAccessToken = {
+    refreshToken: string;
+  };
+
   type UpdateProfile = Partial<{
     birthday?: string;
     company?: string;
@@ -302,14 +306,16 @@ export declare namespace ApiResponse {
 
   type SuccessResponse = FetchData<{ success: boolean }>;
 
+  type RefreshAccessToken = FetchData<{ accessToken: string }>;
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   type FetchPaginationData<T, R extends Record<string, any> = object> = {
     [P in keyof R]?: R[P];
   } & FetchData<T, { pagination: Pagination }>;
 
   type Tokens = {
-    accessToken: string;
-    refreshToken: string;
+    accessToken?: string;
+    refreshToken?: string;
   };
 
   type RemoveData = FetchData<{ success: true }>;

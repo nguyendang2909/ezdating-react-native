@@ -1,4 +1,5 @@
 import { API_ENDPOINTS } from 'app/config/config.api';
+import { API_METHODS } from 'app/constants/constants';
 import { ApiRequest, ApiResponse } from 'app/types';
 
 import { api } from './api';
@@ -36,6 +37,17 @@ const authApi = api.injectEndpoints({
         body,
       }),
     }),
+
+    refreshAccessToken: builder.mutation<
+      ApiResponse.RefreshAccessToken,
+      ApiRequest.RefreshAccessToken
+    >({
+      query: body => ({
+        url: API_ENDPOINTS.AUTH.TOKENS.ACCESS_TOKEN,
+        method: API_METHODS.POST,
+        body,
+      }),
+    }),
   }),
 });
 
@@ -44,5 +56,6 @@ export const {
   useSignInWithFacebookMutation,
   useSignInWithGoogleMutation,
   useLogoutMutation,
+  useRefreshAccessTokenMutation,
   endpoints: authEndpoints,
 } = authApi;

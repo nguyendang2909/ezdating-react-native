@@ -9,23 +9,25 @@ const profilesApi = api.injectEndpoints({
   endpoints: builder => ({
     // Profile
     getMyProfile: builder.query<ApiResponse.ProfileData, void>({
-      query: () => ({
-        url: API_ENDPOINTS.PROFILES.ME,
-        method: 'GET',
-      }),
+      query: () => {
+        return {
+          url: API_ENDPOINTS.PROFILES.ME.INDEX,
+          method: 'GET',
+        };
+      },
       providesTags: [API_TAGS.MY_PROFILE],
     }),
 
     fetchMyProfile: builder.mutation<ApiResponse.ProfileData, void>({
       query: () => ({
-        url: API_ENDPOINTS.PROFILES.ME,
+        url: API_ENDPOINTS.PROFILES.ME.INDEX,
         method: 'GET',
       }),
     }),
 
     updateProfile: builder.mutation<ApiResponse.Logged, ApiRequest.UpdateProfile>({
       query: body => ({
-        url: API_ENDPOINTS.PROFILES.ME,
+        url: API_ENDPOINTS.PROFILES.ME.INDEX,
         method: 'PATCH',
         body,
       }),
@@ -137,4 +139,5 @@ export const {
   useGetNextSwipeProfilesMutation,
   useFetchMyProfileMutation,
   endpoints: profileEndpoints,
+  useUploadBasicPhotoMutation,
 } = profilesApi;

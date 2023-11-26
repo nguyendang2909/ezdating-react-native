@@ -1,145 +1,172 @@
+import { useActionSheet } from '@expo/react-native-action-sheet';
 import { StackActions, useNavigation } from '@react-navigation/native';
-import { useRemovePhotoMutation, useUploadPhotoMutation } from 'app/api';
-import { UploadPhotoCard } from 'app/components/Form/UploadPhotoCard';
-import { LoadingScreen } from 'app/components/Screen/LoadingScreen';
+import {
+  api,
+  useRefreshAccessTokenMutation,
+  useRemovePhotoMutation,
+  useUploadBasicPhotoMutation,
+} from 'app/api';
+import { LoadingButton } from 'app/components/Button';
 import { SCREENS } from 'app/constants';
 import { PhotoRequestPermission } from 'app/containers/Photos/PhotoRequestPermission.ios';
+import { ProfileEditMediaFileCard } from 'app/containers/ProfileEdit/ProfileEditPhotos/MediaFileCard';
 import { useAppSelector, useMessages } from 'app/hooks';
 import { AppStackScreenProps } from 'app/navigators';
-import {
-  alignItemsCenter,
-  flexDirectionRow,
-  flexGrow,
-  flexWrapWrap,
-  justifyContentCenter,
-  padding,
-  width,
-} from 'app/styles';
+import { appActions } from 'app/store/app.store';
+import { flexDirectionRow, flexGrow, flexWrapWrap, padding, width } from 'app/styles';
 import { spacing } from 'app/theme';
-import { ApiRequest, FormParams } from 'app/types';
-import { mediaFileUtil } from 'app/utils/media-files.util';
-import { useFormik } from 'formik';
-import {
-  Actionsheet,
-  Box,
-  Button,
-  ChevronLeftIcon,
-  Divider,
-  Heading,
-  HStack,
-  IconButton,
-  Text,
-  useToast,
-  View,
-} from 'native-base';
-import React, { useState } from 'react';
+import _ from 'lodash';
+import { Box, ChevronLeftIcon, Heading, HStack, IconButton, Text, View } from 'native-base';
+import React, { useCallback, useState } from 'react';
+import { Platform } from 'react-native';
 import ImageCropPicker from 'react-native-image-crop-picker';
+import { check, PERMISSIONS, request, RESULTS } from 'react-native-permissions';
 import Toast from 'react-native-toast-message';
+import { useDispatch } from 'react-redux';
 
 type FCProps = AppStackScreenProps<'CREATE_BASIC_PHOTOS'>;
 
 export const CreateBasicPhotosScreen: React.FC<FCProps> = () => {
   const { formatMessage } = useMessages();
   const navigation = useNavigation();
-
-  const toast = useToast();
-  const { goBack } = useNavigation();
-  const [removePhotoIndex, setRemovePhotoIndex] = useState<number | string | undefined>(undefined);
-  const [uploadPhoto] = useUploadPhotoMutation();
+  const [updateBasicPhoto] = useUploadBasicPhotoMutation();
   const [removePhoto] = useRemovePhotoMutation();
-  const mediaFiles = useAppSelector(state => state.app.profile?.mediaFiles);
-  const profilePublicPhotosLength = mediaFiles?.length || 0;
+  const refreshToken = useAppSelector(s => s.app.refreshToken);
+  const [refreshAccessToken, { isLoading: isLoadingRefreshAccessToken }] =
+    useRefreshAccessTokenMutation();
+  const mediaFiles = useAppSelector(state => state.app.profile?.mediaFiles) || [];
+  const [loadings, setLoadings] = useState<boolean[]>([false, false, false, false, false, false]);
+  const mediaFilesLength = mediaFiles.length;
+  const { showActionSheetWithOptions } = useActionSheet();
+  const dispatch = useDispatch();
 
-  const formik = useFormik<FormParams.UpdateProfilePhoto>({
-    initialValues: {
-      photos: [],
-    },
-    onSubmit: async values => {
-      try {
-        navigation.dispatch(StackActions.replace(SCREENS.Home, { screen: 'DatingSwipe' }));
-        if (values.photos.length) {
-          await Promise.all(
-            values.photos.map((item, index) => {
-              const payload: ApiRequest.UploadPhoto = {
-                file: item,
-                ...(index === 0 ? { isAvatar: true } : {}),
-              };
-
-              return uploadPhoto(payload).unwrap();
-            }),
-          );
-          Toast.show({
-            text1: formatMessage('Uploaded photos successfully'),
-          });
-        }
-      } catch (err) {
-        Toast.show({
-          text1: formatMessage('Update failed, please try again.'),
-        });
-      }
-    },
-  });
-
-  const handleRemovePhotoCardById = async () => {
-    if (removePhotoIndex !== undefined) {
-      if (typeof removePhotoIndex === 'number') {
-        formik.setFieldValue(
-          'photos',
-          formik.values.photos.filter((value, index) => index !== removePhotoIndex),
-        );
-        handleCloseRemovePhotoCard();
-      } else if (typeof removePhotoIndex === 'string') {
-        try {
-          formik.setSubmitting(true);
-          handleCloseRemovePhotoCard();
-          await removePhoto(removePhotoIndex).unwrap();
-        } catch (err) {
-          toast.show({
-            title: formatMessage('Remove failed, please try again.'),
-            placement: 'top-right',
-          });
-        } finally {
-          formik.setSubmitting(false);
-        }
-      }
+  const handleRemoveMediaFile = async (index: number, _id: string) => {
+    try {
+      const newLoadings = _.cloneDeep(loadings);
+      newLoadings[index] = true;
+      setLoadings(newLoadings);
+      await removePhoto(_id).unwrap();
+    } catch (err) {
+      Toast.show({
+        text1: formatMessage('Remove failed, please try again.'),
+      });
+    } finally {
+      const newLoadings = _.cloneDeep(loadings);
+      newLoadings[index] = false;
+      setLoadings(newLoadings);
     }
   };
 
-  const handleCloseRemovePhotoCard = () => {
-    setRemovePhotoIndex(undefined);
-  };
+  const handleUploadPhoto = async (index: number) => {
+    try {
+      if (Platform.OS === 'ios') {
+        const permission = await check(PERMISSIONS.IOS.PHOTO_LIBRARY);
+        if (permission !== RESULTS.GRANTED) {
+          const requestPermission = await request(PERMISSIONS.IOS.PHOTO_LIBRARY);
+          if (requestPermission !== RESULTS.LIMITED && requestPermission !== RESULTS.GRANTED) {
+            console.log('Permissions to access camera has been blocked');
 
-  const handleClickPhotoCard = async (index: number | string) => {
-    if (typeof index === 'number') {
-      const photos = formik.values.photos;
-      if (photos[index]) {
-        setRemovePhotoIndex(index);
-        return;
+            return;
+          }
+        }
+      } else if (Platform.OS === 'android') {
+        const permission = await check(PERMISSIONS.ANDROID.CAMERA);
+        if (permission !== RESULTS.GRANTED) {
+          const requestPermission = await request(PERMISSIONS.ANDROID.CAMERA);
+          if (requestPermission !== RESULTS.LIMITED && requestPermission !== RESULTS.GRANTED) {
+            console.log('Permissions to access camera has been blocked');
+            return;
+          }
+        }
       }
-      try {
-        const photo = await ImageCropPicker.openPicker({
-          width: 640,
-          height: 860,
-          cropping: true,
-          mediaType: 'photo',
-          forceJpg: true,
-        });
-        formik.setFieldValue('photos', formik.values.photos.concat(photo));
-      } catch (err) {}
-    } else if (typeof index === 'string') {
-      setRemovePhotoIndex(index);
+      const photo = await ImageCropPicker.openPicker({
+        width: 640,
+        height: 860,
+        cropping: true,
+        mediaType: 'photo',
+        forceJpg: true,
+      });
+      const newLoadings = _.cloneDeep(loadings);
+      newLoadings[index] = true;
+      setLoadings(newLoadings);
+      await updateBasicPhoto({ file: photo }).unwrap();
+    } catch (err) {
+    } finally {
+      const newLoadings = _.cloneDeep(loadings);
+      newLoadings[index] = false;
+      setLoadings(newLoadings);
     }
   };
+
+  const handlePress = async (index: number, _id?: string) => {
+    if (_id) {
+      showActionSheetWithOptions(
+        {
+          showSeparators: true,
+          options: [formatMessage('Remove the photo'), formatMessage('Cancel')],
+          cancelButtonIndex: 1,
+          useModal: true,
+        },
+        (selectedIndex: number) => {
+          switch (selectedIndex) {
+            case 0:
+              handleRemoveMediaFile(index, _id);
+              break;
+          }
+        },
+      );
+    } else {
+      showActionSheetWithOptions(
+        {
+          showSeparators: true,
+          options: [formatMessage('Upload the photo'), formatMessage('Cancel')],
+          cancelButtonIndex: 1,
+          useModal: true,
+        },
+        (selectedIndex: number) => {
+          switch (selectedIndex) {
+            case 0:
+              handleUploadPhoto(index);
+              break;
+          }
+        },
+      );
+    }
+  };
+
+  const files = mediaFiles.concat([...Array(6 - mediaFilesLength)]);
+
+  const handleGoBack = useCallback(() => {
+    if (navigation.canGoBack()) {
+      navigation.goBack();
+      return;
+    }
+    navigation.navigate(SCREENS.CREATE_BASIC_PROFILE);
+  }, [navigation]);
+
+  const handlePressComplete = useCallback(async () => {
+    if (!mediaFiles.length) {
+      Toast.show({ text1: formatMessage('Please upload at least 1 photo') });
+      return;
+    }
+    if (!refreshToken) {
+      dispatch(appActions.logout());
+      dispatch(api.util.resetApiState());
+      return;
+    }
+    const { data } = await refreshAccessToken({ refreshToken }).unwrap();
+    dispatch(appActions.updateAccessToken({ accessToken: data.accessToken }));
+    navigation.dispatch(StackActions.replace(SCREENS.Home, { screen: 'DatingSwipe' }));
+  }, [dispatch, formatMessage, mediaFiles.length, navigation, refreshAccessToken, refreshToken]);
 
   return (
     <>
       <Box flex="1" safeAreaY>
-        <LoadingScreen isLoading={formik.isSubmitting} />
         <View flex="1">
           <View style={flexGrow}>
             <View px="4" py="4">
               <View>
-                <IconButton size={36} onPress={goBack}>
+                <IconButton size={36} onPress={handleGoBack}>
                   <ChevronLeftIcon />
                 </IconButton>
               </View>
@@ -155,30 +182,19 @@ export const CreateBasicPhotosScreen: React.FC<FCProps> = () => {
 
             <View p="4">
               <HStack style={[flexDirectionRow, flexWrapWrap]}>
-                {mediaFiles?.map(item => {
-                  return (
-                    <View key={item._id} style={[padding(spacing.xxs), width('33%')]}>
-                      <UploadPhotoCard
-                        key={item._id}
-                        value={mediaFileUtil.getUrl(item.key)}
-                        onPress={() => {
-                          if (item._id) {
-                            handleClickPhotoCard(item._id);
-                          }
-                        }}
-                      ></UploadPhotoCard>
-                    </View>
-                  );
-                })}
-                {[...Array(6 - profilePublicPhotosLength)].map((item, index) => {
+                {files.map((item, index) => {
+                  const isLoading = loadings[index];
                   return (
                     <View key={index} style={[padding(spacing.xxs), width('33%')]}>
-                      <UploadPhotoCard
-                        value={formik.values.photos[index] ? formik.values.photos[index].path : ''}
+                      <ProfileEditMediaFileCard
+                        value={item?.key}
+                        isLoading={isLoading}
                         onPress={() => {
-                          handleClickPhotoCard(index);
+                          if (!isLoading) {
+                            handlePress(index, item?._id);
+                          }
                         }}
-                      />
+                      ></ProfileEditMediaFileCard>
                     </View>
                   );
                 })}
@@ -187,19 +203,18 @@ export const CreateBasicPhotosScreen: React.FC<FCProps> = () => {
           </View>
 
           <View px="4" py="4">
-            <Button
-              isLoading={formik.isSubmitting}
-              onPress={() => {
-                formik.handleSubmit();
-              }}
+            <LoadingButton
+              disabled={!mediaFiles.length}
+              onPress={handlePressComplete}
+              isLoading={isLoadingRefreshAccessToken}
             >
               {formatMessage('Complete')}
-            </Button>
+            </LoadingButton>
           </View>
         </View>
       </Box>
 
-      <Actionsheet isOpen={removePhotoIndex !== undefined} onClose={handleCloseRemovePhotoCard}>
+      {/* <Actionsheet isOpen={removePhotoIndex !== undefined} onClose={handleCloseRemovePhotoCard}>
         <Actionsheet.Content>
           <View mb="8">
             <Text color="gray.500">{formatMessage('Remove photo')}</Text>
@@ -216,7 +231,7 @@ export const CreateBasicPhotosScreen: React.FC<FCProps> = () => {
             <Text>{formatMessage('Cancel')}</Text>
           </Actionsheet.Item>
         </Actionsheet.Content>
-      </Actionsheet>
+      </Actionsheet> */}
 
       <PhotoRequestPermission />
     </>

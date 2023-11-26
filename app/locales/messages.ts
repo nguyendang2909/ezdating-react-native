@@ -401,4 +401,8 @@ export const messages = defineMessages({
     id: 'aef8ab336d',
   },
   None: { defaultMessage: 'None', id: 'e39d05b72f' },
+  'Please upload at least 1 photo': {
+    defaultMessage: 'Please upload at least 1 photo',
+    id: '0399c8c2ff',
+  },
 });

@@ -1,5 +1,5 @@
 import { KeyboardAvoidingView } from '@gluestack-ui/themed';
-import { StackActions, useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import { useCreateBasicProfileMutation, useFetchMyProfileMutation } from 'app/api';
 import { BirthDayFormControl } from 'app/components/Form/BirthDayFormControl';
 import { FormControlInput } from 'app/components/Form/FormControlInput';
@@ -53,7 +53,8 @@ export const CreateProfileForm: FC = () => {
       birthday: profile?.birthday ? moment(profile?.birthday).format('YYYY-MM-DD') : undefined,
       relationshipGoal: profile?.relationshipGoal,
       introduce: profile?.introduce,
-      countryIso2: region,
+      countryIso2: profile.state?.country?.iso2 || region,
+      stateId: profile.state?._id,
     },
     enableReinitialize: true,
     validationSchema: Yup.object().shape({
@@ -76,14 +77,14 @@ export const CreateProfileForm: FC = () => {
             introduce,
             stateId,
           }).unwrap();
-          navigation.dispatch(StackActions.replace(SCREENS.CREATE_BASIC_PHOTOS));
+          navigation.navigate(SCREENS.CREATE_BASIC_PHOTOS);
         }
       } catch (error) {
         if ('status' in error && error.status === 409) {
           try {
             const profile = await fetchMyProfile().unwrap();
             dispatch(appActions.setProfile(profile.data));
-            navigation.dispatch(StackActions.replace(SCREENS.CREATE_BASIC_PHOTOS));
+            navigation.navigate(SCREENS.CREATE_BASIC_PHOTOS);
             return;
           } catch (err) {}
         }

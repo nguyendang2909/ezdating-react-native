@@ -14,7 +14,7 @@ import { ProfileEditIntroduceMenuItem } from './ProfileEditIntroductionMenuItem'
 import { ProfileEditJobTitleMenuItem } from './ProfileEditJobTitleMenuItem';
 import { ProfileEditLocationMenuItem } from './ProfileEditLocationMenuItem';
 import { ProfileEditNicknameMenuItem } from './ProfileEditNicknameMenuItem';
-import { ProfileEditPhotos } from './ProfileEditPhotos/ProfileEditMedifaFiles';
+import { ProfileEditPhotos } from './ProfileEditPhotos/profile-edit-media-files';
 import { ProfileEditRelationshipGoalMenuItem } from './ProfileEditRelationshipGoalMenuItem';
 import { ProfileEditRelationshipStatusMenuItem } from './ProfileEditRelationshipStatusMenuItem';
 import { ProfileShowAgeMenuItem } from './ProfileEditShowAgeMenuItem';
