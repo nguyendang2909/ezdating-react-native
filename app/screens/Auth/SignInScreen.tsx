@@ -1,5 +1,4 @@
 import { View, VStack } from '@gluestack-ui/themed';
-import { SignInWithFacebookButton } from 'app/containers/Button/SignInWithFacebookButton';
 import { SignInWithPhoneNumberButton } from 'app/containers/Button/SignInWithPhoneNumberButton';
 import { AppStackScreenProps } from 'app/navigators';
 import { SignInWithGoogleButton } from 'app/pages/sign-in/sign-in-with-google/SignInWithGoogleButton';
@@ -31,9 +30,9 @@ export const SignInScreen: FC<FCProps> = () => {
           <View>
             <SignInWithPhoneNumberButton />
           </View>
-          <View>
+          {/* <View>
             <SignInWithFacebookButton />
-          </View>
+          </View> */}
           <View>
             <SignInWithGoogleButton />
           </View>
