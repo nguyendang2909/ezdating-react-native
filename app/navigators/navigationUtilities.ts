@@ -175,10 +175,23 @@ export function navigate(...args: Parameters<typeof navigationRef.navigate>) {
  * The navigationRef variable is a React ref that references a navigation object.
  * The navigationRef variable is set in the App component.
  */
-export function goBack() {
-  if (navigationRef.isReady() && navigationRef.canGoBack()) {
-    navigationRef.goBack();
+export function goBack<RouteName extends keyof AppStackParamList>(
+  ...args: RouteName extends unknown
+    ? undefined extends AppStackParamList[RouteName]
+      ?
+          | [screen: RouteName] // if the params are optional, we don't have to provide it
+          | [screen: RouteName, params: AppStackParamList[RouteName]]
+      : [screen: RouteName, params: AppStackParamList[RouteName]]
+    : never
+) {
+  if (!navigationRef.isReady()) {
+    return;
   }
+  if (navigationRef.canGoBack()) {
+    navigationRef.goBack();
+    return;
+  }
+  navigationRef.navigate(...args);
 }
 
 /**
