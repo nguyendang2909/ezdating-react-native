@@ -1,5 +1,5 @@
 import { Header } from 'app/components';
-import { StarBody } from 'app/pages/Star';
+import { StarBody } from 'app/pages/star/StarBody';
 import React from 'react';
 
 export const StarScreen: React.FC = () => {

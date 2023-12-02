@@ -13,6 +13,7 @@
  * @refresh reset
  */
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { SCREENS } from 'app/constants';
 import { Platform } from 'react-native';
 import { ArgType } from 'reactotron-core-client';
 
@@ -196,7 +197,9 @@ export function setupReactotron(customConfig: ReactotronConfig = {}) {
         if (Reactotron.log) {
           Reactotron.log('Going back');
         }
-        goBack();
+        goBack(SCREENS.Home, {
+          screen: 'Profile',
+        });
       },
     });
 

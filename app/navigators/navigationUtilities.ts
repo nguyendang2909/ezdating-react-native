@@ -163,7 +163,20 @@ export function useNavigationPersistence(storage: Storage, persistenceKey: strin
  * prop. If you have access to the navigation prop, do not use this.
  * @see https://reactnavigation.org/docs/navigating-without-navigation-prop/
  */
-export function navigate(...args: Parameters<typeof navigationRef.navigate>) {
+export function navigate<RouteName extends keyof AppStackParamList>(
+  ...args: // this first condition allows us to iterate over a union type
+  // This is to avoid getting a union of all the params from `ParamList[RouteName]`,
+  // which will get our types all mixed up if a union RouteName is passed in.
+  RouteName extends unknown
+    ? // This condition checks if the params are optional,
+      // which means it's either undefined or a union with undefined
+      undefined extends AppStackParamList[RouteName]
+      ?
+          | [screen: RouteName] // if the params are optional, we don't have to provide it
+          | [screen: RouteName, params: AppStackParamList[RouteName]]
+      : [screen: RouteName, params: AppStackParamList[RouteName]]
+    : never
+) {
   if (navigationRef.isReady()) {
     navigationRef.navigate(...args);
   }
@@ -175,7 +188,20 @@ export function navigate(...args: Parameters<typeof navigationRef.navigate>) {
  * The navigationRef variable is a React ref that references a navigation object.
  * The navigationRef variable is set in the App component.
  */
-export function goBack(...args: Parameters<typeof navigationRef.navigate>) {
+export function goBack<RouteName extends keyof AppStackParamList>(
+  ...args: // this first condition allows us to iterate over a union type
+  // This is to avoid getting a union of all the params from `ParamList[RouteName]`,
+  // which will get our types all mixed up if a union RouteName is passed in.
+  RouteName extends unknown
+    ? // This condition checks if the params are optional,
+      // which means it's either undefined or a union with undefined
+      undefined extends AppStackParamList[RouteName]
+      ?
+          | [screen: RouteName] // if the params are optional, we don't have to provide it
+          | [screen: RouteName, params: AppStackParamList[RouteName]]
+      : [screen: RouteName, params: AppStackParamList[RouteName]]
+    : never
+) {
   if (!navigationRef.isReady()) {
     return;
   }
