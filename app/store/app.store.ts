@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { authEndpoints, profileEndpoints, profileFilterEndpoints } from 'app/api';
-import { ApiResponse, Profile, ProfileFilter, User } from 'app/types';
+import { ApiResponse, Entity } from 'app/types';
 import { AppStore } from 'app/types/app-store.type';
 import moment from 'moment';
 import { AuthorizationResult } from 'react-native-geolocation-service';
@@ -21,13 +21,13 @@ export const appSlice = createSlice({
   name: 'app',
   initialState,
   reducers: {
-    setUser: (state, { payload }: PayloadAction<User>) => {
+    setUser: (state, { payload }: PayloadAction<Entity.User>) => {
       state.profile = payload;
     },
-    setProfile: (state, { payload }: PayloadAction<Profile>) => {
+    setProfile: (state, { payload }: PayloadAction<Entity.Profile>) => {
       state.profile = payload;
     },
-    setProfileFilter: (state, { payload }: PayloadAction<ProfileFilter>) => {
+    setProfileFilter: (state, { payload }: PayloadAction<Entity.ProfileFilter>) => {
       state.profileFilter = payload;
     },
     updateAccessToken: (state, { payload }: PayloadAction<ApiResponse.Tokens>) => {

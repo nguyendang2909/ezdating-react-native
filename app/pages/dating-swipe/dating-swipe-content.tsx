@@ -3,7 +3,7 @@ import { useSendLikeMutation, useSendViewMutation } from 'app/api';
 import { LoadingOverlay } from 'app/components';
 import { APP_CONFIG } from 'app/config/config.app';
 import { useMessages, useSwipeProfiles } from 'app/hooks';
-import { Profile } from 'app/types';
+import { Entity } from 'app/types';
 import _ from 'lodash';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Dimensions, StyleSheet } from 'react-native';
@@ -13,7 +13,7 @@ import { DatingSwipeCard } from './cards';
 import { DatingSwipeNoCard } from './cards/dating-swipe-no-card';
 import { DatingSwipeMenuActions } from './menu/dating-swipe-menu-actions';
 
-const getKeyExtractor = (card: Profile) => {
+const getKeyExtractor = (card: Entity.Profile) => {
   return _.get(card, '_id', `${Math.floor(Math.random() * 10000 + 1)}`);
 };
 
@@ -30,7 +30,7 @@ export const DatingSwipeContent: React.FC = () => {
   const spaceX =
     (windowHeight - APP_CONFIG.SIZE.TOP_BAR.HEIGHT - APP_CONFIG.SIZE.BOTTOM_BAR.HEIGHT - height) /
     2;
-  const swipeRef = useRef<Swiper<Profile>>(null);
+  const swipeRef = useRef<Swiper<Entity.Profile>>(null);
 
   const [sendLike] = useSendLikeMutation();
   const [sendView] = useSendViewMutation();
@@ -95,7 +95,7 @@ export const DatingSwipeContent: React.FC = () => {
           overlayLabels={overlayLabels}
           swipeBackCard={false}
           showSecondCard={swipeProfileLength > 0}
-          renderCard={(card: Profile) => {
+          renderCard={(card: Entity.Profile) => {
             return card ? (
               <DatingSwipeCard width={width} height={height} key={card._id} profile={card} />
             ) : isLoading ? (

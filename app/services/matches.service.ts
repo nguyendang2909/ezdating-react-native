@@ -1,6 +1,6 @@
 import { CommonService } from 'app/commons/service.common';
 import { APP_CONFIG } from 'app/config/config.app';
-import { AppStore, Match } from 'app/types';
+import { AppStore, Entity } from 'app/types';
 import _ from 'lodash';
 import moment from 'moment';
 
@@ -10,7 +10,7 @@ class MatchesService extends CommonService {
     this.staleTime = APP_CONFIG.STALE_TIME.DEFAULT;
   }
 
-  formatMany(payload: Match[], options?: Partial<AppStore.MatchData>): AppStore.MatchData[] {
+  formatMany(payload: Entity.Match[], options?: Partial<AppStore.Match>): AppStore.Match[] {
     const lastRefreshedAt = moment().toISOString();
     return payload.map(e => ({
       ...e,
@@ -19,21 +19,21 @@ class MatchesService extends CommonService {
     }));
   }
 
-  formatOne(payload: Match): AppStore.MatchData {
+  formatOne(payload: Entity.Match): AppStore.Match {
     return {
       ...payload,
       lastRefreshedAt: moment().toISOString(),
     };
   }
 
-  sortAndUniq(news: AppStore.MatchData[], olds: AppStore.MatchData[]) {
+  sortAndUniq(news: AppStore.Match[], olds: AppStore.Match[]) {
     return _.chain([...news, ...olds])
       .uniqBy('_id')
       .orderBy(['lastMessageAt', 'createdAt'], ['desc', 'desc'])
       .value();
   }
 
-  public getCursor(data: Match[]): string | undefined {
+  public getCursor(data: Entity.Match[]): string | undefined {
     return this.getCursorByField(['createdAt'], data);
   }
 }

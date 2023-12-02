@@ -2,7 +2,7 @@ import { HStack, View } from '@gluestack-ui/themed';
 import { CloseIconButton } from 'app/components/Button';
 import { SendSwipeLikeButton } from 'app/containers/Button/send-swipe-like-button.tsx';
 import { SendMessageButton } from 'app/pages/dating-nearby-profile';
-import { Profile } from 'app/types';
+import { Entity } from 'app/types/entities.type';
 import { FC, useState } from 'react';
 import { Modal } from 'react-native';
 import Swiper from 'react-native-deck-swiper';
@@ -11,8 +11,8 @@ import { ProfileInfoButton } from '../../../containers/Button/profile-info-butto
 import { DatingSwipeProfileDetail } from '../profile-detail/dating-swipe-profile-detail';
 
 type FCProps = {
-  currentSwipeRef: Swiper<Profile> | null;
-  profile?: Profile;
+  currentSwipeRef: Swiper<Entity.Profile> | null;
+  profile?: Entity.Profile;
 };
 
 export const DatingSwipeMenuActions: FC<FCProps> = ({ currentSwipeRef, profile }) => {

@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { profileEndpoints } from 'app/api';
 import { swipeProfilesService } from 'app/services/swipe-profiles.service';
-import { Profile } from 'app/types';
+import { Entity } from 'app/types';
 import { AppStore } from 'app/types/app-store.type';
 import moment from 'moment';
 
@@ -16,7 +16,7 @@ export const swipeProfileSlice = createSlice({
   name: 'swipeProfile',
   initialState,
   reducers: {
-    addMany: (state, action: PayloadAction<Profile[]>) => {
+    addMany: (state, action: PayloadAction<Entity.Profile[]>) => {
       const { payload } = action;
       if (!payload.length) {
         return;
@@ -24,7 +24,7 @@ export const swipeProfileSlice = createSlice({
       state.data = payload;
     },
 
-    addManyNext(state, action: PayloadAction<Profile[]>) {
+    addManyNext(state, action: PayloadAction<Entity.Profile[]>) {
       const { payload } = action;
       if (!payload.length) {
         return;

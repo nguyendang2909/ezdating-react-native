@@ -1,5 +1,5 @@
 import { Box, Pressable, Text } from '@gluestack-ui/themed';
-import { Profile } from 'app/types';
+import { Entity } from 'app/types';
 import _ from 'lodash';
 import React from 'react';
 import { StyleSheet } from 'react-native';
@@ -7,8 +7,8 @@ import { StyleSheet } from 'react-native';
 import { CacheImage, LinearGradient } from '../../components';
 
 type NearbyProfileItemProps = {
-  profile: Profile;
-  onOpen: (e: Profile) => void;
+  profile: Entity.Profile;
+  onOpen: (e: Entity.Profile) => void;
 };
 
 export const NearbyProfileItem: React.FC<NearbyProfileItemProps> = ({ profile, onOpen }) => {

@@ -2,11 +2,11 @@ import { ScrollView, View } from '@gluestack-ui/themed';
 import { ViewSafeArea } from 'app/components';
 import { ProfileMenuActions } from 'app/containers/Menu/ProfileMenuActions';
 import { UserProfile } from 'app/containers/UserProfile';
-import { Profile } from 'app/types';
+import { Entity } from 'app/types';
 import { FC } from 'react';
 
 type FCProps = {
-  profile: Profile;
+  profile: Entity.Profile;
   onClose: () => void;
   onDislike: () => void;
   onSendLike: () => void;

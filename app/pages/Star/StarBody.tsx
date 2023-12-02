@@ -4,7 +4,7 @@ import { LoadingOverlay } from 'app/components';
 import { MEMBERSHIPS } from 'app/constants';
 import { useAppSelector, useMessages } from 'app/hooks';
 import { useLikedMe } from 'app/hooks/useLikedMe';
-import { Like } from 'app/types';
+import { Entity } from 'app/types';
 import { scrollUtil } from 'app/utils/scroll.util';
 import React, { useCallback } from 'react';
 import { NativeScrollEvent, NativeSyntheticEvent, RefreshControl } from 'react-native';
@@ -33,7 +33,7 @@ export const StarBody: React.FC = () => {
   };
 
   const handlePressCard = useCallback(
-    (like: Like) => {
+    (like: Entity.View) => {
       navigation.navigate('LikedMeProfile', {
         like,
       });

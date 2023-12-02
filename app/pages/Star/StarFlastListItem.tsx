@@ -1,11 +1,11 @@
 import { View } from '@gluestack-ui/themed';
 import { TargetUserCard } from 'app/components';
-import { Like } from 'app/types';
+import { Entity } from 'app/types';
 import React, { useCallback } from 'react';
 
 type StarFlatListItemProps = {
-  data: Like;
-  onPress: (like: Like) => void;
+  data: Entity.View;
+  onPress: (like: Entity.View) => void;
 };
 
 export const StarFlatListItem: React.FC<StarFlatListItemProps> = ({ data, onPress }) => {

@@ -8,7 +8,7 @@ import { api } from './api';
 const profilesApi = api.injectEndpoints({
   endpoints: builder => ({
     // Profile
-    getMyProfile: builder.query<ApiResponse.ProfileData, void>({
+    getMyProfile: builder.query<ApiResponse.Profile, void>({
       query: () => {
         return {
           url: API_ENDPOINTS.PROFILES.ME.INDEX,
@@ -18,7 +18,7 @@ const profilesApi = api.injectEndpoints({
       providesTags: [API_TAGS.MY_PROFILE],
     }),
 
-    fetchMyProfile: builder.mutation<ApiResponse.ProfileData, void>({
+    fetchMyProfile: builder.mutation<ApiResponse.Profile, void>({
       query: () => ({
         url: API_ENDPOINTS.PROFILES.ME.INDEX,
         method: 'GET',
@@ -39,7 +39,7 @@ const profilesApi = api.injectEndpoints({
       },
     }),
 
-    createBasicProfile: builder.mutation<ApiResponse.ProfileData, ApiRequest.CreateProfile>({
+    createBasicProfile: builder.mutation<ApiResponse.Profile, ApiRequest.CreateProfile>({
       query: body => ({
         url: API_ENDPOINTS.PROFILES.ME.BASIC,
         method: 'POST',

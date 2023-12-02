@@ -2,11 +2,11 @@ import { FirebaseAuthTypes } from '@react-native-firebase/auth';
 import { NavigatorScreenParams } from '@react-navigation/native';
 import { HomeTabParamList } from 'app/navigators';
 
-import { Like, Match, Profile } from './fe.type';
+import { Entity } from './entities.type';
 
 export type AppStackParamList = {
   ChatProfile: {
-    profile: Profile;
+    profile: Entity.Profile;
   };
   EditInfoHeight: undefined;
   EDIT_INFO_LOCATION: undefined;
@@ -18,16 +18,16 @@ export type AppStackParamList = {
   Home: NavigatorScreenParams<HomeTabParamList>;
   LikedMe: undefined;
   LikedMeProfile: {
-    like: Like;
+    like: Entity.View;
   };
   Main: undefined;
   Messages: {
     matchId: string;
-    match: Match;
+    match: Entity.Match;
   };
   ProfileEdit: undefined;
   ProfileNearby: {
-    profile: Profile;
+    profile: Entity.Profile;
   };
   ProfileSetting: undefined;
   SelectRelationshipGoal: undefined;
@@ -41,6 +41,6 @@ export type AppStackParamList = {
   SignInWithPhoneNumber: undefined;
   Welcome: undefined;
   DATING_SWIPE_PROFILE: {
-    profile: Profile;
+    profile: Entity.Profile;
   };
 };

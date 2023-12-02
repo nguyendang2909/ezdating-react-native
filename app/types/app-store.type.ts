@@ -4,7 +4,7 @@ import { AuthorizationResult } from 'react-native-geolocation-service';
 import { IMessage } from 'react-native-gifted-chat';
 import { ThunkAction } from 'redux-thunk';
 
-import { Like, Match, Message, Profile, ProfileFilter, User } from './fe.type';
+import { Entity } from './entities.type';
 
 export declare namespace AppStore {
   type RootState = ReturnType<typeof store.getState>;
@@ -13,9 +13,9 @@ export declare namespace AppStore {
     accessToken?: string;
     refreshToken?: string;
     isLogged?: boolean;
-    profile: Partial<Profile>;
-    profileFilter: Partial<ProfileFilter>;
-    user: Partial<User>;
+    profile: Partial<Entity.Profile>;
+    profileFilter: Partial<Entity.ProfileFilter>;
+    user: Partial<Entity.User>;
     osPermissions?: {
       locationService?: AuthorizationResult;
     };
@@ -25,14 +25,14 @@ export declare namespace AppStore {
   };
 
   type ConversationState = {
-    data: AppStore.MatchData[];
+    data: AppStore.Match[];
   };
 
-  type MatchData = Match & {
+  type Match = Entity.Match & {
     lastRefreshedAt: string;
   };
 
-  type LikeData = Like & {
+  type View = Entity.View & {
     lastRefreshedAt: string;
   };
 
@@ -50,7 +50,7 @@ export declare namespace AppStore {
   };
 
   type MatchState = {
-    data: MatchData[];
+    data: Match[];
     infoMatches: {
       lastRefreshedAt?: string;
       isReachedEnd?: boolean;
@@ -62,18 +62,18 @@ export declare namespace AppStore {
   };
 
   type Messages = Partial<{
-    [T: string]: Message[];
+    [T: string]: Entity.Message[];
   }>;
 
   type UserState = {
     swipe?: {
-      data?: User[];
+      data?: Entity.User[];
     };
-    data?: Record<string, User>;
+    data?: Record<string, Entity.User>;
   };
 
   type NearbyState = {
-    data: Profile[];
+    data: Entity.Profile[];
     info: {
       lastRefreshedAt?: string;
       isReachedEnd?: boolean;
@@ -81,7 +81,7 @@ export declare namespace AppStore {
   };
 
   type SwipeProfileState = {
-    data: Profile[];
+    data: Entity.Profile[];
     info: {
       lastRefreshedAt?: string;
       isReachedEnd?: boolean;
@@ -89,11 +89,11 @@ export declare namespace AppStore {
   };
 
   type LikesState = {
-    data?: Like[];
+    data?: Entity.View[];
   };
 
   type LikedMeState = {
-    data: LikeData[];
+    data: View[];
     info: {
       lastRefreshedAt?: string;
       isReachedEnd?: boolean;

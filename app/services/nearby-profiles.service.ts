@@ -1,16 +1,16 @@
 import { CommonService } from 'app/commons/service.common';
-import { Profile } from 'app/types';
+import { Entity } from 'app/types';
 import _ from 'lodash';
 
 class NearbyProfilesService extends CommonService {
-  sortAndUniq(news: Profile[], olds: Profile[]) {
+  sortAndUniq(news: Entity.Profile[], olds: Entity.Profile[]) {
     return _.chain([...news, ...olds])
       .uniqBy('_id')
       .orderBy('distance', 'asc')
       .value();
   }
 
-  public getCursor(profiles: Profile[]): string | undefined {
+  public getCursor(profiles: Entity.Profile[]): string | undefined {
     if (!profiles.length) {
       return undefined;
     }

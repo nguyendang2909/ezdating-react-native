@@ -1,8 +1,8 @@
 import { CommonService } from 'app/commons/service.common';
-import { Profile } from 'app/types';
+import { Entity } from 'app/types';
 
 class ProfilesService extends CommonService {
-  getIdsWithSameLastDistance(profiles: Profile[]): string[] {
+  getIdsWithSameLastDistance(profiles: Entity.Profile[]): string[] {
     const length = profiles.length;
     if (!length) {
       return [];

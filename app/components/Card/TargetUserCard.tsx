@@ -1,5 +1,5 @@
 import { Pressable, Text, View } from '@gluestack-ui/themed';
-import { Profile } from 'app/types';
+import { Entity } from 'app/types/entities.type';
 import React from 'react';
 import { StyleSheet } from 'react-native';
 
@@ -8,7 +8,7 @@ import { LinearGradient } from '../LinearGradient';
 
 type TargetUserCardProps = {
   onPress?: () => void;
-  targetUser?: Profile;
+  targetUser?: Entity.Profile;
 };
 
 export const TargetUserCard: React.FC<TargetUserCardProps> = ({ onPress, targetUser }) => {

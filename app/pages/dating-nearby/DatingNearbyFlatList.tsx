@@ -2,7 +2,7 @@ import { Box, ButtonSpinner, FlatList, ScrollView, View } from '@gluestack-ui/th
 import { ViewSafeArea } from 'app/components';
 import { UserProfile } from 'app/containers/UserProfile';
 import { useNearbyProfiles } from 'app/hooks/useNearbyUsers';
-import { Profile } from 'app/types';
+import { Entity } from 'app/types';
 import { scrollUtil } from 'app/utils/scroll.util';
 import { Spinner } from 'native-base';
 import React, { useCallback, useState } from 'react';
@@ -12,7 +12,7 @@ import { NearbyUserActions } from '../dating-nearby-profile/NearbyUserActions';
 import { NearbyProfileItem } from './NearbyProfileItem';
 
 export const DatingNearbyFlatList: React.FC = () => {
-  const [profile, setProfile] = useState<Profile | null>(null);
+  const [profile, setProfile] = useState<Entity.Profile | null>(null);
 
   const handleCloseProfileDetail = useCallback(() => {
     setProfile(null);
@@ -58,7 +58,7 @@ export const DatingNearbyFlatList: React.FC = () => {
             }
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
-            renderItem={({ item }: { item: Profile }) => (
+            renderItem={({ item }: { item: Entity.Profile }) => (
               <NearbyProfileItem profile={item} onOpen={setProfile} />
             )}
           ></FlatList>

@@ -1,139 +1,7 @@
 import { Image } from 'react-native-image-crop-picker';
 
-import {
-  DevicePlatform,
-  EducationLevel,
-  Gender,
-  MediaFileType,
-  Membership,
-  RelationshipGoal,
-  RelationshipStatus,
-  UserRole,
-  UserStatus,
-} from './data.type';
-
-export type BaseEntity = {
-  _id: string;
-  createdAt?: string;
-  updatedAt?: string;
-};
-
-export type MediaFile = BaseEntity & {
-  key: string;
-  location: string;
-  type: MediaFileType;
-};
-
-export type User = BaseEntity & {
-  coins?: number;
-  email?: string;
-  phoneNumber?: string;
-  role?: UserRole;
-  weight: number;
-  status?: UserStatus;
-};
-
-export type Country = BaseEntity & {
-  name?: string;
-  iso3?: string;
-  numericCode?: string;
-  iso2?: string;
-  phoneCode?: string;
-  capital?: string;
-  currency?: string;
-  currencyName?: string;
-  currencySymbol?: string;
-  tld?: string;
-  native?: string;
-  region?: string;
-  subregion?: string;
-  translations?: string;
-  latitude?: string;
-  longitude?: string;
-  emoji?: string;
-  emojiU?: string;
-  sourceId?: number;
-};
-
-export type State = BaseEntity & {
-  name?: string;
-  country?: Country;
-  countryCode?: string;
-  iso2?: string;
-  type?: string;
-  latitude?: string;
-  longitude?: string;
-  sourceId?: string;
-};
-
-export type Profile = BaseEntity & {
-  age?: number;
-  birthday?: string;
-  company?: string;
-  educationLevel?: EducationLevel;
-  gender?: Gender;
-  geolocation?: {
-    coordinates?: [number, number];
-    type?: 'Point';
-  };
-  height?: number;
-  introduce?: string;
-  jobTitle?: string;
-  hideAge?: boolean;
-  hideDistance?: boolean;
-  lastActivatedAt?: Date;
-  languages?: string[];
-  mediaFiles?: MediaFile[];
-  membership?: Membership;
-  nickname?: string;
-  relationshipGoal?: RelationshipGoal;
-  relationshipStatus?: RelationshipStatus;
-  school?: string;
-  weight?: number;
-  distance?: number;
-  state?: State;
-};
-
-export type ProfileFilter = BaseEntity &
-  Partial<{
-    gender: Gender;
-    maxDistance: number;
-    maxAge: number;
-    minAge: number;
-    relationshipGoal?: RelationshipGoal;
-  }>;
-
-export type Message = BaseEntity & {
-  _matchId?: string;
-  _userId?: string;
-  replyMessage?: Message;
-  audio?: string;
-  image?: string;
-  // likeUserIds?: string[];
-  // loveUserIds?: string[];
-  text?: string;
-  uuid?: string;
-  video?: string;
-};
-
-export type Match = BaseEntity & {
-  lastMessage?: Message;
-  userOneRead?: boolean;
-  read?: boolean;
-  targetProfile: Profile;
-};
-
-export type Like = BaseEntity & {
-  profile?: Profile;
-  targetProfile?: Profile;
-  isMatched?: boolean;
-};
-
-export type View = BaseEntity & {
-  profile?: Profile;
-  targetProfile?: Profile;
-  isLiked?: boolean;
-};
+import { DevicePlatform, Gender, RelationshipGoal, RelationshipStatus } from './data.type';
+import { Entity } from './entities.type';
 
 export declare namespace ApiRequest {
   type FindAll = {
@@ -292,15 +160,15 @@ export declare namespace ApiResponse {
     type: string;
   };
 
-  type MatchData = FetchData<Match>;
+  type Match = FetchData<Entity.Match>;
 
-  type Matches = PaginatedResponse<Match>;
+  type Matches = PaginatedResponse<Entity.Match>;
 
-  type Likes = PaginatedResponse<Like>;
+  type Views = PaginatedResponse<Entity.View>;
 
-  type LikeData = FetchData<Like>;
+  type View = FetchData<Entity.View>;
 
-  type Profiles = PaginatedResponse<Profile>;
+  type Profiles = PaginatedResponse<Entity.Profile>;
 
   type Unmatch = FetchData<{ _id?: string }>;
 
@@ -320,20 +188,20 @@ export declare namespace ApiResponse {
 
   type RemoveData = FetchData<{ success: true }>;
 
-  type UploadedFileListData = FetchData<MediaFile[]>;
+  type UploadedFileListData = FetchData<Entity.MediaFile[]>;
 
-  type UserData = FetchData<User>;
+  type User = FetchData<Entity.User>;
 
-  type ProfileData = FetchData<Profile>;
+  type Profile = FetchData<Entity.Profile>;
 
-  type ProfileFilterData = FetchData<ProfileFilter>;
+  type ProfileFilterData = FetchData<Entity.ProfileFilter>;
 
   type Logged = FetchData<{
     accessToken: string;
     refreshToken: string;
   }>;
 
-  type Messages = PaginatedResponse<Message> & {
+  type Messages = PaginatedResponse<Entity.Message> & {
     _matchId: string;
   };
 }

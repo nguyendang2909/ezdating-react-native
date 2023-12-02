@@ -1,11 +1,11 @@
 import { useNavigation } from '@react-navigation/native';
-import { Match } from 'app/types';
+import { Entity } from 'app/types/entities.type';
 import { mediaFileUtil } from 'app/utils/media-files.util';
 import { Avatar, Box, HStack, Pressable, Text } from 'native-base';
 import React, { useCallback } from 'react';
 
 type FCProps = {
-  data: Match;
+  data: Entity.Match;
 };
 
 export const ConversationBox: React.FC<FCProps> = ({ data }) => {

@@ -3,10 +3,10 @@ import { DetailRow } from 'app/components';
 import { FontAwesome, MaterialCommunityIcons, MaterialIcons } from 'app/components/Icon/Lib';
 import { RELATIONSHIP_GOAL_MESSAGES, RELATIONSHIP_STATUS_MESSAGES } from 'app/constants/constants';
 import { useMessages } from 'app/hooks';
-import { Profile } from 'app/types';
+import { Entity } from 'app/types';
 import React from 'react';
 
-export const UserProfileDetails: React.FC<{ profile: Profile }> = ({ profile }) => {
+export const UserProfileDetails: React.FC<{ profile: Entity.Profile }> = ({ profile }) => {
   const { formatMessage } = useMessages();
 
   return (

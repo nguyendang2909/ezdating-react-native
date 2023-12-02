@@ -6,7 +6,7 @@ import { api } from './api';
 
 const usersApi = api.injectEndpoints({
   endpoints: builder => ({
-    getMyUser: builder.query<ApiResponse.ProfileData, void>({
+    getMyUser: builder.query<ApiResponse.Profile, void>({
       query: () => ({
         url: API_ENDPOINTS.USERS.ME,
         method: 'GET',

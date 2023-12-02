@@ -10,7 +10,7 @@ import {
   VStack,
 } from '@gluestack-ui/themed';
 import { useNavigation } from '@react-navigation/native';
-import { AppStore, Match } from 'app/types';
+import { AppStore, Entity } from 'app/types';
 import { mediaFileUtil } from 'app/utils/media-files.util';
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
@@ -19,7 +19,7 @@ import { BackIconButton } from '../../containers/IconButton/BackIconButton';
 import { MessagesSetting } from './MessagesSetting';
 
 export type FCProps = {
-  match?: AppStore.MatchData | Match;
+  match?: AppStore.Match | Entity.Match;
 };
 export const MessagesHeader: React.FC<FCProps> = ({ match }) => {
   const navigation = useNavigation();

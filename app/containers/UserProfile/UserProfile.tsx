@@ -7,11 +7,11 @@ import {
   UserProfileDetails,
   UserProfileImagesMemo,
 } from 'app/pages';
-import { Profile } from 'app/types';
+import { Entity } from 'app/types';
 import React from 'react';
 
 type UserProfileScrollViewProps = {
-  profile: Profile;
+  profile: Entity.Profile;
   onClose?: () => void;
 };
 

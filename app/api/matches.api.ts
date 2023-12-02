@@ -12,13 +12,13 @@ const matchesApi = api.injectEndpoints({
         method: 'POST',
       }),
     }),
-    getMatch: builder.query<ApiResponse.MatchData, string>({
+    getMatch: builder.query<ApiResponse.Match, string>({
       query: id => ({
         url: `${API_ENDPOINTS.MATCHES.INDEX}/${id}`,
         method: 'GET',
       }),
     }),
-    getMatchByTargetUserId: builder.mutation<ApiResponse.MatchData, string>({
+    getMatchByTargetUserId: builder.mutation<ApiResponse.Match, string>({
       query: userId => ({
         url: `${API_ENDPOINTS.MATCHES.BY_TARGET_USER}/${userId}`,
         method: 'GET',
@@ -43,7 +43,7 @@ const matchesApi = api.injectEndpoints({
         params,
       }),
     }),
-    createMatch: builder.mutation<ApiResponse.MatchData, ApiRequest.CreateMatch>({
+    createMatch: builder.mutation<ApiResponse.Match, ApiRequest.CreateMatch>({
       query: body => ({
         url: API_ENDPOINTS.MATCHES.INDEX,
         method: 'POST',

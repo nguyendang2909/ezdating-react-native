@@ -6,19 +6,19 @@ import { api } from './api';
 const likesApi = api.injectEndpoints({
   endpoints: builder => ({
     // Likes
-    refreshLikedMe: builder.query<ApiResponse.Likes, ApiRequest.FindManyLikedMe>({
+    refreshLikedMe: builder.query<ApiResponse.Views, ApiRequest.FindManyLikedMe>({
       query: () => ({
         url: API_ENDPOINTS.LIKES.ME,
         method: 'GET',
       }),
     }),
-    getNewestLikedMe: builder.mutation<ApiResponse.Likes, ApiRequest.FindManyLikedMe>({
+    getNewestLikedMe: builder.mutation<ApiResponse.Views, ApiRequest.FindManyLikedMe>({
       query: () => ({
         url: API_ENDPOINTS.LIKES.ME,
         method: 'GET',
       }),
     }),
-    getNextLikedMe: builder.mutation<ApiResponse.Likes, ApiRequest.FindManyLikedMe>({
+    getNextLikedMe: builder.mutation<ApiResponse.Views, ApiRequest.FindManyLikedMe>({
       query: params => ({
         url: API_ENDPOINTS.LIKES.ME,
         method: 'GET',
@@ -38,7 +38,7 @@ const likesApi = api.injectEndpoints({
         method: 'GET',
       }),
     }),
-    getOneLikedMe: builder.query<ApiResponse.LikeData, string>({
+    getOneLikedMe: builder.query<ApiResponse.View, string>({
       query: id => ({
         url: `${API_ENDPOINTS.LIKES.ME}/${id}`,
         method: 'GET',

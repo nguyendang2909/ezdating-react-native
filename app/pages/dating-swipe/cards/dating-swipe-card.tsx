@@ -1,12 +1,12 @@
 import { HStack, Text, View } from '@gluestack-ui/themed';
 import { AgeText, CacheImage, DistanceText, LinearGradient } from 'app/components';
-import { Profile } from 'app/types';
+import { Entity } from 'app/types';
 import _ from 'lodash';
 import React from 'react';
 import { StyleSheet } from 'react-native';
 
 interface CardProps {
-  profile: Profile;
+  profile: Entity.Profile;
   height: number;
   width: number;
 }

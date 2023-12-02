@@ -1,16 +1,16 @@
 import { Box, Pressable, Text } from '@gluestack-ui/themed';
 import { CacheImage, LinearGradient } from 'app/components';
 import { height, width } from 'app/styles';
-import { Match } from 'app/types';
+import { Entity } from 'app/types';
 import _ from 'lodash';
 import { FC, useCallback } from 'react';
 import { StyleSheet } from 'react-native';
 
 type MatchCardItemProps = {
-  match: Match;
+  match: Entity.Match;
   width: number;
   height: number;
-  onPress: (e: Match) => void;
+  onPress: (e: Entity.Match) => void;
 };
 
 export const MatchCardItem: FC<MatchCardItemProps> = ({

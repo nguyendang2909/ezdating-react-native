@@ -4,6 +4,7 @@ export * from './app-store.type';
 export * from './common.type';
 export * from './configs.type';
 export * from './data.type';
+export * from './entities.type';
 export * from './fe.type';
 export * from './form-params.type';
 export * from './navigation.type';
