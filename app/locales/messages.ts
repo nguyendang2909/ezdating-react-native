@@ -405,4 +405,16 @@ export const messages = defineMessages({
     defaultMessage: 'Please upload at least 1 photo',
     id: '0399c8c2ff',
   },
+  'Likes will appear here once you start to Like people.': {
+    defaultMessage: 'Likes will appear here once you start to Like people.',
+    id: '760d357e21',
+  },
+  'Start matching': {
+    defaultMessage: 'Start matching',
+    id: '06a58cea3c',
+  },
+  'Start like': {
+    defaultMessage: 'Start like',
+    id: 'ace9ded6be',
+  },
 });

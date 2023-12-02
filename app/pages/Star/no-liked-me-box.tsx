@@ -4,7 +4,7 @@ import React from 'react';
 
 import { LinearGradient } from '../../components';
 
-export const NoConversationBox: React.FC = () => {
+export const NoLikedMeBox: React.FC = () => {
   const { formatMessage } = useMessages();
   return (
     <>
@@ -20,14 +20,12 @@ export const NoConversationBox: React.FC = () => {
           </Box>
           <Box mt={16}>
             <Text textAlign="center" bold={true} size="2xl">
-              {formatMessage('Start matching')}
+              {formatMessage('Start like')}
             </Text>
           </Box>
           <Box mt={8}>
             <Text textAlign="center">
-              {formatMessage(
-                'Matches will appear here once you start to Like people. You can message them directly from here when you’re ready to spark up the conversation.',
-              )}
+              {formatMessage('Likes will appear here once you start to Like people.')}
             </Text>
           </Box>
         </Box>

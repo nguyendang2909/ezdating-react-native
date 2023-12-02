@@ -9,6 +9,7 @@ import { scrollUtil } from 'app/utils/scroll.util';
 import React, { useCallback } from 'react';
 import { NativeScrollEvent, NativeSyntheticEvent, RefreshControl } from 'react-native';
 
+import { NoLikedMeBox } from './no-liked-me-box';
 import { StarFlatListItem } from './StarFlastListItem';
 
 export const StarBody: React.FC = () => {
@@ -21,6 +22,7 @@ export const StarBody: React.FC = () => {
     fetchNewest,
     fetchNext,
     isLoading,
+    lastRefreshedAt,
   } = useLikedMe();
   const membership = useAppSelector(state => state.app.profile.membership) || MEMBERSHIPS.FREE;
 
@@ -43,6 +45,10 @@ export const StarBody: React.FC = () => {
 
   if (isLoading) {
     return <LoadingOverlay />;
+  }
+
+  if (!!lastRefreshedAt && !likes.length) {
+    return <NoLikedMeBox />;
   }
 
   return (
