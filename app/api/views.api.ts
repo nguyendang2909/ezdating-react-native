@@ -1,5 +1,5 @@
 import { API_ENDPOINTS } from 'app/config';
-import { ApiRequest } from 'app/types';
+import { ApiRequest, ApiResponse } from 'app/types';
 
 import { api } from './api';
 
@@ -13,7 +13,13 @@ const viewsApi = api.injectEndpoints({
         body,
       }),
     }),
+    getViews: builder.query<ApiResponse.Views, void>({
+      query: () => ({
+        url: API_ENDPOINTS.VIEWS.INDEX,
+        method: 'GET',
+      }),
+    }),
   }),
 });
 
-export const { useSendViewMutation } = viewsApi;
+export const { useSendViewMutation, useGetViewsQuery } = viewsApi;
