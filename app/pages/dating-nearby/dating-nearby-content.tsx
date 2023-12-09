@@ -1,5 +1,5 @@
-import { Box, ButtonSpinner, FlatList, ScrollView, View } from '@gluestack-ui/themed';
-import { ViewSafeArea } from 'app/components';
+import { Box, FlatList, ScrollView, View } from '@gluestack-ui/themed';
+import { LoadingContent, ViewSafeArea } from 'app/components';
 import { UserProfile } from 'app/containers/UserProfile';
 import { useNearbyProfiles } from 'app/hooks/useNearbyUsers';
 import { Entity } from 'app/types';
@@ -9,9 +9,10 @@ import React, { useCallback, useState } from 'react';
 import { Modal, NativeScrollEvent, NativeSyntheticEvent, RefreshControl } from 'react-native';
 
 import { NearbyUserActions } from '../dating-nearby-profile/NearbyUserActions';
+import { DatingNearbyNoCard } from './dating-nearby-no-card';
 import { NearbyProfileItem } from './NearbyProfileItem';
 
-export const DatingNearbyFlatList: React.FC = () => {
+export const DatingNearbyContent: React.FC = () => {
   const [profile, setProfile] = useState<Entity.Profile | null>(null);
 
   const handleCloseProfileDetail = useCallback(() => {
@@ -35,45 +36,45 @@ export const DatingNearbyFlatList: React.FC = () => {
     fetchNext();
   };
 
+  if (!nearbyUsers.length) {
+    if (isLoading) {
+      return <LoadingContent />;
+    }
+
+    if (lastRefreshedAt) {
+      return <DatingNearbyNoCard isRefreshing={isLoadingNewest} refresh={fetchNewest} />;
+    }
+
+    // Show error
+    return <></>;
+  }
+
   return (
     <>
-      {!isLoading ? (
-        <>
-          <FlatList
-            showsVerticalScrollIndicator={false}
-            refreshControl={
-              <RefreshControl refreshing={isLoadingNewest} onRefresh={fetchNewest}></RefreshControl>
-            }
-            onScroll={handleScroll}
-            numColumns={2}
-            data={nearbyUsers}
-            ListFooterComponent={
-              isLoadingNext ? (
-                <Box mt={16}>
-                  <Spinner />
-                </Box>
-              ) : (
-                <></>
-              )
-            }
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
-            renderItem={({ item }: { item: Entity.Profile }) => (
-              <NearbyProfileItem profile={item} onOpen={setProfile} />
-            )}
-          ></FlatList>
-        </>
-      ) : (
-        <Box
-          sx={{
-            flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <ButtonSpinner />
-        </Box>
-      )}
+      <FlatList
+        showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl refreshing={isLoadingNewest} onRefresh={fetchNewest}></RefreshControl>
+        }
+        onScroll={handleScroll}
+        numColumns={2}
+        data={nearbyUsers}
+        ListFooterComponent={
+          isLoadingNext ? (
+            <Box mt={16}>
+              <Spinner />
+            </Box>
+          ) : (
+            <></>
+          )
+        }
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        renderItem={({ item }: { item: Entity.Profile }) => (
+          <NearbyProfileItem profile={item} onOpen={setProfile} />
+        )}
+      ></FlatList>
+
       <Modal visible={!!profile} animationType="slide">
         <View flex={1}>
           <View position="absolute" bottom={0} left={0} right={0} zIndex={999}>

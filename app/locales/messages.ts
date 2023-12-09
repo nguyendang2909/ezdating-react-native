@@ -405,9 +405,9 @@ export const messages = defineMessages({
     defaultMessage: 'Please upload at least 1 photo',
     id: '0399c8c2ff',
   },
-  'Likes will appear here once you start to Like people.': {
-    defaultMessage: 'Likes will appear here once you start to Like people.',
-    id: '760d357e21',
+  'Likes will appear here once people start to like you.': {
+    defaultMessage: 'Likes will appear here once people start to like you.',
+    id: '8a0aae31d7',
   },
   'Start matching': {
     defaultMessage: 'Start matching',
@@ -416,5 +416,21 @@ export const messages = defineMessages({
   'Start like': {
     defaultMessage: 'Start like',
     id: 'ace9ded6be',
+  },
+  'No users found around you. Try changing the filter and reload.': {
+    defaultMessage: 'No users found around you. Try changing the filter and reload.',
+    id: 'b555205c1c',
+  },
+  Reload: {
+    defaultMessage: 'Reload',
+    id: '7dd092e7f6',
+  },
+  'Change your filter': {
+    defaultMessage: 'Change your filter',
+    id: 'ec2fd35967',
+  },
+  'No users found. Try changing the filter and reload.': {
+    defaultMessage: 'No users found. Try changing the filter and reload.',
+    id: 'f6ee2b7d92',
   },
 });

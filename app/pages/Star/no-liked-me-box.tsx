@@ -25,7 +25,7 @@ export const NoLikedMeBox: React.FC = () => {
           </Box>
           <Box mt={8}>
             <Text textAlign="center">
-              {formatMessage('Likes will appear here once you start to Like people.')}
+              {formatMessage('Likes will appear here once people start to like you.')}
             </Text>
           </Box>
         </Box>

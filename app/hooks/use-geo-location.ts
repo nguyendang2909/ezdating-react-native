@@ -9,22 +9,20 @@ export const useGeolocation = () => {
   const [longitude, latitude] = useAppSelector(s => s.app.profile.geolocation?.coordinates) || [];
 
   useEffect(() => {
-    if (!longitude && !latitude) {
-      Geolocation.getCurrentPosition(
-        async position => {
-          await updateProfile({
-            longitude: position.coords.longitude,
-            latitude: position.coords.latitude,
-          }).unwrap();
-        },
-        error => {
-          // See error code charts below.
-          console.log(error.code, error.message);
-        },
-        { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 },
-      );
-    }
-  }, [latitude, longitude, updateProfile]);
+    Geolocation.getCurrentPosition(
+      async position => {
+        await updateProfile({
+          longitude: position.coords.longitude,
+          latitude: position.coords.latitude,
+        }).unwrap();
+      },
+      error => {
+        // See error code charts below.
+        console.log(error.code, error.message);
+      },
+      { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 },
+    );
+  }, [updateProfile]);
 
   return {
     longitude,
