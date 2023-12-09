@@ -1,6 +1,7 @@
 import { View, VStack } from '@gluestack-ui/themed';
 import { SignInWithPhoneNumberButton } from 'app/containers/Button/SignInWithPhoneNumberButton';
 import { AppStackScreenProps } from 'app/navigators';
+import { SignInWithGoogleButton } from 'app/pages/sign-in';
 import { backgroundColor, heightFull, posititionAbsolute, widthFull, zIndex } from 'app/styles';
 import React, { FC } from 'react';
 import { ImageBackground } from 'react-native';
@@ -32,9 +33,9 @@ export const SignInScreen: FC<FCProps> = () => {
           {/* <View>
             <SignInWithFacebookButton />
           </View> */}
-          {/* <View>
+          <View>
             <SignInWithGoogleButton />
-          </View> */}
+          </View>
         </VStack>
       </View>
     </>
