@@ -4,6 +4,7 @@ import { LoadingContent } from 'app/components';
 import { APP_CONFIG } from 'app/config/config.app';
 import { useMessages } from 'app/hooks';
 import { Entity } from 'app/types';
+import _ from 'lodash';
 import { FC, useEffect, useMemo, useRef, useState } from 'react';
 import { Dimensions, StyleSheet } from 'react-native';
 import Swiper from 'react-native-deck-swiper';

@@ -1,17 +1,20 @@
-import { Button, ButtonSpinner, ButtonText } from '@gluestack-ui/themed';
-import React from 'react';
+import { Button, ButtonSpinner, ButtonText, View } from '@gluestack-ui/themed';
+import React, { ReactNode } from 'react';
 
 type LoadingButtonProps = React.ComponentProps<typeof Button> & {
   isLoading?: boolean;
+  startIcon?: ReactNode;
 };
 
 export const LoadingButton: React.FC<LoadingButtonProps> = ({
   children,
   isLoading = false,
+  startIcon,
   ...buttonProps
 }) => {
   return (
     <Button rounded={100} bgColor="$red600" {...buttonProps} disabled={isLoading}>
+      {!!startIcon && <View mr={8}>{startIcon}</View>}
       {isLoading ? <ButtonSpinner /> : <ButtonText>{children}</ButtonText>}
     </Button>
   );

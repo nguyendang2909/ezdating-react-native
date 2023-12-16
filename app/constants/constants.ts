@@ -142,3 +142,8 @@ export const API_METHODS = {
   PATCH: 'PATCH',
   DELETE: 'DELETE',
 };
+
+export const SIGN_IN_METHODS = {
+  GOOGLE: 'google',
+  PHONE_NUMBER: 'phone_number',
+};

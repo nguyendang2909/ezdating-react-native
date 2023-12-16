@@ -1,11 +1,20 @@
-import { Button, ButtonIcon, ButtonText } from '@gluestack-ui/themed';
+import { ButtonIcon } from '@gluestack-ui/themed';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { useSignInWithGoogleMutation } from 'app/api';
+import { LoadingButton } from 'app/components/Button';
 import { FontAwesome } from 'app/components/Icon/Lib';
+import { SIGN_IN_METHODS } from 'app/constants/constants';
 import { useMessages } from 'app/hooks';
+import { SignInMethod } from 'app/types';
 import React, { FC, useEffect } from 'react';
+import Toast from 'react-native-toast-message';
 
-export const SignInWithGoogleButton: FC = () => {
+type FCProps = {
+  signInMethod: SignInMethod | null;
+  setSignInMethod: (method: SignInMethod | null) => void;
+};
+
+export const SignInWithGoogleButton: FC<FCProps> = ({ signInMethod, setSignInMethod }) => {
   const { formatMessage } = useMessages();
   const [signIn] = useSignInWithGoogleMutation();
 
@@ -19,23 +28,32 @@ export const SignInWithGoogleButton: FC = () => {
 
   const handlePress = async () => {
     try {
+      setSignInMethod(SIGN_IN_METHODS.GOOGLE);
       await GoogleSignin.hasPlayServices();
       const googleUser = await GoogleSignin.signIn();
       const { idToken } = googleUser;
       if (idToken) {
         await signIn({ token: idToken }).unwrap();
       }
-    } catch (error) {}
+    } catch (error) {
+      Toast.show({ text1: formatMessage('Oops, something went wrong. Please try again.') });
+    } finally {
+      setSignInMethod(null);
+    }
   };
 
   return (
     <>
-      <Button backgroundColor="$amber600" onPress={handlePress}>
-        {/* 
-      @ts-ignore */}
-        <ButtonIcon mr={8} as={FontAwesome} name="google"></ButtonIcon>
-        <ButtonText>{formatMessage('Sign in with Google')}</ButtonText>
-      </Button>
+      <LoadingButton
+        disabled={![null, SIGN_IN_METHODS.GOOGLE].includes(signInMethod)}
+        isLoading={signInMethod === SIGN_IN_METHODS.GOOGLE}
+        onPress={handlePress}
+        backgroundColor="$amber600"
+        // @ts-ignore
+        startIcon={<ButtonIcon mr={8} as={FontAwesome} name="google"></ButtonIcon>}
+      >
+        {formatMessage('Sign in with Google')}
+      </LoadingButton>
     </>
   );
 };
