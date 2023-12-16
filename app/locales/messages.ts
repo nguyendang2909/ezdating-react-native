@@ -123,6 +123,7 @@ export const messages = defineMessages({
   },
   Remove: { defaultMessage: 'Remove', id: '1bfc992ee9' },
   Resend: { defaultMessage: 'Resend', id: '217c9c328a' },
+  'Resend OTP code': { defaultMessage: 'Resend OTP code', id: 'ad8e80b2ae' },
   'Retype password': { defaultMessage: 'Retype password', id: '91732954a6' },
   Save: { defaultMessage: 'Save', id: '8efa34becd' },
   Settings: { defaultMessage: 'Settings', id: '0f789d62f4' },
