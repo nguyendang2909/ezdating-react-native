@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00E356F31AD99517003FC87E /* EZDatingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* EZDatingTests.m */; };
+		00E356F31AD99517003FC87E /* DatingEZTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* DatingEZTests.m */; };
 		042342242A3467B30037E7A9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 042342232A3467B20037E7A9 /* GoogleService-Info.plist */; };
 		04639A0E2A34888A00448049 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 04639A0D2A34888A00448049 /* Fonts */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
@@ -26,30 +26,30 @@
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
-			remoteInfo = EZDating;
+			remoteInfo = "DatingEZ";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		00E356EE1AD99517003FC87E /* EZDatingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EZDatingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		00E356EE1AD99517003FC87E /* DatingEZTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "DatingEZTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		00E356F21AD99517003FC87E /* EZDatingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EZDatingTests.m; sourceTree = "<group>"; };
+		00E356F21AD99517003FC87E /* DatingEZTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "DatingEZTests.m"; sourceTree = "<group>"; };
 		042342232A3467B20037E7A9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		04639A0D2A34888A00448049 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Fonts; path = "../node_modules/react-native-vector-icons/Fonts"; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* EZDating.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EZDating.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = EZDating/AppDelegate.h; sourceTree = "<group>"; };
-		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = EZDating/AppDelegate.mm; sourceTree = "<group>"; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = EZDating/Images.xcassets; sourceTree = "<group>"; };
-		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = EZDating/Info.plist; sourceTree = "<group>"; };
-		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = EZDating/main.m; sourceTree = "<group>"; };
-		3B4392A12AC88292D35C810B /* Pods-EZDating.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EZDating.debug.xcconfig"; path = "Target Support Files/Pods-EZDating/Pods-EZDating.debug.xcconfig"; sourceTree = "<group>"; };
+		13B07F961A680F5B00A75B9A /* DatingEZ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DatingEZ.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = "DatingEZ/AppDelegate.h"; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = "DatingEZ/AppDelegate.mm"; sourceTree = "<group>"; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "DatingEZ/Images.xcassets"; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = "DatingEZ/Info.plist"; sourceTree = "<group>"; };
+		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = "DatingEZ/main.m"; sourceTree = "<group>"; };
+		3B4392A12AC88292D35C810B /* Pods-DatingEZ.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DatingEZ.debug.xcconfig"; path = "Target Support Files/Pods-DatingEZ/Pods-DatingEZ.debug.xcconfig"; sourceTree = "<group>"; };
 		4D0812994FABF7B5DE42E811 /* Pods_EZDating_EZDatingTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EZDating_EZDatingTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5709B34CF0A7D63546082F79 /* Pods-EZDating.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EZDating.release.xcconfig"; path = "Target Support Files/Pods-EZDating/Pods-EZDating.release.xcconfig"; sourceTree = "<group>"; };
-		5B7EB9410499542E8C5724F5 /* Pods-EZDating-EZDatingTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EZDating-EZDatingTests.debug.xcconfig"; path = "Target Support Files/Pods-EZDating-EZDatingTests/Pods-EZDating-EZDatingTests.debug.xcconfig"; sourceTree = "<group>"; };
-		89C6BE57DB24E9ADA2F236DE /* Pods-EZDating-EZDatingTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EZDating-EZDatingTests.release.xcconfig"; path = "Target Support Files/Pods-EZDating-EZDatingTests/Pods-EZDating-EZDatingTests.release.xcconfig"; sourceTree = "<group>"; };
-		951E59D51E504BC9C5F46169 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-EZDating/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
-		BE406F552862D73000A81E39 /* BootSplash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = BootSplash.storyboard; path = EZDating/BootSplash.storyboard; sourceTree = "<group>"; };
-		D5AFED2E09CC2E86D1338C0F /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-EZDating-EZDatingTests/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
+		5709B34CF0A7D63546082F79 /* Pods-DatingEZ.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DatingEZ.release.xcconfig"; path = "Target Support Files/Pods-DatingEZ/Pods-DatingEZ.release.xcconfig"; sourceTree = "<group>"; };
+		5B7EB9410499542E8C5724F5 /* Pods-DatingEZ-DatingEZTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DatingEZ-DatingEZTests.debug.xcconfig"; path = "Target Support Files/Pods-DatingEZ-DatingEZTests/Pods-DatingEZ-DatingEZTests.debug.xcconfig"; sourceTree = "<group>"; };
+		89C6BE57DB24E9ADA2F236DE /* Pods-DatingEZ-DatingEZTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DatingEZ-DatingEZTests.release.xcconfig"; path = "Target Support Files/Pods-DatingEZ-DatingEZTests/Pods-DatingEZ-DatingEZTests.release.xcconfig"; sourceTree = "<group>"; };
+		951E59D51E504BC9C5F46169 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-DatingEZ/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
+		BE406F552862D73000A81E39 /* BootSplash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = BootSplash.storyboard; path = DatingEZ/BootSplash.storyboard; sourceTree = "<group>"; };
+		D5AFED2E09CC2E86D1338C0F /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-DatingEZ-DatingEZTests/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		F8A4671BBD95E2D15EA6F84C /* Pods_EZDating.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EZDating.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -74,13 +74,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		00E356EF1AD99517003FC87E /* EZDatingTests */ = {
+		00E356EF1AD99517003FC87E /* DatingEZTests */ = {
 			isa = PBXGroup;
 			children = (
-				00E356F21AD99517003FC87E /* EZDatingTests.m */,
+				00E356F21AD99517003FC87E /* DatingEZTests.m */,
 				00E356F01AD99517003FC87E /* Supporting Files */,
 			);
-			path = EZDatingTests;
+			path = "DatingEZTests";
 			sourceTree = "<group>";
 		};
 		00E356F01AD99517003FC87E /* Supporting Files */ = {
@@ -91,7 +91,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		13B07FAE1A68108700A75B9A /* EZDating */ = {
+		13B07FAE1A68108700A75B9A /* DatingEZ */ = {
 			isa = PBXGroup;
 			children = (
 				04639A0D2A34888A00448049 /* Fonts */,
@@ -103,7 +103,7 @@
 				BE406F552862D73000A81E39 /* BootSplash.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
-			name = EZDating;
+			name = "DatingEZ";
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
@@ -119,18 +119,18 @@
 		547A8E9E9663ECB3355FB756 /* ExpoModulesProviders */ = {
 			isa = PBXGroup;
 			children = (
-				6289853FD5D818F15D17248E /* EZDating */,
-				E4DC8A9EFE6F9C5F90DD96E4 /* EZDatingTests */,
+				6289853FD5D818F15D17248E /* DatingEZ */,
+				E4DC8A9EFE6F9C5F90DD96E4 /* DatingEZTests */,
 			);
 			name = ExpoModulesProviders;
 			sourceTree = "<group>";
 		};
-		6289853FD5D818F15D17248E /* EZDating */ = {
+		6289853FD5D818F15D17248E /* DatingEZ */ = {
 			isa = PBXGroup;
 			children = (
 				951E59D51E504BC9C5F46169 /* ExpoModulesProvider.swift */,
 			);
-			name = EZDating;
+			name = "DatingEZ";
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -143,9 +143,9 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				13B07FAE1A68108700A75B9A /* EZDating */,
+				13B07FAE1A68108700A75B9A /* DatingEZ */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
-				00E356EF1AD99517003FC87E /* EZDatingTests */,
+				00E356EF1AD99517003FC87E /* DatingEZTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
@@ -159,8 +159,8 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* EZDating.app */,
-				00E356EE1AD99517003FC87E /* EZDatingTests.xctest */,
+				13B07F961A680F5B00A75B9A /* DatingEZ.app */,
+				00E356EE1AD99517003FC87E /* DatingEZTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -168,28 +168,28 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3B4392A12AC88292D35C810B /* Pods-EZDating.debug.xcconfig */,
-				5709B34CF0A7D63546082F79 /* Pods-EZDating.release.xcconfig */,
-				5B7EB9410499542E8C5724F5 /* Pods-EZDating-EZDatingTests.debug.xcconfig */,
-				89C6BE57DB24E9ADA2F236DE /* Pods-EZDating-EZDatingTests.release.xcconfig */,
+				3B4392A12AC88292D35C810B /* Pods-DatingEZ.debug.xcconfig */,
+				5709B34CF0A7D63546082F79 /* Pods-DatingEZ.release.xcconfig */,
+				5B7EB9410499542E8C5724F5 /* Pods-DatingEZ-DatingEZTests.debug.xcconfig */,
+				89C6BE57DB24E9ADA2F236DE /* Pods-DatingEZ-DatingEZTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		E4DC8A9EFE6F9C5F90DD96E4 /* EZDatingTests */ = {
+		E4DC8A9EFE6F9C5F90DD96E4 /* DatingEZTests */ = {
 			isa = PBXGroup;
 			children = (
 				D5AFED2E09CC2E86D1338C0F /* ExpoModulesProvider.swift */,
 			);
-			name = EZDatingTests;
+			name = "DatingEZTests";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		00E356ED1AD99517003FC87E /* EZDatingTests */ = {
+		00E356ED1AD99517003FC87E /* DatingEZTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "EZDatingTests" */;
+			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "DatingEZTests" */;
 			buildPhases = (
 				A55EABD7B0C7F3A422A6CC61 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
@@ -203,14 +203,14 @@
 			dependencies = (
 				00E356F51AD99517003FC87E /* PBXTargetDependency */,
 			);
-			name = EZDatingTests;
-			productName = EZDatingTests;
-			productReference = 00E356EE1AD99517003FC87E /* EZDatingTests.xctest */;
+			name = "DatingEZTests";
+			productname = "DatingEZTests";
+			productReference = 00E356EE1AD99517003FC87E /* DatingEZTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		13B07F861A680F5B00A75B9A /* EZDating */ = {
+		13B07F861A680F5B00A75B9A /* DatingEZ */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "EZDating" */;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "DatingEZ" */;
 			buildPhases = (
 				C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
@@ -226,9 +226,9 @@
 			);
 			dependencies = (
 			);
-			name = EZDating;
-			productName = EZDating;
-			productReference = 13B07F961A680F5B00A75B9A /* EZDating.app */;
+			name = "DatingEZ";
+			productName = "DatingEZ";
+			productReference = 13B07F961A680F5B00A75B9A /* DatingEZ.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -248,7 +248,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "EZDating" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "DatingEZ" */;
 			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -262,8 +262,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				13B07F861A680F5B00A75B9A /* EZDating */,
-				00E356ED1AD99517003FC87E /* EZDatingTests */,
+				13B07F861A680F5B00A75B9A /* DatingEZ */,
+				00E356ED1AD99517003FC87E /* DatingEZTests */,
 			);
 		};
 /* End PBXProject section */
@@ -312,15 +312,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-EZDating/Pods-EZDating-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-DatingEZ/Pods-DatingEZ-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-EZDating/Pods-EZDating-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-DatingEZ/Pods-DatingEZ-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EZDating/Pods-EZDating-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DatingEZ/Pods-DatingEZ-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A55EABD7B0C7F3A422A6CC61 /* [CP] Check Pods Manifest.lock */ = {
@@ -338,7 +338,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-EZDating-EZDatingTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-DatingEZ-DatingEZTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -360,7 +360,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-EZDating-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-DatingEZ-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -373,15 +373,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-EZDating-EZDatingTests/Pods-EZDating-EZDatingTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-DatingEZ-DatingEZTests/Pods-DatingEZ-DatingEZTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-EZDating-EZDatingTests/Pods-EZDating-EZDatingTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-DatingEZ-DatingEZTests/Pods-DatingEZ-DatingEZTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EZDating-EZDatingTests/Pods-EZDating-EZDatingTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DatingEZ-DatingEZTests/Pods-DatingEZ-DatingEZTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E235C05ADACE081382539298 /* [CP] Copy Pods Resources */ = {
@@ -390,15 +390,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-EZDating/Pods-EZDating-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-DatingEZ/Pods-DatingEZ-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-EZDating/Pods-EZDating-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-DatingEZ/Pods-DatingEZ-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EZDating/Pods-EZDating-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DatingEZ/Pods-DatingEZ-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F6A41C54EA430FDDC6A6ED99 /* [CP] Copy Pods Resources */ = {
@@ -407,15 +407,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-EZDating-EZDatingTests/Pods-EZDating-EZDatingTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-DatingEZ-DatingEZTests/Pods-DatingEZ-DatingEZTests-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-EZDating-EZDatingTests/Pods-EZDating-EZDatingTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-DatingEZ-DatingEZTests/Pods-DatingEZ-DatingEZTests-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EZDating-EZDatingTests/Pods-EZDating-EZDatingTests-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DatingEZ-DatingEZTests/Pods-DatingEZ-DatingEZTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F6DF7BD890BB1FC7FD9A1916 /* [CP-User] [RNFB] Core Configuration */ = {
@@ -457,7 +457,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00E356F31AD99517003FC87E /* EZDatingTests.m in Sources */,
+				00E356F31AD99517003FC87E /* DatingEZTests.m in Sources */,
 				2215ACBC1E62C44583DB69A9 /* ExpoModulesProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -477,7 +477,7 @@
 /* Begin PBXTargetDependency section */
 		00E356F51AD99517003FC87E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 13B07F861A680F5B00A75B9A /* EZDating */;
+			target = 13B07F861A680F5B00A75B9A /* DatingEZ */;
 			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -485,7 +485,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5B7EB9410499542E8C5724F5 /* Pods-EZDating-EZDatingTests.debug.xcconfig */;
+			baseConfigurationReference = 5B7EB9410499542E8C5724F5 /* Pods-DatingEZ-DatingEZTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -493,7 +493,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = EZDatingTests/Info.plist;
+				INFOPLIST_FILE = "DatingEZTests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -506,21 +506,21 @@
 					"$(inherited)",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ezdating;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.datingez";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EZDating.app/EZDating";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DatingEZ.app/DatingEZ";
 			};
 			name = Debug;
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 89C6BE57DB24E9ADA2F236DE /* Pods-EZDating-EZDatingTests.release.xcconfig */;
+			baseConfigurationReference = 89C6BE57DB24E9ADA2F236DE /* Pods-DatingEZ-DatingEZTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
-				INFOPLIST_FILE = EZDatingTests/Info.plist;
+				INFOPLIST_FILE = "DatingEZTests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -533,22 +533,23 @@
 					"$(inherited)",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE -D EXPO_CONFIGURATION_DEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ezdating;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.datingez";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EZDating.app/EZDating";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DatingEZ.app/DatingEZ";
 			};
 			name = Release;
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-EZDating.debug.xcconfig */;
+			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-DatingEZ.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = EZDating/Info.plist;
+				INFOPLIST_FILE = "DatingEZ/Info.plist";
+             INFOPLIST_KEY_CFBundleDisplayName = "DatingEZ";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -559,8 +560,8 @@
 					"-lc++",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ezdating;
-				PRODUCT_NAME = EZDating;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.datingez";
+				PRODUCT_NAME = "DatingEZ";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -569,12 +570,13 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-EZDating.release.xcconfig */;
+			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-DatingEZ.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				INFOPLIST_FILE = EZDating/Info.plist;
+				INFOPLIST_FILE = "DatingEZ/Info.plist";
+             INFOPLIST_KEY_CFBundleDisplayName = "DatingEZ";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -585,8 +587,8 @@
 					"-lc++",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE -D EXPO_CONFIGURATION_DEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ezdating;
-				PRODUCT_NAME = EZDating;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.datingez";
+				PRODUCT_NAME = "DatingEZ";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -733,7 +735,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "EZDatingTests" */ = {
+		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "DatingEZTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				00E356F61AD99517003FC87E /* Debug */,
@@ -742,7 +744,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "EZDating" */ = {
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "DatingEZ" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
@@ -751,7 +753,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "EZDating" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "DatingEZ" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
