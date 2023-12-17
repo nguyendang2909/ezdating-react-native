@@ -40,7 +40,7 @@ elsif podfile_properties.key?('ios.flipper') then
   end
 end
 
-target 'EZDating' do
+target 'DatingEZ' do
   use_expo_modules!
   config = use_native_modules!
 
@@ -66,7 +66,7 @@ target 'EZDating' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
-  target 'EZDatingTests' do
+  target 'DatingEZTests' do
     inherit! :complete
     # Pods for testing
   end
