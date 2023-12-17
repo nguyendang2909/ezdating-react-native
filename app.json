@@ -1,9 +1,9 @@
 {
-  "name": "EZ Dating",
-  "displayName": "EZ Dating",
+  "name": "EZDating",
+  "displayName": "EZDating",
   "expo": {
-    "name": "EZ Dating",
-    "slug": "EZ Dating",
+    "name": "EZDating",
+    "slug": "EZDating",
     "scheme": "ezdating",
     "version": "1.0.0",
     "orientation": "portrait",
