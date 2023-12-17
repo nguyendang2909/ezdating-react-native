@@ -116,9 +116,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.ezdating"
+    namespace "com.appezdating"
     defaultConfig {
-        applicationId "com.ezdating"
+        applicationId "com.appezdating"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 6
