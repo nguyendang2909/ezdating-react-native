@@ -1,4 +1,4 @@
-package com.datingez;
+package com.appezdating;
 
 import android.app.Application;
 import android.content.res.Configuration;

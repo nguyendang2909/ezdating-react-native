@@ -1,10 +1,10 @@
 {
-  "name": "DatingEZ",
-  "displayName": "DatingEZ",
+  "name": "EZ Dating",
+  "displayName": "EZ Dating",
   "expo": {
-    "name": "DatingEZ",
-    "slug": "DatingEZ",
-    "scheme": "datingez",
+    "name": "EZ Dating",
+    "slug": "EZ Dating",
+    "scheme": "ezdating",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/app-icon-all.png",
@@ -22,7 +22,7 @@
     ],
     "android": {
       "icon": "./assets/images/app-icon-android-legacy.png",
-      "package": "com.datingez",
+      "package": "com.appezdating",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/app-icon-android-adaptive-foreground.png",
         "backgroundImage": "./assets/images/app-icon-android-adaptive-background.png"
@@ -36,7 +36,7 @@
     "ios": {
       "icon": "./assets/images/app-icon-ios.png",
       "supportsTablet": true,
-      "bundleIdentifier": "com.datingez",
+      "bundleIdentifier": "com.appezdating",
       "splash": {
         "image": "./assets/images/splash-logo-ios-mobile.png",
         "tabletImage": "./assets/images/splash-logo-ios-tablet.png",
