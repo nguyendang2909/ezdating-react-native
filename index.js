@@ -12,5 +12,5 @@ function IgniteApp() {
   return <App hideSplashScreen={RNBootSplash.hide} />;
 }
 
-AppRegistry.registerComponent('EZDating', () => IgniteApp);
+AppRegistry.registerComponent('EZ Dating', () => IgniteApp);
 export default App;
