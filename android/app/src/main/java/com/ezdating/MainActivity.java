@@ -1,4 +1,4 @@
-package com.appezdating;
+package com.ezdating;
 
 import android.os.Build;
 import android.os.Bundle;

@@ -1,4 +1,4 @@
-package com.appezdating;
+package com.ezdating;
 
 import android.app.Application;
 import android.content.res.Configuration;
