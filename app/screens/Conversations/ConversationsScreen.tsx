@@ -8,7 +8,7 @@ export const ConversationsScreen: FC = () => {
   return (
     <>
       <StatusBar barStyle="default" />
-      <Header titleTx="EZDating" />
+      <Header titleTx="AppName" />
       <ConversationsScrollView />
       <RequestNotificationPermission />
     </>

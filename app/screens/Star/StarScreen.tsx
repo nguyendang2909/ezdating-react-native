@@ -5,7 +5,7 @@ import React from 'react';
 export const StarScreen: React.FC = () => {
   return (
     <>
-      <Header titleTx="EZDating" />
+      <Header titleTx="AppName" />
 
       <StarBody />
     </>

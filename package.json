@@ -26,7 +26,7 @@
     "expo:android": "expo start --android",
     "expo:ios": "expo start --ios",
     "expo:web": "expo start --web",
-    "locale:compile": "formatjs extract 'app/**/*.ts*' --out-file temp.json --flatten --id-interpolation-pattern '[sha512:contenthash:base64:6]' && formatjs compile 'temp.json' --out-file app/locales/en.json && rm temp.json"
+    "locale:compile": "formatjs extract 'app/**/*.ts*' --out-file temp.json --flatten --id-interpolation-pattern '[sha512:contenthash:base64:6]' && formatjs compile 'temp.json' --out-file app/locales/en.json && rm temp.json && formatjs compile ./app/locales/en.json --out-file ./app/locales/vi.json --format ./formatter.js"
   },
   "overrides": {
     "react-error-overlay": "6.0.9"
