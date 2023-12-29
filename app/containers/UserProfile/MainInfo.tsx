@@ -27,7 +27,7 @@ export const NearbyUserMainInfo: React.FC<FCProps> = ({ nickname, age, distance 
               ellipsizeMode="tail"
             >
               {nickname}
-              {','}
+              {distance ? ',' : undefined}
             </Text>
           </Box>
           <Box ml={8}>

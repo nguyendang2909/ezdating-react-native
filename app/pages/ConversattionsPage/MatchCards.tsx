@@ -30,7 +30,7 @@ export const MatchCards: React.FC<MatchCardsProps> = ({ matches }) => {
   return (
     <>
       <Box px={16}>
-        <Text bold>New matches</Text>
+        <Text bold>New chats</Text>
       </Box>
 
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>

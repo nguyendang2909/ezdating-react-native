@@ -310,11 +310,11 @@ export const messages = defineMessages({
     defaultMessage: 'Education level',
     id: '674de4adbe',
   },
-  'Matches will appear here once you start to Like people. You can message them directly from here when you’re ready to spark up the conversation.':
+  'Chats will appear here once you start to find conversation. You can message them directly from here when you’re ready to spark up the conversation.':
     {
       defaultMessage:
-        'Matches will appear here once you start to Like people. You can message them directly from here when you’re ready to spark up the conversation.',
-      id: '5914c8ac38',
+        'Chats will appear here once you start to find conversation. You can message them directly from here when you’re ready to spark up the conversation.',
+      id: 'bcd0d30c16',
     },
   'Safety Toolkit': {
     defaultMessage: ' Safety Toolkit',
@@ -417,6 +417,10 @@ export const messages = defineMessages({
     defaultMessage: 'Start like',
     id: 'ace9ded6be',
   },
+  Become: {
+    defaultMessage: 'Become',
+    id: '6a7284173f',
+  },
   'No users found around you. Try changing the filter and reload.': {
     defaultMessage: 'No users found around you. Try changing the filter and reload.',
     id: 'b555205c1c',
@@ -424,6 +428,22 @@ export const messages = defineMessages({
   Reload: {
     defaultMessage: 'Reload',
     id: '7dd092e7f6',
+  },
+  'What is your learning target?': {
+    defaultMessage: 'What is your learning target?',
+    id: 'e4451cc25e',
+  },
+  'What is your teaching subject?': {
+    defaultMessage: 'What is your teaching subject?',
+    id: 'c260e18c77',
+  },
+  'Start chatting': {
+    defaultMessage: 'Start chatting',
+    id: '0e051dbf19',
+  },
+  Search: {
+    defaultMessage: 'Search',
+    id: 'c667156740',
   },
   'Change your filter': {
     defaultMessage: 'Change your filter',

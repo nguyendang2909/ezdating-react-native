@@ -7,6 +7,8 @@ import { Divider, Row, Text, View } from 'native-base';
 import React from 'react';
 import Toast from 'react-native-toast-message';
 
+import { ProfileEditLearningTargetMenuItem } from './profile-edit-learning-tareget-menu-item';
+import { ProfileEditTeachingSubjectMenuItem } from './profile-edit-teaching-subject-menu-item';
 import { ProfileEditBirthdayMenuItem } from './ProfileEditBirthdayMenuItem';
 import { ProfileEditGenderMenuItem } from './ProfileEditGenderMenuItem';
 import { ProfileEditHeightMenuItem } from './ProfileEditHeightMenuItem';
@@ -15,10 +17,6 @@ import { ProfileEditJobTitleMenuItem } from './ProfileEditJobTitleMenuItem';
 import { ProfileEditLocationMenuItem } from './ProfileEditLocationMenuItem';
 import { ProfileEditNicknameMenuItem } from './ProfileEditNicknameMenuItem';
 import { ProfileEditPhotos } from './ProfileEditPhotos/profile-edit-media-files';
-import { ProfileEditRelationshipGoalMenuItem } from './ProfileEditRelationshipGoalMenuItem';
-import { ProfileEditRelationshipStatusMenuItem } from './ProfileEditRelationshipStatusMenuItem';
-import { ProfileShowAgeMenuItem } from './ProfileEditShowAgeMenuItem';
-import { ProfileShowMyDistanceMenuItem } from './ProfileEditShowDistanceMenuItem';
 import { ProfileEditWeightMenuItem } from './ProfileEditWeight';
 
 export const ProfileEditPageContent: React.FC = () => {
@@ -27,6 +25,7 @@ export const ProfileEditPageContent: React.FC = () => {
 
   const handleEditProfile = async (payload: ApiRequest.UpdateProfile) => {
     try {
+      console.log(111, payload);
       await updateProfile(payload).unwrap();
     } catch (err) {
       Toast.show({
@@ -94,6 +93,21 @@ export const ProfileEditPageContent: React.FC = () => {
       <View mt={4}>
         <View mx={4} mb={2}>
           <Text bold={true} textTransform="uppercase">
+            Training target
+          </Text>
+        </View>
+        <View backgroundColor={colors.background}>
+          <ProfileEditLearningTargetMenuItem onPress={handleEditProfile} />
+        </View>
+        <Divider />
+        <View backgroundColor={colors.background}>
+          <ProfileEditTeachingSubjectMenuItem onPress={handleEditProfile} />
+        </View>
+      </View>
+
+      {/* <View mt={4}>
+        <View mx={4} mb={2}>
+          <Text bold={true} textTransform="uppercase">
             {formatMessage('Relationship')}
           </Text>
         </View>
@@ -104,7 +118,7 @@ export const ProfileEditPageContent: React.FC = () => {
         <View backgroundColor={colors.background}>
           <ProfileEditRelationshipStatusMenuItem onPress={handleEditProfile} />
         </View>
-      </View>
+      </View> */}
 
       {/* <View mt={4}>
         <View mx={4} mb={2}>
@@ -128,7 +142,7 @@ export const ProfileEditPageContent: React.FC = () => {
         </View>
       </View>
 
-      <View mt={4}>
+      {/* <View mt={4}>
         <View mx={4} mb={2}>
           <Text bold={true} textTransform="uppercase">
             {formatMessage('Control your profile')}
@@ -140,7 +154,7 @@ export const ProfileEditPageContent: React.FC = () => {
         <View backgroundColor={colors.background}>
           <ProfileShowMyDistanceMenuItem onPress={handleEditProfile} />
         </View>
-      </View>
+      </View> */}
 
       <View mt={100}></View>
     </>

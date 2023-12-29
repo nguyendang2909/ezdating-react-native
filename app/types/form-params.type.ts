@@ -26,6 +26,8 @@ export declare namespace FormParams {
     introduce?: string;
     countryIso2: string;
     stateId?: string;
+    learningTarget?: string;
+    teachingSubject?: string;
   };
 
   type UpdateProfilePhoto = {

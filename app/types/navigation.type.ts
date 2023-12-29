@@ -43,4 +43,8 @@ export type AppStackParamList = {
   DATING_SWIPE_PROFILE: {
     profile: Entity.Profile;
   };
+  SUBJECTS: undefined;
+  SUBJECT: {
+    subject: string;
+  };
 };

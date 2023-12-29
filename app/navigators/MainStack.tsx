@@ -19,6 +19,7 @@ import { LikedMeScreen } from 'app/screens/Me/LikedMeScreen';
 import { ProfileSettingScreen } from 'app/screens/Me/ProfileSettingScreen';
 import { MainScreen } from 'app/screens/Pre/MainScreen';
 import { LikedMeProfileScreen } from 'app/screens/Star/LikedMeProfileScreen';
+import { SubjectScreen } from 'app/screens/subjects/subject-screen';
 import { colors } from 'app/theme';
 import React from 'react';
 
@@ -56,6 +57,7 @@ export const MainStack: React.FC = () => {
             component={LikedMeProfileScreen}
           ></Stack.Screen>
           <Stack.Screen name={SCREENS.EDIT_INFO_LOCATION} component={EditInfoLocationScreen} />
+          <Stack.Screen name={SCREENS.SUBJECT} component={SubjectScreen} />
         </Stack.Group>
 
         <Stack.Group

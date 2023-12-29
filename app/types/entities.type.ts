@@ -90,6 +90,8 @@ export declare namespace Entity {
     weight?: number;
     distance?: number;
     state?: State;
+    learningTarget?: string;
+    teachingSubject?: string;
   };
 
   type ProfileFilter = BaseEntity &

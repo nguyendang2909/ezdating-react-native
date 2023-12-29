@@ -1,6 +1,5 @@
 import { HStack, View } from '@gluestack-ui/themed';
 import { CloseIconButton } from 'app/components/Button';
-import { SendLikeButton } from 'app/containers/Button/send-like-button';
 import React from 'react';
 
 import { SendMessageButton } from '.';
@@ -22,7 +21,7 @@ export const NearbyUserActions: React.FC<FCProps> = ({ targetUserId, onClose }) 
         <View>
           <SendMessageButton targetUserId={targetUserId} onClose={onClose} />
         </View>
-        <SendLikeButton targetUserId={targetUserId} />
+        {/* <SendLikeButton targetUserId={targetUserId} /> */}
       </HStack>
     </>
   );

@@ -83,6 +83,8 @@ export declare namespace ApiRequest {
     stateId?: string;
     // smoking?: ESmoking;
     // workout?: EWorkout;
+    learningTarget?: string;
+    teachingSubject?: string;
   }>;
 
   type UpdateProfileFilter = {
@@ -100,6 +102,8 @@ export declare namespace ApiRequest {
     relationshipGoal: RelationshipGoal;
     introduce?: string;
     stateId: string;
+    learningTarget?: string;
+    teachingSubject?: string;
   };
 
   type SearchUsersNearby = Pagination;

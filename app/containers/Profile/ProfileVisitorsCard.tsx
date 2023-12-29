@@ -25,7 +25,7 @@ export const ProfileVisitorsCard: React.FC = () => {
             </View>
           </Center>
           <Center>
-            <Text>{formatMessage('Second look')}</Text>
+            <Text>(Coming soon)</Text>
           </Center>
         </VStack>
       </View>

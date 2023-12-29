@@ -1,22 +1,18 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { MaterialIcons } from 'app/components';
 import { GradientIcon } from 'app/components/Icon/GradientIcon';
-import { AntDesign } from 'app/components/Icon/Lib';
 import { APP_CONFIG } from 'app/config/config.app';
 import { UpdateGeolocation } from 'app/containers/Home/UpdateGeoLocation';
 import { useMessages } from 'app/hooks';
 import { AppStackScreenProps } from 'app/navigators';
 import { ConversationsScreen } from 'app/screens/Conversations/ConversationsScreen';
-import { DatingNearbyScreen } from 'app/screens/DatingNearby/DatingNearbyScreen';
-import { DatingSwipeScreen } from 'app/screens/DatingSwipe/DatingSwipeScreen';
 import { ProfileScreen } from 'app/screens/Me/ProfileScreen';
-import { StarScreen } from 'app/screens/Star/StarScreen';
+import { SubjectsScreen } from 'app/screens/subjects/subjects-screen';
 import { backgroundColor, borderTopColor } from 'app/styles';
 import { colors } from 'app/theme';
 import React, { FC } from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 export type HomeTabParamList = {
   DatingSwipe: undefined;
@@ -24,6 +20,7 @@ export type HomeTabParamList = {
   Conversations: undefined;
   Profile: undefined;
   Star: undefined;
+  Subjects: undefined;
 };
 
 type FCProps = AppStackScreenProps<'Home'>;
@@ -57,6 +54,26 @@ export const HomeNavigator: FC<FCProps> = () => {
         }}
       >
         <Tab.Screen
+          name="Subjects"
+          component={SubjectsScreen}
+          options={{
+            tabBarShowLabel: false,
+            //   tabBarLabel: formatMessage('Nearby'),
+            tabBarIcon: ({ focused }) => (
+              <GradientIcon
+                {...(!focused
+                  ? {
+                      colors: [colors.palette.neutral500, colors.palette.neutral500],
+                    }
+                  : {})}
+                size={30}
+                name="book"
+                icon={MaterialIcons}
+              />
+            ),
+          }}
+        />
+        {/* <Tab.Screen
           name="DatingNearby"
           component={DatingNearbyScreen}
           options={{
@@ -75,8 +92,8 @@ export const HomeNavigator: FC<FCProps> = () => {
               />
             ),
           }}
-        />
-        <Tab.Screen
+        /> */}
+        {/* <Tab.Screen
           name="DatingSwipe"
           component={DatingSwipeScreen}
           options={{
@@ -95,8 +112,8 @@ export const HomeNavigator: FC<FCProps> = () => {
               />
             ),
           }}
-        />
-        <Tab.Screen
+        /> */}
+        {/* <Tab.Screen
           name="Star"
           component={StarScreen}
           options={{
@@ -115,7 +132,7 @@ export const HomeNavigator: FC<FCProps> = () => {
               />
             ),
           }}
-        />
+        /> */}
         <Tab.Screen
           name="Conversations"
           component={ConversationsScreen}

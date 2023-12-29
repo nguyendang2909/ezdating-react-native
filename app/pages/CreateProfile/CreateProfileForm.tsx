@@ -3,10 +3,11 @@ import { useNavigation } from '@react-navigation/native';
 import { useCreateBasicProfileMutation, useFetchMyProfileMutation } from 'app/api';
 import { BirthDayFormControl } from 'app/components/Form/BirthDayFormControl';
 import { FormControlInput } from 'app/components/Form/FormControlInput';
-import { RelationshipGoalFormControl } from 'app/components/Form/RelationshipGoalFormControl';
+import { LearningTargetFormControl } from 'app/components/Form/learning-target-form-control';
 import { SelectCountryFormControl } from 'app/components/Form/select-country-form-control';
 import { SelectGenderFormControl } from 'app/components/Form/SelectGenderForm';
-import { SCREENS } from 'app/constants';
+import { TeachingSubjectFormControl } from 'app/components/Form/teaching-subject-form-control';
+import { RELATIONSHIP_GOALS, SCREENS } from 'app/constants';
 import { UserGender } from 'app/constants/constants';
 import { useAppSelector, useMessages } from 'app/hooks';
 import { region } from 'app/locales/locale';
@@ -38,6 +39,14 @@ export const CreateProfileForm: FC = () => {
     formik.setFieldValue('relationshipGoal', value);
   };
 
+  const handleChangeLearningTarget = (value: string) => {
+    formik.setFieldValue('learningTarget', value);
+  };
+
+  const handleChangeTeachingSubject = (value: string) => {
+    formik.setFieldValue('teachingSubject', value);
+  };
+
   const handleChangeCountryIso2 = (value: string) => {
     formik.setFieldValue('countryIso2', value);
   };
@@ -51,10 +60,12 @@ export const CreateProfileForm: FC = () => {
       nickname: profile?.nickname,
       gender: profile?.gender,
       birthday: profile?.birthday ? moment(profile?.birthday).format('YYYY-MM-DD') : undefined,
-      relationshipGoal: profile?.relationshipGoal,
+      relationshipGoal: RELATIONSHIP_GOALS.BOY_GIRL_FRIEND,
       introduce: profile?.introduce,
       countryIso2: profile.state?.country?.iso2 || region,
       stateId: profile.state?._id,
+      learningTarget: 'Language',
+      teachingSubject: undefined,
     },
     enableReinitialize: true,
     validationSchema: Yup.object().shape({
@@ -64,10 +75,21 @@ export const CreateProfileForm: FC = () => {
       relationshipGoal: Yup.string().required(formatMessage('Please choose your desire relation.')),
       introduce: Yup.string().max(500).notRequired(),
       stateId: Yup.string().required(formatMessage('Please choose your city')),
+      learningTarget: Yup.string().optional(),
+      teachingSubject: Yup.string().optional(),
     }),
     onSubmit: async values => {
       try {
-        const { nickname, gender, birthday, relationshipGoal, introduce, stateId } = values;
+        const {
+          nickname,
+          gender,
+          birthday,
+          relationshipGoal,
+          introduce,
+          stateId,
+          learningTarget,
+          teachingSubject,
+        } = values;
         if (nickname && gender && birthday && relationshipGoal && stateId) {
           await createBasicProfile({
             nickname,
@@ -76,10 +98,13 @@ export const CreateProfileForm: FC = () => {
             relationshipGoal,
             introduce,
             stateId,
+            learningTarget,
+            teachingSubject,
           }).unwrap();
           navigation.navigate(SCREENS.CREATE_BASIC_PHOTOS);
         }
       } catch (error) {
+        console.log(111, error);
         if ('status' in error && error.status === 409) {
           try {
             const profile = await fetchMyProfile().unwrap();
@@ -146,13 +171,32 @@ export const CreateProfileForm: FC = () => {
                   />
                 </View>
 
-                <View mb="4">
+                {/* <View mb="4">
                   <RelationshipGoalFormControl
                     isRequired
                     value={formik.values.relationshipGoal}
                     onChange={handleChangeRelationshipGoal}
                     error={
                       formik.touched.relationshipGoal ? formik.errors.relationshipGoal : undefined
+                    }
+                  />
+                </View> */}
+
+                <View mb="4">
+                  <LearningTargetFormControl
+                    isRequired
+                    value={formik.values.learningTarget}
+                    onChange={handleChangeLearningTarget}
+                    error={formik.touched.learningTarget ? formik.errors.learningTarget : undefined}
+                  />
+                </View>
+
+                <View mb="4">
+                  <TeachingSubjectFormControl
+                    value={formik.values.teachingSubject}
+                    onChange={handleChangeTeachingSubject}
+                    error={
+                      formik.touched.teachingSubject ? formik.errors.teachingSubject : undefined
                     }
                   />
                 </View>

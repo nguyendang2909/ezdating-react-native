@@ -63,11 +63,11 @@
 	<key>NSContactsUsageDescription</key>
 	<string>$(PRODUCT_NAME) contacts use.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>$(PRODUCT_NAME) location use.</string>
+	<string>$(PRODUCT_NAME) location use. </string>
 	<key>NSLocationUsageDescription</key>
 	<string>$(PRODUCT_NAME) location use.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>It will be used to display your current location on maps, find nearby places.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>$(PRODUCT_NAME) requires to access Audio recording to record and uplod videos</string>
 	<key>NSMotionUsageDescription</key>

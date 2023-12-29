@@ -30,14 +30,14 @@ export const RequireEnalbeLocationSharing: React.FC<FCProps> = ({ onChange }) =>
 
       <View mt={5} alignItems="center" px={4}>
         <Text textAlign="center">
-          To use EZ Dating, you need to enable your location sharing so we can show you who&apos;s
+          To use Chatka, you need to enable your location sharing so we can show you teacher&apos;s
           around.
         </Text>
       </View>
 
       <View mt={5} alignItems="center" px={4}>
         <Text textAlign="center">
-          Go to Settings {'>'} EZDating {'>'} Location {'>'} Enable Location While Using the App
+          Go to Settings {'>'} Chatka {'>'} Location {'>'} Enable Location While Using the App
         </Text>
       </View>
 

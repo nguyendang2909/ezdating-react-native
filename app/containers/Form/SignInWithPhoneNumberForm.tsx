@@ -52,7 +52,7 @@ export const SignInWithPhoneNumberForm: FC = () => {
           user: { phoneNumber: fullPhoneNumber },
         });
       } catch (err) {
-        setErrorCode('Error, please try again!');
+        setErrorCode(err.message);
       }
     },
   });

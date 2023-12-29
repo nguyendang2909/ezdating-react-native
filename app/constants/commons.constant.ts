@@ -21,6 +21,8 @@ export const SCREENS = {
   LikedMeProfile: 'LikedMeProfile',
   DATING_SWIPE_PROFILE: 'DATING_SWIPE_PROFILE',
   EDIT_INFO_LOCATION: 'EDIT_INFO_LOCATION',
+  SUBJECTS: 'SUBJECTS',
+  SUBJECT: 'SUBJECT',
 } as const;
 
 export const AGES = {

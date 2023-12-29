@@ -99,9 +99,9 @@ export const MessagesSetting: React.FC<{ matchId: string }> = ({ matchId }) => {
               @ts-ignore */}
               <Icon as={MaterialCommunityIcons} name="close-circle" size="xl" color="$amber600" />
               <View pl={16}>
-                <ActionsheetItemText bold>{formatMessage('Unmatch')}</ActionsheetItemText>
+                <ActionsheetItemText bold>Remove conversation</ActionsheetItemText>
                 <ActionsheetItemText>
-                  {formatMessage('No longer interested? Remove them from your matches.')}
+                  No longer interested? Remove them from your chats.
                 </ActionsheetItemText>
               </View>
             </ActionsheetItem>
@@ -149,7 +149,7 @@ export const MessagesSetting: React.FC<{ matchId: string }> = ({ matchId }) => {
             </ModalHeader>
             <ModalBody>
               <Text textAlign="center">
-                {formatMessage('Would you like to unmatch with this user? This cannot be undone.')}
+                Would you like to remove this conversation? This cannot be undone.
               </Text>
             </ModalBody>
             <ModalFooter>

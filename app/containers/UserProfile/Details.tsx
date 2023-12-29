@@ -1,7 +1,6 @@
 import { Text, View } from '@gluestack-ui/themed';
 import { DetailRow } from 'app/components';
 import { FontAwesome, MaterialCommunityIcons, MaterialIcons } from 'app/components/Icon/Lib';
-import { RELATIONSHIP_GOAL_MESSAGES, RELATIONSHIP_STATUS_MESSAGES } from 'app/constants/constants';
 import { useMessages } from 'app/hooks';
 import { Entity } from 'app/types';
 import React from 'react';
@@ -15,7 +14,40 @@ export const UserProfileDetails: React.FC<{ profile: Entity.Profile }> = ({ prof
         <Text bold>{formatMessage('Details')}</Text>
       </View>
 
-      {!!profile.relationshipGoal && (
+      {!!profile.learningTarget && (
+        <View>
+          <DetailRow
+            leftIcon={{ icon: FontAwesome, name: 'search' }}
+            title="Learning target"
+            value={profile.learningTarget}
+          />
+        </View>
+      )}
+
+      {!!profile.teachingSubject && (
+        <View mt={8}>
+          <DetailRow
+            leftIcon={{ icon: MaterialIcons, name: 'book' }}
+            title="Teaching subject"
+            value={profile.teachingSubject}
+          />
+        </View>
+      )}
+
+      {/* {!!profile.relationshipStatus && (
+        <View mt={8}>
+          <DetailRow
+            leftIcon={{
+              icon: MaterialCommunityIcons,
+              name: 'cards-playing-heart-multiple',
+            }}
+            titleTx="Relationship status"
+            valueTx={RELATIONSHIP_STATUS_MESSAGES[profile.relationshipStatus]}
+          />
+        </View>
+      )} */}
+
+      {/* {!!profile.relationshipGoal && (
         <View>
           <DetailRow
             leftIcon={{ icon: FontAwesome, name: 'search' }}
@@ -36,7 +68,7 @@ export const UserProfileDetails: React.FC<{ profile: Entity.Profile }> = ({ prof
             valueTx={RELATIONSHIP_STATUS_MESSAGES[profile.relationshipStatus]}
           />
         </View>
-      )}
+      )} */}
 
       {!!profile.height && (
         <View mt={8}>

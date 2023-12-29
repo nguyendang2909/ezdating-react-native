@@ -2,8 +2,7 @@ import { Header } from 'app/components';
 import { ProfileSettingIconButton } from 'app/containers/IconButton/ProfileSettingIconButton';
 import { ProfileEditCard } from 'app/containers/Profile/ProfileEditCard';
 import { ProfileHeader } from 'app/containers/Profile/ProfileHeader';
-import { ProfileVisitorsCard } from 'app/containers/Profile/ProfileVisitorsCard';
-import { SettingsUpgradePlan } from 'app/pages/settings/settings-upgrade-plan';
+import { SettingsBecomeTeacher } from 'app/pages/settings/settings-become-a-teacher';
 import { colors } from 'app/theme';
 import { Box, HStack, View, VStack } from 'native-base';
 import React, { FC } from 'react';
@@ -29,14 +28,15 @@ export const ProfileScreen: FC = () => {
               <View flex="1">
                 <ProfileEditCard />
               </View>
-              <View flex="1">
+              {/* <View flex="1">
                 <ProfileVisitorsCard />
-              </View>
+              </View> */}
               {/* <View flex="1">
                 <ProfileFreeCoinsCard />
               </View> */}
             </HStack>
-            <SettingsUpgradePlan />
+            {/* <SettingsUpgradePlan /> */}
+            <SettingsBecomeTeacher />
           </VStack>
         </View>
       </Box>

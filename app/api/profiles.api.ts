@@ -124,6 +124,15 @@ const profilesApi = api.injectEndpoints({
         return [API_TAGS.MY_PROFILE];
       },
     }),
+
+    // NearbyUser
+    getSubjectProfiles: builder.query<ApiResponse.Profiles, { teachingSubject: string }>({
+      query: params => ({
+        url: '/profiles/learning',
+        method: 'GET',
+        params,
+      }),
+    }),
   }),
 });
 
@@ -140,4 +149,5 @@ export const {
   useFetchMyProfileMutation,
   endpoints: profileEndpoints,
   useUploadBasicPhotoMutation,
+  useGetSubjectProfilesQuery,
 } = profilesApi;
