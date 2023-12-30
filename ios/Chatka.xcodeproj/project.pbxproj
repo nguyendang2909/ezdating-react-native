@@ -8,15 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* ChatkaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* ChatkaTests.m */; };
-		044A3C422B2F5755008C85D8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 044A3C412B2F5755008C85D8 /* GoogleService-Info.plist */; };
+		041C0EC67E13DE709E6A2AB5 /* Pods_Chatka_ChatkaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F9EED79EF8444D8CA7D78C /* Pods_Chatka_ChatkaTests.framework */; };
 		04639A0E2A34888A00448049 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 04639A0D2A34888A00448049 /* Fonts */; };
+		04FC833C2B3FE49E0092AB8E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04FC833B2B3FE49E0092AB8E /* GoogleService-Info.plist */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		1722DE4BAB6A97FD211FDB30 /* Pods_DatingEZ.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 882FA5B0634AE6E5F67B967E /* Pods_DatingEZ.framework */; };
 		2215ACBC1E62C44583DB69A9 /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AFED2E09CC2E86D1338C0F /* ExpoModulesProvider.swift */; };
 		400EB2C1E1807E6CBC68B7AB /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951E59D51E504BC9C5F46169 /* ExpoModulesProvider.swift */; };
-		9C6EF2D0E1207DD79EF43A27 /* Pods_DatingEZ_DatingEZTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 407755A6CA6C57A3D767B915 /* Pods_DatingEZ_DatingEZTests.framework */; };
+		A5AEF210827D1E9D5153FAB9 /* Pods_Chatka.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E421982B97B6D8B2E522E963 /* Pods_Chatka.framework */; };
 		BE406F562862D73000A81E39 /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE406F552862D73000A81E39 /* BootSplash.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -26,32 +26,32 @@
 			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
-			remoteInfo = "Chatka";
+			remoteInfo = Chatka;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		00E356EE1AD99517003FC87E /* ChatkaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ChatkaTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		00E356EE1AD99517003FC87E /* ChatkaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChatkaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		00E356F21AD99517003FC87E /* ChatkaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "ChatkaTests.m"; sourceTree = "<group>"; };
+		00E356F21AD99517003FC87E /* ChatkaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatkaTests.m; sourceTree = "<group>"; };
 		044A3C3E2B2F5474008C85D8 /* Chatka.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Chatka.entitlements; path = Chatka/Chatka.entitlements; sourceTree = "<group>"; };
-		044A3C412B2F5755008C85D8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		04639A0D2A34888A00448049 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Fonts; path = "../node_modules/react-native-vector-icons/Fonts"; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* Chatka.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Chatka.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = "Chatka/AppDelegate.h"; sourceTree = "<group>"; };
-		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = "Chatka/AppDelegate.mm"; sourceTree = "<group>"; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "Chatka/Images.xcassets"; sourceTree = "<group>"; };
-		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = "Chatka/Info.plist"; sourceTree = "<group>"; };
-		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = "Chatka/main.m"; sourceTree = "<group>"; };
+		04FC833B2B3FE49E0092AB8E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		13B07F961A680F5B00A75B9A /* Chatka.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chatka.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Chatka/AppDelegate.h; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = Chatka/AppDelegate.mm; sourceTree = "<group>"; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Chatka/Images.xcassets; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Chatka/Info.plist; sourceTree = "<group>"; };
+		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Chatka/main.m; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-Chatka.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chatka.debug.xcconfig"; path = "Target Support Files/Pods-Chatka/Pods-Chatka.debug.xcconfig"; sourceTree = "<group>"; };
-		407755A6CA6C57A3D767B915 /* Pods_DatingEZ_DatingEZTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DatingEZ_DatingEZTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5709B34CF0A7D63546082F79 /* Pods-Chatka.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chatka.release.xcconfig"; path = "Target Support Files/Pods-Chatka/Pods-Chatka.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-Chatka-ChatkaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chatka-ChatkaTests.debug.xcconfig"; path = "Target Support Files/Pods-Chatka-ChatkaTests/Pods-Chatka-ChatkaTests.debug.xcconfig"; sourceTree = "<group>"; };
-		882FA5B0634AE6E5F67B967E /* Pods_DatingEZ.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DatingEZ.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-Chatka-ChatkaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chatka-ChatkaTests.release.xcconfig"; path = "Target Support Files/Pods-Chatka-ChatkaTests/Pods-Chatka-ChatkaTests.release.xcconfig"; sourceTree = "<group>"; };
 		951E59D51E504BC9C5F46169 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-Chatka/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 		BE406F552862D73000A81E39 /* BootSplash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = BootSplash.storyboard; path = Chatka/BootSplash.storyboard; sourceTree = "<group>"; };
 		D5AFED2E09CC2E86D1338C0F /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-Chatka-ChatkaTests/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
+		E421982B97B6D8B2E522E963 /* Pods_Chatka.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Chatka.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E7F9EED79EF8444D8CA7D78C /* Pods_Chatka_ChatkaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Chatka_ChatkaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -60,7 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9C6EF2D0E1207DD79EF43A27 /* Pods_DatingEZ_DatingEZTests.framework in Frameworks */,
+				041C0EC67E13DE709E6A2AB5 /* Pods_Chatka_ChatkaTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,7 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1722DE4BAB6A97FD211FDB30 /* Pods_DatingEZ.framework in Frameworks */,
+				A5AEF210827D1E9D5153FAB9 /* Pods_Chatka.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,7 +81,7 @@
 				00E356F21AD99517003FC87E /* ChatkaTests.m */,
 				00E356F01AD99517003FC87E /* Supporting Files */,
 			);
-			path = "ChatkaTests";
+			path = ChatkaTests;
 			sourceTree = "<group>";
 		};
 		00E356F01AD99517003FC87E /* Supporting Files */ = {
@@ -95,7 +95,7 @@
 		13B07FAE1A68108700A75B9A /* Chatka */ = {
 			isa = PBXGroup;
 			children = (
-				044A3C412B2F5755008C85D8 /* GoogleService-Info.plist */,
+				04FC833B2B3FE49E0092AB8E /* GoogleService-Info.plist */,
 				044A3C3E2B2F5474008C85D8 /* Chatka.entitlements */,
 				04639A0D2A34888A00448049 /* Fonts */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -105,15 +105,15 @@
 				BE406F552862D73000A81E39 /* BootSplash.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
-			name = "Chatka";
+			name = Chatka;
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				882FA5B0634AE6E5F67B967E /* Pods_DatingEZ.framework */,
-				407755A6CA6C57A3D767B915 /* Pods_DatingEZ_DatingEZTests.framework */,
+				E421982B97B6D8B2E522E963 /* Pods_Chatka.framework */,
+				E7F9EED79EF8444D8CA7D78C /* Pods_Chatka_ChatkaTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -132,7 +132,7 @@
 			children = (
 				951E59D51E504BC9C5F46169 /* ExpoModulesProvider.swift */,
 			);
-			name = "Chatka";
+			name = Chatka;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -183,7 +183,7 @@
 			children = (
 				D5AFED2E09CC2E86D1338C0F /* ExpoModulesProvider.swift */,
 			);
-			name = "ChatkaTests";
+			name = ChatkaTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -205,8 +205,8 @@
 			dependencies = (
 				00E356F51AD99517003FC87E /* PBXTargetDependency */,
 			);
-			name = "ChatkaTests";
-			productname = "ChatkaTests";
+			name = ChatkaTests;
+			productName = ChatkaTests;
 			productReference = 00E356EE1AD99517003FC87E /* ChatkaTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
@@ -228,8 +228,8 @@
 			);
 			dependencies = (
 			);
-			name = "Chatka";
-			productName = "Chatka";
+			name = Chatka;
+			productName = Chatka;
 			productReference = 13B07F961A680F5B00A75B9A /* Chatka.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -283,7 +283,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE406F562862D73000A81E39 /* BootSplash.storyboard in Resources */,
-				044A3C422B2F5755008C85D8 /* GoogleService-Info.plist in Resources */,
+				04FC833C2B3FE49E0092AB8E /* GoogleService-Info.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				04639A0E2A34888A00448049 /* Fonts in Resources */,
 			);
@@ -495,7 +495,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "ChatkaTests/Info.plist";
+				INFOPLIST_FILE = ChatkaTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -508,7 +508,7 @@
 					"$(inherited)",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ezchatka";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ezchatka;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Chatka.app/Chatka";
@@ -522,7 +522,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
-				INFOPLIST_FILE = "ChatkaTests/Info.plist";
+				INFOPLIST_FILE = ChatkaTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -535,7 +535,7 @@
 					"$(inherited)",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE -D EXPO_CONFIGURATION_DEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ezchatka";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ezchatka;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Chatka.app/Chatka";
@@ -552,8 +552,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = CL8WBPTKPT;
 				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = "Chatka/Info.plist";
-             INFOPLIST_KEY_CFBundleDisplayName = "Chatka";
+				INFOPLIST_FILE = Chatka/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Chatka;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -565,8 +564,8 @@
 					"-lc++",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ezchatka";
-				PRODUCT_NAME = "Chatka";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ezchatka;
+				PRODUCT_NAME = Chatka;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -582,8 +581,7 @@
 				CODE_SIGN_ENTITLEMENTS = Chatka/Chatka.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = CL8WBPTKPT;
-				INFOPLIST_FILE = "Chatka/Info.plist";
-             INFOPLIST_KEY_CFBundleDisplayName = "Chatka";
+				INFOPLIST_FILE = Chatka/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Chatka;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -595,8 +593,8 @@
 					"-lc++",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE -D EXPO_CONFIGURATION_DEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ezchatka";
-				PRODUCT_NAME = "Chatka";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ezchatka;
+				PRODUCT_NAME = Chatka;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

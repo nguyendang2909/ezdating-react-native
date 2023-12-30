@@ -27,12 +27,14 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.472228192707-te63u22qdl9uco4ve9fsodupfrtmasgl</string>
+				<string>com.googleusercontent.apps.472228192707-dfdqpak3msbj8v7aiahe0ckps986rl39</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -65,7 +67,7 @@
 	<key>NSLocationUsageDescription</key>
 	<string>$(PRODUCT_NAME) location use.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
+	<string></string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>$(PRODUCT_NAME) requires to access Audio recording to record and uplod videos</string>
 	<key>NSMotionUsageDescription</key>
@@ -80,8 +82,6 @@
 	<string>$(PRODUCT_NAME) speech recognition use.</string>
 	<key>NSVideoSubscriberAccountUsageDescription</key>
 	<string>$(PRODUCT_NAME) video use.</string>
-	<key>ITSAppUsesNonExemptEncryption</key>
-	<false/>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>

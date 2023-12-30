@@ -11,7 +11,7 @@ export const SignInScreen: FC<FCProps> = () => {
   return (
     <>
       <ImageBackground
-        source={require('../../../assets/images/Couples-home.jpeg')}
+        source={require('../../../assets/images/girl-smile.jpg')}
         style={[widthFull, heightFull, posititionAbsolute, zIndex(1)]}
       ></ImageBackground>
       <View
