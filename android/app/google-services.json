@@ -39,10 +39,10 @@
               "client_type": 3
             },
             {
-              "client_id": "472228192707-pgugsv6htc1cql22hia7d43oeb99nvsn.apps.googleusercontent.com",
+              "client_id": "472228192707-dfdqpak3msbj8v7aiahe0ckps986rl39.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.ezdating"
+                "bundle_id": "com.ezchatka"
               }
             }
           ]
@@ -51,18 +51,18 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:472228192707:android:728e6c166ed117bfd1dd76",
+        "mobilesdk_app_id": "1:472228192707:android:28b4b6f8abc1fe32d1dd76",
         "android_client_info": {
-          "package_name": "com.ezdating"
+          "package_name": "com.ezchatka"
         }
       },
       "oauth_client": [
         {
-          "client_id": "472228192707-nuqtkjfeip0lkosrsbsfcvsgjium9huh.apps.googleusercontent.com",
+          "client_id": "472228192707-bcrpiijqj3abbhhsat79mfct4n0m62g9.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.ezdating",
-            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+            "package_name": "com.ezchatka",
+            "certificate_hash": "39c2da8ff423f3d6171c514f2b5dadc565c10c65"
           }
         },
         {
@@ -83,10 +83,10 @@
               "client_type": 3
             },
             {
-              "client_id": "472228192707-pgugsv6htc1cql22hia7d43oeb99nvsn.apps.googleusercontent.com",
+              "client_id": "472228192707-dfdqpak3msbj8v7aiahe0ckps986rl39.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.ezdating"
+                "bundle_id": "com.ezchatka"
               }
             }
           ]

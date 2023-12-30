@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>472228192707-te63u22qdl9uco4ve9fsodupfrtmasgl.apps.googleusercontent.com</string>
+	<string>472228192707-dfdqpak3msbj8v7aiahe0ckps986rl39.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.472228192707-te63u22qdl9uco4ve9fsodupfrtmasgl</string>
+	<string>com.googleusercontent.apps.472228192707-dfdqpak3msbj8v7aiahe0ckps986rl39</string>
 	<key>ANDROID_CLIENT_ID</key>
-	<string>472228192707-nuqtkjfeip0lkosrsbsfcvsgjium9huh.apps.googleusercontent.com</string>
+	<string>472228192707-i9v97jcgg990phs3bn76l73c60hggtsv.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
 	<string>AIzaSyDVURz9OsZcSxNLqtqeQrdAJwlWbfdc35s</string>
 	<key>GCM_SENDER_ID</key>
@@ -15,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.datingez</string>
+	<string>com.ezchatka</string>
 	<key>PROJECT_ID</key>
 	<string>ezdating-23371</string>
 	<key>STORAGE_BUCKET</key>
@@ -31,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:472228192707:ios:976ba6a1e7e4e739d1dd76</string>
+	<string>1:472228192707:ios:0d3ae97e65501e02d1dd76</string>
 </dict>
 </plist>

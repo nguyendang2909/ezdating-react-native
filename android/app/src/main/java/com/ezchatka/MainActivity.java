@@ -1,4 +1,4 @@
-package com.datingez;
+package com.ezchatka;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -19,7 +19,7 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "DatingEZ";
+    return "Chatka";
   }
 
   /**
