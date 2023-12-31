@@ -22,7 +22,6 @@ export function* select<T>(selector: (state: AppStore.RootState) => T) {
 }
 
 function setupSocketIo(token: string) {
-  disconnectWebSocket();
   return io(`${Config.API_URL}/chats`, {
     reconnection: true,
     query: {
