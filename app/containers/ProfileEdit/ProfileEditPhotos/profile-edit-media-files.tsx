@@ -17,7 +17,7 @@ import { ProfileEditMediaFileCard } from './MediaFileCard';
 
 export const ProfileEditPhotos: React.FC = () => {
   const navigation = useNavigation();
-  const { formatMessage } = useMessages();
+  const { formatMessage, formatErrorMessage } = useMessages();
   const [uploadPhoto] = useUploadPhotoMutation();
   const [removePhoto] = useRemovePhotoMutation();
   const mediaFiles = useAppSelector(state => state.app.profile?.mediaFiles) || [];
@@ -34,7 +34,7 @@ export const ProfileEditPhotos: React.FC = () => {
       await removePhoto(_id).unwrap();
     } catch (err) {
       Toast.show({
-        text1: formatMessage('Remove failed, please try again.'),
+        text1: formatErrorMessage(err, 'Remove failed, please try again.'),
       });
     } finally {
       const newLoadings = _.cloneDeep(loadings);

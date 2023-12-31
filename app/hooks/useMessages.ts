@@ -8,7 +8,13 @@ export const getMessageFromResponse = (
   defaultMessage?: TxKey,
 ): (typeof messages)[TxKey] => {
   const message: TxKey = _.get(error, 'data.message') || defaultMessage || 'Internal server error';
-  return messages[message];
+  if (message && messages[message]) {
+    return messages[message];
+  }
+  if (defaultMessage && messages[defaultMessage]) {
+    return messages[defaultMessage];
+  }
+  return messages['Oops, something went wrong. Please try again.'];
 };
 
 export const useMessages = () => {

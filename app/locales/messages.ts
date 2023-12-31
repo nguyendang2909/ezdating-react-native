@@ -231,8 +231,8 @@ export const messages = defineMessages({
     id: '92761d53bb',
   },
   'Remove failed, please try again.': {
-    defaultMessage: 'Updated failed, please try again.',
-    id: '92761d53bb',
+    defaultMessage: 'Remove failed, please try again.',
+    id: '877217c282',
   },
   'Please enter your weight.': {
     defaultMessage: 'Please enter your weight.',
@@ -432,6 +432,10 @@ export const messages = defineMessages({
   'No users found. Try changing the filter and reload.': {
     defaultMessage: 'No users found. Try changing the filter and reload.',
     id: 'f6ee2b7d92',
+  },
+  'You should have at least 1 photo': {
+    defaultMessage: 'You should have at least 1 photo',
+    id: '222087826a',
   },
 });
 

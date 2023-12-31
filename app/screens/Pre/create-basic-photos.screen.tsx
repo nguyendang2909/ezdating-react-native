@@ -27,7 +27,7 @@ import { useDispatch } from 'react-redux';
 type FCProps = AppStackScreenProps<'CREATE_BASIC_PHOTOS'>;
 
 export const CreateBasicPhotosScreen: React.FC<FCProps> = () => {
-  const { formatMessage } = useMessages();
+  const { formatMessage, formatErrorMessage } = useMessages();
   const navigation = useNavigation();
   const [updateBasicPhoto] = useUploadBasicPhotoMutation();
   const [removePhoto] = useRemovePhotoMutation();
@@ -48,7 +48,7 @@ export const CreateBasicPhotosScreen: React.FC<FCProps> = () => {
       await removePhoto(_id).unwrap();
     } catch (err) {
       Toast.show({
-        text1: formatMessage('Remove failed, please try again.'),
+        text1: formatErrorMessage(err, 'Remove failed, please try again.'),
       });
     } finally {
       const newLoadings = _.cloneDeep(loadings);
