@@ -1395,7 +1395,7 @@
     node-forge "^1.2.1"
     nullthrows "^1.1.1"
 
-"@expo/config-plugins@6.0.2", "@expo/config-plugins@~6.0.0":
+"@expo/config-plugins@6.0.2", "@expo/config-plugins@^6.0.1", "@expo/config-plugins@~6.0.0":
   version "6.0.2"
   resolved "https://registry.yarnpkg.com/@expo/config-plugins/-/config-plugins-6.0.2.tgz#cf07319515022ba94d9aa9fa30e0cff43a14256f"
   integrity sha512-Cn01fXMHwjU042EgO9oO3Mna0o/UCrW91MQLMbJa4pXM41CYGjNgVy1EVXiuRRx/upegHhvltBw5D+JaUm8aZQ==
@@ -13227,6 +13227,13 @@ react-native-gradle-plugin@^0.71.17:
   version "0.71.19"
   resolved "https://registry.yarnpkg.com/react-native-gradle-plugin/-/react-native-gradle-plugin-0.71.19.tgz#3379e28341fcd189bc1f4691cefc84c1a4d7d232"
   integrity sha512-1dVk9NwhoyKHCSxcrM6vY6cxmojeATsBobDicX0ZKr7DgUF2cBQRTKsimQFvzH8XhOVXyH8p4HyDSZNIFI8OlQ==
+
+react-native-iap@^12.12.1:
+  version "12.12.1"
+  resolved "https://registry.yarnpkg.com/react-native-iap/-/react-native-iap-12.12.1.tgz#c25c8d61ab85c05805616245cba2b054d97e8abc"
+  integrity sha512-wkerR6WK1SFOxJ3kJvP4zMx34a+1qyFSIwj+kEAsQWuncEtlcSB81MQTCT+M/kE0hGN51LSRLkU5PZ3BcyFgfA==
+  dependencies:
+    "@expo/config-plugins" "^6.0.1"
 
 react-native-image-crop-picker@^0.40.0:
   version "0.40.0"
