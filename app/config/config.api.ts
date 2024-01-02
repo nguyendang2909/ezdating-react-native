@@ -1,6 +1,7 @@
 export const API_ENDPOINTS = {
   AUTH: {
     SIGN_IN: {
+      APPLE: '/auth/sign-in/apple',
       FACEBOOK: '/auth/sign-in/facebook',
       GOOGLE: '/auth/sign-in/google',
       PHONE_NUMBER: '/auth/sign-in/phone-number',

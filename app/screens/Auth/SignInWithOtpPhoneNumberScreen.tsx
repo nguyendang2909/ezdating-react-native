@@ -7,6 +7,7 @@ import { LoadingLayout } from 'app/components/Overlay/LoadingLayout';
 import { SCREENS } from 'app/constants';
 import { BackIconButton } from 'app/containers/IconButton/BackIconButton';
 import { useMessages } from 'app/hooks';
+import { appActions } from 'app/store/app.store';
 import {
   flexGrow,
   marginTop,
@@ -19,6 +20,7 @@ import { ValueOf } from 'app/types/common.type';
 import { Box, FormControl, Heading, HStack, Text, WarningOutlineIcon } from 'native-base';
 import React, { FC, useEffect, useState } from 'react';
 import { Keyboard, Pressable } from 'react-native';
+import { useDispatch } from 'react-redux';
 
 import { AppStackScreenProps, goBack } from '../../navigators';
 
@@ -38,6 +40,7 @@ export const SignInWithOtpPhoneNumberScreen: FC<FCProps> = props => {
   const { formatMessage } = useMessages();
   const { otpConfirm, user } = props.route.params;
   const [signInWithPhoneNumberMutation] = useSignInWithPhoneNumberMutation();
+  const dispatch = useDispatch();
 
   const [isSubmiting, setIsSubmitting] = useState<boolean>(false);
   const [isError, setError] = useState<boolean>(false);
@@ -58,9 +61,10 @@ export const SignInWithOtpPhoneNumberScreen: FC<FCProps> = props => {
         return;
       }
       const idToken = await credential.user.getIdToken();
-      await signInWithPhoneNumberMutation({
+      const signInResponse = await signInWithPhoneNumberMutation({
         token: idToken,
       }).unwrap();
+      dispatch(appActions.updateAccessToken(signInResponse.data));
     } catch (err) {
       setError(true);
       setResendStatus(ResendStatusObj.nonResent);

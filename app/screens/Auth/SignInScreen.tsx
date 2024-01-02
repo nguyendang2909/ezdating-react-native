@@ -24,7 +24,7 @@ export const SignInScreen: FC<FCProps> = () => {
         ]}
       ></View>
 
-      <View flex={1} justifyContent="center" px={24} zIndex={10}>
+      <View flex={1} justifyContent="center" zIndex={10}>
         <SignInButtons />
       </View>
     </>

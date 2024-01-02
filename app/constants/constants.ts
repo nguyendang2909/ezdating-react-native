@@ -146,4 +146,5 @@ export const API_METHODS = {
 export const SIGN_IN_METHODS = {
   GOOGLE: 'google',
   PHONE_NUMBER: 'phone_number',
+  APPLE: 'apple',
 };

@@ -31,6 +31,10 @@ export declare namespace ApiRequest {
     token: string;
   };
 
+  type SignInWithApple = {
+    token: string;
+  };
+
   type LoginByEmail = {
     email: string;
     password: string;

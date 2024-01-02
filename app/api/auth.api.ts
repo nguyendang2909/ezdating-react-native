@@ -22,6 +22,14 @@ const authApi = api.injectEndpoints({
       }),
     }),
 
+    signInWithApple: builder.mutation<ApiResponse.Logged, ApiRequest.SignInWithApple>({
+      query: body => ({
+        url: API_ENDPOINTS.AUTH.SIGN_IN.APPLE,
+        method: 'POST',
+        body,
+      }),
+    }),
+
     signInWithFacebook: builder.mutation<ApiResponse.Logged, ApiRequest.SignInWithFacebook>({
       query: body => ({
         url: API_ENDPOINTS.AUTH.SIGN_IN.FACEBOOK,
@@ -52,6 +60,7 @@ const authApi = api.injectEndpoints({
 });
 
 export const {
+  useSignInWithAppleMutation,
   useSignInWithPhoneNumberMutation,
   useSignInWithFacebookMutation,
   useSignInWithGoogleMutation,

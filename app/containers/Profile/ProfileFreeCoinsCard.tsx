@@ -1,5 +1,5 @@
+import { Center, Icon, Text, View, VStack } from '@gluestack-ui/themed';
 import { useMessages } from 'app/hooks';
-import { Center, Icon, Text, View, VStack } from 'native-base';
 import React from 'react';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
@@ -8,11 +8,21 @@ export const ProfileFreeCoinsCard: React.FC = () => {
 
   return (
     <>
-      <View borderWidth="1" borderRadius="2xl" borderColor="coolGray.200" py="4">
-        <VStack space="1">
+      <View borderWidth={1} borderRadius={8} borderColor="$coolGray200" py={16}>
+        <VStack space="sm">
           <Center>
             <View>
-              <Icon size={10} color="#e9ad03" as={<FontAwesome5 name="coins" />} />
+              <Icon
+                sx={{
+                  fontSize: 30,
+                  height: 30,
+                  width: 30,
+                }}
+                color="#e9ad03"
+                as={FontAwesome5}
+                // @ts-ignore
+                name="coins"
+              />
             </View>
           </Center>
           <Center>

@@ -1,8 +1,8 @@
+import { Center, Icon, Pressable, Text, View, VStack } from '@gluestack-ui/themed';
 import { useNavigation } from '@react-navigation/native';
+import { MaterialIcons } from 'app/components';
 import { useMessages } from 'app/hooks';
-import { Center, Icon, Pressable, Text, View, VStack } from 'native-base';
 import React from 'react';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 export const ProfileEditCard: React.FC = () => {
   const { formatMessage } = useMessages();
@@ -14,19 +14,29 @@ export const ProfileEditCard: React.FC = () => {
 
   return (
     <Pressable onPress={onPress}>
-      {({ isPressed }) => {
+      {({ pressed }: { pressed: boolean }) => {
         return (
           <View
-            borderWidth="1"
-            borderRadius="2xl"
-            borderColor="coolGray.200"
-            py="4"
-            bg={isPressed ? 'coolGray.200' : undefined}
+            borderWidth={1}
+            borderRadius={8}
+            borderColor="$coolGray200"
+            py={16}
+            bg={pressed ? '$coolGray200' : undefined}
           >
-            <VStack space="1">
+            <VStack space="sm">
               <Center>
                 <View>
-                  <Icon size={10} color="#DE685A" as={<MaterialIcons name="account-circle" />} />
+                  <Icon
+                    sx={{
+                      fontSize: 30,
+                      height: 30,
+                      width: 30,
+                    }}
+                    as={MaterialIcons}
+                    // @ts-ignore
+                    name="account-circle"
+                    color="#DE685A"
+                  />
                 </View>
               </Center>
               <Center>

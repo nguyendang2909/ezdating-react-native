@@ -1,7 +1,7 @@
 import { defineMessages } from 'react-intl';
 
 export const messages = defineMessages({
-  AppName: { defaultMessage: 'DatingEZ', id: '9992cb4213' },
+  AppName: { defaultMessage: 'Chatka', id: 'bec650c5ca' },
   'About me': { defaultMessage: 'About me', id: 'd48efc4ceb' },
   Account: { defaultMessage: 'Account', id: '4f0c8c6ae3' },
   'Add languages': { defaultMessage: 'Add languages', id: '1e2d09cb8d' },
@@ -436,6 +436,22 @@ export const messages = defineMessages({
   'You should have at least 1 photo': {
     defaultMessage: 'You should have at least 1 photo',
     id: '222087826a',
+  },
+  Upgrade: {
+    defaultMessage: 'Upgrade',
+    id: 'd21fe53cc7',
+  },
+  'Gold member': {
+    defaultMessage: 'Gold member',
+    id: '88309bfc48',
+  },
+  'Instant chat with everyone': {
+    defaultMessage: 'Instant chat with everyone',
+    id: '6c53885383',
+  },
+  'Sign in with Apple': {
+    defaultMessage: 'Sign in with Apple',
+    id: '3dc99ec621',
   },
 });
 
