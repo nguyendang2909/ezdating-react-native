@@ -19,7 +19,7 @@ import { BackIconButton } from '../../containers/IconButton/BackIconButton';
 import { MessagesSetting } from './MessagesSetting';
 
 export type FCProps = {
-  match?: AppStore.Match | Entity.Match;
+  match: AppStore.Match | Entity.Match;
 };
 export const MessagesHeader: React.FC<FCProps> = ({ match }) => {
   const navigation = useNavigation();
@@ -65,7 +65,7 @@ export const MessagesHeader: React.FC<FCProps> = ({ match }) => {
           </TouchableOpacity>
         </HStack>
         <Box pr={16}>
-          <MessagesSetting matchId={match?._id} />
+          <MessagesSetting matchId={match._id} />
         </Box>
       </View>
     </>

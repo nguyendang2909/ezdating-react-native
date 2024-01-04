@@ -28,11 +28,11 @@ import { LoadingButton } from 'app/components/Button/LoadingButton';
 import { MaterialCommunityIcons, MaterialIcons } from 'app/components/Icon/Lib';
 import { useMessages } from 'app/hooks';
 import { useDisclose } from 'app/hooks/useDisclose';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 import Toast from 'react-native-toast-message';
 
-export const MessagesSetting: React.FC<{ matchId?: string }> = ({ matchId }) => {
+export const MessagesSetting: React.FC<{ matchId: string }> = ({ matchId }) => {
   const navigation = useNavigation();
   const [unmatch, { isLoading: isLoadingUnMatch }] = useUnmatchMutation();
   const { isOpen: isOpenSheet, onOpen: onOpenSheet, onClose: onCloseSheet } = useDisclose();
@@ -47,34 +47,21 @@ export const MessagesSetting: React.FC<{ matchId?: string }> = ({ matchId }) => 
 
   const handlePressUnmatch = () => {
     onCloseSheet();
+    setInitUnmatchModal(true);
     onOpenUnmatchModal();
   };
 
   const { formatMessage } = useMessages();
 
-  useEffect(() => {
-    if (isOpenUnmatchModal) {
-      setInitUnmatchModal(true);
-    }
-  }, [isOpenUnmatchModal]);
-
-  useEffect(() => {
-    if (isOpenSheet) {
-      setInitSheet(true);
-    }
-  }, [isOpenSheet]);
-
   const handleUnmatch = async () => {
     try {
-      if (matchId) {
-        await unmatch({ id: matchId }).unwrap();
-        onCloseUnmatchModal();
-        navigation.goBack();
-        Toast.show({
-          type: 'success',
-          text1: formatMessage('Unmatch'),
-        });
-      }
+      await unmatch({ id: matchId }).unwrap();
+      onCloseUnmatchModal();
+      navigation.goBack();
+      Toast.show({
+        type: 'success',
+        text1: formatMessage('Unmatch'),
+      });
     } catch (err) {
       onCloseUnmatchModal();
       Toast.show({
@@ -84,9 +71,14 @@ export const MessagesSetting: React.FC<{ matchId?: string }> = ({ matchId }) => 
     }
   };
 
+  const handleOpenSheet = () => {
+    setInitSheet(true);
+    onOpenSheet();
+  };
+
   return (
     <>
-      <TouchableOpacity onPress={onOpenSheet}>
+      <TouchableOpacity onPress={handleOpenSheet}>
         <Icon height={28} width={28} as={InfoIcon} />
       </TouchableOpacity>
 

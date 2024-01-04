@@ -107,27 +107,27 @@ function App(props: AppProps) {
     <SafeAreaProvider initialMetrics={initialWindowMetrics}>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <ConnectSocket />
-          <ErrorBoundary catchErrors={Config.catchErrors}>
-            <GluestackUIProvider config={gluestackConfig}>
-              <NativeBaseProvider theme={defaultTheme} config={nativeBaseConfig}>
-                <ActionSheetProvider>
-                  <IntlProvider
-                    defaultLocale="en"
-                    locale={language}
-                    messages={translators[language] || translators.en}
-                  >
+          <IntlProvider
+            defaultLocale="en"
+            locale={language}
+            messages={translators[language] || translators.en}
+          >
+            <ConnectSocket />
+            <ErrorBoundary catchErrors={Config.catchErrors}>
+              <GluestackUIProvider config={gluestackConfig}>
+                <NativeBaseProvider theme={defaultTheme} config={nativeBaseConfig}>
+                  <ActionSheetProvider>
                     <AppNavigator
                       linking={linking}
                       initialState={initialNavigationState}
                       onStateChange={onNavigationStateChange}
                     />
-                    <Toast />
-                  </IntlProvider>
-                </ActionSheetProvider>
-              </NativeBaseProvider>
-            </GluestackUIProvider>
-          </ErrorBoundary>
+                  </ActionSheetProvider>
+                  <Toast />
+                </NativeBaseProvider>
+              </GluestackUIProvider>
+            </ErrorBoundary>
+          </IntlProvider>
         </PersistGate>
       </Provider>
     </SafeAreaProvider>

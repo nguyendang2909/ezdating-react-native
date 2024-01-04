@@ -53,6 +53,7 @@ export const API_ENDPOINTS = {
   USERS: {
     INDEX: '/users',
     ME: '/users/me',
+    BLOCKS: '/users/blocks',
   },
   VIEWS: {
     INDEX: '/views',
