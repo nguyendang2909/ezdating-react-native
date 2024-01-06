@@ -69,12 +69,6 @@ interface IconProps extends TouchableOpacityProps {
   onPress?: TouchableOpacityProps['onPress'];
 }
 
-/**
- * A component to render a registered icon.
- * It is wrapped in a <TouchableOpacity /> if `onPress` is provided, otherwise a <View />.
- *
- * - [Documentation and Examples](https://github.com/infinitered/ignite/blob/master/docs/Components-Icon.md)
- */
 export function Icon(props: IconProps) {
   const {
     icon,

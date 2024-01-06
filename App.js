@@ -9,12 +9,12 @@ import App from './app/app.tsx';
 
 SplashScreen.preventAutoHideAsync();
 
-function IgniteApp() {
+function StartApp() {
   return <App hideSplashScreen={SplashScreen.hideAsync} />;
 }
 
 if (Platform.OS !== 'web') {
-  registerRootComponent(IgniteApp);
+  registerRootComponent(StartApp);
 }
 
-export default IgniteApp;
+export default StartApp;

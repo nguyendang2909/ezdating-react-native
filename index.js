@@ -8,9 +8,9 @@ import RNBootSplash from 'react-native-bootsplash';
 
 import App from './app/app.tsx';
 
-function IgniteApp() {
+function StartApp() {
   return <App hideSplashScreen={RNBootSplash.hide} />;
 }
 
-AppRegistry.registerComponent('Chatka', () => IgniteApp);
+AppRegistry.registerComponent('Chatka', () => StartApp);
 export default App;
